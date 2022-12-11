@@ -1,0 +1,202 @@
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
+using SimpleAdmin.Core.Utils;
+using System.Linq;
+
+namespace SimpleAdmin.Core;
+
+/// <summary>
+/// 数据库上下文对象
+/// </summary>
+public static class DbContext
+{
+    /// <summary>
+    /// 读取配置文件中的 ConnectionStrings:Sqlsugar 配置节点
+    /// </summary>
+    public static readonly List<SqlSugarConfig> DbConfigs = App.GetConfig<List<SqlSugarConfig>>("ConnectionStrings:Sqlsugar");
+
+
+
+    /// <summary>
+    /// SqlSugar 数据库实例
+    /// </summary>
+    public static readonly SqlSugarScope Db = new(
+        DbConfigs.Adapt<List<ConnectionConfig>>()
+        , db =>
+        {
+            //遍历配置的数据库
+            DbConfigs.ForEach(it =>
+                {
+                    var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
+                    MoreSetting(sqlsugarScope);//更多设置
+                    ExternalServicesSetting(sqlsugarScope);//实体拓展配置
+                    AopSetting(sqlsugarScope);//aop配置
+                    FilterSetting(sqlsugarScope);//过滤器配置
+                });
+        });
+
+    /// <summary>
+    /// 实体拓展配置,自定义类型多库兼容
+    /// </summary>
+    /// <param name="db"></param>
+    private static void ExternalServicesSetting(SqlSugarScopeProvider db)
+    {
+        db.CurrentConnectionConfig.ConfigureExternalServices = new ConfigureExternalServices
+        {
+            //自定义类型多库兼容
+            EntityService = (c, p) =>
+             {
+                 //如果是mysql并且是varchar(max)
+                 if (db.CurrentConnectionConfig.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
+                 {
+                     p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
+                 }
+                 else if (db.CurrentConnectionConfig.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
+                 {
+                     p.DataType = SqlsugarConst.Text;//转成sqlite的text
+                 }
+             }
+        };
+
+    }
+
+    /// <summary>
+    /// Aop设置
+    /// </summary>
+    /// <param name="db"></param>
+    public static void AopSetting(SqlSugarScopeProvider db)
+    {
+
+        var config = db.CurrentConnectionConfig;
+
+        // 设置超时时间
+        db.Ado.CommandTimeOut = 30;
+
+        // 打印SQL语句
+        db.Aop.OnLogExecuting = (sql, pars) =>
+        {
+            //如果不是开发环境就打印sql
+            if (App.WebHostEnvironment.IsDevelopment())
+            {
+                if (sql.StartsWith("SELECT"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    WriteSqlLog($"查询{config.ConfigId}库操作");
+                }
+                if (sql.StartsWith("UPDATE") || sql.StartsWith("INSERT"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    WriteSqlLog($"修改{config.ConfigId}库操作");
+                }
+                if (sql.StartsWith("DELETE"))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    WriteSqlLog($"删除{config.ConfigId}库操作");
+                }
+                Console.WriteLine(UtilMethods.GetSqlString(config.DbType, sql, pars));
+                WriteSqlLog($"{config.ConfigId}库操作结束");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine();
+            }
+        };
+        //异常
+        db.Aop.OnError = (ex) =>
+       {
+           //如果不是开发环境就打印日志
+           if (App.WebHostEnvironment.IsDevelopment())
+           {
+               if (ex.Parametres == null) return;
+               Console.ForegroundColor = ConsoleColor.Red;
+               var pars = db.Utilities.SerializeObject(((SugarParameter[])ex.Parametres).ToDictionary(it => it.ParameterName, it => it.Value));
+               WriteSqlLog($"{config.ConfigId}库操作异常");
+               Console.WriteLine(UtilMethods.GetSqlString(config.DbType, ex.Sql, (SugarParameter[])ex.Parametres) + "\r\n");
+               Console.ForegroundColor = ConsoleColor.White;
+           }
+       };
+        //插入和更新过滤器
+        db.Aop.DataExecuting = (oldValue, entityInfo) =>
+        {
+            // 新增操作
+            if (entityInfo.OperationType == DataFilterType.InsertByObject)
+            {
+                // 主键(long类型)且没有值的---赋值雪花Id
+                if (entityInfo.EntityColumnInfo.IsPrimarykey && entityInfo.EntityColumnInfo.PropertyInfo.PropertyType == typeof(long))
+                {
+                    var id = entityInfo.EntityColumnInfo.PropertyInfo.GetValue(entityInfo.EntityValue);
+                    if (id == null || (long)id == 0)
+                        entityInfo.SetValue(Yitter.IdGenerator.YitIdHelper.NextId());
+                }
+                if (entityInfo.PropertyName == nameof(BaseEntity.CreateTime))
+                    entityInfo.SetValue(DateTime.Now);
+                //手机号和密码自动加密
+                if (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone))
+                    entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
+                if (App.User != null)
+                {
+                    if (entityInfo.PropertyName == nameof(BaseEntity.CreateUserId))
+                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.UserId)?.Value);
+                    if (entityInfo.PropertyName == nameof(DataEntityBase.CreateOrgId))
+                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.OrgId)?.Value);
+                }
+            }
+            // 更新操作
+            if (entityInfo.OperationType == DataFilterType.UpdateByObject)
+            {
+                if (entityInfo.PropertyName == nameof(BaseEntity.UpdateTime))
+                    entityInfo.SetValue(DateTime.Now);
+                if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUserId))
+                    entityInfo.SetValue(App.User?.FindFirst(ClaimConst.UserId)?.Value);
+            }
+        };
+
+        //查询数据转换 
+        db.Aop.DataExecuted = (value, entity) =>
+       {
+           if (entity.Entity.Type == typeof(SysUser))
+           {
+               //如果手机号不为空
+               if (entity.GetValue(nameof(SysUser.Phone)) != null)
+               {
+                   //手机号数据转换
+                   var phone = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Phone)).ToString());
+                   entity.SetValue(nameof(SysUser.Phone), phone);
+               }
+               //如果密码不为空
+               if (entity.GetValue(nameof(SysUser.Password)) != null)
+               {
+                   //密码数据转换
+                   var passwd = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Password)).ToString());
+                   entity.SetValue(nameof(SysUser.Password), passwd);
+               }
+
+           }
+       };
+    }
+
+
+    /// <summary>
+    /// 实体更多配置
+    /// </summary>
+    /// <param name="db"></param>
+    private static void MoreSetting(SqlSugarScopeProvider db)
+    {
+        db.CurrentConnectionConfig.MoreSettings = new ConnMoreSettings
+        {
+            SqlServerCodeFirstNvarchar = true,//设置默认nvarchar
+        };
+    }
+
+    /// <summary>
+    /// 过滤器设置
+    /// </summary>
+    /// <param name="db"></param>
+    public static void FilterSetting(SqlSugarScopeProvider db)
+    {
+
+    }
+
+    private static void WriteSqlLog(string msg)
+    {
+        Console.WriteLine($"=============={msg}==============");
+    }
+}

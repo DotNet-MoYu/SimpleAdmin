@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controllers\**" />
+		<Content Remove="Controllers\**" />
+		<EmbeddedResource Remove="Controllers\**" />
+		<None Remove="Controllers\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="ip2region.db">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties properties_4launchsettings_1json__JsonSchema="" />
+		</VisualStudio>
+	</ProjectExtensions>
+
+</Project>

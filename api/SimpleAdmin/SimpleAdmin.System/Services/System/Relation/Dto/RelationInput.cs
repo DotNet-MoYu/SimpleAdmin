@@ -1,0 +1,2 @@
+﻿namespace SimpleAdmin.System;
+

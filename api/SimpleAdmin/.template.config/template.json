@@ -1,0 +1,13 @@
+{
+    "author": "huguodong", //必须
+    "classifications": [ "Web/ASP.NET" ], //必须，这个对应模板的Tags
+    "name": "SimpleAdmin", //必须，这个对应模板的Templates
+    "identity": "SimpleAdmin", //可选，模板的唯一名称
+    "shortName": "simpleadmin", //必须，这个对应模板的Short Name
+    "tags": {
+      "language": "C#" ,
+      "type":"project"
+    },
+    "sourceName": "SimpleAdmin",  // 可选，要替换的名字
+    "preferNameDirectory": true  // 可选，添加目录  
+}

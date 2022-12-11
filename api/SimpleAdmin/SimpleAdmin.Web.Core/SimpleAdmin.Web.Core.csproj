@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8625</NoWarn>
+		<DocumentationFile>SimpleAdmin.Web.Core.xml</DocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controllers\Gen\**" />
+		<EmbeddedResource Remove="Controllers\Gen\**" />
+		<None Remove="Controllers\Gen\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="SimpleAdmin.Web.Core.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Application\SimpleAdmin.Application.csproj" />
+	</ItemGroup>
+
+</Project>
