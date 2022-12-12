@@ -29,6 +29,11 @@ public class LoginEvent
     public AuthDeviceTypeEumu Device { get; set; }
 
     /// <summary>
+    /// 登录类型
+    /// </summary>
+    public LoginClientTypeEnum LoginClientType { get; set; }
+
+    /// <summary>
     /// Token
     /// </summary>
     public string Token { get; set; }

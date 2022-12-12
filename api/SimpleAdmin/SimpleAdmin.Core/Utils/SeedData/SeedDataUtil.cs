@@ -45,16 +45,41 @@ namespace SimpleAdmin.Core.Utils
                 //遍历seedDataRecord2
                 for (int i = 0; i < seedDataRecord2.Records.Count; i++)
                 {
-                    //获取extjson的值
-                    var extJson = typeof(T).GetProperty(nameof(PrimaryKeyEntity.ExtJson)).GetValue(seedDataRecord2.Records[i])?.ToString();
-                    // 如果extjson不为空并且包含NullableDictionary表示序列化失败了
-                    if (!string.IsNullOrEmpty(extJson) && extJson.Contains("NullableDictionary"))
+                    #region 处理ExtJosn
+                    //获取extjson属性
+                    var propertyExtJosn = typeof(T).GetProperty(nameof(PrimaryKeyEntity.ExtJson));
+                    if (propertyExtJosn != null)
                     {
-                        //设置extjson为seedDataRecord1对应的值
-                        extJson = typeof(T).GetProperty(nameof(PrimaryKeyEntity.ExtJson)).GetValue(seedDataRecord1.Records[i])?.ToString();
-                        //seedDataRecord2赋值seedDataRecord1的extjson
-                        typeof(T).GetProperty(nameof(PrimaryKeyEntity.ExtJson)).SetValue(seedDataRecord2.Records[i], extJson);
+                        //获取extjson的值
+                        var extJson = propertyExtJosn.GetValue(seedDataRecord2.Records[i])?.ToString();
+                        // 如果extjson不为空并且包含NullableDictionary表示序列化失败了
+                        if (!string.IsNullOrEmpty(extJson) && extJson.Contains("NullableDictionary"))
+                        {
+                            //设置extjson为seedDataRecord1对应的值
+                            extJson = propertyExtJosn.GetValue(seedDataRecord1.Records[i])?.ToString();
+                            //seedDataRecord2赋值seedDataRecord1的extjson
+                            propertyExtJosn.SetValue(seedDataRecord2.Records[i], extJson);
+                        }
                     }
+
+                    #endregion
+                    #region 处理ConfigValue
+                    //获取extjson属性
+                    var propertyConfigValue = typeof(T).GetProperty(nameof(DevConfig.ConfigValue));
+                    if (propertyConfigValue != null)
+                    {
+                        //获取extjson的值
+                        var configValue = propertyConfigValue.GetValue(seedDataRecord2.Records[i])?.ToString();
+                        // 如果extjson不为空并且包含NullableDictionary表示序列化失败了
+                        if (!string.IsNullOrEmpty(configValue) && configValue.Contains("NullableDictionary"))
+                        {
+                            //设置extjson为seedDataRecord1对应的值
+                            configValue = propertyConfigValue.GetValue(seedDataRecord1.Records[i])?.ToString();
+                            //seedDataRecord2赋值seedDataRecord1的extjson
+                            propertyConfigValue.SetValue(seedDataRecord2.Records[i], configValue);
+                        }
+                    }
+                    #endregion
                 }
                 //种子数据赋值
                 seedData = seedDataRecord2.Records;

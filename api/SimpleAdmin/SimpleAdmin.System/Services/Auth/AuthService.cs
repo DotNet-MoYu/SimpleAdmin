@@ -248,7 +248,17 @@ public class AuthService : IAuthService
         var httpContext = App.HttpContext;
         var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
         //发布登录事件总线
-        await _eventPublisher.PublishAsync(EventSubscriberConst.Login, new LoginEvent { ClientInfo = client, Ip = httpContext.GetRemoteIpAddressToIPv4(), Device = device, Expire = expire, SysUser = sysUser, Token = accessToken });
+        await _eventPublisher.PublishAsync(EventSubscriberConst.Login, new LoginEvent
+        {
+            ClientInfo = client,
+            Ip = httpContext.GetRemoteIpAddressToIPv4(),
+            Device = device,
+            LoginClientType = LoginClientTypeEnum.B,
+            Expire = expire,
+            SysUser = sysUser,
+            Token = accessToken
+        });
+        //返回结果
         return new LoginOutPut { Token = accessToken, Account = sysUser.Account, Name = sysUser.Name };
     }
     #endregion

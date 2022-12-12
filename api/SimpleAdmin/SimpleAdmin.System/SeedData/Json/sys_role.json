@@ -95,6 +95,22 @@
       "UpdateUserId": "",
       "IsDelete": "0",
       "ExtJson": ""
+    },
+    {
+      "Id": "363084914917445",
+      "OrgId": "361404296994885",
+      "Name": "研发部管理员",
+      "Code": "sfEg40KhpZ",
+      "Category": "ORG",
+      "DefaultDataScope": "{\"Level\":4,\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[]}",
+      "SortCode": "99",
+      "CreateOrgId": "252885263003720",
+      "CreateTime": "2022-12-12 09:36:20.077",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     }
   ]
 }
