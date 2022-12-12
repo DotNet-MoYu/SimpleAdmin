@@ -2,7 +2,7 @@
   //连接字符串配置
   "ConnectionStrings": {
     //redis配置
-    "Redis": "server=127.0.0.1:6379;db=9",
+    "Redis": "server=127.0.0.1:6379;password=123456;db=9",
     //Sqlsugar数据库配置
     "Sqlsugar": [
       //{
@@ -15,7 +15,7 @@
       //}
       {
         "ConfigId": "SimpleAdmin", //租户ID
-        "ConnectionString": "Server=192.168.1.1;Database=SimpleAdmin;User=sa;Password=xxx;MultipleActiveResultSets=True;", //连接字符串
+        "ConnectionString": "Server=192.168.1.16;Database=SimpleAdmin;User=sa;Password=xxx;MultipleActiveResultSets=True;", //连接字符串
         "DbType": "SqlServer", //数据库类型
         "IsAutoCloseConnection": true, //是否自动释放
         "IsInitDb": false, //是否初始化数据库,适用于codefirst
