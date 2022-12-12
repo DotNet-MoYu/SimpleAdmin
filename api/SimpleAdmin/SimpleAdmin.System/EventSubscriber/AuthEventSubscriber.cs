@@ -26,7 +26,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     public async Task Login(EventHandlerExecutingContext context)
     {
         var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
-        var clientInfo = loginEvent.ClientInfo;//获取上下文
+        //var clientInfo = loginEvent.ClientInfo;//获取上下文
         var LoginAddress = GetLoginAddress(loginEvent.Ip);
         var sysUser = loginEvent.SysUser;
         #region 重新赋值属性,设置本次登录信息为最新的信息
@@ -41,12 +41,8 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         sysUser.LatestLoginTime = loginEvent.DateTime;
         #endregion
         //更新用户信息
-        await _db.UpdateableWithAttr(sysUser).ExecuteCommandAsync();
-        //更新Redis信息
-        _redisCacheManager.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser);
-        //添加登录日志
-        //await CreateVisitLog(EventSubscriberConst.Login, sysUser, clientInfo);
-
+        if (await _db.UpdateableWithAttr(sysUser).ExecuteCommandAsync() > 0)
+            _redisCacheManager.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser); //更新Redis信息
         await Task.CompletedTask;
     }
 

@@ -270,7 +270,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //默认头像
         sysUser.Avatar = AvatarUtil.GetNameImageBase64(sysUser.Name);
         //获取默认密码
-        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_PASSWORD)).ConfigKey;
         sysUser.Password = await GetDefaultPassWord();//设置密码
         sysUser.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//默认状态
         await InsertAsync(sysUser);//添加数据
@@ -404,7 +403,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task ResetPassword(BaseIdInput input)
     {
-        var password = await GetDefaultPassWord();//获取默认密码
+        var password = await GetDefaultPassWord(true);//获取默认密码,这里不走Aop所以需要加密一下
         //重置密码
         if (await UpdateAsync(it => new SysUser { Password = password }, it => it.Id == input.Id))
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
@@ -466,11 +465,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// 获取默认密码
     /// </summary>
     /// <returns></returns>
-    private async Task<string> GetDefaultPassWord()
+    private async Task<string> GetDefaultPassWord(bool isSm4 = false)
     {
         //获取默认密码
         var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_PASSWORD)).ConfigValue;
-        return CryptogramUtil.Sm4Encrypt(defaultPassword);
+        return isSm4 ? CryptogramUtil.Sm4Encrypt(defaultPassword) : defaultPassword;//判断是否需要加密
     }
 
 

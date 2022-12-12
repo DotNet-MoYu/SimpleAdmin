@@ -133,6 +133,7 @@ public static class DbContext
                     entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
                 if (App.User != null)
                 {
+                    //创建人和创建机构ID
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUserId))
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.UserId)?.Value);
                     if (entityInfo.PropertyName == nameof(DataEntityBase.CreateOrgId))
@@ -142,35 +143,44 @@ public static class DbContext
             // 更新操作
             if (entityInfo.OperationType == DataFilterType.UpdateByObject)
             {
+                //这里不能自动加密，不然redis数据会有问题
+                //if (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone))
+                //    entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
+                //更新时间
                 if (entityInfo.PropertyName == nameof(BaseEntity.UpdateTime))
                     entityInfo.SetValue(DateTime.Now);
-                if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUserId))
-                    entityInfo.SetValue(App.User?.FindFirst(ClaimConst.UserId)?.Value);
+                //更新人
+                if (App.User != null)
+                {
+                    if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUserId))
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.UserId)?.Value);
+                }
+
             }
         };
 
         //查询数据转换 
         db.Aop.DataExecuted = (value, entity) =>
-       {
-           if (entity.Entity.Type == typeof(SysUser))
            {
-               //如果手机号不为空
-               if (entity.GetValue(nameof(SysUser.Phone)) != null)
+               if (entity.Entity.Type == typeof(SysUser))
                {
-                   //手机号数据转换
-                   var phone = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Phone)).ToString());
-                   entity.SetValue(nameof(SysUser.Phone), phone);
-               }
-               //如果密码不为空
-               if (entity.GetValue(nameof(SysUser.Password)) != null)
-               {
-                   //密码数据转换
-                   var passwd = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Password)).ToString());
-                   entity.SetValue(nameof(SysUser.Password), passwd);
-               }
+                   //如果手机号不为空
+                   if (entity.GetValue(nameof(SysUser.Phone)) != null)
+                   {
+                       //手机号数据转换
+                       var phone = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Phone)).ToString());
+                       entity.SetValue(nameof(SysUser.Phone), phone);
+                   }
+                   //如果密码不为空
+                   if (entity.GetValue(nameof(SysUser.Password)) != null)
+                   {
+                       //密码数据转换
+                       var passwd = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Password)).ToString());
+                       entity.SetValue(nameof(SysUser.Password), passwd);
+                   }
 
-           }
-       };
+               }
+           };
     }
 
 
