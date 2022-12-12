@@ -843,8 +843,8 @@
     {
       "Id": "252875263003765",
       "ParentId": "252875263003764",
-      "DictLabel": "系统",
-      "DictValue": "SYS",
+      "DictLabel": "通知",
+      "DictValue": "INFORM",
       "Category": "FRM",
       "SortCode": "10",
       "CreateTime": "",
@@ -857,8 +857,8 @@
     {
       "Id": "252875263003766",
       "ParentId": "252875263003764",
-      "DictLabel": "业务",
-      "DictValue": "BIZ",
+      "DictLabel": "公告",
+      "DictValue": "NOTICE",
       "Category": "FRM",
       "SortCode": "20",
       "CreateTime": "",

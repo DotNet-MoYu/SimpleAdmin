@@ -83,27 +83,10 @@ namespace SimpleAdmin.Core.Utils
         public static string GetNameImageBase64(string name, int width = 100, int height = 100)
         {
             Bitmap img = GetNameImage(name, width, height);
-            var imgByte = BitmapToBytes(img);
-            return $"data:image/png;base64," + Convert.ToBase64String(imgByte);
+            var imgByte = img.ImgToBase64String();
+            return $"data:image/png;base64," + imgByte;
         }
 
-        /// <summary>
-        /// bitmap转byte数组
-        /// </summary>
-        /// <param name="bitmap"></param>
-        /// <returns></returns>
-        private static byte[] BitmapToBytes(Bitmap bitmap)
-        {
-            // 1.先将BitMap转成内存流
-            MemoryStream ms = new MemoryStream();
-            bitmap.Save(ms, ImageFormat.Bmp);
-            ms.Seek(0, SeekOrigin.Begin);
-            // 2.再将内存流转成byte[]并返回
-            byte[] bytes = new byte[ms.Length];
-            ms.Read(bytes, 0, bytes.Length);
-            ms.Dispose();
-            return bytes;
-        }
 
 
         /// <summary>

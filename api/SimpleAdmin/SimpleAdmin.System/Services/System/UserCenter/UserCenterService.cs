@@ -1,4 +1,5 @@
 ﻿using Masuit.Tools;
+using System.DrawingCore;
 
 namespace SimpleAdmin.System;
 
@@ -10,18 +11,20 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     private readonly IResourceService _resourceService;
     private readonly IMenuService _menuService;
     private readonly IConfigService _configService;
+    private readonly ISysOrgService _sysOrgService;
 
     public UserCenterService(ISysUserService userService,
                              IRelationService relationService,
                              IResourceService resourceService,
                              IMenuService menuService,
-                             IConfigService configService)
+                             IConfigService configService, ISysOrgService sysOrgService)
     {
         _userService = userService;
         _relationService = relationService;
         _resourceService = resourceService;
         this._menuService = menuService;
         _configService = configService;
+        this._sysOrgService = sysOrgService;
     }
 
     /// <inheritdoc />
@@ -119,10 +122,27 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     }
 
     /// <inheritdoc />
-    public async Task UpdateUserInfo(UserUpdateInfoInput input)
+    public async Task UpdateUserInfo(UpdateInfoInput input)
     {
+        //如果手机号不是空
+        if (!string.IsNullOrEmpty(input.Phone))
+        {
+            if (!input.Phone.MatchPhoneNumber())//判断是否是手机号格式
+                throw Oops.Bah($"手机号码格式错误");
+            input.Phone = CryptogramUtil.Sm4Encrypt(input.Phone);
+            var any = await IsAnyAsync(it => it.Phone == input.Phone && it.Id != UserManager.UserId);//判断是否有重复的
+            if (any)
+                throw Oops.Bah($"系统已存在该手机号");
+        }
+        if (!string.IsNullOrEmpty(input.Email))
+        {
+            var match = input.Email.MatchEmail();
+            if (!match.isMatch)
+                throw Oops.Bah($"邮箱格式错误");
+        }
+
         //更新指定字段
-        await UpdateAsync(it => new SysUser
+        var result = await UpdateAsync(it => new SysUser
         {
             Name = input.Name,
             Email = input.Email,
@@ -130,11 +150,55 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             Nickname = input.Nickname,
             Gender = input.Gender,
             Birthday = input.Birthday,
-            Signature = input.Signature
         }, it => it.Id == UserManager.UserId);
+        if (result)
+            _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateSignature(UpdateSignatureInput input)
+    {
+        var user = await _userService.GetUsertById(UserManager.UserId);//获取信息
+        var signatureArray = input.Signature.Split(",");//分割
+        var base64String = signatureArray[1];//根据逗号分割取到base64字符串
+        var image = base64String.GetBitmapFromBase64();//转成图片
+        var resizeImage = image.ResizeImage(100, 50);//重新裁剪
+        var newBase64String = resizeImage.ImgToBase64String();//重新转为base64
+        var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名
+
+        //更新签名
+        var result = await UpdateAsync(it => new SysUser
+        {
+            Signature = newSignature
+
+        }, it => it.Id == UserManager.UserId);
+        if (result)
+            _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
 
 
+    /// <inheritdoc />
+    public async Task<List<LoginOrgTreeOutput>> LoginOrgTree()
+    {
+        var orgList = await _sysOrgService.GetListAsync();//获取全部机构
+        var parentOrgs = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
+        var topOrg = parentOrgs.Where(it => it.ParentId == 0).FirstOrDefault();//获取顶级节点
+        if (topOrg != null)
+        {
+            var orgs = await _sysOrgService.GetChildListById(topOrg.Id);//获取下级
+            var orgTree = ConstrucOrgTrees(orgs, 0, UserManager.OrgId);//获取组织架构
+            return orgTree;
+        }
+        return new List<LoginOrgTreeOutput>();
+
+    }
+
+    /// <inheritdoc />
+    public async Task UpdateWorkbench(UpdateWorkbenchInput input)
+    {
+        //关系表保存个人工作台
+        await _relationService.SaveRelation(CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA, UserManager.UserId, null, input.WorkbenchData, true);
+    }
     #region 方法
     /// <summary>
     /// 获取父菜单集合
@@ -257,6 +321,39 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             it.Meta = meta;
         });
     }
+
+
+    /// <summary>
+    /// 构建机构树
+    /// </summary>
+    /// <param name="orgList">机构列表</param>
+    /// <param name="parentId">父ID</param>
+    /// <param name="orgId">用户ID</param>
+    /// <returns></returns>
+    public List<LoginOrgTreeOutput> ConstrucOrgTrees(List<SysOrg> orgList, long parentId, long orgId)
+    {
+        //找下级字典ID列表
+        var orgs = orgList.Where(it => it.ParentId == parentId).OrderBy(it => it.SortCode).ToList();
+        if (orgs.Count > 0)//如果数量大于0
+        {
+            var data = new List<LoginOrgTreeOutput>();
+            foreach (var item in orgs)//遍历字典
+            {
+                var loginOrg = new LoginOrgTreeOutput
+                {
+                    Children = ConstrucOrgTrees(orgList, item.Id, orgId),//添加子节点 
+                    Id = item.Id,
+                    Label = item.Name,
+                    Pid = item.ParentId,
+                    Style = orgId != item.Id ? null : new LoginOrgTreeOutput.MyStyle { }
+                };
+                data.Add(loginOrg);//添加到列表
+            }
+            return data;//返回结果
+        }
+        return new List<LoginOrgTreeOutput>();
+    }
+
 
     #endregion
 

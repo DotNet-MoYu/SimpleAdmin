@@ -203,6 +203,23 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return new List<SysOrg>();
     }
 
+    /// <inheritdoc />
+    public List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true)
+    {
+        //找到组织
+        var sysOrgs = allOrgList.Where(it => it.Id == orgId).FirstOrDefault();
+        if (sysOrgs != null)//如果组织不为空
+        {
+            var data = new List<SysOrg>();
+            var parents = GetOrgParents(allOrgList, sysOrgs.ParentId, includeSelf);//递归获取父节点
+            data.AddRange(parents);//添加父节点;
+            if (includeSelf)
+                data.Add(sysOrgs);//添加到列表
+            return data;//返回结果
+        }
+        return new List<SysOrg>();
+    }
+
     #region 方法
     /// <summary>
     /// 检查输入参数
@@ -279,28 +296,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return new List<SysOrg>();
     }
 
-    /// <summary>
-    /// 根据组织Id递归获取上级
-    /// </summary>
-    /// <param name="allOrgList">组织列表</param>
-    /// <param name="orgId">组织Id</param>
-    /// <param name="includeSelf">是否包含自己</param>
-    /// <returns></returns>
-    public List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true)
-    {
-        //找到组织
-        var sysOrgs = allOrgList.Where(it => it.Id == orgId).FirstOrDefault();
-        if (sysOrgs != null)//如果组织不为空
-        {
-            var data = new List<SysOrg>();
-            var parents = GetOrgParents(allOrgList, sysOrgs.ParentId, includeSelf);//递归获取父节点
-            data.AddRange(parents);//添加父节点;
-            if (includeSelf)
-                data.Add(sysOrgs);//添加到列表
-            return data;//返回结果
-        }
-        return new List<SysOrg>();
-    }
+
 
     #endregion
 

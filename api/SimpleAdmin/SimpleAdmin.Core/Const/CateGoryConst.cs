@@ -61,6 +61,11 @@ public class CateGoryConst
     /// 用户日程数据
     /// </summary>
     public const string Relation_SYS_USER_SCHEDULE_DATA = "Relation_SYS_USER_SCHEDULE_DATA";
+
+    /// <summary>
+    /// 站内信与接收用户
+    /// </summary>
+    public const string Relation_MSG_TO_USER = "MSG_TO_USER";
     #endregion
 
     #region 数据范围
@@ -189,4 +194,19 @@ public class CateGoryConst
     /// </summary>
     public const string Role_ORG = "ORG";
     #endregion
+
+    #region 站内信表
+
+    /// <summary>
+    /// 通知
+    /// </summary>
+    public const string Message_INFORM = "INFORM";
+
+    /// <summary>
+    /// 公告
+    /// </summary>
+    public const string Message_NOTICE = "INFORM";
+
+    #endregion
+
 }

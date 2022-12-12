@@ -68,6 +68,15 @@ public interface ISysOrgService : ITransient
     Task<List<long>> GetOrgChildIds(long orgId, bool isContainOneself = true);
 
     /// <summary>
+    /// 根据组织Id递归获取上级
+    /// </summary>
+    /// <param name="allOrgList">组织列表</param>
+    /// <param name="orgId">组织Id</param>
+    /// <param name="includeSelf">是否包含自己</param>
+    /// <returns></returns>
+    List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true);
+
+    /// <summary>
     /// 获取组织信息
     /// </summary>
     /// <param name="id">组织id</param>

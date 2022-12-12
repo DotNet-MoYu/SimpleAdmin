@@ -42,8 +42,42 @@ public class UserCenterController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("updateUserInfo")]
     [Description("编辑个人信息")]
-    public async Task UpdateUserInfo([FromBody] UserUpdateInfoInput input)
+    public async Task UpdateUserInfo([FromBody] UpdateInfoInput input)
     {
         await _userCenterService.UpdateUserInfo(input);
+    }
+
+    /// <summary>
+    /// 更新签名
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("updateSignature")]
+    [Description("更新签名")]
+    public async Task UpdateSignature([FromBody] UpdateSignatureInput input)
+    {
+        await _userCenterService.UpdateSignature(input);
+    }
+
+    /// <summary>
+    /// 获取组织架构
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("loginOrgTree")]
+    public async Task<dynamic> LoginOrgTree()
+    {
+        return await _userCenterService.LoginOrgTree();
+    }
+
+    /// <summary>
+    /// 编辑工作台
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("updateUserWorkbench")]
+    [Description("编辑工作台")]
+    public async Task updateUserWorkbench([FromBody] UpdateWorkbenchInput input)
+    {
+        await _userCenterService.UpdateWorkbench(input);
     }
 }

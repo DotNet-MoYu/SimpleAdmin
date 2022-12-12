@@ -692,9 +692,29 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UserUpdateInfoInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
             <summary>
             编辑个人信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <summary>
+            更新签名
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.LoginOrgTree">
+            <summary>
+            获取组织架构
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.updateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <summary>
+            编辑工作台
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -703,6 +723,25 @@
             <summary>
             基础控制器
             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController">
+            <summary>
+            站内信控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Page(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Send(SimpleAdmin.System.MessageSendInput)">
+            <summary>
+            发送站内信
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.System.System.RoleController">
             <summary>
