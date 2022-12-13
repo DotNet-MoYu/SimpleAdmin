@@ -1,4 +1,5 @@
 ﻿using Masuit.Tools;
+using SimpleAdmin.Core;
 using System.DrawingCore;
 
 namespace SimpleAdmin.System;
@@ -12,12 +13,15 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     private readonly IMenuService _menuService;
     private readonly IConfigService _configService;
     private readonly ISysOrgService _sysOrgService;
+    private readonly IMessageService _messageService;
 
     public UserCenterService(ISysUserService userService,
                              IRelationService relationService,
                              IResourceService resourceService,
                              IMenuService menuService,
-                             IConfigService configService, ISysOrgService sysOrgService)
+                             IConfigService configService,
+                             ISysOrgService sysOrgService,
+                             IMessageService messageService)
     {
         _userService = userService;
         _relationService = relationService;
@@ -25,6 +29,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         this._menuService = menuService;
         _configService = configService;
         this._sysOrgService = sysOrgService;
+        this._messageService = messageService;
     }
 
     /// <inheritdoc />
@@ -199,6 +204,27 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         //关系表保存个人工作台
         await _relationService.SaveRelation(CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA, UserManager.UserId, null, input.WorkbenchData, true);
     }
+
+    /// <inheritdoc />
+    public async Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input)
+    {
+        input.ReceiveUserId = UserManager.UserId;//接受用户为自己
+        var messages = await _messageService.Page(input);//分页查询
+
+
+        return messages;
+    }
+
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public async Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input)
+    {
+        return await _messageService.Detail(input, true);//返回详情，不带用户列表
+    }
+
     #region 方法
     /// <summary>
     /// 获取父菜单集合

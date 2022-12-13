@@ -43,4 +43,18 @@ public interface IUserCenterService : ITransient
     /// <param name="input">工作台字符串</param>
     /// <returns></returns>
     Task UpdateWorkbench(UpdateWorkbenchInput input);
+
+    /// <summary>
+    /// 获取登录用户的站内信分页
+    /// </summary>
+    /// <param name="input">查询参数</param>
+    /// <returns>站内信列表</returns>
+    Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input);
+
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input">消息ID</param>
+    /// <returns>消息详情</returns>
+    Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input);
 }

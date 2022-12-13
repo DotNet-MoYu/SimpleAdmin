@@ -139,62 +139,6 @@
       "UpdateUserId": "212725263002001",
       "IsDelete": "0",
       "ExtJson": ""
-    },
-    {
-      "Id": "357093390630981",
-      "ConfigKey": "1",
-      "ConfigValue": "2",
-      "Category": "BIZ_DEFINE",
-      "Remark": "",
-      "SortCode": "0",
-      "CreateTime": "2022-11-25 11:16:45.593",
-      "UpdateTime": "",
-      "CreateUserId": "212725263002001",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "357094417309765",
-      "ConfigKey": "21",
-      "ConfigValue": "2",
-      "Category": "BIZ_DEFINE",
-      "Remark": "",
-      "SortCode": "0",
-      "CreateTime": "2022-11-25 11:20:56.247",
-      "UpdateTime": "",
-      "CreateUserId": "212725263002001",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "357100480434245",
-      "ConfigKey": "212",
-      "ConfigValue": "2",
-      "Category": "BIZ_DEFINE",
-      "Remark": "",
-      "SortCode": "0",
-      "CreateTime": "2022-11-25 11:45:36.5",
-      "UpdateTime": "",
-      "CreateUserId": "212725263002001",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "357124240269381",
-      "ConfigKey": "2132",
-      "ConfigValue": "2",
-      "Category": "BIZ_DEFINE",
-      "Remark": "",
-      "SortCode": "0",
-      "CreateTime": "2022-11-25 13:22:17.243",
-      "UpdateTime": "",
-      "CreateUserId": "212725263002001",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
     }
   ]
 }

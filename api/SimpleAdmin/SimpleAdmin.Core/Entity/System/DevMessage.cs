@@ -5,7 +5,7 @@
     ///</summary>
     [SugarTable("dev_message", TableDescription = "站内信")]
     [Tenant(SqlsugarConst.DB_Default)]
-    public class DevMessage : DataEntityBase
+    public class DevMessage : BaseEntity
     {
         /// <summary>
         /// 分类 
@@ -22,5 +22,11 @@
         ///</summary>
         [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
         public virtual string Content { get; set; }
+
+        /// <summary>
+        /// 是否一度
+        /// </summary>
+        [SugarColumn(IsIgnore = true)]
+        public bool Read { get; set; }
     }
 }

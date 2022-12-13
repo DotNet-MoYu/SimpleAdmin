@@ -712,9 +712,23 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.updateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
             <summary>
             编辑工作台
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.UserCenterController.LoginUnreadMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            读取登录用户站内信详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -739,6 +753,20 @@
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Send(SimpleAdmin.System.MessageSendInput)">
             <summary>
             发送站内信
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            消息详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除站内信
             </summary>
             <param name="input"></param>
             <returns></returns>

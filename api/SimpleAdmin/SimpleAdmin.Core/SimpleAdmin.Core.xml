@@ -1192,6 +1192,11 @@
              正文 
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Core.DevMessage.Read">
+            <summary>
+            是否一度
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.DevRelation">
              <summary>
              开发关系表

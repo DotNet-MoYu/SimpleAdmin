@@ -6,6 +6,21 @@
 public interface IMessageService : ITransient
 {
     /// <summary>
+    /// 删除消息
+    /// </summary>
+    /// <param name="input">id列表</param>
+    /// <returns></returns>
+    Task Delete(List<BaseIdInput> input);
+
+    /// <summary>
+    /// 获取消息详情
+    /// </summary>
+    /// <param name="input">消息ID</param>
+    /// <param name="isSelf">是否是自己</param>
+    /// <returns>消息详情</returns>
+    Task<MessageDetailOutPut> Detail(BaseIdInput input, bool isSelf = false);
+
+    /// <summary>
     /// 分页查询
     /// </summary>
     /// <param name="input">查询参数</param>

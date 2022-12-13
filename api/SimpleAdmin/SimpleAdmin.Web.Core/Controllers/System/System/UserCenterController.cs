@@ -76,8 +76,31 @@ public class UserCenterController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("updateUserWorkbench")]
     [Description("编辑工作台")]
-    public async Task updateUserWorkbench([FromBody] UpdateWorkbenchInput input)
+    public async Task UpdateUserWorkbench([FromBody] UpdateWorkbenchInput input)
     {
         await _userCenterService.UpdateWorkbench(input);
     }
+
+    /// <summary>
+    /// 获取登录用户的站内信分页
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("loginUnreadMessagePage")]
+    public async Task<dynamic> LoginUnreadMessagePage([FromQuery] MessagePageInput input)
+    {
+        return await _userCenterService.LoginMessagePage(input);
+    }
+
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("loginUnreadMessageDetail")]
+    public async Task<dynamic> LoginUnreadMessageDetail([FromQuery] BaseIdInput input)
+    {
+        return await _userCenterService.LoginMessageDetail(input);
+    }
+
 }
