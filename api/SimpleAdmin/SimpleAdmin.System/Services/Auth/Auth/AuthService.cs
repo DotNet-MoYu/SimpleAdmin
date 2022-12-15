@@ -1,4 +1,5 @@
-﻿using UAParser;
+﻿using IPTools.Core.Extensions;
+using UAParser;
 
 namespace SimpleAdmin.System.Services.Auth;
 
@@ -114,12 +115,10 @@ public class AuthService : IAuthService
         if (userinfo != null)
         {
             var httpContext = App.HttpContext;
-            var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);//客户端信息
             //发布登出事件总线
-            await _eventPublisher.PublishAsync(EventSubscriberConst.LoginOut, new LoginEvent
+            await _eventPublisher.PublishAsync(EventSubscriberConst.LoginOutB, new LoginEvent
             {
-                ClientInfo = client,
-                Ip = httpContext.GetRemoteIpAddressToIPv4(),
+                IpInfo = httpContext.GetRemoteIpInfo(),
                 SysUser = userinfo,
                 Token = token
             });
@@ -248,12 +247,10 @@ public class AuthService : IAuthService
         var httpContext = App.HttpContext;
         var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
         //发布登录事件总线
-        await _eventPublisher.PublishAsync(EventSubscriberConst.Login, new LoginEvent
+        await _eventPublisher.PublishAsync(EventSubscriberConst.LoginB, new LoginEvent
         {
-            ClientInfo = client,
-            Ip = httpContext.GetRemoteIpAddressToIPv4(),
+            IpInfo = httpContext.GetRemoteIpInfo(),
             Device = device,
-            LoginClientType = LoginClientTypeEnum.B,
             Expire = expire,
             SysUser = sysUser,
             Token = accessToken

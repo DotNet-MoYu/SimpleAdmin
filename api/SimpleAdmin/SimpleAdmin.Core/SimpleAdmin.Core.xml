@@ -487,14 +487,14 @@
             事件总线常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.Login">
+        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LoginB">
             <summary>
-            登录
+            B端登录
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LoginOut">
+        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LoginOutB">
             <summary>
-            登出
+            B端登录
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.EventSubscriberConst.LogVisit">
@@ -517,9 +517,14 @@
             Redis常量
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.RedisConst.Redis_Prefix_Web">
+            <summary>
+            Redis Key前缀(可删除)
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.RedisConst.Redis_Prefix">
             <summary>
-            Redis Key前缀
+            Redis Key前缀(需要持久化，不随系统重启删除)
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.RedisConst.Redis_Hash">
@@ -580,6 +585,16 @@
         <member name="F:SimpleAdmin.Core.RedisConst.Redis_SysPosition">
             <summary>
             职位表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.RedisConst.Redis_UserTokenB">
+            <summary>
+            B端用户Token缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.RedisConst.Redis_UserTokenC">
+            <summary>
+            C端用户Token缓存Key
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.ResourceConst">
@@ -705,6 +720,47 @@
         <member name="F:SimpleAdmin.Core.SqlsugarConst.Text">
             <summary>
             sqlite的text
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.LinqPagedList`1">
+            <summary>
+            Linq分页泛型集合
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:SimpleAdmin.Core.TokenInfo">
+            <summary>
+            Token信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.Device">
+            <summary>
+            设备
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.Expire">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.Token">
+            <summary>
+            Token
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.TokenTimeout">
+            <summary>
+            超时时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.TokenRemain">
+            <summary>
+            token剩余有效期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.TokenInfo.TokenRemainPercent">
+            <summary>
+            token剩余有效期百分比
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.PrimaryKeyEntity">
@@ -1798,6 +1854,11 @@
             通用错误码
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0000">
+            <summary>
+            系统异常
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0001">
             <summary>
             数据不存在
@@ -1831,6 +1892,16 @@
             <param name="first">第一个列表</param>
             <param name="secend">第二个列表</param>
             <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Extension.LinqExtension.LinqPagedList``1(System.Collections.Generic.List{``0},System.Int32,System.Int32)">
+            <summary>
+            分页查询
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="list">数据列表</param>
+            <param name="pageIndex">当前页</param>
+            <param name="pageSize">每页数量</param>
+            <returns>分页集合</returns>
         </member>
         <member name="T:SimpleAdmin.Core.ObjectExtension">
             <summary>

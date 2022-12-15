@@ -1,4 +1,5 @@
-﻿using UAParser;
+﻿using IPTools.Core;
+using UAParser;
 
 namespace SimpleAdmin.System;
 
@@ -18,23 +19,20 @@ public class LoginEvent
     /// </summary>
     public SysUser SysUser { get; set; }
 
+
     /// <summary>
-    /// Ip地址
+    /// 地址
     /// </summary>
-    public string Ip { get; set; }
+    public IpInfo IpInfo { get; set; }
 
     /// <summary>
     /// 登录设备
     /// </summary>
     public AuthDeviceTypeEumu Device { get; set; }
 
-    /// <summary>
-    /// 登录类型
-    /// </summary>
-    public LoginClientTypeEnum LoginClientType { get; set; }
 
     /// <summary>
-    /// Token
+    /// Tokens
     /// </summary>
     public string Token { get; set; }
 

@@ -48,7 +48,7 @@ public class MenuController : BaseController
 
 
     /// <summary>
-    /// 获取菜单树
+    /// 获取菜单树选择器
     /// </summary>
     /// <returns></returns> 
     [HttpGet("menuTreeSelector")]

@@ -1,8 +1,4 @@
-﻿using Furion;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -15,7 +11,7 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-
+        services.AddComponent<AppSettingsComponent>();//启动系统设置ConfigureServices组件
         // JWT配置
         services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
         // 允许跨域
@@ -38,6 +34,9 @@ public class Startup : AppStartup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        //启动系统设置Configure组件
+        app.UseComponent<AppSettingsApplicationComponent>(env);
+
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -52,7 +51,6 @@ public class Startup : AppStartup
 
         // 添加状态码拦截中间件
         app.UseUnifyResultStatusCodes();
-
 
         app.UseRouting();
 

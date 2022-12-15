@@ -12,15 +12,15 @@ namespace SimpleAdmin.Core;
 public class EventSubscriberConst
 {
     /// <summary>
-    /// 登录
+    /// B端登录
     /// </summary>
-    public const string Login = "用户登录";
+    public const string LoginB = "B端登录";
 
 
     /// <summary>
-    /// 登出
+    /// B端登录
     /// </summary>
-    public const string LoginOut = "用户登出";
+    public const string LoginOutB = "B端登出";
 
 
     /// <summary>

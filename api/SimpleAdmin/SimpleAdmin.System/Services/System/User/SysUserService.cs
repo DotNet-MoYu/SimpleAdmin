@@ -363,6 +363,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (result.IsSuccess)//如果成功了
             {
                 DeleteUserFromRedis(ids);//redis删除用户
+                // TODO 此处需要将这些用户踢下线，并永久注销这些用户
             }
             else
             {
@@ -371,7 +372,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 throw Oops.Oh(ErrorCodeEnum.A0002);
             }
 
-            // TODO 此处需要将这些用户踢下线，并永久注销这些用户
+
         }
     }
 
@@ -518,5 +519,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
     }
 
+    /// <inheritdoc />
+    public void DeleteTokenFromRedis(List<long> ids)
+    {
+
+    }
     #endregion
 }

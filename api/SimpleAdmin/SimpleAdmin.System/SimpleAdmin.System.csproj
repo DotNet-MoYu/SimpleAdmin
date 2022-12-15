@@ -16,6 +16,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Components\AppSettingsComponent.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
 	</ItemGroup>
 

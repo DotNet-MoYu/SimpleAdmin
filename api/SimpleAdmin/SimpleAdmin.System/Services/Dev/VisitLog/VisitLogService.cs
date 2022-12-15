@@ -67,13 +67,13 @@ public class VisitLogService : DbRepository<DevLogVisit>, IVisitLogService
             //添加登录数据
             new VisitLogTotalCountOutput
             {
-                Type = EventSubscriberConst.Login,
+                Type = EventSubscriberConst.LoginB,
                 Value = data.Where(it => it.Category == CateGoryConst.Log_LOGIN).Select(it => it.Count).FirstOrDefault()
             },
             //添加登出数据
             new VisitLogTotalCountOutput
             {
-                Type = EventSubscriberConst.LoginOut,
+                Type = EventSubscriberConst.LoginOutB,
                 Value = data.Where(it => it.Category == CateGoryConst.Log_LOGOUT).Select(it => it.Count).FirstOrDefault()
             }
         };

@@ -8,3 +8,7 @@ global using System.Threading.Tasks;
 global using Microsoft.AspNetCore.Authorization;
 global using System.ComponentModel;
 global using SimpleAdmin.Web.Core.Controllers.System;
+global using Furion;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;

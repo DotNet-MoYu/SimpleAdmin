@@ -13,6 +13,11 @@ namespace SimpleAdmin.Core;
 public enum ErrorCodeEnum
 {
     /// <summary>
+    /// 系统异常
+    /// </summary>
+    [ErrorCodeItemMetadata("系统异常")]
+    A0000,
+    /// <summary>
     /// 数据不存在
     /// </summary>
     [ErrorCodeItemMetadata("数据不存在")]

@@ -245,7 +245,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         {
             var typeName = Target.GetType().Name;//获取实例名
             var methodName = method.Name;//获取方法名
-            key = $"{RedisConst.Redis_Prefix}{typeName}:{methodName}:";//生成Key
+            key = $"{RedisConst.Redis_Prefix_Web}{typeName}:{methodName}:";//生成Key
             foreach (var param in methodArguments)//遍历参数列表
             {
                 key = $"{key}{param}:";//生成加上参数的KEY

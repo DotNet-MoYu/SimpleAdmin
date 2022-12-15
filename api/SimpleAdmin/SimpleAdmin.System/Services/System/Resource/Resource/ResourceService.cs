@@ -279,7 +279,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         List<SysResource> allMenuList = (await GetListByCategory(CateGoryConst.Resource_MENU)).Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
         List<SysResource> allButtonList = await GetListByCategory(CateGoryConst.Resource_BUTTON);//获取所有按钮列表
         var parentMenuList = allMenuList.Where(it => it.ParentId == 0).ToList();//获取一级目录
-                                                                                //遍历一级目录
+
+        //遍历一级目录
         foreach (var parent in parentMenuList)
         {
             //获取所有下级菜单
@@ -301,6 +302,18 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                         Module = moduleId,
                         Title = GetRoleGrantResourceMenuTitle(menuList, menu),//菜单名称需要特殊处理因为有二级菜单
                         Button = buttons
+                    });
+                }
+                else if (menu.MenuType == ResourceConst.LINK || menu.MenuType == ResourceConst.IFRAME)//如果是内链或者外链
+                {
+                    //直接加到资源列表
+                    roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                    {
+                        Id = menu.Id,
+                        ParentId = parent.Id,
+                        ParentName = parent.Title,
+                        Module = moduleId,
+                        Title = menu.Title,
                     });
                 }
             }

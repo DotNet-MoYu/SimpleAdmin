@@ -34,7 +34,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             var path = logMsg.Context.Get(LoggingConst.Path).ToString();//获取操作名称
             var method = logMsg.Context.Get(LoggingConst.Method).ToString();//获取方法
             //表示访问日志
-            if (operation == EventSubscriberConst.Login || operation == EventSubscriberConst.LoginOut)
+            if (operation == EventSubscriberConst.LoginB || operation == EventSubscriberConst.LoginOutB)
             {
                 //如果没有异常信息
                 if (loggingMonitor.Exception == null)
@@ -74,7 +74,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
 
         var name = "";//用户姓名
         var opAccount = "";//用户账号
-        if (operation == EventSubscriberConst.Login)
+        if (operation == EventSubscriberConst.LoginB)
         {
             //如果是登录，用户信息就从返回值里拿
             var result = loggingMonitor.ReturnInformation.Value.ToJson();//返回值转json
@@ -92,7 +92,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var devLogVisit = new DevLogVisit
         {
             Name = operation,
-            Category = operation == EventSubscriberConst.Login ? CateGoryConst.Log_LOGIN : CateGoryConst.Log_LOGOUT,
+            Category = operation == EventSubscriberConst.LoginB ? CateGoryConst.Log_LOGIN : CateGoryConst.Log_LOGOUT,
             ExeStatus = DevLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,

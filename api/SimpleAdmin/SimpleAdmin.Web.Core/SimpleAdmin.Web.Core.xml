@@ -4,6 +4,18 @@
         <name>SimpleAdmin.Web.Core</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Web.Core.AppSettingsComponent">
+            <summary>
+            系统设置组件
+            模拟 ConfigureService
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.AppSettingsApplicationComponent">
+            <summary>
+            系统设置组件
+            模拟 Configure
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.Application.OrgController">
             <summary>
             机构管理控制器
@@ -480,7 +492,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.System.MenuController.MenuTreeSelector(SimpleAdmin.System.MenuTreeInput)">
             <summary>
-            获取菜单树
+            获取菜单树选择器
             </summary>
             <returns></returns> 
         </member>
@@ -733,6 +745,55 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController">
+            <summary>
+            会话管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.PageB(SimpleAdmin.System.SessionPageInput)">
+            <summary>
+            B端会话分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.PageC(SimpleAdmin.System.SessionPageInput)">
+            <summary>
+            C端会话分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.Analysis">
+            <summary>
+            会话统计
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitSessionForB(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            强退B端会话
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitSessionForC(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            强退C端会话
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitTokenForB(SimpleAdmin.System.ExitTokenInput)">
+            <summary>
+            强退B端Token
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitTokenForC(SimpleAdmin.System.ExitTokenInput)">
+            <summary>
+            强退C端Token
+            </summary>
+            <param name="input"></param>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.System.BaseController">
             <summary>
             基础控制器
@@ -964,6 +1025,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.MyActionFilter">
+            <summary>
+            操作筛选器
+            </summary>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
             <summary>
             重写 Handler 添加自动刷新
@@ -985,6 +1051,26 @@
             </summary>
             <param name="httpContext"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.LogExceptionHandler">
+            <summary>
+            全局异常处理提供器
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.AppSettingsOptions">
+            <summary>
+            系统配置选项
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.AppSettingsOptions.EnvPoc">
+            <summary>
+            是否演示环境
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.AppSettingsOptions.ClearRedis">
+            <summary>
+            是否清除Redis缓存
+            </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.Startup">
             <summary>

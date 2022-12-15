@@ -1,0 +1,39 @@
+﻿using Masuit.Tools.DateTimeExt;
+
+namespace SimpleAdmin.Core;
+
+/// <summary>
+/// Token信息
+/// </summary>
+public class TokenInfo
+{
+    /// <summary>
+    /// 设备
+    /// </summary>
+    public string Device { get; set; }
+
+    /// <summary>
+    /// 过期时间
+    /// </summary>
+    public int Expire { get; set; }
+
+    /// <summary>
+    /// Token
+    /// </summary>
+    public string Token { get; set; }
+
+    /// <summary>
+    /// 超时时间
+    /// </summary>
+    public DateTime TokenTimeout { get; set; }
+
+    /// <summary>
+    /// token剩余有效期
+    /// </summary>
+    public string TokenRemain { get; set; }
+
+    /// <summary>
+    /// token剩余有效期百分比
+    /// </summary>
+    public double TokenRemainPercent { get; set; }
+}

@@ -64,7 +64,7 @@ public class ResTreeSelector
         /// <summary>
         /// 菜单下按钮集合
         /// </summary>
-        public List<RoleGrantResourceButton> Button { get; set; }
+        public List<RoleGrantResourceButton> Button { get; set; } = new List<RoleGrantResourceButton>();
 
     }
 

@@ -923,6 +923,27 @@
       "UpdateUserId": "",
       "IsDelete": "0",
       "ExtJson": ""
+    },
+    {
+      "Id": "363532005732421",
+      "ParentId": "212745263003735",
+      "Title": "接口文档",
+      "Name": "7008338600685211648",
+      "Code": "",
+      "Category": "MENU",
+      "Module": "212725263003721",
+      "MenuType": "IFRAME",
+      "Path": "https://console-docs.apipost.cn/preview/1e7bca3db35bd13a/6d6e3ad27d4721de",
+      "Component": "",
+      "Icon": "file-word-outlined",
+      "Color": "",
+      "SortCode": "99",
+      "CreateTime": "2022-12-13 15:55:33.107",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     }
   ]
 }

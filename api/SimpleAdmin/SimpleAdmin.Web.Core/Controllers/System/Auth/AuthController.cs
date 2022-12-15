@@ -48,8 +48,8 @@ public class AuthController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [AllowAnonymous]
-    [Post("login")]
-    [Description(EventSubscriberConst.Login)]
+    [HttpPost("login")]
+    [Description(EventSubscriberConst.LoginB)]
     public async Task<dynamic> Login(LoginInput input)
     {
         return await _authService.Login(input, LoginClientTypeEnum.B);
@@ -61,7 +61,7 @@ public class AuthController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [AllowAnonymous]
-    [Post("loginByPhone")]
+    [HttpPost("loginByPhone")]
     public async Task<dynamic> LoginByPhone(LoginByPhoneInput input)
     {
         return await _authService.LoginByPhone(input, LoginClientTypeEnum.B);
@@ -73,8 +73,8 @@ public class AuthController : IDynamicApiController
     /// 登出
     /// </summary>
     /// <returns></returns>
-    [Post("loginOut")]
-    [Description(EventSubscriberConst.LoginOut)]
+    [HttpPost("loginOut")]
+    [Description(EventSubscriberConst.LoginOutB)]
     public async Task LoginOut(LoginOutIput input)
     {
         await _authService.LoginOut(input.Token);

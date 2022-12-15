@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleAdmin.System
-{
-    public class ScheduleListOutput : RelationUserSchedule
-    {
+namespace SimpleAdmin.System;
 
-        /// <summary>
-        /// ID
-        /// </summary>
-        public long Id { get; set; }
-    }
+public class ScheduleListOutput : RelationUserSchedule
+{
+
+    /// <summary>
+    /// ID
+    /// </summary>
+    public long Id { get; set; }
 }
