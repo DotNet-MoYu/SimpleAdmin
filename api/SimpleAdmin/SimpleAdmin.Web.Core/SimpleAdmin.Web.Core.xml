@@ -16,6 +16,11 @@
             模拟 Configure
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.AuthComponent">
+            <summary>
+            认证相关组件
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.Application.OrgController">
             <summary>
             机构管理控制器
@@ -1030,11 +1035,24 @@
             操作筛选器
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.MyAuthorizationFilter">
+            <summary>
+            自定义授权筛选器
+            </summary>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
             <summary>
             重写 Handler 添加自动刷新
             </summary>
             <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.JwtHandler.CheckTokenFromRedis(Microsoft.AspNetCore.Http.DefaultHttpContext,System.Int32)">
+            <summary>
+            检查token有效性
+            </summary>
+            <param name="context">DefaultHttpContext</param>
+            <param name="expire">token有效期/分钟</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.PipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">

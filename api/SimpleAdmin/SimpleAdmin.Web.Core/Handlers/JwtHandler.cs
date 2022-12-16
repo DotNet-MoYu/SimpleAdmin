@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Security.Claims;
 using Furion;
 using Furion.Authorization;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.Http;
+using Shiny.Redis;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -16,20 +18,78 @@ public class JwtHandler : AppAuthorizeHandler
     public override async Task HandleAsync(AuthorizationHandlerContext context)
     {
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
-        // 自动刷新Token
-        if (JWTEncryption.AutoRefreshToken(context, context.GetCurrentHttpContext(), expire, expire * 2))
+        DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
+        //自动刷新Token
+        if (JWTEncryption.AutoRefreshToken(context, currentHttpContext, expire, expire * 2))
         {
-            await AuthorizeHandleAsync(context);
+            //判断token是否有效
+            if (CheckTokenFromRedis(currentHttpContext, expire))
+            {
+                await AuthorizeHandleAsync(context);
+            }
+            else
+            {
+                currentHttpContext.Response.StatusCode = 401;//返回401给授权筛选器用
+                return;
+            }
         }
         else
         {
             context.Fail(); // 授权失败
-            DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
             if (currentHttpContext == null)
                 return;
             currentHttpContext.SignoutToSwagger();
         }
 
+
+    }
+
+    /// <summary>
+    /// 检查token有效性
+    /// </summary>
+    /// <param name="context">DefaultHttpContext</param>
+    /// <param name="expire">token有效期/分钟</param>
+    /// <returns></returns>
+    private bool CheckTokenFromRedis(DefaultHttpContext context, int expire)
+    {
+
+        var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
+        var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
+        var _redisCacheManager = App.GetService<IRedisCacheManager>();//获取redis实例
+        var key = RedisConst.Redis_UserTokenB;
+        var tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(key, userId);//获取B端token信息
+        if (tokenInfos == null)//如果token是空的则去C端里面找
+        {
+            key = RedisConst.Redis_UserTokenC;
+            tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserTokenC, userId);
+        }
+        if (tokenInfos == null)//如果还是空
+        {
+            return false;
+        }
+        else
+        {
+            var tokenInfo = tokenInfos.Where(it => it.Token == token).FirstOrDefault();//获取redis中token值是当前token的对象
+            if (tokenInfo != null)
+            {
+                // 自动刷新token返回新的Token
+                var accessToken = context.Response.Headers["access-token"].ToString();
+                global::System.Console.WriteLine(accessToken);
+                if (!string.IsNullOrEmpty(accessToken))//如果有新的刷新token
+                {
+                    tokenInfo.Token = accessToken;//新的token
+                    tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
+                    _redisCacheManager.HashAdd(key, userId, tokenInfos);//更新tokne信息到redis
+                }
+            }
+            else
+            {
+                return false;
+            }
+
+
+        }
+        return true;
     }
 
     /// <summary>
@@ -42,6 +102,7 @@ public class JwtHandler : AppAuthorizeHandler
     public async override Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
     {
         // 这里写您的授权判断逻辑，授权通过返回 true，否则返回 false
+
         // 此处已经自动验证 Jwt Token的有效性了，无需手动验证
         return await CheckAuthorizationAsync(httpContext);
     }

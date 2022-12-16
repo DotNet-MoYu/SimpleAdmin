@@ -11,12 +11,13 @@ namespace SimpleAdmin.System;
 public class AuthEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly IRedisCacheManager _redisCacheManager;
-
+    public IServiceProvider _services { get; }
     private readonly SqlSugarScope _db;
-    public AuthEventSubscriber(IRedisCacheManager redisCacheManager)
+    public AuthEventSubscriber(IRedisCacheManager redisCacheManager, IServiceProvider services)
     {
         _db = DbContext.Db;
         this._redisCacheManager = redisCacheManager;
+        this._services = services;
     }
 
     /// <summary>
@@ -43,10 +44,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         #endregion
         //更新用户信息
         if (await _db.UpdateableWithAttr(sysUser).ExecuteCommandAsync() > 0)
-        {
             _redisCacheManager.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser); //更新Redis信息
-            WriteTokenToRedis(loginEvent, LoginClientTypeEnum.B);//写入token到redis
-        }
         await Task.CompletedTask;
     }
 
@@ -60,98 +58,9 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     public async Task LoginOut(EventHandlerExecutingContext context)
     {
         var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
-        RemoveTokenFromRedis(loginEvent, LoginClientTypeEnum.B);//删除用户token
 
     }
 
-    /// <summary>
-    /// 写入用户token到redis
-    /// </summary>
-    /// <param name="loginEvent">登录事件参数</param>
-    /// <param name="loginClientType">登录类型</param>
-    private void WriteTokenToRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
-    {
-        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
-        //获取token列表
-        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
-        var tokenTimeout = loginEvent.DateTime.AddMinutes(loginEvent.Expire);
-        //生成token信息
-        var tokenInfo = new TokenInfo
-        {
-            Device = loginEvent.Device.ToString(),
-            Expire = loginEvent.Expire,
-            TokenTimeout = tokenTimeout,
-            Token = loginEvent.Token,
-        };
-        //判断是否单点登录
-        var a = false;
-        if (a)
-        {
-            tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
-        }
-        else
-        {
-            //判断是否是空的
-            if (tokenInfos != null)
-            {
-                tokenInfos.Add(tokenInfo);
-            }
-            else
-            {
-                tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
-            }
-
-        }
-        //添加到token列表
-        _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
-    }
-
-    /// <summary>
-    /// redis删除用户token
-    /// </summary>
-    /// <param name="loginEvent">登录事件参数</param>
-    /// <param name="loginClientType">登录类型</param>
-    private void RemoveTokenFromRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
-    {
-        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
-        //获取token列表
-        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
-        if (tokenInfos != null)
-        {
-            //获取当前用户的token
-            var token = tokenInfos.Where(it => it.Token == loginEvent.Token).FirstOrDefault();
-            if (token != null)
-                tokenInfos.Remove(token);
-            if (tokenInfos.Count > 0)
-            {
-                //更新token列表
-                _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
-            }
-            else
-            {
-                //从列表中删除
-                _redisCacheManager.HashDel<List<TokenInfo>>(key, new string[] { loginEvent.SysUser.Id.ToString() });
-            }
-        }
-
-    }
-
-    /// <summary>
-    /// 获取用户token列表
-    /// </summary>
-    /// <param name="userId">用户ID</param>
-    /// <returns>token列表</returns>
-    private List<TokenInfo> GetTokenInfos(long userId)
-    {
-        //redis获取用户token列表
-        List<TokenInfo> tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserTokenB, userId.ToString());
-        if (tokenInfos != null)
-        {
-            tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
-        }
-        return tokenInfos;
-
-    }
     /// <summary>
     /// 解析IP地址
     /// </summary>

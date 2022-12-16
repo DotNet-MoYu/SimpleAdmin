@@ -63,8 +63,8 @@ public class SysUser : BaseEntity
     /// <summary>
     /// 籍贯 
     ///</summary>
-    [SugarColumn(ColumnName = "Native_Place", ColumnDescription = "籍贯", Length = 200, IsNullable = true)]
-    public string Native_Place { get; set; }
+    [SugarColumn(ColumnName = "NativePlace", ColumnDescription = "籍贯", Length = 200, IsNullable = true)]
+    public string NativePlace { get; set; }
     /// <summary>
     /// 家庭住址 
     ///</summary>
@@ -139,8 +139,8 @@ public class SysUser : BaseEntity
     /// <summary>
     /// 紧急联系人 
     ///</summary>
-    [SugarColumn(ColumnName = "Emergency_Contact", ColumnDescription = "紧急联系人", Length = 200, IsNullable = true)]
-    public string Emergency_Contact { get; set; }
+    [SugarColumn(ColumnName = "EmergencyContact", ColumnDescription = "紧急联系人", Length = 200, IsNullable = true)]
+    public string EmergencyContact { get; set; }
     /// <summary>
     /// 紧急联系人电话 
     ///</summary>
@@ -164,12 +164,12 @@ public class SysUser : BaseEntity
     /// <summary>
     /// 机构id 
     ///</summary>
-    [SugarColumn(ColumnName = "OrgId", ColumnDescription = "机构id")]
+    [SugarColumn(ColumnName = "OrgId", ColumnDescription = "机构id", IsNullable = false)]
     public virtual long OrgId { get; set; }
     /// <summary>
     /// 职位id 
     ///</summary>
-    [SugarColumn(ColumnName = "PositionId", ColumnDescription = "职位id")]
+    [SugarColumn(ColumnName = "PositionId", ColumnDescription = "职位id", IsNullable = false)]
     public virtual long PositionId { get; set; }
     /// <summary>
     /// 职级 
@@ -257,7 +257,7 @@ public class SysUser : BaseEntity
     public List<string> ButtonCodeList { get; set; }
 
     /// <summary>
-    /// 权限吗集合
+    /// 权限码集合
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     public List<string> PermissionCodeList { get; set; }

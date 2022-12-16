@@ -28,8 +28,8 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var userIds = bTokenInfoDic.Keys.Select(it => it.ToLong()).ToList();
         var query = Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id))//根据ID查询
               .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据姓名查询
-              .WhereIF(!string.IsNullOrEmpty(input.Account), it => it.Name.Contains(input.Account))//根据账号查询
-              .WhereIF(!string.IsNullOrEmpty(input.LatestLoginIp), it => it.Name.Contains(input.LatestLoginIp))//根据IP查询
+              .WhereIF(!string.IsNullOrEmpty(input.Account), it => it.Account.Contains(input.Account))//根据账号查询
+              .WhereIF(!string.IsNullOrEmpty(input.LatestLoginIp), it => it.LatestLoginIp.Contains(input.LatestLoginIp))//根据IP查询
               .OrderBy(it => it.LatestLoginTime, OrderByType.Desc)
               .Select<SessionOutput>()
               .Mapper(it =>
@@ -48,7 +48,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     public async Task<SqlSugarPagedList<SessionOutput>> PageC(SessionPageInput input)
     {
 
-        return new SqlSugarPagedList<SessionOutput>();
+        return new SqlSugarPagedList<SessionOutput>() { Current = 1, Size = 20, Total = 0, Pages = 1, HasNextPages = false };
     }
 
 
@@ -57,7 +57,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
 
         var redisB = GetTokenDicFromRedis(RedisConst.Redis_UserTokenB);//b端会话信息
-        var redisC = GetTokenDicFromRedis(RedisConst.Redis_UserTokenB);//c端会话信息
+        var redisC = GetTokenDicFromRedis(RedisConst.Redis_UserTokenC);//c端会话信息
         var tokenB = redisB.Values.ToList();//b端token列表
         int maxCountB = 0, maxCountC = 0;
         if (tokenB.Count > 0)
@@ -172,7 +172,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             it.TokenRemain = now.GetDiffTime(it.TokenTimeout);//获取时间差
             var tokenSecond = it.TokenTimeout.AddMinutes(-it.Expire).ConvertDateTimeToLong();//颁发时间转为时间戳
             var timeoutSecond = it.TokenTimeout.ConvertDateTimeToLong();//过期时间转为时间戳
-            var tokenRemainPercent = ((timeoutSecond - tokenSecond) * 1.0 / (now.ConvertDateTimeToLong() - tokenSecond));//求百分比,用超时时间-token颁布时间除以现在时间-token颁布时间
+            var tokenRemainPercent = 1 - ((now.ConvertDateTimeToLong() - tokenSecond) * 1.0 / (timeoutSecond - tokenSecond));//求百分比,用现在时间-token颁布时间除以超时时间-token颁布时间
             it.TokenRemainPercent = tokenRemainPercent;
         });
 

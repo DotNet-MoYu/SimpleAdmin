@@ -442,6 +442,11 @@
             登录验证码开关
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.SYS_DEFAULT_SINGLE_OPEN">
+            <summary>
+            单用户登录开关
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.DevConfigConst.SYS_DEFAULT_PASSWORD">
             <summary>
             默认用户密码
@@ -1563,7 +1568,7 @@
              民族 
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.SysUser.Native_Place">
+        <member name="P:SimpleAdmin.Core.SysUser.NativePlace">
              <summary>
              籍贯 
             </summary>
@@ -1639,7 +1644,7 @@
              办公电话 
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.SysUser.Emergency_Contact">
+        <member name="P:SimpleAdmin.Core.SysUser.EmergencyContact">
              <summary>
              紧急联系人 
             </summary>
@@ -1756,7 +1761,7 @@
         </member>
         <member name="P:SimpleAdmin.Core.SysUser.PermissionCodeList">
             <summary>
-            权限吗集合
+            权限码集合
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SysUser.RoleCodeList">
@@ -2061,11 +2066,12 @@
             SqlSugar 数据库实例
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Core.DbContext.ExternalServicesSetting(SqlSugar.SqlSugarScopeProvider)">
+        <member name="M:SimpleAdmin.Core.DbContext.ExternalServicesSetting(SqlSugar.SqlSugarScopeProvider,SimpleAdmin.Core.SqlSugarConfig)">
             <summary>
             实体拓展配置,自定义类型多库兼容
             </summary>
             <param name="db"></param>
+            <param name="config"></param>
         </member>
         <member name="M:SimpleAdmin.Core.DbContext.AopSetting(SqlSugar.SqlSugarScopeProvider)">
             <summary>
@@ -2143,6 +2149,11 @@
         <member name="P:SimpleAdmin.Core.SqlSugarConfig.IsSeedData">
             <summary>
             是否初始化种子数据
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.SqlSugarConfig.IsUnderLine">
+            <summary>
+            是否驼峰转下划线
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.ISqlSugarEntitySeedData`1">

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Reflection;
 
 namespace SimpleAdmin.Core;
@@ -82,6 +83,13 @@ public static class SqlsugarSetup
             if (tenantAtt != null && tenantAtt.configId.ToString() != config.ConfigId) continue;//如果不是当前租户的就下一个
             var seedDataTable = seedData.ToList().ToDataTable();//获取种子数据
             seedDataTable.TableName = db.EntityMaintenance.GetEntityInfo(entityType).DbTableName;//获取表名
+            if (config.IsUnderLine) // 驼峰转下划线
+            {
+                foreach (DataColumn col in seedDataTable.Columns)
+                {
+                    col.ColumnName = UtilMethods.ToUnderLine(col.ColumnName);
+                }
+            }
             var ignoreAdd = hasDataMethod.GetCustomAttribute<IgnoreSeedDataAddAttribute>();//读取忽略插入特性
             var ignoreUpdate = hasDataMethod.GetCustomAttribute<IgnoreSeedDataUpdateAttribute>();//读取忽略更新特性
             if (seedDataTable.Columns.Contains(SqlsugarConst.DB_PrimaryKey))//判断种子数据是否有主键

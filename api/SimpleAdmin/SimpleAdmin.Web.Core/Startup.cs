@@ -11,11 +11,10 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddComponent<AppSettingsComponent>();//启动系统设置ConfigureServices组件
-        // JWT配置
-        services.AddJwt<JwtHandler>(enableGlobalAuthorize: true);
-        // 允许跨域
-        services.AddCorsAccessor();
+        //启动系统设置ConfigureServices组件
+        services.AddComponent<AppSettingsComponent>();
+        //认证组件
+        services.AddComponent<AuthComponent>();
         //gip压缩
         services.AddComponent<GzipCompressionComponent>();
         //事件总线
@@ -29,6 +28,7 @@ public class Startup : AppStartup
                          options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化                                          
                          options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
                      });
+
 
     }
 

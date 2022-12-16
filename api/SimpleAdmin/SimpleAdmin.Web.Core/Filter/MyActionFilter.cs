@@ -1,8 +1,4 @@
 ﻿using Furion.FriendlyException;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Filters;
 using System.Linq;
 
 namespace SimpleAdmin.Web.Core;

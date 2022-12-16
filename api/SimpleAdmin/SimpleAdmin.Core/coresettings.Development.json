@@ -11,6 +11,7 @@
       //  "DbType": "Sqlite", //数据库类型
       //  "IsAutoCloseConnection": true, //是否自动释放
       //  "IsInitDb": true, //是否初始化数据库,适用于codefirst
+      //  "IsUnderLine": true, //是否驼峰转下划线
       //  "IsSeedData": true //是否初始化种子数据
       //}
       {
@@ -19,7 +20,9 @@
         "DbType": "SqlServer", //数据库类型
         "IsAutoCloseConnection": true, //是否自动释放
         "IsInitDb": false, //是否初始化数据库,适用于codefirst
-        "IsSeedData": true //是否初始化种子数据
+        "IsUnderLine": false, //是否驼峰转下划线
+        "IsSeedData": false //是否初始化种子数据
+
       }
     ]
   },

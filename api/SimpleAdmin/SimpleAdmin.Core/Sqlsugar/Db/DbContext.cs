@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using SimpleAdmin.Core.Utils;
 using System.Linq;
+using System.Reflection;
 
 namespace SimpleAdmin.Core;
 
@@ -29,7 +30,7 @@ public static class DbContext
                 {
                     var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
                     MoreSetting(sqlsugarScope);//更多设置
-                    ExternalServicesSetting(sqlsugarScope);//实体拓展配置
+                    ExternalServicesSetting(sqlsugarScope, it);//实体拓展配置
                     AopSetting(sqlsugarScope);//aop配置
                     FilterSetting(sqlsugarScope);//过滤器配置
                 });
@@ -39,24 +40,39 @@ public static class DbContext
     /// 实体拓展配置,自定义类型多库兼容
     /// </summary>
     /// <param name="db"></param>
-    private static void ExternalServicesSetting(SqlSugarScopeProvider db)
+    /// <param name="config"></param>
+    private static void ExternalServicesSetting(SqlSugarScopeProvider db, SqlSugarConfig config)
     {
         db.CurrentConnectionConfig.ConfigureExternalServices = new ConfigureExternalServices
         {
+            // 处理表
+            EntityNameService = (type, entity) =>
+            {
+                if (config.IsUnderLine && !entity.DbTableName.Contains('_'))
+                    entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+            },
             //自定义类型多库兼容
             EntityService = (c, p) =>
              {
                  //如果是mysql并且是varchar(max)
-                 if (db.CurrentConnectionConfig.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
+                 if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
                  {
                      p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
                  }
-                 else if (db.CurrentConnectionConfig.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
+                 else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
                  {
                      p.DataType = SqlsugarConst.Text;//转成sqlite的text
                  }
+                 //默认不写IsNullable为非必填
+                 //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
+                 //    p.IsNullable = true;
+                 if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_'))
+                     p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName); // 驼峰转下划线
+
              }
         };
+
+
 
     }
 

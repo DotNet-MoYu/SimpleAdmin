@@ -75,7 +75,7 @@ public class AuthService : IAuthService
             var userInfo = await _userService.GetUserByAccount(input.Account);//获取用户信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
             if (userInfo.Password != password) throw Oops.Bah("账号密码错误");//账号密码错误
-            return await ExecLoginB(userInfo, input.Device);// 执行B端登录
+            return await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
         }
         else
         {
@@ -94,7 +94,7 @@ public class AuthService : IAuthService
         {
             var userInfo = await _userService.GetUserByPhone(input.Phone);//获取信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
-            var result = await ExecLoginB(userInfo, input.Device);// 执行B端登录
+            var result = await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
             RemoveValidCodeFromRedis(input.ValidCodeReqNo);//删除验证码
             return result;
         }
@@ -108,20 +108,21 @@ public class AuthService : IAuthService
     }
 
     /// <inheritdoc/>
-    public async Task LoginOut(string token)
+    public async Task LoginOut(string token, LoginClientTypeEnum loginClientType)
     {
         //获取用户信息
         var userinfo = await _userService.GetUserByAccount(UserManager.UserAccount);
         if (userinfo != null)
         {
-            var httpContext = App.HttpContext;
-            //发布登出事件总线
-            await _eventPublisher.PublishAsync(EventSubscriberConst.LoginOutB, new LoginEvent
+            LoginEvent loginEvent = new LoginEvent
             {
-                IpInfo = httpContext.GetRemoteIpInfo(),
+                IpInfo = App.HttpContext.GetRemoteIpInfo(),
                 SysUser = userinfo,
                 Token = token
-            });
+            };
+            RemoveTokenFromRedis(loginEvent, loginClientType);//移除token
+            //发布登出事件总线
+            await _eventPublisher.PublishAsync(EventSubscriberConst.LoginOutB, loginEvent);
         }
 
     }
@@ -223,7 +224,7 @@ public class AuthService : IAuthService
     /// <param name="sysUser"></param>
     /// <param name="device"></param>
     /// <returns></returns>
-    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEumu device)
+    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEumu device, LoginClientTypeEnum loginClientType)
     {
         if (sysUser.UserStatus == DevDictConst.COMMON_STATUS_DISABLED) throw Oops.Bah("账号已停用");//账号冻结
 
@@ -244,19 +245,113 @@ public class AuthService : IAuthService
         App.HttpContext.SigninToSwagger(accessToken);
         // 设置响应报文头
         App.HttpContext.SetTokensOfResponseHeaders(accessToken, refreshToken);
-        var httpContext = App.HttpContext;
-        var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
-        //发布登录事件总线
-        await _eventPublisher.PublishAsync(EventSubscriberConst.LoginB, new LoginEvent
+        //var httpContext = App.HttpContext;
+        //var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
+        //登录事件参数
+        var logingEvent = new LoginEvent
         {
-            IpInfo = httpContext.GetRemoteIpInfo(),
+            IpInfo = App.HttpContext.GetRemoteIpInfo(),
             Device = device,
             Expire = expire,
             SysUser = sysUser,
             Token = accessToken
-        });
+        };
+        await WriteTokenToRedis(logingEvent, loginClientType);//写入token到redis
+        await _eventPublisher.PublishAsync(EventSubscriberConst.LoginB, logingEvent); //发布登录事件总线
         //返回结果
         return new LoginOutPut { Token = accessToken, Account = sysUser.Account, Name = sysUser.Name };
+    }
+
+    /// <summary>
+    /// 写入用户token到redis
+    /// </summary>
+    /// <param name="loginEvent">登录事件参数</param>
+    /// <param name="loginClientType">登录类型</param>
+    private async Task WriteTokenToRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
+    {
+        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
+        //获取token列表
+        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
+        var tokenTimeout = loginEvent.DateTime.AddMinutes(loginEvent.Expire);
+        //生成token信息
+        var tokenInfo = new TokenInfo
+        {
+            Device = loginEvent.Device.ToString(),
+            Expire = loginEvent.Expire,
+            TokenTimeout = tokenTimeout,
+            Token = loginEvent.Token,
+        };
+        bool isSingle = false;//默认不开启单用户登录
+        var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_SINGLE_OPEN);//获取系统单用户登录选项
+        if (singleConfig != null) isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
+        //判断是否单用户登录
+        if (isSingle)
+        {
+            tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
+        }
+        else
+        {
+            //判断是否是空的
+            if (tokenInfos != null)
+            {
+                tokenInfos.Add(tokenInfo);
+            }
+            else
+            {
+                tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
+            }
+
+        }
+        //添加到token列表
+        _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
+    }
+
+
+    /// <summary>
+    /// redis删除用户token
+    /// </summary>
+    /// <param name="loginEvent">登录事件参数</param>
+    /// <param name="loginClientType">登录类型</param>
+    private void RemoveTokenFromRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
+    {
+        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
+        //获取token列表
+        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
+        if (tokenInfos != null)
+        {
+            //获取当前用户的token
+            var token = tokenInfos.Where(it => it.Token == loginEvent.Token).FirstOrDefault();
+            if (token != null)
+                tokenInfos.Remove(token);
+            if (tokenInfos.Count > 0)
+            {
+                //更新token列表
+                _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
+            }
+            else
+            {
+                //从列表中删除
+                _redisCacheManager.HashDel<List<TokenInfo>>(key, new string[] { loginEvent.SysUser.Id.ToString() });
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// 获取用户token列表
+    /// </summary>
+    /// <param name="userId">用户ID</param>
+    /// <returns>token列表</returns>
+    private List<TokenInfo> GetTokenInfos(long userId)
+    {
+        //redis获取用户token列表
+        List<TokenInfo> tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserTokenB, userId.ToString());
+        if (tokenInfos != null)
+        {
+            tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
+        }
+        return tokenInfos;
+
     }
     #endregion
 }

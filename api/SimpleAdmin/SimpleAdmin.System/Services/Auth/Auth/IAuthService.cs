@@ -46,6 +46,7 @@ public interface IAuthService : ITransient
     /// 退出登录
     /// </summary>
     /// <param name="token">token</param>
+    /// <param name="loginClientType">登出类型</param>
     /// <returns></returns>
-    Task LoginOut(string token);
+    Task LoginOut(string token, LoginClientTypeEnum loginClientType);
 }

@@ -155,12 +155,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         foreach (var controller in controllerTypes)
         {
             //获取数据权限特性
-            var route = controller.GetCustomAttribute<RouteAttribute>();
-            var routeName = route.Template;//赋值路由名称
-            if (!route.Template.StartsWith("/"))
-                routeName = "/" + routeName;//如果路由名称不是/开头则加上/防止控制器没写
+            var routeAttributes = controller.GetCustomAttributes<RouteAttribute>().ToList();
+            if (routeAttributes == null)
+                continue;
+            var route = routeAttributes[0];//取第一个值
+            var routeName = GetRouteName(controller.Name, route.Template);//赋值路由名称
             //如果路由包含在路由列表中
-            if (routes.Contains(route.Template))
+            if (routes.Contains(routeName))
             {
                 //获取所有方法
                 var menthods = controller.GetMethods();
@@ -209,6 +210,26 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     #region 方法
+
+    /// <summary>
+    /// 获取路由地址名称
+    /// </summary>
+    /// <param name="controllerName">控制器地址</param>
+    /// <param name="template">路由名称</param>
+    /// <returns></returns>
+    private string GetRouteName(string controllerName, string template)
+    {
+        if (!template.StartsWith("/"))
+            template = "/" + template;//如果路由名称不是/开头则加上/防止控制器没写
+        if (template.Contains("[controller]"))
+        {
+            controllerName = controllerName.Replace("Controller", "");//去掉Controller
+            controllerName = FirstCharToLower(controllerName);//转首字母小写写
+            template = template.Replace("[controller]", controllerName);//替换[controller]
+        }
+
+        return template;
+    }
 
     /// <summary>
     /// 首字母小写写

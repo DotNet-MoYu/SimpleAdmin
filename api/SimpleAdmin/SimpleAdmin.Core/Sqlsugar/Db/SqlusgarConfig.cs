@@ -15,4 +15,9 @@ public sealed class SqlSugarConfig : ConnectionConfig
     /// </summary>
     public bool IsSeedData { get; set; }
 
+    /// <summary>
+    /// 是否驼峰转下划线
+    /// </summary>
+    public bool IsUnderLine { get; set; }
+
 }

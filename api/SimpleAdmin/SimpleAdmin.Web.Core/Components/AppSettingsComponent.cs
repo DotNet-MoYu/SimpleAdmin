@@ -21,6 +21,7 @@ public sealed class AppSettingsComponent : IServiceComponent
             services.AddMvcFilter<MyActionFilter>();
         }
 
+
     }
 }
 

@@ -30,8 +30,9 @@ public class UserService : DbRepository<SysUser>, IUserService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //动态查询条件
         var exp = Expressionable.Create<SysUser>();
+        exp.And(it => it.Account != RoleConst.SuperAdmin);
         exp.OrIF(dataScope.Count > 0, u => dataScope.Contains(u.OrgId));//用户机构在数据范围内
-        exp.Or(u => u.Id == UserManager.UserId);//用户ID等于自己
+        exp.OrIF(dataScope.Count == 0, u => u.Id == UserManager.UserId);//用户ID等于自己
         input.Expression = exp;
         //分页查询
         var pageInfo = await _sysUserService.Page(input);

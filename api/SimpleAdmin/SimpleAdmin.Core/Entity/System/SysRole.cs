@@ -15,23 +15,23 @@ public class SysRole : DataEntityBase
     /// <summary>
     /// 名称 
     ///</summary>
-    [SugarColumn(ColumnName = "Name", ColumnDescription = "名称", Length = 200)]
+    [SugarColumn(ColumnName = "Name", ColumnDescription = "名称", Length = 200, IsNullable = false)]
     public virtual string Name { get; set; }
     /// <summary>
     /// 编码 
     ///</summary>
-    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200)]
+    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200, IsNullable = false)]
     public string Code { get; set; }
     /// <summary>
     /// 分类 
     ///</summary>
-    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200)]
+    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = false)]
     public virtual string Category { get; set; }
 
     /// <summary>
     /// 默认数据范围
     ///</summary>
-    [SugarColumn(ColumnName = "DefaultDataScope", ColumnDescription = "默认数据范围", IsJson = true, ColumnDataType = SqlsugarConst.NVarCharMax)]
+    [SugarColumn(ColumnName = "DefaultDataScope", ColumnDescription = "默认数据范围", IsJson = true, ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = false)]
     public virtual DefaultDataScope DefaultDataScope { get; set; }
 
     /// <summary>

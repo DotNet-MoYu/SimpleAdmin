@@ -139,6 +139,20 @@
       "UpdateUserId": "212725263002001",
       "IsDelete": "0",
       "ExtJson": ""
+    },
+    {
+      "Id": "364564896825413",
+      "ConfigKey": "SYS_DEFAULT_SINGLE_OPEN",
+      "ConfigValue": "false",
+      "Category": "SYS_BASE",
+      "Remark": "请选择单用户登录开关",
+      "SortCode": "1",
+      "CreateTime": "2022-12-16 13:58:23.783",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     }
   ]
 }
