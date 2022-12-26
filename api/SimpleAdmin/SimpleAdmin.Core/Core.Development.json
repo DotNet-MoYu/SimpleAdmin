@@ -11,6 +11,7 @@
       //  "DbType": "Sqlite", //数据库类型
       //  "IsAutoCloseConnection": true, //是否自动释放
       //  "IsInitDb": true, //是否初始化数据库,适用于codefirst
+      //  "IsUnderLine": true, //是否驼峰转下划线
       //  "IsSeedData": true //是否初始化种子数据
       //}
       {
@@ -18,8 +19,8 @@
         "ConnectionString": "Server=192.168.1.16;Database=SimpleAdmin;User=sa;Password=xxx;MultipleActiveResultSets=True;", //连接字符串
         "DbType": "SqlServer", //数据库类型
         "IsAutoCloseConnection": true, //是否自动释放
-        "IsInitDb": true, //是否初始化数据库,适用于codefirst
-        "IsUnderLine": true, //是否驼峰转下划线
+        "IsInitDb": false, //是否初始化数据库,适用于codefirst
+        "IsUnderLine": false, //是否驼峰转下划线
         "IsSeedData": false //是否初始化种子数据
 
       }
@@ -37,7 +38,8 @@
   "Logging": {
     "WriteMonitor": false, //是否写入LoggingMonitor日志
     "LogLevel": {
-      "Default": "Debug",
+      "Default": "Debug", //默认日志级别
+      "Max": "Error", //最大日志级别
       "Microsoft": "Warning",
       "Microsoft.Hosting.Lifetime": "Information",
       "Microsoft.AspNetCore.HttpLogging.HttpLoggingMiddleware": "Information"

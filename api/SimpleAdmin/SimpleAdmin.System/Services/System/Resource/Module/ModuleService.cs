@@ -10,16 +10,16 @@ namespace SimpleAdmin.System;
 public class ModuleService : DbRepository<SysResource>, IModuleService
 {
     private readonly ILogger<ModuleService> _logger;
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IResourceService _resourceService;
     private readonly IRelationService _relationService;
 
-    public ModuleService(ILogger<ModuleService> logger, IRedisCacheManager redisCacheManager,
+    public ModuleService(ILogger<ModuleService> logger, ISimpleRedis simpleRedis,
                          IResourceService resourceService,
                          IRelationService relationService)
     {
         this._logger = logger;
-        this._redisCacheManager = redisCacheManager;
+        this._simpleRedis = simpleRedis;
         this._resourceService = resourceService;
         this._relationService = relationService;
     }

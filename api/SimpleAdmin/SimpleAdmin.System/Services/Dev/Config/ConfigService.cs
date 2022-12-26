@@ -5,11 +5,11 @@
 /// <inheritdoc cref="IConfigService"/>
 public class ConfigService : DbRepository<DevConfig>, IConfigService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
 
-    public ConfigService(IRedisCacheManager redisCacheManager)
+    public ConfigService(ISimpleRedis simpleRedis)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
     }
 
     /// <inheritdoc/>
@@ -17,14 +17,14 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     {
         var key = RedisConst.Redis_DevConfig + category;//系统配置key
         //先从redis拿配置
-        var configList = _redisCacheManager.Get<List<DevConfig>>(key);
+        var configList = _simpleRedis.Get<List<DevConfig>>(key);
         if (configList == null)
         {
             //redis没有再去数据可拿
             configList = await GetListAsync(it => it.Category == category);//获取系统配置列表
             if (configList.Count > 0)
             {
-                _redisCacheManager.Set(key, configList);//如果不为空,插入redis
+                _simpleRedis.Set(key, configList);//如果不为空,插入redis
             }
         }
         return configList;
@@ -122,7 +122,7 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     /// <returns></returns>
     private async Task RefreshCache(string category)
     {
-        _redisCacheManager.Remove(RedisConst.Redis_DevConfig + category);//redis删除
+        _simpleRedis.Remove(RedisConst.Redis_DevConfig + category);//redis删除
         await GetListByCategory(category);//重新获取
     }
 

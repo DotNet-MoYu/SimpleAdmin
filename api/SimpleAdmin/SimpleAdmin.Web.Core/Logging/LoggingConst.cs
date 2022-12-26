@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 日志常量

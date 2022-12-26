@@ -32,4 +32,22 @@ public class DevConfigConst
     public const string SYS_DEFAULT_WORKBENCH_DATA_KEY = "SYS_DEFAULT_WORKBENCH_DATA_KEY";
 
 
+    /// <summary>
+    /// mqtt连接地址
+    /// </summary>
+    public const string MQTT_PARAM_URL = "MQTT_PARAM_URL";
+
+    /// <summary>
+    /// mqtt连接用户名
+    /// </summary>
+    public const string MQTT_PARAM_USERNAME = "MQTT_PARAM_USERNAME";
+
+    /// <summary>
+    /// mqtt连接密码
+    /// </summary>
+    public const string MQTT_PARAM_PASSWORD = "MQTT_PARAM_PASSWORD";
+
+
+
+
 }

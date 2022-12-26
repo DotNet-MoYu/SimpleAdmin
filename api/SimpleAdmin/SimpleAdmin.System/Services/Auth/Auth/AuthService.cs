@@ -1,4 +1,5 @@
 ﻿using IPTools.Core.Extensions;
+using Microsoft.AspNetCore.SignalR;
 using UAParser;
 
 namespace SimpleAdmin.System.Services.Auth;
@@ -6,19 +7,19 @@ namespace SimpleAdmin.System.Services.Auth;
 /// <inheritdoc cref="IAuthService"/>
 public class AuthService : IAuthService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IEventPublisher _eventPublisher;
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
     private readonly IRoleService _roleService;
 
-    public AuthService(IRedisCacheManager redisCacheManager,
+    public AuthService(ISimpleRedis simpleRedis,
                        IEventPublisher eventPublisher,
                        IConfigService configService,
                        ISysUserService userService,
                        IRoleService roleService)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
         this._eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
@@ -116,7 +117,7 @@ public class AuthService : IAuthService
         {
             LoginEvent loginEvent = new LoginEvent
             {
-                IpInfo = App.HttpContext.GetRemoteIpInfo(),
+                Ip = App.HttpContext.GetRemoteIpAddressToIPv4(),
                 SysUser = userinfo,
                 Token = token
             };
@@ -154,7 +155,7 @@ public class AuthService : IAuthService
     {
 
         var key = RedisConst.Redis_Captcha + validCodeReqNo; //获取验证码Key值
-        var code = _redisCacheManager.Get<string>(key);//从redis拿数据
+        var code = _simpleRedis.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
         if (code != null)//如果有
         {
@@ -174,7 +175,7 @@ public class AuthService : IAuthService
     public void RemoveValidCodeFromRedis(string validCodeReqNo)
     {
         var key = RedisConst.Redis_Captcha + validCodeReqNo; //获取验证码Key值
-        _redisCacheManager.Remove(key);//删除验证码
+        _simpleRedis.Remove(key);//删除验证码
     }
 
     /// <summary>
@@ -214,15 +215,16 @@ public class AuthService : IAuthService
         //生成请求号
         var reqNo = YitIdHelper.NextId().ToString();
         //插入redis
-        _redisCacheManager.Set(RedisConst.Redis_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
+        _simpleRedis.Set(RedisConst.Redis_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
     }
 
     /// <summary>
     /// 执行B端登录
     /// </summary>
-    /// <param name="sysUser"></param>
-    /// <param name="device"></param>
+    /// <param name="sysUser">用户信息</param>
+    /// <param name="device">登录设备</param>
+    /// <param name="loginClientType">登录类型</param>
     /// <returns></returns>
     public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEumu device, LoginClientTypeEnum loginClientType)
     {
@@ -250,7 +252,7 @@ public class AuthService : IAuthService
         //登录事件参数
         var logingEvent = new LoginEvent
         {
-            IpInfo = App.HttpContext.GetRemoteIpInfo(),
+            Ip = App.HttpContext.GetRemoteIpAddressToIPv4(),
             Device = device,
             Expire = expire,
             SysUser = sysUser,
@@ -269,7 +271,6 @@ public class AuthService : IAuthService
     /// <param name="loginClientType">登录类型</param>
     private async Task WriteTokenToRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
     {
-        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
         //获取token列表
         List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
         var tokenTimeout = loginEvent.DateTime.AddMinutes(loginEvent.Expire);
@@ -279,31 +280,34 @@ public class AuthService : IAuthService
             Device = loginEvent.Device.ToString(),
             Expire = loginEvent.Expire,
             TokenTimeout = tokenTimeout,
+            LoginClientType = loginClientType,
             Token = loginEvent.Token,
         };
-        bool isSingle = false;//默认不开启单用户登录
-        var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_SINGLE_OPEN);//获取系统单用户登录选项
-        if (singleConfig != null) isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
-        //判断是否单用户登录
-        if (isSingle)
+        //如果redis有数据
+        if (tokenInfos != null)
         {
-            tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
-        }
-        else
-        {
-            //判断是否是空的
-            if (tokenInfos != null)
+            bool isSingle = false;//默认不开启单用户登录
+            var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_SINGLE_OPEN);//获取系统单用户登录选项
+            if (singleConfig != null) isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
+            //判断是否单用户登录
+            if (isSingle)
             {
-                tokenInfos.Add(tokenInfo);
+                SingleLogin(tokenInfos.Where(it => it.LoginClientType == loginClientType).ToList());//单用户登录方法
+                tokenInfos = tokenInfos.Where(it => it.LoginClientType != loginClientType).ToList();//去掉当前登录类型的token
+                tokenInfos.Add(tokenInfo);//添加到列表
             }
             else
             {
-                tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
+                tokenInfos.Add(tokenInfo);
             }
-
         }
+        else
+        {
+            tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
+        }
+
         //添加到token列表
-        _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
+        _simpleRedis.HashAdd(RedisConst.Redis_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
     }
 
 
@@ -314,24 +318,24 @@ public class AuthService : IAuthService
     /// <param name="loginClientType">登录类型</param>
     private void RemoveTokenFromRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
     {
-        var key = loginClientType == LoginClientTypeEnum.B ? RedisConst.Redis_UserTokenB : RedisConst.Redis_UserTokenC;
+
         //获取token列表
         List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
         if (tokenInfos != null)
         {
             //获取当前用户的token
-            var token = tokenInfos.Where(it => it.Token == loginEvent.Token).FirstOrDefault();
+            var token = tokenInfos.Where(it => it.Token == loginEvent.Token && it.LoginClientType == loginClientType).FirstOrDefault();
             if (token != null)
                 tokenInfos.Remove(token);
             if (tokenInfos.Count > 0)
             {
                 //更新token列表
-                _redisCacheManager.HashAdd(key, loginEvent.SysUser.Id.ToString(), tokenInfos);
+                _simpleRedis.HashAdd(RedisConst.Redis_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
             }
             else
             {
                 //从列表中删除
-                _redisCacheManager.HashDel<List<TokenInfo>>(key, new string[] { loginEvent.SysUser.Id.ToString() });
+                _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { loginEvent.SysUser.Id.ToString() });
             }
         }
 
@@ -345,13 +349,43 @@ public class AuthService : IAuthService
     private List<TokenInfo> GetTokenInfos(long userId)
     {
         //redis获取用户token列表
-        List<TokenInfo> tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserTokenB, userId.ToString());
+        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId.ToString());
         if (tokenInfos != null)
         {
             tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
         }
         return tokenInfos;
 
+    }
+
+    /// <summary>
+    /// 单用户登录
+    /// </summary>
+    /// <param name="tokenInfos"></param>
+    private void SingleLogin(List<TokenInfo> tokenInfos)
+    {
+        var message = "该账号已在别处登录!";
+        //获取web配置
+        var webSettings = App.GetOptions<WebSettingsOptions>();
+        //客户端ID列表
+        var clienIds = new List<string>();
+        //遍历token列表获取客户端ID列表
+        tokenInfos.ForEach(it =>
+        {
+            clienIds.AddRange(it.ClientIds);
+        });
+        //如果是mqtt
+        if (webSettings.UseMqtt)
+        {
+            var mqttClientManager = App.GetService<IMqttClientManager>();
+        }
+        else//signalr
+        {
+            //获取signalr实例
+            var signalr = App.GetService<IHubContext<SimpleHub, ISimpleHub>>();
+            //发送登出消息
+            signalr.Clients.Users(clienIds).LoginOut(message);
+        }
     }
     #endregion
 }

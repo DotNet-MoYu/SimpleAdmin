@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -16,15 +16,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Components\AppSettingsComponent.cs" />
+		<Compile Remove="Gen\**" />
+		<EmbeddedResource Remove="Gen\**" />
+		<None Remove="Gen\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="Gen\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -33,6 +31,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="System.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="System.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="SeedData\Json\dev_config.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

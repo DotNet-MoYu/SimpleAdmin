@@ -1,5 +1,5 @@
 ﻿using Masuit.Tools;
-
+using SimpleSqlSugar;
 
 namespace SimpleAdmin.System;
 
@@ -7,12 +7,12 @@ namespace SimpleAdmin.System;
 /// <inheritdoc cref="ISysOrgService"/>
 public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
 
 
-    public SysOrgService(IRedisCacheManager redisCacheManager)
+    public SysOrgService(ISimpleRedis simpleRedis)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
     }
 
 
@@ -21,7 +21,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public override async Task<List<SysOrg>> GetListAsync()
     {
         //先从Redis拿
-        var sysOrgs = _redisCacheManager.Get<List<SysOrg>>(RedisConst.Redis_SysOrg);
+        var sysOrgs = _simpleRedis.Get<List<SysOrg>>(RedisConst.Redis_SysOrg);
         if (sysOrgs == null)
         {
             //redis没有就去数据库拿
@@ -29,7 +29,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             if (sysOrgs.Count > 0)
             {
                 //插入Redis
-                _redisCacheManager.Set(RedisConst.Redis_SysOrg, sysOrgs);
+                _simpleRedis.Set(RedisConst.Redis_SysOrg, sysOrgs);
 
             }
         }
@@ -180,8 +180,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _redisCacheManager.Remove(RedisConst.Redis_SysOrg);//从redis删除
-        _redisCacheManager.Remove(RedisConst.Redis_SysUser);//清空redis所有的用户信息
+        _simpleRedis.Remove(RedisConst.Redis_SysOrg);//从redis删除
+        _simpleRedis.Remove(RedisConst.Redis_SysUser);//清空redis所有的用户信息
         await GetListAsync();//刷新缓存
     }
 

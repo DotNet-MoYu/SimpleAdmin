@@ -17,6 +17,6 @@ global using System.Linq.Expressions;
 global using System.Threading.Tasks;
 global using Yitter.IdGenerator;
 global using System.Collections;
-global using Shiny.Redis;
+global using SimpleRedis;
 global using System.ComponentModel;
 global using Masuit.Tools.Core.Validator;

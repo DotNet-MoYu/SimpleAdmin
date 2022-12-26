@@ -1,11 +1,11 @@
 ﻿using Furion.ConfigurableOptions;
 
-namespace SimpleAdmin.Web.Core;
+namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 系统配置选项
 /// </summary>
-public class AppSettingsOptions : IConfigurableOptions
+public class WebSettingsOptions : IConfigurableOptions
 {
 
     /// <summary>
@@ -17,4 +17,9 @@ public class AppSettingsOptions : IConfigurableOptions
     /// 是否清除Redis缓存
     /// </summary>
     public bool ClearRedis { get; set; } = false;
+
+    /// <summary>
+    /// 是否使用MQTT
+    /// </summary>
+    public bool UseMqtt { get; set; } = false;
 }

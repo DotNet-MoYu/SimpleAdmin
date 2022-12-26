@@ -8,21 +8,21 @@ namespace SimpleAdmin.System;
 public class RoleService : DbRepository<SysRole>, IRoleService
 {
     private readonly ILogger<RoleService> _logger;
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IRelationService _relationService;
     private readonly ISysOrgService _sysOrgService;
     private readonly IResourceService _resourceService;
     private readonly IEventPublisher _eventPublisher;
 
     public RoleService(ILogger<RoleService> logger,
-                       IRedisCacheManager redisCacheManager,
+                       ISimpleRedis simpleRedis,
                        IRelationService relationService,
                        ISysOrgService sysOrgService,
                        IResourceService resourceService,
                        IEventPublisher eventPublisher)
     {
         this._logger = logger;
-        this._redisCacheManager = redisCacheManager;
+        this._simpleRedis = simpleRedis;
         _relationService = relationService;
         this._sysOrgService = sysOrgService;
         this._resourceService = resourceService;
@@ -36,7 +36,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async override Task<List<SysRole>> GetListAsync()
     {
         //先从Redis拿
-        var sysRoles = _redisCacheManager.Get<List<SysRole>>(RedisConst.Redis_SysRole);
+        var sysRoles = _simpleRedis.Get<List<SysRole>>(RedisConst.Redis_SysRole);
         if (sysRoles == null)
         {
             //redis没有就去数据库拿
@@ -44,7 +44,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             if (sysRoles.Count > 0)
             {
                 //插入Redis
-                _redisCacheManager.Set(RedisConst.Redis_SysRole, sysRoles);
+                _simpleRedis.Set(RedisConst.Redis_SysRole, sysRoles);
 
             }
         }
@@ -402,7 +402,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task RefreshCache()
     {
 
-        _redisCacheManager.Remove(RedisConst.Redis_SysRole);//删除KEY
+        _simpleRedis.Remove(RedisConst.Redis_SysRole);//删除KEY
         await GetListAsync();//重新缓存
     }
 

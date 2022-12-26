@@ -7,14 +7,14 @@ namespace SimpleAdmin.System;
 public class SysUserService : DbRepository<SysUser>, ISysUserService
 {
     private readonly ILogger<ILogger> _logger;
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IRelationService _relationService;
     private readonly IResourceService _resourceService;
     private readonly ISysOrgService _sysOrgService;
     private readonly IRoleService _roleService;
     private readonly IConfigService _configService;
 
-    public SysUserService(ILogger<ILogger> logger, IRedisCacheManager redisCacheManager,
+    public SysUserService(ILogger<ILogger> logger, ISimpleRedis simpleRedis,
                        IRelationService relationService,
                        IResourceService resourceService,
                        ISysOrgService orgService,
@@ -22,7 +22,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                        IConfigService configService)
     {
         this._logger = logger;
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
         _relationService = relationService;
         _resourceService = resourceService;
         _sysOrgService = orgService;
@@ -68,7 +68,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<long> GetIdByPhone(string phone)
     {
         //先从Redis拿
-        var userId = _redisCacheManager.HashGet<long>(RedisConst.Redis_SysUserPhone, new string[] { phone })[0];
+        var userId = _simpleRedis.HashGet<long>(RedisConst.Redis_SysUserPhone, new string[] { phone })[0];
         if (userId == 0)
         {
             phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
@@ -77,7 +77,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId > 0)
             {
                 //插入Redis
-                _redisCacheManager.HashAdd(RedisConst.Redis_SysUserPhone, phone, userId);
+                _simpleRedis.HashAdd(RedisConst.Redis_SysUserPhone, phone, userId);
             }
         }
         return userId;
@@ -88,7 +88,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<SysUser> GetUsertById(long Id)
     {
         //先从Redis拿
-        var sysUser = _redisCacheManager.HashGet<SysUser>(RedisConst.Redis_SysUser, new string[] { Id.ToString() })[0];
+        var sysUser = _simpleRedis.HashGet<SysUser>(RedisConst.Redis_SysUser, new string[] { Id.ToString() })[0];
         if (sysUser == null)
         {
             sysUser = await Context.Queryable<SysUser>()
@@ -114,7 +114,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 sysUser.PermissionCodeList = permissionCodeList;
                 sysUser.DataScopeList = dataScopeList;
                 //插入Redis
-                _redisCacheManager.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser);
+                _simpleRedis.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser);
             }
         }
         return sysUser;
@@ -125,7 +125,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<long> GetIdByAccount(string account)
     {
         //先从Redis拿
-        var userId = _redisCacheManager.HashGet<long>(RedisConst.Redis_SysUserAccount, new string[] { account })[0];
+        var userId = _simpleRedis.HashGet<long>(RedisConst.Redis_SysUserAccount, new string[] { account })[0];
         if (userId == 0)
         {
 
@@ -134,7 +134,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId != 0)
             {
                 //插入Redis
-                _redisCacheManager.HashAdd(RedisConst.Redis_SysUserAccount, account, userId);
+                _simpleRedis.HashAdd(RedisConst.Redis_SysUserAccount, account, userId);
             }
         }
         return userId;
@@ -251,7 +251,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
          .WhereIF(input.Expression != null, input.Expression?.ToExpression())//动态查询
          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(u.Account))//根据关键字查询
          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
-         .OrderBy(u => u.CreateTime)//排序
+         .OrderBy(u => u.Id)//排序
          .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name })
          .Mapper(u =>
          {
@@ -443,19 +443,19 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public void DeleteUserFromRedis(List<long> ids)
     {
         var userIds = ids.Select(it => it.ToString()).ToArray();//id转string列表
-        var sysUsers = _redisCacheManager.HashGet<SysUser>(RedisConst.Redis_SysUser, userIds);//获取用户列表
+        var sysUsers = _simpleRedis.HashGet<SysUser>(RedisConst.Redis_SysUser, userIds);//获取用户列表
         sysUsers = sysUsers.Where(it => it != null).ToList();//过滤掉不存在的
         if (sysUsers.Count > 0)
         {
             var accounts = sysUsers.Select(it => it.Account).ToArray();//账号集合
             var phones = sysUsers.Select(it => it.Phone).ToArray();//手机号集合
             //删除用户信息
-            _redisCacheManager.HashDel<SysUser>(RedisConst.Redis_SysUser, userIds);
+            _simpleRedis.HashDel<SysUser>(RedisConst.Redis_SysUser, userIds);
             //删除账号
-            _redisCacheManager.HashDel<long>(RedisConst.Redis_SysUserAccount, accounts);
+            _simpleRedis.HashDel<long>(RedisConst.Redis_SysUserAccount, accounts);
             //删除手机
             if (phones != null)
-                _redisCacheManager.HashDel<long>(RedisConst.Redis_SysUserPhone, phones);
+                _simpleRedis.HashDel<long>(RedisConst.Redis_SysUserPhone, phones);
         }
     }
 

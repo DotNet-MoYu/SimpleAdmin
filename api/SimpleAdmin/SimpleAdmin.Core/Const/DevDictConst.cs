@@ -24,6 +24,19 @@ public class DevDictConst
     public const string COMMON_STATUS_DISABLED = "DISABLED";
     #endregion
 
+    #region   在线用户状态
+    /// <summary>
+    /// 在线
+    /// </summary>
+    public const string ONLINE_STATUS_ONLINE = "ONLINE";
+
+    /// <summary>
+    /// 离线
+    /// </summary>
+    public const string ONLINE_STATUS_OFFLINE = "OFFLINE";
+
+    #endregion
+
     #endregion
 
     #region 业务字典

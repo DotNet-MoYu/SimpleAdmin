@@ -5,12 +5,12 @@
 /// </summary>
 public class SpaService : DbRepository<SysResource>, ISpaService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IResourceService _resourceService;
 
-    public SpaService(IRedisCacheManager redisCacheManager, IResourceService resourceService)
+    public SpaService(ISimpleRedis simpleRedis, IResourceService resourceService)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
         this._resourceService = resourceService;
     }
 

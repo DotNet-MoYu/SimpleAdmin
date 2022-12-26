@@ -9,11 +9,11 @@ namespace SimpleAdmin.System;
 /// <inheritdoc cref="IResourceService"/>
 public class ResourceService : DbRepository<SysResource>, IResourceService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
 
-    public ResourceService(IRedisCacheManager redisCacheManager)
+    public ResourceService(ISimpleRedis simpleRedis)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
     }
 
     /// <inheritdoc />
@@ -65,13 +65,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (category == null)
         {
             //删除全部key
-            _redisCacheManager.DelByPattern(RedisConst.Redis_SysResource);
+            _simpleRedis.DelByPattern(RedisConst.Redis_SysResource);
             await GetListAsync();
         }
         else
         {
             //否则只删除一个Key
-            _redisCacheManager.Remove(RedisConst.Redis_SysResource + category);
+            _simpleRedis.Remove(RedisConst.Redis_SysResource + category);
             await GetListByCategory(category);
         }
 
@@ -111,7 +111,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetListByCategory(string category)
     {
         //先从Redis拿
-        var sysResources = _redisCacheManager.Get<List<SysResource>>(RedisConst.Redis_SysResource + category);
+        var sysResources = _simpleRedis.Get<List<SysResource>>(RedisConst.Redis_SysResource + category);
         if (sysResources == null)
         {
             //redis没有就去数据库拿
@@ -119,7 +119,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             if (sysResources.Count > 0)
             {
                 //插入Redis
-                _redisCacheManager.Set(RedisConst.Redis_SysResource + category, sysResources);
+                _simpleRedis.Set(RedisConst.Redis_SysResource + category, sysResources);
             }
         }
         return sysResources;

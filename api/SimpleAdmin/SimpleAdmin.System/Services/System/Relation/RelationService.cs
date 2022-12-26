@@ -7,13 +7,13 @@ namespace SimpleAdmin.System;
 public class Relationservice : DbRepository<SysRelation>, IRelationService
 {
     private readonly ILogger<Relationservice> _logger;
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly IResourceService _resourceService;
 
-    public Relationservice(ILogger<Relationservice> logger, IRedisCacheManager redisCacheManager, IResourceService resourceService)
+    public Relationservice(ILogger<Relationservice> logger, ISimpleRedis simpleRedis, IResourceService resourceService)
     {
         this._logger = logger;
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
         this._resourceService = resourceService;
     }
 
@@ -23,7 +23,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     {
         var key = RedisConst.Redis_SysRelation + category;
         //先从Redis拿
-        var sysRelations = _redisCacheManager.Get<List<SysRelation>>(key);
+        var sysRelations = _simpleRedis.Get<List<SysRelation>>(key);
         if (sysRelations == null)
         {
             //redis没有就去数据库拿
@@ -31,7 +31,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             if (sysRelations.Count > 0)
             {
                 //插入Redis
-                _redisCacheManager.Set(key, sysRelations);
+                _simpleRedis.Set(key, sysRelations);
 
             }
         }
@@ -83,7 +83,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     public async Task RefreshCache(string category)
     {
         var key = RedisConst.Redis_SysRelation + category;//key
-        _redisCacheManager.Remove(key);//删除redis
+        _simpleRedis.Remove(key);//删除redis
         await GetRelationByCategory(category);//更新缓存
     }
 

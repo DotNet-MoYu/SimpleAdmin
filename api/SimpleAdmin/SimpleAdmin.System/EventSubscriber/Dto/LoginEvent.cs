@@ -23,7 +23,13 @@ public class LoginEvent
     /// <summary>
     /// 地址
     /// </summary>
-    public IpInfo IpInfo { get; set; }
+    //public IpInfo IpInfo { get; set; }
+
+    /// <summary>
+    /// Ip地址
+    /// </summary>
+    public string Ip { get; set; }
+
 
     /// <summary>
     /// 登录设备

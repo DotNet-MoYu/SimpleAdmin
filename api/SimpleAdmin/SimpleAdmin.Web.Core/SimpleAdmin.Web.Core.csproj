@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
 		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8625</NoWarn>
 		<DocumentationFile>SimpleAdmin.Web.Core.xml</DocumentationFile>
 	</PropertyGroup>
@@ -18,6 +18,15 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Application\SimpleAdmin.Application.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Web.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Web.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 </Project>

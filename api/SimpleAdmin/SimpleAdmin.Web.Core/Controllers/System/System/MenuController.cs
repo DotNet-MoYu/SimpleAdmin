@@ -1,4 +1,4 @@
-﻿using SimpleAdmin.System;
+﻿using SimpleAdmin.Web.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;

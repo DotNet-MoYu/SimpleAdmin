@@ -19,7 +19,7 @@ public class VisitLogService : DbRepository<DevLogVisit>, IVisitLogService
                            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
                            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.OpIp.Contains(input.SearchKey))//根据关键字查询
                            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
-                           .OrderBy(it => it.CreateTime, OrderByType.Desc);
+                           .OrderBy(it => it.Id, OrderByType.Desc);
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }

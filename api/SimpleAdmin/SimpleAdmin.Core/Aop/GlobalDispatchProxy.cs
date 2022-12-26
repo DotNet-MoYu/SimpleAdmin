@@ -120,7 +120,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         //判断需不需要读取缓存
         if (cacheAttribute != null)
         {
-            var _redisManager = Services.GetService<IRedisCacheManager>(); // 获取redis服务
+            var _redisManager = Services.GetService<ISimpleRedis>(); // 获取redis服务
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
             var cacheValue = string.Empty;
             if (cacheAttribute.StoreType == RedisConst.Redis_Hash)//如果存的是Hash值
@@ -190,7 +190,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);
             if (!string.IsNullOrWhiteSpace(cacheKey))//如果有key
             {
-                var _redisManager = Services.GetService<IRedisCacheManager>(); // 获取redis服务
+                var _redisManager = Services.GetService<ISimpleRedis>(); // 获取redis服务
                 if (cacheAttribute.IsDelete)//判断是否是删除操作
                 {
                     //删除Redis整个KEY

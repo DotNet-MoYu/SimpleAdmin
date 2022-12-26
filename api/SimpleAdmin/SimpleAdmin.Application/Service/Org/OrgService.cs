@@ -6,13 +6,13 @@ namespace SimpleAdmin.Application;
 /// <inheritdoc cref="IOrgService"/>
 public class OrgService : DbRepository<SysOrg>, IOrgService
 {
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public OrgService(IRedisCacheManager redisCacheManager, ISysOrgService sysOrgService, ISysUserService sysUserService)
+    public OrgService(ISimpleRedis simpleRedis, ISysOrgService sysOrgService, ISysUserService sysUserService)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
         this._sysOrgService = sysOrgService;
         this._sysUserService = sysUserService;
     }

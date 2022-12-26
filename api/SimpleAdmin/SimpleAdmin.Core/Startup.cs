@@ -14,7 +14,7 @@ public class Startup : AppStartup
         services.AddComponent<LoggingConsoleComponent>();//启动控制台日志格式化组件
         services.AddComponent<LoggingFileComponent>();//启动日志写入文件组件
 
-        services.AddRedisCacheManager();//注入Redis
+        services.AddSimpleRedis();//注入Redis
 
         // 配置雪花Id算法机器码
         YitIdHelper.SetIdGenerator(new IdGeneratorOptions

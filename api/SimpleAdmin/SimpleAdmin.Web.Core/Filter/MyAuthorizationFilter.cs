@@ -1,6 +1,6 @@
 ﻿
 
-using Shiny.Redis;
+using SimpleRedis;
 using System.Security.Claims;
 
 namespace SimpleAdmin.Web.Core;

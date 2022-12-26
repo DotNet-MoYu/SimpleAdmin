@@ -10,11 +10,11 @@ namespace SimpleAdmin.Web.Core.Controllers.Systems.Auth;
 /// </summary>
 [ApiDescriptionSettings(Tag = "B端权限校验")]
 [Route("auth/b")]
-public class AuthController : IDynamicApiController
+public class AuthBController : IDynamicApiController
 {
     private readonly IAuthService _authService;
 
-    public AuthController(IAuthService authService)
+    public AuthBController(IAuthService authService)
     {
         _authService = authService;
     }

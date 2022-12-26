@@ -6,11 +6,11 @@
 public class DictService : DbRepository<DevDict>, IDictService
 {
 
-    private readonly IRedisCacheManager _redisCacheManager;
+    private readonly ISimpleRedis _simpleRedis;
 
-    public DictService(IRedisCacheManager redisCacheManager)
+    public DictService(ISimpleRedis simpleRedis)
     {
-        _redisCacheManager = redisCacheManager;
+        _simpleRedis = simpleRedis;
     }
 
     /// <inheritdoc />
@@ -68,13 +68,13 @@ public class DictService : DbRepository<DevDict>, IDictService
     public override async Task<List<DevDict>> GetListAsync()
     {
         //先从redis拿
-        var devDicts = _redisCacheManager.Get<List<DevDict>>(RedisConst.Redis_DevDict);
+        var devDicts = _simpleRedis.Get<List<DevDict>>(RedisConst.Redis_DevDict);
         if (devDicts == null)
         {
             devDicts = await base.GetListAsync();//去数据库拿
             if (devDicts.Count > 0)
             {
-                _redisCacheManager.Set(RedisConst.Redis_DevDict, devDicts);//如果数据库有数,更新redis
+                _simpleRedis.Set(RedisConst.Redis_DevDict, devDicts);//如果数据库有数,更新redis
                 return devDicts;
             }
         }
@@ -115,7 +115,7 @@ public class DictService : DbRepository<DevDict>, IDictService
     /// </summary>
     private async Task RefreshCache()
     {
-        _redisCacheManager.Remove(RedisConst.Redis_DevDict);
+        _simpleRedis.Remove(RedisConst.Redis_DevDict);
         await GetListAsync();
     }
 

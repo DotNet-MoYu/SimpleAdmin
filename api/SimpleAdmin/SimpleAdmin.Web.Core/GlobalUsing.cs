@@ -1,6 +1,5 @@
 ﻿global using System;
 global using Microsoft.AspNetCore.Mvc;
-global using SimpleAdmin.System;
 global using Furion.DynamicApiController;
 global using SimpleAdmin.Core;
 global using System.Collections.Generic;
@@ -16,3 +15,6 @@ global using Microsoft.AspNetCore.Mvc.Filters;
 global using Microsoft.AspNetCore.Mvc.Authorization;
 global using Microsoft.AspNetCore.Mvc.Controllers;
 global using System.Linq;
+global using SimpleAdmin.Application;
+global using SimpleAdmin.System;
+global using Furion.Logging;

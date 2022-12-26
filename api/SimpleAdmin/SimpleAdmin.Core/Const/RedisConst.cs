@@ -81,15 +81,15 @@ public class RedisConst
     /// </summary>
     public const string Redis_SysPosition = Redis_Prefix_Web + "SysPosition";
 
+    /// <summary>
+    /// mqtt认证登录信息key
+    /// </summary>
+    public const string Redis_MqttClientUser = Redis_Prefix_Web + "MqttClientUser:";
 
     /// <summary>
-    /// B端用户Token缓存Key
+    /// 用户Token缓存Key
     /// </summary>
-    public const string Redis_UserTokenB = Redis_Prefix + "UserTokenB";
+    public const string Redis_UserToken = Redis_Prefix + "UserToken";
 
-    /// <summary>
-    /// C端用户Token缓存Key
-    /// </summary>
-    public const string Redis_UserTokenC = Redis_Prefix + "UserTokenC";
 
 }

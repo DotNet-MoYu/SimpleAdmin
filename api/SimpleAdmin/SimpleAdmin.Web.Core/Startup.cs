@@ -11,10 +11,12 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        //启动系统设置ConfigureServices组件
-        services.AddComponent<AppSettingsComponent>();
+        //启动LoggingMonitor操作日志写入数据库组件
+        services.AddComponent<LoggingMonitorComponent>();
         //认证组件
         services.AddComponent<AuthComponent>();
+        //启动Web设置ConfigureServices组件
+        services.AddComponent<WebSettingsComponent>();
         //gip压缩
         services.AddComponent<GzipCompressionComponent>();
         //事件总线
@@ -29,13 +31,12 @@ public class Startup : AppStartup
                          options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
                      });
 
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        //启动系统设置Configure组件
-        app.UseComponent<AppSettingsApplicationComponent>(env);
+        //启动Web设置Configure组件
+        app.UseComponent<WebSettingsApplicationComponent>(env);
 
         if (env.IsDevelopment())
         {
@@ -54,7 +55,11 @@ public class Startup : AppStartup
 
         app.UseRouting();
 
-        app.UseCorsAccessor();
+        //app.UseCorsAccessor();
+
+        app.UseCorsAccessor(builder =>
+        builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+      );
 
         app.UseAuthentication();
         app.UseAuthorization();
@@ -63,6 +68,13 @@ public class Startup : AppStartup
 
         app.UseEndpoints(endpoints =>
         {
+            //通过 App.GetOptions<TOptions> 获取选项
+            var webSettings = App.GetOptions<WebSettingsOptions>();
+            if (!webSettings.UseMqtt)
+            {
+                // 注册集线器
+                endpoints.MapHubs();
+            }
             endpoints.MapControllers();
         });
     }

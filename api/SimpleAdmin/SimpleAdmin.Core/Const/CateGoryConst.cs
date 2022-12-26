@@ -35,6 +35,17 @@ public class CateGoryConst
     public const string Config_FILE_MINIO = "FILE_MINIO";
     #endregion
 
+    #region Mqtt配置
+
+    /// <summary>
+    /// MQTT配置
+    /// </summary>
+    public const string Config_MQTT_BASE = "MQTT_BASE";
+
+
+
+    #endregion
+
     #region 关系表
     /// <summary>
     /// 用户有哪些角色

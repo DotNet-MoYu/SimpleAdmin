@@ -8,7 +8,6 @@ public class SessionOutput
     /// <summary>
     /// 主键Id
     /// </summary>
-    [SugarColumn(ColumnDescription = "Id", IsPrimaryKey = true)]
     public virtual long Id { get; set; }
 
     /// <summary>
@@ -26,6 +25,11 @@ public class SessionOutput
     ///</summary>
 
     public virtual string Name { get; set; }
+
+    /// <summary>
+    /// 在线状态
+    /// </summary>
+    public string OnlineStatus { get; set; }
 
     /// <summary>
     /// 最新登录ip 
@@ -76,7 +80,7 @@ public class SessionAnalysisOutPut
 
 
     /// <summary>
-    /// 最近1小时会话数
+    /// 在线用户数
     /// </summary>
     public int OnLineCount { get; set; }
 

@@ -4,21 +4,26 @@
         <name>SimpleAdmin.Web.Core</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.Web.Core.AppSettingsComponent">
-            <summary>
-            系统设置组件
-            模拟 ConfigureService
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.AppSettingsApplicationComponent">
-            <summary>
-            系统设置组件
-            模拟 Configure
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.AuthComponent">
             <summary>
             认证相关组件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.LoggingMonitorComponent">
+            <summary>
+            LoggingMonitor操作日志写入数据库插件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.WebSettingsComponent">
+            <summary>
+            Web设置组件
+            模拟 ConfigureService
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.WebSettingsApplicationComponent">
+            <summary>
+            Web设置组件
+            模拟 Configure
             </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.Application.OrgController">
@@ -198,45 +203,45 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController">
+        <member name="T:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController">
             <summary>
             B端登录控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.GetPicCaptcha">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.GetPicCaptcha">
             <summary>
             B端获取图片验证码
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.GetPhoneValidCode(SimpleAdmin.System.GetPhoneValidCodeInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.GetPhoneValidCode(SimpleAdmin.System.GetPhoneValidCodeInput)">
             <summary>
             B端获取手机验证码
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.Login(SimpleAdmin.System.LoginInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.Login(SimpleAdmin.System.LoginInput)">
             <summary>
             B端登录
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.LoginByPhone(SimpleAdmin.System.LoginByPhoneInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.LoginByPhone(SimpleAdmin.System.LoginByPhoneInput)">
             <summary>
             B端手机号登录
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.LoginOut(SimpleAdmin.System.LoginOutIput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.LoginOut(SimpleAdmin.System.LoginOutIput)">
             <summary>
             登出
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthController.GetLoginUser">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Systems.Auth.AuthBController.GetLoginUser">
             <summary>
             获取用户信息
             </summary>
@@ -750,6 +755,24 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController">
+            <summary>
+            mqtt服务控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.GetParameter">
+            <summary>
+            获取mqtt登录参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.Auth(SimpleAdmin.System.MqttAuthInput)">
+            <summary>
+            mqtt认证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController">
             <summary>
             会话管理控制器
@@ -1075,19 +1098,219 @@
             全局异常处理提供器
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.AppSettingsOptions">
+        <member name="T:SimpleAdmin.Web.Core.DatabaseLoggingWriter">
             <summary>
-            系统配置选项
+            数据库写入器
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.AppSettingsOptions.EnvPoc">
+        <member name="M:SimpleAdmin.Web.Core.DatabaseLoggingWriter.CreateVisitLog(System.String,SimpleAdmin.Web.Core.LoggingMonitorJson,UAParser.ClientInfo)">
             <summary>
-            是否演示环境
+            创建访问日志
+            </summary>
+            <param name="operation">访问类型</param>
+            <param name="loggingMonitor">loggingMonitor</param>
+            <param name="clientInfo">客户端信息</param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.DatabaseLoggingWriter.CreateOperationLog(System.String,System.String,SimpleAdmin.Web.Core.LoggingMonitorJson,UAParser.ClientInfo)">
+            <summary>
+            创建操作日志
+            </summary>
+            <param name="operation">操作名称</param>
+            <param name="path">请求地址</param>
+            <param name="loggingMonitor">loggingMonitor</param>
+            <param name="clientInfo">客户端信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.DatabaseLoggingWriter.GetLoginAddress(System.String)">
+            <summary>
+            解析IP地址
+            </summary>
+            <param name="ip"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.LoggingConst">
+            <summary>
+            日志常量
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.AppSettingsOptions.ClearRedis">
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Operation">
             <summary>
-            是否清除Redis缓存
+            操作名称
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Client">
+            <summary>
+            客户端信息
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Path">
+            <summary>
+            请求地址
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Method">
+            <summary>
+            请求方法：POST/GET
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.LoggingMonitorJson">
+            <summary>
+            请求信息格式化
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.ControllerName">
+            <summary>
+            控制器名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.ActionName">
+            <summary>
+            方法名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.DisplayName">
+            <summary>
+            类名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.LocalIPv4">
+            <summary>
+            服务端
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.RemoteIPv4">
+            <summary>
+            客户端IPV4地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.HttpMethod">
+            <summary>
+            请求方法
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.RequestUrl">
+            <summary>
+            请求地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.UserAgent">
+            <summary>
+            浏览器标识
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.OsDescription">
+            <summary>
+            系统名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.OsArchitecture">
+            <summary>
+            系统架构
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.Environment">
+            <summary>
+            环境
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.AuthorizationClaims">
+            <summary>
+            认证信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.Parameters">
+            <summary>
+            参数列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.ReturnInformation">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.Exception">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.Validation">
+            <summary>
+            验证错误信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.LogDateTime">
+            <summary>
+            日志时间
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.AuthorizationClaims">
+            <summary>
+            认证信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.AuthorizationClaims.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.AuthorizationClaims.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Parameters">
+            <summary>
+            请求参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Parameters.Name">
+            <summary>
+            参数名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Parameters.Value">
+            <summary>
+            值
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.ReturnInformation">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.Value">
+            <summary>
+            返回值
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Exception">
+            <summary>
+            异常信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Exception.Type">
+            <summary>
+            异常类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Exception.Message">
+            <summary>
+            异常内容
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Exception.StackTrace">
+            <summary>
+            堆栈信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Validation">
+            <summary>
+            验证失败信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.Validation.Message">
+            <summary>
+            错误详情
             </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.Startup">

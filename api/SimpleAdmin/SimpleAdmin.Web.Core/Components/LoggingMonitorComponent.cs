@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿
+using System.ComponentModel;
+using System.Reflection;
 using UAParser;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// LoggingMonitor操作日志写入数据库插件
@@ -18,8 +20,11 @@ public sealed class LoggingMonitorComponent : IServiceComponent
              options.ConfigureLogger((logger, logContext, context) =>
               {
                   var httpContext = context.HttpContext;//获取httpContext
+                  //获取头
+                  var userAgent = httpContext.Request.Headers["User-Agent"];
+                  if (string.IsNullOrEmpty(userAgent)) userAgent = "Other";//如果没有这个头就指定一个
                   //获取客户端信息
-                  var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
+                  var client = Parser.GetDefault().Parse(userAgent);
                   // 获取控制器/操作描述器
                   var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
                   //操作名称默认是控制器名加方法名,自定义操作名称要在action上加Description特性

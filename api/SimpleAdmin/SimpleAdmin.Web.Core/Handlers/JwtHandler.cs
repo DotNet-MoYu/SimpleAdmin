@@ -4,7 +4,7 @@ using Furion;
 using Furion.Authorization;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.Http;
-using Shiny.Redis;
+using SimpleRedis;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -55,14 +55,8 @@ public class JwtHandler : AppAuthorizeHandler
 
         var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
         var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
-        var _redisCacheManager = App.GetService<IRedisCacheManager>();//获取redis实例
-        var key = RedisConst.Redis_UserTokenB;
-        var tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(key, userId);//获取B端token信息
-        if (tokenInfos == null)//如果token是空的则去C端里面找
-        {
-            key = RedisConst.Redis_UserTokenC;
-            tokenInfos = _redisCacheManager.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserTokenC, userId);
-        }
+        var _simpleRedis = App.GetService<ISimpleRedis>();//获取redis实例
+        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);//获取B端token信息W
         if (tokenInfos == null)//如果还是空
         {
             return false;
@@ -79,7 +73,7 @@ public class JwtHandler : AppAuthorizeHandler
                 {
                     tokenInfo.Token = accessToken;//新的token
                     tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
-                    _redisCacheManager.HashAdd(key, userId, tokenInfos);//更新tokne信息到redis
+                    _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新tokne信息到redis
                 }
             }
             else
