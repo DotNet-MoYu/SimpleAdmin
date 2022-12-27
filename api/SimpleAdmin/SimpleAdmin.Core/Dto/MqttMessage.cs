@@ -4,28 +4,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Core;
 
 /// <summary>
-/// mqtt认证参数
+/// mqtt消息
 /// </summary>
-public class MqttAuthInput
+public class MqttMessage
 {
 
     /// <summary>
-    /// 账号
+    /// 消息分类
     /// </summary>
-    public string Username { get; set; }
-
+    public string MsgType { get; set; }
 
     /// <summary>
-    /// 密码
+    /// 消息内容
     /// </summary>
-    public string Password { get; set; }
-
+    public object Data { get; set; }
 
     /// <summary>
-    /// 客户端ID
+    /// 时间
     /// </summary>
-    public string ClientId { get; set; }
+    public DateTime DetTime { get; set; } = DateTime.Now;
 }

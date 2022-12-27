@@ -14,16 +14,14 @@ public interface ISessionService : ITransient
     /// <summary>
     /// 强退会话
     /// </summary>
-    /// <param name="input"></param>
-    /// <param name="loginClientType"></param>
-    void ExitSession(BaseIdInput input, LoginClientTypeEnum loginClientType);
+    /// <param name="input">用户ID</param>
+    Task ExitSession(BaseIdInput input);
 
     /// <summary>
     /// 强退token
     /// </summary>
-    /// <param name="input"></param>
-    /// <param name="loginClientType"></param>
-    void ExitToken(ExitTokenInput input, LoginClientTypeEnum loginClientType);
+    /// <param name="input">token列表</param>
+    Task ExitToken(ExitTokenInput input);
 
     /// <summary>
     /// B端会话分页查询

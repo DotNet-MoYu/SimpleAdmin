@@ -552,6 +552,16 @@
             mqtt常量
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.Mqtt_TopicPrefix">
+            <summary>
+            mqtt主题前缀
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.Mqtt_Message_LoginOut">
+            <summary>
+            登出
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.RedisConst">
             <summary>
             Redis常量
@@ -767,6 +777,26 @@
             Linq分页泛型集合
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:SimpleAdmin.Core.MqttMessage">
+            <summary>
+            mqtt消息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.MqttMessage.MsgType">
+            <summary>
+            消息分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.MqttMessage.Data">
+            <summary>
+            消息内容
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.MqttMessage.DetTime">
+            <summary>
+            时间
+            </summary>
         </member>
         <member name="T:SimpleAdmin.Core.TokenInfo">
             <summary>

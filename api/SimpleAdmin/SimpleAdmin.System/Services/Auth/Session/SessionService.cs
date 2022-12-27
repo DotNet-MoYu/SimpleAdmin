@@ -11,10 +11,12 @@ namespace SimpleAdmin.System;
 public class SessionService : DbRepository<SysUser>, ISessionService
 {
     private readonly ISimpleRedis _simpleRedis;
+    private readonly INoticeService _noticeService;
 
-    public SessionService(ISimpleRedis simpleRedis)
+    public SessionService(ISimpleRedis simpleRedis, INoticeService noticeService)
     {
         this._simpleRedis = simpleRedis;
+        this._noticeService = noticeService;
     }
 
     /// <inheritdoc/>
@@ -92,29 +94,32 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     }
 
     /// <inheritdoc/>
-    public void ExitSession(BaseIdInput input, LoginClientTypeEnum loginClientType)
+    public async Task ExitSession(BaseIdInput input)
     {
-
+        //token列表
+        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, input.Id.ToString());
         //从列表中删除
         _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { input.Id.ToString() });
+        var message = "您已被强制下线!";
+        await _noticeService.LoginOut(input.Id.ToString(), tokenInfos, message);//通知下线
     }
 
     /// <inheritdoc/>
-    public void ExitToken(ExitTokenInput input, LoginClientTypeEnum loginClientType)
+    public async Task ExitToken(ExitTokenInput input)
     {
+
         //获取该用户的token信息
         var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, input.Id.ToString());
+        //当前需要踢掉用户的token
+        var deleteTokens = tokenInfos.Where(it => input.Tokens.Contains(it.Token)).ToList();
         //踢掉包含token列表的token信息
         tokenInfos = tokenInfos.Where(it => !input.Tokens.Contains(it.Token)).ToList();
         if (tokenInfos.Count > 0)
-        {
             _simpleRedis.HashAdd(RedisConst.Redis_UserToken, input.Id.ToString(), tokenInfos);//如果还有token则更新token
-        }
         else
-        {
-            _simpleRedis.Remove(RedisConst.Redis_UserToken);//否则直接删除key
-        }
-
+            _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { input.Id.ToString() });//否则直接删除key
+        var message = "您已被强制下线!";
+        await _noticeService.LoginOut(input.Id.ToString(), deleteTokens, message);//通知下线
     }
     #region 方法
 
@@ -122,7 +127,6 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <summary>
     /// 获取redis中token信息列表
     /// </summary>
-    /// <param name="key">redis键</param>
     /// <returns></returns>
     public Dictionary<string, List<TokenInfo>> GetTokenDicFromRedis()
     {

@@ -12,18 +12,20 @@ public class AuthService : IAuthService
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
     private readonly IRoleService _roleService;
+    private readonly INoticeService _noticeService;
 
     public AuthService(ISimpleRedis simpleRedis,
                        IEventPublisher eventPublisher,
                        IConfigService configService,
                        ISysUserService userService,
-                       IRoleService roleService)
+                       IRoleService roleService, INoticeService noticeService)
     {
         _simpleRedis = simpleRedis;
         this._eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
         this._roleService = roleService;
+        this._noticeService = noticeService;
     }
 
     /// <inheritdoc/>
@@ -292,7 +294,7 @@ public class AuthService : IAuthService
             //判断是否单用户登录
             if (isSingle)
             {
-                SingleLogin(tokenInfos.Where(it => it.LoginClientType == loginClientType).ToList());//单用户登录方法
+                await SingleLogin(loginEvent.SysUser.Id.ToString(), tokenInfos.Where(it => it.LoginClientType == loginClientType).ToList());//单用户登录方法
                 tokenInfos = tokenInfos.Where(it => it.LoginClientType != loginClientType).ToList();//去掉当前登录类型的token
                 tokenInfos.Add(tokenInfo);//添加到列表
             }
@@ -361,31 +363,12 @@ public class AuthService : IAuthService
     /// <summary>
     /// 单用户登录
     /// </summary>
-    /// <param name="tokenInfos"></param>
-    private void SingleLogin(List<TokenInfo> tokenInfos)
+    /// <param name="userId">用户ID</param>
+    /// <param name="tokenInfos">Token列表</param>
+    private async Task SingleLogin(string userId, List<TokenInfo> tokenInfos)
     {
         var message = "该账号已在别处登录!";
-        //获取web配置
-        var webSettings = App.GetOptions<WebSettingsOptions>();
-        //客户端ID列表
-        var clienIds = new List<string>();
-        //遍历token列表获取客户端ID列表
-        tokenInfos.ForEach(it =>
-        {
-            clienIds.AddRange(it.ClientIds);
-        });
-        //如果是mqtt
-        if (webSettings.UseMqtt)
-        {
-            var mqttClientManager = App.GetService<IMqttClientManager>();
-        }
-        else//signalr
-        {
-            //获取signalr实例
-            var signalr = App.GetService<IHubContext<SimpleHub, ISimpleHub>>();
-            //发送登出消息
-            signalr.Clients.Users(clienIds).LoginOut(message);
-        }
+        await _noticeService.LoginOut(userId, tokenInfos, message);//通知其他用户下线
     }
     #endregion
 }
