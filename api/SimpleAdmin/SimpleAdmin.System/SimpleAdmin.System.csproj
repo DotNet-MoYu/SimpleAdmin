@@ -16,13 +16,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Compile Remove="Gen\**" />
-		<EmbeddedResource Remove="Gen\**" />
-		<None Remove="Gen\**" />
+		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
+		<Folder Include="Gen\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -31,12 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="System.Development.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="System.Production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="SeedData\Json\dev_config.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

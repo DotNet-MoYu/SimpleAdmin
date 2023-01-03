@@ -8,16 +8,16 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="application.Development.json" />
-		<None Remove="application.Production.json" />
+		<None Remove="applicationsettings.Development.json" />
+		<None Remove="applicationsettings.Production.json" />
 		<None Remove="SimpleAdmin.Application.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="Application.Production.json">
+		<Content Include="applicationsettings.Production.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-		<Content Include="Application.Development.json">
+		<Content Include="applicationsettings.Development.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
