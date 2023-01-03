@@ -22,6 +22,11 @@ public static class ImageUtil
         return bytes;
     }
 
+    /// <summary>
+    /// 图片转换成base64
+    /// </summary>
+    /// <param name="bmp"></param>
+    /// <returns></returns>
     public static string ImgToBase64String(this Bitmap bmp)
     {
         try
@@ -37,6 +42,28 @@ public static class ImageUtil
         catch
         {
             return null;
+        }
+    }
+
+    /// <summary>
+    /// 图片转换成base64
+    /// </summary>
+    /// <param name="bmp"></param>
+    /// <returns></returns>		
+    public static string ImgToBase64String(Image bmp)
+    {
+        try
+        {
+            MemoryStream ms = new MemoryStream();
+            bmp.Save(ms, ImageFormat.Png);
+            byte[] arr = new byte[ms.Length]; ms.Position = 0;
+            ms.Read(arr, 0, (int)ms.Length); ms.Close();
+            return Convert.ToBase64String(arr);
+        }
+        catch (Exception ex)
+        {
+
+            return "";
         }
     }
 
@@ -119,5 +146,33 @@ public static class ImageUtil
             return null;
         }
     }
+
+
+
+    /// <summary>
+    /// 获取缩略图
+    /// </summary>
+    /// <param name="bmp"></param>
+    /// <param name="w">宽</param>
+    /// <param name="h">高</param>
+    /// <returns></returns>
+    public static Image GetPicThumbnail(this Bitmap bmp, int w, int h)
+    {
+        try
+        {
+            Image thumbnail = bmp.GetThumbnailImage(
+      w, h, () => false, IntPtr.Zero);
+            return thumbnail;
+        }
+        catch (Exception ex)
+        {
+
+            return null;
+        }
+
+    }
+
+
+
 
 }

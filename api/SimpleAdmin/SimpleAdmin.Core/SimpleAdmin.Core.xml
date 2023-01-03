@@ -477,6 +477,36 @@
             mqtt连接密码
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS">
+            <summary>
+            mqtt连接用户名
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX">
+            <summary>
+            mqtt连接密码
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_MINIO_ACCESS_KEY">
+            <summary>
+            MINIO文件AccessKey
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_MINIO_SECRET_KEY">
+            <summary>
+            MINIO文件SecetKey
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_MINIO_END_POINT">
+            <summary>
+            MINIO文件EndPoint
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME">
+            <summary>
+            MINIO文件默认存储桶
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.DevDictConst">
             <summary>
             字典常量
@@ -500,6 +530,16 @@
         <member name="F:SimpleAdmin.Core.DevDictConst.ONLINE_STATUS_OFFLINE">
             <summary>
             离线
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevDictConst.FILE_ENGINE_LOCAL">
+            <summary>
+            本地
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.DevDictConst.FILE_ENGINE_MINIO">
+            <summary>
+            MINIO
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.DevLogConst">
@@ -1211,6 +1251,61 @@
         <member name="P:SimpleAdmin.Core.DevDict.Children">
             <summary>
             子节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.DevFile">
+             <summary>
+             文件表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.Engine">
+             <summary>
+             存储引擎 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.Bucket">
+             <summary>
+             存储桶 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.Name">
+             <summary>
+             文件名称 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.Suffix">
+             <summary>
+             文件后缀 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.SizeKb">
+             <summary>
+             文件大小kb 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.SizeInfo">
+             <summary>
+             文件大小（格式化后） 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.ObjName">
+             <summary>
+             文件的对象名（唯一名称） 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.StoragePath">
+             <summary>
+             文件存储路径 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.DownloadPath">
+             <summary>
+             文件下载路径 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.DevFile.Thumbnail">
+             <summary>
+             图片缩略图 
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.DevLogOperate">
@@ -2982,6 +3077,20 @@
             <param name="bitmap"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(System.DrawingCore.Bitmap)">
+            <summary>
+            图片转换成base64
+            </summary>
+            <param name="bmp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(System.DrawingCore.Image)">
+            <summary>
+            图片转换成base64
+            </summary>
+            <param name="bmp"></param>
+            <returns></returns>		
+        </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetBitmapFromBase64(System.String)">
             <summary>
             base64转bitmap
@@ -3005,6 +3114,15 @@
             <param name="newW">新的宽度</param>
             <param name="newH">新的高度</param>
             <returns>处理以后的图片</returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(System.DrawingCore.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            获取缩略图
+            </summary>
+            <param name="bmp"></param>
+            <param name="w">宽</param>
+            <param name="h">高</param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SeedDataUtil">
             <summary>

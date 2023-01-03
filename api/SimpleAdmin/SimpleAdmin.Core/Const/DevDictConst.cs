@@ -37,6 +37,18 @@ public class DevDictConst
 
     #endregion
 
+    #region 上传文件引擎
+    /// <summary>
+    /// 本地
+    /// </summary>
+    public const string FILE_ENGINE_LOCAL = "LOCAL";
+
+    /// <summary>
+    /// MINIO
+    /// </summary>
+    public const string FILE_ENGINE_MINIO = "MINIO";
+
+    #endregion
     #endregion
 
     #region 业务字典
