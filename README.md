@@ -47,7 +47,8 @@ SqlSugar是一款老牌.NET开源ORM框架，由果糖大数据科技团队维�
 #### 🧱接口级别的数据权限
 权限设计作为一个管理系统的灵魂，是一个系统好不好用的关键。本系统是基于RBAC+多机构的权限管理模式，并实现了接口级别的数据权限，可以指定某个角色的某个接口的数据权限，非常的灵活。
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/接口数据权限.png"/>
-获取数据权限只需一个方法搞定
+
+在该系统中，获取数据权限只需一个方法搞定。
 ```cs
 //获取数据范围
 var dataScope = await _sysUserService.GetLoginUserApiDataScope();
