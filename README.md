@@ -49,8 +49,8 @@ SqlSugar是一款老牌.NET开源ORM框架，由果糖大数据科技团队维�
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/接口数据权限.png"/>
 获取数据权限只需一个方法搞定
 ```cs
-        //获取数据范围
-        var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+//获取数据范围
+var dataScope = await _sysUserService.GetLoginUserApiDataScope();
 ```
 #### 📖详细的注释和文档
 作为一个开源项目，如何让使用者看懂代码是非常重要的，很多作者会忽视这一点，导致我们阅读其代码的时候很难理解其为什么要这么写,如果没有详细的文档，想要二次开发需要花精力去研究源码。而本系统完全不用担心这个问题，后端源码注释覆盖率超过<font color="#dd0000">90%</font><br /> 
@@ -98,6 +98,7 @@ npm run dev
 ```
 #### 🛩️启动后端
 编辑`Core.Development.json`文件,配置Redis地址和数据库地址,设置`SimpleAdmin.Web.Entry`为启动项目，直接启动项目即可。
+
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/后端启动.png"/>
 ## 🎞️演示地址
 1. 地址：[http://admin.zxzyjs.com](http://admin.zxzyjs.com)
