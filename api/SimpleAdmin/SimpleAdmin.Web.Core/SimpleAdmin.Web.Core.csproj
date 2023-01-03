@@ -20,13 +20,4 @@
 		<ProjectReference Include="..\SimpleAdmin.Application\SimpleAdmin.Application.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<None Update="Web.Development.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Web.Production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
 </Project>
