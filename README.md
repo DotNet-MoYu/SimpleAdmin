@@ -3,7 +3,7 @@
 
 
 ## 🎨框架介绍🎨
-💥SimpleAdmin一个小而美的通用业务型后台管理系统。前端基于小诺2.0版本,采用Vue3+Vite+Vuex,并在此基础上增加更人性化功能,后端采用.NET7+Furion,ORM采用Sqlsugar单例模式。基于RBAC+多机构的权限管理模式，实现接口级别的数据权限控制，集成国密加解密插件。将日常开发中的业务场景和框架紧密结合，坚持以人为本,以业务为中心，做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
+💥SimpleAdmin一个小而美的通用业务型后台管理系统。前端基于小诺2.0版本,采用Vue3+Vite+Vuex,并在此基础上增加更人性化功能,后端采用.NET6/7+Furion,ORM采用Sqlsugar单例模式。基于RBAC+多机构的权限管理模式，实现接口级别的数据权限控制，集成国密加解密插件。将日常开发中的业务场景和框架紧密结合，坚持以人为本,以业务为中心，做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
 
 ## 🍕系统特色🍕
 #### 📗后台基于Furion脚手架
@@ -54,30 +54,31 @@ SqlSugar是一款老牌.NET开源ORM框架，由果糖大数据科技团队维�
 ## 🚑快速启动🚑
 <table>
     <tr>
-        <td><img src="./doc/Image/1.png"/></td>
-        <td><img src="./doc/Image/1.png"/></td>
        <td><img src="./doc/Image/1.png"/></td>
+       <td><img src="./doc/Image/2.png"/></td>
+       <td><img src="./doc/Image/3.png"/></td>
     </tr>
     <tr>
-        <td><img src="./doc/Image/1.png"/></td>
-        <td><img src="./doc/Image/1.png"/></td>
-        <td><img src="./doc/Image/1.png"/></td>
+        <td><img src="./doc/Image/4.png"/></td>
+        <td><img src="./doc/Image/5.png"/></td>
+        <td><img src="./doc/Image/6.png"/></td>
     </tr>
     <tr>
-       <td><img src="./doc/Image/1.png"/></td>
-        <td><img src="./doc/Image/1.png"/></td>
-       <td><img src="./doc/Image/1.png"/></td>
+       <td><img src="./doc/Image/7.png"/></td>
+       <td><img src="./doc/Image/8.png"/></td>
+       <td><img src="./doc/Image/9.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/10.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/11.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/12.png"/></td>
+       <td><img src="./doc/Image/10.png"/></td>
+       <td><img src="./doc/Image/11.png"/></td>
+       <td><img src="./doc/Image/12.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/13.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/14.png"/></td>
-        <td><img src="https://gitee.com/zuohuaijun/Admin.NET/raw/master/doc/img/15.png"/></td>
+       <td><img src="./doc/Image/13.png"/></td>
+       <td><img src="./doc/Image/14.png"/></td>
+       <td><img src="./doc/Image/15.png"/></td>
     </tr>
+
 </table>
 #### 🚀启动前端
 
