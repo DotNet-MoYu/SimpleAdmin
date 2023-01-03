@@ -100,6 +100,7 @@ npm run dev
 编辑`Core.Development.json`文件,配置Redis地址和数据库地址,设置`SimpleAdmin.Web.Entry`为启动项目，直接启动项目即可。
 
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/后端启动.png"/>
+
 ## 🎞️演示地址
 1. 地址：[http://admin.zxzyjs.com](http://admin.zxzyjs.com)
 2. 账号：superAdmin
