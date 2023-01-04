@@ -42,6 +42,7 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <returns></returns>
         [HttpPost("uploadLocal")]
         [Description("上传本地文件")]
+        [DisableRequestSizeLimit]
         public async Task UploadLocal([FromForm] IFormFile File)
         {
             await _fileService.UploadFile(DevDictConst.FILE_ENGINE_LOCAL, File);
@@ -54,6 +55,8 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <returns></returns>
         [HttpPost("uploadMinio")]
         [Description("上传MINIO文件")]
+        [DisableRequestSizeLimit]
+
         public async Task UploadMinio([FromForm] IFormFile File)
         {
             await _fileService.UploadFile(DevDictConst.FILE_ENGINE_MINIO, File);

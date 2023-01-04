@@ -65,7 +65,7 @@ public class AuthService : IAuthService
             if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
             {
                 //如果没填验证码，提示验证码不能为空
-                if (string.IsNullOrEmpty(input.ValidCode) || string.IsNullOrEmpty(input.ValidCodeReqNo)) throw Oops.Bah("验证码不能为空");
+                if (string.IsNullOrEmpty(input.ValidCode) || string.IsNullOrEmpty(input.ValidCodeReqNo)) throw Oops.Bah("验证码不能为空").StatusCode(410);
                 ValidValidCode(input.ValidCode, input.ValidCodeReqNo);//校验验证码
             }
         }
