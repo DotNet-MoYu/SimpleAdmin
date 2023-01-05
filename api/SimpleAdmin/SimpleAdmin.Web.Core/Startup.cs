@@ -21,6 +21,8 @@ public class Startup : AppStartup
         services.AddComponent<GzipCompressionComponent>();
         //事件总线
         services.AddEventBus();
+        //定时任务
+        //services.AddSchedule();
         //添加控制器相关
         services.AddControllers()
                      .AddInjectWithUnifyResult<SimpleAdminResultProvider>()//配置统一返回模型
@@ -55,8 +57,7 @@ public class Startup : AppStartup
 
         app.UseRouting();
 
-        //app.UseCorsAccessor();
-
+        //跨域设置
         app.UseCorsAccessor(builder =>
         builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
       );
@@ -65,7 +66,12 @@ public class Startup : AppStartup
         app.UseAuthorization();
 
         app.UseInject(string.Empty);
-
+        //app.UseStaticFiles();
+        ////定时任务Dashboard
+        //app.UseScheduleUI(options =>
+        //{
+        //    options.DisableOnProduction = true;//配置生产环境关闭
+        //});
         app.UseEndpoints(endpoints =>
         {
             //通过 App.GetOptions<TOptions> 获取选项
