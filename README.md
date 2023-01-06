@@ -106,14 +106,14 @@ npm run dev
 1. 地址：[http://admin.zxzyjs.com](http://admin.zxzyjs.com)
 2. 账号：superAdmin
 3. 密码：123456
-   
-## 🎈文档链接🎈
 
-github下载地址：[https://github.com/zxzyjs/SimpleAdmin](https://github.com/zxzyjs/SimpleAdmin)
+## 🎈相关连接🎈
 
-gitee下载地址：[https://gitee.com/zxzyjs/SimpleAdmin](https://gitee.com/zxzyjs/SimpleAdmin)
+更新日志：[点击查看](https://gitee.com/zxzyjs/SimpleAdmin/commits/master)
 
-文档地址：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
+Wiki文档地址：[点击查看](https://gitee.com/zxzyjs/SimpleAdmin/wikis)
+
+博客园文档地址：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
 
 常见问题合集：[https://www.cnblogs.com/huguodong/p/17021241.html](https://www.cnblogs.com/huguodong/p/17021241.html)
 

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Web.Entry", "Si
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.System", "SimpleAdmin.System\SimpleAdmin.System.csproj", "{CB1C48E3-78AA-488E-8DA5-724804C53A6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.Background", "SimpleAdmin.Background\SimpleAdmin.Background.csproj", "{4944A2F3-C380-4B8A-B58E-47F7B19F47A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Background", "SimpleAdmin.Background\SimpleAdmin.Background.csproj", "{4944A2F3-C380-4B8A-B58E-47F7B19F47A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
