@@ -19,8 +19,6 @@ public class Startup : AppStartup
         services.AddComponent<WebSettingsComponent>();
         //gip压缩
         services.AddComponent<GzipCompressionComponent>();
-        //事件总线
-        services.AddEventBus();
         //定时任务
         //services.AddSchedule();
         //添加控制器相关
