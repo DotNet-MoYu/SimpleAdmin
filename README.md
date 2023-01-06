@@ -130,6 +130,6 @@ Wiki文档地址：[点击查看](https://gitee.com/zxzyjs/SimpleAdmin/wikis)
 ## 💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码尊重小诺开源协议，属于非开源项目，如需获取请[加我](https://qm.qq.com/cgi-bin/qm/qr?k=of373DKaD1xCdNfz8DskOwauCguHfMrS&noverify=0&personal_qrcode_source=4)获取授权(白菜价)
+- 前端源码尊重小诺开源协议，属于非开源项目，如需获取请[加我](https://qm.qq.com/cgi-bin/qm/qr?k=of373DKaD1xCdNfz8DskOwauCguHfMrS&noverify=0&personal_qrcode_source=4)获取授权，或者直接[海鲜市场](https://m.tb.cn/h.U9OPmu4?tk=gfnkdfxTR0T)
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
