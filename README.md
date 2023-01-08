@@ -2,7 +2,7 @@
 <div align="center"><h4 align="center">⚡️麻雀虽小,五脏俱全!⚡️</h4></div>
 
 ## 🎨框架介绍🎨
-💥SimpleAdmin一个小而美的通用业务型 后台管理 系统。前端基于小诺2.0版本,采用Vue3+Vite+Vuex,并在此基础上增加更人性化功能,后端采用.NET6/7+Furion,ORM采用Sqlsugar单例模式。基于RBAC+多机构的权限管理模式，实现接口级别的数据权限控制，集成国密加解密插件。将日常开发中的业务场景和框架紧密结合，坚持以人为本,以业务为中心，做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
+💥SimpleAdmin一个小而美的通用业务型后台管理系统。前端基于小诺2.0版本,采用Vue3+Vite+Vuex,并在此基础上增加更人性化功能,后端采用.NET6/7+Furion,ORM采用Sqlsugar单例模式。基于RBAC+多机构的权限管理模式，实现接口级别的数据权限控制，集成国密加解密插件。将日常开发中的业务场景和框架紧密结合，坚持以人为本,以业务为中心，做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
 
 ## 🍕系统特色🍕
 #### 📗后台基于Furion脚手架
@@ -112,9 +112,7 @@ npm run dev
 
 更新日志：[点击查看](https://gitee.com/zxzyjs/SimpleAdmin/commits/master)
 
-Wiki文档地址：[点击查看](https://gitee.com/zxzyjs/SimpleAdmin/wikis)
-
-博客园文档地址：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
+文档地址：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
 
 常见问题合集：[https://www.cnblogs.com/huguodong/p/17021241.html](https://www.cnblogs.com/huguodong/p/17021241.html)
 
