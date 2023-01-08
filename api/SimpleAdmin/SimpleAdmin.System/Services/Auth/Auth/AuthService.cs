@@ -249,8 +249,6 @@ public class AuthService : IAuthService
         App.HttpContext.SigninToSwagger(accessToken);
         // 设置响应报文头
         App.HttpContext.SetTokensOfResponseHeaders(accessToken, refreshToken);
-        //var httpContext = App.HttpContext;
-        //var client = Parser.GetDefault().Parse(httpContext.Request.Headers["User-Agent"]);
         //登录事件参数
         var logingEvent = new LoginEvent
         {

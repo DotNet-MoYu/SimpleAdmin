@@ -56,7 +56,7 @@ public class JwtHandler : AppAuthorizeHandler
         var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
         var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
         var _simpleRedis = App.GetService<ISimpleRedis>();//获取redis实例
-        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);//获取B端token信息W
+        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);//获取token信息
         if (tokenInfos == null)//如果还是空
         {
             return false;
@@ -68,7 +68,6 @@ public class JwtHandler : AppAuthorizeHandler
             {
                 // 自动刷新token返回新的Token
                 var accessToken = context.Response.Headers["access-token"].ToString();
-                global::System.Console.WriteLine(accessToken);
                 if (!string.IsNullOrEmpty(accessToken))//如果有新的刷新token
                 {
                     tokenInfo.Token = accessToken;//新的token
