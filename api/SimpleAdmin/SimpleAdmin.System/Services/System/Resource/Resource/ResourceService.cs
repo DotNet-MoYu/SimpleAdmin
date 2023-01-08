@@ -169,8 +169,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                 foreach (var menthod in menthods)
                 {
                     //获取忽略数据权限特性
-                    var ignoreDataPermission = menthod.GetCustomAttribute<IgnoreRolePermissionAttribute>();
-                    if (ignoreDataPermission == null)//如果是空的代表需要数据权限
+                    var ignoreRolePermission = menthod.GetCustomAttribute<IgnoreRolePermissionAttribute>();
+                    if (ignoreRolePermission == null)//如果是空的代表需要数据权限
                     {
                         //获取接口描述
                         var description = menthod.GetCustomAttribute<DescriptionAttribute>();
