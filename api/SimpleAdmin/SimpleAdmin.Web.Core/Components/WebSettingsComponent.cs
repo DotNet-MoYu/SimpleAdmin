@@ -25,8 +25,8 @@ public sealed class WebSettingsComponent : IServiceComponent
             services.AddMqttClientManager();
         else
         {
-            services.AddSignalR();
-            services.AddSingleton<IUserIdProvider, UserIdProvider>();
+            services.AddSignalR();//注册SignalR
+            services.AddSingleton<IUserIdProvider, UserIdProvider>();//用户ID提供器
         }
 
     }
