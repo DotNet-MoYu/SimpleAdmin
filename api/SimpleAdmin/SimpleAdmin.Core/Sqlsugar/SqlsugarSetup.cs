@@ -16,8 +16,9 @@ public static class SqlsugarSetup
     public static void AddSqlSugar(this IServiceCollection services)
     {
 
-        services.AddSingleton<ISqlSugarClient>(DbContext.Db); // 单例注册
-        services.AddUnitOfWork<SqlSugarUnitOfWork>(); // 事务与工作单元注册
+        //services.AddSingleton<ISqlSugarClient>(DbContext.Db); // 单例注册,不用工作单元不需要注入
+        //services.AddUnitOfWork<SqlSugarUnitOfWork>(); // 事务与工作单元注册
+
         //遍历配置
         DbContext.DbConfigs.ForEach(it =>
         {
