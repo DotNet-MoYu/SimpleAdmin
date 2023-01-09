@@ -249,6 +249,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
          .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)
          .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//根据组织
          .WhereIF(input.Expression != null, input.Expression?.ToExpression())//动态查询
+         .WhereIF(!string.IsNullOrEmpty(input.UserStatus), u => u.UserStatus == input.UserStatus)//根据状态查询
          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(u.Account))//根据关键字查询
          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
          .OrderBy(u => u.Id)//排序
