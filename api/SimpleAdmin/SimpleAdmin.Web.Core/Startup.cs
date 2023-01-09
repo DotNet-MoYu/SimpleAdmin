@@ -56,9 +56,12 @@ public class Startup : AppStartup
         app.UseRouting();
 
         //跨域设置
-        app.UseCorsAccessor(builder =>
-        builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
-      );
+        //  app.UseCorsAccessor(builder =>
+        //  builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
+
+        //);
+        app.UseCorsAccessor();
+
 
         app.UseAuthentication();
         app.UseAuthorization();
