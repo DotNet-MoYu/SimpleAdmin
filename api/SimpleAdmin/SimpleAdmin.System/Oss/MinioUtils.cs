@@ -68,15 +68,15 @@ namespace SimpleAdmin.System
         /// 上传文件
         /// </summary>
         /// <param name="objectName">存储桶里的对象名称,例:/mnt/photos/island.jpg</param>
-        /// <param name="data">文件流</param>
-        /// <param name="size">文件大小</param>
+        /// <param name="file">文件</param>
         /// <param name="contentType">文件的Content type，默认是"application/octet-stream"</param>
         /// <returns></returns>
-        public async Task<string> PutObjectAsync(string objectName, Stream data, long size, string contentType = "application/octet-stream")
+        public async Task<string> PutObjectAsync(string objectName, IFormFile file, string contentType = "application/octet-stream")
         {
             try
             {
-                PutObjectArgs putObjectArgs = new PutObjectArgs().WithBucket(defaultBucketName).WithObject(objectName).WithStreamData(data).WithObjectSize(size).WithContentType(contentType);
+                using var fileStream = file.OpenReadStream();//获取文件流
+                PutObjectArgs putObjectArgs = new PutObjectArgs().WithBucket(defaultBucketName).WithObject(objectName).WithStreamData(fileStream).WithObjectSize(file.Length).WithContentType(contentType);
                 await minioClient.PutObjectAsync(putObjectArgs);
                 return $"{defaultPrefix}{defaultEndPoint}/{defaultBucketName}/{objectName}";//默认http
             }

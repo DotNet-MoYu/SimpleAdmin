@@ -127,8 +127,8 @@ namespace SimpleAdmin.System
             {
 
                 //$"data:image/png;base64," + imgByte;
-                var image = Image.FromStream(file.OpenReadStream());//获取图片
-
+                using var fileStream = file.OpenReadStream();//获取文件流
+                var image = Image.FromStream(fileStream);//获取图片
                 var thubnail = image.GetThumbnailImage(100, 100, () => false, IntPtr.Zero);//压缩图片
                 var thubnailBase64 = ImageUtil.ImgToBase64String(thubnail);//转base64
                 devFile.Thumbnail = $"data:image/png;base64," + thubnailBase64;
@@ -196,7 +196,7 @@ namespace SimpleAdmin.System
             var now = DateTime.Now.ToString("d");
             var fileSuffix = Path.GetExtension(file.FileName).ToLower(); // 文件后缀
             var fileObjectName = $"{now}/{fileId}{fileSuffix}";//存储后的文件名
-            return await minioService.PutObjectAsync(fileObjectName, file.OpenReadStream(), file.Length);
+            return await minioService.PutObjectAsync(fileObjectName, file);
 
 
         }
