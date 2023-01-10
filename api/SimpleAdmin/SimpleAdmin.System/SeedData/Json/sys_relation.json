@@ -918,294 +918,441 @@
       "ExtJson": "{\"shortcut\":[{\"id\":212725263003722,\"title\":\"系统首页\",\"icon\":\"home-outlined\",\"path\":\"/index\"},{\"id\":212725263003723,\"title\":\"个人中心\",\"icon\":\"appstore-outlined\",\"path\":\"/usercenter\"},{\"id\":212755263003745,\"title\":\"机构管理\",\"icon\":\"cluster-outlined\",\"path\":\"/biz/org\"},{\"id\":212755263003746,\"title\":\"人员管理\",\"icon\":\"user-outlined\",\"path\":\"/biz/user\"},{\"id\":212755263003747,\"title\":\"岗位管理\",\"icon\":\"apartment-outlined\",\"path\":\"/biz/position\"}]}"
     },
     {
-      "Id": "369090372005957",
+      "Id": "373423617318981",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003725",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003725,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010053",
+      "Id": "373423617331269",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003726",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003726,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010054",
+      "Id": "373423617331270",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003727",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003727,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010055",
+      "Id": "373423617331271",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003729",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003729,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010056",
+      "Id": "373423617331272",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003730",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003730,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010057",
+      "Id": "373423617331273",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003731",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003731,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010058",
+      "Id": "373423617331274",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003732",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003732,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010059",
+      "Id": "373423617331275",
       "ObjectId": "212725263001001",
       "TargetId": "212735263003734",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212735263003734,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010060",
+      "Id": "373423617331276",
       "ObjectId": "212725263001001",
       "TargetId": "369089951367237",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":369089951367237,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010061",
+      "Id": "373423617331277",
       "ObjectId": "212725263001001",
       "TargetId": "212745263003736",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212745263003736,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010062",
+      "Id": "373423617331278",
       "ObjectId": "212725263001001",
       "TargetId": "212745263003737",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212745263003737,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010063",
+      "Id": "373423617331279",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003739",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003739,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010064",
+      "Id": "373423617331280",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003740",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003740,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010065",
+      "Id": "373423617331281",
       "ObjectId": "212725263001001",
       "TargetId": "363532005732421",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":363532005732421,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010066",
+      "Id": "373423617331282",
       "ObjectId": "212725263001001",
       "TargetId": "363798244282437",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":363798244282437,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "369090372010067",
+      "Id": "373423617331283",
+      "ObjectId": "212725263001001",
+      "TargetId": "371662120710213",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":371662120710213,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331284",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003742",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003742,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331285",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003749",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003749,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331286",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003750",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003750,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331287",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003751",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003751,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331288",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003752",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003752,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331289",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003753",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003753,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331290",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003754",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003754,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331291",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003755",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003755,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331292",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003756",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003756,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331293",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003757",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003757,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331294",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003758",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003758,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331295",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003759",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003759,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331296",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003760",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003760,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331297",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003761",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003761,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331298",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003762",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003762,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331299",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003763",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003763,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331300",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003764",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003764,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331301",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003765",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003765,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331302",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003766",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003766,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331303",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003767",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003767,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "373423617331304",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003745",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731]}"
     },
     {
-      "Id": "369090372010068",
+      "Id": "373423617331305",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003746",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[]}"
+      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740]}"
     },
     {
-      "Id": "369090372010069",
+      "Id": "373423617331306",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003747",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[]}"
+      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
     },
     {
-      "Id": "369090372010070",
+      "Id": "373423617331307",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/tree",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
     },
     {
-      "Id": "369090372010071",
+      "Id": "373423617331308",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
     },
     {
-      "Id": "369090372010072",
+      "Id": "373423617331309",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
     },
     {
-      "Id": "369090372010073",
+      "Id": "373423617331310",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
     },
     {
-      "Id": "369090372010074",
+      "Id": "373423617331311",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
     },
     {
-      "Id": "369090372010075",
+      "Id": "373423617331312",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/orgTreeSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
     },
     {
-      "Id": "369090372010076",
+      "Id": "373423617331313",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/org/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
     },
     {
-      "Id": "369090372010077",
+      "Id": "373423617331314",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/position/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
     },
     {
-      "Id": "369090372010078",
+      "Id": "373423617331315",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/position/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
     },
     {
-      "Id": "369090372010079",
+      "Id": "373423617331316",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/position/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
     },
     {
-      "Id": "369090372010080",
+      "Id": "373423617331317",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/position/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
     },
     {
-      "Id": "369090372010081",
+      "Id": "373423617331318",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/orgTreeSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
     },
     {
-      "Id": "369090372010082",
+      "Id": "373423617331319",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
     },
     {
-      "Id": "369090372010083",
+      "Id": "373423617331320",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
     },
     {
-      "Id": "369090372010084",
+      "Id": "373423617331321",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/positionSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
     },
     {
-      "Id": "369090372010085",
+      "Id": "373423617331322",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
     },
     {
-      "Id": "369090372010086",
+      "Id": "373423617331323",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
     },
     {
-      "Id": "369090372010087",
+      "Id": "373423617331324",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
     },
     {
-      "Id": "369090372010088",
+      "Id": "373423617331325",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/disableUser",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
     },
     {
-      "Id": "369090372010089",
+      "Id": "373423617331326",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/enableUser",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
     },
     {
-      "Id": "369090372010090",
+      "Id": "373423617331327",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/resetPassword",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
     },
     {
-      "Id": "369090372010091",
+      "Id": "373423617335365",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/ownRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
     },
     {
-      "Id": "369090372010092",
+      "Id": "373423617335366",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/grantRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
     },
     {
-      "Id": "369090372010093",
+      "Id": "373423617335367",
       "ObjectId": "212725263001001",
       "TargetId": "/biz/user/roleSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
