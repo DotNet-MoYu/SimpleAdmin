@@ -92,7 +92,7 @@ public static class DbContext
         db.Aop.OnLogExecuting = (sql, pars) =>
         {
             //如果不是开发环境就打印sql
-            if (App.WebHostEnvironment.IsDevelopment())
+            if (App.HostEnvironment.IsDevelopment())
             {
                 if (sql.StartsWith("SELECT"))
                 {
@@ -152,6 +152,8 @@ public static class DbContext
                     //创建人和创建机构ID
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUserId))
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.UserId)?.Value);
+                    if (entityInfo.PropertyName == nameof(BaseEntity.CreateUser))
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.Account)?.Value);
                     if (entityInfo.PropertyName == nameof(DataEntityBase.CreateOrgId))
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.OrgId)?.Value);
                 }
@@ -170,6 +172,8 @@ public static class DbContext
                 {
                     if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUserId))
                         entityInfo.SetValue(App.User?.FindFirst(ClaimConst.UserId)?.Value);
+                    if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUser))
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.Account)?.Value);
                 }
 
             }

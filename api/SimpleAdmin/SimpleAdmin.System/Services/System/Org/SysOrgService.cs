@@ -1,5 +1,4 @@
 ﻿using Masuit.Tools;
-using SimpleSqlSugar;
 
 namespace SimpleAdmin.System;
 

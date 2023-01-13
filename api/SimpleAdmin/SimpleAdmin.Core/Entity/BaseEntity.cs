@@ -51,6 +51,19 @@ public class BaseEntity : PrimaryKeyEntity
     public virtual long? UpdateUserId { get; set; }
 
     /// <summary>
+    /// 创建人
+    /// </summary>
+    [SugarColumn(ColumnDescription = "创建人", IsOnlyIgnoreUpdate = true, IsNullable = true)]
+    public virtual string CreateUser { get; set; }
+
+
+    /// <summary>
+    /// 更新人
+    /// </summary>
+    [SugarColumn(ColumnDescription = "更新人", IsOnlyIgnoreUpdate = true, IsNullable = true)]
+    public virtual string UpdateUser { get; set; }
+
+    /// <summary>
     /// 软删除
     /// </summary>
     [SugarColumn(ColumnDescription = "软删除", IsNullable = true)]

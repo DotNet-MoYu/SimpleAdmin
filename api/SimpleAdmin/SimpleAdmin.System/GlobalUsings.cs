@@ -21,7 +21,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using NewLife.Serialization;
 global using System.Reflection;
 global using System.Linq.Expressions;
-global using SimpleSqlSugar;
 global using SimpleMQTT;
 global using Microsoft.Extensions.Options;
 global using Microsoft.AspNetCore.SignalR;
