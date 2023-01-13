@@ -47,8 +47,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     public async Task AddBatch(ButtonAddInput input)
     {
         List<SysResource> sysResources = new List<SysResource>();//按钮列表
-        var codeList = new List<string>() { "Page", "Add", "Edit", "Delete", "Detail" };//code后缀
-        var titleList = new List<string>() { "查询", "新增", "编辑", "删除", "详情" };//title前缀
+        var codeList = new List<string>() { "Add", "Edit", "Delete", "BatchDelete", };//code后缀
+        var titleList = new List<string>() { "新增", "编辑", "删除", "批量删除" };//title前缀
         for (int i = 0; i < codeList.Count; i++)
         {
             sysResources.Add(new SysResource

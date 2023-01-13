@@ -33,11 +33,6 @@ public class ButtonAddInput : SysResource
     [Required(ErrorMessage = "Code不能为空")]
     public override string Code { get; set; }
 
-    /// <summary>
-    /// 路由地址
-    /// </summary>
-    [Required(ErrorMessage = "Path不能为空")]
-    public override string Path { get; set; }
 
 
 
