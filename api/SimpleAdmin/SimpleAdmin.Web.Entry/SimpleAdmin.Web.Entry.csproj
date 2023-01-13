@@ -20,6 +20,10 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\CodeGen\Backend\" />
+		<Folder Include="wwwroot\CodeGen\Forntend\" />
+	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
 			<UserProperties properties_4launchsettings_1json__JsonSchema="" />

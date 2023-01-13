@@ -67,7 +67,7 @@ public class Startup : AppStartup
         app.UseAuthorization();
 
         app.UseInject(string.Empty);
-        //app.UseStaticFiles();
+        app.UseStaticFiles();
         ////定时任务Dashboard
         //app.UseScheduleUI(options =>
         //{

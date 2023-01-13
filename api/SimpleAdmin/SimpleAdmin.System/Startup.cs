@@ -17,6 +17,8 @@ public class Startup : AppStartup
     {
         //事件总线
         services.AddEventBus();
+        //试图引擎
+        services.AddViewEngine();
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {

@@ -130,6 +130,11 @@
             存储类型
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.CodeGenAttribute">
+            <summary>
+            代码生成
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.IgnoreSeedDataAddAttribute">
             <summary>
             种子数据忽略新增
@@ -587,6 +592,66 @@
             清除用户缓存
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.GenConst">
+            <summary>
+            代码生成器常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.Yes">
+            <summary>
+            是
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.No">
+            <summary>
+            否
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.INPUT">
+            <summary>
+            输入框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.TEXTAREA">
+            <summary>
+            文本框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.SELECT">
+            <summary>
+            下拉框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.RADIO">
+            <summary>
+            单选框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.CHECKBOX">
+            <summary>
+            复选框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.DATEPICKER">
+            <summary>
+            日期选择器
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.TIMEPICKER">
+            <summary>
+            时间选择器
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.INPUTNUMBER">
+            <summary>
+            数字输入框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.SLIDER">
+            <summary>
+            滑动数字条
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.MqttConst">
             <summary>
             mqtt常量
@@ -883,6 +948,31 @@
             token剩余有效期百分比
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.GenTest">
+             <summary>
+             代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Money">
+            <summary>
+            存款
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.PrimaryKeyEntity">
             <summary>
             主键实体基类
@@ -921,6 +1011,16 @@
         <member name="P:SimpleAdmin.Core.BaseEntity.UpdateUserId">
             <summary>
             修改者Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseEntity.CreateUser">
+            <summary>
+            创建人
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseEntity.UpdateUser">
+            <summary>
+            更新人
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseEntity.IsDelete">
@@ -1431,6 +1531,166 @@
         <member name="T:SimpleAdmin.Core.DevRelation">
              <summary>
              开发关系表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.GenBasic">
+             <summary>
+             代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.DbTable">
+             <summary>
+             主表 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.TablePrefix">
+             <summary>
+             移除表前缀 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.GenerateType">
+             <summary>
+             生成方式 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.Module">
+             <summary>
+             所属模块 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.MenuPid">
+             <summary>
+             上级目录 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.RouteName">
+             <summary>
+             业务名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.Icon">
+             <summary>
+             图标 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.FunctionName">
+             <summary>
+             功能名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.BusName">
+             <summary>
+             业务名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.ClassName">
+             <summary>
+             类名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.FormLayout">
+             <summary>
+             表单布局 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.GridWhether">
+             <summary>
+             使用栅格 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.PackageName">
+             <summary>
+             包名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.AuthorName">
+             <summary>
+             作者 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.SortCode">
+             <summary>
+             排序 
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.GenConfig">
+             <summary>
+             代码生成配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.BasicId">
+             <summary>
+             基础ID 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.IsPrimarykey">
+             <summary>
+             是否主键 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldName">
+             <summary>
+             字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldRemark">
+             <summary>
+             名称 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldType">
+             <summary>
+             类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldNetType">
+             <summary>
+             实体类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.EffectType">
+             <summary>
+             作用类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.DictTypeCode">
+             <summary>
+             字典 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.WhetherTable">
+             <summary>
+             列表显示 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.WhetherRetract">
+             <summary>
+             列省略 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.WhetherAddUpdate">
+             <summary>
+             是否增改 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.WhetherRequired">
+             <summary>
+             必填 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.QueryWhether">
+             <summary>
+             查询 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.QueryType">
+             <summary>
+             查询方式 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.SortCode">
+             <summary>
+             排序 
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.SysOrg">
@@ -3032,6 +3292,25 @@
             <summary>
             是否补足16进制字符串
             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.Utils.CodeGenUtil">
+            <summary>
+            代码生成工具类
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.CodeGenUtil.ConvertDataType(System.String)">
+            <summary>
+            数据库字段类型转.NET类型
+            </summary>
+            <param name="dataType">字段类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.CodeGenUtil.IsCommonColumn(System.String)">
+            <summary>
+            是否通用字段
+            </summary>
+            <param name="columnName">字段名</param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.AvatarUtil">
             <summary>

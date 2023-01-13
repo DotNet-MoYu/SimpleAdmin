@@ -1,27 +1,6 @@
 {
   "RECORDS": [
     {
-      "Id": "0",
-      "ParentId": "",
-      "Title": "",
-      "Name": "",
-      "Code": "",
-      "Category": "",
-      "Module": "",
-      "MenuType": "",
-      "Path": "",
-      "Component": "",
-      "Icon": "",
-      "Color": "",
-      "SortCode": "",
-      "CreateTime": "",
-      "UpdateTime": "",
-      "CreateUserId": "",
-      "UpdateUserId": "",
-      "IsDelete": "",
-      "ExtJson": ""
-    },
-    {
       "Id": "212725263003721",
       "ParentId": "",
       "Title": "系统",

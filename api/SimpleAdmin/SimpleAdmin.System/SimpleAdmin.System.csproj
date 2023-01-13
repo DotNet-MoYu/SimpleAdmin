@@ -16,11 +16,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
+	  <Compile Remove="Gen\**" />
+	  <EmbeddedResource Remove="Gen\**" />
+	  <None Remove="Gen\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Gen\" />
+		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
