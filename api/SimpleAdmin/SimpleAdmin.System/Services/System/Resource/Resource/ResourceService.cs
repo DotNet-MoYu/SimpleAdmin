@@ -304,40 +304,58 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         //遍历一级目录
         foreach (var parent in parentMenuList)
         {
-            //获取所有下级菜单
-            var menuList = GetChildListById(allMenuList, parent.Id, false);
-            //遍历下级菜单
-            foreach (var menu in menuList)
+            //如果是目录则去遍历下级
+            if (parent.MenuType == ResourceConst.CATALOG)
             {
-                //如果菜单类型是菜单
-                if (menu.MenuType == ResourceConst.MENU)
+                //获取所有下级菜单
+                var menuList = GetChildListById(allMenuList, parent.Id, false);
+
+                //遍历下级菜单
+                foreach (var menu in menuList)
                 {
-                    //获取菜单下按钮集合并转换成对应实体
-                    var buttonList = allButtonList.Where(it => it.ParentId == menu.Id).ToList();
-                    var buttons = buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
-                    roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                    //如果菜单类型是菜单
+                    if (menu.MenuType == ResourceConst.MENU)
                     {
-                        Id = menu.Id,
-                        ParentId = parent.Id,
-                        ParentName = parent.Title,
-                        Module = moduleId,
-                        Title = GetRoleGrantResourceMenuTitle(menuList, menu),//菜单名称需要特殊处理因为有二级菜单
-                        Button = buttons
-                    });
-                }
-                else if (menu.MenuType == ResourceConst.LINK || menu.MenuType == ResourceConst.IFRAME)//如果是内链或者外链
-                {
-                    //直接加到资源列表
-                    roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                        //获取菜单下按钮集合并转换成对应实体
+                        var buttonList = allButtonList.Where(it => it.ParentId == menu.Id).ToList();
+                        var buttons = buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
+                        roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                        {
+                            Id = menu.Id,
+                            ParentId = parent.Id,
+                            ParentName = parent.Title,
+                            Module = moduleId,
+                            Title = GetRoleGrantResourceMenuTitle(menuList, menu),//菜单名称需要特殊处理因为有二级菜单
+                            Button = buttons
+                        });
+                    }
+                    else if (menu.MenuType == ResourceConst.LINK || menu.MenuType == ResourceConst.IFRAME)//如果是内链或者外链
                     {
-                        Id = menu.Id,
-                        ParentId = parent.Id,
-                        ParentName = parent.Title,
-                        Module = moduleId,
-                        Title = menu.Title,
-                    });
+                        //直接加到资源列表
+                        roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                        {
+                            Id = menu.Id,
+                            ParentId = parent.Id,
+                            ParentName = parent.Title,
+                            Module = moduleId,
+                            Title = menu.Title,
+                        });
+                    }
                 }
             }
+            else
+            {
+                //否则就将自己加到一级目录里面
+                roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+                {
+                    Id = parent.Id,
+                    ParentId = parent.Id,
+                    ParentName = parent.Title,
+                    Module = moduleId,
+                    Title = parent.Title,
+                });
+            }
+
         }
         return roleGrantResourceMenus;
     }
