@@ -17,7 +17,7 @@ public class GenBasicColumnInput
 /// 代码生成基础添加参数
 /// </summary>
 
-public class GenBasicAddInput : GenBasic
+public class GenBasicAddInput : GenBasic, IValidatableObject
 {
 
     /// <summary>
@@ -91,6 +91,7 @@ public class GenBasicAddInput : GenBasic
     [Required(ErrorMessage = "GridWhether不能为空")]
     public override string GridWhether { get; set; }
 
+
     /// <summary>
     /// 排序
     /// </summary>
@@ -103,15 +104,18 @@ public class GenBasicAddInput : GenBasic
     [Required(ErrorMessage = "AuthorName不能为空")]
     public override string AuthorName { get; set; }
 
-    /// <summary>
-    /// 包名
-    /// </summary>
-    [Required(ErrorMessage = "PackageName不能为空")]
-    public override string PackageName { get; set; }
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        //如果是项目中生成
+        if (GenerateType == GenConst.Pro)
+        {
+            if (string.IsNullOrEmpty(FrontedPath) || string.IsNullOrEmpty(ServicePosition) || string.IsNullOrEmpty(ControllerPosition))
+            {
+                yield return new ValidationResult("前端生成路径或后端代码存放位置不能为空", new[] { nameof(FrontedPath), nameof(ServicePosition), nameof(ControllerPosition) });
+            }
+        }
 
-
-
-
+    }
 }
 
 /// <summary>

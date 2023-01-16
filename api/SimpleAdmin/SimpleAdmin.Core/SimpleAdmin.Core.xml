@@ -607,6 +607,16 @@
             否
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.GenConst.Zip">
+            <summary>
+            压缩包
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.GenConst.Pro">
+            <summary>
+            项目中
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.GenConst.INPUT">
             <summary>
             输入框
@@ -1598,9 +1608,19 @@
              使用栅格 
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.GenBasic.PackageName">
+        <member name="P:SimpleAdmin.Core.GenBasic.FrontedPath">
              <summary>
-             包名 
+             前端项目路径 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.ServicePosition">
+             <summary>
+             服务代码存放位置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.ControllerPosition">
+             <summary>
+             控制器代码存放位置 
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.GenBasic.AuthorName">
@@ -3417,6 +3437,142 @@
         <member name="P:SimpleAdmin.Core.Utils.SeedDataRecords`1.Records">
             <summary>
             数据
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            压缩单个文件
+            </summary>
+            <param name="fileToZip">要压缩的文件</param>
+            <param name="zipedFile">压缩后的文件</param>
+            <param name="compressionLevel">压缩等级</param>
+            <param name="blockSize">每次写入大小</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String)">
+            <summary>
+            压缩单个文件
+            </summary>
+            <param name="fileToZip">要进行压缩的文件名</param>
+            <param name="zipedFile">压缩后生成的压缩文件名</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            压缩多个文件到指定路径
+            </summary>        
+            <param name="sourceFileNames">压缩到哪个路径</param>
+            <param name="zipFileName">压缩文件名称</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFileDirectory(System.String,System.String)">
+            <summary>
+            压缩多层目录
+            </summary>
+            <param name="strDirectory">待压缩目录</param>
+            <param name="zipedFile">压缩后生成的压缩文件名，绝对路径</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFileDirectory(System.String,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            压缩多层目录
+            </summary>
+            <param name="strDirectory">待压缩目录</param>
+            <param name="zipedFile">压缩后生成的压缩文件名，绝对路径</param>
+            <param name="files">指定要压缩的文件列表(完全路径)</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipSetp(System.String,ICSharpCode.SharpZipLib.Zip.ZipOutputStream,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            递归遍历目录
+            </summary>
+            <param name="strDirectory">需遍历的目录</param>
+            <param name="s">压缩输出流对象</param>
+            <param name="parentPath">The parent path.</param>
+            <param name="files">需要压缩的文件</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String,System.Boolean,System.String)">
+            <summary>
+            解压缩一个 zip 文件。
+            </summary>
+            <param name="zipedFile">压缩文件</param>
+            <param name="strDirectory">解压目录</param>
+            <param name="password">zip 文件的密码。</param>
+            <param name="overWrite">是否覆盖已存在的文件。</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String,System.Boolean)">
+            <summary>
+            解压缩一个 zip 文件。
+            </summary>
+            <param name="zipedFile">压缩文件</param>
+            <param name="strDirectory">解压目录</param>
+            <param name="overWrite">是否覆盖已存在的文件。</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String)">
+            <summary>
+            解压缩一个 zip 文件。
+            覆盖已存在的文件。
+            </summary>
+            <param name="zipedFile">压缩文件</param>
+            <param name="strDirectory">解压目录</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetFiles(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            获取压缩文件中指定类型的文件
+            </summary>
+            <param name="zipedFile">压缩文件</param>
+            <param name="fileExtension">文件类型(.txt|.exe)</param>
+            <returns>文件名称列表(包含子目录)</returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetFiles(System.String)">
+            <summary>
+            获取压缩文件中的所有文件
+            </summary>
+            <param name="zipedFile">压缩文件</param>
+            <returns>文件名称列表(包含子目录)</returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFiles(System.String,System.Collections.Generic.List{SimpleAdmin.Core.Utils.FileItem},System.String@,System.Boolean)">
+            <summary>
+            打包线上线下文件
+            </summary>
+            <param name="zipName">压缩文件名称</param>
+            <param name="fileList">文件列表</param>
+            <param name="savepath">保存路径</param>
+            <param name="isLocal">是否本地</param>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.CompressDirectory(System.String,System.Boolean)">
+            压缩文件夹   
+            要打包的文件夹   
+            是否删除原文件夹 
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllFies(System.String)">
+               
+            获取所有文件   
+               
+               
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirsFiles(System.IO.DirectoryInfo[],System.Collections.Generic.Dictionary{System.String,System.DateTime})">
+               
+            获取一个文件夹下的所有文件夹里的文件   
+               
+               
+               
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirFiles(System.IO.DirectoryInfo,System.Collections.Generic.Dictionary{System.String,System.DateTime})">
+               
+            获取一个文件夹下的文件   
+               
+            目录名称   
+            文件列表HastTable   
+        </member>
+        <member name="T:SimpleAdmin.Core.Utils.FileItem">
+            <summary>
+            文件对象
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.FileItem.FileName">
+            <summary>
+            文件名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.FileItem.FilePath">
+            <summary>
+            文件路径
             </summary>
         </member>
     </members>

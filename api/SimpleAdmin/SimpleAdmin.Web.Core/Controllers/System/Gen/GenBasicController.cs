@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Furion.RemoteRequest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -98,6 +99,31 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Gen
         public async Task<dynamic> PreviewGen([FromQuery] BaseIdInput input)
         {
             return await _genbasicService.PreviewGen(input);
+        }
+
+
+        /// <summary>
+        /// 执行代码生成(本地)"
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Description("执行代码生成(本地)")]
+        [HttpPost("execGenPro")]
+        public async Task ExecGenPro([FromBody] BaseIdInput input)
+        {
+            await _genbasicService.ExecGenPro(input);
+        }
+
+        /// <summary>
+        /// 执行代码生成(压缩包)
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        [Description("执行代码生成(压缩包)")]
+        [HttpGet("execGenZip")]
+        public async Task<IActionResult> ExecGenZip([FromQuery] BaseIdInput input)
+        {
+            return await _genbasicService.ExecGenZip(input);
         }
     }
 }

@@ -85,9 +85,9 @@ public class GenBasePreviewOutput
         public string CodeFileName { get; set; }
 
         /// <summary>
-        /// 代码文件文件夹
+        /// 文件路径
         /// </summary>
-        public string CodeFileDir { get; set; }
+        public string FilePath { get; set; }
 
         /// <summary>
         /// 代码文件内容

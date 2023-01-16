@@ -953,6 +953,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            执行代码生成(本地)"
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            执行代码生成(压缩包)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Controllers.System.Gen.GenConfigController">
             <summary>
             代码生成配置控制器

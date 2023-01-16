@@ -17,6 +17,18 @@ public class GenConst
     public const string No = "N";
     #endregion
 
+    /// <summary>
+    /// 压缩包
+    /// </summary>
+    public const string Zip = "ZIP";
+
+    /// <summary>
+    /// 项目中
+    /// </summary>
+    public const string Pro = "PRO";
+    #region 生成方式
+
+    #endregion
 
     #region 作用类型
 

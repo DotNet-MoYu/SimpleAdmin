@@ -20,3 +20,4 @@ global using System.Collections;
 global using SimpleRedis;
 global using System.ComponentModel;
 global using Masuit.Tools.Core.Validator;
+global using System.IO;

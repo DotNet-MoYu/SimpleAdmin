@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,6 +32,20 @@ public interface IGenbasicService : ITransient
     /// <param name="input"></param>
     /// <returns>代码生产基础</returns>
     Task<GenBasic> Edit(GenBasicEditInput input);
+
+    /// <summary>
+    /// 执行代码生成:本地
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task ExecGenPro(BaseIdInput input);
+
+    /// <summary>
+    /// 执行代码生成:压缩包
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<FileStreamResult> ExecGenZip(BaseIdInput input);
 
     /// <summary>
     /// 获取项目所有程序集

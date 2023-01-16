@@ -8,9 +8,13 @@
 
 	<ItemGroup>
 		<Compile Remove="Controllers\**" />
+		<Compile Remove="wwwroot\CodeGen\Forntend\**" />
 		<Content Remove="Controllers\**" />
+		<Content Remove="wwwroot\CodeGen\Forntend\**" />
 		<EmbeddedResource Remove="Controllers\**" />
+		<EmbeddedResource Remove="wwwroot\CodeGen\Forntend\**" />
 		<None Remove="Controllers\**" />
+		<None Remove="wwwroot\CodeGen\Forntend\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
@@ -21,8 +25,7 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="wwwroot\CodeGen\Backend\" />
-		<Folder Include="wwwroot\CodeGen\Forntend\" />
+		<Folder Include="wwwroot\CodeGen\Backend\Service\" />
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>

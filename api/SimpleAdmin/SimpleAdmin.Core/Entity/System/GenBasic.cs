@@ -71,11 +71,28 @@ public class GenBasic : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "GridWhether", ColumnDescription = "使用栅格", Length = 200)]
     public virtual string GridWhether { get; set; }
+
+
     /// <summary>
-    /// 包名 
+    /// 前端项目路径 
     ///</summary>
-    [SugarColumn(ColumnName = "PackageName", ColumnDescription = "包名", Length = 200)]
-    public virtual string PackageName { get; set; }
+    [SugarColumn(ColumnName = "FrontedPath", ColumnDescription = "前端项目路径", IsNullable = true, Length = 200)]
+    public virtual string FrontedPath { get; set; }
+    /// <summary>
+    /// 服务代码存放位置
+    ///</summary>
+    [SugarColumn(ColumnName = "ServicePosition", ColumnDescription = "服务代码存放位置", IsNullable = true, Length = 200)]
+    public virtual string ServicePosition { get; set; }
+
+
+
+    /// <summary>
+    /// 控制器代码存放位置 
+    ///</summary>
+    [SugarColumn(ColumnName = "ControllerPosition", ColumnDescription = "控制器代码存放位置", IsNullable = true, Length = 200)]
+    public virtual string ControllerPosition { get; set; }
+
+
     /// <summary>
     /// 作者 
     ///</summary>
