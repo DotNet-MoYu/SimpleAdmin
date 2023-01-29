@@ -22,7 +22,7 @@ public interface IRoleService : ITransient
     /// <summary>
     /// 编辑角色
     /// </summary>
-    /// <param name="input">编辑角色</param>
+    /// <param name="input">编辑参数</param>
     /// <returns></returns>
     Task Edit(RoleEditInput input);
 
