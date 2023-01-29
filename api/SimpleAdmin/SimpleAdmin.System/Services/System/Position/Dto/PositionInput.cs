@@ -46,6 +46,9 @@ public class PositionAddInput : SysPosition
     public override string Category { get; set; }
 }
 
+/// <summary>
+/// 机构编辑参数
+/// </summary>
 public class PositionEditInput : PositionAddInput
 {
     /// <summary>

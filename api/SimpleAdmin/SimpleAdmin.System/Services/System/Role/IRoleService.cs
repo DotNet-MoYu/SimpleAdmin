@@ -20,9 +20,9 @@ public interface IRoleService : ITransient
     Task Delete(List<BaseIdInput> input);
 
     /// <summary>
-    /// 编辑参数
+    /// 编辑角色
     /// </summary>
-    /// <param name="input">编辑参数</param>
+    /// <param name="input">编辑角色</param>
     /// <returns></returns>
     Task Edit(RoleEditInput input);
 
