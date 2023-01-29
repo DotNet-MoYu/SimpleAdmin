@@ -1,6 +1,4 @@
-﻿
-using System.ComponentModel;
-using System.Reflection;
+﻿using System.Reflection;
 using UAParser;
 
 namespace SimpleAdmin.Web.Core;

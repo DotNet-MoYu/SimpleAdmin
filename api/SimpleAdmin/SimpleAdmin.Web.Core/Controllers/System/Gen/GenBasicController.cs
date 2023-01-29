@@ -1,11 +1,4 @@
-﻿using Furion.RemoteRequest;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Web.Core.Controllers.System.Gen
+﻿namespace SimpleAdmin.Web.Core.Controllers.System.Gen
 {
     /// <summary>
     /// 代码生成基础控制器

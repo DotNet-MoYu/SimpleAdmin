@@ -1,7 +1,4 @@
-﻿using System;
-
-namespace SimpleAdmin.Web.Core.Controllers.Systems.System;
-
+﻿namespace SimpleAdmin.Web.Core;
 /// <summary>
 /// 模块管理控制器
 /// </summary>

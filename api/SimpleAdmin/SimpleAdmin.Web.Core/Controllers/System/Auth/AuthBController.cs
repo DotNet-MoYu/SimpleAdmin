@@ -1,9 +1,4 @@
-﻿using Furion.RemoteRequest;
-using SimpleAdmin.Web.Core.Controllers.System;
-using System.ComponentModel;
-
-namespace SimpleAdmin.Web.Core.Controllers.Systems.Auth;
-
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// B端登录控制器

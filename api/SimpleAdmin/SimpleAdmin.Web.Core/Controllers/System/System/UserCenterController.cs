@@ -1,5 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.Systems.System;
-
+﻿namespace SimpleAdmin.Web.Core;
 /// <summary>
 /// 用户个人信息控制器
 /// </summary>

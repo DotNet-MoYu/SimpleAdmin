@@ -1,6 +1,5 @@
 ﻿using Furion.DependencyInjection;
 using Furion.FriendlyException;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace SimpleAdmin.Web.Core;
 

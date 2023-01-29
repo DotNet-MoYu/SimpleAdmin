@@ -1,11 +1,4 @@
-﻿using SimpleAdmin.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Web.Core.Controllers.Application;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 岗位管理控制器
@@ -13,11 +6,11 @@ namespace SimpleAdmin.Web.Core.Controllers.Application;
 [ApiDescriptionSettings("Application", Tag = "岗位管理")]
 [Route("/biz/position")]
 [RolePermission]
-public class PositionController
+public class BizPositionController
 {
     private readonly IPositionService _positionService;
 
-    public PositionController(IPositionService positionService)
+    public BizPositionController(IPositionService positionService)
     {
         this._positionService = positionService;
     }

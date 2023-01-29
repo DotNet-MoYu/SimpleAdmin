@@ -1,5 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.Systems.Index;
-
+﻿namespace SimpleAdmin.Web.Core;
 /// <summary>
 /// 系统首页控制器
 /// </summary>

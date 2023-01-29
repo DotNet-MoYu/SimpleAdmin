@@ -1,11 +1,4 @@
-﻿using SimpleAdmin.Application;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Web.Core.Controllers.Application;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 机构管理控制器
@@ -13,12 +6,12 @@ namespace SimpleAdmin.Web.Core.Controllers.Application;
 [ApiDescriptionSettings("Application", Tag = "机构管理")]
 [Route("/biz/org")]
 [RolePermission]
-public class OrgController : IDynamicApiController
+public class BizOrgController : IDynamicApiController
 {
     private readonly IOrgService _orgService;
     private readonly IUserService _userService;
 
-    public OrgController(IOrgService orgService, IUserService userService)
+    public BizOrgController(IOrgService orgService, IUserService userService)
     {
         _orgService = orgService;
         this._userService = userService;

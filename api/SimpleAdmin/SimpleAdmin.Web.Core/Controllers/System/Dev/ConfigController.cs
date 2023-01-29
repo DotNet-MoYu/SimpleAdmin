@@ -1,5 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.Systems.Dev;
-
+﻿namespace SimpleAdmin.Web.Core;
 /// <summary>
 /// 系统配置控制器
 /// </summary>

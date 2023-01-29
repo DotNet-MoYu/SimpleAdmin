@@ -1,9 +1,4 @@
-﻿
-
-using SimpleRedis;
-using System.Security.Claims;
-
-namespace SimpleAdmin.Web.Core;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 自定义授权筛选器

@@ -1,5 +1,4 @@
 ﻿using Furion.FriendlyException;
-using System.Linq;
 
 namespace SimpleAdmin.Web.Core;
 

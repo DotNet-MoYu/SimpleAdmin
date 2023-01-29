@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Web.Core.Controllers.System.Auth;
+﻿namespace SimpleAdmin.Web.Core.Controllers.System.Auth;
 
 /// <summary>
 /// mqtt服务控制器

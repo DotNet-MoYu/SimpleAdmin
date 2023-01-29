@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Claims;
-using Furion;
+﻿using System.Security.Claims;
 using Furion.Authorization;
 using Furion.DataEncryption;
 using Microsoft.AspNetCore.Http;

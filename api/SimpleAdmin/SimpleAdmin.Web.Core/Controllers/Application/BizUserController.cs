@@ -1,6 +1,6 @@
 ﻿
 
-namespace SimpleAdmin.Web.Core.Controllers.Application;
+namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 人员管理控制器
@@ -8,13 +8,13 @@ namespace SimpleAdmin.Web.Core.Controllers.Application;
 [ApiDescriptionSettings("Application", Tag = "人员管理")]
 [Route("/biz/user")]
 [RolePermission]
-public class UserController : IDynamicApiController
+public class BizUserController : IDynamicApiController
 {
     private readonly IUserService _userService;
     private readonly IOrgService _orgService;
     private readonly IPositionService _positionService;
 
-    public UserController(IUserService userService, IOrgService orgService, IPositionService positionService)
+    public BizUserController(IUserService userService, IOrgService orgService, IPositionService positionService)
     {
         this._userService = userService;
         this._orgService = orgService;
