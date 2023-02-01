@@ -22,6 +22,8 @@ public class GenConfig : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "FieldName", ColumnDescription = "字段", Length = 200)]
     public string FieldName { get; set; }
+
+
     /// <summary>
     /// 名称 
     ///</summary>
@@ -82,5 +84,18 @@ public class GenConfig : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "SortCode", ColumnDescription = "排序")]
     public int SortCode { get; set; }
+
+
+    /// <summary>
+    /// 字段名首字母小写
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public string FieldNameFirstLower { get; set; }
+
+    /// <summary>
+    /// 字段名首字母大写
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public string FieldNameFirstUpper { get; set; }
 }
 

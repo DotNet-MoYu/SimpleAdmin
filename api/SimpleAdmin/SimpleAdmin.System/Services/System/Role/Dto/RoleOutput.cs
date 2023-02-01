@@ -24,7 +24,7 @@ public class RoleOwnResourceOutput
 public class RoleOwnPermissionOutput
 {
     /// <summary>
-    /// Id
+    /// 角色Id
     /// </summary>
     public virtual long Id { get; set; }
 

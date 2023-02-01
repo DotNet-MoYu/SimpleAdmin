@@ -10,14 +10,26 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
 {
     private readonly ILogger<GenBasicService> _logger;
     private readonly IViewEngine _viewEngine;
+    private readonly IGenConfigSerivce _genConfigSerivce;
+    private readonly IMenuService _menuService;
+    private readonly IButtonService _buttonService;
+    private readonly IRoleService _roleService;
     private string _sqlDir = "Sql";
     private string _backendDir = "Backend";
     private string _frontDir = "Frontend";
 
-    public GenBasicService(ILogger<GenBasicService> logger, IViewEngine viewEngine)
+    public GenBasicService(ILogger<GenBasicService> logger,
+                           IViewEngine viewEngine,
+                           IGenConfigSerivce genConfigSerivce,
+                           IMenuService menuService,
+                           IButtonService buttonService, IRoleService roleService)
     {
         this._logger = logger;
         this._viewEngine = viewEngine;
+        this._genConfigSerivce = genConfigSerivce;
+        this._menuService = menuService;
+        this._buttonService = buttonService;
+        this._roleService = roleService;
     }
 
     /// <inheritdoc/>
@@ -66,9 +78,25 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var dbColumnInfos = Context.DbMaintenance.GetColumnInfosByTableName(input.TableName);//根据表名获取表信息
         if (dbColumnInfos != null)
         {
+
             //遍历字段获取信息
             dbColumnInfos.ForEach(it =>
             {
+                if (it.DbColumnName.Contains("_"))//如果有下划线,转换一下
+                {
+                    var column = "";//新的字段值
+                    var columnList = it.DbColumnName.Split('_');//根据下划线分割
+                    columnList.ForEach(it =>
+                    {
+                        column += StringHelper.FirstCharToUpper(it);//首字母大写
+                    });
+                    it.DbColumnName = column;//赋值给数据库字段
+
+                }
+                else
+                {
+                    it.DbColumnName = StringHelper.FirstCharToUpper(it.DbColumnName);//首字母大写
+                }
                 columns.Add(new GenBasicColumnOutput
                 {
                     ColumnName = it.DbColumnName,
@@ -130,7 +158,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 SortCode = yesOrNo == GenConst.No ? 99 : sortCode//如果是公共字段就排最后
             });
             sortCode++;
-
         });
         //事务
         var result = await itenant.UseTranAsync(async () =>
@@ -172,7 +199,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 throw Oops.Oh(ErrorCodeEnum.A0002);
             }
         }
-
     }
 
     /// <inheritdoc/>
@@ -197,14 +223,21 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         if (genBasic.GenerateType != GenConst.Pro) throw Oops.Bah("当前配置生成方式为：项目中");
-        var previewCode = await PreviewGen(genBasic);//获取代码生成预览
-        var backendPath = Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName);//获取主工程目录
-        ExecBackend(previewCode.CodeBackendResults, genBasic, backendPath);//执行后端代码生成
-        var srcDir = "src";//默认都是代码放在src文件夹
-        var frontedPath = genBasic.FrontedPath;//获取前端代码路径,
-        if (!frontedPath.Contains(srcDir))//如果不包含src
-            frontedPath = genBasic.FrontedPath.CombinePath(srcDir);
-        ExecFronted(previewCode.CodeFrontendResults, genBasic, frontedPath);
+        if (await CreateMenuButtonAndRelation(genBasic))
+        {
+            var previewCode = await PreviewGen(genBasic);//获取代码生成预览
+            var backendPath = Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName);//获取主工程目录
+            ExecBackend(previewCode.CodeBackendResults, genBasic, backendPath);//执行后端代码生成
+            var srcDir = "src";//默认都是代码放在src文件夹
+            var frontedPath = genBasic.FrontedPath;//获取前端代码路径,
+            if (!frontedPath.Contains(srcDir))//如果不包含src
+                frontedPath = genBasic.FrontedPath.CombinePath(srcDir);
+            ExecFronted(previewCode.CodeFrontendResults, genBasic, frontedPath);
+        }
+        else
+        {
+            throw Oops.Bah("代码生成失败");
+        }
     }
 
 
@@ -213,8 +246,9 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         if (genBasic.GenerateType != GenConst.Zip) throw Oops.Bah("当前配置生成方式为：压缩包");
-        var previewCode = await PreviewGen(genBasic);//获取代码生成预览
         var temDir = Path.GetTempPath().CombinePath(genBasic.ClassName);//获取临时目录并用类名做存放代码文件文件夹
+        File.Delete(temDir + ".zip");// 先删除压缩包
+        var previewCode = await PreviewGen(genBasic);//获取代码生成预览
         ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
         ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
         ExecSql(previewCode.SqlResults, temDir);//执行sql生成
@@ -282,7 +316,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             //if (it.CodeFileName.StartsWith("IService"))
             //    fileName = $"I{genBasic.ClassName}Service.cs";//对IService接口要特殊处理
             //path = path.CombinePath(fileName);//最终生成文件地址
-            File.WriteAllText(path.CombinePath(it.CodeFileName), "global using Furion;", Encoding.UTF8);//写入文件
+            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
         });
 
     }
@@ -307,7 +341,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
            var parentName = fileInfo.Directory.Parent.Name;//获取父文件文件夹名称
            var path = frontedPath.CombinePath(fileInfo.Directory.Name).CombinePath(genBasic.RouteName);//生成路径为前端路径+代码文件所在文件夹+路由地址
            if (dirName == apiDir)//如果是api文件夹
-               it.CodeFileName = genBasic.RouteName + genBasic.ClassName + it.CodeFileName;//文件名等于路由名加类名加代码文件名
+               it.CodeFileName = StringHelper.FirstCharToLower(genBasic.ClassName) + it.CodeFileName;//文件名等于路由名加类名加代码文件名
            else if (dirName == viewDir)
                path = path.CombinePath(genBasic.BusName);
            if (!Directory.Exists(path))//如果文件夹不存在就创建文件夹
@@ -351,15 +385,11 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             var fileName = fileInfo.Name;//文件名
             var fileNoPrefix = fileName.Split(fileInfo.Extension)[0];//不带模板后缀的文件名
             var tContent = File.ReadAllText(fileInfo.FullName);//读取文件
-            //视图引擎渲染
-            var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel, builderAction: builder =>
-            {
-                builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
-            });
+            string? tResult = await GetViewEngine(tContent, genViewModel);//渲染
             //将渲染结果添加到结果集
             sqlCodeResults.Add(new GenBasePreviewOutput.GenBaseCodeResult
             {
-                CodeFileContent = tResult,
+                CodeFileContent = tContent,
                 CodeFileName = fileNoPrefix,
                 FilePath = fileInfo.FullName
             });
@@ -381,6 +411,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var backendCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var backendTemplatePath = Path.Combine(templatePath, _backendDir);//获取后端模板文件路径
         FileInfo[] files = GetAllFileInfo(backendTemplatePath);
+        //files = files.Where(it => it.Name == "Service.cs.vm").ToArray();//测试用
         foreach (var fileInfo in files)
         {
             var nameWithPrefix = fileInfo.Name;//文件名
@@ -389,19 +420,16 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             var fileName = genViewModel.ClassName + fileNoPrefix;//文件名等于类名加代码文件名
             if (fileNoPrefix.StartsWith("IService"))
                 fileName = $"I{genViewModel.ClassName}Service.cs";//对IService接口要特殊处理
-            //视图引擎渲染
-            //var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel, builderAction: builder =>
-            //{
-            //    builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
-            //});
+            string? tResult = await GetViewEngine(tContent, genViewModel);//渲染
             //将渲染结果添加到结果集
             backendCodeResults.Add(new GenBasePreviewOutput.GenBaseCodeResult
             {
-                CodeFileContent = tContent,
+                CodeFileContent = tResult,
                 CodeFileName = fileName,
                 FilePath = fileInfo.FullName
             });
         }
+
         return backendCodeResults;
 
     }
@@ -418,20 +446,17 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var frontCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var frontTemplatePath = Path.Combine(templatePath, _frontDir);//获取前端模板文件路径
         FileInfo[] files = GetAllFileInfo(frontTemplatePath);
+        //files = files.Where(it => it.Name == "form.vue.vm").ToArray();//测试用
         foreach (var fileInfo in files)
         {
             var fileName = fileInfo.Name;//文件名
             var fileNoPrefix = fileName.Split(fileInfo.Extension)[0];//不带模板后缀的文件名
             var tContent = File.ReadAllText(fileInfo.FullName);//读取文件
-            //视图引擎渲染
-            //var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel, builderAction: builder =>
-            //{
-            //    builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
-            //});
+            var tResult = await GetViewEngine(tContent, genViewModel);//渲染
             //将渲染结果添加到结果集
             frontCodeResults.Add(new GenBasePreviewOutput.GenBaseCodeResult
             {
-                CodeFileContent = tContent,
+                CodeFileContent = tResult,
                 CodeFileName = fileNoPrefix,
                 FilePath = fileInfo.FullName
             });
@@ -445,11 +470,37 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// </summary>
     /// <param name="genBasic"></param>
     /// <returns></returns>
-    public GenViewModel GetGenViewModel(GenBasic genBasic)
+    public async Task<GenViewModel> GetGenViewModel(GenBasic genBasic)
     {
         //实体转视图
         var genViewEngine = genBasic.Adapt<GenViewModel>();
+        //获取字段信息
+        var tableFieldList = await _genConfigSerivce.List(genBasic.Id);
+        tableFieldList.ForEach(it =>
+        {
+            it.FieldNameFirstLower = StringHelper.FirstCharToLower(it.FieldName);//首字母小写
+            it.FieldNameFirstUpper = StringHelper.FirstCharToUpper(it.FieldName);//首字母大写
+        });
+        genViewEngine.TableFields = tableFieldList;//赋值表字段信息
+
         return genViewEngine;
+    }
+
+    /// <summary>
+    /// 视图渲染
+    /// </summary>
+    /// <param name="tContent">模板内容</param>
+    /// <param name="genViewModel">参数</param>
+    /// <returns></returns>
+    public async Task<string> GetViewEngine(string tContent, GenViewModel genViewModel)
+    {
+        //视图引擎渲染
+        var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel, builderAction: builder =>
+        {
+            builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
+            builder.AddAssemblyReferenceByName("System.Collections");//添加程序集
+        });
+        return tResult;
     }
 
     /// <summary>
@@ -468,17 +519,22 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<GenBasePreviewOutput> PreviewGen(GenBasic genBasic)
     {
         var templatePath = App.WebHostEnvironment.WebRootPath + @"\CodeGen";//模板文件文件夹
-        var genViewModel = GetGenViewModel(genBasic);
-        var backendResult = await GetBackendCodeResult(genViewModel, templatePath);
+        var genViewModel = await GetGenViewModel(genBasic);
         var frontendResult = await GetForntCodeResult(genViewModel, templatePath);
+        var backendResult = await GetBackendCodeResult(genViewModel, templatePath);
         var sqlResult = await GetSqlCodeResult(genViewModel, templatePath);
-        return new GenBasePreviewOutput { CodeBackendResults = backendResult, CodeFrontendResults = frontendResult, SqlResults = sqlResult };
+        return new GenBasePreviewOutput
+        {
+            CodeBackendResults = backendResult,
+            CodeFrontendResults = frontendResult,
+            SqlResults = sqlResult
+        };
     }
 
     /// <summary>
     /// 获取代码生成基础
     /// </summary>
-    /// <param name="long"></param>
+    /// <param name="id"></param>
     /// <returns></returns>
     private async Task<GenBasic> GetGenBasic(long id)
     {
@@ -488,5 +544,75 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         return genBasic;
 
     }
+
+    /// <summary>
+    /// 创建代码生成相关的菜单按钮和授权关系
+    /// </summary>
+    /// <param name="genBasic"></param>
+    /// <returns></returns>
+    private async Task<bool> CreateMenuButtonAndRelation(GenBasic genBasic)
+    {
+        try
+        {
+
+            #region 菜单
+            var title = genBasic.FunctionName + genBasic.FunctionNameSuffix;
+            var menuRep = ChangeRepository<DbRepository<SysResource>>();//切换仓储
+                                                                        //获取已经存在的旧菜单
+            var oldMenu = await menuRep.
+                GetFirstAsync(it => it.Title == title
+                && it.Category == CateGoryConst.Resource_MENU
+                && it.MenuType == ResourceConst.MENU);
+            if (oldMenu != null)//如果存在就直接和删除（同时删除其下面的菜单、按钮，清除对应的角色与资源信息)
+                await _menuService.Delete(new List<BaseIdInput> { new BaseIdInput { Id = oldMenu.Id } });
+            //添加菜单参数
+            MenuAddInput menu = new MenuAddInput
+            {
+                Id = YitIdHelper.NextId(),
+                ParentId = genBasic.MenuPid,
+                Title = title,
+                Category = CateGoryConst.Resource_MENU,
+                Module = genBasic.Module,
+                Icon = genBasic.Icon,
+                Name = genBasic.BusName,
+                Code = RandomHelper.CreateRandomString(10),
+                Path = $"/{genBasic.RouteName}/{genBasic.BusName}",
+                Component = $"{genBasic.RouteName}/{genBasic.BusName}/index",
+                SortCode = 99
+            };
+            await _menuService.Add(menu);//添加菜单
+            #endregion
+            #region 按钮
+            //添加按钮参数
+            ButtonAddInput button = new ButtonAddInput
+            {
+                Title = genBasic.FunctionName,
+                ParentId = menu.Id,
+                Code = StringHelper.FirstCharToLower(genBasic.ClassName)
+            };
+            var buttonIds = await _buttonService.AddBatch(button);//添加按钮
+            #endregion
+            #region 角色授权
+            var roleRep = ChangeRepository<DbRepository<SysRole>>();//切换仓储
+            var superAdmin = await roleRep.GetFirstAsync(it => it.Code == RoleConst.SuperAdmin && it.Category == CateGoryConst.Role_GLOBAL);//获取超级管理员
+                                                                                                                                            //授权菜单参数
+            GrantResourceInput grantResource = new GrantResourceInput
+            {
+                Id = superAdmin.Id,
+                GrantInfoList = new List<RelationRoleResuorce> { new RelationRoleResuorce { MenuId = menu.Id, ButtonInfo = buttonIds } },
+                IsCodeGen = true,
+            };
+            await _roleService.GrantResource(grantResource);//授权菜单
+            #endregion
+            return true;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError($"代码生成创建菜单和授权报错{ex.Message}", ex.InnerException);
+            return false;
+        }
+    }
+
+
     #endregion
 }

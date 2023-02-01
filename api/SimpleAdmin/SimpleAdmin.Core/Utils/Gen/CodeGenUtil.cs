@@ -23,31 +23,31 @@
                 case "blob":
                 case "longtext":
                 case "nclob":
-                    return "String";
+                    return "string";
 
                 case "int":
                 case "mediumint":
-                    return "Int";
+                    return "int";
 
                 case "smallint":
                     return "Int16";
 
                 case "tinyint":
-                    return "Byte";
+                    return "byte";
 
                 case "bigint":
                 case "integer"://sqlite数据库
-                    return "Long";
+                    return "long";
 
                 case "bit":
                 case "boolean":
-                    return "Bool";
+                    return "bool";
 
                 case "money":
                 case "smallmoney":
                 case "numeric":
                 case "decimal":
-                    return "Decimal";
+                    return "decimal";
 
                 case "real":
                     return "Single";
@@ -62,18 +62,18 @@
 
                 case "float":
                 case "double":
-                    return "Double";
+                    return "double";
 
                 case "image":
                 case "binary":
                 case "varbinary":
-                    return "Byte[]";
+                    return "byte[]";
 
                 case "uniqueidentifier":
                     return "Guid";
 
                 default:
-                    return "String";
+                    return "string";
             }
         }
 

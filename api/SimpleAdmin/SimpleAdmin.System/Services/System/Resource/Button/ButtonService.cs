@@ -44,20 +44,24 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
 
 
     /// <inheritdoc />
-    public async Task AddBatch(ButtonAddInput input)
+    public async Task<List<long>> AddBatch(ButtonAddInput input)
     {
         List<SysResource> sysResources = new List<SysResource>();//按钮列表
         var codeList = new List<string>() { "Add", "Edit", "Delete", "BatchDelete", };//code后缀
         var titleList = new List<string>() { "新增", "编辑", "删除", "批量删除" };//title前缀
+        var idList = new List<long>();//Id列表
         for (int i = 0; i < codeList.Count; i++)
         {
+            var id = YitIdHelper.NextId();
             sysResources.Add(new SysResource
             {
+                Id = id,
                 Title = titleList[i] + input.Title,//标题等于前缀输入的值
                 Code = input.Code + codeList[i],//code等于输入的值加后缀
                 ParentId = input.ParentId,
                 SortCode = i + 1,
             });
+            idList.Add(id);
         }
         //遍历列表
         foreach (var sysResource in sysResources)
@@ -66,7 +70,16 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         }
         //添加到数据库
         if (await InsertRangeAsync(sysResources))//插入数据
+        {
             await _resourceService.RefreshCache(CateGoryConst.Resource_BUTTON);//刷新缓存
+            return sysResources.Select(it => it.Id).ToList();
+        }
+        else
+        {
+            return new List<long>();
+        }
+
+
     }
 
     /// <inheritdoc />

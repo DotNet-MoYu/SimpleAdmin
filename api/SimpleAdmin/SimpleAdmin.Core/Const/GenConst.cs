@@ -35,39 +35,39 @@ public class GenConst
     /// <summary>
     /// 输入框
     /// </summary>
-    public const string INPUT = "INPUT";
+    public const string INPUT = "input";
     /// <summary>
     /// 文本框
     /// </summary>
-    public const string TEXTAREA = "TEXTAREA";
+    public const string TEXTAREA = "textarea";
     /// <summary>
     /// 下拉框
     /// </summary>
-    public const string SELECT = "SELECT";
+    public const string SELECT = "select";
     /// <summary>
     /// 单选框
     /// </summary>
-    public const string RADIO = "RADIO";
+    public const string RADIO = "radio";
     /// <summary>
     /// 复选框
     /// </summary>
-    public const string CHECKBOX = "CHECKBOX";
+    public const string CHECKBOX = "checkbox";
     /// <summary>
     /// 日期选择器
     /// </summary>
-    public const string DATEPICKER = "DATEPICKER";
+    public const string DATEPICKER = "datepicker";
     /// <summary>
     /// 时间选择器
     /// </summary>
-    public const string TIMEPICKER = "TIMEPICKER";
+    public const string TIMEPICKER = "timepicker";
     /// <summary>
     /// 数字输入框
     /// </summary>
-    public const string INPUTNUMBER = "INPUTNUMBER";
+    public const string INPUTNUMBER = "inputNumber";
     /// <summary>
     /// 滑动数字条
     /// </summary>
-    public const string SLIDER = "SLIDER";
+    public const string SLIDER = "slider";
     #endregion
 }
 

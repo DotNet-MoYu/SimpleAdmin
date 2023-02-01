@@ -1,0 +1,34 @@
+{
+  "RECORDS": [
+    {
+      "Id": "380460402909253",
+      "DbTable": "gen_test",
+      "EntityName": "GenTest",
+      "TablePrefix": "Y",
+      "GenerateType": "PRO",
+      "Module": "212755263003743",
+      "MenuPid": "212755263003744",
+      "RouteName": "biz",
+      "Icon": "down-square-outlined",
+      "FunctionName": "测试",
+      "FunctionNameSuffix": "管理",
+      "BusName": "test",
+      "ClassName": "GenTest",
+      "FormLayout": "vertical",
+      "GridWhether": "Y",
+      "FrontedPath": "D:\\SimpleAdminWeb\\SimpleAdminWeb",
+      "ServicePosition": "SimpleAdmin.Application",
+      "ControllerPosition": "SimpleAdmin.Web.Core",
+      "AuthorName": "admin",
+      "SortCode": "99",
+      "CreateTime": "2023-1-30 11:57:22.573",
+      "UpdateTime": "2023-2-1 14:26:47.443",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
+    }
+  ]
+}

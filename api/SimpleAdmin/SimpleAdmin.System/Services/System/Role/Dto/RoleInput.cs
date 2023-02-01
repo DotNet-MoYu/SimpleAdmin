@@ -45,7 +45,7 @@ public class RoleEditInput : RoleAddInput
 public class GrantResourceInput : RoleOwnResourceOutput
 {
     /// <summary>
-    /// Id
+    /// 角色Id
     /// </summary>
     [MinValue(1, ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
@@ -55,6 +55,11 @@ public class GrantResourceInput : RoleOwnResourceOutput
     /// </summary>
     [Required(ErrorMessage = "GrantInfoList不能为空")]
     public override List<RelationRoleResuorce> GrantInfoList { get; set; }
+
+    /// <summary>
+    /// 是否代码生成
+    /// </summary>
+    public bool IsCodeGen { get; set; }
 }
 
 /// <summary>
@@ -63,7 +68,7 @@ public class GrantResourceInput : RoleOwnResourceOutput
 public class GrantPermissionInput : RoleOwnPermissionOutput
 {
     /// <summary>
-    /// Id
+    /// 角色Id
     /// </summary>
     [MinValue(1, ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }

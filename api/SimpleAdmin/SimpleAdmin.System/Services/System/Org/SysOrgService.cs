@@ -118,8 +118,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             await RefreshCache();//刷新缓存
     }
 
+    /// <inheritdoc />
     public async Task<SysOrg> Detail(BaseIdInput input)
     {
+
         var sysOrgs = await GetListAsync();
         var orgDetail = sysOrgs.Where(it => it.Id == input.Id).FirstOrDefault();
         return orgDetail;

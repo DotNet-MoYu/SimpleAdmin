@@ -262,8 +262,9 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var result = await itenant.UseTranAsync(async () =>
            {
                var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
-               //删除老的
-               await relatioRep.DeleteAsync(it => it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE));
+               //如果不是代码生成,就删除老的
+               if (!input.IsCodeGen)
+                   await relatioRep.DeleteAsync(it => it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE));
                await relatioRep.InsertRangeAsync(relationRoles);//添加新的
            });
             if (result.IsSuccess)//如果成功了
@@ -305,9 +306,9 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task GrantPermission(GrantPermissionInput input)
     {
-        var aoiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
+        var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
         var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-        await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, aoiUrls, extJsons, true);//添加到数据库
+        await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
         await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
     }
 

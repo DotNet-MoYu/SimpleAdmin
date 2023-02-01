@@ -177,7 +177,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                         if (description != null)
                         {
                             //默认路由名称
-                            var apiRoute = FirstCharToLower(menthod.Name);
+                            var apiRoute = StringHelper.FirstCharToLower(menthod.Name);
                             //获取get特性
                             var requestGet = menthod.GetCustomAttribute<HttpGetAttribute>();
                             if (requestGet != null)//如果是get方法
@@ -224,24 +224,11 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (template.Contains("[controller]"))
         {
             controllerName = controllerName.Replace("Controller", "");//去掉Controller
-            controllerName = FirstCharToLower(controllerName);//转首字母小写写
+            controllerName = StringHelper.FirstCharToLower(controllerName);//转首字母小写写
             template = template.Replace("[controller]", controllerName);//替换[controller]
         }
 
         return template;
-    }
-
-    /// <summary>
-    /// 首字母小写写
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    public string FirstCharToLower(string input)
-    {
-        if (String.IsNullOrEmpty(input))
-            return input;
-        string str = input.First().ToString().ToLower() + input.Substring(1);
-        return str;
     }
 
     /// <summary>

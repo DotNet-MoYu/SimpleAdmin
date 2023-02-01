@@ -15,6 +15,12 @@ public class GenBasic : BaseEntity
     public virtual string DbTable { get; set; }
 
     /// <summary>
+    /// 表实体名称
+    /// </summary>
+    [SugarColumn(ColumnName = "EntityName", ColumnDescription = "表实体名称", Length = 200)]
+    public virtual string EntityName { get; set; }
+
+    /// <summary>
     /// 移除表前缀 
     ///</summary>
     [SugarColumn(ColumnName = "TablePrefix", ColumnDescription = "移除表前缀", Length = 200)]
@@ -51,6 +57,12 @@ public class GenBasic : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "FunctionName", ColumnDescription = "功能名", Length = 200)]
     public virtual string FunctionName { get; set; }
+
+    /// <summary>
+    /// 功能名后缀 
+    ///</summary>
+    [SugarColumn(ColumnName = "FunctionNameSuffix", ColumnDescription = "功能名后缀", Length = 200, IsNullable = true)]
+    public virtual string FunctionNameSuffix { get; set; }
     /// <summary>
     /// 业务名 
     ///</summary>

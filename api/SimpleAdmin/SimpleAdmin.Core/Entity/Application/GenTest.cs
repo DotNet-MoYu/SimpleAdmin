@@ -16,6 +16,18 @@ public class GenTest : DataEntityBase
 
 
     /// <summary>
+    /// 性别
+    /// </summary>
+    public string Sex { get; set; }
+
+
+
+    /// <summary>
+    /// 民族
+    /// </summary>
+    public string Nation { get; set; }
+
+    /// <summary>
     /// 年龄
     /// </summary>
     public int Age { get; set; }
@@ -30,5 +42,10 @@ public class GenTest : DataEntityBase
     /// 存款
     /// </summary>
     public decimal Money { get; set; }
+
+    /// <summary>
+    /// 排序码 
+    ///</summary>
+    public int SortCode { get; set; }
 
 }

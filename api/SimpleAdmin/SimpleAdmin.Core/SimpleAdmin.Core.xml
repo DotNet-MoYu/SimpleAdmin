@@ -968,6 +968,16 @@
             姓名
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.Nation">
+            <summary>
+            民族
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Core.GenTest.Age">
             <summary>
             年龄
@@ -981,6 +991,11 @@
         <member name="P:SimpleAdmin.Core.GenTest.Money">
             <summary>
             存款
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenTest.SortCode">
+             <summary>
+             排序码 
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.PrimaryKeyEntity">
@@ -1553,6 +1568,11 @@
              主表 
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.EntityName">
+            <summary>
+            表实体名称
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Core.GenBasic.TablePrefix">
              <summary>
              移除表前缀 
@@ -1586,6 +1606,11 @@
         <member name="P:SimpleAdmin.Core.GenBasic.FunctionName">
              <summary>
              功能名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.FunctionNameSuffix">
+             <summary>
+             功能名后缀 
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.GenBasic.BusName">
@@ -1711,6 +1736,16 @@
         <member name="P:SimpleAdmin.Core.GenConfig.SortCode">
              <summary>
              排序 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldNameFirstLower">
+            <summary>
+            字段名首字母小写
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenConfig.FieldNameFirstUpper">
+            <summary>
+            字段名首字母大写
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.SysOrg">

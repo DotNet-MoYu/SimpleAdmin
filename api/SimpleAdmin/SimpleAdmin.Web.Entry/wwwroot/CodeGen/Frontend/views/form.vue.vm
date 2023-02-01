@@ -1,0 +1,203 @@
+<template>
+  @{Main();}
+</template>
+@
+@{Script();}
+
+@{
+//主体
+void Main()
+{
+var tableFieIds=@Model.TableFields;//获取字段
+<a-drawer
+    @foreach (var column in tableFieIds){//遍历字段
+	@if(column.IsPrimarykey=="Y"){//如果是主键
+@::title="formData.@column.FieldNameFirstLower ? '编辑@(@Model.FunctionName)' : '增加@(@Model.FunctionName)'"
+    }}
+    :width="600"
+    :visible="visible"
+    :destroy-on-close="true"
+    :footer-style="{ textAlign: 'right' }"
+    @@close="onClose"
+>
+    <a-form ref="formRef" :model="formData" :rules="formRules" layout="@Model.FormLayout">
+	@if(@Model.GridWhether=="Y"){//使用栅格
+      @:<a-row :gutter="16">
+	  @foreach (var column in tableFieIds){//遍历字段
+	  @if(column.WhetherAddUpdate=="Y"){//如果增改
+        @:<a-col :span="12">
+          @:<a-form-item label="@column.FieldRemark" name="@column.FieldNameFirstLower">
+          @:@{FormItem(@column);}          </a-form-item>
+        @:</a-col>
+		}
+	  }
+      @:</a-row>	  
+	}
+	else{
+	@foreach (var column in tableFieIds){//遍历字段
+	@if(column.WhetherAddUpdate=="Y"){//如果增改
+        @:<a-form-item label="@column.FieldRemark" name="@column.FieldNameFirstLower">
+        @:@{FormItem(@column);}        </a-form-item>
+		}
+	  }
+	}
+    </a-form>
+    <template #footer>
+        <a-button style="margin-right: 8px" @@click="onClose">关闭</a-button>
+        <a-button type="primary" @@click="onSubmit" :loading="submitLoading">保存</a-button>
+    </template>
+</a-drawer>
+}
+
+//表单控件
+void FormItem(dynamic column){
+switch (@column.EffectType)//根据类型生成不同控件
+{
+//输入框
+case "input":
+  <a-input v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" allow-clear />
+break;
+case "textarea":
+  <a-textarea v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :auto-size="{ minRows: 3, maxRows: 5 }" />
+break;
+//选择
+case "select":
+  <a-select v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+break;
+case "radio":
+  <a-radio-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+break;
+case "checkbox":
+  <a-checkbox-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+break;
+//数字
+case "inputNumber":
+  <a-input-number v-model:value="formData.@column.FieldNameFirstLower" :min="1" :max="100" style="width: 100%" />
+break;
+case "slider":
+  <a-slider v-model:value="formData.@column.FieldNameFirstLower" :max="100" :min="1" style="width: 100%" />
+break;
+//时间
+case "datepicker":
+  <a-date-picker v-model:value="formData.@column.FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time placeholder="请选择@(@column.FieldRemark)" style="width: 100%" />
+break;
+case "timepicker":
+  <a-time-picker v-model:value="formData.@column.FieldNameFirstLower" placeholder="请选择@(@column.FieldRemark)" style="width: 100%" />
+break;
+default:
+break;}}
+
+void Script(){
+var tableFieIds=@Model.TableFields;//获取字段
+var primaryKey=tableFieIds.Where(it => it.IsPrimarykey=="Y").First();//主键字段
+var selectColumns=tableFieIds.Where(it => it.EffectType=="select"||it.EffectType=="radio"||it.EffectType=="checkbox").ToList();//选择框字段列表
+var addOrUpdateColumns=tableFieIds.Where(it => it.WhetherAddUpdate=="Y").ToList();//增改字段列表
+var selectCount=selectColumns.Count;//选择框数量
+<script setup name="@(@Model.ClassNameFirstLower)Form">
+  @if(selectCount>0){
+  @:import tool from '@@/utils/tool'
+  }
+  import { cloneDeep } from 'lodash-es'
+  import { required } from '@@/utils/formRules'
+  import @(@Model.ClassNameFirstLower)Api from '@@/api/@Model.RouteName/@(@Model.ClassNameFirstLower)Api'
+
+  // 抽屉状态
+  const visible = ref(false)  
+  // 定义emit事件
+  const emit = defineEmits({ successful: null }) 
+  //表单
+  const formRef = ref()  
+  // 表单数据，也就是默认给一些数据
+  const formData = ref({})
+  //提交等待
+  const submitLoading = ref(false)
+  
+  @foreach (var column in selectColumns){//遍历选择框
+  @://@(column.FieldRemark)选项
+  @:const @(column.FieldNameFirstLower)Options = ref([])
+  }
+  
+  // 打开抽屉 
+  const onOpen = (record) => {
+      visible.value = true //显示抽屉
+	  //表单数据
+      formData.value = {
+	    @foreach (var column in addOrUpdateColumns){//遍历增改字段
+        @if(column.FieldName=="SortCode"){//如果是SortCode
+        @:sortCode: 99
+        }
+	    }
+      }
+      if (record) {
+        let recordData = cloneDeep(record)
+		@foreach (var column in addOrUpdateColumns){//遍历增改字段
+		@if(column.EffectType=="checkbox"){//如果是checkbox
+        @:recordData.@column.FieldNameFirstLower= JSON.parse(recordData.@column.FieldNameFirstLower)
+		}
+		}
+        formData.value = Object.assign({}, recordData)
+        //const param = {
+        @foreach (var column in tableFieIds){//遍历字段
+        @if(column.IsPrimarykey=="Y"){//如果是主键
+        @://  @column.FieldNameFirstLower: record.@column.FieldNameFirstLower
+		}}
+        //}
+        //@(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Detail(param).then((data) => {
+        //  formData.value = Object.assign({}, data)
+        @foreach (var column in addOrUpdateColumns){//遍历增改字段
+		@if(column.EffectType=="checkbox"){//如果是checkbox
+        @://  recordData.@column.FieldNameFirstLower= JSON.parse(recordData.@column.FieldNameFirstLower)
+		}
+		}
+        //  })
+      }  
+	  @foreach (var column in selectColumns){//遍历选择框
+      @:@(column.FieldNameFirstLower)Options.value = tool.dictList('@column.DictTypeCode')
+	  }
+  }
+  
+  // 关闭抽屉
+  const onClose = () => {
+      formRef.value.resetFields()
+      formData.value = {}
+      visible.value = false
+  }
+  
+  // 默认要校验的
+  const formRules = {
+      @foreach (var column in addOrUpdateColumns){//遍历增改字段
+      @if(column.WhetherRequired=="Y"){//如果是必填
+      @:@column.FieldNameFirstLower: [required('请输入@(@column.FieldRemark)')],
+      }
+      }
+  }
+
+  // 验证并提交数据
+  const onSubmit = () => {
+      formRef.value.validate().then(() => {
+          submitLoading.value = true
+          const formDataParam = cloneDeep(formData.value)
+		  @foreach (var column in addOrUpdateColumns){//遍历增改字段
+          @if(column.EffectType=="checkbox"){//如果是checkbox、
+          @:formDataParam.@column.FieldNameFirstLower = JSON.stringify(formDataParam.@column.FieldNameFirstLower)
+		  }
+		  }
+          @(@Model.ClassNameFirstLower)Api
+              .@(@Model.ClassNameFirstLower)SubmitForm(formDataParam, !formDataParam.@primaryKey.FieldNameFirstLower)
+              .then(() => {
+                  onClose()
+                  emit('successful')
+              })
+              .finally(() => {
+                  submitLoading.value = false
+              })
+      })
+  }
+  // 抛出函数
+  defineExpose({
+  onOpen
+  })
+</script>
+}
+
+}

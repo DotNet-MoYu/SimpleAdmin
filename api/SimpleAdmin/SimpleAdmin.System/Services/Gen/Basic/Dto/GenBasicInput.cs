@@ -17,7 +17,7 @@ public class GenBasicColumnInput
 /// 代码生成基础添加参数
 /// </summary>
 
-public class GenBasicAddInput : GenBasic, IValidatableObject
+public class GenBasicAddInput : GenBasic
 {
 
     /// <summary>
@@ -25,6 +25,12 @@ public class GenBasicAddInput : GenBasic, IValidatableObject
     /// </summary>
     [Required(ErrorMessage = "BbTable不能为空")]
     public override string DbTable { get; set; }
+
+    /// <summary>
+    /// 实体名称
+    /// </summary>
+    [Required(ErrorMessage = "EntityName不能为空")]
+    public override string EntityName { get; set; }
 
 
 
@@ -91,6 +97,24 @@ public class GenBasicAddInput : GenBasic, IValidatableObject
     [Required(ErrorMessage = "GridWhether不能为空")]
     public override string GridWhether { get; set; }
 
+    /// <summary>
+    /// 前端路径
+    /// </summary>
+    [Required(ErrorMessage = "FrontedPath不能为空")]
+    public override string FrontedPath { get; set; }
+
+    /// <summary>
+    /// 服务层
+    /// </summary>
+    [Required(ErrorMessage = "ServicePosition不能为空")]
+    public override string ServicePosition { get; set; }
+
+    /// <summary>
+    /// 控制器层
+    /// </summary>
+    [Required(ErrorMessage = "ControllerPosition不能为空")]
+    public override string ControllerPosition { get; set; }
+
 
     /// <summary>
     /// 排序
@@ -104,18 +128,7 @@ public class GenBasicAddInput : GenBasic, IValidatableObject
     [Required(ErrorMessage = "AuthorName不能为空")]
     public override string AuthorName { get; set; }
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        //如果是项目中生成
-        if (GenerateType == GenConst.Pro)
-        {
-            if (string.IsNullOrEmpty(FrontedPath) || string.IsNullOrEmpty(ServicePosition) || string.IsNullOrEmpty(ControllerPosition))
-            {
-                yield return new ValidationResult("前端生成路径或后端代码存放位置不能为空", new[] { nameof(FrontedPath), nameof(ServicePosition), nameof(ControllerPosition) });
-            }
-        }
 
-    }
 }
 
 /// <summary>
