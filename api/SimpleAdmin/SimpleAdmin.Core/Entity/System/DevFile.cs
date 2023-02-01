@@ -55,7 +55,7 @@ public class DevFile : DataEntityBase
     /// <summary>
     /// 图片缩略图 
     ///</summary>
-    [SugarColumn(ColumnName = "Thumbnail", ColumnDescription = "图片缩略图", IsNullable = true, ColumnDataType = SqlsugarConst.NVarCharMax)]
+    [SugarColumn(ColumnName = "Thumbnail", ColumnDescription = "图片缩略图", IsNullable = true, ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public string Thumbnail { get; set; }
 
 }

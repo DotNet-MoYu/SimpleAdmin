@@ -31,7 +31,7 @@ public class SysRole : DataEntityBase
     /// <summary>
     /// 默认数据范围
     ///</summary>
-    [SugarColumn(ColumnName = "DefaultDataScope", ColumnDescription = "默认数据范围", IsJson = true, ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = false)]
+    [SugarColumn(ColumnName = "DefaultDataScope", ColumnDescription = "默认数据范围", IsJson = true, ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = false)]
     public virtual DefaultDataScope DefaultDataScope { get; set; }
 
     /// <summary>

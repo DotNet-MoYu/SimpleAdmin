@@ -17,12 +17,12 @@ public class ClientUser : DataEntityBase
     /// <summary>
     /// 头像 
     ///</summary>
-    [SugarColumn(ColumnName = "Avatar", ColumnDescription = "头像", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "Avatar", ColumnDescription = "头像", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string Avatar { get; set; }
     /// <summary>
     /// 签名 
     ///</summary>
-    [SugarColumn(ColumnName = "Signature", ColumnDescription = "签名", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "Signature", ColumnDescription = "签名", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string Signature { get; set; }
     /// <summary>
     /// 账号 

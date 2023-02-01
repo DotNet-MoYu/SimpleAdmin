@@ -16,7 +16,7 @@ public abstract class PrimaryKeyEntity
     /// <summary>
     /// 拓展信息
     /// </summary>
-    [SugarColumn(ColumnName = "ExtJson", ColumnDescription = "扩展信息", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "ExtJson", ColumnDescription = "扩展信息", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public virtual string ExtJson { get; set; }
 
 }

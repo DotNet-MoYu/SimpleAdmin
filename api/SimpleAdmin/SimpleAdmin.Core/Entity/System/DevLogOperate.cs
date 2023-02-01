@@ -16,7 +16,7 @@ public class DevLogOperate : DevLogVisit
     /// <summary>
     /// 具体消息 
     ///</summary>
-    [SugarColumn(ColumnName = "ExeMessage", ColumnDescription = "具体消息", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "ExeMessage", ColumnDescription = "具体消息", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ExeMessage { get; set; }
 
     /// <summary>
@@ -37,16 +37,16 @@ public class DevLogOperate : DevLogVisit
     /// <summary>
     /// 请求地址 
     ///</summary>
-    [SugarColumn(ColumnName = "ReqUrl", ColumnDescription = "请求地址", ColumnDataType = SqlsugarConst.NVarCharMax)]
+    [SugarColumn(ColumnName = "ReqUrl", ColumnDescription = "请求地址", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public string ReqUrl { get; set; }
     /// <summary>
     /// 请求参数 
     ///</summary>
-    [SugarColumn(ColumnName = "ParamJson", ColumnDescription = "请求参数", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "ParamJson", ColumnDescription = "请求参数", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ParamJson { get; set; }
     /// <summary>
     /// 返回结果 
     ///</summary>
-    [SugarColumn(ColumnName = "ResultJson", ColumnDescription = "返回结果", ColumnDataType = SqlsugarConst.NVarCharMax, IsNullable = true)]
+    [SugarColumn(ColumnName = "ResultJson", ColumnDescription = "返回结果", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ResultJson { get; set; }
 }

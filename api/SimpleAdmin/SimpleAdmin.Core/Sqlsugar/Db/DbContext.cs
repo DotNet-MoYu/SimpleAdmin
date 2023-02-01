@@ -54,15 +54,15 @@ public static class DbContext
             //自定义类型多库兼容
             EntityService = (c, p) =>
              {
-                 //如果是mysql并且是varchar(max)
-                 if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
-                 {
-                     p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
-                 }
-                 else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
-                 {
-                     p.DataType = SqlsugarConst.Text;//转成sqlite的text
-                 }
+                 //如果是mysql并且是varchar(max) 已弃用
+                 //if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
+                 //{
+                 //    p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
+                 //}
+                 //else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
+                 //{
+                 //    p.DataType = SqlsugarConst.Text;//转成sqlite的text
+                 //}
                  //默认不写IsNullable为非必填
                  //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
                  //    p.IsNullable = true;

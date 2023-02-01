@@ -15,7 +15,7 @@ public class DevConfig : BaseEntity
     /// <summary>
     /// 配置值 
     ///</summary>
-    [SugarColumn(ColumnName = "ConfigValue", ColumnDescription = "配置值", ColumnDataType = SqlsugarConst.NVarCharMax)]
+    [SugarColumn(ColumnName = "ConfigValue", ColumnDescription = "配置值", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public virtual string ConfigValue { get; set; }
     /// <summary>
     /// 分类 
