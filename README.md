@@ -53,8 +53,8 @@ SqlSugar是一款老牌.NET开源ORM框架，由果糖大数据科技团队维�
 //获取数据范围
 var dataScope = await _sysUserService.GetLoginUserApiDataScope();
 ```
-#### 🔧支持代码生成器
-代码生成功能通过选择数据库表，完成单表的增删改查管理功能，可以生成包括前端、后端、和SQL语句，同时支持ZIP压缩包和直接生成到项目两种模式，解放你的双手，大大减少了重复代码的编写,无需复制提升开发效率。
+#### 🔧代码生成器
+大部分项目里，其实有很多代码是重复的，几乎每个模块都有 CRUD 增删改查的功能，而这些功能的实现代码往往是大同小异的。如果这些功能都要自己去手写，非常无聊枯燥，浪费时间且效率很低，还可能会写错。代码生成功能通过选择数据库表，完成单表的增删改查管理功能，可以生成包括前端、后端、和SQL语句，同时支持ZIP压缩包和直接生成到项目两种模式，解放你的双手，大大减少了重复代码的编写,无需复制提升开发效率。
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/代码生成.png"/>
 
 #### 📖详细的注释和文档
@@ -132,6 +132,6 @@ npm run dev
 ## 💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码尊重小诺开源协议，属于非开源项目，如需获取请[加我](https://qm.qq.com/cgi-bin/qm/qr?k=of373DKaD1xCdNfz8DskOwauCguHfMrS&noverify=0&personal_qrcode_source=4)获取授权，或者直接咸鱼搜simpleadmin
+- 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码授权请[加我](https://qm.qq.com/cgi-bin/qm/qr?k=of373DKaD1xCdNfz8DskOwauCguHfMrS&noverify=0&personal_qrcode_source=4)获取授权，或者直接咸鱼搜simpleadmin
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
