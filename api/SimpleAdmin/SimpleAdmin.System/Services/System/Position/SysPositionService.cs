@@ -148,6 +148,21 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         var sysPositions = await GetListAsync();//获取全部
         if (sysPositions.Any(it => it.OrgId == sysPosition.OrgId && it.Name == sysPosition.Name && it.Id != sysPosition.Id))//判断同级是否有名称重复的
             throw Oops.Bah($"存在重复的{name}:{sysPosition.Name}");
+        if (sysPosition.Id > 0)//如果ID大于0表示编辑
+        {
+            var postion = sysPositions.Where(it => it.Id == sysPosition.Id).FirstOrDefault();//获取当前职位
+            if (postion != null)
+            {
+                if (postion.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
+                {
+                    if (await Context.Queryable<SysUser>().Where(it => it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson, sysPosition.Id.ToString())).AnyAsync())//如果职位下有用户
+                        throw Oops.Bah($"该{name}下已存在用户,请先删除{name}下的用户");
+                }
+            }
+            else
+                throw Oops.Bah($"{name}不存在");
+
+        }
     }
     #endregion
 }
