@@ -22,7 +22,7 @@ public class SM2Util
     /// <returns>密文</returns>
     public static string Encrypt(string plainText)
     {
-        return SM2CryptoUtil.Encrypt(PrivateKey, plainText);
+        return SM2CryptoUtil.Encrypt(PublicKey, plainText);
     }
 
     /// <summary>

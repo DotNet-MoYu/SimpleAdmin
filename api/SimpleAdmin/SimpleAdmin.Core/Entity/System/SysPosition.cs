@@ -5,7 +5,6 @@
 ///</summary>
 [SugarTable("sys_position", TableDescription = "职位表")]
 [Tenant(SqlsugarConst.DB_Default)]
-[CodeGen]
 public class SysPosition : DataEntityBase
 {
     /// <summary>
