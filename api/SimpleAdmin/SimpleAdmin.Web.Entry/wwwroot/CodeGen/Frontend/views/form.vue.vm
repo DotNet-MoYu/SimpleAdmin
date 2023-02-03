@@ -132,7 +132,7 @@ var selectCount=selectColumns.Count;//选择框数量
         let recordData = cloneDeep(record)
 		@foreach (var column in addOrUpdateColumns){//遍历增改字段
 		@if(column.EffectType=="checkbox"){//如果是checkbox
-        @:recordData.@column.FieldNameFirstLower= JSON.parse(recordData.@column.FieldNameFirstLower)
+        @:if (recordData.@column.FieldNameFirstLower) recordData.@column.FieldNameFirstLower= JSON.parse(recordData.@column.FieldNameFirstLower)
 		}
 		}
         formData.value = Object.assign({}, recordData)
