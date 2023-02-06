@@ -55,6 +55,19 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         await _sysOrgService.Edit(input, SimpleAdminConst.BizOrg);
     }
 
+    /// <inheritdoc />
+    public async Task Copy(OrgCopyInput input)
+    {
+        //获取数据范围
+        var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        if (dataScope.Count > 0)//如果有机构
+        {
+            if (!dataScope.ContainsAll(input.Ids) || !dataScope.Contains(input.TargetId))//判断目标机构和需要复制的机构是否都在数据范围里面
+                throw Oops.Bah($"您没有权限复制这些机构");
+            await _sysOrgService.Copy(input);//复制操作
+        }
+
+    }
 
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input)

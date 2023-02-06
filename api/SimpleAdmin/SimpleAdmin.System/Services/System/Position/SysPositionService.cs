@@ -141,6 +141,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <param name="name">名称</param>
     private async Task CheckInput(SysPosition sysPosition, string name)
     {
+
         //所有分类放一个列表
         var positionCategorys = new List<string>() { CateGoryConst.Position_HIGH, CateGoryConst.Position_LOW, CateGoryConst.Position_MIDDLE };
         if (!positionCategorys.Contains(sysPosition.Category))

@@ -58,6 +58,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Copy(SimpleAdmin.System.OrgCopyInput)">
+            <summary>
+            复制组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.BizOrgController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除机构
@@ -201,6 +208,46 @@
             <summary>
             获取角色选择器
             </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.GenTestController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Page(SimpleAdmin.Application.GenTestPageInput)">
+            <summary>
+            测试分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
+            <summary>
+            添加测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edit(SimpleAdmin.Application.GenTestEditInput)">
+            <summary>
+            修改测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.AuthBController">
@@ -1031,6 +1078,13 @@
         <member name="M:SimpleAdmin.Web.Core.OrgController.Edit(SimpleAdmin.System.OrgEditInput)">
             <summary>
             修改组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Copy(SimpleAdmin.System.OrgCopyInput)">
+            <summary>
+            复制组织
             </summary>
             <param name="input"></param>
             <returns></returns>

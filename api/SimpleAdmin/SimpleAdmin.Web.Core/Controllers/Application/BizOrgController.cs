@@ -64,6 +64,19 @@ public class BizOrgController : IDynamicApiController
         await _orgService.Edit(input);
     }
 
+
+    /// <summary>
+    /// 复制组织
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("copy")]
+    [Description("复制组织")]
+    public async Task Copy(OrgCopyInput input)
+    {
+        await _orgService.Copy(input);
+    }
+
     /// <summary>
     /// 删除机构
     /// </summary>

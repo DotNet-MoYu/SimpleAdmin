@@ -57,6 +57,7 @@ public class OrgController : BaseController
         await _sysOrgService.Add(input);
     }
 
+
     /// <summary>
     /// 修改组织
     /// </summary>
@@ -67,6 +68,18 @@ public class OrgController : BaseController
     public async Task Edit([FromBody] OrgEditInput input)
     {
         await _sysOrgService.Edit(input);
+    }
+
+    /// <summary>
+    /// 复制组织
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("copy")]
+    [Description("复制组织")]
+    public async Task Copy(OrgCopyInput input)
+    {
+        await _sysOrgService.Copy(input);
     }
 
     /// <summary>

@@ -12,6 +12,14 @@ public interface IOrgService : ITransient
     /// <returns></returns>
     Task Add(OrgAddInput input);
 
+
+    /// <summary>
+    /// 复制机构
+    /// </summary>
+    /// <param name="input">机构复制参数</param>
+    /// <returns></returns>
+    Task Copy(OrgCopyInput input);
+
     /// <summary>
     /// 删除机构
     /// </summary>

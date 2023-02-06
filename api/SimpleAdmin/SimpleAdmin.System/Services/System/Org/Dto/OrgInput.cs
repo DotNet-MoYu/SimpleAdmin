@@ -38,3 +38,30 @@ public class OrgEditInput : OrgAddInput
     [MinValue(1, ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
+
+/// <summary>
+/// 组织复制参数
+/// </summary>
+public class OrgCopyInput
+{
+
+
+
+    /// <summary>
+    /// 目标ID
+    /// </summary>
+    public long TargetId { get; set; }
+
+
+    /// <summary>
+    /// 组织Id列表
+    /// </summary>
+    [Required(ErrorMessage = "Ids列表不能为空")]
+    public List<long>? Ids { get; set; }
+
+    /// <summary>
+    /// 是否包含下级
+    /// </summary>
+    public bool ContainsChild { get; set; } = false;
+
+}

@@ -22,6 +22,13 @@ public interface ISysOrgService : ITransient
     List<SysOrg> ConstrucOrgTrees(List<SysOrg> orgList, long parentId = 0);
 
     /// <summary>
+    /// 复制组织
+    /// </summary>
+    /// <param name="input">机构复制参数</param>
+    /// <returns></returns>
+    Task Copy(OrgCopyInput input);
+
+    /// <summary>
     /// 删除组织
     /// </summary>
     /// <param name="input">删除参数</param>

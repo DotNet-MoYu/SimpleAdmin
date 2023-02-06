@@ -909,6 +909,54 @@
       "UpdateUserId": "",
       "IsDelete": "0",
       "ExtJson": ""
+    },
+    {
+      "Id": "382969159073861",
+      "ParentId": "0",
+      "DictLabel": "是否",
+      "DictValue": "YES_NO",
+      "Category": "FRM",
+      "SortCode": "99",
+      "CreateTime": "2023-2-6 14:05:31.87",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": ""
+    },
+    {
+      "Id": "382969320693829",
+      "ParentId": "382969159073861",
+      "DictLabel": "是",
+      "DictValue": "true",
+      "Category": "FRM",
+      "SortCode": "99",
+      "CreateTime": "2023-2-6 14:06:11.33",
+      "UpdateTime": "2023-2-6 14:06:40.78",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "212725263002001",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": ""
+    },
+    {
+      "Id": "382969486618693",
+      "ParentId": "382969159073861",
+      "DictLabel": "否",
+      "DictValue": "false",
+      "Category": "FRM",
+      "SortCode": "99",
+      "CreateTime": "2023-2-6 14:06:51.84",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": ""
     }
   ]
 }
