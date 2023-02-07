@@ -22,7 +22,7 @@ public class BizOrgController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("tree")]
-    [Description("机构树查询")]
+    [DisplayName("机构树查询")]
     public async Task<dynamic> Tree()
     {
         return await _orgService.Tree();
@@ -34,7 +34,7 @@ public class BizOrgController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("page")]
-    [Description("机构分页查询")]
+    [DisplayName("机构分页查询")]
     public async Task<dynamic> Page([FromQuery] OrgPageInput input)
     {
         return await _orgService.Page(input);
@@ -46,7 +46,7 @@ public class BizOrgController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加机构")]
+    [DisplayName("添加机构")]
     public async Task Add([FromBody] OrgAddInput input)
     {
         await _orgService.Add(input);
@@ -58,7 +58,7 @@ public class BizOrgController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改机构")]
+    [DisplayName("修改机构")]
     public async Task Edit([FromBody] OrgEditInput input)
     {
         await _orgService.Edit(input);
@@ -71,7 +71,7 @@ public class BizOrgController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("copy")]
-    [Description("复制组织")]
+    [DisplayName("复制组织")]
     public async Task Copy(OrgCopyInput input)
     {
         await _orgService.Copy(input);
@@ -84,7 +84,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除机构")]
+    [DisplayName("删除机构")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _orgService.Delete(input);
@@ -95,7 +95,7 @@ public class BizOrgController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("orgTreeSelector")]
-    [Description("机构树选择器")]
+    [DisplayName("机构树选择器")]
     public async Task<dynamic> OrgTreeSelector()
     {
         return await _orgService.Tree();
@@ -107,7 +107,7 @@ public class BizOrgController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("userSelector")]
-    [Description("人员选择器")]
+    [DisplayName("人员选择器")]
     public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
     {
         return await _userService.UserSelector(input);

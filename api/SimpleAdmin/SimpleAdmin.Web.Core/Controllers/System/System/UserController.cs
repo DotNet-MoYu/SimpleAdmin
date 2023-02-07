@@ -81,7 +81,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加用户")]
+    [DisplayName("添加用户")]
     public async Task Add([FromBody] UserAddInput input)
     {
         await _sysUserService.Add(input);
@@ -94,7 +94,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改用户")]
+    [DisplayName("修改用户")]
     public async Task Edit([FromBody] UserEditInput input)
     {
         await _sysUserService.Edit(input);
@@ -107,7 +107,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [Description("删除用户")]
+    [DisplayName("删除用户")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _sysUserService.Delete(input);
@@ -119,7 +119,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("disableUser")]
-    [Description("禁用用户")]
+    [DisplayName("禁用用户")]
     public async Task DisableUser([FromBody] BaseIdInput input)
     {
         await _sysUserService.DisableUser(input);
@@ -131,7 +131,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("enableUser")]
-    [Description("启用用户")]
+    [DisplayName("启用用户")]
     public async Task EnableUser([FromBody] BaseIdInput input)
     {
         await _sysUserService.EnableUser(input);
@@ -143,7 +143,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("resetPassword")]
-    [Description("重置密码")]
+    [DisplayName("重置密码")]
     public async Task ResetPassword([FromBody] BaseIdInput input)
     {
         await _sysUserService.ResetPassword(input);
@@ -166,7 +166,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantRole")]
-    [Description("授权角色")]
+    [DisplayName("授权角色")]
     public async Task GrantRole([FromBody] UserGrantRoleInput input)
     {
         await _sysUserService.GrantRole(input);

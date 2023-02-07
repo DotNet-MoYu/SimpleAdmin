@@ -65,7 +65,7 @@ public class IndexController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("schedule/add")]
-    [Description("添加日程")]
+    [DisplayName("添加日程")]
     public async Task AddSchedule([FromBody] ScheduleAddInput input)
     {
         await _indexService.AddSchedule(input);
@@ -77,7 +77,7 @@ public class IndexController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("schedule/deleteSchedule")]
-    [Description("删除日程")]
+    [DisplayName("删除日程")]
     public async Task DeleteSchedule([FromBody] List<BaseIdInput> input)
     {
         await _indexService.DeleteSchedule(input);

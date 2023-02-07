@@ -51,7 +51,7 @@ public class OrgController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加组织")]
+    [DisplayName("添加组织")]
     public async Task Add([FromBody] OrgAddInput input)
     {
         await _sysOrgService.Add(input);
@@ -64,7 +64,7 @@ public class OrgController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改组织")]
+    [DisplayName("修改组织")]
     public async Task Edit([FromBody] OrgEditInput input)
     {
         await _sysOrgService.Edit(input);
@@ -76,7 +76,7 @@ public class OrgController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("copy")]
-    [Description("复制组织")]
+    [DisplayName("复制组织")]
     public async Task Copy(OrgCopyInput input)
     {
         await _sysOrgService.Copy(input);
@@ -89,7 +89,7 @@ public class OrgController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除组织")]
+    [DisplayName("删除组织")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _sysOrgService.Delete(input);

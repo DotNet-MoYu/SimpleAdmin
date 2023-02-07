@@ -32,7 +32,7 @@ public class MessageController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("send")]
-    [Description("发送站内信")]
+    [DisplayName("发送站内信")]
     public async Task Send([FromBody] MessageSendInput input)
     {
         await _messageService.Send(input);
@@ -55,7 +55,7 @@ public class MessageController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [Description("删除站内信")]
+    [DisplayName("删除站内信")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _messageService.Delete(input);

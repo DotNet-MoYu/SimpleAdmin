@@ -27,10 +27,10 @@ public sealed class LoggingMonitorComponent : IServiceComponent
                   var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
                   //操作名称默认是控制器名加方法名,自定义操作名称要在action上加Description特性
                   var option = $"{controllerActionDescriptor.ControllerName}/{controllerActionDescriptor.ActionName}";
-                  //获取特性
-                  var monitor = controllerActionDescriptor.MethodInfo.GetCustomAttribute<DescriptionAttribute>();
-                  if (monitor != null)//如果有LoggingMonitor特性
-                      option = monitor.Description;//则将操作名称赋值为控制器上写的title
+                  ////获取特性
+                  //var monitor = controllerActionDescriptor.MethodInfo.GetCustomAttribute<DescriptionAttribute>();
+                  //if (monitor != null)//如果有LoggingMonitor特性
+                  //    option = monitor.Description;//则将操作名称赋值为控制器上写的title
                   logContext.Set(LoggingConst.Operation, option);//传操作名称
                   logContext.Set(LoggingConst.Client, client);//客户端信息
                   logContext.Set(LoggingConst.Path, httpContext.Request.Path.Value);//请求地址

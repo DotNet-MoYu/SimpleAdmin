@@ -40,7 +40,7 @@ public class UserCenterController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("updateUserInfo")]
-    [Description("编辑个人信息")]
+    [DisplayName("编辑个人信息")]
     public async Task UpdateUserInfo([FromBody] UpdateInfoInput input)
     {
         await _userCenterService.UpdateUserInfo(input);
@@ -52,7 +52,7 @@ public class UserCenterController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("updateSignature")]
-    [Description("更新签名")]
+    [DisplayName("更新签名")]
     public async Task UpdateSignature([FromBody] UpdateSignatureInput input)
     {
         await _userCenterService.UpdateSignature(input);
@@ -74,7 +74,7 @@ public class UserCenterController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("updateUserWorkbench")]
-    [Description("编辑工作台")]
+    [DisplayName("编辑工作台")]
     public async Task UpdateUserWorkbench([FromBody] UpdateWorkbenchInput input)
     {
         await _userCenterService.UpdateWorkbench(input);

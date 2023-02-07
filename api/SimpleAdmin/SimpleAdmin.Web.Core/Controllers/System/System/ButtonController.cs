@@ -30,7 +30,7 @@ public class ButtonController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加按钮")]
+    [DisplayName("添加按钮")]
     public async Task Add([FromBody] ButtonAddInput input)
     {
         await _buttonService.Add(input);
@@ -42,7 +42,7 @@ public class ButtonController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改按钮")]
+    [DisplayName("修改按钮")]
     public async Task Edit([FromBody] ButtonEditInput input)
     {
         await _buttonService.Edit(input);
@@ -54,7 +54,7 @@ public class ButtonController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [Description("删除按钮")]
+    [DisplayName("删除按钮")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _buttonService.Delete(input);
@@ -66,7 +66,7 @@ public class ButtonController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("batch")]
-    [Description("新增按钮")]
+    [DisplayName("新增按钮")]
     public async Task Batch([FromBody] ButtonAddInput input)
     {
         await _buttonService.AddBatch(input);

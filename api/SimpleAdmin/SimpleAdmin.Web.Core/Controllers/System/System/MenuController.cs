@@ -56,7 +56,7 @@ public class MenuController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加菜单")]
+    [DisplayName("添加菜单")]
     public async Task Add([FromBody] MenuAddInput input)
     {
         await _menuService.Add(input);
@@ -68,7 +68,7 @@ public class MenuController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("编辑菜单")]
+    [DisplayName("编辑菜单")]
     public async Task Edit([FromBody] MenuEditInput input)
     {
         await _menuService.Edit(input);
@@ -91,7 +91,7 @@ public class MenuController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [Description("删除菜单")]
+    [DisplayName("删除菜单")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _menuService.Delete(input);
@@ -103,7 +103,7 @@ public class MenuController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("changeModule")]
-    [Description("更改模块")]
+    [DisplayName("更改模块")]
     public async Task ChangeModule([FromBody] MenuChangeModuleInput input)
     {
         await _menuService.ChangeModule(input);

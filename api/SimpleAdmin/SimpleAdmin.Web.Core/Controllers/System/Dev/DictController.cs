@@ -41,7 +41,7 @@ public class DictController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加字典")]
+    [DisplayName("添加字典")]
     public async Task Add([FromBody] DictAddInput input)
     {
         await _dictService.Add(input);
@@ -53,7 +53,7 @@ public class DictController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改字典")]
+    [DisplayName("修改字典")]
     public async Task Edit([FromBody] DictEditInput input)
     {
         await _dictService.Edit(input);
@@ -66,7 +66,7 @@ public class DictController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除字典")]
+    [DisplayName("删除字典")]
     public async Task Delete([FromBody] DictDeleteInput input)
     {
         await _dictService.Delete(input);

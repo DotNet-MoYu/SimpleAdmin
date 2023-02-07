@@ -52,7 +52,7 @@ public class ConfigController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加配置")]
+    [DisplayName("添加配置")]
     public async Task Add([FromBody] ConfigAddInput input)
     {
         await _configService.Add(input);
@@ -64,7 +64,7 @@ public class ConfigController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改配置")]
+    [DisplayName("修改配置")]
     public async Task Edit([FromBody] ConfigEditInput input)
     {
         await _configService.Edit(input);
@@ -77,7 +77,7 @@ public class ConfigController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除配置")]
+    [DisplayName("删除配置")]
     public async Task Delete([FromBody] ConfigDeleteInput input)
     {
         await _configService.Delete(input);
@@ -89,7 +89,7 @@ public class ConfigController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpPost("editBatch")]
-    [Description("修改配置")]
+    [DisplayName("修改配置")]
     public async Task EditBatch([FromBody] List<DevConfig> devConfigs)
     {
         await _configService.EditBatch(devConfigs);

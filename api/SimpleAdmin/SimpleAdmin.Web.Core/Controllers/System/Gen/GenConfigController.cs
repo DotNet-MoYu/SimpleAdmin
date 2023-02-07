@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("编辑代码生成详细")]
+        [DisplayName("编辑代码生成详细")]
         [HttpPost("editBatch")]
         public async Task EditBatch([FromBody] List<GenConfig> input)
         {

@@ -1338,6 +1338,16 @@
             请求信息格式化
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.DisplayTitle">
+            <summary>
+            操作名称
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Web.Core.LoggingMonitorJson.ControllerName">
             <summary>
             控制器名

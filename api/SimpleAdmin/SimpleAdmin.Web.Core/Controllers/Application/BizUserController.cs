@@ -26,7 +26,7 @@ public class BizUserController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("orgTreeSelector")]
-    [Description("机构树查询")]
+    [DisplayName("机构树查询")]
     public async Task<dynamic> OrgTreeSelector()
     {
         return await _orgService.Tree();
@@ -40,7 +40,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("page")]
-    [Description("人员分页查询")]
+    [DisplayName("人员分页查询")]
     public async Task<dynamic> Page([FromQuery] UserPageInput input)
     {
         return await _userService.Page(input);
@@ -51,7 +51,7 @@ public class BizUserController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("userSelector")]
-    [Description("人员选择器")]
+    [DisplayName("人员选择器")]
     public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
     {
         return await _userService.UserSelector(input);
@@ -63,7 +63,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("positionSelector")]
-    [Description("岗位选择器")]
+    [DisplayName("岗位选择器")]
     public async Task<dynamic> PositionSelector([FromQuery] PositionSelectorInput input)
     {
         return await _positionService.PositionSelector(input);
@@ -76,7 +76,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加人员")]
+    [DisplayName("添加人员")]
     public async Task Add([FromBody] UserAddInput input)
     {
         await _userService.Add(input);
@@ -89,7 +89,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改人员")]
+    [DisplayName("修改人员")]
     public async Task Edit([FromBody] UserEditInput input)
     {
         await _userService.Edit(input);
@@ -102,7 +102,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("delete")]
-    [Description("删除人员")]
+    [DisplayName("删除人员")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _userService.Delete(input);
@@ -114,7 +114,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("disableUser")]
-    [Description("禁用人员")]
+    [DisplayName("禁用人员")]
     public async Task DisableUser([FromBody] BaseIdInput input)
     {
         await _userService.DisableUser(input);
@@ -126,7 +126,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("enableUser")]
-    [Description("启用人员")]
+    [DisplayName("启用人员")]
     public async Task EnableUser([FromBody] BaseIdInput input)
     {
         await _userService.EnableUser(input);
@@ -138,7 +138,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("resetPassword")]
-    [Description("重置密码")]
+    [DisplayName("重置密码")]
     public async Task ResetPassword([FromBody] BaseIdInput input)
     {
         await _userService.ResetPassword(input);
@@ -150,7 +150,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("ownRole")]
-    [Description("获取人员拥有角色")]
+    [DisplayName("获取人员拥有角色")]
     public async Task<dynamic> OwnRole([FromQuery] BaseIdInput input)
     {
         return await _userService.OwnRole(input);
@@ -162,7 +162,7 @@ public class BizUserController : IDynamicApiController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantRole")]
-    [Description("授权角色")]
+    [DisplayName("授权角色")]
     public async Task GrantRole([FromBody] UserGrantRoleInput input)
     {
         await _userService.GrantRole(input);
@@ -173,7 +173,7 @@ public class BizUserController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpGet("roleSelector")]
-    [Description("角色选择器")]
+    [DisplayName("角色选择器")]
     public async Task<dynamic> RoleSelector([FromQuery] RoleSelectorInput input)
     {
         return await _userService.RoleSelector(input);

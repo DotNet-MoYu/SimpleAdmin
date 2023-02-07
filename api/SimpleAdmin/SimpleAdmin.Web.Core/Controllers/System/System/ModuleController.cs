@@ -30,7 +30,7 @@ public class ModuleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加模块")]
+    [DisplayName("添加模块")]
     public async Task Add([FromBody] ModuleAddInput input)
     {
         await _moduleService.Add(input);
@@ -42,7 +42,7 @@ public class ModuleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改模块")]
+    [DisplayName("修改模块")]
     public async Task Edit([FromBody] ModuleEditInput input)
     {
         await _moduleService.Edit(input);
@@ -55,7 +55,7 @@ public class ModuleController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除模块")]
+    [DisplayName("删除模块")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _moduleService.Delete(input);

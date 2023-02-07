@@ -53,7 +53,7 @@ public class SessionController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost("b/exitSession")]
-    [Description("强退B端会话")]
+    [DisplayName("强退B端会话")]
 
     public async Task ExitSessionForB([FromBody] BaseIdInput input)
     {
@@ -66,7 +66,7 @@ public class SessionController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost("c/exitSession")]
-    [Description("强退C端会话")]
+    [DisplayName("强退C端会话")]
 
     public async Task ExitSessionForC([FromBody] BaseIdInput input)
     {
@@ -78,7 +78,7 @@ public class SessionController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost("b/ExitToken")]
-    [Description("强退B端Token")]
+    [DisplayName("强退B端Token")]
 
     public async Task ExitTokenForB([FromBody] ExitTokenInput input)
     {
@@ -90,7 +90,7 @@ public class SessionController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost("c/ExitToken")]
-    [Description("强退C端Token")]
+    [DisplayName("强退C端Token")]
 
     public async Task ExitTokenForC([FromBody] ExitTokenInput input)
     {

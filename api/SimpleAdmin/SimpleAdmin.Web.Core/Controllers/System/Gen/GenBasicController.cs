@@ -52,7 +52,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("添加代码生成")]
+        [DisplayName("添加代码生成")]
         [HttpPost("add")]
         public async Task<dynamic> Add([FromBody] GenBasicAddInput input)
         {
@@ -64,7 +64,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("编辑代码生成基础")]
+        [DisplayName("编辑代码生成基础")]
         [HttpPost("edit")]
         public async Task<dynamic> Edit([FromBody] GenBasicEditInput input)
         {
@@ -76,7 +76,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("删除代码生成基础")]
+        [DisplayName("删除代码生成基础")]
         [HttpPost("delete")]
         public async Task Delete([FromBody] List<BaseIdInput> input)
         {
@@ -100,7 +100,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("执行代码生成(本地)")]
+        [DisplayName("执行代码生成(本地)")]
         [HttpPost("execGenPro")]
         public async Task ExecGenPro([FromBody] BaseIdInput input)
         {
@@ -112,7 +112,7 @@
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [Description("执行代码生成(压缩包)")]
+        [DisplayName("执行代码生成(压缩包)")]
         [HttpGet("execGenZip")]
         public async Task<IActionResult> ExecGenZip([FromQuery] BaseIdInput input)
         {

@@ -36,7 +36,7 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <param name="File"></param>
         /// <returns></returns>
         [HttpPost("uploadLocal")]
-        [Description("上传本地文件")]
+        [DisplayName("上传本地文件")]
         [DisableRequestSizeLimit]
         public async Task UploadLocal([FromForm] IFormFile File)
         {
@@ -49,7 +49,7 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <param name="File"></param>
         /// <returns></returns>
         [HttpPost("uploadMinio")]
-        [Description("上传MINIO文件")]
+        [DisplayName("上传MINIO文件")]
         [DisableRequestSizeLimit]
 
         public async Task UploadMinio([FromForm] IFormFile File)
@@ -63,7 +63,7 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost("delete")]
-        [Description("删除文件")]
+        [DisplayName("删除文件")]
         public async Task Delete([FromBody] List<BaseIdInput> input)
         {
             await _fileService.Delete(input);
@@ -75,7 +75,7 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Dev
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpGet("download")]
-        [Description("下载文件")]
+        [DisplayName("下载文件")]
         public async Task<IActionResult> DownLoad([FromQuery] BaseIdInput input)
         {
             return await _fileService.Download(input);

@@ -18,7 +18,7 @@ public class PositionController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("page")]
-    [Description("职位分页查询")]
+    [DisplayName("职位分页查询")]
     public async Task<dynamic> Page([FromQuery] PositionPageInput input)
     {
         return await _sysPositionService.Page(input);
@@ -30,7 +30,7 @@ public class PositionController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加职位")]
+    [DisplayName("添加职位")]
     public async Task Add([FromBody] PositionAddInput input)
     {
         await _sysPositionService.Add(input);
@@ -42,7 +42,7 @@ public class PositionController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改职位")]
+    [DisplayName("修改职位")]
     public async Task Edit([FromBody] PositionEditInput input)
     {
         await _sysPositionService.Edit(input);
@@ -55,7 +55,7 @@ public class PositionController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除职位")]
+    [DisplayName("删除职位")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _sysPositionService.Delete(input);

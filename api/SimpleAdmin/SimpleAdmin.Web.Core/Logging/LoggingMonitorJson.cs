@@ -6,6 +6,18 @@
 public class LoggingMonitorJson
 {
 
+
+
+    /// <summary>
+    /// 标题
+    /// </summary>
+    public string Title { get; set; }
+
+    /// <summary>
+    /// 操作名称
+    /// </summary>
+    public string DisplayTitle { get; set; }
+
     /// <summary>
     /// 控制器名
     /// </summary>

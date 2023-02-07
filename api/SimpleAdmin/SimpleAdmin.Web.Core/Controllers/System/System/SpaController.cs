@@ -30,7 +30,7 @@ public class SpaController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加单页")]
+    [DisplayName("添加单页")]
     public async Task Add([FromBody] SpaAddInput input)
     {
         await _spaService.Add(input);
@@ -42,7 +42,7 @@ public class SpaController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改单页")]
+    [DisplayName("修改单页")]
     public async Task Edit([FromBody] SpaEditInput input)
     {
         await _spaService.Edit(input);
@@ -55,7 +55,7 @@ public class SpaController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除单页")]
+    [DisplayName("删除单页")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _spaService.Delete(input);

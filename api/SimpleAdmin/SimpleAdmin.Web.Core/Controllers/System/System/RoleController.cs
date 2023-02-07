@@ -37,7 +37,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("add")]
-    [Description("添加角色")]
+    [DisplayName("添加角色")]
     public async Task Add([FromBody] RoleAddInput input)
     {
         await _roleService.Add(input);
@@ -49,7 +49,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("edit")]
-    [Description("修改角色")]
+    [DisplayName("修改角色")]
     public async Task Edit([FromBody] RoleEditInput input)
     {
         await _roleService.Edit(input);
@@ -62,7 +62,7 @@ public class RoleController : BaseController
     /// <returns></returns>
 
     [HttpPost("delete")]
-    [Description("删除角色")]
+    [DisplayName("删除角色")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _roleService.Delete(input);
@@ -95,7 +95,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantResource")]
-    [Description("角色授权")]
+    [DisplayName("角色授权")]
     public async Task GrantResource([FromBody] GrantResourceInput input)
     {
         await _roleService.GrantResource(input);
@@ -129,7 +129,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantPermission")]
-    [Description("角色授权")]
+    [DisplayName("角色授权")]
     public async Task GrantPermission([FromBody] GrantPermissionInput input)
     {
         await _roleService.GrantPermission(input);
@@ -172,7 +172,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantUser")]
-    [Description("角色授权")]
+    [DisplayName("角色授权")]
     public async Task GrantUser([FromBody] GrantUserInput input)
     {
         await _roleService.GrantUser(input);
