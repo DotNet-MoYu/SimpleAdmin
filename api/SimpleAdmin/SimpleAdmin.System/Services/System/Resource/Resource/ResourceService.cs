@@ -173,8 +173,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                     if (ignoreRolePermission == null)//如果是空的代表需要数据权限
                     {
                         //获取接口描述
-                        var description = menthod.GetCustomAttribute<DescriptionAttribute>();
-                        if (description != null)
+                        var displayName = menthod.GetCustomAttribute<DisplayNameAttribute>();
+                        if (displayName != null)
                         {
                             //默认路由名称
                             var apiRoute = StringHelper.FirstCharToLower(menthod.Name);
@@ -190,7 +190,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                                     apiRoute = requestPost.Template;
                             }
                             apiRoute = route.Template + $"/{apiRoute}";
-                            var apiName = description.Description;//如果描述不为空则接口名称用描述的名称
+                            var apiName = displayName.DisplayName;//如果描述不为空则接口名称用描述的名称
                             //合并
                             var permissionName = apiRoute + $"[{apiName}]";
                             //添加到权限列表
