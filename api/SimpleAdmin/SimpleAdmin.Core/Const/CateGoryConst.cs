@@ -216,7 +216,7 @@ public class CateGoryConst
     /// <summary>
     /// 公告
     /// </summary>
-    public const string Message_NOTICE = "INFORM";
+    public const string Message_NOTICE = "NOTICE";
 
     #endregion
 
