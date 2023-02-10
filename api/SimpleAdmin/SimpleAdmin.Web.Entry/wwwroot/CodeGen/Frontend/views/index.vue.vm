@@ -142,7 +142,7 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     :row-selection="options.rowSelection"
     :tool-config="toolConfig"
   >
-    <template #operator class="table-operator">
+    <template #operator>
       <a-space>
         <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
         <template #icon><plus-outlined /></template>新增</a-button>
