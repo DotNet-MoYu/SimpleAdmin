@@ -116,7 +116,9 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var names = new List<string>();//结果集
         //获取所有程序集名称
-        var assemblies = App.Assemblies.Where(it => it.FullName.StartsWith("SimpleAdmin")).Select(it => it.FullName).ToList();
+        var assemblies = App.Assemblies
+            .Where(it => !it.FullName.StartsWith("Furion"))
+            .Select(it => it.FullName).ToList();
         assemblies.ForEach(it => names.Add(it.Split(",")[0]));//根据逗号分割取第一个
         return names;
     }
@@ -159,6 +161,10 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             });
             sortCode++;
         });
+        if (!genConfigs.Any(it => it.IsPrimarykey == GenConst.Yes))//判断是否有主键
+        {
+            throw Oops.Bah("要生成的表必须有主键");
+        }
         //事务
         var result = await itenant.UseTranAsync(async () =>
         {
