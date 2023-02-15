@@ -125,7 +125,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var opAccount = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
-        var paramJson = loggingMonitor.Parameters == null ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
+        var paramJson = (loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0) ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
         //获取结果json字符串
         var resultJson = loggingMonitor.ReturnInformation.Value == null ? null : loggingMonitor.ReturnInformation.Value.ToJsonString();
 
