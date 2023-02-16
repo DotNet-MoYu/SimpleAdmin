@@ -54,7 +54,12 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 		//时间
 		case "datepicker":
 		case "timepicker":
-        <a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		@if(@column.FieldNetType=="Date")
+		{
+        @:<a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD" />
+		}else{
+		@:<a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		}
 		break;
 		default:
 		<a-input v-model:value="searchFormState.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)"></a-input>
@@ -93,7 +98,12 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 		//时间
 		case "datepicker":
 		case "timepicker":
-        <a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		@if(@searchColumns[i].FieldNetType=="Date")
+		{
+        @:<a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD" />
+		}else{
+		@:<a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		}
 		break;
 		default:
 		<a-input v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" placeholder="请输入@(@searchColumns[i].FieldRemark)"></a-input>
@@ -166,6 +176,15 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
       <a-tag v-for="textValue in JSON.parse(record.@column.FieldNameFirstLower)" :key="textValue" color="green">{{ $TOOL.dictTypeData('@column.DictTypeCode', textValue) }}</a-tag>
       </template>
       break;
+	  //日期
+	  case "datepicker":
+	  @if(@column.FieldNetType=="Date")
+	  {
+      @:<template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+      @:    {{ record.@(@column.FieldNameFirstLower) && record.@(@column.FieldNameFirstLower) .substr(0, 10) }}
+      @:</template>
+      }
+	  break;
 	}
 	}
       <template v-if="column.dataIndex === 'action'">
