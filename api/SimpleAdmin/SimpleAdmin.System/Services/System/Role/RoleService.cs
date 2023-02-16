@@ -342,7 +342,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         var result = await itenant.UseTranAsync(async () =>
        {
            var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
-           await relationRep.DeleteAsync(it => it.TargetId == input.Id.ToString() && it.Category == CateGoryConst.Relation_SYS_USER_HAS_ROLE);//删除老的
+           var targetId = input.Id.ToString();//目标ID转string
+           await relationRep.DeleteAsync(it => it.TargetId == targetId && it.Category == CateGoryConst.Relation_SYS_USER_HAS_ROLE);//删除老的
            await relationRep.InsertRangeAsync(sysRelations);//添加新的
        });
         if (result.IsSuccess)//如果成功了
