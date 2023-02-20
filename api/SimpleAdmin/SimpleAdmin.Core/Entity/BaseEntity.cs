@@ -60,7 +60,7 @@ public class BaseEntity : PrimaryKeyEntity
     /// <summary>
     /// 更新人
     /// </summary>
-    [SugarColumn(ColumnDescription = "更新人", IsOnlyIgnoreUpdate = true, IsNullable = true)]
+    [SugarColumn(ColumnDescription = "更新人", IsOnlyIgnoreInsert = true, IsNullable = true)]
     public virtual string UpdateUser { get; set; }
 
     /// <summary>
