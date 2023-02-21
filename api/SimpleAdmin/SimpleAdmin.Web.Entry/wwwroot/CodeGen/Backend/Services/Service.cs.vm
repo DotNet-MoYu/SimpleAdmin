@@ -25,7 +25,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.ClassName)>, I@(@Mode
     {
         var query = Context.Queryable<@(@Model.EntityName)>()
                          @{PageWhereIf();}
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+                         //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
                          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
                          @{PageSortCode();}
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
