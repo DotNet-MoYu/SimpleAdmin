@@ -54,7 +54,7 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 		//时间
 		case "datepicker":
 		case "timepicker":
-		@if(@column.FieldNetType=="Date")
+		@if(@column.FieldNetType.ToLower()=="date")
 		{
         @:<a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD" />
 		}else{
@@ -98,7 +98,7 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 		//时间
 		case "datepicker":
 		case "timepicker":
-		@if(@searchColumns[i].FieldNetType=="Date")
+		@if(@searchColumns[i].FieldNetType.ToLower()=="date")
 		{
         @:<a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD" />
 		}else{
@@ -178,7 +178,7 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
       break;
 	  //日期
 	  case "datepicker":
-	  @if(@column.FieldNetType=="Date")
+	  @if(@column.FieldNetType.ToLower()=="date")
 	  {
       @:<template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
       @:    {{ record.@(@column.FieldNameFirstLower) && record.@(@column.FieldNameFirstLower) .substr(0, 10) }}

@@ -90,7 +90,7 @@ void PageWhereIf()
   foreach (var column in tableFieIds){//遍历字段
   if(column.QueryWhether=="Y")//判断是否查询
   {
-    if(@column.FieldNetType == "String")//判断是否是字符串类型
+    if(@column.FieldNetType.ToLower() == "string")//判断是否是字符串类型
     {
       switch (@column.QueryType)//遍历查询方式
       {
