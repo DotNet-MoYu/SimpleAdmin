@@ -38,6 +38,8 @@ public class SimpleAdminConst
 
     #endregion
 
+    #region 别称
+
     /// <summary>
     /// 组织
     /// </summary>
@@ -57,6 +59,12 @@ public class SimpleAdminConst
     /// 岗位
     /// </summary>
     public const string BizPos = "岗位";
+    #endregion
+
+    #region 文件地址
+
+    #endregion
+
 
 
 }

@@ -21,3 +21,6 @@ global using SimpleRedis;
 global using System.ComponentModel;
 global using Masuit.Tools.Core.Validator;
 global using System.IO;
+global using Magicodes.ExporterAndImporter.Core;
+global using Magicodes.ExporterAndImporter.Core.Models;
+global using Magicodes.ExporterAndImporter.Excel;

@@ -35,6 +35,28 @@ public interface IDictService : ITransient
     Task Edit(DictAddInput input);
 
     /// <summary>
+    /// 获取字典
+    /// </summary>
+    /// <param name="DictValue">字典</param>
+    /// <returns></returns>
+    Task<DevDict> GetDict(string DictValue);
+
+    /// <summary>
+    /// 根据字典DictValue获取字典值列表
+    /// </summary>
+    /// <param name="DictValue">字典值</param>
+    /// <param name="devDictList">字典列表</param>
+    /// <returns>字典值列表</returns>
+    Task<List<string>> GetValuesByDictValue(string DictValue, List<DevDict> devDictList = null);
+
+    /// <summary>
+    /// 根据字典DictValue列表获取对应字典值列表
+    /// </summary>
+    /// <param name="DictValues">字典值列表</param>
+    /// <returns></returns>
+    Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] DictValues);
+
+    /// <summary>
     /// 字典分页查询
     /// </summary>
     /// <param name="input">查询参数</param>

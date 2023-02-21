@@ -1,4 +1,5 @@
 ﻿using Furion.Extensions;
+using Magicodes.ExporterAndImporter.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using NewLife;
 using System.DrawingCore;
@@ -51,6 +52,25 @@ namespace SimpleAdmin.System
         }
 
         /// <inheritdoc/>
+        public FileStreamResult GetFileStreamResult(string path, string fileName, bool isPathFolder = false)
+        {
+            if (isPathFolder) path = path.CombinePath(fileName);
+            fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+            //文件转流
+            var result = new FileStreamResult(new FileStream(path, FileMode.Open), "application/octet-stream") { FileDownloadName = fileName };
+            return result;
+        }
+
+        /// <inheritdoc/>
+        public FileStreamResult GetFileStreamResult(byte[] byteArray, string fileName)
+        {
+            fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+            //文件转流
+            var result = new FileStreamResult(new MemoryStream(byteArray), "application/octet-stream") { FileDownloadName = fileName };
+            return result;
+        }
+
+        /// <inheritdoc/>
         public async Task<FileStreamResult> Download(BaseIdInput input)
         {
             var devFile = await GetByIdAsync(input.Id);
@@ -58,8 +78,7 @@ namespace SimpleAdmin.System
             {
                 if (devFile.Engine != DevDictConst.FILE_ENGINE_LOCAL)
                     throw Oops.Bah($"非本地文件不支持此方式下载");
-                var fileName = HttpUtility.UrlEncode(devFile.Name, Encoding.GetEncoding("UTF-8"));
-                var result = new FileStreamResult(new FileStream(devFile.StoragePath, FileMode.Open), "application/octet-stream") { FileDownloadName = fileName };
+                var result = GetFileStreamResult(devFile.StoragePath, devFile.Name);
                 return result;
             }
             else
@@ -68,6 +87,74 @@ namespace SimpleAdmin.System
             }
 
         }
+
+        /// <inheritdoc/>
+        public void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null)
+        {
+
+            if (file == null) throw Oops.Bah("文件不能为空");
+            if (file.Length > maxSzie * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSzie}M");
+            var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1]; // 文件后缀
+            string[] allowTypeS = allowTypes == null ? new string[] { "xlsx" } : allowTypes;//允许上传的文件类型
+            if (!allowTypeS.Contains(fileSuffix)) throw Oops.Bah(errorMessage: "文件格式错误");
+
+        }
+
+        /// <inheritdoc/>
+        public ImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult) where T : class
+        {
+            if (importResult.Data == null)
+                throw Oops.Bah("文件数据格式有误,请重新导入!");
+            if (importResult.Exception != null) throw Oops.Bah("导入异常,请检查文件格式!");
+            ////遍历模板错误
+            importResult.TemplateErrors.ForEach(error =>
+            {
+                if (error.Message.Contains("not found")) throw Oops.Bah($"列[{error.RequireColumnName}]未找到");
+                else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
+
+            });
+
+
+            //导入结果输出
+            var importPreview = new ImportPreviewOutput<T>() { HasError = importResult.HasError, Data = importResult.Data.ToList() };
+            Dictionary<string, string> headerMap = new Dictionary<string, string>();
+            //遍历导入的表头列表信息
+            importResult.ImporterHeaderInfos.ForEach(it =>
+            {
+                headerMap.Add(it.Header.Name, it.PropertyName);
+                var tableColumns = new TableColumns { Title = it.Header.Name, DataIndex = it.PropertyName.FirstCharToLower() };//定义表头
+                var antTableAttribute = it.PropertyInfo.GetCustomAttribute<AntTableAttribute>();//获取表格特性
+                if (antTableAttribute != null)
+                {
+                    tableColumns.Date = antTableAttribute.IsDate;
+                    tableColumns.Ellipsis = antTableAttribute.Ellipsis;
+                    tableColumns.Width = antTableAttribute.Width;
+                }
+                importPreview.TableColumns.Add(tableColumns);//添加到表头
+            });
+            //遍历错误列,将错误字典中的中文改成英文跟实体对应
+            importResult.RowErrors.ForEach(row =>
+            {
+                IDictionary<string, string> fieldErrors = new Dictionary<string, string>();//定义字典
+                //遍历错误列,赋值给新的字典
+                row.FieldErrors.ForEach(it =>
+                {
+                    fieldErrors.Add(headerMap[it.Key], it.Value);
+                });
+                row.FieldErrors = fieldErrors;//替换新的字典
+            });
+            return importPreview;
+
+        }
+
+
+        /// <inheritdoc/>
+        public string GetTemplateFolder()
+        {
+            var folder = App.WebHostEnvironment.WebRootPath.CombinePath("Template");
+            return folder;
+        }
+
 
 
         #region 方法
@@ -169,7 +256,7 @@ namespace SimpleAdmin.System
                 var fileObjectName = $"{fileId}{fileSuffix}";//存储后的文件名
                 var fileName = Path.Combine(filePath, fileObjectName);//获取文件全路局
                 fileName = fileName.Replace("\\", "/");//格式化一系
-                //存储文件
+                                                       //存储文件
                 using (var stream = File.Create(Path.Combine(filePath, fileObjectName)))
                 {
                     await file.CopyToAsync(stream);

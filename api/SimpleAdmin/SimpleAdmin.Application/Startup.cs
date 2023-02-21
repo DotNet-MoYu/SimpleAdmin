@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.Application;
+﻿
+
+namespace SimpleAdmin.Application;
 
 public class Startup : AppStartup
 {

@@ -12,6 +12,31 @@ namespace SimpleAdmin.Core;
 public class DevDictConst
 {
     #region 系统字典
+    /// <summary>
+    /// 性别
+    /// </summary>
+    public const string GENDER = "GENDER";
+
+    /// <summary>
+    /// 名族
+    /// </summary>
+    public const string NATION = "NATION";
+
+
+    /// <summary>
+    /// 用户证件类型
+    /// </summary>
+    public const string IDCARD_TYPE = "IDCARD_TYPE";
+
+
+    /// <summary>
+    /// 通用文化程度
+    /// </summary>
+    public const string CULTURE_LEVEL = "CULTURE_LEVEL";
+
+    #region MyRegion
+
+    #endregion
     #region 系统通用状态
     /// <summary>
     /// 启用

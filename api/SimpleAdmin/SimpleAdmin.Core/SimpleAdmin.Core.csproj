@@ -14,6 +14,7 @@
 		<PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.5.10" />
 		<PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.5.10" />
 		<PackageReference Include="Furion.Pure" Version="4.8.5.10" />
+		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.2" />
 		<PackageReference Include="Minio" Version="4.0.7" />
 		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
 		<PackageReference Include="SimpleMQTT" Version="1.0.3" />

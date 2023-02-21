@@ -82,6 +82,40 @@ public class DictService : DbRepository<DevDict>, IDictService
     }
 
     /// <inheritdoc />
+    public async Task<DevDict> GetDict(string DictValue)
+    {
+        var devDicts = await GetListAsync();
+        var devDict = devDicts.Where(it => it.DictValue == DictValue).FirstOrDefault();
+        return devDict;
+    }
+
+    /// <inheritdoc />
+    public async Task<List<string>> GetValuesByDictValue(string DictValue, List<DevDict> devDictList = null)
+    {
+        var devDicts = devDictList == null ? await GetListAsync() : devDictList;//获取全部
+        var id = devDicts.Where(it => it.DictValue == DictValue).Select(it => it.Id).FirstOrDefault();//根据value找到父节点
+        if (id > 0)
+            return devDicts.Where(it => it.ParentId == id).Select(it => it.DictValue).ToList();//拿到字典值
+        else
+            return new List<string>();
+    }
+
+    /// <inheritdoc />
+    public async Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] DictValues)
+    {
+        Dictionary<string, List<string>> result = new Dictionary<string, List<string>>();
+        var devDicts = await GetListAsync();//获取全部
+        var ids = devDicts.Where(it => DictValues.Contains(it.DictValue)).Select(it => it.Id).ToList();//根据value找到父节点
+        foreach (var dictValue in DictValues)
+        {
+            var data = await GetValuesByDictValue(dictValue, devDicts);
+            result.Add(dictValue, data);
+        }
+        return result;
+    }
+
+
+    /// <inheritdoc />
     public async Task<List<DevDict>> Tree(DictTreeInput input)
     {
         var devDicts = await GetListAsync();//获取字典列表

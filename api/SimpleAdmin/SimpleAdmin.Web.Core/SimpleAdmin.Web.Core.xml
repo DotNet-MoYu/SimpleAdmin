@@ -250,6 +250,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            预览
+            </summary>
+            <param name="File"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.AuthBController">
             <summary>
             B端登录控制器

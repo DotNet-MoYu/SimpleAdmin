@@ -22,3 +22,6 @@ global using SimpleRedis;
 global using SimpleAdmin.System;
 global using SimpleTool;
 global using SimpleAdmin.Core.Extension;
+global using Magicodes.ExporterAndImporter.Core;
+global using Magicodes.ExporterAndImporter.Excel;
+global using OfficeOpenXml.Table;
