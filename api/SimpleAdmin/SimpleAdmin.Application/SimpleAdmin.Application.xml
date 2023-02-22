@@ -205,7 +205,7 @@
             <inheritdoc />
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Preview(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:SimpleAdmin.Application.GenTestService.Preview(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.Core.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">

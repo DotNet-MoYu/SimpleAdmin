@@ -250,11 +250,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(Microsoft.AspNetCore.Http.IFormFile)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
             <summary>
             预览
             </summary>
             <param name="File"></param>
+            <param name="maxRowsCount"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.AuthBController">

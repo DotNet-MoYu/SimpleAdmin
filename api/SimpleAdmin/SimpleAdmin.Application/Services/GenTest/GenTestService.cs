@@ -90,13 +90,13 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
 
     /// <inheritdoc/>
-    public async Task<dynamic> Preview(IFormFile file)
+    public async Task<dynamic> Preview(IFormFile file, int maxRowsCount)
     {
         _fileService.ImportVerification(file);
         IImporter Importer = new ExcelImporter();
         using var fileStream = file.OpenReadStream();//获取文件流
         var import = await Importer.Import<GenTestImportInput>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = _fileService.TemplateDataVerification(import);//验证数据完整度
+        var ImportPreview = _fileService.TemplateDataVerification(import, maxRowsCount);//验证数据完整度
         //遍历错误的行
         import.RowErrors.ForEach(row =>
         {
@@ -121,12 +121,12 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             it.HasError = false;
         });
         var data = await CheckImport(input.Data);
-        var result = new ImportResultOutPut<GenTestImportInput> { Data = data, Total = input.Data.Count };
+        var result = new ImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
         var errorCount = data.Where(it => it.HasError == true).Count();
         if (errorCount > 0)
         {
             //result.Success = false;
-            result.Data = data;
+            //result.Data = data;
             result.ErrorCount = errorCount;
         }
         result.ImportCount = data.Count - errorCount;
@@ -148,7 +148,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             }
 
         });
-        genTestImports.OrderByDescending(it => it.HasError).ToList();//排序
+        genTestImports = genTestImports.OrderByDescending(it => it.HasError).ToList();//排序
         return genTestImports;
 
     }
