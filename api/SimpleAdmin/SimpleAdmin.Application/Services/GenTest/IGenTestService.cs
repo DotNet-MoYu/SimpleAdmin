@@ -45,7 +45,7 @@ public interface IGenTestService : ITransient
     Task<GenTest> Detail(BaseIdInput input);
     Task<dynamic> Preview(IFormFile file, int maxRowsCount);
     Task<dynamic> Export(GenTestPageInput input);
-    Task<dynamic> Template();
+    Task<FileStreamResult> Template();
 
     Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input);
 }

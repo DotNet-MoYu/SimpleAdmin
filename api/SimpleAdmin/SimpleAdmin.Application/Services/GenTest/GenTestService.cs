@@ -71,7 +71,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
     }
 
-    public async Task<dynamic> Template()
+    public async Task<FileStreamResult> Template()
     {
         var templateName = "学生信息.xlsx";
         //var folder = _fileService.GetTemplateFolder();
@@ -122,14 +122,14 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         });
         var data = await CheckImport(input.Data);
         var result = new ImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
-        var errorCount = data.Where(it => it.HasError == true).Count();
-        if (errorCount > 0)
+        var errrData = data.Where(it => it.HasError == true).ToList();
+        if (errrData.Count > 0)
         {
-            //result.Success = false;
-            //result.Data = data;
-            result.ErrorCount = errorCount;
+            result.Success = false;
+            //result.Data = errrData;
+            result.FailCount = errrData.Count;
         }
-        result.ImportCount = data.Count - errorCount;
+        result.ImportCount = data.Count - errrData.Count;
         return result;
 
     }

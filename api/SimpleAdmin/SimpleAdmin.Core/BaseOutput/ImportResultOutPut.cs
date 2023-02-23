@@ -12,7 +12,7 @@ namespace SimpleAdmin.Core
     public class ImportResultOutPut<T> where T : class
     {
         /// <summary>
-        /// 成功数
+        /// 是否成功
         /// </summary>
 
         public bool Success { get; set; } = true;
@@ -32,12 +32,17 @@ namespace SimpleAdmin.Core
         /// <summary>
         /// 错误数
         /// </summary>
-        public int ErrorCount { get; set; }
+        public int FailCount { get; set; }
 
         /// <summary>
         /// 数据
         /// </summary>
 
         public List<T> Data { get; set; }
+
+        /// <summary>
+        /// 错误文件
+        /// </summary>
+        public FileStreamResult FailDetail { get; set; }
     }
 }
