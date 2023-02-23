@@ -4,6 +4,262 @@
         <name>SimpleAdmin.Application</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Application.GenTestPageInput">
+            <summary>
+            测试分页查询参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.StartBir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.EndBir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.ExtJson">
+            <summary>
+            扩展信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GenTestAddInput">
+            <summary>
+            添加测试参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Nation">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.SortCode">
+            <summary>
+            SortCode
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.Money">
+            <summary>
+            存款
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestAddInput.ExtJson">
+            <summary>
+            扩展信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GenTestEditInput">
+            <summary>
+            修改测试参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestEditInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.NativePlace">
+             <summary>
+             籍贯 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.HomeAddress">
+             <summary>
+             家庭住址 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.MailingAddress">
+             <summary>
+             通信地址 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.IdCardType">
+             <summary>
+             证件类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.IdCardNumber">
+             <summary>
+             证件号码 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.CultureLevel">
+             <summary>
+             文化程度 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.PoliticalOutlook">
+             <summary>
+             政治面貌 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.College">
+             <summary>
+             毕业院校 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestImportInput.Education">
+             <summary>
+             学历 
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GenTestExport">
+            <summary>
+            学生信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestExport.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestExport.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestExport.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.GenTestExport.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GenTestService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Application.IGenTestService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Page(SimpleAdmin.Application.GenTestPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Add(SimpleAdmin.Application.GenTestAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Edit(SimpleAdmin.Application.GenTestEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Preview(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.Core.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.Export(SimpleAdmin.Application.GenTestPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.GenTestService.CheckInput(SimpleAdmin.Core.GenTest)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="genTest"></param>
+        </member>
+        <member name="T:SimpleAdmin.Application.IGenTestService">
+            <summary>
+            测试服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Application.IGenTestService.Page(SimpleAdmin.Application.GenTestPageInput)">
+            <summary>
+            测试分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>分页结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IGenTestService.Add(SimpleAdmin.Application.GenTestAddInput)">
+            <summary>
+            添加测试
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IGenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除测试
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IGenTestService.Edit(SimpleAdmin.Application.GenTestEditInput)">
+            <summary>
+            修改测试
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IGenTestService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input">Id参数</param>
+            <returns>详细信息</returns>
+        </member>
         <member name="T:SimpleAdmin.Application.IOrgService">
             <summary>
             机构服务

@@ -307,7 +307,7 @@
         </member>
         <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Success">
             <summary>
-            成功数
+            是否成功
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Total">
@@ -320,7 +320,7 @@
             导入数量
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.ErrorCount">
+        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.FailCount">
             <summary>
             错误数
             </summary>
@@ -328,6 +328,11 @@
         <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Data">
             <summary>
             数据
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.FailDetail">
+            <summary>
+            错误文件
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.GzipCompressionComponent">
