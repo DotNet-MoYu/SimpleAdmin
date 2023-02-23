@@ -210,54 +210,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.GenTestController">
-            <summary>
-            测试控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Page(SimpleAdmin.Application.GenTestPageInput)">
-            <summary>
-            测试分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
-            <summary>
-            添加测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edit(SimpleAdmin.Application.GenTestEditInput)">
-            <summary>
-            修改测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            测试详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
-            <summary>
-            预览
-            </summary>
-            <param name="File"></param>
-            <param name="maxRowsCount"></param>
-            <returns></returns>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.AuthBController">
             <summary>
             B端登录控制器
