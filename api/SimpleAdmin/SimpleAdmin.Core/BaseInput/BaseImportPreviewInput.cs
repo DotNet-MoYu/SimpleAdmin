@@ -8,7 +8,7 @@ namespace SimpleAdmin.Core
     /// 导入基础输入
     /// </summary>
     [ExcelImporter(IsLabelingError = true)]
-    public class ImportPreviewInput
+    public class BaseImportPreviewInput
     {
 
         /// <summary>

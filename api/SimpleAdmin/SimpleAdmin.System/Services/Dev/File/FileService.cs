@@ -101,7 +101,7 @@ namespace SimpleAdmin.System
         }
 
         /// <inheritdoc/>
-        public ImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : class
+        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportPreviewInput
         {
             if (importResult.Data == null)
                 throw Oops.Bah("文件数据格式有误,请重新导入!");
@@ -114,10 +114,19 @@ namespace SimpleAdmin.System
                 else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
 
             });
-
+            //导入的数据转集合
+            var data = importResult.Data.ToList();
+            //遍历错误的行
+            importResult.RowErrors.ForEach(row =>
+            {
+                row.RowIndex -= 2;//下表与列表中的下标一致
+                data[row.RowIndex].HasError = true;//错误的行HasError = true
+                data[row.RowIndex].ErrorInfo = row.FieldErrors;
+            });
+            importResult.Data = data;
 
             //导入结果输出
-            var importPreview = new ImportPreviewOutput<T>() { HasError = importResult.HasError, Data = importResult.Data.ToList() };
+            var importPreview = new BaseImportPreviewOutput<T>() { HasError = importResult.HasError, Data = importResult.Data.ToList() };
             Dictionary<string, string> headerMap = new Dictionary<string, string>();
             //遍历导入的表头列表信息
             importResult.ImporterHeaderInfos.ForEach(it =>
@@ -147,6 +156,7 @@ namespace SimpleAdmin.System
             return importPreview;
 
         }
+
 
 
         /// <inheritdoc/>

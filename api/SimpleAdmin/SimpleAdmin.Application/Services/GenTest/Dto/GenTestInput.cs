@@ -106,7 +106,7 @@ public class GenTestEditInput : GenTestAddInput
     public long Id { get; set; }
 }
 
-public class GenTestImportInput : ImportPreviewInput
+public class GenTestImportInput : BaseImportPreviewInput
 {
 
     /// <summary>

@@ -195,6 +195,31 @@
             主键Id
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.BaseImportPreviewInput">
+            <summary>
+            导入基础输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.ErrorInfo">
+            <summary>
+            错误详情
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportResultInput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.BasePageInput">
             <summary>
             全局分页查询输入参数
@@ -225,47 +250,22 @@
             关键字
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Core.ImportPreviewInput">
-            <summary>
-            导入基础输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewInput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewInput.HasError">
-            <summary>
-            是否有错误
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewInput.ErrorInfo">
-            <summary>
-            错误详情
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.ImportResultInput`1.Data">
-            <summary>
-            数据
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.ImportPreviewOutput`1">
+        <member name="T:SimpleAdmin.Core.BaseImportPreviewOutput`1">
             <summary>
             文件导入通用输出
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewOutput`1.HasError">
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.HasError">
             <summary>
             是否有错误
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewOutput`1.TableColumns">
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.TableColumns">
             <summary>
             动态表头
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportPreviewOutput`1.Data">
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.Data">
             <summary>
             数据
             </summary>
@@ -300,37 +300,37 @@
             是否是日期格式
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Core.ImportResultOutPut`1">
+        <member name="T:SimpleAdmin.Core.BaseImportResultOutPut`1">
             <summary>
             导入结果输出
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Success">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Success">
             <summary>
             是否成功
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Total">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Total">
             <summary>
             总数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.ImportCount">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.ImportCount">
             <summary>
             导入数量
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.FailCount">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.FailCount">
             <summary>
             错误数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.Data">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Data">
             <summary>
             数据
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.ImportResultOutPut`1.FailDetail">
+        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.FailDetail">
             <summary>
             错误文件
             </summary>

@@ -98,22 +98,19 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         var import = await Importer.Import<GenTestImportInput>(fileStream);//导入的文件转化为带入结果
         var ImportPreview = _fileService.TemplateDataVerification(import, maxRowsCount);//验证数据完整度
         //遍历错误的行
-        import.RowErrors.ForEach(row =>
-        {
-            row.RowIndex -= 2;//下表与列表中的下标一致
-            ImportPreview.Data[row.RowIndex].HasError = true;//错误的行HasError = true
-            ImportPreview.Data[row.RowIndex].ErrorInfo = row.FieldErrors;
-        });
-        //自己的业务
-        var dicts = await _dictService.GetValuesByDictValue(new string[] { DevDictConst.GENDER, DevDictConst.NATION, DevDictConst.IDCARD_TYPE, DevDictConst.CULTURE_LEVEL });
-        var sexDict = dicts[DevDictConst.GENDER];
+        //import.RowErrors.ForEach(row =>
+        //{
+        //    row.RowIndex -= 2;//下表与列表中的下标一致
+        //    ImportPreview.Data[row.RowIndex].HasError = true;//错误的行HasError = true
+        //    ImportPreview.Data[row.RowIndex].ErrorInfo = row.FieldErrors;
+        //});
         ImportPreview.Data = await CheckImport(ImportPreview.Data);
         return ImportPreview;
     }
 
 
     /// <inheritdoc/>
-    public async Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input)
+    public async Task<BaseImportResultOutPut<GenTestImportInput>> Import(BaseImportResultInput<GenTestImportInput> input)
     {
         input.Data.ForEach(it =>
         {
@@ -121,7 +118,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             it.HasError = false;
         });
         var data = await CheckImport(input.Data);
-        var result = new ImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
+        var result = new BaseImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
         var errrData = data.Where(it => it.HasError == true).ToList();
         if (errrData.Count > 0)
         {

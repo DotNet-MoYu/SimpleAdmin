@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SimpleAdmin.Core
 {
-    public class ImportResultInput<T> where T : class
+    public class BaseImportResultInput<T> where T : class
     {
 
         /// <summary>

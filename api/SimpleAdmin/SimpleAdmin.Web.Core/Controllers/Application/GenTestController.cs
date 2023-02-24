@@ -112,7 +112,7 @@ public class GenTestController : IDynamicApiController
 
     [HttpPost("import")]
     [DisplayName("导入")]
-    public async Task<dynamic> Import([FromBody] ImportResultInput<GenTestImportInput> input)
+    public async Task<dynamic> Import([FromBody] BaseImportResultInput<GenTestImportInput> input)
     {
         return await _genTestService.Import(input);
     }

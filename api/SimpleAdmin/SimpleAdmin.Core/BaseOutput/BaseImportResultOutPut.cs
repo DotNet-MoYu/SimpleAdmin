@@ -9,7 +9,7 @@ namespace SimpleAdmin.Core
     /// <summary>
     /// 导入结果输出
     /// </summary>
-    public class ImportResultOutPut<T> where T : class
+    public class BaseImportResultOutPut<T> where T : class
     {
         /// <summary>
         /// 是否成功

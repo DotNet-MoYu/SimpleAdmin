@@ -11,7 +11,7 @@ namespace SimpleAdmin.Core;
 /// <summary>
 /// 文件导入通用输出
 /// </summary>
-public class ImportPreviewOutput<T> where T : class
+public class BaseImportPreviewOutput<T> where T : class
 {
     /// <summary>
     /// 是否有错误

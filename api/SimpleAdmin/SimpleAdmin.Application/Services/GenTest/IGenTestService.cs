@@ -47,5 +47,5 @@ public interface IGenTestService : ITransient
     Task<dynamic> Export(GenTestPageInput input);
     Task<FileStreamResult> Template();
 
-    Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input);
+    Task<BaseImportResultOutPut<GenTestImportInput>> Import(BaseImportResultInput<GenTestImportInput> input);
 }
