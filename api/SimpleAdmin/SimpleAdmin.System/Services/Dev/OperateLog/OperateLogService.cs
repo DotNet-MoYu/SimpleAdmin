@@ -18,14 +18,13 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<DevLogOperate>> Page(OperateLogPageInput input)
     {
-
         var query = Context.Queryable<DevLogOperate>()
                            .WhereIF(!string.IsNullOrEmpty(input.Account), it => it.OpAccount == input.Account)//根据账号查询
                            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
                            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.OpIp.Contains(input.SearchKey))//根据关键字查询
+                           .IgnoreColumns(it => new { it.ParamJson, it.ResultJson })
                            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
                            .OrderBy(it => it.Id, OrderByType.Desc);
-
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
@@ -100,6 +99,12 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
     public async Task Delete(string category)
     {
         await DeleteAsync(it => it.Category == category);//删除对应分类日志
+    }
+
+    /// <inheritdoc />
+    public async Task<DevLogOperate> Detail(BaseIdInput input)
+    {
+        return await GetFirstAsync(it => it.Id == input.Id);//删除对应分类日志
     }
 
 }

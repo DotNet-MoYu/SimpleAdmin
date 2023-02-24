@@ -11,6 +11,14 @@ public interface IOperateLogService : ITransient
     /// <param name="category">分类名称</param>
     /// <returns></returns>
     Task Delete(string category);
+
+    /// <summary>
+    /// 日志详情
+    /// </summary>
+    /// <param name="input">id</param>
+    /// <returns>日志详情</returns>
+    Task<DevLogOperate> Detail(BaseIdInput input);
+
     /// <summary>
     /// 操作日志分页查询
     /// </summary>

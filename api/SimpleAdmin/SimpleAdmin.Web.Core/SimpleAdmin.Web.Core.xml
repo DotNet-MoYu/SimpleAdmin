@@ -848,6 +848,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            日志详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.LogVisitController">
             <summary>
             访问日志控制器

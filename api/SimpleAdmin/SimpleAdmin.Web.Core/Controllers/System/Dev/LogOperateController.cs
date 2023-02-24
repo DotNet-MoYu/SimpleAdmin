@@ -56,4 +56,14 @@ public class LogOperateController : BaseController
         await _operateLogService.Delete(input.Category);
     }
 
+    /// <summary>
+    /// 日志详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _operateLogService.Detail(input);
+    }
 }
