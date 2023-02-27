@@ -8,7 +8,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// <inheritdoc cref="ISysUserService"/>
 /// </summary>
-public partial class SysUserService : DbRepository<SysUser>, ISysUserService
+public class SysUserService : DbRepository<SysUser>, ISysUserService
 {
     private readonly ILogger<ILogger> _logger;
     private readonly ISimpleRedis _simpleRedis;
