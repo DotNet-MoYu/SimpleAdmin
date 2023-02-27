@@ -20,8 +20,9 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
         List<DevRelation> relations = new List<DevRelation>();//用户消息关系列表
         if (input.ReceiveUserId > 0)//如果用户ID大于0
         {
+            var receiveUserId = input.ReceiveUserId.ToString();
             relations = await Context.Queryable<DevRelation>()//获取关系表中的站内信ID
-               .Where(it => it.Category == CateGoryConst.Relation_MSG_TO_USER && it.TargetId == input.ReceiveUserId.ToString())//根据分类和用户用户ID查询
+               .Where(it => it.Category == CateGoryConst.Relation_MSG_TO_USER && it.TargetId == receiveUserId)//根据分类和用户用户ID查询
               .ToListAsync();
 
             input.Ids = relations.Select(it => it.ObjectId).ToList();
