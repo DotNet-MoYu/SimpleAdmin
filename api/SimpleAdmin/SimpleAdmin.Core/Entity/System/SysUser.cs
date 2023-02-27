@@ -45,11 +45,7 @@ public class SysUser : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "Gender", ColumnDescription = "性别", Length = 200, IsNullable = true)]
     public string Gender { get; set; }
-    /// <summary>
-    /// 年龄 
-    ///</summary>
-    [SugarColumn(ColumnName = "Age", ColumnDescription = "年龄", Length = 200, IsNullable = true)]
-    public string Age { get; set; }
+
     /// <summary>
     /// 出生日期 
     ///</summary>
