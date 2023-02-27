@@ -163,7 +163,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     /// <inheritdoc />
     public async Task UpdateSignature(UpdateSignatureInput input)
     {
-        var user = await _userService.GetUsertById(UserManager.UserId);//获取信息
+        var user = await _userService.GetUserById(UserManager.UserId);//获取信息
         var signatureArray = input.Signature.Split(",");//分割
         var base64String = signatureArray[1];//根据逗号分割取到base64字符串
         var image = base64String.GetBitmapFromBase64();//转成图片

@@ -27,3 +27,5 @@ global using Microsoft.AspNetCore.SignalR;
 global using Masuit.Tools;
 global using System.Text;
 global using Microsoft.AspNetCore.Mvc;
+global using Magicodes.ExporterAndImporter.Core;
+global using Magicodes.ExporterAndImporter.Excel;

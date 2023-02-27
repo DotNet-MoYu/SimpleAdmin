@@ -191,7 +191,7 @@ public class UserService : DbRepository<SysUser>, IUserService
         if (dataScope.Count > 0)//如果有机构
         {
             //获取用户信息
-            var user = await _sysUserService.GetUsertById(userId);
+            var user = await _sysUserService.GetUserById(userId);
             if (!dataScope.Contains(user.OrgId))//判断用户机构ID是否在数据范围
                 throw Oops.Bah(errorMessage);
         }

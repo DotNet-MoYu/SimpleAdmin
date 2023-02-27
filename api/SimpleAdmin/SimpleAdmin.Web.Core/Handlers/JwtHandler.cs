@@ -127,7 +127,7 @@ public class JwtHandler : AppAuthorizeHandler
                 // 路由名称
                 var routeName = httpContext.Request.Path.Value;
                 //获取用户信息
-                var userInfo = await App.GetService<ISysUserService>().GetUsertById(UserManager.UserId);
+                var userInfo = await App.GetService<ISysUserService>().GetUserById(UserManager.UserId);
                 if (userInfo != null)
                 {
                     if (!userInfo.PermissionCodeList.Contains(routeName))//如果当前路由信息不包含在角色授权路由列表中则认证失败

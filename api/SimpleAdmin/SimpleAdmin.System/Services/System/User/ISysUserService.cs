@@ -3,8 +3,11 @@
 /// <summary>
 /// 用户服务
 /// </summary>
-public interface ISysUserService : ITransient
+public partial interface ISysUserService : ITransient
 {
+
+    #region 查询
+
     /// <summary>
     /// 根据用户ID获取按钮ID集合
     /// </summary>
@@ -49,25 +52,11 @@ public interface ISysUserService : ITransient
     Task<SqlSugarPagedList<SysUser>> Page(UserPageInput input);
 
     /// <summary>
-    /// 添加用户
-    /// </summary>
-    /// <param name="input">添加参数</param>
-    /// <returns></returns>
-    Task Add(UserAddInput input);
-
-    /// <summary>
-    /// 编辑
-    /// </summary>
-    /// <param name="input">编辑参数</param>
-    /// <returns></returns>
-    Task Edit(UserEditInput input);
-
-    /// <summary>
-    /// 
+    /// 根据用户Id获取用户信息
     /// </summary>
     /// <param name="Id">用户ID</param>
     /// <returns>用户信息</returns>
-    Task<SysUser> GetUsertById(long Id);
+    Task<SysUser> GetUserById(long Id);
 
     /// <summary>
     ///根据用户账号获取用户ID
@@ -84,18 +73,41 @@ public interface ISysUserService : ITransient
     Task<SysUser> GetUserByPhone(string phone);
 
     /// <summary>
-    /// 删除用户
+    /// 获取用户拥有角色
     /// </summary>
-    /// <param name="input">Id列表</param>
+    /// <param name="input">用户ID</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task<List<long>> OwnRole(BaseIdInput input);
 
     /// <summary>
-    /// 禁用用户
+    /// 获取当前API用户的数据范围
     /// </summary>
-    /// <param name="input">用户Id</param>
+    /// <param name="userId">用户ID</param>
+    /// <returns>机构列表</returns>
+    Task<List<long>> GetLoginUserApiDataScope();
+
+    #endregion
+
+    #region 新增
+
+    /// <summary>
+    /// 添加用户
+    /// </summary>
+    /// <param name="input">添加参数</param>
     /// <returns></returns>
-    Task DisableUser(BaseIdInput input);
+    Task Add(UserAddInput input);
+    #endregion
+
+    #region 编辑
+
+
+    /// <summary>
+    /// 编辑
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <returns></returns>
+    Task Edit(UserEditInput input);
+
 
     /// <summary>
     /// 启用用户
@@ -105,19 +117,18 @@ public interface ISysUserService : ITransient
     Task EnableUser(BaseIdInput input);
 
     /// <summary>
+    /// 禁用用户
+    /// </summary>
+    /// <param name="input">用户Id</param>
+    /// <returns></returns>
+    Task DisableUser(BaseIdInput input);
+
+    /// <summary>
     /// 重置密码
     /// </summary>
     /// <param name="input">用户Id</param>
     /// <returns></returns>
     Task ResetPassword(BaseIdInput input);
-
-
-    /// <summary>
-    /// 获取用户拥有角色
-    /// </summary>
-    /// <param name="input">用户ID</param>
-    /// <returns></returns>
-    Task<List<long>> OwnRole(BaseIdInput input);
 
     /// <summary>
     /// 给用户授权角色
@@ -125,6 +136,17 @@ public interface ISysUserService : ITransient
     /// <param name="input">授权参数</param>
     /// <returns></returns>
     Task GrantRole(UserGrantRoleInput input);
+    #endregion
+
+    #region 删除
+
+    /// <summary>
+    /// 删除用户
+    /// </summary>
+    /// <param name="input">Id列表</param>
+    /// <returns></returns>
+    Task Delete(List<BaseIdInput> input);
+
 
     /// <summary>
     /// 从redis中删除用户信息
@@ -137,11 +159,17 @@ public interface ISysUserService : ITransient
     /// </summary>
     /// <param name="userId">用户ID</param>
     void DeleteUserFromRedis(long userId);
+    #endregion
+
+
+    #region 导入导出
 
     /// <summary>
-    /// 获取当前API用户的数据范围
+    /// 导出用户
     /// </summary>
-    /// <param name="userId">用户ID</param>
-    /// <returns>机构列表</returns>
-    Task<List<long>> GetLoginUserApiDataScope();
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<dynamic> Export(UserPageInput input);
+    #endregion
+
 }
