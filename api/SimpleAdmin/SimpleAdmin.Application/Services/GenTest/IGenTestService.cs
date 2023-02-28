@@ -43,7 +43,7 @@ public interface IGenTestService : ITransient
     /// <param name="input">Id参数</param>
     /// <returns>详细信息</returns>
     Task<GenTest> Detail(BaseIdInput input);
-    Task<dynamic> Preview(IFormFile file, int maxRowsCount);
+    Task<dynamic> Preview(BaseImportPreviewInput input);
     Task<dynamic> Export(GenTestPageInput input);
     Task<FileStreamResult> Template();
 

@@ -197,27 +197,42 @@
         </member>
         <member name="T:SimpleAdmin.Core.BaseImportPreviewInput">
             <summary>
-            导入基础输入
+            导入预览输入
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.Id">
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.File">
             <summary>
-            Id
+            文件
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.HasError">
+        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.MaxRowsCount">
             <summary>
-            是否有错误
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.ErrorInfo">
-            <summary>
-            错误详情
+            单次导入允许最大行数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseImportResultInput`1.Data">
             <summary>
             数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.BaseImportTemplateInput">
+            <summary>
+            导入基础输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.ErrorInfo">
+            <summary>
+            错误详情
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.BasePageInput">
@@ -328,11 +343,6 @@
         <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Data">
             <summary>
             数据
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.FailDetail">
-            <summary>
-            错误文件
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.GzipCompressionComponent">
@@ -2188,11 +2198,6 @@
              性别 
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.SysUser.Age">
-             <summary>
-             年龄 
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.Core.SysUser.Birthday">
              <summary>
              出生日期 
@@ -2517,6 +2522,11 @@
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0004">
             <summary>
             没有权限
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0005">
+            <summary>
+            导入数据失败
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Extension.LinqExtension">

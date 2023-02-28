@@ -51,7 +51,7 @@ public class TableColumns
     /// <summary>
     /// 宽度
     /// </summary>
-    public int Width { get; set; } = 100;
+    public int Width { get; set; } = 120;
 
 
     /// <summary>

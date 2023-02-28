@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.System;
+﻿
+
+namespace SimpleAdmin.Web.Core.Controllers.System.System;
 
 
 /// <summary>
@@ -20,6 +22,8 @@ public class UserController : BaseController
         this._roleService = roleService;
     }
 
+
+    #region Get请求
     /// <summary>
     /// 获取组织树选择器
     /// </summary>
@@ -74,6 +78,43 @@ public class UserController : BaseController
         return await _sysPositionService.PositionSelector(input);
     }
 
+    /// <summary>
+    /// 获取用户拥有角色
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("ownRole")]
+    public async Task<dynamic> OwnRole([FromQuery] BaseIdInput input)
+    {
+        return await _sysUserService.OwnRole(input);
+    }
+
+    /// <summary>
+    /// 导入预览
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("preview")]
+    [DisableRequestSizeLimit]
+    [SuppressMonitor]
+    public async Task<dynamic> Preview([FromForm] BaseImportPreviewInput input)
+    {
+        return await _sysUserService.Preview(input);
+    }
+
+    /// <summary>
+    /// 模板下载
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet(template: "template")]
+    [SuppressMonitor]
+    public async Task<dynamic> Template()
+    {
+        return await _sysUserService.Template();
+    }
+    #endregion
+
+    #region Post请求
 
     /// <summary>
     /// 添加用户
@@ -149,16 +190,6 @@ public class UserController : BaseController
         await _sysUserService.ResetPassword(input);
     }
 
-    /// <summary>
-    /// 获取用户拥有角色
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("ownRole")]
-    public async Task<dynamic> OwnRole([FromQuery] BaseIdInput input)
-    {
-        return await _sysUserService.OwnRole(input);
-    }
 
     /// <summary>
     /// 给用户授权角色
@@ -171,5 +202,38 @@ public class UserController : BaseController
     {
         await _sysUserService.GrantRole(input);
     }
+
+    /// <summary>
+    /// 用户导入
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("import")]
+    [DisplayName("用户导入")]
+    public async Task<dynamic> Import([FromBody] BaseImportResultInput<SysUserImportInput> input)
+    {
+        return await _sysUserService.Import(input);
+    }
+
+
+    /// <summary>
+    /// 用户导出
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("export")]
+    [DisplayName("导出")]
+    public async Task<dynamic> Export([FromBody] UserPageInput input)
+    {
+        return await _sysUserService.Export(input);
+    }
+    #endregion
+
+
+
+
+
+
+
 
 }

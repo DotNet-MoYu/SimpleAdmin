@@ -83,15 +83,14 @@ public class GenTestController : IDynamicApiController
     /// <summary>
     /// 预览
     /// </summary>
-    /// <param name="File"></param>
-    /// <param name="maxRowsCount"></param>
+    /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("preview")]
     [DisableRequestSizeLimit]
     [SuppressMonitor]
-    public async Task<dynamic> Preview([FromForm] IFormFile File, int maxRowsCount = 0)
+    public async Task<dynamic> Preview([FromForm] BaseImportPreviewInput input)
     {
-        return await _genTestService.Preview(File, maxRowsCount);
+        return await _genTestService.Preview(input);
     }
 
     [HttpPost("export")]

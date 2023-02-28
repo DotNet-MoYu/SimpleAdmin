@@ -250,12 +250,11 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(Microsoft.AspNetCore.Http.IFormFile,System.Int32)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.Core.BaseImportPreviewInput)">
             <summary>
             预览
             </summary>
-            <param name="File"></param>
-            <param name="maxRowsCount"></param>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.AuthBController">
@@ -665,6 +664,26 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.Core.BaseImportPreviewInput)">
+            <summary>
+            导入预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Template">
+            <summary>
+            模板下载
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Add(SimpleAdmin.System.UserAddInput)">
             <summary>
             添加用户
@@ -707,16 +726,23 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
             <summary>
-            获取用户拥有角色
+            给用户授权角色
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.Core.BaseImportResultInput{SimpleAdmin.System.SysUserImportInput})">
             <summary>
-            给用户授权角色
+            用户导入
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Export(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            用户导出
             </summary>
             <param name="input"></param>
             <returns></returns>

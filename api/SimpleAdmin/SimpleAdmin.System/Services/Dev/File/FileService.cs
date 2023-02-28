@@ -101,7 +101,7 @@ namespace SimpleAdmin.System
         }
 
         /// <inheritdoc/>
-        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportPreviewInput
+        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportTemplateInput
         {
             if (importResult.Data == null)
                 throw Oops.Bah("文件数据格式有误,请重新导入!");
@@ -114,25 +114,15 @@ namespace SimpleAdmin.System
                 else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
 
             });
-            //导入的数据转集合
-            var data = importResult.Data.ToList();
-            //遍历错误的行
-            importResult.RowErrors.ForEach(row =>
-            {
-                row.RowIndex -= 2;//下表与列表中的下标一致
-                data[row.RowIndex].HasError = true;//错误的行HasError = true
-                data[row.RowIndex].ErrorInfo = row.FieldErrors;
-            });
-            importResult.Data = data;
 
             //导入结果输出
-            var importPreview = new BaseImportPreviewOutput<T>() { HasError = importResult.HasError, Data = importResult.Data.ToList() };
+            var importPreview = new BaseImportPreviewOutput<T>() { HasError = importResult.HasError };
             Dictionary<string, string> headerMap = new Dictionary<string, string>();
             //遍历导入的表头列表信息
             importResult.ImporterHeaderInfos.ForEach(it =>
             {
                 headerMap.Add(it.Header.Name, it.PropertyName);
-                var tableColumns = new TableColumns { Title = it.Header.Name, DataIndex = it.PropertyName.FirstCharToLower() };//定义表头
+                var tableColumns = new TableColumns { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
                 var antTableAttribute = it.PropertyInfo.GetCustomAttribute<AntTableAttribute>();//获取表格特性
                 if (antTableAttribute != null)
                 {
@@ -142,6 +132,10 @@ namespace SimpleAdmin.System
                 }
                 importPreview.TableColumns.Add(tableColumns);//添加到表头
             });
+
+            //导入的数据转集合
+            var data = importResult.Data.ToList();
+            var systemError = new string[] { };//系统错误提示
             //遍历错误列,将错误字典中的中文改成英文跟实体对应
             importResult.RowErrors.ForEach(row =>
             {
@@ -149,10 +143,20 @@ namespace SimpleAdmin.System
                 //遍历错误列,赋值给新的字典
                 row.FieldErrors.ForEach(it =>
                 {
-                    fieldErrors.Add(headerMap[it.Key], it.Value);
+                    var errrVaule = it.Value;
+                    //value xx Invalid, please fill in the correct integer value!
+                    //value xx Invalid, please fill in the correct date and time format!
+                    if (it.Value.Contains("Invalid"))//如果错误信息有Invalid就提示格式错误
+                        errrVaule = $"{it.Key}格式错误";
+                    fieldErrors.Add(headerMap[it.Key], errrVaule);
                 });
                 row.FieldErrors = fieldErrors;//替换新的字典
+                row.RowIndex -= 2;//下表与列表中的下标一致
+                data[row.RowIndex].HasError = true;//错误的行HasError = true
+                data[row.RowIndex].ErrorInfo = fieldErrors;//替换新的字典
             });
+            data = data.OrderByDescending(it => it.HasError).ToList();//排序
+            importPreview.Data = data;//重新赋值data
             return importPreview;
 
         }

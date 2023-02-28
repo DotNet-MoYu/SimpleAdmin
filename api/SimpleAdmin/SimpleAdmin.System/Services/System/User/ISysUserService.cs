@@ -170,6 +170,26 @@ public partial interface ISysUserService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<dynamic> Export(UserPageInput input);
+
+    /// <summary>
+    /// 导入模板下载
+    /// </summary>
+    /// <returns>模板</returns>
+    Task<FileStreamResult> Template();
+
+    /// <summary>
+    /// 导入预览
+    /// </summary>
+    /// <param name="input">预览参数</param>
+    /// <returns>预览结果</returns>
+    Task<dynamic> Preview(BaseImportPreviewInput input);
+
+    /// <summary>
+    /// 用户导入
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<BaseImportResultOutPut<SysUserImportInput>> Import(BaseImportResultInput<SysUserImportInput> input);
     #endregion
 
 }

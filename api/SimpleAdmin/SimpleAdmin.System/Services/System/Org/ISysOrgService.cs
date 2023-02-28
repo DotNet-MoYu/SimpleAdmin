@@ -5,36 +5,21 @@
 /// </summary>
 public interface ISysOrgService : ITransient
 {
-    /// <summary>
-    /// 添加组织
-    /// </summary>
-    /// <param name="input">添加参数</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg);
+
+
+    #region 查询
+
+
 
     /// <summary>
-    /// 构建组织树形结构
+    /// 检查组织是否存在
     /// </summary>
-    /// <param name="orgList">组织列表</param>
-    /// <param name="parentId">父ID</param>
-    /// <returns>树型结构</returns>
-    List<SysOrg> ConstrucOrgTrees(List<SysOrg> orgList, long parentId = 0);
-
-    /// <summary>
-    /// 复制组织
-    /// </summary>
-    /// <param name="input">机构复制参数</param>
-    /// <returns></returns>
-    Task Copy(OrgCopyInput input);
-
-    /// <summary>
-    /// 删除组织
-    /// </summary>
-    /// <param name="input">删除参数</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg);
+    /// <param name="sysOrgs">组织列表</param>
+    /// <param name="orgName">组织名称</param>
+    /// <param name="parentId">父Id</param>
+    /// <param name="orgId">组织Id</param>
+    /// <returns>是否存在,存在返回组织ID</returns>
+    bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId, out long orgId);
 
     /// <summary>
     /// 组织详情
@@ -43,13 +28,6 @@ public interface ISysOrgService : ITransient
     /// <returns>组织信息</returns>
     Task<SysOrg> Detail(BaseIdInput input);
 
-    /// <summary>
-    /// 编辑组织
-    /// </summary>
-    /// <param name="input">编辑参数</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg);
 
     /// <summary>
     /// 根据组织ID获取 下级
@@ -97,6 +75,65 @@ public interface ISysOrgService : ITransient
     /// <returns>分页信息</returns>
     Task<SqlSugarPagedList<SysOrg>> Page(OrgPageInput input);
 
+    #endregion
+
+
+    #region 新增
+
+    /// <summary>
+    /// 添加组织
+    /// </summary>
+    /// <param name="input">添加参数</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg);
+
+    /// <summary>
+    /// 复制组织
+    /// </summary>
+    /// <param name="input">机构复制参数</param>
+    /// <returns></returns>
+    Task Copy(OrgCopyInput input);
+    #endregion
+
+
+    #region 修改
+
+    #endregion
+
+    #region 编辑
+
+    /// <summary>
+    /// 编辑组织
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg);
+    #endregion
+
+
+    #region 删除
+    /// <summary>
+    /// 删除组织
+    /// </summary>
+    /// <param name="input">删除参数</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg);
+
+    #endregion
+
+    #region 其他
+
+    /// <summary>
+    /// 构建组织树形结构
+    /// </summary>
+    /// <param name="orgList">组织列表</param>
+    /// <param name="parentId">父ID</param>
+    /// <returns>树型结构</returns>
+    List<SysOrg> ConstrucOrgTrees(List<SysOrg> orgList, long parentId = 0);
+
     /// <summary>
     /// 刷新缓存
     /// </summary>
@@ -109,4 +146,6 @@ public interface ISysOrgService : ITransient
     /// <param name="orgIds">机构ID列表</param>
     /// <returns>组织树列表</returns>
     Task<List<SysOrg>> Tree(List<long> orgIds = null);
+    #endregion
+
 }

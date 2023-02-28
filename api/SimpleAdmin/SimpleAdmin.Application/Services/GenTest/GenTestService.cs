@@ -90,13 +90,13 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
 
     /// <inheritdoc/>
-    public async Task<dynamic> Preview(IFormFile file, int maxRowsCount)
+    public async Task<dynamic> Preview(BaseImportPreviewInput input)
     {
-        _fileService.ImportVerification(file);
+        _fileService.ImportVerification(input.File);
         IImporter Importer = new ExcelImporter();
-        using var fileStream = file.OpenReadStream();//获取文件流
+        using var fileStream = input.File.OpenReadStream();//获取文件流
         var import = await Importer.Import<GenTestImportInput>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = _fileService.TemplateDataVerification(import, maxRowsCount);//验证数据完整度
+        var ImportPreview = _fileService.TemplateDataVerification(import, input.MaxRowsCount);//验证数据完整度
         //遍历错误的行
         //import.RowErrors.ForEach(row =>
         //{
@@ -112,12 +112,8 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     /// <inheritdoc/>
     public async Task<BaseImportResultOutPut<GenTestImportInput>> Import(BaseImportResultInput<GenTestImportInput> input)
     {
-        input.Data.ForEach(it =>
-        {
-            it.ErrorInfo = new Dictionary<string, string>();
-            it.HasError = false;
-        });
-        var data = await CheckImport(input.Data);
+
+        var data = await CheckImport(input.Data, true);
         var result = new BaseImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
         var errrData = data.Where(it => it.HasError == true).ToList();
         if (errrData.Count > 0)
@@ -131,17 +127,17 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
     }
 
-    public async Task<List<GenTestImportInput>> CheckImport(List<GenTestImportInput> genTestImports)
+    public async Task<List<GenTestImportInput>> CheckImport(List<GenTestImportInput> genTestImports, bool clearError = false)
     {
         //自己的业务
         var dicts = await _dictService.GetValuesByDictValue(new string[] { DevDictConst.GENDER, DevDictConst.NATION, DevDictConst.IDCARD_TYPE, DevDictConst.CULTURE_LEVEL });
-        var sexDict = dicts[DevDictConst.GENDER];
+        //var sexDict = dicts[DevDictConst.GENDER];
         genTestImports.ForEach(data =>
         {
-            if (!string.IsNullOrEmpty(data.Sex) && !sexDict.Contains(data.Sex))
+            if (clearError)//如果需要清除错误
             {
-                data.HasError = true;
-                data.ErrorInfo.Add(nameof(data.Sex), "性别只能为男或女");
+                data.ErrorInfo = new Dictionary<string, string>();
+                data.HasError = false;
             }
 
         });
@@ -158,7 +154,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         var data = genTests.Adapt<List<GenTestExport>>();
         IExporter exporter = new ExcelExporter();
         var byteArray = await exporter.ExportAsByteArray(data);
-        var result = new FileStreamResult(new MemoryStream(byteArray), "application/octet-stream") { FileDownloadName = "学生信息.xlsx" };
+        var result = _fileService.GetFileStreamResult(byteArray, "学生信息.xlsx");
         return result;
 
     }

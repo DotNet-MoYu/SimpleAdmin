@@ -1,6 +1,7 @@
 ﻿using Magicodes.ExporterAndImporter.Core;
 using Magicodes.ExporterAndImporter.Excel;
 using Masuit.Tools;
+using Org.BouncyCastle.Asn1;
 
 namespace SimpleAdmin.System;
 
@@ -16,6 +17,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private readonly IResourceService _resourceService;
     private readonly ISysOrgService _sysOrgService;
     private readonly IRoleService _roleService;
+    private readonly IFileService _fileService;
+    private readonly ISysPositionService _sysPositionService;
     private readonly IConfigService _configService;
 
     public SysUserService(ILogger<ILogger> logger, ISimpleRedis simpleRedis,
@@ -23,6 +26,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                        IResourceService resourceService,
                        ISysOrgService orgService,
                        IRoleService roleService,
+                       IFileService fileService,
+                       ISysPositionService sysPositionService,
                        IConfigService configService)
     {
         this._logger = logger;
@@ -31,6 +36,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         _resourceService = resourceService;
         _sysOrgService = orgService;
         _roleService = roleService;
+        this._fileService = fileService;
+        this._sysPositionService = sysPositionService;
         this._configService = configService;
     }
 
@@ -255,7 +262,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
 
 
-
     /// <inheritdoc/>
     public async Task<List<long>> OwnRole(BaseIdInput input)
     {
@@ -470,18 +476,69 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
     #region 导入导出
 
+    /// <inheritdoc/>
+    public async Task<FileStreamResult> Template()
+    {
+        var templateName = "用户信息.xlsx";
+        //var folder = _fileService.GetTemplateFolder();
+        //var result = _fileService.GetFileStreamResult(folder, templateName, true);
 
+        IImporter Importer = new ExcelImporter();
+        var byteArray = await Importer.GenerateTemplateBytes<SysUserImportInput>();
+        var result = _fileService.GetFileStreamResult(byteArray, templateName);
+        return result;
 
+    }
+
+    /// <inheritdoc/>
+    public async Task<dynamic> Preview(BaseImportPreviewInput input)
+    {
+        _fileService.ImportVerification(input.File);
+        IImporter Importer = new ExcelImporter();
+        using var fileStream = input.File.OpenReadStream();//获取文件流
+        var import = await Importer.Import<SysUserImportInput>(fileStream);//导入的文件转化为带入结果
+        var ImportPreview = _fileService.TemplateDataVerification(import, input.MaxRowsCount);//验证数据完整度
+        ImportPreview.Data = await CheckImport(ImportPreview.Data);
+        return ImportPreview;
+    }
+
+    /// <inheritdoc/>
+    public async Task<BaseImportResultOutPut<SysUserImportInput>> Import(BaseImportResultInput<SysUserImportInput> input)
+    {
+        var data = await CheckImport(input.Data, true);//检查数据格式
+        var result = new BaseImportResultOutPut<SysUserImportInput> { Total = input.Data.Count };//定义返回结果
+        var importData = data.Where(it => it.HasError == false).ToList();//需要导入的数据
+        if (importData.Count != data.Count)//如果和总数据不一样表示有错
+        {
+            result.Success = false;
+            result.Data = data.Where(it => it.HasError == true).ToList();
+            result.FailCount = data.Count - importData.Count;
+        }
+        result.ImportCount = importData.Count;
+        var sysUsers = importData.Adapt<List<SysUser>>();//转实体
+        //默认值赋值
+        foreach (var user in sysUsers)
+        {
+            user.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//状态
+            user.Phone = CryptogramUtil.Sm4Encrypt(user.Phone);//手机号
+            user.Password = await GetDefaultPassWord(true);//默认密码
+            user.Avatar = AvatarUtil.GetNameImageBase64(user.Name);//默认头像
+
+        }
+        await InsertRangeAsync(sysUsers);//导入用户
+        return result;
+
+    }
 
     /// <inheritdoc/>
     public async Task<dynamic> Export(UserPageInput input)
     {
         var query = await GetQuery(input);
         var genTests = await query.ToListAsync();//分页
-        var data = genTests.Adapt<List<SysUser>>();
+        var data = genTests.Adapt<List<SysUserExportOutput>>();
         IExporter exporter = new ExcelExporter();
         var byteArray = await exporter.ExportAsByteArray(data);
-        var result = new FileStreamResult(new MemoryStream(byteArray), "application/octet-stream") { FileDownloadName = "学生信息.xlsx" };
+        var result = _fileService.GetFileStreamResult(byteArray, "用户信息.xlsx");
         return result;
 
     }
@@ -531,7 +588,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (await IsAnyAsync(it => it.Email == sysUser.Email && it.Id != sysUser.Id))
                 throw Oops.Bah($"存在重复的邮箱:{sysUser.Email}");
         }
-
     }
 
     /// <summary>
@@ -545,6 +601,23 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             throw Oops.Bah($"禁止{operate}自己");
         }
+    }
+
+    /// <summary>
+    /// 根据日期计算年龄
+    /// </summary>
+    /// <param name="birthdate"></param>
+    /// <returns></returns>
+    public int GetAgeByBirthdate(DateTime birthdate)
+    {
+        DateTime now = DateTime.Now;
+        int age = now.Year - birthdate.Year;
+        if (now.Month < birthdate.Month || (now.Month == birthdate.Month && now.Day < birthdate.Day))
+        {
+            age--;
+        }
+        return age < 0 ? 0 : age;
+
     }
 
 
@@ -572,6 +645,89 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return query;
     }
 
+    /// <summary>
+    /// 检查导入数据
+    /// </summary>
+    /// <param name="data"></param>
+    /// <param name="clearError"></param>
+    /// <returns></returns>
+    public async Task<List<SysUserImportInput>> CheckImport(List<SysUserImportInput> data, bool clearError = false)
+    {
+        #region 校验要用到的数据
+        var accounts = data.Select(it => it.Account).ToList();//当前导入数据账号列表
+        var phones = data.Where(it => !string.IsNullOrEmpty(it.Phone)).Select(it => it.Phone).ToList();//当前导入数据手机号列表
+        var emails = data.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//当前导入数据邮箱列表
+        var sysUsers = await GetListAsync(it => true, it => new SysUser { Account = it.Account, Phone = it.Phone, Email = it.Email });//获取数据用户信息
+        var dbAccounts = sysUsers.Select(it => it.Account).ToList();//数据库账号列表
+        var dbPhones = sysUsers.Where(it => !string.IsNullOrEmpty(it.Phone)).Select(it => it.Phone).ToList();//数据库手机号列表
+        var dbEmails = sysUsers.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//邮箱账号列表
+        var sysOrgs = await _sysOrgService.GetListAsync();
+        var sysPositions = await _sysPositionService.GetListAsync();
+        #endregion
+        data.ForEach(it =>
+        {
+            if (clearError)//如果需要清除错误
+            {
+                it.ErrorInfo = new Dictionary<string, string>();
+                it.HasError = false;
+            }
+            #region 校验账号
+            if (dbAccounts.Contains(it.Account))
+                it.ErrorInfo.Add(nameof(it.Account), $"系统已存在账号{it.Account}");
+            if (accounts.Where(u => u == it.Account).Count() > 1)
+                it.ErrorInfo.Add(nameof(it.Account), $"账号重复");
+            #endregion
+            #region 校验手机号
+            if (!string.IsNullOrEmpty(it.Phone))
+            {
+                if (dbPhones.Contains(it.Phone))
+                    it.ErrorInfo.Add(nameof(it.Phone), $"系统已存在手机号{it.Phone}的用户");
+                if (phones.Where(u => u == it.Phone).Count() > 1)
+                    it.ErrorInfo.Add(nameof(it.Phone), $"手机号重复");
+            }
+            #endregion
+            #region 校验邮箱
+            if (!string.IsNullOrEmpty(it.Email))
+            {
+                if (dbEmails.Contains(it.Email))
+                    it.ErrorInfo.Add(nameof(it.Email), $"系统已存在邮箱{it.Email}");
+                if (emails.Where(u => u == it.Email).Count() > 1)
+                    it.ErrorInfo.Add(nameof(it.Email), $"邮箱重复");
+            }
+            #endregion
+            #region 校验部门和职位
+            if (!string.IsNullOrEmpty(it.OrgName))
+            {
+                var orgList = it.OrgName.Split("/").ToList();//根据/分割
+                long orgId = 0;//部门Id
+                orgList.ForEach(org =>
+                {
+                    if (!_sysOrgService.IsExistOrgByName(sysOrgs, org, orgId, out orgId))//检查部门是否存在
+                    {
+                        it.ErrorInfo.Add(nameof(it.OrgName), $"部门{org}不存在");
+                        return;
+                    }
+                });
+                it.OrgId = orgId;//赋值组织Id
+                //校验职位
+                if (!string.IsNullOrEmpty(it.PositionName))
+                {
+                    //根据部门ID和职位名判断是否有职位
+                    var position = sysPositions.FirstOrDefault(u => u.OrgId == orgId && u.Name == it.PositionName);
+                    if (position != null) it.PositionId = position.Id;
+                    else it.ErrorInfo.Add(nameof(it.PositionName), $"职位{it.PositionName}不存在");
+                }
+            }
+
+            #endregion
+            if (it.ErrorInfo.Count > 0) it.HasError = true;//如果错误信息数量大于0则表示有错误
+
+
+        });
+        data = data.OrderByDescending(it => it.HasError).ToList();//排序
+        return data;
+
+    }
     #endregion
 }
 

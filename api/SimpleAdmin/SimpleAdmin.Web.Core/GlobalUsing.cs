@@ -18,3 +18,4 @@ global using System.Linq;
 global using SimpleAdmin.Application;
 global using SimpleAdmin.System;
 global using Furion.Logging;
+global using Microsoft.AspNetCore.Http;

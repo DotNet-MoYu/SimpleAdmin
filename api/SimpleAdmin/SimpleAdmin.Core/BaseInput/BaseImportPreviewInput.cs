@@ -1,32 +1,28 @@
-﻿using Magicodes.ExporterAndImporter.Core;
-using Magicodes.ExporterAndImporter.Core.Models;
-using Magicodes.ExporterAndImporter.Excel;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SimpleAdmin.Core
 {
+
     /// <summary>
-    /// 导入基础输入
+    /// 导入预览输入
     /// </summary>
-    [ExcelImporter(IsLabelingError = true)]
     public class BaseImportPreviewInput
     {
+        /// <summary>
+        /// 文件
+        /// </summary>
+        public IFormFile File { get; set; }
+
+
 
         /// <summary>
-        /// Id
+        /// 单次导入允许最大行数
         /// </summary>
-        [ImporterHeader(IsIgnore = true)]
-        public long Id { get; set; } = YitIdHelper.NextId();
+        public int MaxRowsCount { get; set; } = 0;
 
-        /// <summary>
-        /// 是否有错误
-        /// </summary>
-        [ImporterHeader(IsIgnore = true)]
-        public bool HasError { get; set; } = false;
-
-        /// <summary>
-        /// 错误详情
-        /// </summary>
-        [ImporterHeader(IsIgnore = true)]
-        public IDictionary<string, string> ErrorInfo { get; set; } = new Dictionary<string, string>();
     }
 }

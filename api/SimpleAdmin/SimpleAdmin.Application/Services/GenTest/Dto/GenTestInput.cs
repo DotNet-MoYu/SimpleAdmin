@@ -106,7 +106,7 @@ public class GenTestEditInput : GenTestAddInput
     public long Id { get; set; }
 }
 
-public class GenTestImportInput : BaseImportPreviewInput
+public class GenTestImportInput : BaseImportTemplateInput
 {
 
     /// <summary>
@@ -121,6 +121,7 @@ public class GenTestImportInput : BaseImportPreviewInput
     /// </summary>
     [ImporterHeader(Name = "性别")]
     [Required(ErrorMessage = "学生性别不能为空")]
+    [InDict(DevDictConst.GENDER)]
     public string Sex { get; set; }
 
     /// <summary>

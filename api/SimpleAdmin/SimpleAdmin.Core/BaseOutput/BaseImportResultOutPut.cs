@@ -38,11 +38,6 @@ namespace SimpleAdmin.Core
         /// 数据
         /// </summary>
 
-        public List<T> Data { get; set; }
-
-        /// <summary>
-        /// 错误文件
-        /// </summary>
-        public FileStreamResult FailDetail { get; set; }
+        public List<T> Data { get; set; } = new List<T>();
     }
 }

@@ -14,7 +14,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         _simpleRedis = simpleRedis;
     }
 
-
+    #region 查询
 
     /// <inheritdoc />
     public override async Task<List<SysOrg>> GetListAsync()
@@ -34,6 +34,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         }
         return sysOrgs;
     }
+
 
     /// <inheritdoc />
     public async Task<SysOrg> GetSysOrgById(long id)
@@ -99,24 +100,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return result;
     }
 
-    /// <inheritdoc />
-    public async Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg)
-    {
-        await CheckInput(input, name);//检查参数
-        var sysOrg = input.Adapt<SysOrg>();//实体转换
-        sysOrg.Code = RandomHelper.CreateRandomString(10);//赋值Code
-        if (await InsertAsync(sysOrg))//插入数据
-            await RefreshCache();//刷新缓存
-    }
 
-    /// <inheritdoc />
-    public async Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg)
-    {
-        await CheckInput(input, name);//检查参数
-        var sysOrg = input.Adapt<SysOrg>();//实体转换
-        if (await UpdateAsync(sysOrg))//更新数据
-            await RefreshCache();//刷新缓存
-    }
 
     /// <inheritdoc />
     public async Task<SysOrg> Detail(BaseIdInput input)
@@ -128,57 +112,50 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 
     }
 
-    /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg)
-    {
-        //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
-        if (ids.Count > 0)
-        {
-            var sysOrgs = await GetListAsync();//获取所有组织
-            var sysDeleteOrgList = new List<long>();//需要删除的组织ID集合
-            ids.ForEach(it =>
-            {
-                var childen = GetSysOrgChilden(sysOrgs, it);//查找下级组织
-                sysDeleteOrgList.AddRange(childen.Select(it => it.Id).ToList());
-                sysDeleteOrgList.Add(it);
-            });
-            //如果组织下有用户则不能删除
-            if (await Context.Queryable<SysUser>().AnyAsync(it => sysDeleteOrgList.Contains(it.OrgId)))
-            {
-                throw Oops.Bah($"请先删除{name}下的用户");
-            }
-            //获取用户表有兼任组织的信息
-            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
-            if (positionJsons.Count > 0)
-            {
-                //去一次空
-                positionJsons.Where(it => it != null).ToList().ForEach(it =>
-                {
 
-                    //获取组织列表
-                    var orgIds = it.Select(it => it.OrgId).ToList();
-                    //获取交集
-                    var sameOrgIds = sysDeleteOrgList.Intersect(orgIds).ToList();
-                    if (sameOrgIds.Count > 0)
-                    {
-                        throw Oops.Bah($"请先删除{name}下的兼任用户");
-                    }
-                });
-            }
-            //判断组织下是否有角色
-            var hasRole = await Context.Queryable<SysRole>().Where(it => sysDeleteOrgList.Contains(it.OrgId.Value)).CountAsync() > 0;
-            if (hasRole) throw Oops.Bah($"请先删除{name}下的角色");
-            // 判断组织下是否有职位
-            var hasPosition = await Context.Queryable<SysPosition>().Where(it => sysDeleteOrgList.Contains(it.OrgId)).CountAsync() > 0;
-            if (hasRole) throw Oops.Bah($"请先删除{name}下的职位");
-            //删除组织
-            if (await DeleteByIdsAsync(sysDeleteOrgList.Cast<object>().ToArray()))
-                await RefreshCache();//刷新缓存
+    /// <inheritdoc />
+    public List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true)
+    {
+        //找到组织
+        var sysOrgs = allOrgList.Where(it => it.Id == orgId).FirstOrDefault();
+        if (sysOrgs != null)//如果组织不为空
+        {
+            var data = new List<SysOrg>();
+            var parents = GetOrgParents(allOrgList, sysOrgs.ParentId, includeSelf);//递归获取父节点
+            data.AddRange(parents);//添加父节点;
+            if (includeSelf)
+                data.Add(sysOrgs);//添加到列表
+            return data;//返回结果
         }
+        return new List<SysOrg>();
     }
 
+    /// <inheritdoc />
+    public bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId, out long orgId)
+    {
+        orgId = 0;
+        var sysOrg = sysOrgs.Where(it => it.ParentId == parentId && it.Name == orgName).FirstOrDefault();
+        if (sysOrg != null)
+        {
+            orgId = sysOrg.Id;
+            return true;
+        }
+        else
+            return false;
+    }
+    #endregion
 
+    #region 新增
+
+    /// <inheritdoc />
+    public async Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg)
+    {
+        await CheckInput(input, name);//检查参数
+        var sysOrg = input.Adapt<SysOrg>();//实体转换
+        sysOrg.Code = RandomHelper.CreateRandomString(10);//赋值Code
+        if (await InsertAsync(sysOrg))//插入数据
+            await RefreshCache();//刷新缓存
+    }
 
     /// <inheritdoc />
     public async Task Copy(OrgCopyInput input)
@@ -260,8 +237,76 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             await RefreshCache();//刷新缓存
     }
 
+    #endregion
 
+    #region 编辑
 
+    /// <inheritdoc />
+    public async Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg)
+    {
+        await CheckInput(input, name);//检查参数
+        var sysOrg = input.Adapt<SysOrg>();//实体转换
+        if (await UpdateAsync(sysOrg))//更新数据
+            await RefreshCache();//刷新缓存
+    }
+
+    #endregion
+
+    #region 删除
+
+    /// <inheritdoc />
+    public async Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg)
+    {
+        //获取所有ID
+        var ids = input.Select(it => it.Id).ToList();
+        if (ids.Count > 0)
+        {
+            var sysOrgs = await GetListAsync();//获取所有组织
+            var sysDeleteOrgList = new List<long>();//需要删除的组织ID集合
+            ids.ForEach(it =>
+            {
+                var childen = GetSysOrgChilden(sysOrgs, it);//查找下级组织
+                sysDeleteOrgList.AddRange(childen.Select(it => it.Id).ToList());
+                sysDeleteOrgList.Add(it);
+            });
+            //如果组织下有用户则不能删除
+            if (await Context.Queryable<SysUser>().AnyAsync(it => sysDeleteOrgList.Contains(it.OrgId)))
+            {
+                throw Oops.Bah($"请先删除{name}下的用户");
+            }
+            //获取用户表有兼任组织的信息
+            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
+            if (positionJsons.Count > 0)
+            {
+                //去一次空
+                positionJsons.Where(it => it != null).ToList().ForEach(it =>
+                {
+
+                    //获取组织列表
+                    var orgIds = it.Select(it => it.OrgId).ToList();
+                    //获取交集
+                    var sameOrgIds = sysDeleteOrgList.Intersect(orgIds).ToList();
+                    if (sameOrgIds.Count > 0)
+                    {
+                        throw Oops.Bah($"请先删除{name}下的兼任用户");
+                    }
+                });
+            }
+            //判断组织下是否有角色
+            var hasRole = await Context.Queryable<SysRole>().Where(it => sysDeleteOrgList.Contains(it.OrgId.Value)).CountAsync() > 0;
+            if (hasRole) throw Oops.Bah($"请先删除{name}下的角色");
+            // 判断组织下是否有职位
+            var hasPosition = await Context.Queryable<SysPosition>().Where(it => sysDeleteOrgList.Contains(it.OrgId)).CountAsync() > 0;
+            if (hasRole) throw Oops.Bah($"请先删除{name}下的职位");
+            //删除组织
+            if (await DeleteByIdsAsync(sysDeleteOrgList.Cast<object>().ToArray()))
+                await RefreshCache();//刷新缓存
+        }
+    }
+
+    #endregion
+
+    #region 其他
     /// <inheritdoc />
     public async Task RefreshCache()
     {
@@ -287,23 +332,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         }
         return new List<SysOrg>();
     }
+    #endregion
 
-    /// <inheritdoc />
-    public List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true)
-    {
-        //找到组织
-        var sysOrgs = allOrgList.Where(it => it.Id == orgId).FirstOrDefault();
-        if (sysOrgs != null)//如果组织不为空
-        {
-            var data = new List<SysOrg>();
-            var parents = GetOrgParents(allOrgList, sysOrgs.ParentId, includeSelf);//递归获取父节点
-            data.AddRange(parents);//添加父节点;
-            if (includeSelf)
-                data.Add(sysOrgs);//添加到列表
-            return data;//返回结果
-        }
-        return new List<SysOrg>();
-    }
 
     #region 方法
     /// <summary>

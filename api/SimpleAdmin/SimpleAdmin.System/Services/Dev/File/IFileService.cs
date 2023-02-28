@@ -71,7 +71,7 @@ public interface IFileService : ITransient
     /// <typeparam name="T"></typeparam>
     /// <param name="importResult">导入结果</param>
     /// <param name="maxRowsCount"></param>
-    BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportPreviewInput;
+    BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportTemplateInput;
 
     /// <summary>
     /// 上传文件到本地返回下载url
