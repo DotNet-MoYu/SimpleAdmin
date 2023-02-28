@@ -103,8 +103,7 @@ namespace SimpleAdmin.System
         /// <inheritdoc/>
         public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportTemplateInput
         {
-            if (importResult.Data == null)
-                throw Oops.Bah("文件数据格式有误,请重新导入!");
+
             if (importResult.Exception != null) throw Oops.Bah("导入异常,请检查文件格式!");
             if (maxRowsCount > 0 && importResult.Data.Count > maxRowsCount) throw Oops.Bah($"单次导入数量为{maxRowsCount},请分批次导入!");
             ////遍历模板错误
@@ -112,8 +111,9 @@ namespace SimpleAdmin.System
             {
                 if (error.Message.Contains("not found")) throw Oops.Bah($"列[{error.RequireColumnName}]未找到");
                 else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
-
             });
+            if (importResult.Data == null)
+                throw Oops.Bah("文件数据格式有误,请重新导入!");
 
             //导入结果输出
             var importPreview = new BaseImportPreviewOutput<T>() { HasError = importResult.HasError };

@@ -2524,11 +2524,6 @@
             没有权限
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0005">
-            <summary>
-            导入数据失败
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Core.Extension.LinqExtension">
             <summary>
             Linq扩展

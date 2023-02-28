@@ -164,9 +164,9 @@ public class SysUserImportInput : BaseImportTemplateInput
 
 
     /// <summary>
-    /// 所属部门
+    /// 所属机构
     /// </summary>
-    [ImporterHeader(Name = "所属部门(子部门用/隔开)")]
+    [ImporterHeader(Name = "所属机构(子机构用/隔开)")]
     [Required(ErrorMessage = "所属部门不能为空")]
     [AntTable(Width = 200)]
     public string OrgName { get; set; }
