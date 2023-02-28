@@ -156,7 +156,9 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
       <a-space>
         <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
         <template #icon><plus-outlined /></template>新增</a-button>
-        <a-button danger @@click="deleteBatch@(@Model.ClassName)()" v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')">删除</a-button>
+        <a-popconfirm title="确定要删除选中@(@Model.FunctionName)吗?" :disabled="selectedRowKeys.length === 0" @@confirm="deleteBatch@(@Model.ClassName)()">
+          <a-button danger type="primary" :disabled="selectedRowKeys.length === 0" v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"><template #icon><delete-outlined /></template>删除</a-button>
+        </a-popconfirm>
       </a-space>
     </template>
     <template #bodyCell="{ column, record }">
@@ -272,12 +274,6 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
       rowSelection: {
           onChange: (selectedRowKey, selectedRows) => {
               selectedRowKeys.value = selectedRowKey
-              //如果有选择就显示选择个数
-              if (selectedRowKey.length > 0) {
-                  options.alert.show = true
-              } else {
-                  options.alert.show = false
-              }
           }
       }
   })
