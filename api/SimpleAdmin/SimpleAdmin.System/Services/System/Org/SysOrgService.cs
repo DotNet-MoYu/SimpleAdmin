@@ -167,35 +167,50 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         ids.AddRange(input.Ids);//加到集合
         if (ids.Contains(input.TargetId))
             throw Oops.Bah($"不能包含自己");
-
-        foreach (var id in input.Ids)
+        //获取目标组织
+        var target = orgList.Where(it => it.Id == input.TargetId).FirstOrDefault();
+        if (target != null)
         {
-            var org = orgList.Where(o => o.Id == id).FirstOrDefault();//获取下级
-            if (org != null && !alreadyIds.Contains(id))
+            //需要复制的组织名称列表
+            var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
+            //目标组织的一级子组织名称列表
+            var targetChildNames = orgList.Where(it => it.ParentId == input.TargetId).Select(it => it.Name).ToList();
+            orgNames.ForEach(it =>
             {
-                alreadyIds.Add(id);//添加到已复制列表
-                RedirectOrg(org);//生成新的实体
-                org.ParentId = input.TargetId;//父id为目标Id
-                addOrgList.Add(org);
-                //是否包含下级
-                if (input.ContainsChild)
+                if (targetChildNames.Contains(it)) throw Oops.Bah($"{target.Name}下已存在{it}");
+            });
+
+            foreach (var id in input.Ids)
+            {
+                var org = orgList.Where(o => o.Id == id).FirstOrDefault();//获取下级
+                if (org != null && !alreadyIds.Contains(id))
                 {
-                    var childIds = await GetOrgChildIds(id, false);//获取下级id列表
-                    alreadyIds.AddRange(childIds);//添加到已复制id
-                    var childList = orgList.Where(c => childIds.Contains(c.Id)).ToList();//获取下级
-                    var addOrgs = CopySysOrgChilden(childList, id, org.Id);//赋值下级组织
-                    addOrgList.AddRange(addOrgs);
+                    alreadyIds.Add(id);//添加到已复制列表
+                    RedirectOrg(org);//生成新的实体
+                    org.ParentId = input.TargetId;//父id为目标Id
+                    addOrgList.Add(org);
+                    //是否包含下级
+                    if (input.ContainsChild)
+                    {
+                        var childIds = await GetOrgChildIds(id, false);//获取下级id列表
+                        alreadyIds.AddRange(childIds);//添加到已复制id
+                        var childList = orgList.Where(c => childIds.Contains(c.Id)).ToList();//获取下级
+                        var addOrgs = CopySysOrgChilden(childList, id, org.Id);//赋值下级组织
+                        addOrgList.AddRange(addOrgs);
+                    }
                 }
             }
-        }
-        //遍历机构重新赋值全称
-        addOrgList.ForEach(it =>
-        {
-            it.Names = it.ParentId == 0 ? it.Name : GetNames(orgList, it.ParentId, it.Name);
-        });
+            //遍历机构重新赋值全称
+            addOrgList.ForEach(it =>
+            {
+                it.Names = it.ParentId == 0 ? it.Name : GetNames(orgList, it.ParentId, it.Name);
+            });
 
-        if (await InsertRangeAsync(addOrgList))//插入数据
-            await RefreshCache();//刷新缓存
+            if (await InsertRangeAsync(addOrgList))//插入数据
+                await RefreshCache();//刷新缓存
+
+        }
+
     }
 
     #endregion
