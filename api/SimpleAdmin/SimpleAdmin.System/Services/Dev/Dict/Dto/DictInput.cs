@@ -78,8 +78,6 @@ public class DictEditInput : DictAddInput
     [MinValue(1, ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 
-    [MinValue(1, ErrorMessage = "ParentId不能为空")]
-    public override long ParentId { get; set; }
 }
 
 
