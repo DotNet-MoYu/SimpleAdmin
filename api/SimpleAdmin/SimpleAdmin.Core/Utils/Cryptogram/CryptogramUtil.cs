@@ -40,7 +40,7 @@ public class CryptogramUtil
     /// <returns>明文</returns>
     public static string Sm4Decrypt(string str)
     {
-        if (str != null)
+        if (!string.IsNullOrEmpty(str))
             return SM4Util.Decrypt(new SM4Util { Data = str });// 解密
         else
             return null;
@@ -53,7 +53,7 @@ public class CryptogramUtil
     /// <returns>密文</returns>
     public static string Sm4Encrypt(string str)
     {
-        if (str != null)
+        if (!string.IsNullOrEmpty(str))
             return SM4Util.Encrypt(new SM4Util { Data = str });            // 加密
         else
             return null;

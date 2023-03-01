@@ -140,7 +140,6 @@ public class SysUserImportInput : BaseImportTemplateInput
     ///</summary>
     [ImporterHeader(Name = "性别")]
     [Required(ErrorMessage = "性别不能为空")]
-    [InDict(DevDictConst.GENDER)]
     public string Gender { get; set; }
 
     /// <summary>
@@ -191,7 +190,6 @@ public class SysUserImportInput : BaseImportTemplateInput
     /// 民族 
     ///</summary>
     [ImporterHeader(Name = "民族")]
-    [InDict(DevDictConst.NATION)]
     public string Nation { get; set; }
 
     /// <summary>
@@ -215,7 +213,6 @@ public class SysUserImportInput : BaseImportTemplateInput
     /// 证件类型 
     ///</summary>
     [ImporterHeader(Name = "证件类型")]
-    [InDict(DevDictConst.IDCARD_TYPE)]
     public string IdCardType { get; set; }
 
     /// <summary>
@@ -228,7 +225,6 @@ public class SysUserImportInput : BaseImportTemplateInput
     /// 文化程度 
     ///</summary>
     [ImporterHeader(Name = "文化程度")]
-    [InDict(DevDictConst.CULTURE_LEVEL)]
     public string CultureLevel { get; set; }
 
     /// <summary>

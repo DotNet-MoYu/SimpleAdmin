@@ -121,7 +121,7 @@ public class GenTestImportInput : BaseImportTemplateInput
     /// </summary>
     [ImporterHeader(Name = "性别")]
     [Required(ErrorMessage = "学生性别不能为空")]
-    [InDict(DevDictConst.GENDER)]
+    //[InDict(DevDictConst.GENDER)]
     public string Sex { get; set; }
 
     /// <summary>

@@ -19,6 +19,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private readonly IRoleService _roleService;
     private readonly IFileService _fileService;
     private readonly ISysPositionService _sysPositionService;
+    private readonly IDictService _dictService;
     private readonly IConfigService _configService;
 
     public SysUserService(ILogger<ILogger> logger, ISimpleRedis simpleRedis,
@@ -28,6 +29,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                        IRoleService roleService,
                        IFileService fileService,
                        ISysPositionService sysPositionService,
+                       IDictService dictService,
                        IConfigService configService)
     {
         this._logger = logger;
@@ -38,6 +40,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         _roleService = roleService;
         this._fileService = fileService;
         this._sysPositionService = sysPositionService;
+        this._dictService = dictService;
         this._configService = configService;
     }
 
@@ -516,16 +519,21 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
         result.ImportCount = importData.Count;
         var sysUsers = importData.Adapt<List<SysUser>>();//转实体
-        //默认值赋值
-        foreach (var user in sysUsers)
+        var defaultPassword = await GetDefaultPassWord(true);//默认密码
+
+        //默认值赋值                                            
+        sysUsers.ForEach(user =>
         {
             user.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//状态
             user.Phone = CryptogramUtil.Sm4Encrypt(user.Phone);//手机号
-            user.Password = await GetDefaultPassWord(true);//默认密码
+            user.Password = defaultPassword;//默认密码
             user.Avatar = AvatarUtil.GetNameImageBase64(user.Name);//默认头像
 
-        }
-        await InsertRangeAsync(sysUsers);//导入用户
+        });
+
+        //await InsertRangeAsync(sysUsers);//导入用户
+        DbContext.Db.Fastest<SysUser>().BulkCopy(sysUsers);//大数据导入
+
         return result;
 
     }
@@ -663,8 +671,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var dbEmails = sysUsers.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//邮箱账号列表
         var sysOrgs = await _sysOrgService.GetListAsync();
         var sysPositions = await _sysPositionService.GetListAsync();
+        var dicts = await _dictService.GetListAsync();
         #endregion
-        data.ForEach(it =>
+        data.ForEach(async it =>
         {
             if (clearError)//如果需要清除错误
             {
@@ -698,27 +707,42 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             #region 校验部门和职位
             if (!string.IsNullOrEmpty(it.OrgName))
             {
-                var orgList = it.OrgName.Split("/").ToList();//根据/分割
-                long orgId = 0;//部门Id
-                orgList.ForEach(org =>
-                {
-                    if (!_sysOrgService.IsExistOrgByName(sysOrgs, org, orgId, out orgId))//检查部门是否存在
-                    {
-                        it.ErrorInfo.Add(nameof(it.OrgName), $"部门{org}不存在");
-                        return;
-                    }
-                });
-                it.OrgId = orgId;//赋值组织Id
-                //校验职位
-                if (!string.IsNullOrEmpty(it.PositionName))
+                var org = sysOrgs.Where(u => u.Names == it.OrgName).FirstOrDefault();
+                if (org != null) it.OrgId = org.Id;//赋值组织Id
+                else it.ErrorInfo.Add(nameof(it.OrgName), $"部门{org}不存在");
+            }
+            //校验职位
+            if (!string.IsNullOrEmpty(it.PositionName))
+            {
+                if (string.IsNullOrEmpty(it.OrgName)) it.ErrorInfo.Add(nameof(it.PositionName), $"请填写部门");
+                else
                 {
                     //根据部门ID和职位名判断是否有职位
-                    var position = sysPositions.FirstOrDefault(u => u.OrgId == orgId && u.Name == it.PositionName);
+                    var position = sysPositions.FirstOrDefault(u => u.OrgId == it.OrgId && u.Name == it.PositionName);
                     if (position != null) it.PositionId = position.Id;
                     else it.ErrorInfo.Add(nameof(it.PositionName), $"职位{it.PositionName}不存在");
                 }
-            }
 
+            }
+            #endregion
+            #region 校验性别等字典
+            var genders = await _dictService.GetValuesByDictValue(DevDictConst.GENDER, dicts);
+            if (!genders.Contains(it.Gender)) it.ErrorInfo.Add(nameof(it.Gender), $"性别只能是男和女");
+            if (!string.IsNullOrEmpty(it.Nation))
+            {
+                var nations = await _dictService.GetValuesByDictValue(DevDictConst.NATION, dicts);
+                if (!nations.Contains(it.Nation)) it.ErrorInfo.Add(nameof(it.Nation), $"不存在的民族");
+            }
+            if (!string.IsNullOrEmpty(it.IdCardType))
+            {
+                var idCarTypes = await _dictService.GetValuesByDictValue(DevDictConst.IDCARD_TYPE, dicts);
+                if (!idCarTypes.Contains(it.IdCardType)) it.ErrorInfo.Add(nameof(it.IdCardType), $"证件类型错误");
+            }
+            if (!string.IsNullOrEmpty(it.CultureLevel))
+            {
+                var cultrueLevels = await _dictService.GetValuesByDictValue(DevDictConst.CULTURE_LEVEL, dicts);
+                if (!cultrueLevels.Contains(it.CultureLevel)) it.ErrorInfo.Add(nameof(it.CultureLevel), $"文化程度有误");
+            }
             #endregion
             if (it.ErrorInfo.Count > 0) it.HasError = true;//如果错误信息数量大于0则表示有错误
 

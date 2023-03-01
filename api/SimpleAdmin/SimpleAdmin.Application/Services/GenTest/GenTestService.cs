@@ -115,14 +115,17 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
         var data = await CheckImport(input.Data, true);
         var result = new BaseImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
-        var errrData = data.Where(it => it.HasError == true).ToList();
-        if (errrData.Count > 0)
+        var importData = data.Where(it => it.HasError == false).ToList();
+        if (importData.Count > 0)
         {
-            result.Success = false;
-            //result.Data = errrData;
-            result.FailCount = errrData.Count;
+            result.Success = true;
+            result.Data = data.Where(it => it.HasError == true).ToList();
+            result.FailCount = importData.Count;
         }
-        result.ImportCount = data.Count - errrData.Count;
+        result.ImportCount = importData.Count;
+        var genTests = importData.Adapt<List<GenTest>>();//转实体
+        //await InsertRangeAsync(genTests);//导入用户
+        DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
         return result;
 
     }

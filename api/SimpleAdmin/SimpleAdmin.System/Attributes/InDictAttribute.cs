@@ -3,7 +3,7 @@
 namespace SimpleAdmin.System;
 
 /// <summary>
-/// 验证值是否在字典中
+/// 验证值是否在字典中,大数据慎用
 /// </summary>
 public class InDictAttribute : ValidationAttribute
 {

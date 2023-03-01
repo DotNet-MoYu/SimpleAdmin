@@ -42,6 +42,12 @@ public interface IDictService : ITransient
     Task<DevDict> GetDict(string DictValue);
 
     /// <summary>
+    /// 获取所有
+    /// </summary>
+    /// <returns>字典列表</returns>
+    Task<List<DevDict>> GetListAsync();
+
+    /// <summary>
     /// 根据字典DictValue获取字典值列表
     /// </summary>
     /// <param name="DictValue">字典值</param>
