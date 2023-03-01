@@ -57,9 +57,11 @@ var dataScope = await _sysUserService.GetLoginUserApiDataScope();
 大部分项目里，其实有很多代码是重复的，几乎每个模块都有 CRUD 增删改查的功能，而这些功能的实现代码往往是大同小异的。如果这些功能都要自己去手写，非常无聊枯燥，浪费时间且效率很低，还可能会写错。代码生成功能通过选择数据库表，完成单表的增删改查管理功能，可以生成包括前端、后端、和SQL语句，同时支持ZIP压缩包和直接生成到项目两种模式，解放你的双手，大大减少了重复代码的编写,无需复制提升开发效率。
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/代码生成.png"/>
 
-#### 📖详细的注释和文档
+#### 📖详细的注释和使用文档
 作为一个开源项目，如何让使用者看懂代码是非常重要的，很多作者会忽视这一点，导致我们阅读其代码的时候很难理解其为什么要这么写,如果没有详细的文档，想要二次开发需要花精力去研究源码。而本系统完全不用担心这个问题，后端源码注释覆盖率超过<font color="#dd0000">90%</font><br /> 
 后续每个功能模块也会推出相应的说明文档，目的就是让使用者能够轻易上手，就算不是自己的代码，也能轻易看懂。
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/wendang.png"/>
+
 ## 📺效果图📺
 <table>
     <tr>
@@ -86,6 +88,9 @@ var dataScope = await _sysUserService.GetLoginUserApiDataScope();
        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/13.png"/></td>
        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/14.png"/></td>
        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/15.png"/></td>
+    </tr>
+    <tr>
+       <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/16.png"/></td>
     </tr>
 
 </table>
