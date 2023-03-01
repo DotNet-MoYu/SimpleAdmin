@@ -22,6 +22,12 @@ public class SysOrg : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "Name", ColumnDescription = "名称", Length = 200)]
     public string Name { get; set; }
+
+    /// <summary>
+    /// 全称
+    ///</summary>
+    [SugarColumn(ColumnName = "Names", ColumnDescription = "全称", Length = 500)]
+    public string Names { get; set; }
     /// <summary>
     /// 编码 
     ///</summary>

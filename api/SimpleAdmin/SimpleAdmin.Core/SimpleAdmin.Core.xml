@@ -1928,6 +1928,11 @@
              名称 
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Core.SysOrg.Names">
+             <summary>
+             全称
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Core.SysOrg.Code">
              <summary>
              编码 
