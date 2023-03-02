@@ -205,11 +205,6 @@
             文件
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.MaxRowsCount">
-            <summary>
-            单次导入允许最大行数
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.Core.BaseImportResultInput`1.Data">
             <summary>
             数据
@@ -2392,6 +2387,11 @@
         <member name="P:SimpleAdmin.Core.SysUser.OrgName">
             <summary>
             机构信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.SysUser.OrgNames">
+            <summary>
+            机构信息全称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SysUser.PositionName">

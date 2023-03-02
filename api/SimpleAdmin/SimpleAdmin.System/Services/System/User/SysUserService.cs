@@ -500,7 +500,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         IImporter Importer = new ExcelImporter();
         using var fileStream = input.File.OpenReadStream();//获取文件流
         var import = await Importer.Import<SysUserImportInput>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = _fileService.TemplateDataVerification(import, input.MaxRowsCount);//验证数据完整度
+        var ImportPreview = _fileService.TemplateDataVerification(import);//验证数据完整度
         ImportPreview.Data = await CheckImport(ImportPreview.Data);
         return ImportPreview;
     }
@@ -645,7 +645,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(u.Account))//根据关键字查询
          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
          .OrderBy(u => u.Id)//排序
-         .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name })
+         .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name, OrgNames = o.Names })
          .Mapper(u =>
          {
              u.Password = null;//密码清空

@@ -80,7 +80,7 @@ public class SysUserExportOutput
     /// 所属机构
     /// </summary>
     [ExporterHeader(DisplayName = "所属机构(子机构用/隔开)")]
-    public string OrgName { get; set; }
+    public string OrgNames { get; set; }
 
     /// <summary>
     /// 职位

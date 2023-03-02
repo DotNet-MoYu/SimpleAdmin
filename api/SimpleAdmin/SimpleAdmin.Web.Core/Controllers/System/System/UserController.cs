@@ -210,8 +210,8 @@ public class UserController : BaseController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("用户导入")]
-    [SuppressMonitor]
-    public async Task<dynamic> Import([FromBody] BaseImportResultInput<SysUserImportInput> input)
+
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] BaseImportResultInput<SysUserImportInput> input)
     {
         return await _sysUserService.Import(input);
     }

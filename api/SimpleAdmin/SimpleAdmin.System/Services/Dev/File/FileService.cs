@@ -101,11 +101,10 @@ namespace SimpleAdmin.System
         }
 
         /// <inheritdoc/>
-        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult, int maxRowsCount = 0) where T : BaseImportTemplateInput
+        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult) where T : BaseImportTemplateInput
         {
 
             if (importResult.Exception != null) throw Oops.Bah("导入异常,请检查文件格式!");
-            if (maxRowsCount > 0 && importResult.Data.Count > maxRowsCount) throw Oops.Bah($"单次导入数量为{maxRowsCount},请分批次导入!");
             ////遍历模板错误
             importResult.TemplateErrors.ForEach(error =>
             {

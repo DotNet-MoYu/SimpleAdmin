@@ -96,7 +96,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         IImporter Importer = new ExcelImporter();
         using var fileStream = input.File.OpenReadStream();//获取文件流
         var import = await Importer.Import<GenTestImportInput>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = _fileService.TemplateDataVerification(import, input.MaxRowsCount);//验证数据完整度
+        var ImportPreview = _fileService.TemplateDataVerification(import);//验证数据完整度
         //遍历错误的行
         //import.RowErrors.ForEach(row =>
         //{
@@ -116,16 +116,17 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         var data = await CheckImport(input.Data, true);
         var result = new BaseImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
         var importData = data.Where(it => it.HasError == false).ToList();
-        if (importData.Count > 0)
+        if (importData.Count != data.Count)
         {
-            result.Success = true;
+            result.Success = false;
             result.Data = data.Where(it => it.HasError == true).ToList();
-            result.FailCount = importData.Count;
+            result.FailCount = data.Count - importData.Count;
         }
         result.ImportCount = importData.Count;
         var genTests = importData.Adapt<List<GenTest>>();//转实体
         //await InsertRangeAsync(genTests);//导入用户
-        DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
+        //DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
+        Thread.Sleep(1111);
         return result;
 
     }
@@ -133,17 +134,23 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     public async Task<List<GenTestImportInput>> CheckImport(List<GenTestImportInput> genTestImports, bool clearError = false)
     {
         //自己的业务
-        var dicts = await _dictService.GetValuesByDictValue(new string[] { DevDictConst.GENDER, DevDictConst.NATION, DevDictConst.IDCARD_TYPE, DevDictConst.CULTURE_LEVEL });
-        //var sexDict = dicts[DevDictConst.GENDER];
-        genTestImports.ForEach(data =>
+        var dicts = await _dictService.GetListAsync();
+
+        foreach (var data in genTestImports)
         {
+
             if (clearError)//如果需要清除错误
             {
                 data.ErrorInfo = new Dictionary<string, string>();
                 data.HasError = false;
             }
+            var genders = await _dictService.GetValuesByDictValue(DevDictConst.GENDER, dicts);
+            if (!genders.Contains(data.Sex)) data.ErrorInfo.Add(nameof(data.Sex), $"性别只能是男和女");
 
-        });
+            var nations = await _dictService.GetValuesByDictValue(DevDictConst.NATION, dicts);
+            if (!nations.Contains(data.Nation)) data.ErrorInfo.Add(nameof(data.Nation), $"不存在的民族");
+            if (data.ErrorInfo.Count > 0) data.HasError = true;//如果错误信息数量大于0则表示有错误
+        }
         genTestImports = genTestImports.OrderByDescending(it => it.HasError).ToList();//排序
         return genTestImports;
 

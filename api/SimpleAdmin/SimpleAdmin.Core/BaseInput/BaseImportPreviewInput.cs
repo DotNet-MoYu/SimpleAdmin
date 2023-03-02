@@ -17,12 +17,5 @@ namespace SimpleAdmin.Core
         /// </summary>
         public IFormFile File { get; set; }
 
-
-
-        /// <summary>
-        /// 单次导入允许最大行数
-        /// </summary>
-        public int MaxRowsCount { get; set; } = 0;
-
     }
 }

@@ -241,6 +241,12 @@ public class SysUser : BaseEntity
     public string OrgName { get; set; }
 
     /// <summary>
+    /// 机构信息全称
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public string OrgNames { get; set; }
+
+    /// <summary>
     /// 职位信息
     /// </summary>
     [SugarColumn(IsIgnore = true)]
