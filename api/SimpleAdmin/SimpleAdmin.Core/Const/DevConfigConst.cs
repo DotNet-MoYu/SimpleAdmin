@@ -29,7 +29,7 @@ public class DevConfigConst
     /// <summary>
     /// 系统默认工作台
     /// </summary>
-    public const string SYS_DEFAULT_WORKBENCH_DATA_KEY = "SYS_DEFAULT_WORKBENCH_DATA_KEY";
+    public const string SYS_DEFAULT_WORKBENCH_DATA = "SYS_DEFAULT_WORKBENCH_DATA";
 
     #region MQTT
     /// <summary>
