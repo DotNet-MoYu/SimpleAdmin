@@ -23,7 +23,7 @@ public class GenViewModel : GenBasic
     /// <summary>
     /// 菜单ID
     /// </summary>
-    public long MenuId { get; set; } = YitIdHelper.NextId();
+    public long MenuId { get; set; } = CommonUtils.GetSingleId();
 
     /// <summary>
     /// 菜单编码
@@ -54,24 +54,24 @@ public class GenViewModel : GenBasic
     /// <summary>
     /// 添加按钮ID
     /// </summary>
-    public long AddButtonId { get; set; } = YitIdHelper.NextId();
+    public long AddButtonId { get; set; } = CommonUtils.GetSingleId();
 
     /// <summary>
     /// 批量删除按钮ID
     /// </summary>
-    public long BatchDeleteButtonId { get; set; } = YitIdHelper.NextId();
+    public long BatchDeleteButtonId { get; set; } = CommonUtils.GetSingleId();
 
 
     /// <summary>
     /// 编辑按钮ID
     /// </summary>
-    public long EditButtonId { get; set; } = YitIdHelper.NextId();
+    public long EditButtonId { get; set; } = CommonUtils.GetSingleId();
 
 
     /// <summary>
     /// 删除按钮ID
     /// </summary>
-    public long DeleteButtonId { get; set; } = YitIdHelper.NextId();
+    public long DeleteButtonId { get; set; } = CommonUtils.GetSingleId();
     #endregion
 
     #region 后端

@@ -14,9 +14,9 @@ namespace SimpleAdmin.Core
     {
         public override bool IsValid(object value)
         {
-            if (value.ToLong() == 0 || string.IsNullOrEmpty(value.ToString()))
-                return false;
-            else return true;
+            if (value.ToLong() > 0 || !string.IsNullOrEmpty(value.ToString()))
+                return true;
+            else return false;
         }
     }
 }

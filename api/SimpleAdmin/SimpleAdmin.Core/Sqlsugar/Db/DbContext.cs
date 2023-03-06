@@ -140,7 +140,7 @@ public static class DbContext
                 {
                     var id = entityInfo.EntityColumnInfo.PropertyInfo.GetValue(entityInfo.EntityValue);
                     if (id == null || (long)id == 0)
-                        entityInfo.SetValue(Yitter.IdGenerator.YitIdHelper.NextId());
+                        entityInfo.SetValue(CommonUtils.GetSingleId());
                 }
                 if (entityInfo.PropertyName == nameof(BaseEntity.CreateTime))
                     entityInfo.SetValue(DateTime.Now);

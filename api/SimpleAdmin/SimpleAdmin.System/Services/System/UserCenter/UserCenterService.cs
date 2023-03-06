@@ -274,7 +274,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 {
                     // 否则构造一个模块，并添加到拥有模块
                     SysResource sysResource = new SysResource();
-                    sysResource.Id = YitIdHelper.NextId();
+                    sysResource.Id = CommonUtils.GetSingleId();
                     sysResource.Path = "/" + RandomHelper.CreateRandomString(10);
                     sysResource.Category = CateGoryConst.Resource_MODULE;
                     allModuleList.Add(sysResource);

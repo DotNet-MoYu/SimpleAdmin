@@ -94,7 +94,7 @@ namespace SimpleAdmin.System
 
             string bucketName = string.Empty;    // 存储桶名称
             string storageUrl = string.Empty;// 定义存储的url，本地文件返回文件实际路径，其他引擎返回网络地址
-            var objectId = YitIdHelper.NextId();//生成id
+            var objectId = CommonUtils.GetSingleId();//生成id
 
             switch (engine)
             {

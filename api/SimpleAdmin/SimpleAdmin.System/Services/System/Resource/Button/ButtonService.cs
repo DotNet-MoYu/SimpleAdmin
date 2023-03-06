@@ -52,7 +52,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         var idList = new List<long>();//Id列表
         for (int i = 0; i < codeList.Count; i++)
         {
-            var id = YitIdHelper.NextId();
+            var id = CommonUtils.GetSingleId();
             sysResources.Add(new SysResource
             {
                 Id = id,

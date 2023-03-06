@@ -574,7 +574,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             //添加菜单参数
             MenuAddInput menu = new MenuAddInput
             {
-                Id = YitIdHelper.NextId(),
+                Id = CommonUtils.GetSingleId(),
                 ParentId = genBasic.MenuPid,
                 Title = title,
                 Category = CateGoryConst.Resource_MENU,

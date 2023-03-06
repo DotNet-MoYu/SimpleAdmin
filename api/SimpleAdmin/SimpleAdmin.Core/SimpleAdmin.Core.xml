@@ -3024,6 +3024,17 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Core.Utils.CommonUtils">
+            <summary>
+            公共功能
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.CommonUtils.GetSingleId">
+            <summary>
+            获取唯一Id
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Core.Utils.CryptogramUtil">
             <summary>
             加解密功能
