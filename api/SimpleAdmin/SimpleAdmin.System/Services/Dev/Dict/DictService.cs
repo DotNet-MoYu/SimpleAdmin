@@ -53,7 +53,7 @@ public class DictService : DbRepository<DevDict>, IDictService
         //获取当前字典分类
         var category = dicts.Where(it => it.Id == input.Id).Select(it => it.Category).FirstOrDefault();
         //如果是系统字典提示不可删除
-        if (category == CateGoryConst.Dict_FRM) throw Oops.Bah("不可删除系统内置字典");
+        //if (category == CateGoryConst.Dict_FRM) throw Oops.Bah("不可删除系统内置字典");
         //获取子节点
         var childens = GetDevDictChilden(dicts, input.Id);
         //提取ID
@@ -172,9 +172,6 @@ public class DictService : DbRepository<DevDict>, IDictService
         {
             throw Oops.Bah($"存在重复的字典值:{devDict.DictValue}");
         }
-        //设置字典分类
-        devDict.Category = CateGoryConst.Dict_BIZ;
-
     }
 
 
