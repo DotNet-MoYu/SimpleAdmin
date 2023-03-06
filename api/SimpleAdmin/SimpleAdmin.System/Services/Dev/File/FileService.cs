@@ -1,10 +1,5 @@
-﻿using Furion.Extensions;
-using Magicodes.ExporterAndImporter.Core.Models;
-using Microsoft.AspNetCore.Mvc;
-using NewLife;
-using System.DrawingCore;
+﻿using System.DrawingCore;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Web;
 
 namespace SimpleAdmin.System
@@ -87,89 +82,6 @@ namespace SimpleAdmin.System
             }
 
         }
-
-        /// <inheritdoc/>
-        public void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null)
-        {
-
-            if (file == null) throw Oops.Bah("文件不能为空");
-            if (file.Length > maxSzie * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSzie}M");
-            var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1]; // 文件后缀
-            string[] allowTypeS = allowTypes == null ? new string[] { "xlsx" } : allowTypes;//允许上传的文件类型
-            if (!allowTypeS.Contains(fileSuffix)) throw Oops.Bah(errorMessage: "文件格式错误");
-
-        }
-
-        /// <inheritdoc/>
-        public BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult) where T : BaseImportTemplateInput
-        {
-
-            if (importResult.Exception != null) throw Oops.Bah("导入异常,请检查文件格式!");
-            ////遍历模板错误
-            importResult.TemplateErrors.ForEach(error =>
-            {
-                if (error.Message.Contains("not found")) throw Oops.Bah($"列[{error.RequireColumnName}]未找到");
-                else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
-            });
-            if (importResult.Data == null)
-                throw Oops.Bah("文件数据格式有误,请重新导入!");
-
-            //导入结果输出
-            var importPreview = new BaseImportPreviewOutput<T>() { HasError = importResult.HasError };
-            Dictionary<string, string> headerMap = new Dictionary<string, string>();
-            //遍历导入的表头列表信息
-            importResult.ImporterHeaderInfos.ForEach(it =>
-            {
-                headerMap.Add(it.Header.Name, it.PropertyName);
-                var tableColumns = new TableColumns { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
-                var antTableAttribute = it.PropertyInfo.GetCustomAttribute<AntTableAttribute>();//获取表格特性
-                if (antTableAttribute != null)
-                {
-                    tableColumns.Date = antTableAttribute.IsDate;
-                    tableColumns.Ellipsis = antTableAttribute.Ellipsis;
-                    tableColumns.Width = antTableAttribute.Width;
-                }
-                importPreview.TableColumns.Add(tableColumns);//添加到表头
-            });
-
-            //导入的数据转集合
-            var data = importResult.Data.ToList();
-            var systemError = new string[] { };//系统错误提示
-            //遍历错误列,将错误字典中的中文改成英文跟实体对应
-            importResult.RowErrors.ForEach(row =>
-            {
-                IDictionary<string, string> fieldErrors = new Dictionary<string, string>();//定义字典
-                //遍历错误列,赋值给新的字典
-                row.FieldErrors.ForEach(it =>
-                {
-                    var errrVaule = it.Value;
-                    //value xx Invalid, please fill in the correct integer value!
-                    //value xx Invalid, please fill in the correct date and time format!
-                    if (it.Value.Contains("Invalid"))//如果错误信息有Invalid就提示格式错误
-                        errrVaule = $"{it.Key}格式错误";
-                    fieldErrors.Add(headerMap[it.Key], errrVaule);
-                });
-                row.FieldErrors = fieldErrors;//替换新的字典
-                row.RowIndex -= 2;//下表与列表中的下标一致
-                data[row.RowIndex].HasError = true;//错误的行HasError = true
-                data[row.RowIndex].ErrorInfo = fieldErrors;//替换新的字典
-            });
-            data = data.OrderByDescending(it => it.HasError).ToList();//排序
-            importPreview.Data = data;//重新赋值data
-            return importPreview;
-
-        }
-
-
-
-        /// <inheritdoc/>
-        public string GetTemplateFolder()
-        {
-            var folder = App.WebHostEnvironment.WebRootPath.CombinePath("Template");
-            return folder;
-        }
-
-
 
         #region 方法
         /// <summary>

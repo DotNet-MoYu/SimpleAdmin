@@ -182,14 +182,30 @@ public partial interface ISysUserService : ITransient
     /// </summary>
     /// <param name="input">预览参数</param>
     /// <returns>预览结果</returns>
-    Task<dynamic> Preview(BaseImportPreviewInput input);
+    Task<ImportPreviewOutput<SysUserImportInput>> Preview(ImportPreviewInput input);
 
     /// <summary>
     /// 用户导入
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<BaseImportResultOutPut<SysUserImportInput>> Import(BaseImportResultInput<SysUserImportInput> input);
+    Task<ImportResultOutPut<SysUserImportInput>> Import(ImportResultInput<SysUserImportInput> input);
+
+    /// <summary>
+    /// 检查导入数据
+    /// </summary>
+    /// <param name="data">数据</param>
+    /// <param name="clearError">是否初始化错误</param>
+    /// <returns></returns>
+    Task<List<T>> CheckImport<T>(List<T> data, bool clearError = false) where T : SysUserImportInput;
+
+    /// <summary>
+    /// 设置用户默认值
+    /// </summary>
+    /// <param name="sysUsers"></param>
+    /// <returns></returns>
+    Task SetUserDefault(List<SysUser> sysUsers);
+
     #endregion
 
 }

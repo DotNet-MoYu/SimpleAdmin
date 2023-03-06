@@ -1,7 +1,4 @@
-﻿using Masuit.Tools.Models;
-//using SimpleAdmin.Core.Extension;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// AppStartup启动类

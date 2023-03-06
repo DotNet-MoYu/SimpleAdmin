@@ -1,8 +1,4 @@
-﻿using System.Data;
-using System.Linq;
-using System.Reflection;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 ///  SqlSugar设置启动
@@ -18,7 +14,6 @@ public static class SqlsugarSetup
 
         //services.AddSingleton<ISqlSugarClient>(DbContext.Db); // 单例注册,不用工作单元不需要注入
         //services.AddUnitOfWork<SqlSugarUnitOfWork>(); // 事务与工作单元注册
-
         //遍历配置
         DbContext.DbConfigs.ForEach(it =>
         {

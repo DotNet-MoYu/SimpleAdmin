@@ -1,17 +1,10 @@
-﻿using Magicodes.ExporterAndImporter.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.System;
 
 
 /// <summary>
 /// 文件导入通用输出
 /// </summary>
-public class BaseImportPreviewOutput<T> where T : class
+public class ImportPreviewOutput<T> where T : class
 {
     /// <summary>
     /// 是否有错误
