@@ -113,7 +113,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         else
         {
             //如果没数据去系统配置里取默认的工作台
-            var devConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA_KEY);
+            var devConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
             if (devConfig != null)
             {
                 return devConfig.ConfigValue.ToLower();//返回工作台信息
