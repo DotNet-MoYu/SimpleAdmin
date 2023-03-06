@@ -35,7 +35,7 @@ public class OrgEditInput : OrgAddInput
     /// <summary>
     /// Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
 

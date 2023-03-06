@@ -73,13 +73,13 @@ public class UserAddInput : SysUser
     /// <summary>
     /// 组织id
     /// </summary>
-    [MinValue(1, ErrorMessage = "OrgId不能为空")]
+    [IdNotNull(ErrorMessage = "OrgId不能为空")]
     public override long OrgId { get; set; }
 
     /// <summary>
     /// 职位id
     /// </summary>
-    [MinValue(1, ErrorMessage = "PositionId不能为空")]
+    [IdNotNull(ErrorMessage = "PositionId不能为空")]
     public override long PositionId { get; set; }
 }
 
@@ -91,7 +91,7 @@ public class UserEditInput : UserAddInput
     /// <summary>
     /// Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 
 }

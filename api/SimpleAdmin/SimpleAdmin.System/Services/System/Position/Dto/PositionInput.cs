@@ -30,7 +30,7 @@ public class PositionAddInput : SysPosition
     /// <summary>
     /// 组织ID
     /// </summary>
-    [MinValue(1, ErrorMessage = "OrgId不能为空")]
+    [IdNotNull(ErrorMessage = "OrgId不能为空")]
     public override long OrgId { get; set; }
 
     /// <summary>
@@ -54,7 +54,7 @@ public class PositionEditInput : PositionAddInput
     /// <summary>
     /// Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
 
