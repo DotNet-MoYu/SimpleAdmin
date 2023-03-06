@@ -122,6 +122,19 @@
             人员管理控制器
             </summary>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
+            <summary>
+            导入预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Template">
+            <summary>
+            模板下载
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.OrgTreeSelector">
             <summary>
             获取组织树选择器
@@ -146,6 +159,19 @@
             岗位选择器
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取人员拥有角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            获取角色选择器
+            </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Add(SimpleAdmin.System.UserAddInput)">
@@ -190,13 +216,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取人员拥有角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
             <summary>
             给人员授权角色
@@ -204,10 +223,18 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <summary>
-            获取角色选择器
+            人员导入
             </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Export(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            人员导出
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.GenTestController">
@@ -250,7 +277,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.Core.BaseImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             预览
             </summary>
@@ -671,7 +698,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.Core.BaseImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
@@ -733,7 +760,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.Core.BaseImportResultInput{SimpleAdmin.System.SysUserImportInput})">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
             <summary>
             用户导入
             </summary>

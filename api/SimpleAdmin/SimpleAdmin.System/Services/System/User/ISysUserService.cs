@@ -52,6 +52,13 @@ public partial interface ISysUserService : ITransient
     Task<SqlSugarPagedList<SysUser>> Page(UserPageInput input);
 
     /// <summary>
+    /// 用户列表
+    /// </summary>
+    /// <param name="input">查询</param>
+    /// <returns></returns>
+    Task<List<SysUser>> List(UserPageInput input);
+
+    /// <summary>
     /// 根据用户Id获取用户信息
     /// </summary>
     /// <param name="Id">用户ID</param>
@@ -169,7 +176,7 @@ public partial interface ISysUserService : ITransient
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<dynamic> Export(UserPageInput input);
+    Task<FileStreamResult> Export(UserPageInput input);
 
     /// <summary>
     /// 导入模板下载
@@ -205,6 +212,7 @@ public partial interface ISysUserService : ITransient
     /// <param name="sysUsers"></param>
     /// <returns></returns>
     Task SetUserDefault(List<SysUser> sysUsers);
+
 
     #endregion
 

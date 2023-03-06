@@ -263,7 +263,13 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return pageInfo;
     }
 
-
+    /// <inheritdoc/>
+    public async Task<List<SysUser>> List(UserPageInput input)
+    {
+        var query = await GetQuery(input);//获取查询条件
+        var list = await query.ToListAsync();
+        return list;
+    }
 
     /// <inheritdoc/>
     public async Task<List<long>> OwnRole(BaseIdInput input)
@@ -512,30 +518,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task SetUserDefault(List<SysUser> sysUsers)
+    public async Task<FileStreamResult> Export(UserPageInput input)
     {
-        var defaultPassword = await GetDefaultPassWord(true);//默认密码
-
-        //默认值赋值                                            
-        sysUsers.ForEach(user =>
-        {
-            user.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//状态
-            user.Phone = CryptogramUtil.Sm4Encrypt(user.Phone);//手机号
-            user.Password = defaultPassword;//默认密码
-            user.Avatar = AvatarUtil.GetNameImageBase64(user.Name);//默认头像
-
-        });
-    }
-
-    /// <inheritdoc/>
-    public async Task<dynamic> Export(UserPageInput input)
-    {
-        var query = await GetQuery(input);
-        var genTests = await query.ToListAsync();//分页
+        var genTests = await List(input);
         var data = genTests.Adapt<List<SysUserExportOutput>>();//转为Dto
         var result = await _importExportService.Export(data, "用户信息");
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -631,6 +619,22 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         data = data.OrderByDescending(it => it.HasError).ToList();//排序
         return data;
 
+    }
+
+    /// <inheritdoc/>
+    public async Task SetUserDefault(List<SysUser> sysUsers)
+    {
+        var defaultPassword = await GetDefaultPassWord(true);//默认密码
+
+        //默认值赋值                                            
+        sysUsers.ForEach(user =>
+        {
+            user.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//状态
+            user.Phone = CryptogramUtil.Sm4Encrypt(user.Phone);//手机号
+            user.Password = defaultPassword;//默认密码
+            user.Avatar = AvatarUtil.GetNameImageBase64(user.Name);//默认头像
+
+        });
     }
     #endregion
 

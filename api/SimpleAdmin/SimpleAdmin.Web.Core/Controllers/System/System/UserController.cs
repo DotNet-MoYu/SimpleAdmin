@@ -213,6 +213,7 @@ public class UserController : BaseController
 
     public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
     {
+
         return await _sysUserService.Import(input);
     }
 
@@ -223,7 +224,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("export")]
-    [DisplayName("导出")]
+    [DisplayName("用户导出")]
     public async Task<dynamic> Export([FromBody] UserPageInput input)
     {
         return await _sysUserService.Export(input);
