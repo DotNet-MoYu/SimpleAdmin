@@ -405,7 +405,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         if (orgs.Count > 0)//如果数量大于0
         {
             var data = new List<SysOrg>();
-            var newId = YitIdHelper.NextId();
+            var newId = CommonUtils.GetSingleId();
             foreach (var item in orgs)//遍历组织
             {
                 var childen = CopySysOrgChilden(orgList, item.Id, newId);//获取子节点
@@ -426,7 +426,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     private void RedirectOrg(SysOrg org)
     {
         //重新生成ID并赋值
-        var newId = YitIdHelper.NextId();
+        var newId = CommonUtils.GetSingleId();
         org.Id = newId;
         org.Code = RandomHelper.CreateRandomString(10);
         org.CreateTime = DateTime.Now;

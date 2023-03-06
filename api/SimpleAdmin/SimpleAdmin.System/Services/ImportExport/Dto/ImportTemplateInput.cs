@@ -12,7 +12,7 @@ public class ImportTemplateInput
     /// Id
     /// </summary>
     [ImporterHeader(IsIgnore = true)]
-    public long Id { get; set; } = YitIdHelper.NextId();
+    public long Id { get; set; } = CommonUtils.GetSingleId();
 
     /// <summary>
     /// 是否有错误

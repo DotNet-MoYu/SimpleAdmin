@@ -215,7 +215,7 @@ public class AuthService : IAuthService
     public string AddValidCodeToRedis(string code, int expire = 5)
     {
         //生成请求号
-        var reqNo = YitIdHelper.NextId().ToString();
+        var reqNo = CommonUtils.GetSingleId().ToString();
         //插入redis
         _simpleRedis.Set(RedisConst.Redis_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
