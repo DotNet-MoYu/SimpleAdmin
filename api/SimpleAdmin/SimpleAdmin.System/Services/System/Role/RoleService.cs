@@ -349,7 +349,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         if (result.IsSuccess)//如果成功了
         {
             await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_ROLE);//刷新关系表SYS_USER_HAS_ROLE缓存
-            await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id.Value });//清除角色下用户缓存
+            await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
 
         }
         else
