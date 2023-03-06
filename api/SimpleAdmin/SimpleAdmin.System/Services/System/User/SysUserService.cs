@@ -190,13 +190,13 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var orgs = await _sysOrgService.GetListAsync();//获取所有机构
             var scopeAllList = orgs.Select(it => it.Id).ToList();//获取所有机构ID
             //遍历分组
-            relationGroup.ForEach(it =>
+            foreach (var it in relationGroup)
             {
                 HashSet<long> scopeSet = new HashSet<long>();//定义不可重复列表
                 var relationList = it.ToList();//关系列表
-                relationList.ForEach(async it =>
+                foreach (var relation in relationList)
                 {
-                    var rolePermission = it.ExtJson.ToJsonEntity<RelationRolePermission>();
+                    var rolePermission = relation.ExtJson.ToJsonEntity<RelationRolePermission>();
                     var scopeCategory = rolePermission.ScopeCategory;//根据数据权限分类
                     if (scopeCategory != CateGoryConst.SCOPE_SELF)//如果不是仅自己
                     {
@@ -218,9 +218,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                             scopeSet.AddRange(rolePermission.ScopeDefineOrgIdList);//添加自定义范围的机构ID
                         }
                     }
-                });
+                }
                 permissions.Add(new DataScope { ApiUrl = it.Key, DataScopes = scopeSet.ToList() });//将改URL的权限集合加入权限集合列表
-            });
+            }
         }
         return permissions;
     }
@@ -368,16 +368,16 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public async Task GrantRole(UserGrantRoleInput input)
     {
-        var sysUser = await GetUserById(input.Id.Value);//获取用户信息
+        var sysUser = await GetUserById(input.Id);//获取用户信息
         if (sysUser != null)
         {
             var isSuperAdmin = sysUser.Account == RoleConst.SuperAdmin;//判断是否有超管
             if (isSuperAdmin)
                 throw Oops.Bah($"不能给超管分配角色");
-            CheckSelf(input.Id.Value, SimpleAdminConst.GrantRole);//判断是不是自己
+            CheckSelf(input.Id, SimpleAdminConst.GrantRole);//判断是不是自己
             //给用户赋角色
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_ROLE, input.Id.Value, input.RoleIdList.Select(it => it.ToString()).ToList(), null, true);
-            DeleteUserFromRedis(input.Id.Value);//从redis删除用户信息
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_ROLE, input.Id, input.RoleIdList.Select(it => it.ToString()).ToList(), null, true);
+            DeleteUserFromRedis(input.Id);//从redis删除用户信息
         }
     }
 
