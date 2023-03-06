@@ -97,7 +97,7 @@ public class UserController : BaseController
     [HttpPost("preview")]
     [DisableRequestSizeLimit]
     [SuppressMonitor]
-    public async Task<dynamic> Preview([FromForm] BaseImportPreviewInput input)
+    public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
     {
         return await _sysUserService.Preview(input);
     }
@@ -211,8 +211,9 @@ public class UserController : BaseController
     [HttpPost("import")]
     [DisplayName("用户导入")]
 
-    public async Task<dynamic> Import([SuppressMonitor][FromBody] BaseImportResultInput<SysUserImportInput> input)
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
     {
+
         return await _sysUserService.Import(input);
     }
 
@@ -223,7 +224,7 @@ public class UserController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("export")]
-    [DisplayName("导出")]
+    [DisplayName("用户导出")]
     public async Task<dynamic> Export([FromBody] UserPageInput input)
     {
         return await _sysUserService.Export(input);

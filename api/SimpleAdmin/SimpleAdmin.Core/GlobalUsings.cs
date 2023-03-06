@@ -24,3 +24,7 @@ global using System.IO;
 global using Magicodes.ExporterAndImporter.Core;
 global using Magicodes.ExporterAndImporter.Core.Models;
 global using Magicodes.ExporterAndImporter.Excel;
+global using NewLife.Serialization;
+global using System.Data;
+global using System.Linq;
+global using System.Reflection;

@@ -88,7 +88,7 @@ public class GenTestController : IDynamicApiController
     [HttpPost("preview")]
     [DisableRequestSizeLimit]
     [SuppressMonitor]
-    public async Task<dynamic> Preview([FromForm] BaseImportPreviewInput input)
+    public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
     {
         return await _genTestService.Preview(input);
     }
@@ -113,7 +113,7 @@ public class GenTestController : IDynamicApiController
     [DisplayName("导入")]
     [SuppressMonitor]
     [LoggingMonitor()]
-    public async Task<dynamic> Import([FromBody] BaseImportResultInput<GenTestImportInput> input)
+    public async Task<dynamic> Import([FromBody] ImportResultInput<GenTestImportInput> input)
     {
         return await _genTestService.Import(input);
     }

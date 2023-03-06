@@ -30,3 +30,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using Magicodes.ExporterAndImporter.Core;
 global using Magicodes.ExporterAndImporter.Excel;
 global using OfficeOpenXml.Table;
+global using Magicodes.ExporterAndImporter.Core.Models;

@@ -119,7 +119,7 @@ public class UserGrantRoleInput
 /// 用户导入
 /// </summary>
 
-public class SysUserImportInput : BaseImportTemplateInput
+public class SysUserImportInput : ImportTemplateInput
 {
     /// <summary>
     /// 账号

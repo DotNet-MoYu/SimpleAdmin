@@ -100,26 +100,6 @@
             <param name="arg"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Core.AntTableAttribute">
-            <summary>
-            前端表格特性
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.AntTableAttribute.IsDate">
-            <summary>
-            是否是日期格式
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.AntTableAttribute.Ellipsis">
-            <summary>
-            是否自动省略
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.AntTableAttribute.Width">
-            <summary>
-            宽度
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Core.CacheAttribute">
             <summary>
             缓存结果特性
@@ -195,41 +175,6 @@
             主键Id
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Core.BaseImportPreviewInput">
-            <summary>
-            导入预览输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewInput.File">
-            <summary>
-            文件
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultInput`1.Data">
-            <summary>
-            数据
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.BaseImportTemplateInput">
-            <summary>
-            导入基础输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.HasError">
-            <summary>
-            是否有错误
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportTemplateInput.ErrorInfo">
-            <summary>
-            错误详情
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Core.BasePageInput">
             <summary>
             全局分页查询输入参数
@@ -258,86 +203,6 @@
         <member name="P:SimpleAdmin.Core.BasePageInput.SearchKey">
             <summary>
             关键字
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.BaseImportPreviewOutput`1">
-            <summary>
-            文件导入通用输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.HasError">
-            <summary>
-            是否有错误
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.TableColumns">
-            <summary>
-            动态表头
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportPreviewOutput`1.Data">
-            <summary>
-            数据
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.TableColumns">
-            <summary>
-            动态表头
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.TableColumns.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.TableColumns.DataIndex">
-            <summary>
-            数据源
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.TableColumns.Width">
-            <summary>
-            宽度
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.TableColumns.Ellipsis">
-            <summary>
-            超过宽度将自动省略
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.TableColumns.Date">
-            <summary>
-            是否是日期格式
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.BaseImportResultOutPut`1">
-            <summary>
-            导入结果输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Success">
-            <summary>
-            是否成功
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Total">
-            <summary>
-            总数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.ImportCount">
-            <summary>
-            导入数量
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.FailCount">
-            <summary>
-            错误数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.BaseImportResultOutPut`1.Data">
-            <summary>
-            数据
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.GzipCompressionComponent">
@@ -597,7 +462,7 @@
             默认用户密码
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA_KEY">
+        <member name="F:SimpleAdmin.Core.DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA">
             <summary>
             系统默认工作台
             </summary>

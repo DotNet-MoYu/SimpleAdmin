@@ -21,6 +21,34 @@ public class BizUserController : IDynamicApiController
         this._positionService = positionService;
     }
 
+    #region Get请求
+
+    /// <summary>
+    /// 导入预览
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("preview")]
+    [DisableRequestSizeLimit]
+    [SuppressMonitor]
+    public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
+    {
+        return await _userService.Preview(input);
+
+    }
+
+    /// <summary>
+    /// 模板下载
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet(template: "template")]
+    [SuppressMonitor]
+    public async Task<dynamic> Template()
+    {
+        return await _userService.Template();
+    }
+
+
     /// <summary>
     /// 获取组织树选择器
     /// </summary>
@@ -69,6 +97,33 @@ public class BizUserController : IDynamicApiController
         return await _positionService.PositionSelector(input);
     }
 
+
+    /// <summary>
+    /// 获取人员拥有角色
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("ownRole")]
+    [DisplayName("获取人员拥有角色")]
+    public async Task<dynamic> OwnRole([FromQuery] BaseIdInput input)
+    {
+        return await _userService.OwnRole(input);
+    }
+
+    /// <summary>
+    /// 获取角色选择器
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("roleSelector")]
+    [DisplayName("角色选择器")]
+    public async Task<dynamic> RoleSelector([FromQuery] RoleSelectorInput input)
+    {
+        return await _userService.RoleSelector(input);
+    }
+
+    #endregion
+
+    #region Post请求
 
     /// <summary>
     /// 添加人员
@@ -145,18 +200,6 @@ public class BizUserController : IDynamicApiController
     }
 
     /// <summary>
-    /// 获取人员拥有角色
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("ownRole")]
-    [DisplayName("获取人员拥有角色")]
-    public async Task<dynamic> OwnRole([FromQuery] BaseIdInput input)
-    {
-        return await _userService.OwnRole(input);
-    }
-
-    /// <summary>
     /// 给人员授权角色
     /// </summary>
     /// <param name="input"></param>
@@ -169,14 +212,32 @@ public class BizUserController : IDynamicApiController
     }
 
     /// <summary>
-    /// 获取角色选择器
+    /// 人员导入
     /// </summary>
+    /// <param name="input"></param>
     /// <returns></returns>
-    [HttpGet("roleSelector")]
-    [DisplayName("角色选择器")]
-    public async Task<dynamic> RoleSelector([FromQuery] RoleSelectorInput input)
+    [HttpPost("import")]
+    [DisplayName("人员导入")]
+
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<BizUserImportInput> input)
     {
-        return await _userService.RoleSelector(input);
+        return await _userService.Import(input);
+
     }
+
+
+    /// <summary>
+    /// 人员导出
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("export")]
+    [DisplayName("人员导出")]
+    public async Task<dynamic> Export([FromBody] UserPageInput input)
+    {
+        return await _userService.Export(input);
+    }
+    #endregion
+
 
 }

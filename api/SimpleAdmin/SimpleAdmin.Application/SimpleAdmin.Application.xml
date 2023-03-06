@@ -205,10 +205,10 @@
             <inheritdoc />
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.Core.BaseImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.Core.BaseImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
+        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Export(SimpleAdmin.Application.GenTestPageInput)">
@@ -401,6 +401,16 @@
             <param name="sysPosition">参数</param>
             <param name="operate">操作名称</param>
         </member>
+        <member name="T:SimpleAdmin.Application.BizUserImportInput">
+            <summary>
+            业务用户导入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.BizUserExportOutput">
+            <summary>
+            业务用户导出
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Application.IUserService">
             <summary>
             人员管理服务
@@ -420,6 +430,20 @@
             <param name="input">查询参数</param>
             <returns>用户分页列表</returns>
         </member>
+        <member name="M:SimpleAdmin.Application.IUserService.OwnRole(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有角色
+            </summary>
+            <param name="input">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            角色选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Application.IUserService.Add(SimpleAdmin.System.UserAddInput)">
             <summary>
             添加用户
@@ -432,13 +456,6 @@
             编辑
             </summary>
             <param name="input">编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除用户
-            </summary>
-            <param name="input">Id列表</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Application.IUserService.DisableUser(SimpleAdmin.Core.BaseIdInput)">
@@ -462,13 +479,6 @@
             <param name="input">用户Id</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.OwnRole(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取用户拥有角色
-            </summary>
-            <param name="input">用户ID</param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Application.IUserService.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
             <summary>
             给用户授权角色
@@ -476,12 +486,39 @@
             <param name="input">授权参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
-            角色选择器
+            删除用户
             </summary>
-            <param name="input"></param>
+            <param name="input">Id列表</param>
             <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
+            <summary>
+            导入预览
+            </summary>
+            <param name="input">导入参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Template">
+            <summary>
+            获取导入模板
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Export(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            导出
+            </summary>
+            <param name="input">查询参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+            <summary>
+            导入数据
+            </summary>
+            <param name="input">数据</param>
+            <returns>导入结果</returns>
         </member>
         <member name="T:SimpleAdmin.Application.UserService">
             <summary>
@@ -491,10 +528,16 @@
         <member name="M:SimpleAdmin.Application.UserService.Page(SimpleAdmin.System.UserPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Add(SimpleAdmin.System.UserAddInput)">
+        <member name="M:SimpleAdmin.Application.UserService.OwnRole(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.UserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Add(SimpleAdmin.System.UserAddInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Edit(SimpleAdmin.System.UserEditInput)">
@@ -509,17 +552,23 @@
         <member name="M:SimpleAdmin.Application.UserService.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.OwnRole(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc/>
-        </member>
         <member name="M:SimpleAdmin.Application.UserService.ResetPassword(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <inheritdoc />
+        <member name="M:SimpleAdmin.Application.UserService.Template">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Export(SimpleAdmin.System.UserPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+            <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.Core.SysUser,System.String)">
             <summary>
@@ -535,6 +584,22 @@
             <param name="userId">用户ID</param>
             <param name="operate">操作名称</param>
             <param name="dataScope">数据范围</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.CheckImport(System.Collections.Generic.List{SimpleAdmin.Application.BizUserImportInput},System.Collections.Generic.List{System.Int64},System.Boolean)">
+            <summary>
+            检查导入数据
+            </summary>
+            <param name="data">数据</param>
+            <param name="dataScope">数据范围ID数组</param>
+            <param name="clearError">是否初始化错误</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.GetQuery(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            获取查询条件
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
     </members>

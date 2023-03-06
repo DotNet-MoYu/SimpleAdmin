@@ -44,19 +44,6 @@ public interface IFileService : ITransient
     /// <returns></returns>
     FileStreamResult GetFileStreamResult(byte[] byteArray, string fileName);
 
-    /// <summary>
-    /// 获取导入模板文件夹路径
-    /// </summary>
-    /// <returns>文件夹</returns>
-    string GetTemplateFolder();
-
-    /// <summary>
-    /// 验证上传文件
-    /// </summary>
-    /// <param name="file">文件</param>
-    /// <param name="maxSzie">最大体积(M)</param>
-    /// <param name="allowTypes">允许上传类型</param>
-    void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null);
 
     /// <summary>
     /// 文件分页查询
@@ -65,12 +52,6 @@ public interface IFileService : ITransient
     /// <returns>文件列表</returns>
     Task<SqlSugarPagedList<DevFile>> Page(FilePageInput input);
 
-    /// <summary>
-    /// 模板数据验证
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="importResult">导入结果</param>
-    BaseImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult) where T : BaseImportTemplateInput;
 
     /// <summary>
     /// 上传文件到本地返回下载url

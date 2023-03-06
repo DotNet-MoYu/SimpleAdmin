@@ -18,12 +18,14 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     private readonly ILogger<GenTestService> _logger;
     private readonly IFileService _fileService;
     private readonly IDictService _dictService;
+    private readonly IImportExportService _importExportService;
 
-    public GenTestService(ILogger<GenTestService> logger, IFileService fileService, IDictService dictService)
+    public GenTestService(ILogger<GenTestService> logger, IFileService fileService, IDictService dictService, IImportExportService importExportService)
     {
         this._logger = logger;
         this._fileService = fileService;
         this._dictService = dictService;
+        this._importExportService = importExportService;
     }
 
 
@@ -73,60 +75,32 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
     public async Task<FileStreamResult> Template()
     {
-        var templateName = "学生信息.xlsx";
-        //var folder = _fileService.GetTemplateFolder();
-        //var result = _fileService.GetFileStreamResult(folder, templateName, true);
-
-        IImporter Importer = new ExcelImporter();
-        var byteArray = await Importer.GenerateTemplateBytes<GenTestImportInput>();
-        var result = _fileService.GetFileStreamResult(byteArray, templateName);
-
-        //IExcelExporter exporter = new ExcelExporter();
-        //var byteArray = await exporter.ExportHeaderAsByteArray(new GenTestExport());
-        //var result = new FileStreamResult(new MemoryStream(byteArray), "application/octet-stream") { FileDownloadName = "学生信息.xlsx" };
+        var templateName = "学生信息";
+        //var result = _importExportService.GenerateLocalTemplate(templateName);
+        var result = await _importExportService.GenerateTemplate<GenTestImportInput>(templateName);
         return result;
 
     }
 
 
     /// <inheritdoc/>
-    public async Task<dynamic> Preview(BaseImportPreviewInput input)
+    public async Task<dynamic> Preview(ImportPreviewInput input)
     {
-        _fileService.ImportVerification(input.File);
-        IImporter Importer = new ExcelImporter();
-        using var fileStream = input.File.OpenReadStream();//获取文件流
-        var import = await Importer.Import<GenTestImportInput>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = _fileService.TemplateDataVerification(import);//验证数据完整度
-        //遍历错误的行
-        //import.RowErrors.ForEach(row =>
-        //{
-        //    row.RowIndex -= 2;//下表与列表中的下标一致
-        //    ImportPreview.Data[row.RowIndex].HasError = true;//错误的行HasError = true
-        //    ImportPreview.Data[row.RowIndex].ErrorInfo = row.FieldErrors;
-        //});
-        ImportPreview.Data = await CheckImport(ImportPreview.Data);
-        return ImportPreview;
+        var importPreview = await _importExportService.GetImportPreview<GenTestImportInput>(input.File);
+        importPreview.Data = await CheckImport(importPreview.Data);
+        return importPreview;
     }
 
 
     /// <inheritdoc/>
-    public async Task<BaseImportResultOutPut<GenTestImportInput>> Import(BaseImportResultInput<GenTestImportInput> input)
+    public async Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input)
     {
 
         var data = await CheckImport(input.Data, true);
-        var result = new BaseImportResultOutPut<GenTestImportInput> { Total = input.Data.Count };
-        var importData = data.Where(it => it.HasError == false).ToList();
-        if (importData.Count != data.Count)
-        {
-            result.Success = false;
-            result.Data = data.Where(it => it.HasError == true).ToList();
-            result.FailCount = data.Count - importData.Count;
-        }
-        result.ImportCount = importData.Count;
+        var result = _importExportService.GetImportResultPreview(data, out List<GenTestImportInput> importData);
         var genTests = importData.Adapt<List<GenTest>>();//转实体
         //await InsertRangeAsync(genTests);//导入用户
         //DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
-        Thread.Sleep(1111);
         return result;
 
     }
@@ -162,9 +136,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         var query = GetQuery(input);
         var genTests = await query.ToListAsync();//分页
         var data = genTests.Adapt<List<GenTestExport>>();
-        IExporter exporter = new ExcelExporter();
-        var byteArray = await exporter.ExportAsByteArray(data);
-        var result = _fileService.GetFileStreamResult(byteArray, "学生信息.xlsx");
+        var result = await _importExportService.Export(data, "学生信息");
         return result;
 
     }
