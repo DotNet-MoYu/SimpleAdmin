@@ -102,7 +102,7 @@ public class GenTestEditInput : GenTestAddInput
     /// <summary>
     /// Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public long Id { get; set; }
 }
 

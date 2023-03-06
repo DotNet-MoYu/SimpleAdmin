@@ -165,6 +165,11 @@
             忽略超级管理员才能访问特性
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.IdNotNull">
+            <summary>
+            验证Id不能为 空
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.BaseIdInput">
             <summary>
             主键Id输入参数

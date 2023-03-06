@@ -28,3 +28,4 @@ global using NewLife.Serialization;
 global using System.Data;
 global using System.Linq;
 global using System.Reflection;
+global using System.ComponentModel.DataAnnotations;

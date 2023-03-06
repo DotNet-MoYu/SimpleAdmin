@@ -16,7 +16,7 @@ public class BaseIdInput
     /// <summary>
     /// 主键Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     [DataValidation(ValidationTypes.Numeric)]
     public virtual long Id { get; set; }
 }

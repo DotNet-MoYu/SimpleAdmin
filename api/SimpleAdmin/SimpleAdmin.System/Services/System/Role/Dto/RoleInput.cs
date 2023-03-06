@@ -35,7 +35,7 @@ public class RoleEditInput : RoleAddInput
     /// <summary>
     /// Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
 
@@ -47,7 +47,7 @@ public class GrantResourceInput : RoleOwnResourceOutput
     /// <summary>
     /// 角色Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class GrantPermissionInput : RoleOwnPermissionOutput
     /// <summary>
     /// 角色Id
     /// </summary>
-    [MinValue(1, ErrorMessage = "Id不能为空")]
+    [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 
     /// <summary>
