@@ -22,7 +22,7 @@ public class MyActionFilter : IAsyncActionFilter
         var httpContext = context.HttpContext;
         var httpRequest = httpContext.Request;
         //拦截白名单
-        var whiteAction = new string[] { "loginOut", "auth" };
+        var whiteAction = new string[] { "loginOut", "auth", "preview" };
         //只拦截post方法并且不是
         if (httpRequest.Method == "POST" && !whiteAction.Contains(actionDescriptor.ActionName))
         {
