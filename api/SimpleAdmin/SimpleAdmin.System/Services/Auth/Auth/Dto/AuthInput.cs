@@ -32,14 +32,14 @@ public class LoginInput : ValidCodeInput
     /// 账号 
     ///</summary>
     /// <example>superAdmin</example>
-    [Required(ErrorMessage = "账号不能为空"), MinLength(3, ErrorMessage = "账号不能少于4个字符")]
+    [Required(ErrorMessage = "账号不能为空")]
     public string Account { get; set; }
 
     /// <summary>
     /// 密码 
     ///</summary>
     ///<example>04fc514b346f14b23d7cf5e6f64663b030512aa380a9e7d311288ed1e8be7b863ae5ee0bb570df2405fc9daff2b2d1ac627a0fbbd49ef2c6b8fac4fd5e4b9a1b7120999bdc0a8e425aa37abab3aec6f9f3570775ff901f2845e957b0c2d0542e21fbf1bbb65c04</example>
-    [Required(ErrorMessage = "密码不能为空"), MinLength(3, ErrorMessage = "密码不能少于3个字符")]
+    [Required(ErrorMessage = "密码不能为空")]
     public string Password { get; set; }
 
 
