@@ -40,7 +40,8 @@ public static class SqlsugarSetup
     /// <param name="config">数据库配置</param>
     private static void InitDb(SqlSugarConfig config)
     {
-        DbContext.Db.DbMaintenance.CreateDatabase();//创建数据库
+        var connection = DbContext.Db.GetConnection(config.ConfigId);
+        connection.DbMaintenance.CreateDatabase();//创建数据库
         // 获取所有实体表-初始化表结构
         var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false));
         if (!entityTypes.Any()) return;//没有就退出
