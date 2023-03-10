@@ -165,6 +165,21 @@
             忽略超级管理员才能访问特性
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.UpdateBatchAttribute">
+            <summary>
+            批量更新
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchAttribute.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchAttribute.DataType">
+            <summary>
+            控件类型
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.IdNotNull">
             <summary>
             验证Id不能为 空
@@ -1100,7 +1115,7 @@
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.TargetId">
              <summary>
-             目标ID 
+             目标ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.Category">
@@ -1586,6 +1601,11 @@
         <member name="T:SimpleAdmin.Core.GenBasic">
              <summary>
              代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.GenBasic.ConfigId">
+             <summary>
+             所属库 
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.GenBasic.DbTable">
@@ -2334,6 +2354,101 @@
             主管ID
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.UpdateBatch">
+             <summary>
+             批量修改
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatch.ConfigId">
+             <summary>
+             所属库 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatch.EntityName">
+             <summary>
+             实体名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatch.TableName">
+             <summary>
+             表名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatch.TableDescription">
+             <summary>
+             表描述 
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.UpdateBatchConfig">
+             <summary>
+             批量修改配置表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Uid">
+             <summary>
+             批量配置Id 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Columnname">
+             <summary>
+             字段名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Columncomment">
+             <summary>
+             字段描述 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Datatype">
+             <summary>
+             作用类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Dicttypecode">
+             <summary>
+             字典值 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Nettype">
+             <summary>
+             数据库类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.ApiInfo">
+             <summary>
+             下拉数据接口信息 
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.UpdateBatchApiInfo">
+            <summary>
+            批量修改Api接口信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.ApiName">
+            <summary>
+            接口名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.ApiType">
+            <summary>
+            接口类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Parameter">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Key">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Value">
+            <summary>
+            值
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.AuthDeviceTypeEumu">
             <summary>
             登录设备类型枚举
@@ -2863,6 +2978,12 @@
             初始化种子数据
             </summary>
             <param name="config"></param>
+        </member>
+        <member name="M:SimpleAdmin.Core.SqlsugarSetup.CheckSameConfigId">
+            <summary>
+            检查是否有相同的ConfigId
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Startup">
             <summary>
@@ -3514,6 +3635,76 @@
             <summary>
             数据
             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.Utils.SqlsugarColumnInfo">
+            <summary>
+            Sqlsugar字段信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.ColumnName">
+            <summary>
+            字段名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.IsPrimarykey">
+            <summary>
+            是否主键
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.TypeName">
+            <summary>
+            字段类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.ColumnDescription">
+            <summary>
+            字段注释
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.Utils.SqlSugarTableInfo">
+            <summary>
+            Sqlsugar表信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlSugarTableInfo.ConfigId">
+             <summary>
+             所属库 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlSugarTableInfo.TableName">
+            <summary>
+            表名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlSugarTableInfo.EntityName">
+            <summary>
+            实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Utils.SqlSugarTableInfo.TableDescription">
+            <summary>
+            表注释
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.Utils.SqlSugarUtils">
+            <summary>
+            Sqlusgar通用功能
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.SqlSugarUtils.GetTablesByAttribute``1">
+            <summary>
+            根据特性获取所有表信息
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.SqlSugarUtils.GetTableColumns(System.String,System.String)">
+            <summary>
+            获取字段信息
+            </summary>
+            <param name="configId"></param>
+            <param name="tableName"></param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String,System.Int32,System.Int32)">
             <summary>

@@ -29,3 +29,4 @@ global using System.Data;
 global using System.Linq;
 global using System.Reflection;
 global using System.ComponentModel.DataAnnotations;
+global using Masuit.Tools;

@@ -1,24 +1,16 @@
 ﻿namespace SimpleAdmin.System;
 
 /// <summary>
-/// 获取表字段输入
-/// </summary>
-public class GenBasicColumnInput
-{
-    /// <summary>
-    /// 表名称
-    /// </summary>
-    [Required(ErrorMessage = "表名称不能为空")]
-    public string TableName { get; set; }
-
-}
-
-/// <summary>
 /// 代码生成基础添加参数
 /// </summary>
 
 public class GenBasicAddInput : GenBasic
 {
+    /// <summary>
+    /// 所属库名称
+    /// </summary>
+    [Required(ErrorMessage = "ConfigId不能为空")]
+    public override string ConfigId { get; set; }
 
     /// <summary>
     /// 主表名称
