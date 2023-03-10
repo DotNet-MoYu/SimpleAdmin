@@ -14,9 +14,13 @@ public static class SqlsugarSetup
 
         //services.AddSingleton<ISqlSugarClient>(DbContext.Db); // 单例注册,不用工作单元不需要注入
         //services.AddUnitOfWork<SqlSugarUnitOfWork>(); // 事务与工作单元注册
+
+        //检查ConfigId
+        CheckSameConfigId();
         //遍历配置
         DbContext.DbConfigs.ForEach(it =>
         {
+
             //是否需要初始化数据库
             if (it.IsInitDb)
             {
@@ -102,6 +106,20 @@ public static class SqlsugarSetup
                 var storage = db.Storageable(seedDataTable).ToStorage();
                 if (ignoreAdd == null) storage.AsInsertable.ExecuteCommand();
             }
+        }
+    }
+
+
+    /// <summary>
+    /// 检查是否有相同的ConfigId
+    /// </summary>
+    /// <returns></returns>
+    private static void CheckSameConfigId()
+    {
+        var configIdGroup = DbContext.DbConfigs.GroupBy(it => it.ConfigId).ToList();
+        foreach (var configId in configIdGroup)
+        {
+            if (configId.ToList().Count > 1) throw Oops.Oh($"Sqlsugar连接配置ConfigId:{configId.Key}重复了");
         }
     }
 }
