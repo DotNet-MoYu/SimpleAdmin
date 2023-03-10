@@ -2,6 +2,7 @@
   "RECORDS": [
     {
       "Id": "380460402909253",
+      "ConfigId": "SimpleAdmin",
       "DbTable": "gen_test",
       "EntityName": "GenTest",
       "TablePrefix": "Y",
