@@ -1,30 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-/// <summary>
-/// 表信息输出
-/// </summary>
-
-public class GenBasicTableOutput
-{
-
-    /// <summary>
-    /// 表名称
-    /// </summary>
-    public string TableName { get; set; }
-
-    /// <summary>
-    /// 实体名
-    /// </summary>
-    public string EntityName { get; set; }
-
-    /// <summary>
-    /// 表注释
-    /// </summary>
-    public string TableRemark { get; set; }
-
-
-}
-
 
 /// <summary>
 /// 表字段信息输出

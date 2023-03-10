@@ -53,18 +53,12 @@ public interface IGenbasicService : ITransient
     /// <returns>程序集列表</returns>
     List<string> GetAssemblies();
 
-    /// <summary>
-    /// 获取表内所有字段信息
-    /// </summary>
-    /// <param name="input">表信息</param>
-    /// <returns>字段信息列表</returns>
-    List<GenBasicColumnOutput> GetTableColumns(GenBasicColumnInput input);
 
     /// <summary>
     /// 获取所有表信息
     /// </summary>
     /// <returns>所有表信息</returns>
-    List<GenBasicTableOutput> GetTables();
+    List<SqlSugarTableInfo> GetTables();
 
     /// <summary>
     /// 获取代码生成基础分页

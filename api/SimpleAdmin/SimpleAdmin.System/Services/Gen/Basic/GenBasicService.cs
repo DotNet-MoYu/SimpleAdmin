@@ -44,72 +44,11 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     }
 
     /// <inheritdoc/>
-    public List<GenBasicTableOutput> GetTables()
+    public List<SqlSugarTableInfo> GetTables()
     {
-        List<GenBasicTableOutput> tables = new List<GenBasicTableOutput>();//结果集
-
-        // 获取实体表
-        var entityTypes = App.EffectiveTypes
-            .Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))//有SugarTable特性
-            .Where(u => u.IsDefined(typeof(CodeGenAttribute), false));//具有代码生成特性
-
-        foreach (var entityType in entityTypes)
-        {
-            //获取实体信息
-            var entityInfo = Context.EntityMaintenance.GetEntityInfo(entityType);
-            if (entityInfo != null)
-            {
-                tables.Add(new GenBasicTableOutput
-                {
-                    TableName = entityInfo.DbTableName,
-                    EntityName = entityInfo.EntityName,
-                    TableRemark = entityInfo.TableDescription
-                });
-            }
-
-        }
-        return tables;
+        return SqlSugarUtils.GetTablesByAttribute<CodeGenAttribute>();
     }
 
-    /// <inheritdoc/>
-    public List<GenBasicColumnOutput> GetTableColumns(GenBasicColumnInput input)
-    {
-        List<GenBasicColumnOutput> columns = new List<GenBasicColumnOutput>();//结果集
-        var dbColumnInfos = Context.DbMaintenance.GetColumnInfosByTableName(input.TableName);//根据表名获取表信息
-        if (dbColumnInfos != null)
-        {
-
-            //遍历字段获取信息
-            dbColumnInfos.ForEach(it =>
-            {
-                if (it.DbColumnName.Contains("_"))//如果有下划线,转换一下
-                {
-                    var column = "";//新的字段值
-                    var columnList = it.DbColumnName.Split('_');//根据下划线分割
-                    columnList.ForEach(it =>
-                    {
-                        column += StringHelper.FirstCharToUpper(it);//首字母大写
-                    });
-                    it.DbColumnName = column;//赋值给数据库字段
-
-                }
-                else
-                {
-                    it.DbColumnName = StringHelper.FirstCharToUpper(it.DbColumnName);//首字母大写
-                }
-                columns.Add(new GenBasicColumnOutput
-                {
-                    ColumnName = it.DbColumnName,
-                    IsPrimarykey = it.IsPrimarykey,
-                    ColumnRemark = it.ColumnDescription,
-                    TypeName = it.DataType
-                });
-
-            });
-
-        }
-        return columns;
-    }
 
     /// <inheritdoc/>
     public List<string> GetAssemblies()
@@ -128,7 +67,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<GenBasic> Add(GenBasicAddInput input)
     {
         var entity = input.Adapt<GenBasic>();//输入参数转实体
-        var tableColumns = GetTableColumns(new GenBasicColumnInput { TableName = input.DbTable });//获取表的字段信息
+        var tableColumns = SqlSugarUtils.GetTableColumns(input.ConfigId, input.DbTable);//获取表的字段信息
         List<GenConfig> genConfigs = new List<GenConfig>();//代码生成配置字段集合
         //遍历字段
         int sortCode = 0;
@@ -150,7 +89,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 FieldName = it.ColumnName,
                 FieldType = it.TypeName,
                 FieldNetType = CodeGenUtil.ConvertDataType(it.TypeName),
-                FieldRemark = it.ColumnRemark ?? it.ColumnName,
+                FieldRemark = it.ColumnDescription ?? it.ColumnName,
                 EffectType = GenConst.INPUT,
                 WhetherTable = yesOrNo,
                 WhetherAddUpdate = yesOrNo,

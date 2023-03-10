@@ -8,6 +8,13 @@
 public class GenBasic : BaseEntity
 {
 
+
+    /// <summary>
+    /// 所属库 
+    ///</summary>
+    [SugarColumn(ColumnName = "ConfigId", ColumnDescription = "库名", Length = 200)]
+    public virtual string ConfigId { get; set; }
+
     /// <summary>
     /// 主表 
     ///</summary>
@@ -19,6 +26,7 @@ public class GenBasic : BaseEntity
     /// </summary>
     [SugarColumn(ColumnName = "EntityName", ColumnDescription = "表实体名称", Length = 200)]
     public virtual string EntityName { get; set; }
+
 
     /// <summary>
     /// 移除表前缀 
