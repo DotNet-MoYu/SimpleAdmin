@@ -71,7 +71,7 @@ public class CateGoryConst
     /// <summary>
     /// 用户日程数据
     /// </summary>
-    public const string Relation_SYS_USER_SCHEDULE_DATA = "Relation_SYS_USER_SCHEDULE_DATA";
+    public const string Relation_SYS_USER_SCHEDULE_DATA = "SYS_USER_SCHEDULE_DATA";
 
     /// <summary>
     /// 站内信与接收用户
