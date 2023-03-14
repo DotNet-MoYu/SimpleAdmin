@@ -20,7 +20,7 @@ public class SqlsugarColumnInfo
     /// <summary>
     /// 字段类型
     /// </summary>
-    public string TypeName { get; set; }
+    public string DataType { get; set; }
 
     /// <summary>
     /// 字段注释

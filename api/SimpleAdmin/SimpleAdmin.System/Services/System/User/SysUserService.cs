@@ -21,6 +21,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private readonly ISysPositionService _sysPositionService;
     private readonly IDictService _dictService;
     private readonly IConfigService _configService;
+    private readonly IBatchEditService _batchEditService;
 
     public SysUserService(ILogger<ILogger> logger, ISimpleRedis simpleRedis,
                        IRelationService relationService,
@@ -30,7 +31,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                        IImportExportService importExportService,
                        ISysPositionService sysPositionService,
                        IDictService dictService,
-                       IConfigService configService)
+                       IConfigService configService, IBatchEditService updateBatchService)
     {
         this._logger = logger;
         _simpleRedis = simpleRedis;
@@ -42,6 +43,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         this._sysPositionService = sysPositionService;
         this._dictService = dictService;
         this._configService = configService;
+        this._batchEditService = updateBatchService;
     }
 
     #region 查询
@@ -331,6 +333,18 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
 
     }
+
+    /// <inheritdoc/>
+    public async Task Edits(BatchEditInput input)
+    {
+        //获取参数字典
+        var data = await _batchEditService.GetUpdateBatchConfigDict(input.Code, input.Columns);
+        if (data.Count > 0)
+        {
+            await Context.Updateable<SysUser>(data).Where(it => input.Ids.Contains(it.Id)).ExecuteCommandAsync();
+        }
+    }
+
 
     /// <inheritdoc/>
     public async Task DisableUser(BaseIdInput input)

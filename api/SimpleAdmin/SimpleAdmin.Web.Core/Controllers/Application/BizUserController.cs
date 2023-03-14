@@ -152,6 +152,19 @@ public class BizUserController : IDynamicApiController
 
 
     /// <summary>
+    /// 批量修改人员
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("edits")]
+    [DisplayName("批量修改人员")]
+    public async Task Edits([FromBody] BatchEditInput input)
+    {
+        await _userService.Edits(input);
+    }
+
+
+    /// <summary>
     /// 删除人员
     /// </summary>
     /// <param name="input"></param>

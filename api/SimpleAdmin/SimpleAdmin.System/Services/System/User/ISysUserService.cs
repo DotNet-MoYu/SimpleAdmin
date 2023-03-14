@@ -213,6 +213,13 @@ public partial interface ISysUserService : ITransient
     /// <returns></returns>
     Task SetUserDefault(List<SysUser> sysUsers);
 
+    /// <summary>
+    /// 批量编辑
+    /// </summary>
+    /// <param name="input">批量编辑信息</param>
+    /// <returns></returns>
+    Task Edits(BatchEditInput input);
+
 
     #endregion
 

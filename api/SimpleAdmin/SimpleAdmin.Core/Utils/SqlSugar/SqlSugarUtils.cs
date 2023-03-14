@@ -91,7 +91,7 @@ namespace SimpleAdmin.Core.Utils
                         ColumnName = it.DbColumnName,
                         IsPrimarykey = it.IsPrimarykey,
                         ColumnDescription = it.ColumnDescription,
-                        TypeName = it.DataType
+                        DataType = it.DataType
                     });
 
                 });

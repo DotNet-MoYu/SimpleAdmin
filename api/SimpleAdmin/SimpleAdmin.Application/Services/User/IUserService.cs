@@ -125,5 +125,12 @@ public interface IUserService : ITransient
     /// <param name="input">数据</param>
     /// <returns>导入结果</returns>
     Task<ImportResultOutPut<BizUserImportInput>> Import(ImportResultInput<BizUserImportInput> input);
+
+    /// <summary>
+    /// 批量编辑
+    /// </summary>
+    /// <param name="input">编辑字段信息</param>
+    /// <returns></returns>
+    Task Edits(BatchEditInput input);
     #endregion
 }

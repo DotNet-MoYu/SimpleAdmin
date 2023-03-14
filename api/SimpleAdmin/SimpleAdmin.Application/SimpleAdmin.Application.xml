@@ -520,6 +520,13 @@
             <param name="input">数据</param>
             <returns>导入结果</returns>
         </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Edits(SimpleAdmin.System.BatchEditInput)">
+            <summary>
+            批量编辑
+            </summary>
+            <param name="input">编辑字段信息</param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Application.UserService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Application.IUserService"/>
@@ -541,6 +548,9 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Edit(SimpleAdmin.System.UserEditInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Edits(SimpleAdmin.System.BatchEditInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.DisableUser(SimpleAdmin.Core.BaseIdInput)">

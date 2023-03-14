@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.Application;
+﻿using SimpleAdmin.Core;
+
+namespace SimpleAdmin.Application;
 
 /// <summary>
 /// <inheritdoc cref="IUserService"/>
@@ -92,6 +94,24 @@ public class UserService : DbRepository<SysUser>, IUserService
     {
         await CheckInput(input, SimpleAdminConst.Edit);//检查参数
         await _sysUserService.Edit(input);//编辑
+    }
+
+    /// <inheritdoc/>
+    public async Task Edits(BatchEditInput input)
+    {
+        //获取数据范围
+        var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        if (dataScope.Count > 0)
+        {
+            var ids = input.Ids;//获取用户id
+            var orgIds = await GetListAsync(it => ids.Contains(it.Id), it => it.OrgId);//根据用户ID获取机构id、
+            orgIds.ForEach(it =>
+            {
+                if (!dataScope.Contains(it)) throw Oops.Bah(ErrorCodeEnum.A0004);
+            });
+            await _sysUserService.Edits(input);
+        }
+        else throw Oops.Bah(ErrorCodeEnum.A0004);
     }
 
     /// <inheritdoc/>
@@ -198,7 +218,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             var result = _importExportService.GetImportResultPreview(data, out List<BizUserImportInput> importData);
             var sysUsers = importData.Adapt<List<SysUser>>();//转实体
             await _sysUserService.SetUserDefault(sysUsers);//设置用户默认值
-            //await InsertRangeAsync(sysUsers);//导入用户
+                                                           //await InsertRangeAsync(sysUsers);//导入用户
             DbContext.Db.Fastest<SysUser>().BulkCopy(sysUsers);//大数据导入
             return result;
         }

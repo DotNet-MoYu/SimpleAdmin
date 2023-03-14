@@ -143,6 +143,19 @@ public class UserController : BaseController
 
 
     /// <summary>
+    /// 批量修改用户
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("edits")]
+    [DisplayName("批量修改用户")]
+    public async Task Edits([FromBody] BatchEditInput input)
+    {
+        await _sysUserService.Edits(input);
+    }
+
+
+    /// <summary>
     /// 删除用户
     /// </summary>
     /// <param name="input"></param>
