@@ -87,8 +87,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             {
                 IsPrimarykey = it.IsPrimarykey ? GenConst.Yes : GenConst.No,
                 FieldName = it.ColumnName,
-                FieldType = it.TypeName,
-                FieldNetType = CodeGenUtil.ConvertDataType(it.TypeName),
+                FieldType = it.DataType,
+                FieldNetType = CodeGenUtil.ConvertDataType(it.DataType),
                 FieldRemark = it.ColumnDescription ?? it.ColumnName,
                 EffectType = GenConst.INPUT,
                 WhetherTable = yesOrNo,

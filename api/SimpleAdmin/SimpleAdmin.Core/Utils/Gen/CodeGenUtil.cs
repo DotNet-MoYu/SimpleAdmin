@@ -79,6 +79,28 @@
 
 
         /// <summary>
+        /// 数据类型转显示类型
+        /// </summary>
+        /// <param name="dataType"></param>
+        /// <returns></returns>
+        public static string DataTypeToEff(string dataType)
+        {
+            return dataType switch
+            {
+                "string" => GenConst.INPUT,
+                "int" => GenConst.INPUTNUMBER,
+                "long" => GenConst.INPUT,
+                "float" => GenConst.INPUT,
+                "double" => GenConst.INPUT,
+                "decimal" => GenConst.INPUT,
+                "bool" => GenConst.SWITCH,
+                "Guid" => GenConst.INPUT,
+                "DateTime" => GenConst.DATEPICKER,
+                _ => GenConst.INPUT,
+            };
+        }
+
+        /// <summary>
         /// 是否通用字段
         /// </summary>
         /// <param name="columnName">字段名</param>

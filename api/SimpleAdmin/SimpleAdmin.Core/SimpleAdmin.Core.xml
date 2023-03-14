@@ -100,6 +100,11 @@
             <param name="arg"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Core.BatchEditAttribute">
+            <summary>
+            批量更新
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.CacheAttribute">
             <summary>
             缓存结果特性
@@ -163,21 +168,6 @@
         <member name="T:SimpleAdmin.Core.IgnoreSuperAdminAttribute">
             <summary>
             忽略超级管理员才能访问特性
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.UpdateBatchAttribute">
-            <summary>
-            批量更新
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchAttribute.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchAttribute.DataType">
-            <summary>
-            控件类型
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdNotNull">
@@ -702,6 +692,11 @@
             滑动数字条
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.GenConst.SWITCH">
+            <summary>
+            下拉框
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.MqttConst">
             <summary>
             mqtt常量
@@ -1103,6 +1098,96 @@
             创建者部门Id
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.BatchEdit">
+             <summary>
+             批量修改
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEdit.Code">
+             <summary>
+             唯一编码 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEdit.ConfigId">
+             <summary>
+             所属库 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEdit.EntityName">
+             <summary>
+             实体名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEdit.TableName">
+             <summary>
+             表名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEdit.TableDescription">
+             <summary>
+             表描述 
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.BatchEditConfig">
+             <summary>
+             批量修改配置表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.UId">
+             <summary>
+             批量配置Id 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.ColumnName">
+             <summary>
+             字段名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.ColumnComment">
+             <summary>
+             字段描述 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.DataType">
+             <summary>
+             作用类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.DictTypeCode">
+             <summary>
+             字典值 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.NetType">
+             <summary>
+             数据库类型 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestUrl">
+            <summary>
+            接口名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestType">
+            <summary>
+            接口类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestLable">
+            <summary>
+            接口结果标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestValue">
+            <summary>
+            接口结果值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.Status">
+            <summary>
+            启用状态
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.Entity.System.ClientRelation">
             <summary>
              C端用户关系
@@ -1115,7 +1200,7 @@
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.TargetId">
              <summary>
-             目标ID
+             目标ID 
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.Category">
@@ -2354,101 +2439,6 @@
             主管ID
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Core.UpdateBatch">
-             <summary>
-             批量修改
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatch.ConfigId">
-             <summary>
-             所属库 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatch.EntityName">
-             <summary>
-             实体名 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatch.TableName">
-             <summary>
-             表名 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatch.TableDescription">
-             <summary>
-             表描述 
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.UpdateBatchConfig">
-             <summary>
-             批量修改配置表
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Uid">
-             <summary>
-             批量配置Id 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Columnname">
-             <summary>
-             字段名 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Columncomment">
-             <summary>
-             字段描述 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Datatype">
-             <summary>
-             作用类型 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Dicttypecode">
-             <summary>
-             字典值 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.Nettype">
-             <summary>
-             数据库类型 
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchConfig.ApiInfo">
-             <summary>
-             下拉数据接口信息 
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.UpdateBatchApiInfo">
-            <summary>
-            批量修改Api接口信息
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.ApiName">
-            <summary>
-            接口名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.ApiType">
-            <summary>
-            接口类型
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Parameter">
-            <summary>
-            参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Key">
-            <summary>
-            参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.UpdateBatchApiInfo.Value">
-            <summary>
-            值
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Core.AuthDeviceTypeEumu">
             <summary>
             登录设备类型枚举
@@ -3522,6 +3512,13 @@
             <param name="dataType">字段类型</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Core.Utils.CodeGenUtil.DataTypeToEff(System.String)">
+            <summary>
+            数据类型转显示类型
+            </summary>
+            <param name="dataType"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Core.Utils.CodeGenUtil.IsCommonColumn(System.String)">
             <summary>
             是否通用字段
@@ -3651,7 +3648,7 @@
             是否主键
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.TypeName">
+        <member name="P:SimpleAdmin.Core.Utils.SqlsugarColumnInfo.DataType">
             <summary>
             字段类型
             </summary>

@@ -188,6 +188,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Edits(SimpleAdmin.System.BatchEditInput)">
+            <summary>
+            批量修改人员
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除人员
@@ -725,6 +732,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Edits(SimpleAdmin.System.BatchEditInput)">
+            <summary>
+            批量修改用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除用户
@@ -778,6 +792,64 @@
             <summary>
             基础控制器
             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.BatchEditController">
+            <summary>
+            批量控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Page(SimpleAdmin.System.BatchEditPageInput)">
+            <summary>
+            批量分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Tables">
+            <summary>
+            获取表信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取批量配置信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Columns(System.String)">
+            <summary>
+            获取批量配置信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Add(SimpleAdmin.System.BatchEditAddInput)">
+            <summary>
+            添加批量
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
+            <summary>
+            配置修改批量
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除批量
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Sync(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            批量更新同步
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.ConfigController">
             <summary>

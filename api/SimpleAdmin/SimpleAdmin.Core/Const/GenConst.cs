@@ -64,10 +64,16 @@ public class GenConst
     /// 数字输入框
     /// </summary>
     public const string INPUTNUMBER = "inputNumber";
+
     /// <summary>
     /// 滑动数字条
     /// </summary>
     public const string SLIDER = "slider";
+
+    /// <summary>
+    /// 下拉框
+    /// </summary>
+    public const string SWITCH = "switch";
     #endregion
 }
 

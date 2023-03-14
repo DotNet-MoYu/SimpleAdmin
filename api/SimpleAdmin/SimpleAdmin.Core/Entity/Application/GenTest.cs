@@ -6,6 +6,7 @@
 [SugarTable("gen_test", TableDescription = "代码生成测试")]
 [Tenant(SqlsugarConst.DB_Default)]
 [CodeGen]
+[BatchEdit]
 public class GenTest : DataEntityBase
 {
 
@@ -30,6 +31,7 @@ public class GenTest : DataEntityBase
     /// <summary>
     /// 年龄
     /// </summary>
+
     public int Age { get; set; }
 
     /// <summary>
@@ -43,9 +45,11 @@ public class GenTest : DataEntityBase
     /// </summary>
     public decimal Money { get; set; }
 
+
     /// <summary>
     /// 排序码 
     ///</summary>
     public int SortCode { get; set; }
+
 
 }
