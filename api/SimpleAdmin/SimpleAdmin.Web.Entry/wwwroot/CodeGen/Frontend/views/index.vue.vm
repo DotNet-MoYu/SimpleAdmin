@@ -155,10 +155,8 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     <template #operator>
       <a-space>
         <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
-        <template #icon><plus-outlined /></template>新增</a-button>
-        <a-popconfirm title="确定要删除选中@(@Model.FunctionName)吗?" :disabled="selectedRowKeys.length === 0" @@confirm="deleteBatch@(@Model.ClassName)()">
-          <a-button danger type="primary" :disabled="selectedRowKeys.length === 0" v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"><template #icon><delete-outlined /></template>删除</a-button>
-        </a-popconfirm>
+        <template #icon><plus-outlined /></template>新增@(@Model.FunctionName)</a-button>
+		<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')">  title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="deleteBatch@(@Model.ClassName)"/>
       </a-space>
     </template>
     <template #bodyCell="{ column, record }">
@@ -318,19 +316,7 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
   }
   
   // 批量删除
-  const deleteBatch@(@Model.ClassName) = () => {
-    if (selectedRowKeys.value.length < 1) {
-      message.warning('请选择一条或多条数据')
-      return false
-    }
-    const params = selectedRowKeys.value.map((m) => {
-      return {
-        @foreach (var column in tableFieIds){//遍历字段
-        @if(column.IsPrimarykey=="Y"){//如果是主键
-        @:@column.FieldNameFirstLower: m
-        }}
-        }
-    })
+  const deleteBatch@(@Model.ClassName) = (params) => {
     @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {
       table.value.clearRefreshSelected()
     })
