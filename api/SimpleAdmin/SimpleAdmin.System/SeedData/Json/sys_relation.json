@@ -127,195 +127,6 @@
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_SELF\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
     },
     {
-      "Id": "361388127060037",
-      "ObjectId": "359567292014661",
-      "TargetId": "212755263003745",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731]}"
-    },
-    {
-      "Id": "361388127060038",
-      "ObjectId": "359567292014661",
-      "TargetId": "212755263003746",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740]}"
-    },
-    {
-      "Id": "361388127060039",
-      "ObjectId": "359567292014661",
-      "TargetId": "212755263003747",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
-    },
-    {
-      "Id": "361388127060040",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/tree",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
-    },
-    {
-      "Id": "361388127060041",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
-    },
-    {
-      "Id": "361388127060042",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
-    },
-    {
-      "Id": "361388127060043",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
-    },
-    {
-      "Id": "361388127060044",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
-    },
-    {
-      "Id": "361388127060045",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/orgTreeSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
-    },
-    {
-      "Id": "361388127060046",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/org/userSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
-    },
-    {
-      "Id": "361388127060047",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/position/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
-    },
-    {
-      "Id": "361388127060048",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/position/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
-    },
-    {
-      "Id": "361388127060049",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/position/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
-    },
-    {
-      "Id": "361388127060050",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/position/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
-    },
-    {
-      "Id": "361388127060051",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/orgTreeSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
-    },
-    {
-      "Id": "361388127060052",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
-    },
-    {
-      "Id": "361388127060053",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/userSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
-    },
-    {
-      "Id": "361388127060054",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/positionSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
-    },
-    {
-      "Id": "361388127060055",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
-    },
-    {
-      "Id": "361388127060056",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
-    },
-    {
-      "Id": "361388127060057",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
-    },
-    {
-      "Id": "361388127060058",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/disableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
-    },
-    {
-      "Id": "361388127060059",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/enableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
-    },
-    {
-      "Id": "361388127060060",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/resetPassword",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
-    },
-    {
-      "Id": "361388127060061",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/ownRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
-    },
-    {
-      "Id": "361388127060062",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/grantRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
-    },
-    {
-      "Id": "361388127060063",
-      "ObjectId": "359567292014661",
-      "TargetId": "/biz/user/roleSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
-    },
-    {
       "Id": "361406212943941",
       "ObjectId": "361405857865797",
       "TargetId": "359567292014661",
@@ -729,648 +540,935 @@
       "ExtJson": "{\"shortcut\":[{\"id\":212725263003722,\"title\":\"系统首页\",\"icon\":\"home-outlined\",\"path\":\"/index\"},{\"id\":212725263003723,\"title\":\"个人中心\",\"icon\":\"appstore-outlined\",\"path\":\"/usercenter\"},{\"id\":212755263003745,\"title\":\"机构管理\",\"icon\":\"cluster-outlined\",\"path\":\"/biz/org\"},{\"id\":212755263003746,\"title\":\"人员管理\",\"icon\":\"user-outlined\",\"path\":\"/biz/user\"},{\"id\":212755263003747,\"title\":\"岗位管理\",\"icon\":\"apartment-outlined\",\"path\":\"/biz/position\"}]}"
     },
     {
-      "Id": "373423617318981",
+      "Id": "391885190627397",
+      "ObjectId": "361405857865797",
+      "TargetId": "",
+      "Category": "SYS_USER_WORKBENCH_DATA",
+      "ExtJson": "{\"shortcut\":[{\"id\":212725263003722,\"title\":\"系统首页\",\"icon\":\"home-outlined\",\"path\":\"/index\"},{\"id\":212725263003723,\"title\":\"个人中心\",\"icon\":\"appstore-outlined\",\"path\":\"/usercenter\"}]}"
+    },
+    {
+      "Id": "395717370404933",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003725",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003725,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331269",
+      "Id": "395717370417221",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003726",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003726,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331270",
+      "Id": "395717370417222",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003727",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003727,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331271",
+      "Id": "395717370417223",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003729",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003729,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331272",
+      "Id": "395717370417224",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003730",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003730,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331273",
+      "Id": "395717370417225",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003731",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003731,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331274",
+      "Id": "395717370417226",
       "ObjectId": "212725263001001",
       "TargetId": "212725263003732",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212725263003732,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331275",
+      "Id": "395717370417227",
       "ObjectId": "212725263001001",
       "TargetId": "212735263003734",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212735263003734,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331276",
+      "Id": "395717370417228",
       "ObjectId": "212725263001001",
       "TargetId": "369089951367237",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":369089951367237,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331277",
+      "Id": "395717370417229",
       "ObjectId": "212725263001001",
       "TargetId": "212745263003736",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212745263003736,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331278",
+      "Id": "395717370417230",
       "ObjectId": "212725263001001",
       "TargetId": "212745263003737",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212745263003737,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331279",
+      "Id": "395717370417231",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003739",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003739,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331280",
+      "Id": "395717370417232",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003740",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003740,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331281",
+      "Id": "395717370417233",
       "ObjectId": "212725263001001",
       "TargetId": "363532005732421",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":363532005732421,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331282",
+      "Id": "395717370417234",
       "ObjectId": "212725263001001",
       "TargetId": "363798244282437",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":363798244282437,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331283",
+      "Id": "395717370417235",
       "ObjectId": "212725263001001",
       "TargetId": "371662120710213",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":371662120710213,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331284",
+      "Id": "395717370417236",
+      "ObjectId": "212725263001001",
+      "TargetId": "394242824978501",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":394242824978501,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "395717370417237",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003742",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003742,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331285",
+      "Id": "395717370417238",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003749",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003749,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331286",
+      "Id": "395717370417239",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003750",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003750,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331287",
+      "Id": "395717370417240",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003751",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003751,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331288",
+      "Id": "395717370417241",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003752",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003752,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331289",
+      "Id": "395717370417242",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003753",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003753,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331290",
+      "Id": "395717370417243",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003754",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003754,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331291",
+      "Id": "395717370417244",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003755",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003755,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331292",
+      "Id": "395717370417245",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003756",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003756,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331293",
+      "Id": "395717370417246",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003757",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003757,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331294",
+      "Id": "395717370417247",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003758",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003758,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331295",
+      "Id": "395717370417248",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003759",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003759,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331296",
+      "Id": "395717370417249",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003760",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003760,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331297",
+      "Id": "395717370417250",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003761",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003761,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331298",
+      "Id": "395717370417251",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003762",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003762,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331299",
+      "Id": "395717370417252",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003763",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003763,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331300",
+      "Id": "395717370417253",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003764",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003764,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331301",
+      "Id": "395717370417254",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003765",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003765,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331302",
+      "Id": "395717370417255",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003766",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003766,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331303",
+      "Id": "395717370417256",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003767",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003767,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "373423617331304",
+      "Id": "395717370417257",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003745",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731]}"
+      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731,383020955254853,383022400483397]}"
     },
     {
-      "Id": "373423617331305",
+      "Id": "395717370417258",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003746",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740]}"
+      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740,391869166551109,391869250662469,395712751292485]}"
     },
     {
-      "Id": "373423617331306",
+      "Id": "395717370417259",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003747",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
     },
     {
-      "Id": "373423617331307",
+      "Id": "395717370417260",
       "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/tree",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
-    },
-    {
-      "Id": "373423617331308",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
-    },
-    {
-      "Id": "373423617331309",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
-    },
-    {
-      "Id": "373423617331310",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
-    },
-    {
-      "Id": "373423617331311",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
-    },
-    {
-      "Id": "373423617331312",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/orgTreeSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
-    },
-    {
-      "Id": "373423617331313",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/org/userSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
-    },
-    {
-      "Id": "373423617331314",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/position/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
-    },
-    {
-      "Id": "373423617331315",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/position/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
-    },
-    {
-      "Id": "373423617331316",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/position/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
-    },
-    {
-      "Id": "373423617331317",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/position/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
-    },
-    {
-      "Id": "373423617331318",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/orgTreeSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
-    },
-    {
-      "Id": "373423617331319",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
-    },
-    {
-      "Id": "373423617331320",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/userSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
-    },
-    {
-      "Id": "373423617331321",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/positionSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
-    },
-    {
-      "Id": "373423617331322",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
-    },
-    {
-      "Id": "373423617331323",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
-    },
-    {
-      "Id": "373423617331324",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
-    },
-    {
-      "Id": "373423617331325",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/disableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
-    },
-    {
-      "Id": "373423617331326",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/enableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
-    },
-    {
-      "Id": "373423617331327",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/resetPassword",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
-    },
-    {
-      "Id": "373423617335365",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/ownRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
-    },
-    {
-      "Id": "373423617335366",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/grantRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
-    },
-    {
-      "Id": "373423617335367",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/user/roleSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
-    },
-    {
-      "Id": "381933068030021",
-      "ObjectId": "212725263001001",
-      "TargetId": "381933067698245",
+      "TargetId": "385833289756741",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":381933067698245,\"ButtonInfo\":[381933067833413,381933067833414,381933067833415,381933067833416]}"
+      "ExtJson": "{\"MenuId\":385833289756741,\"ButtonInfo\":[385833289920581,385833289920582,385833289920583,385833289920584]}"
     },
     {
-      "Id": "383022463967301",
+      "Id": "395717391978565",
       "ObjectId": "212725263001002",
       "TargetId": "212755263003745",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731,383020955254853,383022400483397]}"
     },
     {
-      "Id": "383022463967302",
+      "Id": "395717391978566",
       "ObjectId": "212725263001002",
       "TargetId": "212755263003746",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740]}"
+      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740,391869166551109,391869250662469,395712751292485]}"
     },
     {
-      "Id": "383022463967303",
+      "Id": "395717391978567",
       "ObjectId": "212725263001002",
       "TargetId": "212755263003747",
       "Category": "SYS_ROLE_HAS_RESOURCE",
       "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
     },
     {
-      "Id": "383022463967304",
+      "Id": "395717391978568",
+      "ObjectId": "212725263001002",
+      "TargetId": "385833289756741",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":385833289756741,\"ButtonInfo\":[385833289920581,385833289920582,385833289920583,385833289920584]}"
+    },
+    {
+      "Id": "395717488414789",
+      "ObjectId": "359567292014661",
+      "TargetId": "212755263003745",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731,383020955254853,383022400483397]}"
+    },
+    {
+      "Id": "395717488414790",
+      "ObjectId": "359567292014661",
+      "TargetId": "212755263003746",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740,391869166551109,391869250662469,395712751292485]}"
+    },
+    {
+      "Id": "395717488414791",
+      "ObjectId": "359567292014661",
+      "TargetId": "212755263003747",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
+    },
+    {
+      "Id": "395725241905221",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/tree",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
+    },
+    {
+      "Id": "395725241921605",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
+    },
+    {
+      "Id": "395725241921606",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
+    },
+    {
+      "Id": "395725241921607",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
+    },
+    {
+      "Id": "395725241921608",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/copy",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/copy\"}"
+    },
+    {
+      "Id": "395725241921609",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
+    },
+    {
+      "Id": "395725241921610",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/orgTreeSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
+    },
+    {
+      "Id": "395725241921611",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/org/userSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
+    },
+    {
+      "Id": "395725241921612",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/position/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
+    },
+    {
+      "Id": "395725241921613",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/position/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
+    },
+    {
+      "Id": "395725241921614",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/position/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
+    },
+    {
+      "Id": "395725241921615",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/position/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
+    },
+    {
+      "Id": "395725241921616",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/orgTreeSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
+    },
+    {
+      "Id": "395725241921617",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
+    },
+    {
+      "Id": "395725241921618",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/userSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
+    },
+    {
+      "Id": "395725241921619",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/positionSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
+    },
+    {
+      "Id": "395725241921620",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/ownRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
+    },
+    {
+      "Id": "395725241921621",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/roleSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
+    },
+    {
+      "Id": "395725241921622",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
+    },
+    {
+      "Id": "395725241921623",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
+    },
+    {
+      "Id": "395725241921624",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/edits",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edits\"}"
+    },
+    {
+      "Id": "395725241921625",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
+    },
+    {
+      "Id": "395725241921626",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/disableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
+    },
+    {
+      "Id": "395725241921627",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/enableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
+    },
+    {
+      "Id": "395725241921628",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/resetPassword",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
+    },
+    {
+      "Id": "395725241921629",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/grantRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
+    },
+    {
+      "Id": "395725241921630",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/import",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/import\"}"
+    },
+    {
+      "Id": "395725241921631",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/user/export",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/export\"}"
+    },
+    {
+      "Id": "395725328527429",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/tree",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
     },
     {
-      "Id": "383022463967305",
+      "Id": "395725328527430",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
     },
     {
-      "Id": "383022463967306",
+      "Id": "395725328527431",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
     },
     {
-      "Id": "383022463967307",
+      "Id": "395725328527432",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
     },
     {
-      "Id": "383022463967308",
+      "Id": "395725328527433",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/copy",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/copy\"}"
     },
     {
-      "Id": "383022463967309",
+      "Id": "395725328527434",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
     },
     {
-      "Id": "383022463967310",
+      "Id": "395725328527435",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/orgTreeSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
     },
     {
-      "Id": "383022463967311",
+      "Id": "395725328527436",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/org/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
     },
     {
-      "Id": "383022463967312",
+      "Id": "395725328527437",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/position/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
     },
     {
-      "Id": "383022463967313",
+      "Id": "395725328527438",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/position/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
     },
     {
-      "Id": "383022463967314",
+      "Id": "395725328527439",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/position/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
     },
     {
-      "Id": "383022463967315",
+      "Id": "395725328527440",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/position/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
     },
     {
-      "Id": "383022463967316",
+      "Id": "395725328527441",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/orgTreeSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
     },
     {
-      "Id": "383022463967317",
+      "Id": "395725328527442",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
     },
     {
-      "Id": "383022463967318",
+      "Id": "395725328527443",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
     },
     {
-      "Id": "383022463967319",
+      "Id": "395725328527444",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/positionSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
     },
     {
-      "Id": "383022463967320",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
-    },
-    {
-      "Id": "383022463967321",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
-    },
-    {
-      "Id": "383022463967322",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
-    },
-    {
-      "Id": "383022463967323",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/disableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
-    },
-    {
-      "Id": "383022463967324",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/enableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
-    },
-    {
-      "Id": "383022463967325",
-      "ObjectId": "212725263001002",
-      "TargetId": "/biz/user/resetPassword",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
-    },
-    {
-      "Id": "383022463967326",
+      "Id": "395725328527445",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/ownRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
     },
     {
-      "Id": "383022463967327",
+      "Id": "395725328527446",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/roleSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
+    },
+    {
+      "Id": "395725328527447",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
+    },
+    {
+      "Id": "395725328527448",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
+    },
+    {
+      "Id": "395725328527449",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/edits",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edits\"}"
+    },
+    {
+      "Id": "395725328527450",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
+    },
+    {
+      "Id": "395725328527451",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/disableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
+    },
+    {
+      "Id": "395725328527452",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/enableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
+    },
+    {
+      "Id": "395725328527453",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/resetPassword",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
+    },
+    {
+      "Id": "395725328527454",
       "ObjectId": "212725263001002",
       "TargetId": "/biz/user/grantRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
     },
     {
-      "Id": "383022463967328",
+      "Id": "395725328527455",
       "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/import",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/import\"}"
+    },
+    {
+      "Id": "395725328527456",
+      "ObjectId": "212725263001002",
+      "TargetId": "/biz/user/export",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/export\"}"
+    },
+    {
+      "Id": "395725362061381",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/tree",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/tree\"}"
+    },
+    {
+      "Id": "395725362061382",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/page\"}"
+    },
+    {
+      "Id": "395725362061383",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/add\"}"
+    },
+    {
+      "Id": "395725362061384",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/edit\"}"
+    },
+    {
+      "Id": "395725362061385",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/copy",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/copy\"}"
+    },
+    {
+      "Id": "395725362061386",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/delete\"}"
+    },
+    {
+      "Id": "395725362061387",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/orgTreeSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/orgTreeSelector\"}"
+    },
+    {
+      "Id": "395725362061388",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/org/userSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/org/userSelector\"}"
+    },
+    {
+      "Id": "395725362061389",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/position/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/page\"}"
+    },
+    {
+      "Id": "395725362061390",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/position/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/add\"}"
+    },
+    {
+      "Id": "395725362061391",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/position/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/edit\"}"
+    },
+    {
+      "Id": "395725362061392",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/position/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/position/delete\"}"
+    },
+    {
+      "Id": "395725362061393",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/orgTreeSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/orgTreeSelector\"}"
+    },
+    {
+      "Id": "395725362061394",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/page\"}"
+    },
+    {
+      "Id": "395725362061395",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/userSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/userSelector\"}"
+    },
+    {
+      "Id": "395725362061396",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/positionSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/positionSelector\"}"
+    },
+    {
+      "Id": "395725362061397",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/ownRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/ownRole\"}"
+    },
+    {
+      "Id": "395725362061398",
+      "ObjectId": "359567292014661",
       "TargetId": "/biz/user/roleSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/roleSelector\"}"
+    },
+    {
+      "Id": "395725362061399",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/add\"}"
+    },
+    {
+      "Id": "395725362061400",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edit\"}"
+    },
+    {
+      "Id": "395725362061401",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/edits",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/edits\"}"
+    },
+    {
+      "Id": "395725362061402",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/delete\"}"
+    },
+    {
+      "Id": "395725362061403",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/disableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/disableUser\"}"
+    },
+    {
+      "Id": "395725362061404",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/enableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/enableUser\"}"
+    },
+    {
+      "Id": "395725362061405",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/resetPassword",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/resetPassword\"}"
+    },
+    {
+      "Id": "395725362061406",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/grantRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/grantRole\"}"
+    },
+    {
+      "Id": "395725362061407",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/import",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/import\"}"
+    },
+    {
+      "Id": "395725362061408",
+      "ObjectId": "359567292014661",
+      "TargetId": "/biz/user/export",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/user/export\"}"
     }
   ]
 }
