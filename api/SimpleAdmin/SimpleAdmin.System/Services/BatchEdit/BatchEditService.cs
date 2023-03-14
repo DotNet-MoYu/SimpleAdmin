@@ -164,7 +164,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     /// <inheritdoc/>
     public List<SqlSugarTableInfo> GetTables()
     {
-        return SqlSugarUtils.GetTablesByAttribute<UpdateBatchAttribute>();
+        return SqlSugarUtils.GetTablesByAttribute<BatchEditAttribute>();
     }
 
     /// <inheritdoc/>

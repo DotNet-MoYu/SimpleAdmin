@@ -100,6 +100,11 @@
             <param name="arg"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Core.BatchEditAttribute">
+            <summary>
+            批量更新
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.CacheAttribute">
             <summary>
             缓存结果特性
@@ -163,11 +168,6 @@
         <member name="T:SimpleAdmin.Core.IgnoreSuperAdminAttribute">
             <summary>
             忽略超级管理员才能访问特性
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.UpdateBatchAttribute">
-            <summary>
-            批量更新
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdNotNull">

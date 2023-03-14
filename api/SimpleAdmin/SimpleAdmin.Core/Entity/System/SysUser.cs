@@ -8,7 +8,7 @@ namespace SimpleAdmin.Core;
 ///</summary>
 [SugarTable("sys_user", TableDescription = "用户信息表")]
 [Tenant(SqlsugarConst.DB_Default)]
-[UpdateBatch]
+[BatchEdit]
 public class SysUser : BaseEntity
 {
     /// <summary>
