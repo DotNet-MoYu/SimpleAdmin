@@ -156,7 +156,7 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
       <a-space>
         <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
         <template #icon><plus-outlined /></template>新增@(@Model.FunctionName)</a-button>
-		<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')">  title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="deleteBatch@(@Model.ClassName)"/>
+		<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"  title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="deleteBatch@(@Model.ClassName)"/>
       </a-space>
     </template>
     <template #bodyCell="{ column, record }">
