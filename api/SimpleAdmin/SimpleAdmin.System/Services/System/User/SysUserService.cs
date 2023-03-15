@@ -524,9 +524,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var result = _importExportService.GetImportResultPreview(data, out List<SysUserImportInput> importData);
         var sysUsers = importData.Adapt<List<SysUser>>();//转实体
         await SetUserDefault(sysUsers);//设置默认值
-        //await InsertRangeAsync(sysUsers);//导入用户
-        DbContext.Db.Fastest<SysUser>().BulkCopy(sysUsers);//大数据导入
-
+        await InsertOrBulkCopy(sysUsers);// 数据导入
         return result;
 
     }
