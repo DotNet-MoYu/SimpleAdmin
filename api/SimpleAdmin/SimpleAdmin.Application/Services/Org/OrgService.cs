@@ -19,7 +19,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
 
 
     /// <inheritdoc/>
-    public async Task<SqlSugarPagedList<SysOrg>> Page(OrgPageInput input)
+    public async Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
@@ -42,21 +42,21 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
 
 
     /// <inheritdoc />
-    public async Task Add(OrgAddInput input)
+    public async Task Add(SysOrgAddInput input)
     {
         await CheckInput(input, SimpleAdminConst.Add);//检查参数
         await _sysOrgService.Add(input, SimpleAdminConst.BizOrg);
     }
 
     /// <inheritdoc />
-    public async Task Edit(OrgEditInput input)
+    public async Task Edit(SysOrgEditInput input)
     {
         await CheckInput(input, SimpleAdminConst.Edit);//检查参数
         await _sysOrgService.Edit(input, SimpleAdminConst.BizOrg);
     }
 
     /// <inheritdoc />
-    public async Task Copy(OrgCopyInput input)
+    public async Task Copy(SysOrgCopyInput input)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();

@@ -37,28 +37,28 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Page(SimpleAdmin.System.OrgPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Page(SimpleAdmin.System.SysOrgPageInput)">
             <summary>
             机构分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Add(SimpleAdmin.System.OrgAddInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Add(SimpleAdmin.System.SysOrgAddInput)">
             <summary>
             添加机构
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Edit(SimpleAdmin.System.OrgEditInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Edit(SimpleAdmin.System.SysOrgEditInput)">
             <summary>
             修改机构
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Copy(SimpleAdmin.System.OrgCopyInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Copy(SimpleAdmin.System.SysOrgCopyInput)">
             <summary>
             复制组织
             </summary>
@@ -1201,39 +1201,23 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Page(SimpleAdmin.System.OrgPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Page(SimpleAdmin.System.SysOrgPageInput)">
             <summary>
             组织分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Add(SimpleAdmin.System.OrgAddInput)">
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Template">
             <summary>
-            添加组织
+            模板下载
             </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Edit(SimpleAdmin.System.OrgEditInput)">
+        <member name="M:SimpleAdmin.Web.Core.OrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
             <summary>
-            修改组织
+            获取用户选择器
             </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Copy(SimpleAdmin.System.OrgCopyInput)">
-            <summary>
-            复制组织
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除组织
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.OrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
@@ -1243,10 +1227,32 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Copy(SimpleAdmin.System.SysOrgCopyInput)">
             <summary>
-            获取用户选择器
+            复制组织
             </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Add(SimpleAdmin.System.SysOrgAddInput)">
+            <summary>
+            添加组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Edit(SimpleAdmin.System.SysOrgEditInput)">
+            <summary>
+            修改组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除组织
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.PositionController">

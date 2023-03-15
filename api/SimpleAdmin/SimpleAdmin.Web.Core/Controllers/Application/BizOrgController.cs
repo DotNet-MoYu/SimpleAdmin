@@ -35,7 +35,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpGet("page")]
     [DisplayName("机构分页查询")]
-    public async Task<dynamic> Page([FromQuery] OrgPageInput input)
+    public async Task<dynamic> Page([FromQuery] SysOrgPageInput input)
     {
         return await _orgService.Page(input);
     }
@@ -47,7 +47,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("add")]
     [DisplayName("添加机构")]
-    public async Task Add([FromBody] OrgAddInput input)
+    public async Task Add([FromBody]  SysOrgAddInput input)
     {
         await _orgService.Add(input);
     }
@@ -59,7 +59,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("edit")]
     [DisplayName("修改机构")]
-    public async Task Edit([FromBody] OrgEditInput input)
+    public async Task Edit([FromBody]  SysOrgEditInput input)
     {
         await _orgService.Edit(input);
     }
@@ -72,7 +72,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("copy")]
     [DisplayName("复制组织")]
-    public async Task Copy(OrgCopyInput input)
+    public async Task Copy( SysOrgCopyInput input)
     {
         await _orgService.Copy(input);
     }

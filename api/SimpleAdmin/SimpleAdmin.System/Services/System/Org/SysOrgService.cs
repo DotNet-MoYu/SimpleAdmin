@@ -7,11 +7,12 @@ namespace SimpleAdmin.System;
 public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 {
     private readonly ISimpleRedis _simpleRedis;
+    private readonly IImportExportService _importExportService;
 
-
-    public SysOrgService(ISimpleRedis simpleRedis)
+    public SysOrgService(ISimpleRedis simpleRedis, IImportExportService importExportService)
     {
         _simpleRedis = simpleRedis;
+        this._importExportService = importExportService;
     }
 
     #region 查询
@@ -74,7 +75,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     }
 
     /// <inheritdoc/>
-    public async Task<SqlSugarPagedList<SysOrg>> Page(OrgPageInput input)
+    public async Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input)
     {
         var query = Context.Queryable<SysOrg>()
                          .WhereIF(input.ParentId > 0, it => it.ParentId == input.ParentId)//父级
@@ -148,7 +149,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 新增
 
     /// <inheritdoc />
-    public async Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg)
+    public async Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SysOrg)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -158,7 +159,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     }
 
     /// <inheritdoc />
-    public async Task Copy(OrgCopyInput input)
+    public async Task Copy(SysOrgCopyInput input)
     {
         var orgList = await GetListAsync();//获取所有
         HashSet<long> ids = new HashSet<long>();//定义不重复Id集合
@@ -218,7 +219,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 编辑
 
     /// <inheritdoc />
-    public async Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg)
+    public async Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SysOrg)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -450,6 +451,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         names = names + orgName;//赋值全称
         return names;
     }
+
     #endregion
 
 

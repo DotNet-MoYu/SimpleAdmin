@@ -73,7 +73,7 @@ public interface ISysOrgService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>分页信息</returns>
-    Task<SqlSugarPagedList<SysOrg>> Page(OrgPageInput input);
+    Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input);
 
     #endregion
 
@@ -86,14 +86,14 @@ public interface ISysOrgService : ITransient
     /// <param name="input">添加参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Add(OrgAddInput input, string name = SimpleAdminConst.SysOrg);
+    Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SysOrg);
 
     /// <summary>
     /// 复制组织
     /// </summary>
     /// <param name="input">机构复制参数</param>
     /// <returns></returns>
-    Task Copy(OrgCopyInput input);
+    Task Copy(SysOrgCopyInput input);
     #endregion
 
 
@@ -109,7 +109,7 @@ public interface ISysOrgService : ITransient
     /// <param name="input">编辑参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Edit(OrgEditInput input, string name = SimpleAdminConst.SysOrg);
+    Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SysOrg);
     #endregion
 
 
@@ -146,6 +146,6 @@ public interface ISysOrgService : ITransient
     /// <param name="orgIds">机构ID列表</param>
     /// <returns>组织树列表</returns>
     Task<List<SysOrg>> Tree(List<long> orgIds = null);
-    #endregion
 
+    #endregion
 }
