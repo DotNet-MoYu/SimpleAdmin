@@ -169,7 +169,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             throw Oops.Bah($"不能包含自己");
         //获取目标组织
         var target = orgList.Where(it => it.Id == input.TargetId).FirstOrDefault();
-        if (target != null || input.TargetId == 0)
+        if (target != null || input.TargetId == SimpleAdminConst.Zero)
         {
             //需要复制的组织名称列表
             var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
@@ -203,7 +203,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             //遍历机构重新赋值全称
             addOrgList.ForEach(it =>
             {
-                it.Names = it.ParentId == 0 ? it.Name : GetNames(orgList, it.ParentId, it.Name);
+                it.Names = it.ParentId == SimpleAdminConst.Zero ? it.Name : GetNames(orgList, it.ParentId, it.Name);
             });
 
             if (await InsertRangeAsync(addOrgList))//插入数据

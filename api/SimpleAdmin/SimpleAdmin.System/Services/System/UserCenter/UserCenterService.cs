@@ -187,7 +187,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     {
         var orgList = await _sysOrgService.GetListAsync();//获取全部机构
         var parentOrgs = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
-        var topOrg = parentOrgs.Where(it => it.ParentId == 0).FirstOrDefault();//获取顶级节点
+        var topOrg = parentOrgs.Where(it => it.ParentId == SimpleAdminConst.Zero).FirstOrDefault();//获取顶级节点
         if (topOrg != null)
         {
             var orgs = await _sysOrgService.GetChildListById(topOrg.Id);//获取下级
@@ -312,7 +312,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             // 将根菜单的父id设置为模块的id
             if (it.Category == CateGoryConst.Resource_MENU)
             {
-                if (it.ParentId == 0)
+                if (it.ParentId == SimpleAdminConst.Zero)
                 {
                     it.ParentId = it.Module;
                 }

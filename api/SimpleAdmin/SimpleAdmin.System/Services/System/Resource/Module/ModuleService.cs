@@ -71,7 +71,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             if (system != null)
                 throw Oops.Bah($"不可删除系统内置模块:{system.Title}");
             //获取模块下的所有菜单Id列表
-            var menuIds = resourceList.Where(it => ids.Contains(it.Module.ToLong()) && it.ParentId.ToLong() == 0).Select(it => it.Id).ToList();
+            var menuIds = resourceList.Where(it => ids.Contains(it.Module.ToLong()) && it.ParentId.ToLong() == SimpleAdminConst.Zero).Select(it => it.Id).ToList();
             //需要删除的资源ID列表
             var resourceIds = new List<long>();
             //遍历列表
