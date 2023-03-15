@@ -24,7 +24,7 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
                            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.OpIp.Contains(input.SearchKey))//根据关键字查询
                            .IgnoreColumns(it => new { it.ParamJson, it.ResultJson })
                            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
-                           .OrderBy(it => it.Id, OrderByType.Desc);
+                           .OrderBy(it => it.CreateTime, OrderByType.Desc);
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
