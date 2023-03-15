@@ -286,7 +286,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         var roleGrantResourceMenus = new List<ResTreeSelector.RoleGrantResourceMenu>();//定义结果
         List<SysResource> allMenuList = (await GetListByCategory(CateGoryConst.Resource_MENU)).Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
         List<SysResource> allButtonList = await GetListByCategory(CateGoryConst.Resource_BUTTON);//获取所有按钮列表
-        var parentMenuList = allMenuList.Where(it => it.ParentId == 0).ToList();//获取一级目录
+        var parentMenuList = allMenuList.Where(it => it.ParentId == SimpleAdminConst.Zero).ToList();//获取一级目录
 
         //遍历一级目录
         foreach (var parent in parentMenuList)
