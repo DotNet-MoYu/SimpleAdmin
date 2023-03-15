@@ -265,14 +265,14 @@
             机构服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Add(SimpleAdmin.System.OrgAddInput)">
+        <member name="M:SimpleAdmin.Application.IOrgService.Add(SimpleAdmin.System.SysOrgAddInput)">
             <summary>
             添加机构
             </summary>
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Copy(SimpleAdmin.System.OrgCopyInput)">
+        <member name="M:SimpleAdmin.Application.IOrgService.Copy(SimpleAdmin.System.SysOrgCopyInput)">
             <summary>
             复制机构
             </summary>
@@ -286,14 +286,14 @@
             <param name="input">删除参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Edit(SimpleAdmin.System.OrgEditInput)">
+        <member name="M:SimpleAdmin.Application.IOrgService.Edit(SimpleAdmin.System.SysOrgEditInput)">
             <summary>
             编辑机构
             </summary>
             <param name="input">编辑参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Page(SimpleAdmin.System.OrgPageInput)">
+        <member name="M:SimpleAdmin.Application.IOrgService.Page(SimpleAdmin.System.SysOrgPageInput)">
             <summary>
             机构分页查询
             </summary>
@@ -309,19 +309,19 @@
         <member name="T:SimpleAdmin.Application.OrgService">
             <inheritdoc cref="T:SimpleAdmin.Application.IOrgService"/>
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Page(SimpleAdmin.System.OrgPageInput)">
+        <member name="M:SimpleAdmin.Application.OrgService.Page(SimpleAdmin.System.SysOrgPageInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.Tree">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Add(SimpleAdmin.System.OrgAddInput)">
+        <member name="M:SimpleAdmin.Application.OrgService.Add(SimpleAdmin.System.SysOrgAddInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Edit(SimpleAdmin.System.OrgEditInput)">
+        <member name="M:SimpleAdmin.Application.OrgService.Edit(SimpleAdmin.System.SysOrgEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Copy(SimpleAdmin.System.OrgCopyInput)">
+        <member name="M:SimpleAdmin.Application.OrgService.Copy(SimpleAdmin.System.SysOrgCopyInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">

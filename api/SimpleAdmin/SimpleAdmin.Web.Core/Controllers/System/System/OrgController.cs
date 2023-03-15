@@ -14,6 +14,15 @@ public class OrgController : BaseController
         this._sysUserService = sysUserService;
     }
 
+
+
+
+
+
+
+    #region Get
+
+
     /// <summary>
     /// 获取组织树
     /// </summary>
@@ -40,9 +49,47 @@ public class OrgController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("page")]
-    public async Task<dynamic> Page([FromQuery] OrgPageInput input)
+    public async Task<dynamic> Page([FromQuery] SysOrgPageInput input)
     {
         return await _sysOrgService.Page(input);
+    }
+
+
+    /// <summary>
+    /// 获取用户选择器
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("userSelector")]
+    public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
+    {
+        return await _sysUserService.UserSelector(input);
+    }
+
+    /// <summary>
+    /// 获取组织详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail(BaseIdInput input)
+    {
+        return await _sysOrgService.Detail(input); ;
+    }
+
+    #endregion
+
+    #region Post
+
+    /// <summary>
+    /// 复制组织
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("copy")]
+    [DisplayName("复制组织")]
+    public async Task Copy(SysOrgCopyInput input)
+    {
+        await _sysOrgService.Copy(input);
     }
 
     /// <summary>
@@ -52,7 +99,7 @@ public class OrgController : BaseController
     /// <returns></returns>
     [HttpPost("add")]
     [DisplayName("添加组织")]
-    public async Task Add([FromBody] OrgAddInput input)
+    public async Task Add([FromBody] SysOrgAddInput input)
     {
         await _sysOrgService.Add(input);
     }
@@ -65,21 +112,9 @@ public class OrgController : BaseController
     /// <returns></returns>
     [HttpPost("edit")]
     [DisplayName("修改组织")]
-    public async Task Edit([FromBody] OrgEditInput input)
+    public async Task Edit([FromBody] SysOrgEditInput input)
     {
         await _sysOrgService.Edit(input);
-    }
-
-    /// <summary>
-    /// 复制组织
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpPost("copy")]
-    [DisplayName("复制组织")]
-    public async Task Copy(OrgCopyInput input)
-    {
-        await _sysOrgService.Copy(input);
     }
 
     /// <summary>
@@ -94,25 +129,5 @@ public class OrgController : BaseController
     {
         await _sysOrgService.Delete(input);
     }
-
-    /// <summary>
-    /// 获取组织详情
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("detail")]
-    public async Task<dynamic> Detail(BaseIdInput input)
-    {
-        return await _sysOrgService.Detail(input); ;
-    }
-
-    /// <summary>
-    /// 获取用户选择器
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("userSelector")]
-    public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
-    {
-        return await _sysUserService.UserSelector(input);
-    }
+    #endregion
 }

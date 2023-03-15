@@ -10,7 +10,7 @@ public interface IOrgService : ITransient
     /// </summary>
     /// <param name="input">添加参数</param>
     /// <returns></returns>
-    Task Add(OrgAddInput input);
+    Task Add( SysOrgAddInput input);
 
 
     /// <summary>
@@ -18,7 +18,7 @@ public interface IOrgService : ITransient
     /// </summary>
     /// <param name="input">机构复制参数</param>
     /// <returns></returns>
-    Task Copy(OrgCopyInput input);
+    Task Copy( SysOrgCopyInput input);
 
     /// <summary>
     /// 删除机构
@@ -33,14 +33,14 @@ public interface IOrgService : ITransient
     /// </summary>
     /// <param name="input">编辑参数</param>
     /// <returns></returns>
-    Task Edit(OrgEditInput input);
+    Task Edit( SysOrgEditInput input);
 
     /// <summary>
     /// 机构分页查询
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>分页信息</returns>
-    Task<SqlSugarPagedList<SysOrg>> Page(OrgPageInput input);
+    Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input);
 
     /// <summary>
     /// 机构树结构

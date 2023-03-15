@@ -555,81 +555,80 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var sysPositions = await _sysPositionService.GetListAsync();
         var dicts = await _dictService.GetListAsync();
         #endregion
-        data.ForEach(async it =>
+        foreach (var item in data)
         {
             if (clearError)//如果需要清除错误
             {
-                it.ErrorInfo = new Dictionary<string, string>();
-                it.HasError = false;
+                item.ErrorInfo = new Dictionary<string, string>();
+                item.HasError = false;
             }
             #region 校验账号
-            if (dbAccounts.Contains(it.Account))
-                it.ErrorInfo.Add(nameof(it.Account), $"系统已存在账号{it.Account}");
-            if (accounts.Where(u => u == it.Account).Count() > 1)
-                it.ErrorInfo.Add(nameof(it.Account), $"账号重复");
+            if (dbAccounts.Contains(item.Account))
+                item.ErrorInfo.Add(nameof(item.Account), $"系统已存在账号{item.Account}");
+            if (accounts.Where(u => u == item.Account).Count() > 1)
+                item.ErrorInfo.Add(nameof(item.Account), $"账号重复");
             #endregion
             #region 校验手机号
-            if (!string.IsNullOrEmpty(it.Phone))
+            if (!string.IsNullOrEmpty(item.Phone))
             {
-                if (dbPhones.Contains(it.Phone))
-                    it.ErrorInfo.Add(nameof(it.Phone), $"系统已存在手机号{it.Phone}的用户");
-                if (phones.Where(u => u == it.Phone).Count() > 1)
-                    it.ErrorInfo.Add(nameof(it.Phone), $"手机号重复");
+                if (dbPhones.Contains(item.Phone))
+                    item.ErrorInfo.Add(nameof(item.Phone), $"系统已存在手机号{item.Phone}的用户");
+                if (phones.Where(u => u == item.Phone).Count() > 1)
+                    item.ErrorInfo.Add(nameof(item.Phone), $"手机号重复");
             }
             #endregion
             #region 校验邮箱
-            if (!string.IsNullOrEmpty(it.Email))
+            if (!string.IsNullOrEmpty(item.Email))
             {
-                if (dbEmails.Contains(it.Email))
-                    it.ErrorInfo.Add(nameof(it.Email), $"系统已存在邮箱{it.Email}");
-                if (emails.Where(u => u == it.Email).Count() > 1)
-                    it.ErrorInfo.Add(nameof(it.Email), $"邮箱重复");
+                if (dbEmails.Contains(item.Email))
+                    item.ErrorInfo.Add(nameof(item.Email), $"系统已存在邮箱{item.Email}");
+                if (emails.Where(u => u == item.Email).Count() > 1)
+                    item.ErrorInfo.Add(nameof(item.Email), $"邮箱重复");
             }
             #endregion
             #region 校验部门和职位
-            if (!string.IsNullOrEmpty(it.OrgName))
+            if (!string.IsNullOrEmpty(item.OrgName))
             {
-                var org = sysOrgs.Where(u => u.Names == it.OrgName).FirstOrDefault();
-                if (org != null) it.OrgId = org.Id;//赋值组织Id
-                else it.ErrorInfo.Add(nameof(it.OrgName), $"部门{org}不存在");
+                var org = sysOrgs.Where(u => u.Names == item.OrgName).FirstOrDefault();
+                if (org != null) item.OrgId = org.Id;//赋值组织Id
+                else item.ErrorInfo.Add(nameof(item.OrgName), $"部门{org}不存在");
             }
             //校验职位
-            if (!string.IsNullOrEmpty(it.PositionName))
+            if (!string.IsNullOrEmpty(item.PositionName))
             {
-                if (string.IsNullOrEmpty(it.OrgName)) it.ErrorInfo.Add(nameof(it.PositionName), $"请填写部门");
+                if (string.IsNullOrEmpty(item.OrgName)) item.ErrorInfo.Add(nameof(item.PositionName), $"请填写部门");
                 else
                 {
                     //根据部门ID和职位名判断是否有职位
-                    var position = sysPositions.FirstOrDefault(u => u.OrgId == it.OrgId && u.Name == it.PositionName);
-                    if (position != null) it.PositionId = position.Id;
-                    else it.ErrorInfo.Add(nameof(it.PositionName), $"职位{it.PositionName}不存在");
+                    var position = sysPositions.FirstOrDefault(u => u.OrgId == item.OrgId && u.Name == item.PositionName);
+                    if (position != null) item.PositionId = position.Id;
+                    else item.ErrorInfo.Add(nameof(item.PositionName), $"职位{item.PositionName}不存在");
                 }
 
             }
             #endregion
             #region 校验性别等字典
             var genders = await _dictService.GetValuesByDictValue(DevDictConst.GENDER, dicts);
-            if (!genders.Contains(it.Gender)) it.ErrorInfo.Add(nameof(it.Gender), $"性别只能是男和女");
-            if (!string.IsNullOrEmpty(it.Nation))
+            if (!genders.Contains(item.Gender)) item.ErrorInfo.Add(nameof(item.Gender), $"性别只能是男和女");
+            if (!string.IsNullOrEmpty(item.Nation))
             {
                 var nations = await _dictService.GetValuesByDictValue(DevDictConst.NATION, dicts);
-                if (!nations.Contains(it.Nation)) it.ErrorInfo.Add(nameof(it.Nation), $"不存在的民族");
+                if (!nations.Contains(item.Nation)) item.ErrorInfo.Add(nameof(item.Nation), $"不存在的民族");
             }
-            if (!string.IsNullOrEmpty(it.IdCardType))
+            if (!string.IsNullOrEmpty(item.IdCardType))
             {
                 var idCarTypes = await _dictService.GetValuesByDictValue(DevDictConst.IDCARD_TYPE, dicts);
-                if (!idCarTypes.Contains(it.IdCardType)) it.ErrorInfo.Add(nameof(it.IdCardType), $"证件类型错误");
+                if (!idCarTypes.Contains(item.IdCardType)) item.ErrorInfo.Add(nameof(item.IdCardType), $"证件类型错误");
             }
-            if (!string.IsNullOrEmpty(it.CultureLevel))
+            if (!string.IsNullOrEmpty(item.CultureLevel))
             {
                 var cultrueLevels = await _dictService.GetValuesByDictValue(DevDictConst.CULTURE_LEVEL, dicts);
-                if (!cultrueLevels.Contains(it.CultureLevel)) it.ErrorInfo.Add(nameof(it.CultureLevel), $"文化程度有误");
+                if (!cultrueLevels.Contains(item.CultureLevel)) item.ErrorInfo.Add(nameof(item.CultureLevel), $"文化程度有误");
             }
             #endregion
-            if (it.ErrorInfo.Count > 0) it.HasError = true;//如果错误信息数量大于0则表示有错误
+            if (item.ErrorInfo.Count > 0) item.HasError = true;//如果错误信息数量大于0则表示有错误
 
-
-        });
+        }
         data = data.OrderByDescending(it => it.HasError).ToList();//排序
         return data;
 
