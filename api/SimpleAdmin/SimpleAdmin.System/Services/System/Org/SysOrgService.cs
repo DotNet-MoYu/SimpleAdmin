@@ -169,7 +169,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             throw Oops.Bah($"不能包含自己");
         //获取目标组织
         var target = orgList.Where(it => it.Id == input.TargetId).FirstOrDefault();
-        if (target != null)
+        if (target != null || input.TargetId == 0)
         {
             //需要复制的组织名称列表
             var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
@@ -177,7 +177,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             var targetChildNames = orgList.Where(it => it.ParentId == input.TargetId).Select(it => it.Name).ToList();
             orgNames.ForEach(it =>
             {
-                if (targetChildNames.Contains(it)) throw Oops.Bah($"{target.Name}下已存在{it}");
+                if (targetChildNames.Contains(it)) throw Oops.Bah($"已存在{it}");
             });
 
             foreach (var id in input.Ids)
