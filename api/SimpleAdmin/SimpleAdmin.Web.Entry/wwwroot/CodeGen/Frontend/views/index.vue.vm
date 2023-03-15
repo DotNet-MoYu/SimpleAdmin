@@ -316,10 +316,13 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
   }
   
   // 批量删除
-  const deleteBatch@(@Model.ClassName) = (params) => {
-    @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {
-      table.value.clearRefreshSelected()
-    })
+  const deleteBatch@(@Model.ClassName) = (params,callback) => {
+    @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params)
+	                         .then(() => {})
+                             .finally(() => {
+						         table.value.clearRefreshSelected()
+				                 callback() //调用组件中的回调方法
+			                  })
   }
   @if(searchCount>0){
   @foreach (var column in searchColumns){//遍历字段
