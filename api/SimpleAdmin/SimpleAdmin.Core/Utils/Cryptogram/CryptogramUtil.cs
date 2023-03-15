@@ -16,7 +16,9 @@ public class CryptogramUtil
     public static string Sm2Decrypt(string str)
     {
         // 解密
-        return SM2Util.Decrypt(str);
+        if (!string.IsNullOrWhiteSpace(str))
+            return SM2Util.Decrypt(str);
+        else return "";
     }
 
     /// <summary>
@@ -27,7 +29,9 @@ public class CryptogramUtil
     public static string Sm2Encrypt(string str)
     {
         // 加密
-        return SM2Util.Encrypt(str);
+        if (!string.IsNullOrWhiteSpace(str))
+            return SM2Util.Encrypt(str);
+        else return "";
     }
 
     #endregion
@@ -40,10 +44,10 @@ public class CryptogramUtil
     /// <returns>明文</returns>
     public static string Sm4Decrypt(string str)
     {
-        if (!string.IsNullOrEmpty(str))
-            return SM4Util.Decrypt(new SM4Util { Data = str });// 解密
+        if (!string.IsNullOrWhiteSpace(str))// 解密
+            return SM4Util.Decrypt(new SM4Util { Data = str });
         else
-            return null;
+            return "";
     }
 
     /// <summary>
@@ -53,10 +57,10 @@ public class CryptogramUtil
     /// <returns>密文</returns>
     public static string Sm4Encrypt(string str)
     {
-        if (!string.IsNullOrEmpty(str))
-            return SM4Util.Encrypt(new SM4Util { Data = str });            // 加密
+        if (!string.IsNullOrWhiteSpace(str))// 加密
+            return SM4Util.Encrypt(new SM4Util { Data = str });
         else
-            return null;
+            return "";
 
     }
 
