@@ -218,8 +218,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             var result = _importExportService.GetImportResultPreview(data, out List<BizUserImportInput> importData);
             var sysUsers = importData.Adapt<List<SysUser>>();//转实体
             await _sysUserService.SetUserDefault(sysUsers);//设置用户默认值
-                                                           //await InsertRangeAsync(sysUsers);//导入用户
-            DbContext.Db.Fastest<SysUser>().BulkCopy(sysUsers);//大数据导入
+            await InsertOrBulkCopy(sysUsers);// 数据导入
             return result;
         }
         else throw Oops.Bah("您无权导入用户");

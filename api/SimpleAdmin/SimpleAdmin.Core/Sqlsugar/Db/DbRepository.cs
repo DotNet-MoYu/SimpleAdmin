@@ -17,6 +17,26 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
 
 
     #region 仓储方法拓展
+
+    #region 插入
+
+    /// <summary>
+    /// 批量插入判断走普通导入还是大数据
+    /// </summary>
+    /// <param name="data">数据</param>
+    /// <param name="threshold">阈值</param>
+    /// <returns></returns>
+    public virtual async Task<int> InsertOrBulkCopy(List<T> data, int threshold = 10000)
+    {
+        if (data.Count > threshold)
+            return await Context.Fastest<T>().BulkCopyAsync(data);//大数据导入
+        else
+            return await Context.Insertable(data).ExecuteCommandAsync();//普通导入
+
+
+    }
+
+    #endregion
     #region 列表
     /// <summary>
     /// 获取列表指定多个字段
