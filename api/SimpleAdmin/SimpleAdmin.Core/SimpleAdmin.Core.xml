@@ -892,6 +892,11 @@
             岗位
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Zero">
+            <summary>
+            0
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.SqlsugarConst">
             <summary>
             Sqlsugar系统常量类
