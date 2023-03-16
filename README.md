@@ -1,12 +1,6 @@
 <div align="left"><h1 align="center">SimpleAdmin</a></h1></div>
 <div align="center"><h4 align="center">✨没有花里胡哨，只有简单、稳定、高效✨</h4></div>
-<div align="center">
-[![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://gitee.com/zxzyjs/SimpleAdmin/blob/master/LICENSE)
-[![](https://img.shields.io/badge/Author-少林寺驻北固山办事处大神父王喇嘛-orange.svg)](https://gitee.com/huguodong520)
-[![](https://img.shields.io/badge/Blog-个人博客-blue.svg)](https://www.cnblogs.com/huguodong/)
-[![star](https://gitee.com/zxzyjs/SimpleAdmin/badge/star.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/stargazers)
-[![fork](https://gitee.com/zxzyjs/SimpleAdmin/badge/fork.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/members)
-</div>
+
 
 ### 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
