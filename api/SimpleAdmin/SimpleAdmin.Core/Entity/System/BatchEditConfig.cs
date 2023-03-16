@@ -60,8 +60,8 @@ public class BatchEditConfig : PrimaryKeyEntity
     /// <summary>
     /// 接口结果标签
     /// </summary>
-    [SugarColumn(ColumnName = "RequestLable", ColumnDescription = "接口结果标签", Length = 100, IsNullable = true)]
-    public string RequestLable { get; set; }
+    [SugarColumn(ColumnName = "RequestLabel", ColumnDescription = "接口结果标签", Length = 100, IsNullable = true)]
+    public string RequestLabel { get; set; }
 
     /// <summary>
     /// 接口结果值

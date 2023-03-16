@@ -1188,7 +1188,7 @@
             接口类型
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestLable">
+        <member name="P:SimpleAdmin.Core.BatchEditConfig.RequestLabel">
             <summary>
             接口结果标签
             </summary>
