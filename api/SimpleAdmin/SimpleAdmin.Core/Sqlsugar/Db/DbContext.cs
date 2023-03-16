@@ -144,8 +144,9 @@ public static class DbContext
                 }
                 if (entityInfo.PropertyName == nameof(BaseEntity.CreateTime))
                     entityInfo.SetValue(DateTime.Now);
+
                 //手机号和密码自动加密
-                if (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone))
+                if (entityInfo.EntityName == nameof(SysUser) && (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone)))
                     entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
                 if (App.User != null)
                 {
