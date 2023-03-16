@@ -209,6 +209,16 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         return permissions;
     }
 
+
+    /// <inheritdoc />
+    public async Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds)
+    {
+        //获取所有菜单
+        var menuList = await GetListByCategory(CateGoryConst.Resource_MENU);
+        //获取菜单信息
+        var menus = menuList.Where(it => menuIds.Contains(it.Id)).ToList();
+        return menus;
+    }
     #region 方法
 
     /// <summary>

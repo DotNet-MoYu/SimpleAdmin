@@ -160,21 +160,26 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<List<string>> GetButtonCodeList(long userId)
     {
         List<string> buttonCodeList = new();//按钮ID集合
-        //获取关系集合
-        var roleList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);
-        var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
-        if (roleIdList.Count > 0)//如果该用户有角色
+        //获取用户资源集合
+        var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+        List<long>? buttonIdList = new List<long>();//按钮ID集合
+        if (resourceList.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
-            List<long>? buttonIdList = new List<long>();//按钮ID集合
-            var resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//获取资源集合
-            resourceList.ForEach(it =>
+            //获取用户角色关系集合
+            var roleList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+            var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
+            if (roleIdList.Count > 0)//如果该用户有角色
             {
-                if (!string.IsNullOrEmpty(it.ExtJson)) buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResuorce>().ButtonInfo);//如果有按钮权限，将按钮ID放到buttonIdList
-            });
-            if (buttonIdList.Count > 0)
-            {
-                buttonCodeList = await _resourceService.GetCodeByIds(buttonIdList, CateGoryConst.Resource_BUTTON);
+                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//获取资源集合
             }
+        }
+        resourceList.ForEach(it =>
+        {
+            if (!string.IsNullOrEmpty(it.ExtJson)) buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResuorce>().ButtonInfo);//如果有按钮权限，将按钮ID放到buttonIdList
+        });
+        if (buttonIdList.Count > 0)
+        {
+            buttonCodeList = await _resourceService.GetCodeByIds(buttonIdList, CateGoryConst.Resource_BUTTON);
         }
         return buttonCodeList;
     }
@@ -183,46 +188,50 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<List<DataScope>> GetPermissionListByUserId(long userId, long orgId)
     {
         var permissions = new List<DataScope>();//权限集合
-        var roleIdList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
-        if (roleIdList.Count > 0)//如果角色ID不为空
+        var sysRelations = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//根据用户ID获取用户权限
+        if (sysRelations.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
-            //获取角色权限信息
-            var sysRelations = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList.Select(it => it.TargetId.ToLong()).ToList(), CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
-            var relationGroup = sysRelations.GroupBy(it => it.TargetId).ToList();//根据目标ID,也就是接口名分组，因为存在一个用户多个角色
-            var orgs = await _sysOrgService.GetListAsync();//获取所有机构
-            var scopeAllList = orgs.Select(it => it.Id).ToList();//获取所有机构ID
-            //遍历分组
-            foreach (var it in relationGroup)
+            var roleIdList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
+            if (roleIdList.Count > 0)//如果角色ID不为空
             {
-                HashSet<long> scopeSet = new HashSet<long>();//定义不可重复列表
-                var relationList = it.ToList();//关系列表
-                foreach (var relation in relationList)
+                //获取角色权限信息
+                sysRelations = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList.Select(it => it.TargetId.ToLong()).ToList(), CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
+            }
+        }
+        var relationGroup = sysRelations.GroupBy(it => it.TargetId).ToList();//根据目标ID,也就是接口名分组，因为存在一个用户多个角色
+        var orgs = await _sysOrgService.GetListAsync();//获取所有机构
+        var scopeAllList = orgs.Select(it => it.Id).ToList();//获取所有机构ID
+        //遍历分组
+        foreach (var it in relationGroup)
+        {
+            HashSet<long> scopeSet = new HashSet<long>();//定义不可重复列表
+            var relationList = it.ToList();//关系列表
+            foreach (var relation in relationList)
+            {
+                var rolePermission = relation.ExtJson.ToJsonEntity<RelationRolePermission>();
+                var scopeCategory = rolePermission.ScopeCategory;//根据数据权限分类
+                if (scopeCategory != CateGoryConst.SCOPE_SELF)//如果不是仅自己
                 {
-                    var rolePermission = relation.ExtJson.ToJsonEntity<RelationRolePermission>();
-                    var scopeCategory = rolePermission.ScopeCategory;//根据数据权限分类
-                    if (scopeCategory != CateGoryConst.SCOPE_SELF)//如果不是仅自己
+                    if (scopeCategory == CateGoryConst.SCOPE_ALL)//全部数据范围
                     {
-                        if (scopeCategory == CateGoryConst.SCOPE_ALL)//全部数据范围
-                        {
-                            scopeSet.AddRange(scopeAllList);//添加到范围列表
-                        }
-                        else if (scopeCategory == CateGoryConst.SCOPE_ORG)//只有自己机构
-                        {
-                            scopeSet.Add(orgId);//添加到范围列表
-                        }
-                        else if (scopeCategory == CateGoryConst.SCOPE_ORG_CHILD)//机构及以下机构
-                        {
-                            var scopeOrgChildList = (await _sysOrgService.GetChildListById(orgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
-                            scopeSet.AddRange(scopeOrgChildList);//添加到范围列表
-                        }
-                        else
-                        {
-                            scopeSet.AddRange(rolePermission.ScopeDefineOrgIdList);//添加自定义范围的机构ID
-                        }
+                        scopeSet.AddRange(scopeAllList);//添加到范围列表
+                    }
+                    else if (scopeCategory == CateGoryConst.SCOPE_ORG)//只有自己机构
+                    {
+                        scopeSet.Add(orgId);//添加到范围列表
+                    }
+                    else if (scopeCategory == CateGoryConst.SCOPE_ORG_CHILD)//机构及以下机构
+                    {
+                        var scopeOrgChildList = (await _sysOrgService.GetChildListById(orgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
+                        scopeSet.AddRange(scopeOrgChildList);//添加到范围列表
+                    }
+                    else
+                    {
+                        scopeSet.AddRange(rolePermission.ScopeDefineOrgIdList);//添加自定义范围的机构ID
                     }
                 }
-                permissions.Add(new DataScope { ApiUrl = it.Key, DataScopes = scopeSet.ToList() });//将改URL的权限集合加入权限集合列表
             }
+            permissions.Add(new DataScope { ApiUrl = it.Key, DataScopes = scopeSet.ToList() });//将改URL的权限集合加入权限集合列表
         }
         return permissions;
     }
@@ -257,6 +266,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return result;
     }
 
+
+
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysUser>> Page(UserPageInput input)
     {
@@ -278,6 +289,65 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_ROLE);
         return relations.Select(it => it.TargetId.ToLong()).ToList();
+    }
+
+    /// <inheritdoc />
+    public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
+    {
+        RoleOwnResourceOutput roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
+        List<RelationRoleResuorce> GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        //获取关系列表
+        var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+        //遍历关系表
+        relations.ForEach(it =>
+        {
+            //将扩展信息转为实体
+            var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();
+            GrantInfoList.Add(relationRole);//添加到已授权信息
+        });
+        roleOwnResource.GrantInfoList = GrantInfoList;//赋值已授权信息
+        return roleOwnResource;
+    }
+
+    /// <inheritdoc />
+    public async Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input)
+    {
+        RoleOwnPermissionOutput roleOwnPermission = new RoleOwnPermissionOutput { Id = input.Id };//定义结果集
+        List<RelationRolePermission> GrantInfoList = new List<RelationRolePermission>();//已授权信息集合
+        //获取关系列表
+        var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);
+        //遍历关系表
+        relations.ForEach(it =>
+        {
+            //将扩展信息转为实体
+            var relationPermission = it.ExtJson.ToJsonEntity<RelationRolePermission>();
+            GrantInfoList.Add(relationPermission);//添加到已授权信息
+        });
+        roleOwnPermission.GrantInfoList = GrantInfoList;//赋值已授权信息
+        return roleOwnPermission;
+    }
+
+
+    /// <inheritdoc />
+    public async Task<List<string>> UserPermissionTreeSelector(BaseIdInput input)
+    {
+        List<string> permissionTreeSelectors = new List<string>();//授权树结果集
+        //获取用户资源关系
+        var relationsRes = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+        var menuIds = relationsRes.Where(it => it.ObjectId == input.Id).Select(it => it.TargetId.ToLong()).ToList();
+        if (menuIds.Any())
+        {
+            //获取菜单信息
+            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            //获取权限授权树
+            var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
+            if (permissions.Count > 0)
+            {
+                permissionTreeSelectors = permissions.Select(it => it.PermissionName).ToList();//返回授权树权限名称列表
+            }
+
+        }
+        return permissionTreeSelectors;
     }
 
     #endregion
@@ -395,6 +465,94 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
     }
 
+    /// <inheritdoc />
+    public async Task GrantResource(UserGrantResourceInput input)
+    {
+        var menuIds = input.GrantInfoList.Select(it => it.MenuId).ToList();//菜单ID
+        var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
+        var relationRoles = new List<SysRelation>();//要添加的用户资源和授权关系表
+        var sysUser = await GetUserById(input.Id);//获取用户
+        if (sysUser != null)
+        {
+            #region 用户资源处理
+            //遍历角色列表
+            for (int i = 0; i < menuIds.Count; i++)
+            {
+                //将用户资源添加到列表
+                relationRoles.Add(new SysRelation
+                {
+                    ObjectId = sysUser.Id,
+                    TargetId = menuIds[i].ToString(),
+                    Category = CateGoryConst.Relation_SYS_USER_HAS_RESOURCE,
+                    ExtJson = extJsons == null ? null : extJsons[i]
+                });
+            }
+            #endregion
+            #region 用户权限处理.
+            var relationRolePer = new List<SysRelation>();//要添加的角色有哪些权限列表
+            var defaultDataScope = input.DefaultDataScope;//获取默认数据范围
+
+            //获取菜单信息
+            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            if (menus.Count > 0)
+            {
+                //获取权限授权树
+                var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
+                permissions.ForEach(it =>
+                {
+                    //新建角色权限关系
+                    relationRolePer.Add(new SysRelation
+                    {
+                        ObjectId = sysUser.Id,
+                        TargetId = it.ApiRoute,
+                        Category = CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
+                        ExtJson = new RelationRolePermission { ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory, ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList }.ToJson()
+                    });
+
+                });
+
+            }
+            relationRoles.AddRange(relationRolePer);//合并列表
+            #endregion
+            #region 保存数据库
+            //事务
+            var result = await itenant.UseTranAsync(async () =>
+           {
+               var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
+               await relatioRep.DeleteAsync(it => it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
+               await relatioRep.InsertRangeAsync(relationRoles);//添加新的
+           });
+            if (result.IsSuccess)//如果成功了
+            {
+                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//刷新关系缓存
+                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);//刷新关系缓存
+                DeleteUserFromRedis(input.Id);//删除该用户缓存
+            }
+            else
+            {
+                //写日志
+                _logger.LogError(result.ErrorMessage, result.ErrorException);
+                throw Oops.Oh(ErrorCodeEnum.A0003);
+            }
+            #endregion
+
+        }
+
+    }
+
+
+    /// <inheritdoc />
+    public async Task GrantPermission(GrantPermissionInput input)
+    {
+        var sysUser = await GetUserById(input.Id);//获取用户
+        if (sysUser != null)
+        {
+            var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
+            var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
+            DeleteUserFromRedis(input.Id);
+        }
+    }
 
     #endregion
 

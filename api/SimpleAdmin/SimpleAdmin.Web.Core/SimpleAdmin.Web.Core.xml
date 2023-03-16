@@ -705,6 +705,26 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有权限
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.PermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取权限授权树
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             导入预览
@@ -770,6 +790,20 @@
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
             <summary>
             给用户授权角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantResource(SimpleAdmin.System.UserGrantResourceInput)">
+            <summary>
+            给用户授权资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+            <summary>
+            给用户授权权限
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1206,12 +1240,6 @@
             组织分页查询
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Template">
-            <summary>
-            模板下载
-            </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.OrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">

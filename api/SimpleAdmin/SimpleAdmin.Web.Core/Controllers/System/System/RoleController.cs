@@ -95,7 +95,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantResource")]
-    [DisplayName("角色授权")]
+    [DisplayName("角色授权资源")]
     public async Task GrantResource([FromBody] GrantResourceInput input)
     {
         await _roleService.GrantResource(input);
@@ -129,7 +129,7 @@ public class RoleController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpPost("grantPermission")]
-    [DisplayName("角色授权")]
+    [DisplayName("角色授权权限")]
     public async Task GrantPermission([FromBody] GrantPermissionInput input)
     {
         await _roleService.GrantPermission(input);

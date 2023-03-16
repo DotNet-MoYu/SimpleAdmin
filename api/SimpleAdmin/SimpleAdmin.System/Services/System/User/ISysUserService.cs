@@ -89,10 +89,30 @@ public partial interface ISysUserService : ITransient
     /// <summary>
     /// 获取当前API用户的数据范围
     /// </summary>
-    /// <param name="userId">用户ID</param>
     /// <returns>机构列表</returns>
     Task<List<long>> GetLoginUserApiDataScope();
 
+    /// <summary>
+    /// 获取用户拥有的资源
+    /// </summary>
+    /// <param name="input">用户id</param>
+    /// <returns>资源列表</returns>
+    Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input);
+
+    /// <summary>
+    /// 获取用户拥有的权限
+    /// </summary>
+    /// <param name="input">用户id</param>
+    /// <returns>权限列表</returns>
+    Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input);
+
+
+    /// <summary>
+    /// 用户权限树选择
+    /// </summary>
+    /// <param name="input">用户id</param>
+    /// <returns>权限列表</returns>
+    Task<List<string>> UserPermissionTreeSelector(BaseIdInput input);
     #endregion
 
     #region 新增
@@ -143,6 +163,21 @@ public partial interface ISysUserService : ITransient
     /// <param name="input">授权参数</param>
     /// <returns></returns>
     Task GrantRole(UserGrantRoleInput input);
+
+
+    /// <summary>
+    /// 给用户授权资源
+    /// </summary>
+    /// <param name="input">授权参数</param>
+    /// <returns></returns>
+    Task GrantResource(UserGrantResourceInput input);
+
+    /// <summary>
+    /// 给用户授权权限
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task GrantPermission(GrantPermissionInput input);
     #endregion
 
     #region 删除
@@ -219,7 +254,6 @@ public partial interface ISysUserService : ITransient
     /// <param name="input">批量编辑信息</param>
     /// <returns></returns>
     Task Edits(BatchEditInput input);
-
 
     #endregion
 

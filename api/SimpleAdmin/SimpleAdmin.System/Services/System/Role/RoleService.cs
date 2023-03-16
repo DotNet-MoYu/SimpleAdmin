@@ -236,7 +236,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var defaultDataScope = sysRole.DefaultDataScope;//获取默认数据范围
 
             //获取菜单信息
-            var menus = await GetMenuByMenuIds(menuIds);
+            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
             if (menus.Count > 0)
             {
                 //获取权限授权树
@@ -306,10 +306,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task GrantPermission(GrantPermissionInput input)
     {
-        var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
-        var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-        await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
-        await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
+        var sysRole = (await GetListAsync()).Where(it => it.Id == input.Id).FirstOrDefault();//获取角色
+        if (sysRole != null)
+        {
+            var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
+            var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
+            await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
+        }
     }
 
 
@@ -388,7 +392,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         if (menuIds.Any())
         {
             //获取菜单信息
-            var menus = await GetMenuByMenuIds(menuIds);
+            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
             //获取权限授权树
             var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
             if (permissions.Count > 0)
@@ -435,19 +439,5 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         }
     }
 
-    /// <summary>
-    /// 根据菜单ID获取菜单
-    /// </summary>
-    /// <param name="menuIds"></param>
-    /// <returns></returns>
-    private async Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds)
-    {
-        //获取所有菜单
-        var menuList = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
-        //获取菜单信息
-        var menus = menuList.Where(it => menuIds.Contains(it.Id)).ToList();
-
-        return menus;
-    }
     #endregion
 }
