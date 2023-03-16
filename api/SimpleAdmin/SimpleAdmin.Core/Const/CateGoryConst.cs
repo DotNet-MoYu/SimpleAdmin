@@ -58,10 +58,22 @@ public class CateGoryConst
     /// </summary>
     public const string Relation_SYS_ROLE_HAS_RESOURCE = "SYS_ROLE_HAS_RESOURCE";
 
+
+    /// <summary>
+    ///用户有哪些资源
+    /// </summary>
+    public const string Relation_SYS_USER_HAS_RESOURCE = "SYS_USER_HAS_RESOURCE";
+
     /// <summary>
     /// 角色有哪些权限
     /// </summary>
     public const string Relation_SYS_ROLE_HAS_PERMISSION = "SYS_ROLE_HAS_PERMISSION";
+
+
+    /// <summary>
+    /// 角色有哪些权限
+    /// </summary>
+    public const string Relation_SYS_USER_HAS_PERMISSION = "SYS_USER_HAS_PERMISSION";
 
     /// <summary>
     /// 用户工作台数据

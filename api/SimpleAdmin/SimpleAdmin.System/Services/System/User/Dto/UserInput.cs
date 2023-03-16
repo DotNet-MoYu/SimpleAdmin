@@ -115,6 +115,16 @@ public class UserGrantRoleInput
     public List<long> RoleIdList { get; set; }
 }
 
+public class UserGrantResourceInput : GrantResourceInput
+{
+    /// <summary>
+    /// 默认数据权限
+    /// </summary>
+    [Required(ErrorMessage = "DefaultDataScope不能为空")]
+    public DefaultDataScope DefaultDataScope { get; set; }
+}
+
+
 /// <summary>
 /// 用户导入
 /// </summary>
@@ -306,3 +316,4 @@ public class SysUserImportInput : ImportTemplateInput
     public long PositionId { get; set; }
 
 }
+

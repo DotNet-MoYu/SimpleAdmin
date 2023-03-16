@@ -90,6 +90,38 @@ public class UserController : BaseController
     }
 
     /// <summary>
+    /// 获取用户拥有资源
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("ownResource")]
+    public async Task<dynamic> OwnResource([FromQuery] BaseIdInput input)
+    {
+        return await _sysUserService.OwnResource(input);
+    }
+
+    /// <summary>
+    /// 获取用户拥有权限
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("ownPermission")]
+    public async Task<dynamic> OwnPermission([FromQuery] BaseIdInput input)
+    {
+        return await _sysUserService.OwnPermission(input);
+    }
+
+    /// <summary>
+    /// 获取权限授权树
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("permissionTreeSelector")]
+    public async Task<dynamic> PermissionTreeSelector([FromQuery] BaseIdInput input)
+    {
+        return await _sysUserService.UserPermissionTreeSelector(input);
+    }
+
+    /// <summary>
     /// 导入预览
     /// </summary>
     /// <param name="input"></param>
@@ -217,6 +249,30 @@ public class UserController : BaseController
     }
 
     /// <summary>
+    /// 给用户授权资源
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("grantResource")]
+    [DisplayName("用户授权资源")]
+    public async Task GrantResource([FromBody] UserGrantResourceInput input)
+    {
+        await _sysUserService.GrantResource(input);
+    }
+
+
+    /// <summary>
+    /// 给用户授权权限
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("grantPermission")]
+    [DisplayName("用户授权权限")]
+    public async Task GrantPermission([FromBody] GrantPermissionInput input)
+    {
+        await _sysUserService.GrantPermission(input);
+    }
+    /// <summary>
     /// 用户导入
     /// </summary>
     /// <param name="input"></param>
@@ -243,12 +299,5 @@ public class UserController : BaseController
         return await _sysUserService.Export(input);
     }
     #endregion
-
-
-
-
-
-
-
 
 }

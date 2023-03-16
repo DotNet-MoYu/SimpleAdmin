@@ -40,8 +40,11 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);
         if (userInfo != null)
         {
-            //获取角色所拥有的资源集合
-            var resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
+            //获取用户所拥有的资源集合
+            var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+            if (resourceList.Count == 0)//如果没有就获取角色的
+                //获取角色所拥有的资源集合
+                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
             HashSet<long> menuIdList = new HashSet<long>();
 

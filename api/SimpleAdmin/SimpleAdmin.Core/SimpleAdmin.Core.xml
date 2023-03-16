@@ -282,7 +282,17 @@
             角色有哪些资源
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.CateGoryConst.Relation_SYS_USER_HAS_RESOURCE">
+             <summary>
+            用户有哪些资源
+             </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION">
+            <summary>
+            角色有哪些权限
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CateGoryConst.Relation_SYS_USER_HAS_PERMISSION">
             <summary>
             角色有哪些权限
             </summary>
@@ -2740,6 +2750,14 @@
             <summary>
             仓储模式对象
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.DbRepository`1.InsertOrBulkCopy(System.Collections.Generic.List{`0},System.Int32)">
+            <summary>
+            批量插入判断走普通导入还是大数据
+            </summary>
+            <param name="data">数据</param>
+            <param name="threshold">阈值</param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.DbRepository`1.GetListAsync(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Linq.Expressions.Expression{System.Func{`0,`0}})">
             <summary>
