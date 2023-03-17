@@ -56,11 +56,11 @@ Redis客户端使用的是我基于[NewLife.Redis](https://github.com/NewLifeX/N
 
 #### 👮RBAC+多机构的权限管理模式+权限及时刷新
 作为一个<font color="red">后台管理系统</font>，一个<font color="red">权限管理框架</font>,权限设计作为一个管理系统的灵魂，是一个系统好不好用的关键。本系统是采用RBAC+多机构的权限管理模式,一个机构下有多个角色，每个角色有不同的菜单和权限，可以将不同角色分配给不同的用户，这样每个用户都会拥有他所属角色的权限。当然，一个用户也可以拥有多个角色的权限，除此之外还支持给用户单独授权，让用户脱离所有角色之外，实现灵活再灵活的权限控制。并且当角色或用户的权限被修改之后，后端会立即刷新，前端只需刷新页面就能更新被重新赋予的权限，无需重新登录。
-
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/授权菜单.gif"/>
 
 #### 🧱接口级别的数据范围权限
 目前在我接触的大部分管理系统中，数据权限这块都不太尽如人意，要么只有接口权限没有数据权限，要么有数据权限但是用起来不是特别顺手而且还有BUG，针对以上痛点和难点结合业务场景，本系统实现全网最灵活的接口级别数据范围权限控制，可以指定某个角色的某个接口的数据权限范围，非常的灵活。
-<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/接口数据权限.png"/>
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/接口权限.gif"/>
 
 在系统中，获取数据权限非常简单，只需一个方法搞定。
 ```cs
@@ -78,13 +78,15 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 
 文档地址：[https://www.cnblogs.com/huguodong/p/16991947.html](https://www.cnblogs.com/huguodong/p/16991947.html)
 
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/即时通讯.gif"/>
+
 #### 🔧代码生成器
 大部分项目里，其实有很多代码是重复的，几乎每个模块都有 CRUD 增删改查的功能，而这些功能的实现代码往往是大同小异的。如果这些功能都要自己去手写，非常无聊枯燥，浪费时间且效率很低，还可能会写错。代码生成功能通过选择数据库表，完成单表的增删改查管理功能，可以生成包括前端、后端、和SQL语句，支持预览的同时还支持ZIP压缩包和直接生成到项目两种模式，解放你的双手，大大减少了重复代码的编写,无需复制提升开发效率。
-<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/代码生成.png"/>
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/代码生成.gif"/>
 
 #### 🎺常用功能组件化
-在系统一些常用的功能直接封装成vue组件，如批量导入，批量导出，批量删除，批量编辑等,只需按照规范传入相应参数就可以很好的实现功能，减少了很多不必要的前端代码。最典型的就是批量导入组件，只需传入api接口,通过后端接口自动生成表头，并实现字段级别的错误信息提示和预览，非常好用。
-<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/16.png"/>
+在系统一些常用的功能直接封装成vue组件，如批量导入，批量导出，批量删除，批量编辑等,只需按照规范传入相应参数就可以很好的实现功能，减少了很多不必要的前端代码。最典型的就是批量导入组件，只需传入api接口,通过后端接口自动生成表头，并实现字段级别的错误信息提示和预览,大数据支持分段导入，非常好用。
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/数据导入.gif"/>
 
 #### 📖最详细的注释和使用文档
 作为一个开源项目，如何让使用者看懂代码是非常重要的，很多作者会忽视这一点，导致我们阅读其代码的时候很难理解其为什么要这么写,如果没有详细的文档，想要二次开发需要花精力去研究源码。而本系统完全不用担心这个问题，后端源码注释覆盖率超过<font color="#dd0000">90%</font><br />,每一个方法,每一步都有详细的解释和说明，
@@ -119,7 +121,7 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
       <tr>
        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/13.png"/></td>
        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/14.png"/></td>
-       <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/15.png"/></td>
+       <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/16.png"/></td>
     </tr>
 
 </table>
