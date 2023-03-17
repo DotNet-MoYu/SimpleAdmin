@@ -331,7 +331,7 @@ public class UserService : DbRepository<SysUser>, IUserService
         var exp = Expressionable.Create<SysUser>();
         exp.And(u => u.Account != RoleConst.SuperAdmin);
         exp.AndIF(dataScope.Count > 0, u => dataScope.Contains(u.OrgId));//用户机构在数据范围内
-        exp.OrIF(dataScope.Count == 0, u => u.Id == UserManager.UserId);//用户ID等于自己
+        exp.AndIF(dataScope.Count == 0, u => u.Id == UserManager.UserId);//用户ID等于自己
         input.Expression = exp;
         return input;
     }
