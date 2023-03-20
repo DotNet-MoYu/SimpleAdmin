@@ -334,7 +334,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             //将渲染结果添加到结果集
             sqlCodeResults.Add(new GenBasePreviewOutput.GenBaseCodeResult
             {
-                CodeFileContent = tContent,
+                CodeFileContent = tResult,
                 CodeFileName = fileNoPrefix,
                 FilePath = fileInfo.FullName
             });
