@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,12 +53,12 @@ public class DevConfigConst
 
     #region 存储引擎
     /// <summary>
-    /// mqtt连接用户名
+    /// windows系统本地目录
     /// </summary>
     public const string FILE_LOCAL_FOLDER_FOR_WINDOWS = "FILE_LOCAL_FOLDER_FOR_WINDOWS";
 
     /// <summary>
-    /// mqtt连接密码
+    /// Unix系统本地目录
     /// </summary>
     public const string FILE_LOCAL_FOLDER_FOR_UNIX = "FILE_LOCAL_FOLDER_FOR_UNIX";
 
