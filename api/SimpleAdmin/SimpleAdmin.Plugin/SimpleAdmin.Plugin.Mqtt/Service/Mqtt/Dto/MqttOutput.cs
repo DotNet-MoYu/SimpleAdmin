@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Plugin.Mqtt;
 
 /// <summary>
 /// mqtt登录参数输出
@@ -50,12 +50,12 @@ public class MqttAuthOutput
     /// <summary>
     /// 结果 "allow" | "deny" | "ignore", // Default `"ignore"`
     /// </summary>
-    public string Result { get; set; }
+    public string Result { get; set; } = "deny";
 
 
     /// <summary>
     /// 是否超级管理员
     /// </summary>
-    public bool Is_superuser { get; set; }
+    public bool Is_superuser { get; set; } = false;
 
 }

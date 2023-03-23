@@ -54,6 +54,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public List<string> GetAssemblies()
     {
         var names = new List<string>();//结果集
+        var excludeKeys = new List<string>() { "Furion", "Core", "Plugin" };
         //获取所有程序集名称
         var assemblies = App.Assemblies
             .Where(it => !it.FullName.StartsWith("Furion"))

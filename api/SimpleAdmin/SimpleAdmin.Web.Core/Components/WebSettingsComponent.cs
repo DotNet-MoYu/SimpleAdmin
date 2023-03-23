@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SignalR;
 using SimpleMQTT;
 using SimpleRedis;
@@ -13,6 +14,7 @@ public sealed class WebSettingsComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
+        //web设置配置转实体
         services.AddConfigurableOptions<WebSettingsOptions>();
 
         //禁止在主机启动时通过 App.GetOptions<TOptions> 获取选项，如需获取配置选项理应通过 App.GetConfig<TOptions>("配置节点", true)。
@@ -20,14 +22,11 @@ public sealed class WebSettingsComponent : IServiceComponent
         //如果是演示环境,加上操作筛选器,禁止操作数据库
         if (appSettings.EnvPoc)
             services.AddMvcFilter<MyActionFilter>();
-        //如果使用mqtt，注册mqtt服务
-        if (appSettings.UseMqtt)
-            services.AddMqttClientManager();
-        else
-        {
-            services.AddSignalR();//注册SignalR
-            services.AddSingleton<IUserIdProvider, UserIdProvider>();//用户ID提供器
-        }
+
+        //启动业务层组件
+        services.AddComponent<ApplicationComponent>();
+        //启动System层组件
+        services.AddComponent<SystemComponent>();
 
     }
 }
@@ -49,10 +48,7 @@ public sealed class WebSettingsApplicationComponent : IApplicationComponent
             //删除redis的key
             redis.DelByPattern(RedisConst.Redis_Prefix_Web);
         }
-        if (webSettings.UseMqtt)
-        {
-            var mqttClientManager = App.GetService<IMqttClientManager>();//获取mqtt服务判断配置是否有问题
-        }
-
+        //调用系统层ConfigureService
+        app.UseComponent<SystemApplicationComponent>(env);
     }
 }

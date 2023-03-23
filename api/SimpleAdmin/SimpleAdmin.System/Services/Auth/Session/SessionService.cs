@@ -11,12 +11,12 @@ namespace SimpleAdmin.System;
 public class SessionService : DbRepository<SysUser>, ISessionService
 {
     private readonly ISimpleRedis _simpleRedis;
-    private readonly INoticeService _noticeService;
+    private readonly IEventPublisher _eventPublisher;
 
-    public SessionService(ISimpleRedis simpleRedis, INoticeService noticeService)
+    public SessionService(ISimpleRedis simpleRedis, IEventPublisher eventPublisher)
     {
         this._simpleRedis = simpleRedis;
-        this._noticeService = noticeService;
+        this._eventPublisher = eventPublisher;
     }
 
     /// <inheritdoc/>
@@ -96,30 +96,30 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <inheritdoc/>
     public async Task ExitSession(BaseIdInput input)
     {
+        var userId = input.Id.ToString();
         //token列表
-        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, input.Id.ToString());
+        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
         //从列表中删除
-        _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { input.Id.ToString() });
-        var message = "您已被强制下线!";
-        await _noticeService.LoginOut(input.Id.ToString(), tokenInfos, message);//通知下线
+        _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { userId });
+        await NoticeUserLoginOut(userId, tokenInfos);
     }
 
     /// <inheritdoc/>
     public async Task ExitToken(ExitTokenInput input)
     {
 
+        var userId = input.Id.ToString();
         //获取该用户的token信息
-        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, input.Id.ToString());
+        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
         //当前需要踢掉用户的token
         var deleteTokens = tokenInfos.Where(it => input.Tokens.Contains(it.Token)).ToList();
         //踢掉包含token列表的token信息
         tokenInfos = tokenInfos.Where(it => !input.Tokens.Contains(it.Token)).ToList();
         if (tokenInfos.Count > 0)
-            _simpleRedis.HashAdd(RedisConst.Redis_UserToken, input.Id.ToString(), tokenInfos);//如果还有token则更新token
+            _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//如果还有token则更新token
         else
-            _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { input.Id.ToString() });//否则直接删除key
-        var message = "您已被强制下线!";
-        await _noticeService.LoginOut(input.Id.ToString(), deleteTokens, message);//通知下线
+            _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { userId });//否则直接删除key
+        await NoticeUserLoginOut(userId, deleteTokens);
     }
     #region 方法
 
@@ -184,6 +184,20 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             it.TokenRemainPercent = tokenRemainPercent;
         });
 
+    }
+
+    /// <summary>
+    /// 通知用户下线
+    /// </summary>
+    /// <returns></returns>
+    private async Task NoticeUserLoginOut(string userId, List<TokenInfo> tokenInfos)
+    {
+        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new NoticeEvent
+        {
+            Message = "您已被强制下线!",
+            TokenInfos = tokenInfos,
+            UserId = userId
+        }); //通知用户下线
     }
     #endregion
 }

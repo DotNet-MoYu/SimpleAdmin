@@ -3,7 +3,6 @@
   "WebSettings": {
     "EnvPoc": false, //是否演示环境
     "ClearRedis": true, //是否清除redis缓存
-    "UseMqtt": false //是否使用mqtt
   },
   //mqtt设置
   "MqttSettings": {

@@ -1,0 +1,10 @@
+{
+  //mqtt设置
+  "MqttSetting": {
+    "Host": "127.0.0.1",
+    "Port": 1883,
+    "UserName": "admin",
+    "SecretKey": "admin",
+    "ClientId": "SimpleAdminWeb"
+  }
+}

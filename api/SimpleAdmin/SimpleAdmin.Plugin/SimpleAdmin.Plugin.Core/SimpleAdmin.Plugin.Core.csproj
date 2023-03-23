@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8604;8625;8765</NoWarn>
+		<DocumentationFile>SimpleAdmin.Plugin.Core.xml</DocumentationFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
+	</ItemGroup>
+
+</Project>

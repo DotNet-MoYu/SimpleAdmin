@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.SignalR</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.SignalR.ISimpleHub">
+            <summary>
+            即时通讯集线器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.ISimpleHub.LoginOut(System.Object)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.SignalR.SimpleHub">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.SignalR.ISimpleHub"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SimpleHub.OnConnectedAsync">
+            <summary>
+            连接
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SimpleHub.OnDisconnectedAsync(System.Exception)">
+            <summary>
+            断开连接
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SimpleHub.LoginOut(System.String)">
+            <summary>
+            退出登录
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SimpleHub.UpdateRedis(System.String,System.String,System.Boolean)">
+            <summary>
+            更新redis
+            </summary>
+            <param name="userIdentifier">用户id</param>
+            <param name="token">token</param>
+            <param name="ifConnect">是否是上线</param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.SignalR.UserIdProvider">
+            <summary>
+            用户ID提供器
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.SignalR.SignalrNoticeService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Core.INoticeService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SignalrNoticeService.UserLoginOut(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SignalrNoticeService.GetHubContext">
+            <summary>
+            获取hubContext
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.SignalR.SignalRComponent">
+            <summary>
+             SignalR组件
+            </summary>
+        </member>
+    </members>
+</doc>

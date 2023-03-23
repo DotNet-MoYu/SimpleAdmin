@@ -1,16 +1,9 @@
 ﻿using Furion.InstantMessaging;
 using Masuit.Tools;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Plugin.SignalR;
 
 /// <summary>
 /// <inheritdoc cref="ISimpleHub"/>
@@ -23,7 +16,7 @@ public class SimpleHub : Hub<ISimpleHub>
 
     public SimpleHub(ISimpleRedis simpleRedis)
     {
-        this._simpleRedis = simpleRedis;
+        _simpleRedis = simpleRedis;
     }
 
 
@@ -59,7 +52,7 @@ public class SimpleHub : Hub<ISimpleHub>
     /// <summary>
     /// 退出登录
     /// </summary>
-    /// <param name="input"></param>
+    /// <param name="userId"></param>
     /// <returns></returns>
     public async Task LoginOut(string userId)
     {

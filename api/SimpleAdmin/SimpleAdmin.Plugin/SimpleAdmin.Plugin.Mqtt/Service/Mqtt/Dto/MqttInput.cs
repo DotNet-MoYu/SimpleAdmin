@@ -4,13 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Plugin.Mqtt;
 
 /// <summary>
 /// mqtt认证参数
 /// </summary>
 public class MqttAuthInput
 {
+
+    /// <summary>
+    /// 用户ID
+    /// </summary>
+    public string UserId { get; set; }
+
 
     /// <summary>
     /// 账号

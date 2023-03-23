@@ -1,4 +1,7 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.Auth;
+﻿using Furion.FriendlyException;
+using SimpleAdmin.Plugin.Mqtt;
+
+namespace SimpleAdmin.Web.Core.Controllers.System.Auth;
 
 /// <summary>
 /// mqtt服务控制器
@@ -8,10 +11,12 @@
 public class MqttController
 {
     private readonly IMqttService _mqttService;
+    private readonly ISysUserService _sysUserService;
 
-    public MqttController(IMqttService mqttService)
+    public MqttController(IMqttService mqttService, ISysUserService sysUserService)
     {
         this._mqttService = mqttService;
+        this._sysUserService = sysUserService;
     }
 
     /// <summary>
@@ -21,7 +26,7 @@ public class MqttController
     [HttpGet("getParameter")]
     public async Task<dynamic> GetParameter()
     {
-        return await _mqttService.GetParameter();
+        return await _mqttService.GetWebLoginParameter(await _sysUserService.GetUserById(UserManager.UserId));
     }
 
     /// <summary>
@@ -34,6 +39,11 @@ public class MqttController
     [NonUnify]
     public async Task<dynamic> Auth([FromBody] MqttAuthInput input)
     {
-        return await _mqttService.Auth(input);
+        var user = _sysUserService.GetUserByAccount(input.Username);
+        if (user != null)
+            return await _mqttService.Auth(input, user.Id.ToString());
+        else
+            return new MqttAuthOutput { };
+
     }
 }

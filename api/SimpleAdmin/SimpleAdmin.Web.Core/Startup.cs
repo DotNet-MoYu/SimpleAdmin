@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using SimpleAdmin.Plugin.Core;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -75,13 +76,15 @@ public class Startup : AppStartup
         //});
         app.UseEndpoints(endpoints =>
         {
-            //通过 App.GetOptions<TOptions> 获取选项
-            var webSettings = App.GetOptions<WebSettingsOptions>();
-            if (!webSettings.UseMqtt)
+            // 获取插件选项
+            var pluginsOptions = App.GetOptions<PluginsOptions>();
+            //如果通知类型是mqtt
+            if (pluginsOptions.UseMqtt)
             {
                 // 注册集线器
                 endpoints.MapHubs();
             }
+
             endpoints.MapControllers();
         });
     }

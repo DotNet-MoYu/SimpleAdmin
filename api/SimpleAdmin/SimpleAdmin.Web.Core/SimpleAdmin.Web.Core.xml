@@ -346,7 +346,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.Auth(SimpleAdmin.System.MqttAuthInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
             <summary>
             mqtt认证
             </summary>
@@ -1675,6 +1675,21 @@
         <member name="P:SimpleAdmin.Web.Core.Validation.Message">
             <summary>
             错误详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.WebSettingsOptions">
+            <summary>
+            系统配置选项
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.WebSettingsOptions.EnvPoc">
+            <summary>
+            是否演示环境
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.WebSettingsOptions.ClearRedis">
+            <summary>
+            是否清除Redis缓存
             </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.Startup">

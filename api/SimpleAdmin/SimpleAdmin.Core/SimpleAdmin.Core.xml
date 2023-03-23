@@ -504,12 +504,12 @@
         </member>
         <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS">
             <summary>
-            mqtt连接用户名
+            windows系统本地目录
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX">
             <summary>
-            mqtt连接密码
+            Unix系统本地目录
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.DevConfigConst.FILE_MINIO_ACCESS_KEY">
@@ -600,36 +600,6 @@
         <member name="F:SimpleAdmin.Core.DevLogConst.FAIL">
             <summary>
             成功
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.EventSubscriberConst">
-            <summary>
-            事件总线常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LoginB">
-            <summary>
-            B端登录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LoginOutB">
-            <summary>
-            B端登录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LogVisit">
-            <summary>
-            访问日志
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.LogOperate">
-            <summary>
-            操作日志
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Core.EventSubscriberConst.ClearUserCache">
-            <summary>
-            清除用户缓存
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.GenConst">
@@ -2684,26 +2654,6 @@
         <member name="P:SimpleAdmin.Core.WorkBenchShortcut.Path">
             <summary>
             路由地址
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Core.WebSettingsOptions">
-            <summary>
-            系统配置选项
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.WebSettingsOptions.EnvPoc">
-            <summary>
-            是否演示环境
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.WebSettingsOptions.ClearRedis">
-            <summary>
-            是否清除Redis缓存
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Core.WebSettingsOptions.UseMqtt">
-            <summary>
-            是否使用MQTT
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.DbContext">

@@ -19,3 +19,4 @@ global using SimpleAdmin.Application;
 global using SimpleAdmin.System;
 global using Furion.Logging;
 global using Microsoft.AspNetCore.Http;
+global using SimpleAdmin.Plugin.Core;

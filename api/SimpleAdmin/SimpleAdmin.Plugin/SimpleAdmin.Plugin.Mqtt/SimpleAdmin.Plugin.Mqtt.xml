@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.Mqtt</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
+            <summary>
+            MQTT组件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttApplicationComponent">
+             <summary>
+            MQTT组件
+             模拟 Configure
+             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttAuthInput">
+            <summary>
+            mqtt认证参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthInput.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthInput.Username">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthInput.ClientId">
+            <summary>
+            客户端ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput">
+            <summary>
+            mqtt登录参数输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput.Url">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput.ClientId">
+            <summary>
+            客户端ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttParameterOutput.Topics">
+            <summary>
+            主题列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttAuthOutput">
+            <summary>
+            mqtt认证输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthOutput.Result">
+            <summary>
+            结果 "allow" | "deny" | "ignore", // Default `"ignore"`
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthOutput.Is_superuser">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.IMqttService">
+             <summary>
+            Mqtt服务
+             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput,System.String)">
+            <summary>
+            mqtt登录http认证
+            </summary>
+            <param name="input">认证参数</param>
+            <param name="userId">用户Id</param>
+            <returns>认证结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.GetWebLoginParameter(SimpleAdmin.Core.SysUser)">
+            <summary>
+            获取mqtt登录web端参数
+            </summary>
+            <returns>登录参数</returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mqtt.IMqttService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.GetWebLoginParameter(SimpleAdmin.Core.SysUser)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttNoticeService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Core.INoticeService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.UserLoginOut(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.Startup">
+            <summary>
+            AppStartup启动类
+            </summary>
+        </member>
+    </members>
+</doc>

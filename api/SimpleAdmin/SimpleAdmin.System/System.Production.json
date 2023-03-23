@@ -1,3 +1,7 @@
 {
-
+  "Plugins": {
+    "UseSignalR": true, // 是否开启Signalr
+    "UseMqtt": false, // 是否开启Mqtt
+    "NoticeComponent": "SignalR" //默认通知类型SignalR/Mqtt
+  }
 }

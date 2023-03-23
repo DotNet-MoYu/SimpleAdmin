@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Furion.DataEncryption;
+using Microsoft.AspNetCore.SignalR;
+using SimpleTool;
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Plugin.SignalR;
 
 /// <summary>
 /// 用户ID提供器
 /// </summary>
 public class UserIdProvider : IUserIdProvider
 {
-    public string? GetUserId(HubConnectionContext connection)
+    public string GetUserId(HubConnectionContext connection)
     {
         var token = connection.GetHttpContext().Request.Query["access_token"];//获取token
         var claims = JWTEncryption.ReadJwtToken(token)?.Claims;//解析token

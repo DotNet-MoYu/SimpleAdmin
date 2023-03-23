@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.Plugin.SignalR;
 
 
 /// <summary>
@@ -6,8 +6,6 @@
 /// </summary>
 public interface ISimpleHub
 {
-
-
     /// <summary>
     /// 退出登录
     /// </summary>
