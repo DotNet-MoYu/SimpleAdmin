@@ -4,13 +4,9 @@
     "EnvPoc": false, //是否演示环境
     "ClearRedis": true, //是否清除redis缓存
   },
-  //mqtt设置
-  "MqttSettings": {
-    "Host": "127.0.0.1",
-    "Port": 1883,
-    "UserName": "admin",
-    "SecretKey": "admin",
-    "ClientId": "SimpleAdminWeb"
+  "PluginSettings": {
+    "UseSignalR": true, // 是否开启Signalr,需要单独启动
+    "NoticeComponent": "SignalR" //默认通知组件类型SignalR/Mqtt
   },
   //jwt设置
   "JWTSettings": {

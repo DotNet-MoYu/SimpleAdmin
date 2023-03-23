@@ -7,3 +7,4 @@ global using SimpleRedis;
 global using Microsoft.AspNetCore.SignalR;
 global using Furion.DependencyInjection;
 global using SimpleAdmin.Plugin.Core;
+global using Microsoft.Extensions.Logging;

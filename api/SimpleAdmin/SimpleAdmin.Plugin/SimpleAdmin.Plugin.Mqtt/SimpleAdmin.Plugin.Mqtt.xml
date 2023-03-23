@@ -4,17 +4,6 @@
         <name>SimpleAdmin.Plugin.Mqtt</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
-            <summary>
-            MQTT组件
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttApplicationComponent">
-             <summary>
-            MQTT组件
-             模拟 Configure
-             </summary>
-        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttAuthInput">
             <summary>
             mqtt认证参数

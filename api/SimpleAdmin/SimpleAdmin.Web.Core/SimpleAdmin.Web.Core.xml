@@ -1694,7 +1694,7 @@
         </member>
         <member name="T:SimpleAdmin.Web.Core.Startup">
             <summary>
-            启动项配置
+            Web启动项配置
             </summary>
         </member>
     </members>

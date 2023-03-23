@@ -4,11 +4,6 @@
         <name>SimpleAdmin.Application</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.System.ApplicationComponent">
-            <summary>
-             业务组件
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Application.GenTestPageInput">
             <summary>
             测试分页查询参数
@@ -616,6 +611,11 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Application.Startup">
+            <summary>
+            AppStartup启动类
+            </summary>
         </member>
     </members>
 </doc>

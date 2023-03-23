@@ -6,7 +6,7 @@
     <members>
         <member name="T:SimpleAdmin.Plugin.Core.NoticeComponent">
             <summary>
-            通知类型
+            通知组件类型
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.Core.INoticeService">
@@ -22,6 +22,22 @@
             <param name="clientIds">clientId列表</param>
             <param name="message">通知内容</param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Core.PluginSettingsOptions">
+            <summary>
+            插件配置选项
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.UseSignalR">
+            <summary>
+            是否开启SignalR 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.NoticeComponent">
+            <summary>
+            默认通知类型
+            SignalR/Mqtt
+            </summary>
         </member>
     </members>
 </doc>

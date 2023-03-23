@@ -1,7 +1,9 @@
 ﻿
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using SimpleMQTT;
 
-namespace SimpleAdmin.Plugin.Mqtt;
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// AppStartup启动类
@@ -10,12 +12,14 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        Console.WriteLine("注册Mqtt插件");
-        services.AddMqttClientManager();
+        //事件总线
+        services.AddEventBus();
+        //试图引擎
+        services.AddViewEngine();
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        App.GetService<IMqttClientManager>();//获取mqtt服务判断配置是否有问题
+
     }
 
 }

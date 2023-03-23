@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SimpleAdmin.Plugin.Core
 {
     /// <summary>
-    /// 通知类型
+    /// 通知组件类型
     /// </summary>
     public enum NoticeComponent
     {

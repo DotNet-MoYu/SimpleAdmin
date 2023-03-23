@@ -41,7 +41,7 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
             clientIds.AddRange(it.ClientIds);
         });
         // 获取插件选项
-        var pluginsOptions = App.GetOptions<PluginsOptions>();
+        var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
         //根据通知类型获取对应的服务
         var noticeComponent = pluginsOptions.NoticeComponent.ToString().ToLower();
         var noticeService = _namedServiceProvider.GetService<ITransient>(noticeComponent);//获取服务

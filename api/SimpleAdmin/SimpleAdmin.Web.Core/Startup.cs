@@ -6,8 +6,9 @@ using SimpleAdmin.Plugin.Core;
 namespace SimpleAdmin.Web.Core;
 
 /// <summary>
-/// 启动项配置
+/// Web启动项配置
 /// </summary>
+[AppStartup(99)]
 public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
@@ -77,9 +78,9 @@ public class Startup : AppStartup
         app.UseEndpoints(endpoints =>
         {
             // 获取插件选项
-            var pluginsOptions = App.GetOptions<PluginsOptions>();
+            var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
             //如果通知类型是mqtt
-            if (pluginsOptions.UseMqtt)
+            if (pluginsOptions.UseSignalR)
             {
                 // 注册集线器
                 endpoints.MapHubs();

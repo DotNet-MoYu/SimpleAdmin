@@ -1,6 +1,6 @@
 {
   //mqtt设置
-  "MqttSetting": {
+  "MqttSettings": {
     "Host": "127.0.0.1",
     "Port": 1883,
     "UserName": "admin",
