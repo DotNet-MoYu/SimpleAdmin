@@ -1,7 +1,4 @@
-﻿using Furion.DataEncryption;
-using SimpleAdmin.Core.Utils;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 用户信息表

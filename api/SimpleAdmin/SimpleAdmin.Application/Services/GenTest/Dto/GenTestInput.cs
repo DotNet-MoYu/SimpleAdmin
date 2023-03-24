@@ -1,9 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using Masuit.Tools.Core.Validator;
-using Yitter.IdGenerator;
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 /// <summary>
 /// 测试分页查询参数

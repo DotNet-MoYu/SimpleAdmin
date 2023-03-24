@@ -1,7 +1,4 @@
-﻿using Furion.DependencyInjection;
-using SimpleAdmin.Core;
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 /// <summary>
 /// 测试服务

@@ -1,0 +1,349 @@
+<template>
+@if(1==2)//后面支持树形菜单生成
+{
+<a-row>
+<a-col :span="5">
+
+</a-col>
+<a-col :span="19">
+  @{Main();}
+</a-col>
+</a-row>
+}
+else{
+@{Main();}
+}		
+</template>
+@
+@{Script();}
+@
+@{Style();}
+
+@{
+//主体
+void Main()
+{
+var columnCount = 0;//字段数量
+var tableFieIds=@Model.TableFields;//获取字段
+var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//获取需要查询的字段
+<a-card :bordered="false" style="margin-bottom: 10px">
+  <a-form ref="searchFormRef" name="advanced_search" class="ant-advanced-search-form" :model="searchFormState">
+    <a-row :gutter="24">
+	@foreach (var column in searchColumns)//遍历字段
+	{
+    <a-col :span="6">
+      <a-form-item name="@column.FieldNameFirstLower" label="@column.FieldRemark">
+	    @switch (@column.EffectType)//根据类型生成不同控件
+        {
+		//输入框
+		case "input":
+		case "textarea":
+        <a-input v-model:value="searchFormState.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)"></a-input>
+		break;
+		//选择
+		case "select":
+		case "radio":
+		case "checkbox":
+        <a-select v-model:value="searchFormState.@column.FieldNameFirstLower" placeholder="请选择@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+		break;
+		//数字
+		case "inputNumber":
+		case "slider":
+        <a-input-number v-model:value="searchFormState.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" style="width: 100%" />
+		break;
+		//时间
+		case "datepicker":
+		case "timepicker":
+		@if(@column.FieldNetType.ToLower()=="date")
+		{
+        @:<a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD" />
+		}else{
+		@:<a-range-picker v-model:value="searchFormState.@column.FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		}
+		break;
+		default:
+		<a-input v-model:value="searchFormState.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)"></a-input>
+        break;
+		}
+      </a-form-item>
+    </a-col>
+	columnCount++;
+	if(columnCount==3) break;//默认只显示3个字段，其他的折叠
+	}
+	@if(searchColumns.Count>3)//如果字段大于3个则生成折叠面板
+	{
+    <template v-if="advanced">
+	  @for (int i = 3; i < searchColumns.Count; i++)//遍历字段,从第四个开始
+	  {
+      <a-col :span="6">
+        <a-form-item name="@searchColumns[i].FieldNameFirstLower" label="@searchColumns[i].FieldRemark">
+		@switch (@searchColumns[i].EffectType)
+        {
+		//输入框
+		case "input":
+		case "textarea":
+        <a-input v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" placeholder="请输入@(@searchColumns[i].FieldRemark)"></a-input>
+		break;
+		//选择
+		case "select":
+		case "radio":
+		case "checkbox":
+        <a-select v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" placeholder="请选择@(@searchColumns[i].FieldRemark)" :options="@(@searchColumns[i].FieldNameFirstLower)Options" />
+		break;
+		//数字
+		case "inputNumber":
+		case "slider":
+        <a-input-number v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" placeholder="请输入@(@searchColumns[i].FieldRemark)" style="width: 100%" />
+		break;
+		//时间
+		case "datepicker":
+		case "timepicker":
+		@if(@searchColumns[i].FieldNetType.ToLower()=="date")
+		{
+        @:<a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD" />
+		}else{
+		@:<a-range-picker v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" value-format="YYYY-MM-DD HH:mm:ss" show-time />
+		}
+		break;
+		default:
+		<a-input v-model:value="searchFormState.@searchColumns[i].FieldNameFirstLower" placeholder="请输入@(@searchColumns[i].FieldRemark)"></a-input>
+        break;
+		}
+        </a-form-item>
+      </a-col>
+	}
+    </template>
+	}
+    <a-col :span="6">
+      <a-button type="primary" @@click="table.refresh(true)">
+        <template #icon><SearchOutlined /></template>查询</a-button>
+      <a-button class="buttom-left" @@click="() => searchFormRef.resetFields()">
+        <template #icon><redo-outlined /></template>重置</a-button>
+	  @if(searchColumns.Count>3){//折叠
+      <a @@click="toggleAdvanced" style="margin-left: 8px">
+        {{ advanced ? '收起' : '展开' }}
+        <component :is="advanced ? 'up-outlined' : 'down-outlined'"/>
+      </a>
+	  }
+    </a-col>
+    </a-row>
+  </a-form>
+</a-card>
+@{Table();}
+}
+
+//表格部分
+void Table()
+{
+var tableFieIds=@Model.TableFields;//获取字段
+var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获取需要显示的字段
+<a-card :bordered="false">
+  <s-table
+    ref="table"
+    :columns="columns"
+    :data="loadData"
+    :expand-row-by-click="true"
+    :alert="options.alert.show"
+    bordered
+    @foreach (var column in tableFieIds){//遍历字段
+    @if(column.IsPrimarykey=="Y"){//如果是主键
+@::row-key="(record) => record.@column.FieldNameFirstLower"
+    }}
+    :row-selection="options.rowSelection"
+    :tool-config="toolConfig"
+  >
+    <template #operator>
+      <a-space>
+        <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
+        <template #icon><plus-outlined /></template>新增@(@Model.FunctionName)</a-button>
+		<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"  title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="deleteBatch@(@Model.ClassName)"/>
+      </a-space>
+    </template>
+    <template #bodyCell="{ column, record }">
+	@foreach (var column in showColumns){//遍历显示字段
+	@switch (@column.EffectType)
+    {
+      //选择
+      case "select":
+      case "radio":
+      <template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+          {{ $TOOL.dictTypeData('@column.DictTypeCode', record.@column.FieldNameFirstLower) }}
+      </template>
+      break;
+	  //checkbox
+      case "checkbox":
+      <template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+      <a-tag v-for="textValue in JSON.parse(record.@column.FieldNameFirstLower)" :key="textValue" color="green">{{ $TOOL.dictTypeData('@column.DictTypeCode', textValue) }}</a-tag>
+      </template>
+      break;
+	  //日期
+	  case "datepicker":
+	  @if(@column.FieldNetType.ToLower()=="date")
+	  {
+      @:<template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+      @:    {{ record.@(@column.FieldNameFirstLower) && record.@(@column.FieldNameFirstLower) .substr(0, 10) }}
+      @:</template>
+      }
+	  break;
+	}
+	}
+      <template v-if="column.dataIndex === 'action'">
+        <a-space>
+          <a @@click="formRef.onOpen(record)" v-if="hasPerm('@(@Model.ClassNameFirstLower)Edit')">编辑</a>
+          <a-divider type="vertical" v-if="hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'], 'and')" />
+          <a-popconfirm title="确定要删除吗？" @@confirm="delete@(@Model.ClassName)(record)">
+            <a-button type="link" danger size="small" v-if="hasPerm('@(@Model.ClassNameFirstLower)Delete')">删除</a-button>
+          </a-popconfirm>
+      </a-space>
+      </template>
+    </template>
+  </s-table>
+</a-card>
+<Form ref="formRef" @@successful="table.refresh(true)" />
+}
+
+//Js部分
+void Script()
+{
+var tableFieIds=@Model.TableFields;//获取字段
+var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//获取需要查询的字段
+var searchCount=searchColumns.Count;//查询字段数量
+var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="radio"||it.EffectType=="checkbox");//是否有选择框
+<script setup name="@Model.BusName">
+  import { message, Empty } from 'ant-design-vue'
+  @if(isSelect){
+  @:import tool from '@@/utils/tool'
+  }
+  import Form from './form.vue'
+  import @(@Model.ClassNameFirstLower)Api from '@@/api/@(@Model.RouteName)/@(@Model.ClassNameFirstLower)Api'
+  
+  @if(searchCount>0){
+  @:let searchFormState = reactive({})//查询表单状态
+  @:const searchFormRef = ref()//查询表单
+  }
+  const table = ref()//表格
+  const formRef = ref()//新增/编辑表单页
+  const toolConfig = { refresh: true, height: true, columnSetting: true, striped: false }//表格工具配置
+  
+  @if(searchCount>0){//如果查询字段数量大于
+  @:// 查询区域显示更多控制
+  @:const advanced = ref(false)
+  @:const toggleAdvanced = () => {
+  @:    advanced.value = !advanced.value
+  @:}
+  }
+  const columns = [
+  @foreach (var column in tableFieIds){//遍历字段
+  @if(column.WhetherTable=="Y"){//如果列表显示
+      @:{
+        @:title: '@column.FieldRemark',
+	    @if(column.WhetherRetract=="Y")//如果列省略
+		{
+        @:dataIndex: '@column.FieldNameFirstLower',
+        @:ellipsis: true
+	    }
+		else{
+        @:dataIndex: '@column.FieldNameFirstLower'
+		}
+      @:},
+  }
+  }
+  ]
+  
+  // 操作栏通过权限判断是否显示
+  if(hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'])) {
+      columns.push({
+          title: '操作',
+          dataIndex: 'action',
+          align: 'center',
+          width: '150px'
+        })
+    }  
+  //选择项
+  let selectedRowKeys = ref([])
+  // 列表选择配置
+  const options = reactive({
+      alert: {
+          show: false, //显示选择多少个
+          clear: () => {
+              selectedRowKeys = ref([])
+          }
+      },
+      rowSelection: {
+          onChange: (selectedRowKey, selectedRows) => {
+              selectedRowKeys.value = selectedRowKey
+          }
+      }
+  })
+  
+  // 表格查询 返回 Promise 对象
+  const loadData = (parameter) => {
+      @if(searchCount>0){
+      @:const searchFormParam = JSON.parse(JSON.stringify(searchFormState))
+	  @foreach (var column in searchColumns){//遍历字段
+	  @if(column.EffectType=="datepicker")//如果是时间类型,范围查询条件重载
+	  {
+      @://@(@column.FieldNameFirstLower)范围查询条件重载
+      @:if (searchFormParam.@column.FieldNameFirstLower) {
+          @:searchFormParam.start@(@column.FieldNameFirstUpper) = searchFormParam.@(@column.FieldNameFirstLower)[0]
+          @:searchFormParam.end@(@column.FieldNameFirstUpper) = searchFormParam.@(@column.FieldNameFirstLower)[1]
+          @:delete searchFormParam.@column.FieldNameFirstLower
+      @:}
+	  }
+	  }
+      @:return @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Page(Object.assign(parameter, searchFormParam)).then((data) => {
+	  }
+	  else{
+      @:return @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Page(Object.assign(parameter)).then((data) => {
+	  }
+        return data
+      })
+    }
+  
+  // 删除
+  const delete@(@Model.ClassName) = (record) => {
+      let params = [
+          {
+		    @foreach (var column in tableFieIds){//遍历字段
+            @if(column.IsPrimarykey=="Y"){//如果是主键
+            @:@column.FieldNameFirstLower: record.@column.FieldNameFirstLower
+			}}
+          }
+      ]
+      @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {
+        table.value.refresh(true)
+      })
+  }
+  
+  // 批量删除
+  const deleteBatch@(@Model.ClassName) = (params,callback) => {
+    @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params)
+	                         .then(() => {})
+                             .finally(() => {
+						         table.value.clearRefreshSelected()
+				                 callback() //调用组件中的回调方法
+			                  })
+  }
+  @if(searchCount>0){
+  @foreach (var column in searchColumns){//遍历字段
+  @if(column.EffectType=="select"||column.EffectType=="radio"||column.EffectType=="checkbox"){//如果有选择，加载字典
+  @:
+  @://@(@column.FieldRemark)字典
+  @:const @(@column.FieldNameFirstLower)Options = tool.dictList('@column.DictTypeCode')
+  }
+  }
+  }
+</script>
+}
+
+//Css部分
+void Style()
+{
+@:
+<style scoped>
+  .buttom-left {
+    margin-left: 8px;
+  }
+</style>
+}
+}

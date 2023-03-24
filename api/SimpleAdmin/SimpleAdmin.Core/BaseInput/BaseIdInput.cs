@@ -1,12 +1,4 @@
-﻿using Masuit.Tools.Core.Validator;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 主键Id输入参数

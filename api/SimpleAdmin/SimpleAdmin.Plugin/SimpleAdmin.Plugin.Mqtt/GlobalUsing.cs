@@ -6,4 +6,3 @@ global using Furion.DependencyInjection;
 global using SimpleAdmin.Core;
 global using SimpleMQTT;
 global using SimpleAdmin.Plugin.Core;
-global using Microsoft.Extensions.Logging;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 站内信与接收用户拓展

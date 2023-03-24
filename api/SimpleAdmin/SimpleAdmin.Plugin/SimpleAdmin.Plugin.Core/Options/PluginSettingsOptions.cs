@@ -18,8 +18,6 @@ public class PluginSettingsOptions : IConfigurableOptions
     /// </summary>
     public bool UseMqtt { get; set; } = false;
 
-
-
     /// <summary>
     /// 默认通知类型
     /// SignalR/Mqtt
@@ -28,3 +26,5 @@ public class PluginSettingsOptions : IConfigurableOptions
 
 
 }
+
+

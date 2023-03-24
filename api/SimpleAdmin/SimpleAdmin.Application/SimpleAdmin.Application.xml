@@ -205,10 +205,10 @@
             <inheritdoc />
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
+        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Export(SimpleAdmin.Application.GenTestPageInput)">
@@ -493,7 +493,7 @@
             <param name="input">Id列表</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
@@ -513,14 +513,14 @@
             <param name="input">查询参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+        <member name="M:SimpleAdmin.Application.IUserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <summary>
             导入数据
             </summary>
             <param name="input">数据</param>
             <returns>导入结果</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Edits(SimpleAdmin.System.BatchEditInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
             <summary>
             批量编辑
             </summary>
@@ -550,7 +550,7 @@
         <member name="M:SimpleAdmin.Application.UserService.Edit(SimpleAdmin.System.UserEditInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Edits(SimpleAdmin.System.BatchEditInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.DisableUser(SimpleAdmin.Core.BaseIdInput)">
@@ -571,13 +571,13 @@
         <member name="M:SimpleAdmin.Application.UserService.Template">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Export(SimpleAdmin.System.UserPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+        <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.Core.SysUser,System.String)">

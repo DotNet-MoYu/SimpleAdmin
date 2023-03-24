@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 菜单树查询参数

@@ -1,6 +1,4 @@
-﻿using Microsoft.Data.SqlClient;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 仓储模式对象

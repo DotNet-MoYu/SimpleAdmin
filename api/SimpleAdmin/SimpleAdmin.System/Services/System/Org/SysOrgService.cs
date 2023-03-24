@@ -1,6 +1,4 @@
-﻿using Masuit.Tools;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 
 /// <inheritdoc cref="ISysOrgService"/>

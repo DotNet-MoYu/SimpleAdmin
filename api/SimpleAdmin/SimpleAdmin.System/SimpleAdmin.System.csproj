@@ -15,10 +15,26 @@
 		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8604;8625;8765</NoWarn>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<Compile Remove="SeedData\**" />
+		<Compile Remove="Services\BatchEdit\**" />
+		<Compile Remove="Services\Gen\**" />
+		<Compile Remove="Services\ImportExport\**" />
+		<EmbeddedResource Remove="SeedData\**" />
+		<EmbeddedResource Remove="Services\BatchEdit\**" />
+		<EmbeddedResource Remove="Services\Gen\**" />
+		<EmbeddedResource Remove="Services\ImportExport\**" />
+		<None Remove="SeedData\**" />
+		<None Remove="Services\BatchEdit\**" />
+		<None Remove="Services\Gen\**" />
+		<None Remove="Services\ImportExport\**" />
+	</ItemGroup>
+
 
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Core\SimpleAdmin.Plugin.Core.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Batch\SimpleAdmin.Plugin.Batch.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.CodeFirst\SimpleAdmin.Plugin.CodeFirst.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.ImportExport\SimpleAdmin.Plugin.ImportExport.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mqtt\SimpleAdmin.Plugin.Mqtt.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
 	</ItemGroup>
@@ -29,42 +45,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<None Update="SeedData\Json\batch_edit.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\batch_edit_config.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\dev_config.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\dev_dict.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\gen_basic.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\gen_config.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_org.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_position.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_relation.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_resource.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_role.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="SeedData\Json\sys_user.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
 		<None Update="System.Development.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

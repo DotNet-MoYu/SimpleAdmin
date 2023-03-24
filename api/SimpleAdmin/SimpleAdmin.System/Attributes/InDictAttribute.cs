@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 验证值是否在字典中,大数据慎用

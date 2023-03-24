@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace SimpleAdmin.Web.Core.Controllers.System.Dev;
+﻿namespace SimpleAdmin.Web.Core.Controllers.System.Dev;
 
 
 /// <summary>

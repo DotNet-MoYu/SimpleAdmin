@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.DrawingCore;
+﻿using System.DrawingCore;
 using System.DrawingCore.Imaging;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleAdmin.Core.Utils;
 

@@ -1,7 +1,4 @@
-﻿
-using SimpleMQTT;
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 /// <summary>
 /// AppStartup启动类

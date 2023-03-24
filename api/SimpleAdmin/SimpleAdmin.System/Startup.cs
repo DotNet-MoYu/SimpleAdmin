@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using SimpleMQTT;
 
 namespace SimpleAdmin.System;
 
@@ -14,8 +13,6 @@ public class Startup : AppStartup
     {
         //事件总线
         services.AddEventBus();
-        //试图引擎
-        services.AddViewEngine();
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {

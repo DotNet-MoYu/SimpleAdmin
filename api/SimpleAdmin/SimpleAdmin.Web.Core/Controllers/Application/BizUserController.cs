@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace SimpleAdmin.Web.Core;
 
 /// <summary>

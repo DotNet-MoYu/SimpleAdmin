@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using SimpleAdmin.Plugin.Core;
 
 namespace SimpleAdmin.Web.Core;
 

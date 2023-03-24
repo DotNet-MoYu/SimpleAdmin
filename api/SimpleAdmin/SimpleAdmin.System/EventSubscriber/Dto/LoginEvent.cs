@@ -1,5 +1,4 @@
-﻿using IPTools.Core;
-using UAParser;
+﻿using UAParser;
 
 namespace SimpleAdmin.System;
 

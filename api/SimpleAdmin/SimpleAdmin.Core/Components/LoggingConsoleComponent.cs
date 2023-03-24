@@ -1,7 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System.IO;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 日志写入文件的组件

@@ -1,6 +1,4 @@
-﻿using NewLife.Serialization;
-using SimpleTool;
-using System.IO;
+﻿using SimpleTool;
 
 namespace SimpleAdmin.Core.Utils;
 
@@ -9,12 +7,12 @@ namespace SimpleAdmin.Core.Utils;
 /// </summary>
 public class SeedDataUtil
 {
-    public static List<T> GetSeedData<T>(string jsonName)
+    public static List<T> GetSeedData<T>(string db, string jsonName)
     {
 
         var seedData = new List<T>();//种子数据结果
         var basePath = AppContext.BaseDirectory;//获取项目目录
-        var json = basePath.CombinePath("SeedData", "Json", jsonName);//获取文件路径
+        var json = basePath.CombinePath("SeedData", db, "Json", jsonName);//获取文件路径
         var dataString = FileHelper.ReadFile(json);//读取文件
         if (!string.IsNullOrEmpty(dataString))//如果有内容
         {

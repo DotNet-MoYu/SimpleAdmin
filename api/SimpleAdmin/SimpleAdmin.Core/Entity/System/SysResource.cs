@@ -1,6 +1,4 @@
-﻿using StackExchange.Profiling;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// 资源

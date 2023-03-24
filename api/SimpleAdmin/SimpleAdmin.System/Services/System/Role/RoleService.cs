@@ -1,6 +1,4 @@
-﻿using SimpleAdmin.Core.Extension;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 
 /// <inheritdoc cref="IRoleService"/>

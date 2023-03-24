@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.ImportExport</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.AntTableAttribute">
+            <summary>
+            前端表格特性
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.AntTableAttribute.IsDate">
+            <summary>
+            是否是日期格式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.AntTableAttribute.Ellipsis">
+            <summary>
+            是否自动省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.AntTableAttribute.Width">
+            <summary>
+            宽度
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportPreviewInput">
+            <summary>
+            导入预览输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportPreviewInput.File">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportPreviewOutput`1">
+            <summary>
+            文件导入通用输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportPreviewOutput`1.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportPreviewOutput`1.TableColumns">
+            <summary>
+            动态表头
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportPreviewOutput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.TableColumns">
+            <summary>
+            动态表头
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.TableColumns.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.TableColumns.DataIndex">
+            <summary>
+            数据源
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.TableColumns.Width">
+            <summary>
+            宽度
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.TableColumns.Ellipsis">
+            <summary>
+            超过宽度将自动省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.TableColumns.Date">
+            <summary>
+            是否是日期格式
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportResultInput`1">
+            <summary>
+            批量导入结果输入
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultInput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1">
+            <summary>
+            导入结果输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1.Total">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1.ImportCount">
+            <summary>
+            导入数量
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1.FailCount">
+            <summary>
+            错误数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportResultOutPut`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportTemplateInput">
+            <summary>
+            导入基础输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportTemplateInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportTemplateInput.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportTemplateInput.ErrorInfo">
+            <summary>
+            错误详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.IImportExportService">
+            <summary>
+            导入服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.Export``1(System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            导出数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">数据</param>
+            <param name="fileName">文件名</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.GenerateLocalTemplate(System.String,System.String)">
+            <summary>
+            获取本地模板
+            </summary>
+            <param name="fileName">文件名</param>
+            <param name="templateFolder">模板文件夹路径:默认wwwroot下的Template</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.GenerateTemplate``1(System.String)">
+            <summary>
+            生成模板
+            </summary>
+            <typeparam name="T">实体类</typeparam>
+            <param name="fileName">文件名</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.GetImportPreview``1(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            获取导入预览
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="file">文件</param>
+            <returns>导入预览结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.GetImportResultPreview``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0}@)">
+            <summary>
+            获取预计导入结果
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">数据</param>
+            <param name="importData">成功导入数据</param>
+            <returns>预计导入结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.ImportVerification(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.String[])">
+            <summary>
+            导入文件验证
+            </summary>
+            <param name="file">文件</param>
+            <param name="maxSzie">文件最大体积(M)</param>
+            <param name="allowTypes">允许的格式</param>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.IImportExportService.TemplateDataVerification``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <summary>
+            模板数据验证
+            </summary>
+            <typeparam name="T">模板类实体</typeparam>
+            <param name="importResult">结果</param>
+            <returns>导入预览数据</returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.ImportExport.ImportExportService">
+            <summary>
+             <inheritdoc cref="T:SimpleAdmin.Plugin.ImportExport.IImportExportService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.ImportVerification(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.TemplateDataVerification``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GenerateTemplate``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GenerateLocalTemplate(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetImportPreview``1(Microsoft.AspNetCore.Http.IFormFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetImportResultPreview``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetFileStreamResult(System.String,System.String,System.Boolean)">
+            <summary>
+            获取文件流
+            </summary>
+            <param name="path"></param>
+            <param name="fileName"></param>
+            <param name="isPathFolder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetFileStreamResult(System.Byte[],System.String)">
+            <summary>
+            获取文件流
+            </summary>
+            <param name="byteArray"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetFileName(System.String)">
+            <summary>
+            获取文件名
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.ImportExport.ImportExportService.GetTemplateFolder">
+            <summary>
+            获取本地模板路径
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

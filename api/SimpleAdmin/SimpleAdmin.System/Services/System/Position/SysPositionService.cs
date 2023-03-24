@@ -1,6 +1,4 @@
-﻿using SimpleAdmin.System;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="ISysPositionService"/>

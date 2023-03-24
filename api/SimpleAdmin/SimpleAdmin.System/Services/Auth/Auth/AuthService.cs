@@ -1,8 +1,4 @@
-﻿using IPTools.Core.Extensions;
-using Microsoft.AspNetCore.SignalR;
-using UAParser;
-
-namespace SimpleAdmin.System.Services.Auth;
+﻿namespace SimpleAdmin.System.Services.Auth;
 
 /// <inheritdoc cref="IAuthService"/>
 public class AuthService : IAuthService

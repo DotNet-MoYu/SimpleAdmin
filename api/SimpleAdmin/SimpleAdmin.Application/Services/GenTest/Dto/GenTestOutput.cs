@@ -1,8 +1,4 @@
-﻿using Magicodes.ExporterAndImporter.Core;
-using Magicodes.ExporterAndImporter.Excel;
-using OfficeOpenXml.Table;
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 
 /// <summary>

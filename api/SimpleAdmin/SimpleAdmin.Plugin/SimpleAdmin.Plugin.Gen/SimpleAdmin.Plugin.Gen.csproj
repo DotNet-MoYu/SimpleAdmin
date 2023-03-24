@@ -1,0 +1,97 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8604;8625;8765</NoWarn>
+		<DocumentationFile>SimpleAdmin.Plugin.Gen.xml</DocumentationFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="CodeGen\Backend\Service\**" />
+	  <EmbeddedResource Remove="CodeGen\Backend\Service\**" />
+	  <None Remove="CodeGen\Backend\Service\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="CodeGen\Backend\Controllers\Controller.cs.vm" />
+	  <None Remove="CodeGen\Backend\Services\Dto\Input.cs.vm" />
+	  <None Remove="CodeGen\Backend\Services\Dto\Output.cs.vm" />
+	  <None Remove="CodeGen\Backend\Services\IService.cs.vm" />
+	  <None Remove="CodeGen\Backend\Services\Service.cs.vm" />
+	  <None Remove="CodeGen\Frontend\api\Api.js.vm" />
+	  <None Remove="CodeGen\Frontend\views\form.vue.vm" />
+	  <None Remove="CodeGen\Frontend\views\index.vue.vm" />
+	  <None Remove="CodeGen\Sql\MySql.sql.vm" />
+	  <None Remove="CodeGen\Sql\Oracle.sql.vm" />
+	  <None Remove="CodeGen\Sql\Sqlite.sql.vm" />
+	  <None Remove="CodeGen\Sql\SqlServer.sql.vm" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="CodeGen\Backend\Controllers\Controller.cs.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Backend\Services\Dto\Input.cs.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Backend\Services\Dto\Output.cs.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Backend\Services\IService.cs.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Backend\Services\Service.cs.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Frontend\api\Api.js.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Frontend\views\form.vue.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Frontend\views\index.vue.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Sql\MySql.sql.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Sql\Oracle.sql.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Sql\Sqlite.sql.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="CodeGen\Sql\SqlServer.sql.vm">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\SimpleAdmin.System\SimpleAdmin.System.csproj" />
+	</ItemGroup>
+
+</Project>

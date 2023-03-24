@@ -1,5 +1,4 @@
 ﻿using Furion.DataEncryption;
-using Microsoft.AspNetCore.SignalR;
 using SimpleTool;
 
 namespace SimpleAdmin.Plugin.SignalR;

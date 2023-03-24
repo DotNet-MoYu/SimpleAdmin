@@ -2930,18 +2930,6 @@
             </summary>
             <param name="services"></param>
         </member>
-        <member name="M:SimpleAdmin.Core.SqlsugarSetup.InitDb(SimpleAdmin.Core.SqlSugarConfig)">
-            <summary>
-            初始化数据库表结构
-            </summary>
-            <param name="config">数据库配置</param>
-        </member>
-        <member name="M:SimpleAdmin.Core.SqlsugarSetup.InitSeedData(SimpleAdmin.Core.SqlSugarConfig)">
-            <summary>
-            初始化种子数据
-            </summary>
-            <param name="config"></param>
-        </member>
         <member name="M:SimpleAdmin.Core.SqlsugarSetup.CheckSameConfigId">
             <summary>
             检查是否有相同的ConfigId

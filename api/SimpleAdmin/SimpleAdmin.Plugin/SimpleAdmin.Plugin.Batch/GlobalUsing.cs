@@ -1,0 +1,15 @@
+﻿global using Furion;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Hosting;
+global using Microsoft.Extensions.DependencyInjection;
+global using SimpleAdmin.Core;
+global using SimpleAdmin.Core.Utils;
+global using SqlSugar;
+global using System.Collections;
+global using System.Data;
+global using System.Reflection;
+global using Furion.DependencyInjection;
+global using Mapster;
+global using System.ComponentModel.DataAnnotations;
+global using Furion.FriendlyException;
+global using Microsoft.Extensions.Logging;

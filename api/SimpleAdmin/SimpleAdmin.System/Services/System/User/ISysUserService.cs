@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 用户服务

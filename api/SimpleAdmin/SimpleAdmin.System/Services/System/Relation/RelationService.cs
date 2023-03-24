@@ -1,6 +1,4 @@
-﻿using NewLife.Serialization;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IRelationService"/>
 [Injection(Proxy = typeof(GlobalDispatchProxy))]

@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using UAParser;
+﻿using UAParser;
 
 namespace SimpleAdmin.Web.Core;
 

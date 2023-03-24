@@ -1,6 +1,4 @@
-﻿using Masuit.Tools.DateTimeExt;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 /// <summary>
 /// Token信息

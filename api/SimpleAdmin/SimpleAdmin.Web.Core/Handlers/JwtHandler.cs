@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Furion.Authorization;
 using Furion.DataEncryption;
-using Microsoft.AspNetCore.Http;
 using SimpleRedis;
 
 namespace SimpleAdmin.Web.Core;

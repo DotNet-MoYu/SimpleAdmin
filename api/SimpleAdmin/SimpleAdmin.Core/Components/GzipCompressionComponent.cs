@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
-using System.Linq;
 
 namespace SimpleAdmin.Core;
 

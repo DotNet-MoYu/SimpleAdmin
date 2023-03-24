@@ -1,8 +1,4 @@
-﻿using Masuit.Tools;
-using SimpleAdmin.Core;
-using System.DrawingCore;
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IUserCenterService"/>
 public class UserCenterService : DbRepository<SysUser>, IUserCenterService

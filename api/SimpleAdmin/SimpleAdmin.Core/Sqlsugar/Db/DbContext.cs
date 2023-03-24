@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 using SimpleAdmin.Core.Utils;
-using System.Linq;
-using System.Reflection;
 
 namespace SimpleAdmin.Core;
 

@@ -1,9 +1,4 @@
-﻿using NewLife.Serialization;
-using System.Data;
-using System.Linq;
-using System.Reflection;
-
-namespace SimpleAdmin.Core;
+﻿namespace SimpleAdmin.Core;
 
 
 /// <summary>

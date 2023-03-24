@@ -1,6 +1,4 @@
 ﻿using System.DrawingCore;
-using System.DrawingCore.Imaging;
-using System.IO;
 
 namespace SimpleAdmin.Core.Utils;
 

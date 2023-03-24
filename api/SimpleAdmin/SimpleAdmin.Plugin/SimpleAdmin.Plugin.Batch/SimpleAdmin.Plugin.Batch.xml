@@ -1,0 +1,210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.Batch</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Batch.IBatchEditService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.Page(SimpleAdmin.Plugin.Batch.BatchEditPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.Add(SimpleAdmin.Plugin.Batch.BatchEditAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.Config(System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditConfigInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.SyncColumns(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.Columns(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetTables">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetUpdateBatchConfigDict(System.String,System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditColumn})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetUpdateBatchConfig(SimpleAdmin.Core.Utils.SqlsugarColumnInfo)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="columnInfo"></param>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.CheckInput(SimpleAdmin.Core.BatchEdit)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="updateBatch"></param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditPageInput">
+            <summary>
+            批量分页查询参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditPageInput.Code">
+            <summary>
+            唯一编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditPageInput.ConfigId">
+            <summary>
+            所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditPageInput.Entityname">
+            <summary>
+            实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditPageInput.Tablename">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditAddInput">
+            <summary>
+            添加批量参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditAddInput.Code">
+            <summary>
+            唯一编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditAddInput.ConfigId">
+            <summary>
+            所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditAddInput.EntityName">
+            <summary>
+            实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditAddInput.TableName">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditAddInput.Tabledescription">
+            <summary>
+            表描述
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditConfigInput">
+            <summary>
+            修改批量参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditConfigInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditInput">
+            <summary>
+            批量修改输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditInput.Code">
+            <summary>
+            批量编辑Code
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditInput.Ids">
+            <summary>
+            Id列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Batch.BatchEditInput.Columns">
+            <summary>
+            字段列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.BatchEditColumn">
+            <summary>
+            批量修改DTO
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Batch.IBatchEditService">
+            <summary>
+            批量服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.Page(SimpleAdmin.Plugin.Batch.BatchEditPageInput)">
+            <summary>
+            批量分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>分页结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.Add(SimpleAdmin.Plugin.Batch.BatchEditAddInput)">
+            <summary>
+            添加批量
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除批量
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.GetTables">
+            <summary>
+            获取需要批量修改的表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取批量修改配置
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.Config(System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditConfigInput})">
+            <summary>
+            配置字段
+            </summary>
+            <param name="input">字段信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.Columns(System.String)">
+            <summary>
+            批量配置字段列表
+            </summary>
+            <param name="code">唯一编码</param>
+            <returns>列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.GetUpdateBatchConfigDict(System.String,System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditColumn})">
+            <summary>
+            获取字典配置
+            </summary>
+            <param name="code">唯一编码</param>
+            <param name="columns">字段信息</param>
+            <returns>sqlsugar对应字典</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Batch.IBatchEditService.SyncColumns(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            同步字段
+            </summary>
+            <param name="input">id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

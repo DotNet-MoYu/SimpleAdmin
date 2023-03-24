@@ -122,7 +122,7 @@
             人员管理控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
@@ -188,7 +188,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.Edits(SimpleAdmin.System.BatchEditInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
             <summary>
             批量修改人员
             </summary>
@@ -230,7 +230,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <summary>
             人员导入
             </summary>
@@ -284,69 +284,111 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <summary>
             预览
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.AuthBController">
+        <member name="T:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController">
             <summary>
-            B端登录控制器
+            代码生成基础控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetPicCaptcha">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.Page(SimpleAdmin.Core.BasePageInput)">
             <summary>
-            B端获取图片验证码
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetPhoneValidCode(SimpleAdmin.System.GetPhoneValidCodeInput)">
-            <summary>
-            B端获取手机验证码
+            代码生成基础分页
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.Login(SimpleAdmin.System.LoginInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.Tables">
             <summary>
-            B端登录
+            获取所有表信息
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginByPhone(SimpleAdmin.System.LoginByPhoneInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.GetAssemblies">
             <summary>
-            B端手机号登录
+            获取项目所有程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.Add(SimpleAdmin.Plugin.Gen.GenBasicAddInput)">
+            <summary>
+            添加代码生成器
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginOut(SimpleAdmin.System.LoginOutIput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.Edit(SimpleAdmin.Plugin.Gen.GenBasicEditInput)">
             <summary>
-            登出
+            编辑代码生成器
             </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetLoginUser">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
-            获取用户信息
+            删除代码生成配置
             </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            代码生成预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            执行代码生成(本地)"
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            执行代码生成(压缩包)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Controllers.Gen.GenConfigController">
+            <summary>
+            代码生成配置控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenConfigController.List(System.String)">
+            <summary>
+            查询代码生成详细配置列表
+            </summary>
+            <param name="basicId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.GenConfig})">
+            <summary>
+            编辑代码生成详细
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.Controllers.Mqtt.MqttController">
             <summary>
             mqtt服务控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.GetParameter">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Mqtt.MqttController.GetParameter">
             <summary>
             获取mqtt登录参数
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.MqttController.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Mqtt.MqttController.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
             <summary>
             mqtt认证
             </summary>
@@ -471,92 +513,6 @@
         <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除站内信
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController">
-            <summary>
-            代码生成基础控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Page(SimpleAdmin.Core.BasePageInput)">
-            <summary>
-            代码生成基础分页
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Tables">
-            <summary>
-            获取所有表信息
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.GetAssemblies">
-            <summary>
-            获取项目所有程序集
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Add(SimpleAdmin.System.GenBasicAddInput)">
-            <summary>
-            添加代码生成器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Edit(SimpleAdmin.System.GenBasicEditInput)">
-            <summary>
-            编辑代码生成器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除代码生成配置
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            代码生成预览
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            执行代码生成(本地)"
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            执行代码生成(压缩包)
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Gen.GenConfigController">
-            <summary>
-            代码生成配置控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenConfigController.List(System.String)">
-            <summary>
-            查询代码生成详细配置列表
-            </summary>
-            <param name="basicId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.GenConfig})">
-            <summary>
-            编辑代码生成详细
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -725,7 +681,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
@@ -752,7 +708,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Edits(SimpleAdmin.System.BatchEditInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
             <summary>
             批量修改用户
             </summary>
@@ -808,7 +764,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
             <summary>
             用户导入
             </summary>
@@ -822,6 +778,50 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.AuthBController">
+            <summary>
+            B端登录控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetPicCaptcha">
+            <summary>
+            B端获取图片验证码
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetPhoneValidCode(SimpleAdmin.System.GetPhoneValidCodeInput)">
+            <summary>
+            B端获取手机验证码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.Login(SimpleAdmin.System.LoginInput)">
+            <summary>
+            B端登录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginByPhone(SimpleAdmin.System.LoginByPhoneInput)">
+            <summary>
+            B端手机号登录
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginOut(SimpleAdmin.System.LoginOutIput)">
+            <summary>
+            登出
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.GetLoginUser">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.BaseController">
             <summary>
             基础控制器
@@ -832,7 +832,7 @@
             批量控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Page(SimpleAdmin.System.BatchEditPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Page(SimpleAdmin.Plugin.Batch.BatchEditPageInput)">
             <summary>
             批量分页查询
             </summary>
@@ -857,14 +857,14 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Add(SimpleAdmin.System.BatchEditAddInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Add(SimpleAdmin.Plugin.Batch.BatchEditAddInput)">
             <summary>
             添加批量
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Config(System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditConfigInput})">
             <summary>
             配置修改批量
             </summary>

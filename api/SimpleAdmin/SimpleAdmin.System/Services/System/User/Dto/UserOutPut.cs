@@ -1,5 +1,4 @@
-﻿using OfficeOpenXml.Table;
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 选择用户输出参数
