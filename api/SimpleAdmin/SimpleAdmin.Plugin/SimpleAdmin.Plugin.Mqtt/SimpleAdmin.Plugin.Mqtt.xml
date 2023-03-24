@@ -4,6 +4,17 @@
         <name>SimpleAdmin.Plugin.Mqtt</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
+            <summary>
+             mqtt组件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttApplicationComponent">
+            <summary>
+            mqtt组件
+            模拟 Configure
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttAuthInput">
             <summary>
             mqtt认证参数
@@ -112,10 +123,11 @@
         <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.UserLoginOut(System.String,System.Collections.Generic.List{System.String},System.String)">
             <inheritdoc/>
         </member>
-        <member name="T:SimpleAdmin.Plugin.Mqtt.Startup">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.GetMqttClientManager">
             <summary>
-            AppStartup启动类
+            获取hubContext
             </summary>
+            <returns></returns>
         </member>
     </members>
 </doc>

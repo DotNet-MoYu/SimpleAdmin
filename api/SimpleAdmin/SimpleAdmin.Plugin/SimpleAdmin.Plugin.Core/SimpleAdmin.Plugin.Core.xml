@@ -33,6 +33,11 @@
             是否开启SignalR 
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.UseMqtt">
+            <summary>
+            是否开启Mqtt
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.NoticeComponent">
             <summary>
             默认通知类型
