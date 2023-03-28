@@ -9,7 +9,7 @@
 void Main()
 {
 var tableFieIds=@Model.TableFields;//获取字段
-<a-drawer
+<form-container
     @foreach (var column in tableFieIds){//遍历字段
 	@if(column.IsPrimarykey=="Y"){//如果是主键
 @::title="formData.@column.FieldNameFirstLower ? '编辑@(@Model.FunctionName)' : '增加@(@Model.FunctionName)'"
@@ -17,7 +17,6 @@ var tableFieIds=@Model.TableFields;//获取字段
     :width="600"
     :visible="visible"
     :destroy-on-close="true"
-    :footer-style="{ textAlign: 'right' }"
     @@close="onClose"
 >
     <a-form ref="formRef" :model="formData" :rules="formRules" layout="@Model.FormLayout">
@@ -46,7 +45,7 @@ var tableFieIds=@Model.TableFields;//获取字段
         <a-button style="margin-right: 8px" @@click="onClose">关闭</a-button>
         <a-button type="primary" @@click="onSubmit" :loading="submitLoading">保存</a-button>
     </template>
-</a-drawer>
+</form-container>
 }
 
 //表单控件
