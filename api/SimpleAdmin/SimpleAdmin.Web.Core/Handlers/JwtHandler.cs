@@ -16,6 +16,7 @@ public class JwtHandler : AppAuthorizeHandler
     {
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
         DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
+        var token = currentHttpContext.Request.Query["access_token"];//获取token
         //自动刷新Token
         if (JWTEncryption.AutoRefreshToken(context, currentHttpContext, expire, expire * 2))
         {

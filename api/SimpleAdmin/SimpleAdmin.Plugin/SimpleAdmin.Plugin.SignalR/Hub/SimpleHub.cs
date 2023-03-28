@@ -1,5 +1,7 @@
 ﻿using Furion.InstantMessaging;
 using Masuit.Tools;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Connections;
 
 namespace SimpleAdmin.Plugin.SignalR;
@@ -9,6 +11,7 @@ namespace SimpleAdmin.Plugin.SignalR;
 /// </summary>
 //[Authorize]
 [MapHub("/hubs/simple")]
+[Authorize]
 public class SimpleHub : Hub<ISimpleHub>
 {
     private readonly ISimpleRedis _simpleRedis;
@@ -17,8 +20,6 @@ public class SimpleHub : Hub<ISimpleHub>
     {
         _simpleRedis = simpleRedis;
     }
-
-
 
 
     /// <summary>
