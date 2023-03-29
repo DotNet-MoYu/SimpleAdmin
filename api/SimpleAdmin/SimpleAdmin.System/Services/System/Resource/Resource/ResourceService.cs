@@ -354,17 +354,25 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             }
             else
             {
-                //否则就将自己加到一级目录里面
-                roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
+
+                //就将自己加到一级目录里面
+                var roleGrantResourcesButtons = new ResTreeSelector.RoleGrantResourceMenu
                 {
                     Id = parent.Id,
                     ParentId = parent.Id,
                     ParentName = parent.Title,
                     Module = moduleId,
                     Title = parent.Title,
-                });
+                };
+                //如果菜单类型是菜单
+                if (parent.MenuType == ResourceConst.MENU)
+                {
+                    //获取菜单下按钮集合并转换成对应实体
+                    var buttonList = allButtonList.Where(it => it.ParentId == parent.Id).ToList();
+                    roleGrantResourcesButtons.Button = buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
+                }
+                roleGrantResourceMenus.Add(roleGrantResourcesButtons);
             }
-
         }
         return roleGrantResourceMenus;
     }
