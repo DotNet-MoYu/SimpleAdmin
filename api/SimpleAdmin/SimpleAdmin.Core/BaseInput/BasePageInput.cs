@@ -45,6 +45,12 @@ public class BasePageInput : IValidatableObject
         {
             SortOrder = "asc";
         }
+        //分割排序字段
+        var fields = SortField.Split();
+        if (fields.Length > 0)
+        {
+            yield return new ValidationResult($"排序字段错误", new[] { nameof(SortField) });
+        }
         yield break;
     }
 }
