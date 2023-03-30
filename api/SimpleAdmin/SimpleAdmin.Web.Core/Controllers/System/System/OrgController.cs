@@ -71,7 +71,7 @@ public class OrgController : BaseController
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("detail")]
-    public async Task<dynamic> Detail(BaseIdInput input)
+    public async Task<dynamic> Detail([FromBody]BaseIdInput input)
     {
         return await _sysOrgService.Detail(input); ;
     }
@@ -87,7 +87,7 @@ public class OrgController : BaseController
     /// <returns></returns>
     [HttpPost("copy")]
     [DisplayName("复制组织")]
-    public async Task Copy(SysOrgCopyInput input)
+    public async Task Copy([FromBody]SysOrgCopyInput input)
     {
         await _sysOrgService.Copy(input);
     }
