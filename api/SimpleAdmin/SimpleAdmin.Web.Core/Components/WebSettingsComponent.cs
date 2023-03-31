@@ -1,6 +1,5 @@
 ﻿using SimpleAdmin.Plugin.Mqtt;
 using SimpleAdmin.Plugin.SignalR;
-using SimpleRedis;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -46,15 +45,6 @@ public sealed class WebSettingsApplicationComponent : IApplicationComponent
 {
     public void Load(IApplicationBuilder app, IWebHostEnvironment env, ComponentContext componentContext)
     {
-        //通过 App.GetOptions<TOptions> 获取选项
-        var webSettings = App.GetOptions<WebSettingsOptions>();
-        //如果需要清除缓存
-        if (webSettings.ClearRedis)
-        {
-            var redis = App.GetService<ISimpleRedis>();//获取redis服务
-            //删除redis的key
-            redis.DelByPattern(RedisConst.Redis_Prefix_Web);
-        }
         //通过 App.GetOptions<TOptions> 获取选项
         var pluginSettings = App.GetOptions<PluginSettingsOptions>();
         if (pluginSettings.UseMqtt) app.UseComponent<MqttApplicationComponent>(env);

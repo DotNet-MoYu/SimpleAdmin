@@ -2,6 +2,8 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+		<NoWarn>1701;1702;8616;1591;8618;8629;8602;8603;8604;8625;8765</NoWarn>
+		<DocumentationFile>SimpleAdmin.System.xml</DocumentationFile>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -30,18 +32,18 @@
 		<None Remove="Services\ImportExport\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="IPTools.China" Version="1.6.0" />
+		<PackageReference Include="UAParser" Version="3.1.47" />
+	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Batch\SimpleAdmin.Plugin.Batch.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.CodeFirst\SimpleAdmin.Plugin.CodeFirst.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.ImportExport\SimpleAdmin.Plugin.ImportExport.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mqtt\SimpleAdmin.Plugin.Mqtt.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="IPTools.China" Version="1.6.0" />
-		<PackageReference Include="UAParser" Version="3.1.47" />
 	</ItemGroup>
 
 	<ItemGroup>

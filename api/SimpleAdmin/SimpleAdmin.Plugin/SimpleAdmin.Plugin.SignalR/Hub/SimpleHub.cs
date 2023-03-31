@@ -1,7 +1,6 @@
 ﻿using Furion.InstantMessaging;
 using Masuit.Tools;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Connections;
 
 namespace SimpleAdmin.Plugin.SignalR;
@@ -14,11 +13,11 @@ namespace SimpleAdmin.Plugin.SignalR;
 [Authorize]
 public class SimpleHub : Hub<ISimpleHub>
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
 
-    public SimpleHub(ISimpleRedis simpleRedis)
+    public SimpleHub(ISimpleCacheService simpleCacheService)
     {
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
     }
 
 
@@ -72,7 +71,7 @@ public class SimpleHub : Hub<ISimpleHub>
         if (!string.IsNullOrEmpty(userId))
         {
             //获取redis当前用户的token信息列表
-            var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
+            var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
             if (tokenInfos != null)
             {
                 if (ifConnect)
@@ -82,7 +81,7 @@ public class SimpleHub : Hub<ISimpleHub>
                     if (tokenInfo != null)
                     {
                         tokenInfo.ClientIds.Add(userIdentifier);//添加到客户端列表
-                        _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新Redis
+                        _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
                     }
                 }
                 else
@@ -92,7 +91,7 @@ public class SimpleHub : Hub<ISimpleHub>
                     if (tokenInfo != null)
                     {
                         tokenInfo.ClientIds.RemoveWhere(it => it == userIdentifier);//从客户端列表删除
-                        _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新Redis
+                        _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
                     }
                 }
             }

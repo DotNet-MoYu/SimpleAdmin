@@ -5,12 +5,12 @@
 /// </summary>
 public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly ISysOrgService _sysOrgService;
 
-    public SysPositionService(ISimpleRedis simpleRedis, ISysOrgService sysOrgService)
+    public SysPositionService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService)
     {
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
         this._sysOrgService = sysOrgService;
     }
 
@@ -18,7 +18,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public override async Task<List<SysPosition>> GetListAsync()
     {
         //先从Redis拿
-        var sysPositions = _simpleRedis.Get<List<SysPosition>>(RedisConst.Redis_SysPosition);
+        var sysPositions = _simpleCacheService.Get<List<SysPosition>>(CacheConst.Cache_SysPosition);
         if (sysPositions == null)
         {
             //redis没有就去数据库拿
@@ -26,7 +26,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             if (sysPositions.Count > 0)
             {
                 //插入Redis
-                _simpleRedis.Set(RedisConst.Redis_SysPosition, sysPositions);
+                _simpleCacheService.Set(CacheConst.Cache_SysPosition, sysPositions);
 
             }
         }
@@ -128,7 +128,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleRedis.Remove(RedisConst.Redis_SysPosition);//删除Key
+        _simpleCacheService.Remove(CacheConst.Cache_SysPosition);//删除Key
         await GetListAsync();//重新写入缓存
     }
     #region 方法

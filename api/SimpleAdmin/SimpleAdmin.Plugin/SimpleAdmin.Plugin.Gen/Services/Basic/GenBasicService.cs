@@ -1,5 +1,6 @@
 ﻿
 
+
 namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
@@ -76,7 +77,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         {
             #region 判断是否想显示
             var yesOrNo = GenConst.Yes;
-            if (it.IsPrimarykey || CodeGenUtil.IsCommonColumn(it.ColumnName))//如果是主键或者是公共字段则不显示
+            if (it.IsPrimarykey || SqlSugarUtils.IsCommonColumn(it.ColumnName))//如果是主键或者是公共字段则不显示
                 yesOrNo = GenConst.No;
 
             else
@@ -88,9 +89,9 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 IsPrimarykey = it.IsPrimarykey ? GenConst.Yes : GenConst.No,
                 FieldName = it.ColumnName,
                 FieldType = it.DataType,
-                FieldNetType = CodeGenUtil.ConvertDataType(it.DataType),
+                FieldNetType = SqlSugarUtils.ConvertDataType(it.DataType),
                 FieldRemark = it.ColumnDescription ?? it.ColumnName,
-                EffectType = GenConst.INPUT,
+                EffectType = EffTypeConst.INPUT,
                 WhetherTable = yesOrNo,
                 WhetherAddUpdate = yesOrNo,
                 WhetherRequired = GenConst.No,

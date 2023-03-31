@@ -8,12 +8,12 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class SessionService : DbRepository<SysUser>, ISessionService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IEventPublisher _eventPublisher;
 
-    public SessionService(ISimpleRedis simpleRedis, IEventPublisher eventPublisher)
+    public SessionService(ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher)
     {
-        this._simpleRedis = simpleRedis;
+        this._simpleCacheService = simpleCacheService;
         this._eventPublisher = eventPublisher;
     }
 
@@ -96,9 +96,9 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
         var userId = input.Id.ToString();
         //token列表
-        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
+        List<TokenInfo> tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
         //从列表中删除
-        _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { userId });
+        _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { userId });
         await NoticeUserLoginOut(userId, tokenInfos);
     }
 
@@ -108,15 +108,15 @@ public class SessionService : DbRepository<SysUser>, ISessionService
 
         var userId = input.Id.ToString();
         //获取该用户的token信息
-        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
         //当前需要踢掉用户的token
         var deleteTokens = tokenInfos.Where(it => input.Tokens.Contains(it.Token)).ToList();
         //踢掉包含token列表的token信息
         tokenInfos = tokenInfos.Where(it => !input.Tokens.Contains(it.Token)).ToList();
         if (tokenInfos.Count > 0)
-            _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//如果还有token则更新token
+            _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//如果还有token则更新token
         else
-            _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { userId });//否则直接删除key
+            _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { userId });//否则直接删除key
         await NoticeUserLoginOut(userId, deleteTokens);
     }
     #region 方法
@@ -129,7 +129,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     public Dictionary<string, List<TokenInfo>> GetTokenDicFromRedis()
     {
         //redis获取token信息hash集合,并转成字典
-        var bTokenDic = _simpleRedis.HashGetAll<List<TokenInfo>>(RedisConst.Redis_UserToken).ToDictionary(u => u.Key, u => u.Value);
+        var bTokenDic = _simpleCacheService.HashGetAll<List<TokenInfo>>(CacheConst.Cache_UserToken).ToDictionary(u => u.Key, u => u.Value);
         if (bTokenDic != null)
         {
             bTokenDic.ForEach(it =>
@@ -148,11 +148,11 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             });
             if (bTokenDic.Count > 0)
             {
-                _simpleRedis.HashSet(RedisConst.Redis_UserToken, bTokenDic);//如果还有token则更新token
+                _simpleCacheService.HashSet(CacheConst.Cache_UserToken, bTokenDic);//如果还有token则更新token
             }
             else
             {
-                _simpleRedis.Remove(RedisConst.Redis_UserToken);//否则直接删除key
+                _simpleCacheService.Remove(CacheConst.Cache_UserToken);//否则直接删除key
             }
             return bTokenDic;
         }

@@ -1,0 +1,7 @@
+{
+  //mqtt设置
+  "CacheSettings": {
+    //"ConnectionString": "server=127.0.0.1:6379;password=123456;db=9", //连接字符串，不填就是内存缓存
+    "ClearRedis": true //是否每次启动都清除Redis缓存
+  }
+}

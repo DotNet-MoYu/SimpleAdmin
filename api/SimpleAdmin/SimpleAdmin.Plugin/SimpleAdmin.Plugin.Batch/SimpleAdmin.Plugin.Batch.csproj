@@ -10,6 +10,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Plugin.Core\SimpleAdmin.Plugin.Core.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.Plugin.SqlSugar\SimpleAdmin.Plugin.SqlSugar.csproj" />
 	</ItemGroup>
 
 </Project>

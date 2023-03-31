@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.Aop</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy">
+            <summary>
+            全局异常处理
+            这里没有继承IGlobalDispatchProxy是因为IGlobalDispatchProxy会把一些没有必要的方法也aop了
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.Target">
+            <summary>
+            当前服务实例
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.Services">
+            <summary>
+            服务提供器，可以用来解析服务，如：Services.GetService()
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.Invoke(System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            方法
+            </summary>
+            <param name="method"></param>
+            <param name="args"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.InvokeAsync(System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            异步无返回值
+            </summary>
+            <param name="method"></param>
+            <param name="args"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.InvokeAsyncT``1(System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            异步带返回值
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="method"></param>
+            <param name="args"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.After(System.Reflection.MethodInfo,System.Object,System.Object[])">
+            <summary>
+            方法执行之后
+            </summary>
+            <param name="method">方法</param>
+            <param name="returnValue">返回值</param>
+            <param name="args">参数列表</param>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.Before(System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            方法执行之前
+            </summary>
+            <param name="method">方法</param>
+            <param name="args">参数列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.CheckCache(System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            检查缓存里是否有数据
+            </summary>
+            <param name="method">方法</param>
+            <param name="args">参数列表</param>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.RecordCache(System.Reflection.MethodInfo,System.Object[],System.Object)">
+            <summary>
+            写数据到缓存
+            </summary>
+            <param name="method">方法</param>
+            <param name="args">参数列表</param>
+            <param name="returnValue">返回值</param>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GlobalDispatchProxy.CustomCacheKey(System.String,System.Reflection.MethodInfo,System.Object[])">
+            <summary>
+            自定义缓存Key
+            </summary>
+            <param name="prefix">前缀</param>
+            <param name="method">方法</param>
+            <param name="args">参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Aop.GetCacheKey">
+            <summary>
+            获取缓存Key
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Aop.GetCacheKey.GetArgumentValue(System.Object)">
+            <summary>
+            object 转 string
+            </summary>
+            <param name="arg"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Aop.CacheAttribute">
+            <summary>
+            缓存结果特性
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.CacheAttribute.KeyPrefix">
+            <summary>
+            RedisKey前缀
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.CacheAttribute.AbsoluteExpiration">
+            <summary>
+            过期时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.CacheAttribute.CustomKeyValue">
+            <summary>
+            自定义KEY
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.CacheAttribute.IsDelete">
+            <summary>
+            是否删除
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Aop.CacheAttribute.StoreType">
+            <summary>
+            存储类型
+            </summary>
+        </member>
+    </members>
+</doc>

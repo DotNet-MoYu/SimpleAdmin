@@ -16,7 +16,7 @@ public interface IAuthService : ITransient
     /// 获取登录用户信息
     /// </summary>
     /// <returns></returns>
-    Task<SysUser> GetLoginUser();
+    Task<LoginUserOutput> GetLoginUser();
 
     /// <summary>
     /// 获取手机短信验证码

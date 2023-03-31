@@ -7,13 +7,13 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class AuthEventSubscriber : IEventSubscriber, ISingleton
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     public IServiceProvider _services { get; }
     private readonly SqlSugarScope _db;
-    public AuthEventSubscriber(ISimpleRedis simpleRedis, IServiceProvider services)
+    public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services)
     {
         _db = DbContext.Db;
-        this._simpleRedis = simpleRedis;
+        this._simpleCacheService = simpleCacheService;
         this._services = services;
     }
 
@@ -50,7 +50,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             it.LatestLoginIp,
             it.LatestLoginTime,
         }).ExecuteCommandAsync() > 0)
-            _simpleRedis.HashAdd(RedisConst.Redis_SysUser, sysUser.Id.ToString(), sysUser); //更新Redis信息
+            _simpleCacheService.HashAdd(CacheConst.Cache_SysUser, sysUser.Id.ToString(), sysUser); //更新Redis信息
         await Task.CompletedTask;
     }
 

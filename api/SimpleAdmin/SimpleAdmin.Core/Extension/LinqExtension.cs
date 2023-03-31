@@ -1,6 +1,4 @@
-﻿using Masuit.Tools.Models;
-
-namespace SimpleAdmin.Core.Extension;
+﻿namespace SimpleAdmin.Core.Extension;
 
 /// <summary>
 /// Linq扩展
@@ -21,27 +19,4 @@ public static class LinqExtension
     }
 
 
-    /// <summary>
-    /// 分页查询
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list">数据列表</param>
-    /// <param name="pageIndex">当前页</param>
-    /// <param name="pageSize">每页数量</param>
-    /// <returns>分页集合</returns>
-    public static LinqPagedList<T> LinqPagedList<T>(this List<T> list, int pageIndex, int pageSize)
-    {
-        var result = list.ToPagedList(pageIndex, pageSize);//获取分页
-        //格式化
-        return new LinqPagedList<T>
-        {
-            Current = pageIndex,
-            Size = result.PageSize,
-            Records = result.Data,
-            Total = result.TotalCount,
-            Pages = result.TotalPages,
-            HasNextPages = result.HasNext,
-            HasPrevPages = result.HasPrev
-        };
-    }
 }

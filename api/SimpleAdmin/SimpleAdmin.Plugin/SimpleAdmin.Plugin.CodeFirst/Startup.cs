@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.CodeFirst;
+﻿namespace SimpleAdmin.Plugin.CodeFirst;
 
 /// <summary>
 /// AppStartup启动类

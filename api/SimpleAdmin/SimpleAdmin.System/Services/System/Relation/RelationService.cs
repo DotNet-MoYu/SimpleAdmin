@@ -1,17 +1,16 @@
 ﻿namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IRelationService"/>
-[Injection(Proxy = typeof(GlobalDispatchProxy))]
 public class Relationservice : DbRepository<SysRelation>, IRelationService
 {
     private readonly ILogger<Relationservice> _logger;
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IResourceService _resourceService;
 
-    public Relationservice(ILogger<Relationservice> logger, ISimpleRedis simpleRedis, IResourceService resourceService)
+    public Relationservice(ILogger<Relationservice> logger, ISimpleCacheService simpleCacheService, IResourceService resourceService)
     {
         this._logger = logger;
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
         this._resourceService = resourceService;
     }
 
@@ -19,9 +18,9 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task<List<SysRelation>> GetRelationByCategory(string category)
     {
-        var key = RedisConst.Redis_SysRelation + category;
+        var key = CacheConst.Cache_SysRelation + category;
         //先从Redis拿
-        var sysRelations = _simpleRedis.Get<List<SysRelation>>(key);
+        var sysRelations = _simpleCacheService.Get<List<SysRelation>>(key);
         if (sysRelations == null)
         {
             //redis没有就去数据库拿
@@ -29,7 +28,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             if (sysRelations.Count > 0)
             {
                 //插入Redis
-                _simpleRedis.Set(key, sysRelations);
+                _simpleCacheService.Set(key, sysRelations);
 
             }
         }
@@ -80,8 +79,8 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task RefreshCache(string category)
     {
-        var key = RedisConst.Redis_SysRelation + category;//key
-        _simpleRedis.Remove(key);//删除redis
+        var key = CacheConst.Cache_SysRelation + category;//key
+        _simpleCacheService.Remove(key);//删除redis
         await GetRelationByCategory(category);//更新缓存
     }
 

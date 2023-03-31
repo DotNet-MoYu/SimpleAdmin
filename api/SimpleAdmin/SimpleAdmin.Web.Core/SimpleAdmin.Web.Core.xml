@@ -370,7 +370,7 @@
             <param name="basicId"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.GenConfig})">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.Gen.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.GenConfig})">
             <summary>
             编辑代码生成详细
             </summary>
@@ -931,7 +931,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.DevConfig})">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevConfig})">
             <summary>
             配置批量更新
             </summary>

@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.Plugin.CodeFirst;
+﻿
+
+namespace SimpleAdmin.Plugin.CodeFirst;
 
 /// <summary>
 /// 角色种子数据

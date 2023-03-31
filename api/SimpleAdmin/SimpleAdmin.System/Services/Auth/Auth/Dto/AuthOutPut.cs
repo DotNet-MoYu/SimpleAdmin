@@ -41,3 +41,71 @@ public class LoginOutPut
 
 }
 
+public class LoginUserOutput
+{
+    /// <summary>
+    /// 头像 
+    ///</summary>
+    public virtual string Avatar { get; set; }
+
+    /// <summary>
+    /// 签名 
+    ///</summary>
+    public string Signature { get; set; }
+
+    /// <summary>
+    /// 账号 
+    ///</summary>
+    public virtual string Account { get; set; }
+
+    /// <summary>
+    /// 密码 
+    ///</summary>
+    public string Password { get; set; }
+
+    /// <summary>
+    /// 姓名 
+    ///</summary>
+    public virtual string Name { get; set; }
+
+    /// <summary>
+    /// 昵称 
+    ///</summary>
+    public string Nickname { get; set; }
+
+    /// <summary>
+    /// 性别 
+    ///</summary>
+    public string Gender { get; set; }
+
+    /// <summary>
+    /// 家庭住址 
+    ///</summary>
+    public string HomeAddress { get; set; }
+
+    /// <summary>
+    /// 机构信息
+    /// </summary>
+    public string OrgName { get; set; }
+
+    /// <summary>
+    /// 机构信息全称
+    /// </summary>
+    public string OrgNames { get; set; }
+
+    /// <summary>
+    /// 职位信息
+    /// </summary>
+    public string PositionName { get; set; }
+
+    /// <summary>
+    /// 角色码集合
+    /// </summary>
+    public List<string> RoleCodeList { get; set; }
+
+    /// <summary>
+    /// 按钮码集合
+    /// </summary>
+    public List<string> ButtonCodeList { get; set; }
+
+}

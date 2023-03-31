@@ -3,19 +3,19 @@
 /// <inheritdoc cref="IAuthService"/>
 public class AuthService : IAuthService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IEventPublisher _eventPublisher;
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
     private readonly IRoleService _roleService;
 
-    public AuthService(ISimpleRedis simpleRedis,
+    public AuthService(ISimpleCacheService simpleCacheService,
                        IEventPublisher eventPublisher,
                        IConfigService configService,
                        ISysUserService userService,
                        IRoleService roleService)
     {
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
         this._eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
@@ -126,18 +126,14 @@ public class AuthService : IAuthService
 
 
     /// <inheritdoc/>
-    public async Task<SysUser> GetLoginUser()
+    public async Task<LoginUserOutput> GetLoginUser()
     {
         var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);//根据账号获取用户信息
         if (userInfo != null)
         {
-            //去掉部分信息
-            userInfo.Password = null;
-            userInfo.PermissionCodeList = null;
-            userInfo.DataScopeList = null;
-            return userInfo;
+            return userInfo.Adapt<LoginUserOutput>();
         }
-        return userInfo;
+        return null;
     }
 
     #region 方法
@@ -150,8 +146,8 @@ public class AuthService : IAuthService
     public void ValidValidCode(string validCode, string validCodeReqNo, bool isDelete = true)
     {
 
-        var key = RedisConst.Redis_Captcha + validCodeReqNo; //获取验证码Key值
-        var code = _simpleRedis.Get<string>(key);//从redis拿数据
+        var key = CacheConst.Cache_Captcha + validCodeReqNo; //获取验证码Key值
+        var code = _simpleCacheService.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
         if (code != null)//如果有
         {
@@ -170,8 +166,8 @@ public class AuthService : IAuthService
     /// <param name="validCodeReqNo"></param>
     public void RemoveValidCodeFromRedis(string validCodeReqNo)
     {
-        var key = RedisConst.Redis_Captcha + validCodeReqNo; //获取验证码Key值
-        _simpleRedis.Remove(key);//删除验证码
+        var key = CacheConst.Cache_Captcha + validCodeReqNo; //获取验证码Key值
+        _simpleCacheService.Remove(key);//删除验证码
     }
 
     /// <summary>
@@ -211,7 +207,7 @@ public class AuthService : IAuthService
         //生成请求号
         var reqNo = CommonUtils.GetSingleId().ToString();
         //插入redis
-        _simpleRedis.Set(RedisConst.Redis_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
+        _simpleCacheService.Set(CacheConst.Cache_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
     }
 
@@ -301,7 +297,7 @@ public class AuthService : IAuthService
         }
 
         //添加到token列表
-        _simpleRedis.HashAdd(RedisConst.Redis_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
+        _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
     }
 
 
@@ -324,12 +320,12 @@ public class AuthService : IAuthService
             if (tokenInfos.Count > 0)
             {
                 //更新token列表
-                _simpleRedis.HashAdd(RedisConst.Redis_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
+                _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
             }
             else
             {
                 //从列表中删除
-                _simpleRedis.HashDel<List<TokenInfo>>(RedisConst.Redis_UserToken, new string[] { loginEvent.SysUser.Id.ToString() });
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { loginEvent.SysUser.Id.ToString() });
             }
         }
 
@@ -343,7 +339,7 @@ public class AuthService : IAuthService
     private List<TokenInfo> GetTokenInfos(long userId)
     {
         //redis获取用户token列表
-        List<TokenInfo> tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId.ToString());
+        List<TokenInfo> tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId.ToString());
         if (tokenInfos != null)
         {
             tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的

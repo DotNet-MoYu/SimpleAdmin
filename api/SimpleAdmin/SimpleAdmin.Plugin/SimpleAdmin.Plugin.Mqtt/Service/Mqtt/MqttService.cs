@@ -1,6 +1,5 @@
 ﻿using Furion.DataEncryption;
 using Microsoft.AspNetCore.Http;
-using SimpleRedis;
 using SimpleTool;
 
 namespace SimpleAdmin.Plugin.Mqtt;
@@ -10,12 +9,12 @@ namespace SimpleAdmin.Plugin.Mqtt;
 /// </summary>
 public class MqttService : IMqttService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
 
-    public MqttService(ISimpleRedis simpleRedis)
+    public MqttService(ISimpleCacheService simpleCacheService)
     {
 
-        this._simpleRedis = simpleRedis;
+        this._simpleCacheService = simpleCacheService;
 
     }
 
@@ -42,7 +41,7 @@ public class MqttService : IMqttService
             password = token; // 当前token作为mqtt密码
         #endregion
         var clientId = $"{user.Id}_{RandomHelper.CreateLetterAndNumber(5)}";//客户端ID
-        _simpleRedis.Set(RedisConst.Redis_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
+        _simpleCacheService.Set(CacheConst.Cache_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
         return new MqttParameterOutput
         {
             ClientId = clientId,
@@ -59,7 +58,7 @@ public class MqttService : IMqttService
         MqttAuthOutput mqttAuthOutput = new MqttAuthOutput { Is_superuser = false, Result = "deny" };
 
         //获取用户token
-        var tokens = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
+        var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
         if (tokens != null)
         {
             if (tokens.Any(it => it.Token == input.Password))//判断是否有token
@@ -73,16 +72,16 @@ public class MqttService : IMqttService
 
     private async Task<List<DevConfig>> GetMqttConfig()
     {
-        var key = RedisConst.Redis_DevConfig + CateGoryConst.Config_MQTT_BASE;//mqtt配置key
+        var key = CacheConst.Cache_DevConfig + CateGoryConst.Config_MQTT_BASE;//mqtt配置key
         //先从redis拿配置
-        var configList = _simpleRedis.Get<List<DevConfig>>(key);
+        var configList = _simpleCacheService.Get<List<DevConfig>>(key);
         if (configList == null)
         {
             //redis没有再去数据可拿
             configList = await DbContext.Db.Queryable<DevConfig>().Where(it => it.Category == CateGoryConst.Config_MQTT_BASE).ToListAsync();//获取mqtt配置配置列表
             if (configList.Count > 0)
             {
-                _simpleRedis.Set(key, configList);//如果不为空,插入redis
+                _simpleCacheService.Set(key, configList);//如果不为空,插入redis
             }
         }
         return configList;

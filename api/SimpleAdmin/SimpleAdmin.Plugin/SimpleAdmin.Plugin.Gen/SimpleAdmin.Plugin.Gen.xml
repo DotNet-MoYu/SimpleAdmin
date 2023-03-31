@@ -4,6 +4,31 @@
         <name>SimpleAdmin.Plugin.Gen</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenConst">
+            <summary>
+            代码生成器常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.Yes">
+            <summary>
+            是
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.No">
+            <summary>
+            否
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.Zip">
+            <summary>
+            压缩包
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.Pro">
+            <summary>
+            项目中
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicAddInput">
             <summary>
             代码生成基础添加参数
@@ -311,7 +336,7 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecBackend(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Core.GenBasic,System.String,System.Boolean)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecBackend(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.SqlSugar.GenBasic,System.String,System.Boolean)">
             <summary>
             生成后端代码文件
             </summary>
@@ -320,7 +345,7 @@
             <param name="backendPath">后端生成路径</param>
             <param name="isZip">是否是zip方式</param>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecFronted(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Core.GenBasic,System.String)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecFronted(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.SqlSugar.GenBasic,System.String)">
             <summary>
             生成前端代码文件
             </summary>
@@ -359,7 +384,7 @@
             <param name="templatePath">模板路径</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenViewModel(SimpleAdmin.Core.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenViewModel(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
             <summary>
             获取代码生成视图
             </summary>
@@ -381,7 +406,7 @@
             <param name="path">文件夹路径</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Core.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenBasic(System.Int64)">
@@ -391,7 +416,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.CreateMenuButtonAndRelation(SimpleAdmin.Core.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.CreateMenuButtonAndRelation(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
             <summary>
             创建代码生成相关的菜单按钮和授权关系
             </summary>
@@ -466,7 +491,7 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenConfigSerivce.List(System.Int64)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigSerivce.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.GenConfig})">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigSerivce.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.GenConfig})">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.Plugin.Gen.IGenConfigSerivce">
@@ -474,7 +499,7 @@
             代码生成详细配置服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenConfigSerivce.EditBatch(System.Collections.Generic.List{SimpleAdmin.Core.GenConfig})">
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenConfigSerivce.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.GenConfig})">
             <summary>
             批量更新
             </summary>

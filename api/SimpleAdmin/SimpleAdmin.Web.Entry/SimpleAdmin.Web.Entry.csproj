@@ -17,15 +17,15 @@
 		<None Remove="wwwroot\CodeGen\Forntend\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
-	</ItemGroup>
-	<ItemGroup>
 		<None Update="ip2region.db">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 	<ItemGroup>
 		<Folder Include="wwwroot\CodeGen\Backend\Service\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>

@@ -33,21 +33,21 @@ public class MqttWorker : BackgroundService
             {
                 var userId = clientId.Split("_")[0];
                 //获取redis当前用户的token信息列表
-                var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);
+                var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
                 if (tokenInfos != null)
                 {
                     var connectEvent = topicList.Last();//获取连接事件判断上线还是下线
                     if (connectEvent == "connected")//如果是上线
                     {
                         _logger.LogInformation($"设备{clientId}上线了");
-                        var token = _simpleRedis.Get<string>(RedisConst.Redis_MqttClientUser + clientId);//获取mqtt客户端ID对应的用户token
+                        var token = _simpleRedis.Get<string>(CacheConst.Cache_MqttClientUser + clientId);//获取mqtt客户端ID对应的用户token
                         if (token == null) return;//没有token就直接退出
                         //获取redis中当前token
                         var tokenInfo = tokenInfos.Where(it => it.Token == token).FirstOrDefault();
                         if (tokenInfo != null)
                         {
                             tokenInfo.ClientIds.Add(clientId);//添加到客户端列表
-                            _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新Redis
+                            _simpleRedis.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
                         }
 
                     }
@@ -59,7 +59,7 @@ public class MqttWorker : BackgroundService
                         if (tokenInfo != null)
                         {
                             tokenInfo.ClientIds.RemoveWhere(it => it == clientId);//从客户端列表删除
-                            _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新Redis
+                            _simpleRedis.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
                         }
                     }
                 }

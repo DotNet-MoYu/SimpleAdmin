@@ -214,7 +214,7 @@
         <member name="M:SimpleAdmin.Application.GenTestService.Export(SimpleAdmin.Application.GenTestPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.CheckInput(SimpleAdmin.Core.GenTest)">
+        <member name="M:SimpleAdmin.Application.GenTestService.CheckInput(SimpleAdmin.Plugin.SqlSugar.GenTest)">
             <summary>
             检查输入参数
             </summary>
@@ -327,7 +327,7 @@
         <member name="M:SimpleAdmin.Application.OrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.CheckInput(SimpleAdmin.Core.SysOrg,System.String)">
+        <member name="M:SimpleAdmin.Application.OrgService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysOrg,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -394,7 +394,7 @@
         <member name="M:SimpleAdmin.Application.PositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.Core.SysPosition,System.String)">
+        <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysPosition,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -580,7 +580,7 @@
         <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.Core.SysUser,System.String)">
+        <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysUser,System.String)">
             <summary>
             检查输入参数
             </summary>

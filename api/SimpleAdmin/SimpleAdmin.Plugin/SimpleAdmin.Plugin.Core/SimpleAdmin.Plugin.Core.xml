@@ -4,6 +4,81 @@
         <name>SimpleAdmin.Plugin.Core</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Plugin.Core.BatchEditAttribute">
+            <summary>
+            批量更新
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Core.CodeGenAttribute">
+            <summary>
+            代码生成
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Core.IgnoreSeedDataAddAttribute">
+            <summary>
+            种子数据忽略新增
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Core.IgnoreSeedDataUpdateAttribute">
+            <summary>
+            种子数据忽略修改
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Core.EffTypeConst">
+            <summary>
+            前端控件作用类型常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.INPUT">
+            <summary>
+            输入框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.TEXTAREA">
+            <summary>
+            文本框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.SELECT">
+            <summary>
+            下拉框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.RADIO">
+            <summary>
+            单选框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.CHECKBOX">
+            <summary>
+            复选框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.DATEPICKER">
+            <summary>
+            日期选择器
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.TIMEPICKER">
+            <summary>
+            时间选择器
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.INPUTNUMBER">
+            <summary>
+            数字输入框
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.SLIDER">
+            <summary>
+            滑动数字条
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Core.EffTypeConst.SWITCH">
+            <summary>
+            下拉框
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Core.NoticeComponent">
             <summary>
             通知组件类型

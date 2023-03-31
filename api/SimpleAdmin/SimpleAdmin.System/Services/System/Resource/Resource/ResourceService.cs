@@ -6,11 +6,11 @@ namespace SimpleAdmin.System;
 /// <inheritdoc cref="IResourceService"/>
 public class ResourceService : DbRepository<SysResource>, IResourceService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
 
-    public ResourceService(ISimpleRedis simpleRedis)
+    public ResourceService(ISimpleCacheService simpleCacheService)
     {
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
     }
 
     /// <inheritdoc />
@@ -62,13 +62,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (category == null)
         {
             //删除全部key
-            _simpleRedis.DelByPattern(RedisConst.Redis_SysResource);
+            _simpleCacheService.DelByPattern(CacheConst.Cache_SysResource);
             await GetListAsync();
         }
         else
         {
             //否则只删除一个Key
-            _simpleRedis.Remove(RedisConst.Redis_SysResource + category);
+            _simpleCacheService.Remove(CacheConst.Cache_SysResource + category);
             await GetListByCategory(category);
         }
 
@@ -108,7 +108,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetListByCategory(string category)
     {
         //先从Redis拿
-        var sysResources = _simpleRedis.Get<List<SysResource>>(RedisConst.Redis_SysResource + category);
+        var sysResources = _simpleCacheService.Get<List<SysResource>>(CacheConst.Cache_SysResource + category);
         if (sysResources == null)
         {
             //redis没有就去数据库拿
@@ -116,7 +116,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             if (sysResources.Count > 0)
             {
                 //插入Redis
-                _simpleRedis.Set(RedisConst.Redis_SysResource + category, sysResources);
+                _simpleCacheService.Set(CacheConst.Cache_SysResource + category, sysResources);
             }
         }
         return sysResources;

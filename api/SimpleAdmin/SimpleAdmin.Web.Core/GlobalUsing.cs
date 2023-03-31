@@ -21,3 +21,5 @@ global using Microsoft.AspNetCore.Http;
 global using SimpleAdmin.Plugin.Core;
 global using SimpleAdmin.Plugin.Batch;
 global using SimpleAdmin.Plugin.ImportExport;
+global using SimpleAdmin.Plugin.Cache;
+global using SimpleAdmin.Plugin.SqlSugar;

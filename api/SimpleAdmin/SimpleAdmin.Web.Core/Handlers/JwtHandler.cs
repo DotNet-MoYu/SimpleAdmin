@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using Furion.Authorization;
 using Furion.DataEncryption;
-using SimpleRedis;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -52,8 +51,8 @@ public class JwtHandler : AppAuthorizeHandler
 
         var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
         var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
-        var _simpleRedis = App.GetService<ISimpleRedis>();//获取redis实例
-        var tokenInfos = _simpleRedis.HashGetOne<List<TokenInfo>>(RedisConst.Redis_UserToken, userId);//获取token信息
+        var _simpleCacheService = App.GetService<ISimpleCacheService>();//获取redis实例
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);//获取token信息
         if (tokenInfos == null)//如果还是空
         {
             return false;
@@ -69,7 +68,7 @@ public class JwtHandler : AppAuthorizeHandler
                 {
                     tokenInfo.Token = accessToken;//新的token
                     tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
-                    _simpleRedis.HashAdd(RedisConst.Redis_UserToken, userId, tokenInfos);//更新tokne信息到redis
+                    _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新tokne信息到redis
                 }
             }
             else

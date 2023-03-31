@@ -14,3 +14,5 @@ global using Furion.FriendlyException;
 global using SimpleTool;
 global using System.Text;
 global using System.ComponentModel.DataAnnotations;
+global using SimpleAdmin.Plugin.SqlSugar;
+global using SimpleAdmin.Plugin.Core;

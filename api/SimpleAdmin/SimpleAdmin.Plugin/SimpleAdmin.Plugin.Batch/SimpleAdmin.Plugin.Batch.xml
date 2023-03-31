@@ -36,13 +36,13 @@
         <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetUpdateBatchConfigDict(System.String,System.Collections.Generic.List{SimpleAdmin.Plugin.Batch.BatchEditColumn})">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetUpdateBatchConfig(SimpleAdmin.Core.Utils.SqlsugarColumnInfo)">
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.GetUpdateBatchConfig(SimpleAdmin.Plugin.SqlSugar.SqlsugarColumnInfo)">
             <summary>
             获取配置
             </summary>
             <param name="columnInfo"></param>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.CheckInput(SimpleAdmin.Core.BatchEdit)">
+        <member name="M:SimpleAdmin.Plugin.Batch.BatchEditService.CheckInput(SimpleAdmin.Plugin.SqlSugar.BatchEdit)">
             <summary>
             检查输入参数
             </summary>

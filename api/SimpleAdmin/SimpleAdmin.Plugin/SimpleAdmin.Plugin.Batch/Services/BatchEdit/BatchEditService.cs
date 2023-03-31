@@ -1,5 +1,4 @@
 ﻿
-
 namespace SimpleAdmin.Plugin.Batch;
 
 /// <summary>
@@ -41,7 +40,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         tableColumns.ForEach(it =>
         {
             //判断是否是主键或者通用字段
-            var isPkOrCommon = it.IsPrimarykey || CodeGenUtil.IsCommonColumn(it.ColumnName);
+            var isPkOrCommon = it.IsPrimarykey || SqlSugarUtils.IsCommonColumn(it.ColumnName);
             if (!isPkOrCommon)
             {
                 //添加到字段集合
@@ -118,13 +117,13 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             foreach (var tableColumn in tableColumns)
             {
                 //判断是否是主键或者通用字段
-                var isPkOrCommon = tableColumn.IsPrimarykey || CodeGenUtil.IsCommonColumn(tableColumn.ColumnName);
+                var isPkOrCommon = tableColumn.IsPrimarykey || SqlSugarUtils.IsCommonColumn(tableColumn.ColumnName);
                 if (!isPkOrCommon)
                 {
                     //如果当前配置没有
                     if (!batchEdiConfig.Any(it => it.ColumnName == tableColumn.ColumnName))
                     {
-                        var netType = CodeGenUtil.ConvertDataType(tableColumn.DataType);
+                        var netType = SqlSugarUtils.ConvertDataType(tableColumn.DataType);
                         //添加到字段集合
                         newColumns.Add(GetUpdateBatchConfig(tableColumn));
                     }
@@ -194,13 +193,13 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     /// <param name="columnInfo"></param>
     private BatchEditConfig GetUpdateBatchConfig(SqlsugarColumnInfo columnInfo)
     {
-        var netType = CodeGenUtil.ConvertDataType(columnInfo.DataType);
+        var netType = SqlSugarUtils.ConvertDataType(columnInfo.DataType);
         return new BatchEditConfig
         {
             ColumnName = columnInfo.ColumnName,
             ColumnComment = string.IsNullOrWhiteSpace(columnInfo.ColumnDescription) ? columnInfo.ColumnName : columnInfo.ColumnDescription,
             NetType = netType,
-            DataType = CodeGenUtil.DataTypeToEff(netType),
+            DataType = SqlSugarUtils.DataTypeToEff(netType),
             Status = DevDictConst.COMMON_STATUS_DISABLED
         };
     }

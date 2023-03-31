@@ -1,15 +1,17 @@
-﻿namespace SimpleAdmin.System;
+﻿
+
+namespace SimpleAdmin.System;
 
 
 /// <inheritdoc cref="ISysOrgService"/>
 public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IImportExportService _importExportService;
 
-    public SysOrgService(ISimpleRedis simpleRedis, IImportExportService importExportService)
+    public SysOrgService(ISimpleCacheService simpleCacheService, IImportExportService importExportService)
     {
-        _simpleRedis = simpleRedis;
+        _simpleCacheService = simpleCacheService;
         this._importExportService = importExportService;
     }
 
@@ -19,7 +21,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public override async Task<List<SysOrg>> GetListAsync()
     {
         //先从Redis拿
-        var sysOrgs = _simpleRedis.Get<List<SysOrg>>(RedisConst.Redis_SysOrg);
+        var sysOrgs = _simpleCacheService.Get<List<SysOrg>>(CacheConst.Cache_SysOrg);
         if (sysOrgs == null)
         {
             //redis没有就去数据库拿
@@ -27,7 +29,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             if (sysOrgs.Count > 0)
             {
                 //插入Redis
-                _simpleRedis.Set(RedisConst.Redis_SysOrg, sysOrgs);
+                _simpleCacheService.Set(CacheConst.Cache_SysOrg, sysOrgs);
 
             }
         }
@@ -285,8 +287,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleRedis.Remove(RedisConst.Redis_SysOrg);//从redis删除
-        _simpleRedis.Remove(RedisConst.Redis_SysUser);//清空redis所有的用户信息
+        _simpleCacheService.Remove(CacheConst.Cache_SysOrg);//从redis删除
+        _simpleCacheService.Remove(CacheConst.Cache_SysUser);//清空redis所有的用户信息
         await GetListAsync();//刷新缓存
     }
 

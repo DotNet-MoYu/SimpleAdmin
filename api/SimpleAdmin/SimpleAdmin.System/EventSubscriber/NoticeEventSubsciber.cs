@@ -7,15 +7,15 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class NoticeEventSubsciber : IEventSubscriber, ISingleton
 {
-    private readonly ISimpleRedis _simpleRedis;
+    private readonly ISimpleCacheService _simpleCacheService;
     private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
 
     public IServiceScopeFactory _scopeFactory { get; }
     private readonly SqlSugarScope _db;
-    public NoticeEventSubsciber(ISimpleRedis simpleRedis, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
+    public NoticeEventSubsciber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
     {
         _db = DbContext.Db;
-        this._simpleRedis = simpleRedis;
+        this._simpleCacheService = simpleCacheService;
         this._scopeFactory = scopeFactory;
         this._namedServiceProvider = namedServiceProvider;
     }

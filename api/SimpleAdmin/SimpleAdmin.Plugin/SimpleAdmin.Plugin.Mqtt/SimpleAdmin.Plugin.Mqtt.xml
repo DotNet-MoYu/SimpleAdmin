@@ -4,6 +4,21 @@
         <name>SimpleAdmin.Plugin.Mqtt</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttConst">
+            <summary>
+            mqtt常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_TopicPrefix">
+            <summary>
+            mqtt主题前缀
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_LoginOut">
+            <summary>
+            登出
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
             <summary>
              mqtt组件
@@ -98,7 +113,7 @@
             <param name="userId">用户Id</param>
             <returns>认证结果</returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.GetWebLoginParameter(SimpleAdmin.Core.SysUser)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.GetWebLoginParameter(SimpleAdmin.Plugin.SqlSugar.SysUser)">
             <summary>
             获取mqtt登录web端参数
             </summary>
@@ -109,7 +124,7 @@
             <inheritdoc cref="T:SimpleAdmin.Plugin.Mqtt.IMqttService"/>
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.GetWebLoginParameter(SimpleAdmin.Core.SysUser)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.GetWebLoginParameter(SimpleAdmin.Plugin.SqlSugar.SysUser)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput,System.String)">

@@ -9,7 +9,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SimpleAdmin.Plugin.Core\SimpleAdmin.Plugin.Core.csproj" />
+		<PackageReference Include="SimpleMQTT" Version="1.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Plugin.Cache\SimpleAdmin.Plugin.Cache.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.Plugin.SqlSugar\SimpleAdmin.Plugin.SqlSugar.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
