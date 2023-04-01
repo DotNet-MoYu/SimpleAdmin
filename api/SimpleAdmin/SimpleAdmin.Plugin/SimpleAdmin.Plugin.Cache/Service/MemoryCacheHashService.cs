@@ -45,7 +45,7 @@ public partial class MemoryCacheService : ISimpleCacheService
         var exist = _memoryCache.GetDictionary<T>(key);
         foreach (var field in fields)
         {
-            if (exist.ContainsKey(field))//如果包含Key
+            if (field != null && exist.ContainsKey(field))//如果包含Key
             {
                 exist.Remove(field);//删除
                 result++;
