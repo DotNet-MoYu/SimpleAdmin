@@ -125,13 +125,7 @@ public partial interface ISimpleCacheService
     /// <returns>返回是否包含值，即使反序列化失败</returns>
     bool TryGetValue<T>(string key, out T value);
 
-    /// <summary>获取 或 添加 缓存数据，在数据不存在时执行委托请求数据</summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="key"></param>
-    /// <param name="callback"></param>
-    /// <param name="expire">过期时间，秒。小于0时采用默认缓存时间</param>
-    /// <returns></returns>
-    T GetOrAdd<T>(string key, Func<string, T> callback, int expire = -1);
+
 
     /// <summary>累加，原子操作</summary>
     /// <param name="key">键</param>

@@ -1,4 +1,7 @@
-﻿namespace SimpleAdmin.Plugin.Cache;
+﻿using Mapster;
+
+
+namespace SimpleAdmin.Plugin.Cache;
 
 /// <summary>
 /// <inheritdoc cref="ISimpleCacheService"/>
@@ -17,7 +20,8 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public T Get<T>(string key)
     {
-        return _memoryCache.Get<T>(key);
+        var data = _memoryCache.Get<string>(key);
+        return data.ToObject<T>();
     }
 
 
@@ -32,13 +36,13 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public bool Set<T>(string key, T value, int expire = -1)
     {
-        return _memoryCache.Set(key, value, expire);
+        return _memoryCache.Set(key, value.ToJson(), expire);
     }
 
     /// <inheritdoc/>
     public bool Set<T>(string key, T value, TimeSpan expire)
     {
-        return _memoryCache.Set(key, value, expire);
+        return _memoryCache.Set(key, value.ToJson(), expire);
     }
 
 
@@ -88,19 +92,40 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public IDictionary<string, T> GetAll<T>(IEnumerable<string> keys)
     {
-        return _memoryCache.GetAll<T>(keys);
+        IDictionary<string, T>? result = default;//定义集合
+        IDictionary<string, string>? data = _memoryCache.GetAll<string>(keys);//获取数据
+        data.ForEach(it =>
+        {
+            result.Add(it.Key, it.Value.ToObject<T>());//遍历数据,格式化并加到新的数据集合
+
+        });
+        return result;
+
     }
 
     /// <inheritdoc/>
     public void SetAll<T>(IDictionary<string, T> values, int expire = -1)
     {
+        IDictionary<string, string>? result = default;//定义集合
+        values.ForEach(it =>
+        {
+            result.Add(it.Key, it.Value.ToJson());//遍历数据,格式化并加到新的数据集合
+
+        });
         _memoryCache.SetAll(values, expire);
     }
 
     /// <inheritdoc/>
     public IDictionary<string, T> GetDictionary<T>(string key)
     {
-        return _memoryCache.GetDictionary<T>(key);
+        IDictionary<string, T>? result = default;//定义集合
+        var data = _memoryCache.GetDictionary<string>(key);
+        data.ForEach(it =>
+        {
+            result.Add(it.Key, it.Value.ToObject<T>());//遍历数据,格式化并加到新的数据集合
+
+        });
+        return result;
     }
 
     /// <inheritdoc/>
@@ -127,13 +152,20 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public bool Add<T>(string key, T value, int expire = -1)
     {
-        return _memoryCache.Add(key, value, expire);
+        return _memoryCache.Add(key, value.ToJson(), expire);
     }
 
     /// <inheritdoc/>
     public IList<T> GetList<T>(string key)
     {
-        return _memoryCache.GetList<T>(key);
+        IList<T> result = default;//定义集合
+        var data = _memoryCache.GetList<string>(key);
+        data.ForEach(it =>
+        {
+            result.Add(it.ToObject<T>());//遍历数据,格式化并加到新的数据集合
+
+        });
+        return result;
     }
 
     /// <inheritdoc/>
@@ -142,16 +174,15 @@ public partial class MemoryCacheService : ISimpleCacheService
         return _memoryCache.Replace(key, value);
     }
 
-    /// <inheritdoc/>
-    public T GetOrAdd<T>(string key, Func<string, T> callback, int expire = -1)
-    {
-        return _memoryCache.GetOrAdd<T>(key, callback, expire);
-    }
 
     /// <inheritdoc/>
     public bool TryGetValue<T>(string key, out T value)
     {
-        return _memoryCache.TryGetValue(key, out value);
+        var result = string.Empty;
+        var data = _memoryCache.TryGetValue<string>(key, out result);
+        value = result.ToObject<T>();
+        return value == null;
+
     }
 
     /// <inheritdoc/>

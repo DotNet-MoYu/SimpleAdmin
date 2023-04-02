@@ -265,14 +265,6 @@
             <param name="value">值。即使有值也不一定能够返回，可能缓存项刚好是默认值，或者只是反序列化失败</param>
             <returns>返回是否包含值，即使反序列化失败</returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Cache.ISimpleCacheService.GetOrAdd``1(System.String,System.Func{System.String,``0},System.Int32)">
-            <summary>获取 或 添加 缓存数据，在数据不存在时执行委托请求数据</summary>
-            <typeparam name="T"></typeparam>
-            <param name="key"></param>
-            <param name="callback"></param>
-            <param name="expire">过期时间，秒。小于0时采用默认缓存时间</param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Plugin.Cache.ISimpleCacheService.Increment(System.String,System.Int64)">
             <summary>累加，原子操作</summary>
             <param name="key">键</param>
@@ -412,9 +404,6 @@
         <member name="M:SimpleAdmin.Plugin.Cache.MemoryCacheService.Replace``1(System.String,``0)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Cache.MemoryCacheService.GetOrAdd``1(System.String,System.Func{System.String,``0},System.Int32)">
-            <inheritdoc/>
-        </member>
         <member name="M:SimpleAdmin.Plugin.Cache.MemoryCacheService.TryGetValue``1(System.String,``0@)">
             <inheritdoc/>
         </member>
@@ -519,9 +508,6 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Cache.RedisCacheService.Replace``1(System.String,``0)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.Plugin.Cache.RedisCacheService.GetOrAdd``1(System.String,System.Func{System.String,``0},System.Int32)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Cache.RedisCacheService.TryGetValue``1(System.String,``0@)">

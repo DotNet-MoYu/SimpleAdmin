@@ -325,6 +325,33 @@
             <param name="secend">第二个列表</param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Core.ObjectExtension">
+            <summary>
+            object拓展
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.ObjectExtension.ToObject(System.String)">
+            <summary>
+            json字符串序列化
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.ObjectExtension.ToObject``1(System.String)">
+            <summary>
+            json字符串序列化
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.ObjectExtension.ToJObject(System.String)">
+            <summary>
+            json字符串序列化
+            </summary>
+            <param name="json"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Core.Startup">
             <summary>
             AppStartup启动类

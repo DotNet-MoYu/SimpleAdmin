@@ -137,11 +137,6 @@ public partial class RedisCacheService : ISimpleCacheService
         return _simpleRedis.GetFullRedis().Replace(key, value);
     }
 
-    /// <inheritdoc/>
-    public T GetOrAdd<T>(string key, Func<string, T> callback, int expire = -1)
-    {
-        return _simpleRedis.GetFullRedis().GetOrAdd(key, callback, expire);
-    }
 
     /// <inheritdoc/>
     public bool TryGetValue<T>(string key, out T value)

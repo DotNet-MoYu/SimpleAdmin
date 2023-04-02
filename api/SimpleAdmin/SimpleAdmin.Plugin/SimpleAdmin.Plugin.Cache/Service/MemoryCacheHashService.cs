@@ -78,13 +78,15 @@ public partial class MemoryCacheService : ISimpleCacheService
         var exist = _memoryCache.GetDictionary<T>(key);
 
         exist.TryGetValue(field, out T result);
-        return result;
+        var data = result.DeepClone();
+        return data;
     }
 
     /// <inheritdoc/>
     public IDictionary<string, T> HashGetAll<T>(string key)
     {
-        return _memoryCache.GetDictionary<T>(key);
+        var data = _memoryCache.GetDictionary<T>(key);
+        return data;
     }
 
 
