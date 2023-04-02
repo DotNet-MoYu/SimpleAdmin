@@ -38,10 +38,12 @@
 		<Content Include="CodeGen\Backend\Services\Dto\Input.cs.vm">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="CodeGen\Backend\Services\Dto\Output.cs.vm">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 		<Content Include="CodeGen\Backend\Services\IService.cs.vm">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
