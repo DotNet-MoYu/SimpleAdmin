@@ -79,7 +79,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             //获取我的模块集合
             var myModules = GetMyModules(allModuleList, moduleIds, allSpaList.Count);
             myMenus.AddRange(myModules);//模块添加到菜单列表
-            var a = App.GetService<ISimpleCacheService>();
             // 遍历单页列表
             allSpaList.ForEach(it =>
              {
