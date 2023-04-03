@@ -12,10 +12,11 @@ public class Startup : AppStartup
         //禁止在主机启动时通过 App.GetOptions<TOptions> 获取选项，如需获取配置选项理应通过 App.GetConfig<TOptions>("配置节点", true)。
         var cacheSettings = App.GetConfig<CacheSettingsOptions>("CacheSettings", true);
         //如果有redis连接字符串
-        if (!string.IsNullOrEmpty(cacheSettings.ConnectionString))
+        if (cacheSettings.UserRedis)
         {
+            var connectionString = $"server={cacheSettings.RedisSettings.Address};password={cacheSettings.RedisSettings.Password};db={cacheSettings.RedisSettings.Db}";
             //注入redis
-            services.AddSimpleRedis(cacheSettings.ConnectionString);
+            services.AddSimpleRedis(connectionString);
             services.AddSingleton<ISimpleCacheService, RedisCacheService>();
         }
         else
@@ -33,7 +34,7 @@ public class Startup : AppStartup
         //通过 App.GetOptions<TOptions> 获取选项
         var cacheSettings = App.GetOptions<CacheSettingsOptions>();
         //如果需要清除缓存
-        if (cacheSettings.ClearRedis && !string.IsNullOrEmpty(cacheSettings.ConnectionString))
+        if (cacheSettings.UserRedis)
         {
             var redis = App.GetService<ISimpleCacheService>();//获取redis服务
             //删除redis的key

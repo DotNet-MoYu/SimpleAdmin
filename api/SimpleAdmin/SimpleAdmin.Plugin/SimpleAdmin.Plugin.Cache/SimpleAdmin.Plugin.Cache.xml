@@ -312,14 +312,39 @@
             缓存设置
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.ClearRedis">
+        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.UserRedis">
+            <summary>
+            使用Redis
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.RedisSettings">
             <summary>
             是否每次启动都清空
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.ConnectionString">
+        <member name="T:SimpleAdmin.Plugin.Cache.RedisSettings">
             <summary>
-            连接字符串
+            Redis设置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Cache.RedisSettings.Address">
+            <summary>
+            连接地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Cache.RedisSettings.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Cache.RedisSettings.Db">
+            <summary>
+            数据库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Cache.RedisSettings.ClearRedis">
+            <summary>
+            是否每次启动都清空
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.Cache.MemoryCacheService">

@@ -14,6 +14,11 @@
             代码生成
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Plugin.Core.IgnoreInitTableAttribute">
+            <summary>
+            忽略初始化表
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Core.IgnoreSeedDataAddAttribute">
             <summary>
             种子数据忽略新增
