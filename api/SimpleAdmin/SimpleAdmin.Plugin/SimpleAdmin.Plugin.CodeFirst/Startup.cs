@@ -45,8 +45,9 @@ public class Startup : AppStartup
         foreach (var entityType in entityTypes)
         {
             var tenantAtt = entityType.GetCustomAttribute<TenantAttribute>();//获取Sqlsugar多租户特性
-
-            if (tenantAtt != null && tenantAtt.configId.ToString() != config.ConfigId) continue;//如果特性存在并且租户ID是当前数据库ID
+            var ignoreInit = entityType.GetCustomAttribute<IgnoreInitTableAttribute>();//获取忽略初始化特性
+            if (ignoreInit != null) continue;//如果有忽略初始化特性
+            if (tenantAtt != null && tenantAtt.configId.ToString() != config.ConfigId) continue;//如果特性存在并且租户ID不是当前数据库ID
             var splitTable = entityType.GetCustomAttribute<SplitTableAttribute>();//获取自动分表特性
             if (splitTable == null)//如果特性是空
                 db.CodeFirst.InitTables(entityType);//普通创建
