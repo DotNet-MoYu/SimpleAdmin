@@ -34,7 +34,7 @@ public class Startup : AppStartup
         //通过 App.GetOptions<TOptions> 获取选项
         var cacheSettings = App.GetOptions<CacheSettingsOptions>();
         //如果需要清除缓存
-        if (cacheSettings.UserRedis)
+        if (cacheSettings.UserRedis && cacheSettings.RedisSettings.ClearRedis)
         {
             var redis = App.GetService<ISimpleCacheService>();//获取redis服务
             //删除redis的key
