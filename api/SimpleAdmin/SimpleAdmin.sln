@@ -49,7 +49,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "系统模块", "系统模�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Plugin.Aop", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj", "{8D130807-5AD8-4894-A694-6EBECBF89A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.Plugin.SqlSugar", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.SqlSugar\SimpleAdmin.Plugin.SqlSugar.csproj", "{9AE79EA7-C66B-4330-9696-4D94480F656B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Plugin.SqlSugar", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.SqlSugar\SimpleAdmin.Plugin.SqlSugar.csproj", "{9AE79EA7-C66B-4330-9696-4D94480F656B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
