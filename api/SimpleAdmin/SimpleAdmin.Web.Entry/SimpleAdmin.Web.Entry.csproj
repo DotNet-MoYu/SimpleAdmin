@@ -8,13 +8,13 @@
 
 	<ItemGroup>
 		<Compile Remove="Controllers\**" />
-		<Compile Remove="wwwroot\CodeGen\Forntend\**" />
+		<Compile Remove="wwwroot\CodeGen\**" />
 		<Content Remove="Controllers\**" />
-		<Content Remove="wwwroot\CodeGen\Forntend\**" />
+		<Content Remove="wwwroot\CodeGen\**" />
 		<EmbeddedResource Remove="Controllers\**" />
-		<EmbeddedResource Remove="wwwroot\CodeGen\Forntend\**" />
+		<EmbeddedResource Remove="wwwroot\CodeGen\**" />
 		<None Remove="Controllers\**" />
-		<None Remove="wwwroot\CodeGen\Forntend\**" />
+		<None Remove="wwwroot\CodeGen\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<None Update="ip2region.db">
@@ -22,10 +22,10 @@
 		</None>
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="wwwroot\CodeGen\Backend\Service\" />
+	  <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
+	  <Folder Include="wwwroot\" />
 	</ItemGroup>
 	<ProjectExtensions>
 		<VisualStudio>
