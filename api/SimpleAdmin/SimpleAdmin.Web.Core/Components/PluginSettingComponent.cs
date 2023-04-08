@@ -24,13 +24,8 @@ public sealed class PluginSettingComponent : IServiceComponent
         var pluginSettings = App.GetConfig<PluginSettingsOptions>("PluginSettings");
         if (pluginSettings.UseSignalR)//如果使用signalr则启用signalr插件
             services.AddComponent<SignalRComponent>();
-        if (pluginSettings.UseMqtt)//如果使用signalr则启用signalr插件
+        if (pluginSettings.UseMqtt)//如果使用mqtt则启用mqtt插件
             services.AddComponent<MqttComponent>();
-
-    }
-
-    private void StartPlugins(IServiceCollection services)
-    {
 
     }
 }

@@ -39,7 +39,7 @@ public class Startup : AppStartup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //启动Web设置Configure组件
-        app.UseComponent<WebSettingsApplicationComponent>(env);
+        //app.UseComponent<WebSettingsApplicationComponent>(env);
         //启动插件设置Configure组件
         app.UseComponent<PluginSettingsApplicationComponent>(env);
 
@@ -82,7 +82,7 @@ public class Startup : AppStartup
         {
             // 获取插件选项
             var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
-            //如果通知类型是mqtt
+            //如果通知类型是Signalr
             if (pluginsOptions.UseSignalR)
             {
                 // 注册集线器

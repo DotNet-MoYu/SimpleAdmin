@@ -44,7 +44,7 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
         var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
         //根据通知类型获取对应的服务
         var noticeComponent = pluginsOptions.NoticeComponent.ToString().ToLower();
-        var noticeService = _namedServiceProvider.GetService<ITransient>(noticeComponent);//获取服务
+        var noticeService = _namedServiceProvider.GetService<ISingleton>(noticeComponent);//获取服务
         await noticeService.UserLoginOut(loginEvent.UserId, clientIds, loginEvent.Message);//发送消息
 
     }

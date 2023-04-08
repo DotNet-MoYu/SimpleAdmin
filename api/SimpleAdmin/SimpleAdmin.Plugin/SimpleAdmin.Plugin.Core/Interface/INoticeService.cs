@@ -4,7 +4,7 @@
 /// <summary>
 /// 通知服务
 /// </summary>
-public interface INoticeService : ITransient
+public interface INoticeService : ISingleton
 {
 
     /// <summary>
