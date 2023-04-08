@@ -14,6 +14,18 @@
             LoggingMonitor操作日志写入数据库插件
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.PluginSettingComponent">
+            <summary>
+            插件设置组件
+            模拟 ConfigureService
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.PluginSettingsApplicationComponent">
+            <summary>
+            插件设置组件
+            模拟 Configure
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.WebSettingsComponent">
             <summary>
             Web设置组件

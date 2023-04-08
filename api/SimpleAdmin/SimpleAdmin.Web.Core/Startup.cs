@@ -18,6 +18,8 @@ public class Startup : AppStartup
         services.AddComponent<AuthComponent>();
         //启动Web设置ConfigureServices组件
         services.AddComponent<WebSettingsComponent>();
+        //启动插件设置ConfigureServices组件
+        services.AddComponent<PluginSettingComponent>();
         //gip压缩
         services.AddComponent<GzipCompressionComponent>();
         //定时任务
@@ -38,6 +40,8 @@ public class Startup : AppStartup
     {
         //启动Web设置Configure组件
         app.UseComponent<WebSettingsApplicationComponent>(env);
+        //启动插件设置Configure组件
+        app.UseComponent<PluginSettingsApplicationComponent>(env);
 
         if (env.IsDevelopment())
         {
