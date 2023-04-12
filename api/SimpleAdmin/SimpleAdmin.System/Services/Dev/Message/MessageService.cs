@@ -36,7 +36,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     public async Task<SqlSugarPagedList<DevMessage>> MyMessagePage(MessagePageInput input, long userId)
     {
         var query = Context.Queryable<DevMessageUser>().LeftJoin<DevMessage>((u, m) => u.MessageId == m.Id)
-              .Where((u, m) => u.IsDelete == false)
+              .Where((u, m) => u.IsDelete == false && u.UserId == userId)
               .WhereIF(!string.IsNullOrEmpty(input.Category), (u, m) => m.Category == input.Category)//根据分类查询
               .OrderBy((u, m) => u.Read, OrderByType.Asc)
               .OrderBy((u, m) => m.CreateTime, OrderByType.Desc)
@@ -94,7 +94,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
             var messageDetail = message.Adapt<MessageDetailOutPut>();//实体转换
             var messageUserRep = ChangeRepository<DbRepository<DevMessageUser>>();//切换仓储
             var messageUsers = await messageUserRep.GetListAsync(it => it.MessageId == message.Id);
-            var myMessage = messageUsers.Where(it => it.UserId == UserManager.UserId).FirstOrDefault();//查询是否发给自己
+            var myMessage = messageUsers.Where(it => it.UserId == UserManager.UserId && it.MessageId == input.Id).FirstOrDefault();//查询是否发给自己
             if (myMessage != null)
             {
                 myMessage.Read = true;//设置已读
