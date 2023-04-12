@@ -1,6 +1,6 @@
 ﻿using SimpleAdmin.Plugin.Mqtt;
 
-namespace SimpleAdmin.Web.Core.Controllers.Mqtt;
+namespace SimpleAdmin.Web.Core.Controllers.System.Mqtt;
 
 /// <summary>
 /// mqtt服务控制器

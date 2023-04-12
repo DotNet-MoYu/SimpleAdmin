@@ -1,6 +1,6 @@
 ﻿using SimpleAdmin.Plugin.Gen;
 
-namespace SimpleAdmin.Web.Core.Controllers.Gen;
+namespace SimpleAdmin.Web.Core.Controllers.System.Gen;
 
 /// <summary>
 /// 代码生成基础控制器
