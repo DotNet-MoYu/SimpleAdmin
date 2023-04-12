@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Web.Core;
+﻿namespace SimpleAdmin.Web.Core.Controllers.System.BatchEdit;
 
 /// <summary>
 /// 批量控制器
