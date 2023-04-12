@@ -57,4 +57,17 @@ public interface IUserCenterService : ITransient
     /// <param name="input">消息ID</param>
     /// <returns>消息详情</returns>
     Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input);
+
+    /// <summary>
+    /// 获取未读消息数量
+    /// </summary>
+    /// <returns>未读消息数量</returns>
+    Task<int> UnReadCount();
+
+    /// <summary>
+    /// 删除我的消息
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task DeleteMyMessage(BaseIdInput input);
 }

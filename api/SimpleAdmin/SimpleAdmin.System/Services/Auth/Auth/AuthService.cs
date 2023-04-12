@@ -355,7 +355,7 @@ public class AuthService : IAuthService
     /// <param name="tokenInfos">Token列表</param>
     private async Task SingleLogin(string userId, List<TokenInfo> tokenInfos)
     {
-        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new NoticeEvent
+        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new UserLoginOutEvent
         {
             Message = "您的账号已在别处登录!",
             TokenInfos = tokenInfos,

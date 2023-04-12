@@ -24,8 +24,8 @@ public class DevMessage : BaseEntity
     public virtual string Content { get; set; }
 
     /// <summary>
-    /// 是否一度
+    /// 是否已读
     /// </summary>
     [SugarColumn(IsIgnore = true)]
-    public bool Read { get; set; }
+    public bool Read { get; set; } = true;
 }

@@ -12,4 +12,11 @@ public interface ISimpleHub
     /// <param name="context"></param>
     /// <returns></returns>
     Task LoginOut(object context);
+
+    /// <summary>
+    /// 新消息
+    /// </summary>
+    /// <param name="context"></param>
+    /// <returns></returns>
+    Task NewMessage(object context);
 }

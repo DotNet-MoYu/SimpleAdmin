@@ -102,4 +102,26 @@ public class UserCenterController : IDynamicApiController
         return await _userCenterService.LoginMessageDetail(input);
     }
 
+    /// <summary>
+    /// 未读消息数
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("UnReadCount")]
+    public async Task<dynamic> UnReadCount()
+    {
+        return await _userCenterService.UnReadCount();
+    }
+
+    /// <summary>
+    /// 删除我的消息
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("deleteMessage")]
+    [DisplayName("删除个人消息")]
+    public async Task DeleteMessage([FromBody] BaseIdInput input)
+    {
+        await _userCenterService.DeleteMyMessage(input);
+    }
+
 }

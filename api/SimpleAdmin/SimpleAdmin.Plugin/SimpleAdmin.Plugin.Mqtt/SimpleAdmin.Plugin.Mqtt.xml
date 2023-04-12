@@ -19,6 +19,11 @@
             登出
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_New">
+            <summary>
+            新消息
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
             <summary>
              mqtt组件
@@ -142,6 +147,9 @@
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Plugin.Core.INoticeService"/>
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.NewMesage(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.UserLoginOut(System.String,System.Collections.Generic.List{System.String},System.String)">
             <inheritdoc/>

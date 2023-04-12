@@ -449,6 +449,12 @@
             </summary>
             <param name="db"></param>
         </member>
+        <member name="M:SimpleAdmin.Plugin.SqlSugar.DbContext.LogicDeletedEntityFilter(SqlSugar.SqlSugarScopeProvider)">
+            <summary>
+            假删除过滤器
+            </summary>
+            <param name="db"></param>
+        </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DbRepository`1">
             <summary>
             仓储模式对象
@@ -1190,7 +1196,27 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessage.Read">
             <summary>
-            是否一度
+            是否已读
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.SqlSugar.DevMessageUser">
+             <summary>
+             用户消息表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.MessageId">
+             <summary>
+             消息Id 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.UserId">
+             <summary>
+             用户Id 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.Read">
+             <summary>
+             已读未读 
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevRelation">

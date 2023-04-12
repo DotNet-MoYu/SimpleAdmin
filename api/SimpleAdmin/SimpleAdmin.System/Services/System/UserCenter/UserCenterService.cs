@@ -207,23 +207,27 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input)
     {
-        input.ReceiveUserId = UserManager.UserId;//接受用户为自己
-        var messages = await _messageService.Page(input);//分页查询
-
-
+        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
         return messages;
     }
 
-    /// <summary>
-    /// 读取登录用户站内信详情
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
+    /// <inheritdoc />
     public async Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input)
     {
         return await _messageService.Detail(input, true);//返回详情，不带用户列表
     }
 
+    /// <inheritdoc />
+    public async Task<int> UnReadCount()
+    {
+        return await _messageService.UnReadCount(UserManager.UserId);
+    }
+
+    /// <inheritdoc />
+    public async Task DeleteMyMessage(BaseIdInput input)
+    {
+        await _messageService.DeleteMyMessage(input, UserManager.UserId);
+    }
     #region 方法
     /// <summary>
     /// 获取父菜单集合

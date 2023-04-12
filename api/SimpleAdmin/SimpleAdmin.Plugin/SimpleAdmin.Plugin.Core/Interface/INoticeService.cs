@@ -15,4 +15,13 @@ public interface INoticeService : ISingleton
     /// <param name="message">通知内容</param>
     /// <returns></returns>
     Task UserLoginOut(string userId, List<string> clientIds, string message);
+
+    /// <summary>
+    /// 收到新的消息
+    /// </summary>
+    /// <param name="userIds">用户Id列表</param>
+    /// <param name="clientIds">clientId列表</param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    Task NewMesage(List<string> userIds, List<string> clientIds, string message);
 }

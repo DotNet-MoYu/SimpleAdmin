@@ -217,6 +217,16 @@ public static class DbContext
     /// <param name="db"></param>
     public static void FilterSetting(SqlSugarScopeProvider db)
     {
+        // 假删除过滤器
+        //LogicDeletedEntityFilter(db);
+    }
+
+    /// <summary>
+    /// 假删除过滤器
+    /// </summary>
+    /// <param name="db"></param>
+    private static void LogicDeletedEntityFilter(SqlSugarScopeProvider db)
+    {
 
     }
 

@@ -14,12 +14,17 @@ public class SignalrNoticeService : INoticeService
     }
 
     /// <inheritdoc/>
+    public async Task NewMesage(List<string> userIds, List<string> clientIds, string message)
+    {
+        //发送消息给用户
+        await GetHubContext().Clients.Users(clientIds).NewMessage(message);
+    }
+
+    /// <inheritdoc/>
     public async Task UserLoginOut(string userId, List<string> clientIds, string message)
     {
-        var hubContexxt = GetHubContext();
-
         //发送消息给用户
-        await hubContexxt.Clients.Users(clientIds).LoginOut(message);
+        await GetHubContext().Clients.Users(clientIds).LoginOut(message);
     }
 
     #region MyRegion

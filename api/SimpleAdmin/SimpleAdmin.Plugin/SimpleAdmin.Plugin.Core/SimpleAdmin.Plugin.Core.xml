@@ -103,6 +103,15 @@
             <param name="message">通知内容</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Plugin.Core.INoticeService.NewMesage(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            收到新的消息
+            </summary>
+            <param name="userIds">用户Id列表</param>
+            <param name="clientIds">clientId列表</param>
+            <param name="message"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Core.PluginSettingsOptions">
             <summary>
             插件配置选项

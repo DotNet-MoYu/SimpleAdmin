@@ -34,6 +34,11 @@ public class EventSubscriberConst
     /// 通知用户下线
     /// </summary>
     public const string UserLoginOut = "通知用户下线";
+
+    /// <summary>
+    /// 新消息
+    /// </summary>
+    public const string NewMessage = "新消息";
     #endregion
 
 }

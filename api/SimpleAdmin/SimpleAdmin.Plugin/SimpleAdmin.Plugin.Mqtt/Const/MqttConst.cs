@@ -15,4 +15,9 @@ public class MqttConst
     /// 登出
     /// </summary>
     public const string Mqtt_Message_LoginOut = "LoginOut";
+
+    /// <summary>
+    /// 新消息
+    /// </summary>
+    public const string Mqtt_Message_New = "NewMessage";
 }

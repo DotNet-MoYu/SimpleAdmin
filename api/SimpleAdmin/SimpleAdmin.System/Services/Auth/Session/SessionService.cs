@@ -190,7 +190,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <returns></returns>
     private async Task NoticeUserLoginOut(string userId, List<TokenInfo> tokenInfos)
     {
-        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new NoticeEvent
+        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new UserLoginOutEvent
         {
             Message = "您已被强制下线!",
             TokenInfos = tokenInfos,

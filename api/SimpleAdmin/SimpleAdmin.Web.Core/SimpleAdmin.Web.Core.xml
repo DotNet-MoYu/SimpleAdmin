@@ -1419,6 +1419,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UnReadCount">
+            <summary>
+            未读消息数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.DeleteMessage(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.MyActionFilter">
             <summary>
             操作筛选器

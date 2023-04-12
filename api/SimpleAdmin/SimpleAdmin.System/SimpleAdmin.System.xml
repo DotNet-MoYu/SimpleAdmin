@@ -72,6 +72,11 @@
             通知用户下线
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.NewMessage">
+            <summary>
+            新消息
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.LoginEvent">
             <summary>
             登录事件参数
@@ -112,22 +117,37 @@
             时间
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.NoticeEvent">
+        <member name="T:SimpleAdmin.System.UserLoginOutEvent">
             <summary>
-            通知事件参数
+            用户登出事件
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.NoticeEvent.UserId">
+        <member name="P:SimpleAdmin.System.UserLoginOutEvent.UserId">
             <summary>
             用户Id
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.NoticeEvent.TokenInfos">
+        <member name="P:SimpleAdmin.System.UserLoginOutEvent.TokenInfos">
             <summary>
             token信息
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.NoticeEvent.Message">
+        <member name="P:SimpleAdmin.System.UserLoginOutEvent.Message">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.NewMessageEvent">
+            <summary>
+            新消息事件
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.NewMessageEvent.UserIds">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.NewMessageEvent.Message">
             <summary>
             内容
             </summary>
@@ -144,11 +164,24 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.NoticeEventSubsciber.NewMessage(Furion.EventBus.EventHandlerExecutingContext)">
+            <summary>
+            有新的消息
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.NoticeEventSubsciber.GetService``1">
             <summary>
             获取服务
             </summary>
             <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.NoticeEventSubsciber.GetNoticeService">
+            <summary>
+            获取通知服务
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.UserEventSubscriber">
@@ -1128,16 +1161,6 @@
             站内信分类
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.MessagePageInput.ReceiveUserId">
-            <summary>
-            接收用户id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MessagePageInput.Ids">
-            <summary>
-            消息id列表
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.System.MessageSendInput">
             <summary>
             发送参数
@@ -1195,6 +1218,14 @@
             <param name="input">id列表</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IMessageService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput,System.Int64)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.IMessageService.Detail(SimpleAdmin.Core.BaseIdInput,System.Boolean)">
             <summary>
             获取消息详情
@@ -1202,6 +1233,14 @@
             <param name="input">消息ID</param>
             <param name="isSelf">是否是自己</param>
             <returns>消息详情</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.MyMessagePage(SimpleAdmin.System.MessagePageInput,System.Int64)">
+            <summary>
+            我的消息列表
+            </summary>
+            <param name="input"></param>
+            <param name="userId"></param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IMessageService.Page(SimpleAdmin.System.MessagePageInput)">
             <summary>
@@ -1217,12 +1256,22 @@
             <param name="input">站内信信息</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IMessageService.UnReadCount(System.Int64)">
+            <summary>
+            获取未读消息数
+            </summary>
+            <param name="userId"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.MessageService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.IMessageService"/>
             </summary>
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Page(SimpleAdmin.System.MessagePageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.MyMessagePage(SimpleAdmin.System.MessagePageInput,System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Send(SimpleAdmin.System.MessageSendInput)">
@@ -1232,6 +1281,12 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput,System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.UnReadCount(System.Int64)">
             <inheritdoc />
         </member>
         <member name="T:SimpleAdmin.System.OperateLogPageInput">
@@ -3173,6 +3228,19 @@
             <param name="input">消息ID</param>
             <returns>消息详情</returns>
         </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UnReadCount">
+            <summary>
+            获取未读消息数量
+            </summary>
+            <returns>未读消息数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.UserCenterService">
             <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
         </member>
@@ -3198,11 +3266,13 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            读取登录用户站内信详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource})">
             <summary>

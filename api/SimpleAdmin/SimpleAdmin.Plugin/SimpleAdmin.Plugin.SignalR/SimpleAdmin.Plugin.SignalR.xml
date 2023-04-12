@@ -16,6 +16,13 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.ISimpleHub.NewMessage(System.Object)">
+            <summary>
+            新消息
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Plugin.SignalR.SimpleHub">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Plugin.SignalR.ISimpleHub"/>
@@ -58,6 +65,9 @@
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Plugin.Core.INoticeService"/>
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.SignalR.SignalrNoticeService.NewMesage(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.SignalR.SignalrNoticeService.UserLoginOut(System.String,System.Collections.Generic.List{System.String},System.String)">
             <inheritdoc/>
