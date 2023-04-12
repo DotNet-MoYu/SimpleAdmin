@@ -9,7 +9,10 @@
   },
   //日志配置
   "Logging": {
-    "WriteMonitor": false, //是否写入LoggingMonitor日志
+    "Monitor": {
+      "Write": false, //是否文件写入LoggingMonitor日志
+      "Console": false, //是否控制台输出LoggingMonitor日志
+    },
     "LogLevel": {
       "Default": "Debug", //默认日志级别
       "Max": "Error", //最大日志级别

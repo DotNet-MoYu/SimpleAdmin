@@ -5,12 +5,11 @@
 /// </summary>
 public sealed class LoggingConsoleComponent : IServiceComponent
 {
+    private readonly bool ConsoleMonitor = App.GetConfig<bool>("Logging:Monitor:Console");
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
         services.AddConsoleFormatter(options =>
          {
-
-
              options.MessageFormat = (logMsg) =>
              {
                  //如果不是LoggingMonitor日志才格式化
@@ -34,6 +33,7 @@ public sealed class LoggingConsoleComponent : IServiceComponent
              };
              options.WriteHandler = (logMsg, scopeProvider, writer, fmtMsg, opt) =>
              {
+                 if (logMsg.LogName == "System.Logging.LoggingMonitor" && !ConsoleMonitor) return;
                  ConsoleColor consoleColor = ConsoleColor.White;
                  switch (logMsg.LogLevel)
                  {

@@ -12,7 +12,7 @@ public sealed class LoggingFileComponent : IServiceComponent
     /// <summary>
     /// 是否写入LoggingMonitor日志
     /// </summary>
-    private readonly bool WriteMonitor = App.GetConfig<bool>("Logging:WriteMonitor");
+    private readonly bool WriteMonitor = App.GetConfig<bool>("Logging:Monitor:Write");
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
 
