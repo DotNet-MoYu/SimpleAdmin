@@ -33,20 +33,28 @@ public class LoginOutPut
     public string Token { get; set; }
 
 
-
+    /// <summary>
+    /// 账号
+    /// </summary>
     public string Account { get; set; }
 
 
+    /// <summary>
+    /// 姓名
+    /// </summary>
     public string Name { get; set; }
 
 }
 
+/// <summary>
+/// 登录用互信息
+/// </summary>
 public class LoginUserOutput
 {
     /// <summary>
     /// 头像 
     ///</summary>
-    public virtual string Avatar { get; set; }
+    public string Avatar { get; set; }
 
     /// <summary>
     /// 签名 
@@ -56,22 +64,34 @@ public class LoginUserOutput
     /// <summary>
     /// 账号 
     ///</summary>
-    public virtual string Account { get; set; }
+    public string Account { get; set; }
 
-    /// <summary>
-    /// 密码 
-    ///</summary>
-    public string Password { get; set; }
 
     /// <summary>
     /// 姓名 
     ///</summary>
-    public virtual string Name { get; set; }
+    public string Name { get; set; }
 
     /// <summary>
     /// 昵称 
     ///</summary>
     public string Nickname { get; set; }
+
+    /// <summary>
+    /// 手机号
+    /// </summary>
+    public string Phone { get; set; }
+
+    /// <summary>
+    /// 生日
+    /// </summary>
+    public string Birthday { get; set; }
+
+    /// <summary>
+    /// 邮箱
+    /// </summary>
+
+    public string Email { get; set; }
 
     /// <summary>
     /// 性别 

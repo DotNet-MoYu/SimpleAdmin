@@ -404,6 +404,21 @@
             令牌Token
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.LoginOutPut.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOutPut.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.LoginUserOutput">
+            <summary>
+            登录用互信息
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Avatar">
              <summary>
              头像 
@@ -419,11 +434,6 @@
              账号 
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.LoginUserOutput.Password">
-             <summary>
-             密码 
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Name">
              <summary>
              姓名 
@@ -432,6 +442,21 @@
         <member name="P:SimpleAdmin.System.LoginUserOutput.Nickname">
              <summary>
              昵称 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginUserOutput.Phone">
+            <summary>
+            手机号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginUserOutput.Birthday">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginUserOutput.Email">
+            <summary>
+            邮箱
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Gender">
