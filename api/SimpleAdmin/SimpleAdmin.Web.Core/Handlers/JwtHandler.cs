@@ -1,6 +1,7 @@
 ﻿using System.Security.Claims;
 using Furion.Authorization;
 using Furion.DataEncryption;
+using Furion.Logging.Extensions;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -66,6 +67,7 @@ public class JwtHandler : AppAuthorizeHandler
                 var accessToken = context.Response.Headers["access-token"].ToString();
                 if (!string.IsNullOrEmpty(accessToken))//如果有新的刷新token
                 {
+                    "返回新的刷新token".LogDebug<JwtHandler>();
                     tokenInfo.Token = accessToken;//新的token
                     tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
                     _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新tokne信息到redis

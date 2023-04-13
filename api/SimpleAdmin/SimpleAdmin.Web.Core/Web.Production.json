@@ -2,7 +2,6 @@
   //web设置
   "WebSettings": {
     "EnvPoc": false, //是否演示环境
-    "ClearRedis": true, //是否清除redis缓存
   },
   //插件设置
   "PluginSettings": {
