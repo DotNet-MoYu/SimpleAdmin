@@ -6,5 +6,4 @@
 /// <typeparam name="T"></typeparam>
 public class LinqPagedList<T> : SqlSugarPagedList<T>
 {
-
 }

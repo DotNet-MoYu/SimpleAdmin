@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.Plugin.SqlSugar;
 
-
 /// <summary>
 /// Sqlsugar字段信息
 /// </summary>
@@ -10,7 +9,6 @@ public class SqlsugarColumnInfo
     /// 字段名称
     /// </summary>
     public string ColumnName { get; set; }
-
 
     /// <summary>
     /// 是否主键

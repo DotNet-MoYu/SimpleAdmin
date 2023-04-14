@@ -1,7 +1,4 @@
-﻿
-
-
-namespace SimpleAdmin.Plugin.Mqtt;
+﻿namespace SimpleAdmin.Plugin.Mqtt;
 
 /// <summary>
 ///Mqtt服务

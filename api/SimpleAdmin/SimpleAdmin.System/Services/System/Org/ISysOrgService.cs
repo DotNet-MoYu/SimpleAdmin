@@ -5,11 +5,7 @@
 /// </summary>
 public interface ISysOrgService : ITransient
 {
-
-
     #region 查询
-
-
 
     /// <summary>
     /// 检查组织是否存在
@@ -28,7 +24,6 @@ public interface ISysOrgService : ITransient
     /// <returns>组织信息</returns>
     Task<SysOrg> Detail(BaseIdInput input);
 
-
     /// <summary>
     /// 根据组织ID获取 下级
     /// </summary>
@@ -42,7 +37,6 @@ public interface ISysOrgService : ITransient
     /// </summary>
     /// <returns>组织列表</returns>
     Task<List<SysOrg>> GetListAsync();
-
 
     /// <summary>
     /// 获取机构及下级ID列表
@@ -75,8 +69,7 @@ public interface ISysOrgService : ITransient
     /// <returns>分页信息</returns>
     Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input);
 
-    #endregion
-
+    #endregion 查询
 
     #region 新增
 
@@ -94,12 +87,10 @@ public interface ISysOrgService : ITransient
     /// <param name="input">机构复制参数</param>
     /// <returns></returns>
     Task Copy(SysOrgCopyInput input);
-    #endregion
+
+    #endregion 新增
 
 
-    #region 修改
-
-    #endregion
 
     #region 编辑
 
@@ -110,10 +101,11 @@ public interface ISysOrgService : ITransient
     /// <param name="name">名称</param>
     /// <returns></returns>
     Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SysOrg);
-    #endregion
 
+    #endregion 编辑
 
     #region 删除
+
     /// <summary>
     /// 删除组织
     /// </summary>
@@ -122,7 +114,7 @@ public interface ISysOrgService : ITransient
     /// <returns></returns>
     Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg);
 
-    #endregion
+    #endregion 删除
 
     #region 其他
 
@@ -147,5 +139,5 @@ public interface ISysOrgService : ITransient
     /// <returns>组织树列表</returns>
     Task<List<SysOrg>> Tree(List<long> orgIds = null);
 
-    #endregion
+    #endregion 其他
 }

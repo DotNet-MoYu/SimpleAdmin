@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.Mqtt;
+﻿namespace SimpleAdmin.Plugin.Mqtt;
 
 /// <summary>
 /// <inheritdoc cref="INoticeService"/>
@@ -8,11 +6,8 @@ namespace SimpleAdmin.Plugin.Mqtt;
 [Injection(Named = "mqtt")]
 public class MqttNoticeService : INoticeService
 {
-
-
     public MqttNoticeService()
     {
-
     }
 
     /// <inheritdoc/>

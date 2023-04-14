@@ -5,7 +5,6 @@
 /// </summary>
 public partial interface ISimpleCacheService
 {
-
     /// <summary>
     /// 添加一条数据到HashMap
     /// </summary>
@@ -58,6 +57,4 @@ public partial interface ISimpleCacheService
     /// <param name="key">键</param>
     /// <returns>数据字典</returns>
     IDictionary<string, T> HashGetAll<T>(string key);
-
-
 }

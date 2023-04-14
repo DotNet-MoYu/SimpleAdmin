@@ -13,16 +13,13 @@ public class Startup : AppStartup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
-
         //检查ConfigId
         CheckSameConfigId();
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-
-
     }
-
 
     /// <summary>
     /// 检查是否有相同的ConfigId

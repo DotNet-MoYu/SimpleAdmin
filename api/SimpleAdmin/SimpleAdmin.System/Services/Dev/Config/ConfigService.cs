@@ -1,7 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
-
 /// <inheritdoc cref="IConfigService"/>
 public class ConfigService : DbRepository<DevConfig>, IConfigService
 {
@@ -38,11 +36,9 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
         return configValue;
     }
 
-
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<DevConfig>> Page(ConfigPageInput input)
     {
-
         var query = Context.Queryable<DevConfig>()
                          .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
                          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
@@ -59,7 +55,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
         var devConfig = input.Adapt<DevConfig>();//实体转换
         if (await InsertAsync(devConfig))//插入数据)
             await RefreshCache(CateGoryConst.Config_BIZ_DEFINE);//刷新缓存
-
     }
 
     /// <inheritdoc/>
@@ -81,7 +76,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
             if (await DeleteByIdAsync(input.Id))//删除配置
                 await RefreshCache(CateGoryConst.Config_BIZ_DEFINE);//刷新缓存
         }
-
     }
 
     /// <inheritdoc/>
@@ -103,7 +97,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
                 {
                     //赋值ConfigValue
                     it.ConfigValue = configs.Where(c => c.ConfigKey == it.ConfigKey).First().ConfigValue;
-
                 });
                 //更新数据
                 if (await UpdateRangeAsync(configList))
@@ -111,7 +104,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
             }
         }
     }
-
 
     #region 方法
 
@@ -125,7 +117,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
         _simpleCacheService.Remove(CacheConst.Cache_DevConfig + category);//redis删除
         await GetListByCategory(category);//重新获取
     }
-
 
     /// <summary>
     /// 检查输入参数
@@ -143,5 +134,6 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
         //设置分类为业务
         devConfig.Category = CateGoryConst.Config_BIZ_DEFINE;
     }
-    #endregion
+
+    #endregion 方法
 }

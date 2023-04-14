@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 权限按钮控制器
 /// </summary>
@@ -11,7 +12,6 @@ public class ButtonController : BaseController
     {
         _buttonService = buttonService;
     }
-
 
     /// <summary>
     /// 按钮分页查询

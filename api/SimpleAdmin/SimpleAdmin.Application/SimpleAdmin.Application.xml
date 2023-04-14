@@ -116,47 +116,47 @@
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.NativePlace">
              <summary>
-             籍贯 
+             籍贯
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.MailingAddress">
              <summary>
-             通信地址 
+             通信地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.IdCardType">
              <summary>
-             证件类型 
+             证件类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.IdCardNumber">
              <summary>
-             证件号码 
+             证件号码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.CultureLevel">
              <summary>
-             文化程度 
+             文化程度
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.PoliticalOutlook">
              <summary>
-             政治面貌 
+             政治面貌
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.College">
              <summary>
-             毕业院校 
+             毕业院校
             </summary>
         </member>
         <member name="P:SimpleAdmin.Application.GenTestImportInput.Education">
              <summary>
-             学历 
+             学历
             </summary>
         </member>
         <member name="T:SimpleAdmin.Application.GenTestExport">

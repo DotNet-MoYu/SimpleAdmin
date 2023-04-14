@@ -27,10 +27,12 @@ public static class CaptchaUtil
             case "NUM":
                 charCode = CreateNumCode(length);
                 break;
+
             case "ARITH":
                 charCode = CreateArithCode(out resultCode);
                 length = charCode.Length;
                 break;
+
             default:
                 charCode = CreateCharCode(length);
                 break;
@@ -153,6 +155,7 @@ public static class CaptchaUtil
                 checkCode = intFirst + "-" + intSec + "=";
                 resultCode = (intFirst - intSec).ToString();
                 break;
+
             default:
                 checkCode = intFirst + "+" + intSec + "=";
                 resultCode = (intFirst + intSec).ToString();

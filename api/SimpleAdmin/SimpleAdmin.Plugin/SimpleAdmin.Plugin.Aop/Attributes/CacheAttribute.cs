@@ -10,7 +10,6 @@ public class CacheAttribute : Attribute
     /// </summary>
     public string KeyPrefix { get; set; }
 
-
     /// <summary>
     /// 过期时间
     /// </summary>
@@ -30,5 +29,4 @@ public class CacheAttribute : Attribute
     /// 存储类型
     /// </summary>
     public string StoreType { get; set; }
-
 }

@@ -5,7 +5,6 @@
 /// </summary>
 public class ModulePageInput : BasePageInput
 {
-
 }
 
 /// <summary>
@@ -13,7 +12,6 @@ public class ModulePageInput : BasePageInput
 /// </summary>
 public class ModuleAddInput : SysResource
 {
-
 }
 
 /// <summary>
@@ -26,8 +24,4 @@ public class ModuleEditInput : ModuleAddInput
     /// </summary>
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
-
 }
-
-
-

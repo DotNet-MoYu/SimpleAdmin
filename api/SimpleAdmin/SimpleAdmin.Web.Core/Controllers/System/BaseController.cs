@@ -7,5 +7,4 @@
 [SuperAdmin]
 public class BaseController : IDynamicApiController
 {
-
 }

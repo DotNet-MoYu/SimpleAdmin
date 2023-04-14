@@ -5,7 +5,6 @@
 /// </summary>
 public class IgnoreSeedDataAddAttribute : Attribute
 {
-
 }
 
 /// <summary>
@@ -13,6 +12,4 @@ public class IgnoreSeedDataAddAttribute : Attribute
 /// </summary>
 public class IgnoreSeedDataUpdateAttribute : Attribute
 {
-
-
 }

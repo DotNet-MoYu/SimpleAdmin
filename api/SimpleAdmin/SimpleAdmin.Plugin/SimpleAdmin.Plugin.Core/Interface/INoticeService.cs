@@ -1,12 +1,10 @@
 ﻿namespace SimpleAdmin.Plugin.Core;
 
-
 /// <summary>
 /// 通知服务
 /// </summary>
 public interface INoticeService : ISingleton
 {
-
     /// <summary>
     /// 通知用户下线
     /// </summary>

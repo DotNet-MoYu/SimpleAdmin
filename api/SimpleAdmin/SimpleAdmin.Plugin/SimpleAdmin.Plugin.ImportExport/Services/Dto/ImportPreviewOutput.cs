@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.Plugin.ImportExport;
 
-
 /// <summary>
 /// 文件导入通用输出
 /// </summary>
@@ -16,12 +15,10 @@ public class ImportPreviewOutput<T> where T : class
     /// </summary>
     public List<TableColumns> TableColumns { get; set; } = new List<TableColumns>();
 
-
     /// <summary>
     /// 数据
     /// </summary>
     public List<T> Data { get; set; }
-
 }
 
 /// <summary>
@@ -29,12 +26,10 @@ public class ImportPreviewOutput<T> where T : class
 /// </summary>
 public class TableColumns
 {
-
     /// <summary>
     /// 标题
     /// </summary>
     public string Title { get; set; }
-
 
     /// <summary>
     /// 数据源
@@ -46,16 +41,13 @@ public class TableColumns
     /// </summary>
     public int Width { get; set; } = 120;
 
-
     /// <summary>
     /// 超过宽度将自动省略
     /// </summary>
     public bool Ellipsis { get; set; } = false;
 
-
     /// <summary>
     /// 是否是日期格式
     /// </summary>
     public bool Date { get; set; } = false;
-
 }

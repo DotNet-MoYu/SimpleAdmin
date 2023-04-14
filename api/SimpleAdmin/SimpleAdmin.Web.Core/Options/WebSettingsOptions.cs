@@ -7,7 +7,6 @@ namespace SimpleAdmin.Web.Core;
 /// </summary>
 public class WebSettingsOptions : IConfigurableOptions
 {
-
     /// <summary>
     /// 是否演示环境
     /// </summary>

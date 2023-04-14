@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 单页管理控制器
 /// </summary>
@@ -11,7 +12,6 @@ public class SpaController : BaseController
     {
         _spaService = spaService;
     }
-
 
     /// <summary>
     /// 单页分页查询
@@ -60,5 +60,4 @@ public class SpaController : BaseController
     {
         await _spaService.Delete(input);
     }
-
 }

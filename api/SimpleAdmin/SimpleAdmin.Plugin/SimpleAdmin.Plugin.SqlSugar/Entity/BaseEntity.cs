@@ -1,6 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.SqlSugar;
-
+﻿namespace SimpleAdmin.Plugin.SqlSugar;
 
 /// <summary>
 /// 主键实体基类
@@ -18,7 +16,6 @@ public abstract class PrimaryKeyEntity
     /// </summary>
     [SugarColumn(ColumnName = "ExtJson", ColumnDescription = "扩展信息", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public virtual string ExtJson { get; set; }
-
 }
 
 /// <summary>
@@ -56,7 +53,6 @@ public class BaseEntity : PrimaryKeyEntity
     [SugarColumn(ColumnDescription = "创建人", IsOnlyIgnoreUpdate = true, IsNullable = true)]
     public virtual string CreateUser { get; set; }
 
-
     /// <summary>
     /// 更新人
     /// </summary>
@@ -69,7 +65,6 @@ public class BaseEntity : PrimaryKeyEntity
     [SugarColumn(ColumnDescription = "软删除", IsNullable = true)]
     public virtual bool IsDelete { get; set; } = false;
 }
-
 
 /// <summary>
 /// 业务数据实体基类(数据权限)

@@ -6,7 +6,6 @@ namespace SimpleAdmin.Core.Utils;
 
 public static class ImageUtil
 {
-
     /// <summary>
     /// bitmap转byte数组
     /// </summary>
@@ -48,7 +47,7 @@ public static class ImageUtil
     /// 图片转换成base64
     /// </summary>
     /// <param name="bmp"></param>
-    /// <returns></returns>		
+    /// <returns></returns>
     public static string ImgToBase64String(Image bmp)
     {
         try
@@ -61,7 +60,6 @@ public static class ImageUtil
         }
         catch (Exception ex)
         {
-
             return "";
         }
     }
@@ -89,8 +87,6 @@ public static class ImageUtil
     {
         return "data:image/png;base64," + base64string;
     }
-
-
 
     /// <summary>
     /// 重新修改尺寸
@@ -156,8 +152,6 @@ public static class ImageUtil
         }
     }
 
-
-
     /// <summary>
     /// 获取缩略图
     /// </summary>
@@ -175,13 +169,7 @@ public static class ImageUtil
         }
         catch (Exception ex)
         {
-
             return null;
         }
-
     }
-
-
-
-
 }

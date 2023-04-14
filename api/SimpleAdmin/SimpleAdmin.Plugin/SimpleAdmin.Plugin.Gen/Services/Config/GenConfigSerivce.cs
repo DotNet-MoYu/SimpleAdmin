@@ -24,5 +24,4 @@ public class GenConfigSerivce : DbRepository<GenConfig>, IGenConfigSerivce
     {
         await UpdateRangeAsync(configs);//批量更新
     }
-
 }

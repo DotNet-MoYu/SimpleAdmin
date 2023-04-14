@@ -10,6 +10,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     private readonly ISimpleCacheService _simpleCacheService;
     public IServiceProvider _services { get; }
     private readonly SqlSugarScope _db;
+
     public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services)
     {
         _db = DbContext.Db;
@@ -28,7 +29,9 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
         var LoginAddress = GetLoginAddress(loginEvent.Ip);
         var sysUser = loginEvent.SysUser;
+
         #region 重新赋值属性,设置本次登录信息为最新的信息
+
         sysUser.LastLoginAddress = sysUser.LatestLoginAddress;
         sysUser.LastLoginDevice = sysUser.LatestLoginDevice;
         sysUser.LastLoginIp = sysUser.LatestLoginIp;
@@ -37,7 +40,9 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         sysUser.LatestLoginDevice = loginEvent.Device.ToString();
         sysUser.LatestLoginIp = loginEvent.Ip;
         sysUser.LatestLoginTime = loginEvent.DateTime;
-        #endregion
+
+        #endregion 重新赋值属性,设置本次登录信息为最新的信息
+
         //更新用户登录信息
         if (await _db.UpdateableWithAttr(sysUser).UpdateColumns(it => new
         {
@@ -54,7 +59,6 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         await Task.CompletedTask;
     }
 
-
     /// <summary>
     /// 登出事件
     /// </summary>
@@ -64,10 +68,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     public async Task LoginOut(EventHandlerExecutingContext context)
     {
         var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
-
     }
-
-
 
     /// <summary>
     /// 解析IP地址
@@ -87,9 +88,5 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         {
             return "未知";
         }
-
-
     }
-
-
 }

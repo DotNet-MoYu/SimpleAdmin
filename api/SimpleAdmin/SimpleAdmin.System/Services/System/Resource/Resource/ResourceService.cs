@@ -2,7 +2,6 @@
 
 namespace SimpleAdmin.System;
 
-
 /// <inheritdoc cref="IResourceService"/>
 public class ResourceService : DbRepository<SysResource>, IResourceService
 {
@@ -71,7 +70,6 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             _simpleCacheService.Remove(CacheConst.Cache_SysResource + category);
             await GetListByCategory(category);
         }
-
     }
 
     /// <inheritdoc />
@@ -103,6 +101,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         }
         return childLsit;
     }
+
     /// <inheritdoc />
 
     public async Task<List<SysResource>> GetListByCategory(string category)
@@ -121,8 +120,6 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         }
         return sysResources;
     }
-
-
 
     /// <inheritdoc />
     public async Task<List<ResTreeSelector>> ResourceTreeSelector()
@@ -198,14 +195,12 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                                 PermissionName = permissionName
                             });
                         }
-
                     }
                 }
             }
         }
         return permissions;
     }
-
 
     /// <inheritdoc />
     public async Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds)
@@ -216,6 +211,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         var menus = menuList.Where(it => menuIds.Contains(it.Id)).ToList();
         return menus;
     }
+
     #region 方法
 
     /// <summary>
@@ -337,7 +333,6 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                             });
                         }
                     }
-
                 }
                 else
                 {
@@ -350,11 +345,9 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                         Module = moduleId
                     });
                 }
-
             }
             else
             {
-
                 //就将自己加到一级目录里面
                 var roleGrantResourcesButtons = new ResTreeSelector.RoleGrantResourceMenu
                 {
@@ -399,6 +392,6 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             return menu.Title;//原路返回
         }
     }
-    #endregion
 
+    #endregion 方法
 }

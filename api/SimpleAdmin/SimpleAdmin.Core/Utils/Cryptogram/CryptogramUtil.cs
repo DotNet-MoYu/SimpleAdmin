@@ -5,7 +5,6 @@
 /// </summary>
 public class CryptogramUtil
 {
-
     #region SM2
 
     /// <summary>
@@ -34,9 +33,10 @@ public class CryptogramUtil
         else return "";
     }
 
-    #endregion
+    #endregion SM2
 
     #region Sm4
+
     /// <summary>
     /// SM4解密
     /// </summary>
@@ -61,9 +61,7 @@ public class CryptogramUtil
             return SM4Util.Encrypt(new SM4Util { Data = str });
         else
             return "";
-
     }
 
-    #endregion
-
+    #endregion Sm4
 }

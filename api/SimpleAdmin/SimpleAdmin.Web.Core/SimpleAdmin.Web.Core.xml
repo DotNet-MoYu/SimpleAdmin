@@ -1155,13 +1155,13 @@
             <summary>
             获取菜单树
             </summary>
-            <returns></returns> 
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.MenuController.MenuTreeSelector(SimpleAdmin.System.MenuTreeInput)">
             <summary>
             获取菜单树选择器
             </summary>
-            <returns></returns> 
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.MenuController.Add(SimpleAdmin.System.MenuAddInput)">
             <summary>
@@ -1181,7 +1181,7 @@
             <summary>
             获取菜单详情
             </summary>
-            <returns></returns> 
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.MenuController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>

@@ -11,7 +11,6 @@ public class SimpleAdminResult<T>
     /// </summary>
     public int Code { get; set; }
 
-
     /// <summary>
     /// 错误信息
     /// </summary>

@@ -33,4 +33,3 @@ public interface ISpaService : ITransient
     /// <returns></returns>
     Task<SqlSugarPagedList<SysResource>> Page(SpaPageInput input);
 }
-

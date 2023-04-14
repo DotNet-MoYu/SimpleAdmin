@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// 周统计输出
 /// </summary>

@@ -1,7 +1,4 @@
-﻿
-
-
-namespace SimpleAdmin.Web.Core;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 人员管理控制器
@@ -35,7 +32,6 @@ public class BizUserController : IDynamicApiController
     public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
     {
         return await _userService.Preview(input);
-
     }
 
     /// <summary>
@@ -49,7 +45,6 @@ public class BizUserController : IDynamicApiController
         return await _userService.Template();
     }
 
-
     /// <summary>
     /// 获取组织树选择器
     /// </summary>
@@ -60,8 +55,6 @@ public class BizUserController : IDynamicApiController
     {
         return await _orgService.Tree();
     }
-
-
 
     /// <summary>
     /// 人员分页查询
@@ -98,7 +91,6 @@ public class BizUserController : IDynamicApiController
         return await _positionService.PositionSelector(input);
     }
 
-
     /// <summary>
     /// 获取人员拥有角色
     /// </summary>
@@ -122,7 +114,7 @@ public class BizUserController : IDynamicApiController
         return await _userService.RoleSelector(input);
     }
 
-    #endregion
+    #endregion Get请求
 
     #region Post请求
 
@@ -138,7 +130,6 @@ public class BizUserController : IDynamicApiController
         await _userService.Add(input);
     }
 
-
     /// <summary>
     /// 修改人员
     /// </summary>
@@ -151,7 +142,6 @@ public class BizUserController : IDynamicApiController
         await _userService.Edit(input);
     }
 
-
     /// <summary>
     /// 批量修改人员
     /// </summary>
@@ -163,7 +153,6 @@ public class BizUserController : IDynamicApiController
     {
         await _userService.Edits(input);
     }
-
 
     /// <summary>
     /// 删除人员
@@ -232,13 +221,10 @@ public class BizUserController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("人员导入")]
-
     public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<BizUserImportInput> input)
     {
         return await _userService.Import(input);
-
     }
-
 
     /// <summary>
     /// 人员导出
@@ -251,7 +237,6 @@ public class BizUserController : IDynamicApiController
     {
         return await _userService.Export(input);
     }
-    #endregion
 
-
+    #endregion Post请求
 }

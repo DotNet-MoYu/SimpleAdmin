@@ -12,6 +12,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     /// SqlSugar 对象
     /// </summary>
     private readonly ISqlSugarClient _sqlSugarClient;
+
     private readonly ILogger<SqlSugarUnitOfWork> _logger;
 
     /// <summary>

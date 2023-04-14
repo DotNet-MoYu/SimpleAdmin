@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 系统配置控制器
 /// </summary>
@@ -83,7 +84,6 @@ public class ConfigController : BaseController
         await _configService.Delete(input);
     }
 
-
     /// <summary>
     /// 配置批量更新
     /// </summary>
@@ -93,7 +93,5 @@ public class ConfigController : BaseController
     public async Task EditBatch([FromBody] List<DevConfig> devConfigs)
     {
         await _configService.EditBatch(devConfigs);
-
     }
-
 }

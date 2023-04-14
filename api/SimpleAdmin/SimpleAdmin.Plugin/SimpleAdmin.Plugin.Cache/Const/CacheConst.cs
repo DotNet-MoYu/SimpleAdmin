@@ -84,6 +84,4 @@ public class CacheConst
     /// 用户Token缓存Key
     /// </summary>
     public const string Cache_UserToken = Cache_Prefix + "UserToken";
-
-
 }

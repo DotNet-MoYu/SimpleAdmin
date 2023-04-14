@@ -7,5 +7,4 @@
 [Tenant(SqlsugarConst.DB_Default)]
 public class DevRelation : SysRelation
 {
-
 }

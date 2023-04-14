@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.Gen;
+﻿namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
 /// 代码生成基础添加参数
@@ -26,14 +24,11 @@ public class GenBasicAddInput : GenBasic
     [Required(ErrorMessage = "EntityName不能为空")]
     public override string EntityName { get; set; }
 
-
-
     /// <summary>
     /// 表前缀移除
     /// </summary>
     [Required(ErrorMessage = "TablePrefix不能为空")]
     public override string TablePrefix { get; set; }
-
 
     /// <summary>
     /// 生成方式
@@ -41,13 +36,11 @@ public class GenBasicAddInput : GenBasic
     [Required(ErrorMessage = "GenerateType不能为空")]
     public override string GenerateType { get; set; }
 
-
     /// <summary>
     /// 所属模块
     /// </summary>
     [IdNotNull(ErrorMessage = "Module不能为空")]
     public override long Module { get; set; }
-
 
     /// <summary>
     /// 路由名
@@ -109,7 +102,6 @@ public class GenBasicAddInput : GenBasic
     [Required(ErrorMessage = "ControllerPosition不能为空")]
     public override string ControllerPosition { get; set; }
 
-
     /// <summary>
     /// 排序
     /// </summary>
@@ -121,8 +113,6 @@ public class GenBasicAddInput : GenBasic
     /// </summary>
     [Required(ErrorMessage = "AuthorName不能为空")]
     public override string AuthorName { get; set; }
-
-
 }
 
 /// <summary>

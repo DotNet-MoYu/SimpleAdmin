@@ -13,5 +13,4 @@ public static class CommonUtils
     {
         return YitIdHelper.NextId();
     }
-
 }

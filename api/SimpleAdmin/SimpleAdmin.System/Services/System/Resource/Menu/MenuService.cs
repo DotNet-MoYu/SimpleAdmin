@@ -16,7 +16,6 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         this._relationService = relationService;
     }
 
-
     /// <inheritdoc/>
     public List<SysResource> ConstructMenuTrees(List<SysResource> resourceList, long parentId = 0)
     {
@@ -35,7 +34,6 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         return new List<SysResource>();
     }
 
-
     /// <inheritdoc />
     public async Task<List<SysResource>> Tree(MenuTreeInput input)
     {
@@ -47,7 +45,6 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         //构建菜单树
         var tree = ConstructMenuTrees(sysResources);
         return tree;
-
     }
 
     /// <inheritdoc />
@@ -58,7 +55,6 @@ public class MenuService : DbRepository<SysResource>, IMenuService
 
         if (await InsertAsync(sysResource))//插入数据
             await _resourceService.RefreshCache(CateGoryConst.Resource_MENU);//刷新菜单缓存
-
     }
 
     /// <inheritdoc />
@@ -95,13 +91,11 @@ public class MenuService : DbRepository<SysResource>, IMenuService
                 //将子节点ID添加到删除资源ID列表
                 resourceIds.AddRange(child.Select(it => it.Id).ToList());
                 resourceIds.Add(it.Id);//添加到删除资源ID列表
-
             });
             ids.AddRange(resourceIds);//添加到删除ID列表
             //事务
             var result = await itenant.UseTranAsync(async () =>
             {
-
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
                  .Where(it => it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId))).ExecuteCommandAsync();
@@ -120,7 +114,6 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             }
         }
     }
-
 
     /// <inheritdoc />
     public async Task<SysResource> Detail(BaseIdInput input)
@@ -156,8 +149,8 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         }
     }
 
-
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -185,8 +178,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
                 throw Oops.Bah($"上级菜单不存在:{sysResource.ParentId}");
             }
         }
-
     }
 
-    #endregion
+    #endregion 方法
 }

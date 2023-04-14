@@ -9,8 +9,6 @@ public class SpaPageInput : BasePageInput
     /// 菜单类型
     /// </summary>
     public string MenuType { get; set; }
-
-
 }
 
 /// <summary>
@@ -30,14 +28,11 @@ public class SpaAddInput : SysResource
     [Required(ErrorMessage = "Title不能为空")]
     public override string MenuType { get; set; }
 
-
-
     /// <summary>
     /// 路径
     /// </summary>
     [Required(ErrorMessage = "Path不能为空")]
     public override string Path { get; set; }
-
 
     /// <summary>
     /// 图标
@@ -45,7 +40,6 @@ public class SpaAddInput : SysResource
     [Required(ErrorMessage = "Icon不能为空")]
     public override string Icon { get; set; }
 }
-
 
 /// <summary>
 /// 单页修改参数
@@ -57,6 +51,4 @@ public class SpaEditInput : SpaAddInput
     /// </summary>
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
-
 }
-

@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
-using Masuit.Tools;
-
+﻿using Masuit.Tools;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleAdmin.Application;
 
@@ -21,7 +20,6 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         this._dictService = dictService;
         this._importExportService = importExportService;
     }
-
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<GenTest>> Page(GenTestPageInput input)
@@ -64,7 +62,6 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     {
         var genTest = await GetFirstAsync(it => it.Id == input.Id);
         return genTest;
-
     }
 
     public async Task<FileStreamResult> Template()
@@ -73,9 +70,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         //var result = _importExportService.GenerateLocalTemplate(templateName);
         var result = await _importExportService.GenerateTemplate<GenTestImportInput>(templateName);
         return result;
-
     }
-
 
     /// <inheritdoc/>
     public async Task<dynamic> Preview(ImportPreviewInput input)
@@ -85,18 +80,15 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         return importPreview;
     }
 
-
     /// <inheritdoc/>
     public async Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input)
     {
-
         var data = await CheckImport(input.Data, true);
         var result = _importExportService.GetImportResultPreview(data, out List<GenTestImportInput> importData);
         var genTests = importData.Adapt<List<GenTest>>();//转实体
         //await InsertRangeAsync(genTests);//导入用户
         //DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
         return result;
-
     }
 
     public async Task<List<GenTestImportInput>> CheckImport(List<GenTestImportInput> genTestImports, bool clearError = false)
@@ -106,7 +98,6 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
         foreach (var data in genTestImports)
         {
-
             if (clearError)//如果需要清除错误
             {
                 data.ErrorInfo = new Dictionary<string, string>();
@@ -121,7 +112,6 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         }
         genTestImports = genTestImports.OrderByDescending(it => it.HasError).ToList();//排序
         return genTestImports;
-
     }
 
     /// <inheritdoc/>
@@ -132,8 +122,8 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         var data = genTests.Adapt<List<GenTestExport>>();
         var result = await _importExportService.Export(data, "学生信息");
         return result;
-
     }
+
     #region 方法
 
     /// <summary>
@@ -142,7 +132,6 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     /// <param name="genTest"></param>
     private async Task CheckInput(GenTest genTest)
     {
-
     }
 
     private ISugarQueryable<GenTest> GetQuery(GenTestPageInput input)
@@ -159,8 +148,5 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         return query;
     }
 
-    #endregion
-
+    #endregion 方法
 }
-
-

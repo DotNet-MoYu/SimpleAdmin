@@ -1,7 +1,4 @@
-﻿
-
-namespace SimpleAdmin.System;
-
+﻿namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="ISysOrgService"/>
 public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
@@ -30,12 +27,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             {
                 //插入Redis
                 _simpleCacheService.Set(CacheConst.Cache_SysOrg, sysOrgs);
-
             }
         }
         return sysOrgs;
     }
-
 
     /// <inheritdoc />
     public async Task<SysOrg> GetSysOrgById(long id)
@@ -87,7 +82,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return pageInfo;
     }
 
-
     /// <inheritdoc />
     public async Task<List<SysOrg>> Tree(List<long> orgIds = null)
     {
@@ -101,18 +95,13 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return result;
     }
 
-
-
     /// <inheritdoc />
     public async Task<SysOrg> Detail(BaseIdInput input)
     {
-
         var sysOrgs = await GetListAsync();
         var orgDetail = sysOrgs.Where(it => it.Id == input.Id).FirstOrDefault();
         return orgDetail;
-
     }
-
 
     /// <inheritdoc />
     public List<SysOrg> GetOrgParents(List<SysOrg> allOrgList, long orgId, bool includeSelf = true)
@@ -144,7 +133,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         else
             return false;
     }
-    #endregion
+
+    #endregion 查询
 
     #region 新增
 
@@ -209,12 +199,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 
             if (await InsertRangeAsync(addOrgList))//插入数据
                 await RefreshCache();//刷新缓存
-
         }
-
     }
 
-    #endregion
+    #endregion 新增
 
     #region 编辑
 
@@ -227,7 +215,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             await RefreshCache();//刷新缓存
     }
 
-    #endregion
+    #endregion 编辑
 
     #region 删除
 
@@ -258,7 +246,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 //去一次空
                 positionJsons.Where(it => it != null).ToList().ForEach(it =>
                 {
-
                     //获取组织列表
                     var orgIds = it.Select(it => it.OrgId).ToList();
                     //获取交集
@@ -281,9 +268,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         }
     }
 
-    #endregion
+    #endregion 删除
 
     #region 其他
+
     /// <inheritdoc />
     public async Task RefreshCache()
     {
@@ -309,10 +297,11 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         }
         return new List<SysOrg>();
     }
-    #endregion
 
+    #endregion 其他
 
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -343,7 +332,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             }
             sysOrg.Names = GetNames(sysOrgs, sysOrg.ParentId, sysOrg.Name);
         }
-
     }
 
     /// <summary>
@@ -356,7 +344,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public List<SysOrg> GetParentListByIds(List<SysOrg> allOrgList, List<long> orgIds)
     {
         HashSet<SysOrg> sysOrgs = new HashSet<SysOrg>();//结果列表
-        //遍历组织ID                                     
+        //遍历组织ID
         orgIds.ForEach(it =>
         {
             //获取该组织ID的所有父级
@@ -365,7 +353,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         });
         return sysOrgs.ToList();
     }
-
 
     /// <summary>
     /// 获取组织所有下级
@@ -390,7 +377,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         }
         return new List<SysOrg>();
     }
-
 
     /// <summary>
     /// 赋值组织的所有下级
@@ -433,7 +419,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         org.CreateTime = DateTime.Now;
         org.CreateUser = UserManager.UserAccount;
         org.CreateUserId = UserManager.UserId;
-
     }
 
     /// <summary>
@@ -452,8 +437,5 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return names;
     }
 
-    #endregion
-
-
-
+    #endregion 方法
 }

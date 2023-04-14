@@ -5,7 +5,6 @@
 /// </summary>
 public class DictService : DbRepository<DevDict>, IDictService
 {
-
     private readonly ISimpleCacheService _simpleCacheService;
 
     public DictService(ISimpleCacheService simpleCacheService)
@@ -43,7 +42,6 @@ public class DictService : DbRepository<DevDict>, IDictService
         if (await UpdateAsync(devDict))//更新数据
             await RefreshCache();//刷新缓存
     }
-
 
     /// <inheritdoc />
     public async Task Delete(DictDeleteInput input)
@@ -114,7 +112,6 @@ public class DictService : DbRepository<DevDict>, IDictService
         return result;
     }
 
-
     /// <inheritdoc />
     public async Task<List<DevDict>> Tree(DictTreeInput input)
     {
@@ -122,7 +119,6 @@ public class DictService : DbRepository<DevDict>, IDictService
         var devList = devDicts.WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category).OrderBy(it => it.SortCode).ToList();
         return ConstructResourceTrees(devList);
     }
-
 
     /// <inheritdoc />
     public List<DevDict> ConstructResourceTrees(List<DevDict> dictList, long parentId = 0)
@@ -174,7 +170,6 @@ public class DictService : DbRepository<DevDict>, IDictService
         }
     }
 
-
     /// <summary>
     /// 获取字典所有下级
     /// </summary>
@@ -199,5 +194,5 @@ public class DictService : DbRepository<DevDict>, IDictService
         return new List<DevDict>();
     }
 
-    #endregion
+    #endregion 方法
 }

@@ -10,6 +10,7 @@ public enum LoginClientTypeEnum
     /// </summary>
     [Description("B端")]
     B,
+
     /// <summary>
     /// C端
     /// </summary>

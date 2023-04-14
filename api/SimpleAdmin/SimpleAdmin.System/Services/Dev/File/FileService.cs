@@ -16,8 +16,6 @@ public class FileService : DbRepository<DevFile>, IFileService
         this._configService = configService;
     }
 
-
-
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<DevFile>> Page(FilePageInput input)
     {
@@ -30,12 +28,10 @@ public class FileService : DbRepository<DevFile>, IFileService
         return pageInfo;
     }
 
-
     /// <inheritdoc/>
     public async Task UploadFile(string engine, IFormFile file)
     {
         await StorageFile(engine, file);
-
     }
 
     /// <inheritdoc/>
@@ -43,7 +39,6 @@ public class FileService : DbRepository<DevFile>, IFileService
     {
         var ids = input.Select(it => it.Id).ToList();//获取ID
         await DeleteByIdsAsync(ids.Cast<object>().ToArray());//根据ID删除数据库
-
     }
 
     /// <inheritdoc/>
@@ -80,10 +75,10 @@ public class FileService : DbRepository<DevFile>, IFileService
         {
             return null;
         }
-
     }
 
     #region 方法
+
     /// <summary>
     /// 存储文件
     /// </summary>
@@ -91,7 +86,6 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// <param name="file"></param>
     private async Task StorageFile(string engine, IFormFile file)
     {
-
         string bucketName = string.Empty;    // 存储桶名称
         string storageUrl = string.Empty;// 定义存储的url，本地文件返回文件实际路径，其他引擎返回网络地址
         var objectId = CommonUtils.GetSingleId();//生成id
@@ -112,6 +106,7 @@ public class FileService : DbRepository<DevFile>, IFileService
                     storageUrl = await StorageMinio(objectId, file);
                 }
                 break;
+
             default:
 
                 throw Oops.Bah($"不支持的文件引擎");
@@ -129,7 +124,6 @@ public class FileService : DbRepository<DevFile>, IFileService
             SizeKb = fileSizeKb,
             SizeInfo = GetSizeInfo(fileSizeKb),
             StoragePath = storageUrl,
-
         };
         if (engine != CateGoryConst.Config_FILE_LOCAL)//如果不是本地，设置下载地址
         {
@@ -138,7 +132,6 @@ public class FileService : DbRepository<DevFile>, IFileService
         //如果是图片,生成缩略图
         if (IsPic(fileSuffix))
         {
-
             //$"data:image/png;base64," + imgByte;
             using var fileStream = file.OpenReadStream();//获取文件流
             var image = Image.FromStream(fileStream);//获取图片
@@ -147,7 +140,6 @@ public class FileService : DbRepository<DevFile>, IFileService
             devFile.Thumbnail = $"data:image/png;base64," + thubnailBase64;
         }
         await InsertAsync(devFile);
-
     }
 
     /// <summary>
@@ -163,7 +155,6 @@ public class FileService : DbRepository<DevFile>, IFileService
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             configKey = DevConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX; //Linux
-
         }
         else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
@@ -188,7 +179,6 @@ public class FileService : DbRepository<DevFile>, IFileService
                 await file.CopyToAsync(stream);
             }
             return fileName;
-
         }
         else
         {
@@ -210,8 +200,6 @@ public class FileService : DbRepository<DevFile>, IFileService
         var fileSuffix = Path.GetExtension(file.FileName).ToLower(); // 文件后缀
         var fileObjectName = $"{now}/{fileId}{fileSuffix}";//存储后的文件名
         return await minioService.PutObjectAsync(fileObjectName, file);
-
-
     }
 
     /// <summary>
@@ -221,7 +209,6 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// <returns></returns>
     private string GetSizeInfo(long fileSizeKb)
     {
-
         var b = fileSizeKb * 1024;
         const int MB = 1024 * 1024;
         const int KB = 1024;
@@ -259,5 +246,5 @@ public class FileService : DbRepository<DevFile>, IFileService
             return false;
     }
 
-    #endregion
+    #endregion 方法
 }

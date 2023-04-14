@@ -21,8 +21,6 @@ public class ImportResultOutPut<T> where T : class
     /// </summary>
     public int ImportCount { get; set; }
 
-
-
     /// <summary>
     /// 错误数
     /// </summary>

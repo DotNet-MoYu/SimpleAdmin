@@ -62,8 +62,6 @@ public class AuthBController : IDynamicApiController
         return await _authService.LoginByPhone(input, LoginClientTypeEnum.B);
     }
 
-
-
     /// <summary>
     /// 登出
     /// </summary>

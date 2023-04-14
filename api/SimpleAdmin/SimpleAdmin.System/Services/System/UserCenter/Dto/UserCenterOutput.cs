@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// 我的机构数样式
 /// </summary>
@@ -45,6 +44,5 @@ public class LoginOrgTreeOutput
         ///  字体颜色
         /// </summary>
         public string Color { get; set; } = "#FFF";
-
     }
 }

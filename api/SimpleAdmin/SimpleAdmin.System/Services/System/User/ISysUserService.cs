@@ -1,13 +1,10 @@
-﻿
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 用户服务
 /// </summary>
 public partial interface ISysUserService : ITransient
 {
-
     #region 查询
 
     /// <summary>
@@ -108,14 +105,14 @@ public partial interface ISysUserService : ITransient
     /// <returns>权限列表</returns>
     Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input);
 
-
     /// <summary>
     /// 用户权限树选择
     /// </summary>
     /// <param name="input">用户id</param>
     /// <returns>权限列表</returns>
     Task<List<string>> UserPermissionTreeSelector(BaseIdInput input);
-    #endregion
+
+    #endregion 查询
 
     #region 新增
 
@@ -125,10 +122,10 @@ public partial interface ISysUserService : ITransient
     /// <param name="input">添加参数</param>
     /// <returns></returns>
     Task Add(UserAddInput input);
-    #endregion
+
+    #endregion 新增
 
     #region 编辑
-
 
     /// <summary>
     /// 编辑
@@ -136,7 +133,6 @@ public partial interface ISysUserService : ITransient
     /// <param name="input">编辑参数</param>
     /// <returns></returns>
     Task Edit(UserEditInput input);
-
 
     /// <summary>
     /// 启用用户
@@ -166,7 +162,6 @@ public partial interface ISysUserService : ITransient
     /// <returns></returns>
     Task GrantRole(UserGrantRoleInput input);
 
-
     /// <summary>
     /// 给用户授权资源
     /// </summary>
@@ -180,7 +175,8 @@ public partial interface ISysUserService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task GrantPermission(GrantPermissionInput input);
-    #endregion
+
+    #endregion 编辑
 
     #region 删除
 
@@ -190,7 +186,6 @@ public partial interface ISysUserService : ITransient
     /// <param name="input">Id列表</param>
     /// <returns></returns>
     Task Delete(List<BaseIdInput> input);
-
 
     /// <summary>
     /// 从redis中删除用户信息
@@ -203,8 +198,8 @@ public partial interface ISysUserService : ITransient
     /// </summary>
     /// <param name="userId">用户ID</param>
     void DeleteUserFromRedis(long userId);
-    #endregion
 
+    #endregion 删除
 
     #region 导入导出
 
@@ -257,6 +252,5 @@ public partial interface ISysUserService : ITransient
     /// <returns></returns>
     Task Edits(BatchEditInput input);
 
-    #endregion
-
+    #endregion 导入导出
 }

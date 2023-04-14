@@ -27,7 +27,6 @@ public class GenBasicController : BaseController
         return await _genbasicService.Page(input);
     }
 
-
     /// <summary>
     /// 获取所有表信息
     /// </summary>
@@ -95,7 +94,6 @@ public class GenBasicController : BaseController
     {
         return await _genbasicService.PreviewGen(input);
     }
-
 
     /// <summary>
     /// 执行代码生成(本地)"

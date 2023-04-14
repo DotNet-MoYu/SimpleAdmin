@@ -1,7 +1,4 @@
-﻿using Mapster;
-
-
-namespace SimpleAdmin.Plugin.Cache;
+﻿namespace SimpleAdmin.Plugin.Cache;
 
 /// <summary>
 /// <inheritdoc cref="ISimpleCacheService"/>
@@ -10,13 +7,14 @@ namespace SimpleAdmin.Plugin.Cache;
 public partial class MemoryCacheService : ISimpleCacheService
 {
     public readonly MemoryCache _memoryCache;
+
     public MemoryCacheService()
     {
-
         _memoryCache = new MemoryCache();
     }
 
     #region 普通操作
+
     /// <inheritdoc/>
     public T Get<T>(string key)
     {
@@ -24,14 +22,11 @@ public partial class MemoryCacheService : ISimpleCacheService
         return data.ToObject<T>();
     }
 
-
     /// <inheritdoc/>
     public int Remove(params string[] keys)
     {
         return _memoryCache.Remove(keys);
     }
-
-
 
     /// <inheritdoc/>
     public bool Set<T>(string key, T value, int expire = -1)
@@ -45,21 +40,17 @@ public partial class MemoryCacheService : ISimpleCacheService
         return _memoryCache.Set(key, value.ToJson(), expire);
     }
 
-
     /// <inheritdoc/>
     public bool SetExpire(string key, TimeSpan expire)
     {
         return _memoryCache.SetExpire(key, expire);
     }
 
-
-
     /// <inheritdoc/>
     public TimeSpan GetExpire(string key)
     {
         return _memoryCache.GetExpire(key);
     }
-
 
     /// <inheritdoc/>
     public bool ContainsKey(string key)
@@ -81,11 +72,10 @@ public partial class MemoryCacheService : ISimpleCacheService
         {
             if (it.Contains(pattern))//如果匹配
                 _memoryCache.Remove(pattern);
-
         });
-
     }
-    #endregion
+
+    #endregion 普通操作
 
     #region 集合操作
 
@@ -97,10 +87,8 @@ public partial class MemoryCacheService : ISimpleCacheService
         data.ForEach(it =>
         {
             result.Add(it.Key, it.Value.ToObject<T>());//遍历数据,格式化并加到新的数据集合
-
         });
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -110,7 +98,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         values.ForEach(it =>
         {
             result.Add(it.Key, it.Value.ToJson());//遍历数据,格式化并加到新的数据集合
-
         });
         _memoryCache.SetAll(values, expire);
     }
@@ -123,7 +110,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         data.ForEach(it =>
         {
             result.Add(it.Key, it.Value.ToObject<T>());//遍历数据,格式化并加到新的数据集合
-
         });
         return result;
     }
@@ -145,7 +131,8 @@ public partial class MemoryCacheService : ISimpleCacheService
     {
         return _memoryCache.GetSet<T>(key);
     }
-    #endregion
+
+    #endregion 集合操作
 
     #region 高级操作
 
@@ -163,7 +150,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         data.ForEach(it =>
         {
             result.Add(it.ToObject<T>());//遍历数据,格式化并加到新的数据集合
-
         });
         return result;
     }
@@ -174,7 +160,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         return _memoryCache.Replace(key, value);
     }
 
-
     /// <inheritdoc/>
     public bool TryGetValue<T>(string key, out T value)
     {
@@ -182,7 +167,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         var data = _memoryCache.TryGetValue<string>(key, out result);
         value = result.ToObject<T>();
         return value == null;
-
     }
 
     /// <inheritdoc/>
@@ -197,7 +181,6 @@ public partial class MemoryCacheService : ISimpleCacheService
         return _memoryCache.Decrement(key, value);
     }
 
-
     /// <inheritdoc/>
     public long Increment(string key, long value)
     {
@@ -209,7 +192,8 @@ public partial class MemoryCacheService : ISimpleCacheService
     {
         return _memoryCache.Increment(key, value);
     }
-    #endregion
+
+    #endregion 高级操作
 
     #region 事务
 
@@ -230,5 +214,6 @@ public partial class MemoryCacheService : ISimpleCacheService
     {
         return _memoryCache.AcquireLock(key, msTimeout, msExpire, throwOnFailure);
     }
-    #endregion
+
+    #endregion 事务
 }

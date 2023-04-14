@@ -43,6 +43,5 @@ public class MqttController
             return await _mqttService.Auth(input, user.Id.ToString());
         else
             return new MqttAuthOutput { };
-
     }
 }

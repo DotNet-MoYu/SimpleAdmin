@@ -38,12 +38,16 @@ public class AuthService : IAuthService
     {
         await ValidPhoneValidCode(input, loginClientType);//校验手机号验证码
         var phoneValidCode = RandomHelper.CreateNum(6);//生产随机数字
+
         #region 发送短信和记录数据库等操作
+
         //这里为什么不封装阿里云或者腾讯云短信接口，是因为短信发送是一个通用功能，一般每个公司都有自己封装好的短信组件来适配各种项目,这里再封装一次显得多余了。
         //这里不建议在该系统中封装短信发送接口，当然后续如果确实有需要也会增加
         //这里执行发送短信验证码代码，这里先默认就是年月日
         phoneValidCode = DateTime.Now.ToString("yyMMdd");
-        #endregion
+
+        #endregion 发送短信和记录数据库等操作
+
         //生成请求号，并将验证码放入redis
         var reqNo = AddValidCodeToRedis(phoneValidCode);
         return reqNo;
@@ -68,7 +72,6 @@ public class AuthService : IAuthService
         // 根据账号获取用户信息，根据B端或C端判断
         if (loginClientType == LoginClientTypeEnum.B)//如果是B端
         {
-
             var userInfo = await _userService.GetUserByAccount(input.Account);//获取用户信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
             if (userInfo.Password != password) throw Oops.Bah("账号密码错误");//账号密码错误
@@ -79,7 +82,6 @@ public class AuthService : IAuthService
             //执行c端登录
             return null;
         }
-
     }
 
     /// <inheritdoc/>
@@ -100,8 +102,6 @@ public class AuthService : IAuthService
             //执行c端登录
             return null;
         }
-
-
     }
 
     /// <inheritdoc/>
@@ -121,9 +121,7 @@ public class AuthService : IAuthService
             //发布登出事件总线
             await _eventPublisher.PublishAsync(EventSubscriberConst.LoginOutB, loginEvent);
         }
-
     }
-
 
     /// <inheritdoc/>
     public async Task<LoginUserOutput> GetLoginUser()
@@ -137,6 +135,7 @@ public class AuthService : IAuthService
     }
 
     #region 方法
+
     /// <summary>
     /// 校验验证码方法
     /// </summary>
@@ -145,7 +144,6 @@ public class AuthService : IAuthService
     /// <param name="isDelete">是否从Redis删除</param>
     public void ValidValidCode(string validCode, string validCodeReqNo, bool isDelete = true)
     {
-
         var key = CacheConst.Cache_Captcha + validCodeReqNo; //获取验证码Key值
         var code = _simpleCacheService.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
@@ -194,7 +192,6 @@ public class AuthService : IAuthService
             throw Oops.Bah("手机号不存在");//抛出验证码不能为空
         }
     }
-
 
     /// <summary>
     /// 添加验证码到redis
@@ -300,7 +297,6 @@ public class AuthService : IAuthService
         _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, loginEvent.SysUser.Id.ToString(), tokenInfos);
     }
 
-
     /// <summary>
     /// redis删除用户token
     /// </summary>
@@ -308,7 +304,6 @@ public class AuthService : IAuthService
     /// <param name="loginClientType">登录类型</param>
     private void RemoveTokenFromRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
     {
-
         //获取token列表
         List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
         if (tokenInfos != null)
@@ -328,7 +323,6 @@ public class AuthService : IAuthService
                 _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { loginEvent.SysUser.Id.ToString() });
             }
         }
-
     }
 
     /// <summary>
@@ -345,7 +339,6 @@ public class AuthService : IAuthService
             tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
         }
         return tokenInfos;
-
     }
 
     /// <summary>
@@ -362,5 +355,6 @@ public class AuthService : IAuthService
             UserId = userId
         }); //通知用户下线
     }
-    #endregion
+
+    #endregion 方法
 }

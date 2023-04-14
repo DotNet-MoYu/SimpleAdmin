@@ -5,7 +5,6 @@
 /// </summary>
 public interface IResourceService : ITransient
 {
-
     /// <summary>
     /// 获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
     /// </summary>

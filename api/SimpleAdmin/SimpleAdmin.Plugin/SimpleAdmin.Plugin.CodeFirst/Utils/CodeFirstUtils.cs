@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.CodeFirst;
+﻿namespace SimpleAdmin.Plugin.CodeFirst;
 
 /// <summary>
 /// CodeFirst功能类
@@ -31,7 +30,6 @@ public static class CodeFirstUtils
         // 判断逻辑
         bool IsTheRawGenericType(Type type) => generic == (type.IsGenericType ? type.GetGenericTypeDefinition() : type);
     }
-
 
     /// <summary>
     /// List转DataTable
@@ -94,5 +92,4 @@ public static class CodeFirstUtils
         var sc = pi.GetCustomAttributes<SugarColumn>(false).FirstOrDefault(u => u.IsJson == true);
         return sc != null;
     }
-
 }

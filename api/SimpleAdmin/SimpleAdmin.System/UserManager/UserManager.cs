@@ -5,8 +5,6 @@
 /// </summary>
 public class UserManager
 {
-
-
     /// <summary>
     /// 当前用户Id
     /// </summary>
@@ -26,7 +24,6 @@ public class UserManager
     /// 是否超级管理员
     /// </summary>
     public static bool SuperAdmin => (App.User?.FindFirst(ClaimConst.IsSuperAdmin)?.Value).ToBoolean();
-
 
     /// <summary>
     /// 机构ID

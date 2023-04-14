@@ -28,15 +28,16 @@ public class InDictAttribute : ValidationAttribute
             {
                 case DevDictConst.GENDER:
                     return "性别只能是男和女";
+
                 case DevDictConst.NATION:
                     return "不存在的民族";
+
                 default:
                     return $"字典中不存在{value}";
             }
         }
         else return ErrorMessage;
     }
-
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
@@ -47,10 +48,8 @@ public class InDictAttribute : ValidationAttribute
             if (!values.Contains(value))
             {
                 return new ValidationResult(GetErrorMessage(value.ToString()), new string[] { validationContext.MemberName });
-
             }
         }
         return ValidationResult.Success;
     }
-
 }

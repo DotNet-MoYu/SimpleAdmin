@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 用户个人信息控制器
 /// </summary>
@@ -22,7 +23,6 @@ public class UserCenterController : IDynamicApiController
     {
         return await _userCenterService.GetOwnMenu();
     }
-
 
     /// <summary>
     /// 获取个人工作台
@@ -147,5 +147,4 @@ public class UserCenterController : IDynamicApiController
     {
         return await _userCenterService.UpdateAvatar(input);
     }
-
 }

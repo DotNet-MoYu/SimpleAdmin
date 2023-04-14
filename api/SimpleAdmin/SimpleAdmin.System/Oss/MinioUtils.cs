@@ -14,7 +14,6 @@ public class MinioUtils : ITransient
     private string defaultPrefix = "http://";
     private readonly IConfigService _configService;
 
-
     public MinioUtils(IConfigService configService)
     {
         this._configService = configService;
@@ -43,7 +42,6 @@ public class MinioUtils : ITransient
             defaultEndPoint = endPoint.ConfigValue;
             if (defaultEndPoint.ToLower().StartsWith("http"))
             {
-
                 var point = defaultEndPoint.Split("//").ToList();//分割、
                 defaultPrefix = $"{point[0]}//";
                 defaultEndPoint = point[1];
@@ -53,10 +51,8 @@ public class MinioUtils : ITransient
         }
         catch (Exception ex)
         {
-
             throw Oops.Oh("MINIO客户端启动失败", ex);
         }
-
     }
 
     /// <summary>
@@ -84,6 +80,4 @@ public class MinioUtils : ITransient
             throw Oops.Oh($"上传文件失败!", e);
         }
     }
-
-
 }

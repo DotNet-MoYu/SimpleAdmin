@@ -7,8 +7,6 @@
 
 public partial class RedisCacheService : ISimpleCacheService
 {
-
-
     /// <inheritdoc/>
     public void HashAdd<T>(string key, string hashKey, T value)
     {
@@ -44,5 +42,4 @@ public partial class RedisCacheService : ISimpleCacheService
     {
         return _simpleRedis.HashGetAll<T>(key);
     }
-
 }

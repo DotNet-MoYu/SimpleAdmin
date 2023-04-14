@@ -24,5 +24,4 @@ public class LoggingConst
     /// 请求方法：POST/GET
     /// </summary>
     public const string Method = "Method";
-
 }

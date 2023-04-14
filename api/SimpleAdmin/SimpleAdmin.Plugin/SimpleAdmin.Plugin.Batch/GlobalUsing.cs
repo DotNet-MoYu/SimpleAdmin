@@ -1,10 +1,10 @@
-﻿global using SimpleAdmin.Core;
-global using SqlSugar;
-global using System.Data;
-global using Furion.DependencyInjection;
-global using Mapster;
-global using System.ComponentModel.DataAnnotations;
+﻿global using Furion.DependencyInjection;
 global using Furion.FriendlyException;
+global using Mapster;
 global using Microsoft.Extensions.Logging;
-global using SimpleAdmin.Plugin.SqlSugar;
+global using SimpleAdmin.Core;
 global using SimpleAdmin.Plugin.Core;
+global using SimpleAdmin.Plugin.SqlSugar;
+global using SqlSugar;
+global using System.ComponentModel.DataAnnotations;
+global using System.Data;

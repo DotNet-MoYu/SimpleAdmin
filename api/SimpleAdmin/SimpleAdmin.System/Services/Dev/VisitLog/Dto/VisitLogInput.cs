@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// 访问日志分页输入
 /// </summary>
@@ -16,7 +15,6 @@ public class VisitLogPageInput : BasePageInput
     /// </summary>
     public string Account { get; set; }
 }
-
 
 /// <summary>
 /// 访问日志删除输入

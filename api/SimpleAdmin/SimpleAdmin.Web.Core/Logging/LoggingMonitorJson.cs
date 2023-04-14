@@ -5,9 +5,6 @@
 /// </summary>
 public class LoggingMonitorJson
 {
-
-
-
     /// <summary>
     /// 标题
     /// </summary>
@@ -166,7 +163,6 @@ public class Exception
     /// 堆栈信息
     /// </summary>
     public string StackTrace { get; set; }
-
 }
 
 /// <summary>

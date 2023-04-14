@@ -332,13 +332,13 @@
         </member>
         <member name="P:SimpleAdmin.System.LoginInput.Account">
              <summary>
-             账号 
+             账号
             </summary>
              <example>superAdmin</example>
         </member>
         <member name="P:SimpleAdmin.System.LoginInput.Password">
              <summary>
-             密码 
+             密码
             </summary>
             <example>04fc514b346f14b23d7cf5e6f64663b030512aa380a9e7d311288ed1e8be7b863ae5ee0bb570df2405fc9daff2b2d1ac627a0fbbd49ef2c6b8fac4fd5e4b9a1b7120999bdc0a8e425aa37abab3aec6f9f3570775ff901f2845e957b0c2d0542e21fbf1bbb65c04</example>
         </member>
@@ -421,27 +421,27 @@
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Avatar">
              <summary>
-             头像 
+             头像
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Signature">
              <summary>
-             签名 
+             签名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Nickname">
              <summary>
-             昵称 
+             昵称
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Phone">
@@ -461,12 +461,12 @@
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.Gender">
              <summary>
-             性别 
+             性别
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.LoginUserOutput.OrgName">
@@ -550,17 +550,17 @@
         </member>
         <member name="P:SimpleAdmin.System.SessionPageInput.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionPageInput.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionPageInput.LatestLoginIp">
              <summary>
-             最新登录ip 
+             最新登录ip
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.ExitTokenInput">
@@ -585,17 +585,17 @@
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.Avatar">
              <summary>
-             头像 
+             头像
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.OnlineStatus">
@@ -605,17 +605,17 @@
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.LatestLoginIp">
              <summary>
-             最新登录ip 
+             最新登录ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.LatestLoginAddress">
              <summary>
-             最新登录地点 
+             最新登录地点
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.LatestLoginTime">
              <summary>
-             最新登录时间 
+             最新登录时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SessionOutput.TokenCount">
@@ -942,12 +942,12 @@
         </member>
         <member name="P:SimpleAdmin.System.DictPageInput.ParentId">
              <summary>
-             父id 
+             父id
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.DictPageInput.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.DictAddInput">
@@ -1654,7 +1654,7 @@
         </member>
         <member name="P:SimpleAdmin.System.SysOrgImportInput.Name">
              <summary>
-             名称 
+             名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysOrgImportInput.Names">
@@ -1664,17 +1664,17 @@
         </member>
         <member name="P:SimpleAdmin.System.SysOrgImportInput.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysOrgImportInput.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysOrgImportInput.Director">
              <summary>
-             主管账号 
+             主管账号
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.ISysOrgService">
@@ -3474,28 +3474,28 @@
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Gender">
              <summary>
-             性别 
+             性别
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Nickname">
              <summary>
-             昵称 
+             昵称
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Phone">
              <summary>
-             手机 
+             手机
              这里使用了SM4自动加密解密
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Email">
              <summary>
-             邮箱 
+             邮箱
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.OrgName">
@@ -3510,102 +3510,102 @@
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Birthday">
              <summary>
-             出生日期 
+             出生日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Nation">
              <summary>
-             民族 
+             民族
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.NativePlace">
              <summary>
-             籍贯 
+             籍贯
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.MailingAddress">
              <summary>
-             通信地址 
+             通信地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.IdCardType">
              <summary>
-             证件类型 
+             证件类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.IdCardNumber">
              <summary>
-             证件号码 
+             证件号码
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.CultureLevel">
              <summary>
-             文化程度 
+             文化程度
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.PoliticalOutlook">
              <summary>
-             政治面貌 
+             政治面貌
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.College">
              <summary>
-             毕业院校 
+             毕业院校
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Education">
              <summary>
-             学历 
+             学历
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EduLength">
              <summary>
-             学制 
+             学制
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.Degree">
              <summary>
-             学位 
+             学位
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.HomeTel">
              <summary>
-             家庭电话 
+             家庭电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.OfficeTel">
              <summary>
-             办公电话 
+             办公电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EmergencyContact">
              <summary>
-             紧急联系人 
+             紧急联系人
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EmergencyPhone">
              <summary>
-             紧急联系人电话 
+             紧急联系人电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EmergencyAddress">
              <summary>
-             紧急联系人地址 
+             紧急联系人地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EmpNo">
              <summary>
-             员工编号 
+             员工编号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.EntryDate">
              <summary>
-             入职日期 
+             入职日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserImportInput.OrgId">
@@ -3655,33 +3655,33 @@
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Nickname">
              <summary>
-             昵称 
+             昵称
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Gender">
              <summary>
-             性别 
+             性别
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Phone">
              <summary>
-             手机 
+             手机
              这里使用了SM4自动加密解密
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Email">
              <summary>
-             邮箱 
+             邮箱
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.OrgNames">
@@ -3696,107 +3696,107 @@
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Birthday">
              <summary>
-             出生日期 
+             出生日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Nation">
              <summary>
-             民族 
+             民族
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.NativePlace">
              <summary>
-             籍贯 
+             籍贯
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.MailingAddress">
              <summary>
-             通信地址 
+             通信地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.IdCardType">
              <summary>
-             证件类型 
+             证件类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.IdCardNumber">
              <summary>
-             证件号码 
+             证件号码
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.CultureLevel">
              <summary>
-             文化程度 
+             文化程度
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.PoliticalOutlook">
              <summary>
-             政治面貌 
+             政治面貌
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.College">
              <summary>
-             毕业院校 
+             毕业院校
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Education">
              <summary>
-             学历 
+             学历
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EduLength">
              <summary>
-             学制 
+             学制
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.Degree">
              <summary>
-             学位 
+             学位
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.HomeTel">
              <summary>
-             家庭电话 
+             家庭电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.OfficeTel">
              <summary>
-             办公电话 
+             办公电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EmergencyContact">
              <summary>
-             紧急联系人 
+             紧急联系人
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EmergencyPhone">
              <summary>
-             紧急联系人电话 
+             紧急联系人电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EmergencyAddress">
              <summary>
-             紧急联系人地址 
+             紧急联系人地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EmpNo">
              <summary>
-             员工编号 
+             员工编号
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.EntryDate">
              <summary>
-             入职日期 
+             入职日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUserExportOutput.PositionLevel">
              <summary>
-             职级 
+             职级
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.ISysUserService">

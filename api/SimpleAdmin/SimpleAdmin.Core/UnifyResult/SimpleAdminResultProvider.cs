@@ -71,7 +71,6 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
         }
     }
 
-
     /// <summary>
     /// 返回 RESTful 风格结果集
     /// </summary>

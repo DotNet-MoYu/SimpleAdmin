@@ -19,8 +19,6 @@ public class UserSelectorInput
     /// 关键字
     /// </summary>
     public virtual string SearchKey { get; set; }
-
-
 }
 
 /// <summary>
@@ -39,8 +37,6 @@ public class UserPageInput : BasePageInput
     /// </summary>
     public Expressionable<SysUser> Expression { get; set; }
 
-
-
     /// <summary>
     /// 用户状态
     /// </summary>
@@ -48,14 +44,11 @@ public class UserPageInput : BasePageInput
     public string UserStatus { get; set; }
 }
 
-
 /// <summary>
 /// 添加用户参数
 /// </summary>
 public class UserAddInput : SysUser
 {
-
-
     /// <summary>
     /// 账号
     /// </summary>
@@ -91,9 +84,7 @@ public class UserEditInput : UserAddInput
     /// </summary>
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
-
 }
-
 
 /// <summary>
 /// 用户授权角色参数
@@ -122,7 +113,6 @@ public class UserGrantResourceInput : GrantResourceInput
     public DefaultDataScope DefaultDataScope { get; set; }
 }
 
-
 /// <summary>
 /// 用户导入
 /// </summary>
@@ -137,38 +127,38 @@ public class SysUserImportInput : ImportTemplateInput
     public string Account { get; set; }
 
     /// <summary>
-    /// 姓名 
+    /// 姓名
     ///</summary>
     [ImporterHeader(Name = "姓名")]
     [Required(ErrorMessage = "姓名不能为空")]
     public virtual string Name { get; set; }
 
     /// <summary>
-    /// 性别 
+    /// 性别
     ///</summary>
     [ImporterHeader(Name = "性别")]
     [Required(ErrorMessage = "性别不能为空")]
     public string Gender { get; set; }
 
     /// <summary>
-    /// 昵称 
+    /// 昵称
     ///</summary>
     [ImporterHeader(Name = "昵称")]
     public string Nickname { get; set; }
 
     /// <summary>
-    /// 手机 
+    /// 手机
     /// 这里使用了SM4自动加密解密
     ///</summary>
     [ImporterHeader(Name = "手机号")]
     public string Phone { get; set; }
+
     /// <summary>
-    /// 邮箱 
+    /// 邮箱
     ///</summary>
     [ImporterHeader(Name = "邮箱")]
     [EmailAddress(ErrorMessage = "邮箱格式错误")]
     public string Email { get; set; }
-
 
     /// <summary>
     /// 所属机构
@@ -186,120 +176,127 @@ public class SysUserImportInput : ImportTemplateInput
     public string PositionName { get; set; }
 
     /// <summary>
-    /// 出生日期 
+    /// 出生日期
     ///</summary>
     [ImporterHeader(Name = "出生日期")]
     [AntTable(IsDate = true)]
     public DateTime? Birthday { get; set; }
 
-
-
     /// <summary>
-    /// 民族 
+    /// 民族
     ///</summary>
     [ImporterHeader(Name = "民族")]
     public string Nation { get; set; }
 
     /// <summary>
-    /// 籍贯 
+    /// 籍贯
     ///</summary>
     [ImporterHeader(Name = "籍贯")]
     public string NativePlace { get; set; }
 
     /// <summary>
-    /// 家庭住址 
+    /// 家庭住址
     ///</summary>
     [ImporterHeader(Name = "家庭住址")]
     public string HomeAddress { get; set; }
+
     /// <summary>
-    /// 通信地址 
+    /// 通信地址
     ///</summary>
     [ImporterHeader(Name = "通信地址")]
     public string MailingAddress { get; set; }
 
     /// <summary>
-    /// 证件类型 
+    /// 证件类型
     ///</summary>
     [ImporterHeader(Name = "证件类型")]
     public string IdCardType { get; set; }
 
     /// <summary>
-    /// 证件号码 
+    /// 证件号码
     ///</summary>
     [ImporterHeader(Name = "证件号码")]
     public string IdCardNumber { get; set; }
 
     /// <summary>
-    /// 文化程度 
+    /// 文化程度
     ///</summary>
     [ImporterHeader(Name = "文化程度")]
     public string CultureLevel { get; set; }
 
     /// <summary>
-    /// 政治面貌 
+    /// 政治面貌
     ///</summary>
     [ImporterHeader(Name = "政治面貌")]
     public string PoliticalOutlook { get; set; }
+
     /// <summary>
-    /// 毕业院校 
+    /// 毕业院校
     ///</summary>
     [ImporterHeader(Name = "毕业院校")]
     public string College { get; set; }
+
     /// <summary>
-    /// 学历 
+    /// 学历
     ///</summary>
     [ImporterHeader(Name = "学历")]
     public string Education { get; set; }
+
     /// <summary>
-    /// 学制 
+    /// 学制
     ///</summary>
     [ImporterHeader(Name = "学制")]
     public string EduLength { get; set; }
+
     /// <summary>
-    /// 学位 
+    /// 学位
     ///</summary>
     [ImporterHeader(Name = "学位")]
     public string Degree { get; set; }
 
     /// <summary>
-    /// 家庭电话 
+    /// 家庭电话
     ///</summary>
     [ImporterHeader(Name = "家庭电话")]
     public string HomeTel { get; set; }
+
     /// <summary>
-    /// 办公电话 
+    /// 办公电话
     ///</summary>
     [ImporterHeader(Name = "办公电话")]
     public string OfficeTel { get; set; }
+
     /// <summary>
-    /// 紧急联系人 
+    /// 紧急联系人
     ///</summary>
     [ImporterHeader(Name = "紧急联系人")]
     public string EmergencyContact { get; set; }
+
     /// <summary>
-    /// 紧急联系人电话 
+    /// 紧急联系人电话
     ///</summary>
     [ImporterHeader(Name = "紧急联系人电话")]
     [Phone(ErrorMessage = "电话号码格式错误")]
     public string EmergencyPhone { get; set; }
+
     /// <summary>
-    /// 紧急联系人地址 
+    /// 紧急联系人地址
     ///</summary>
     [ImporterHeader(Name = "紧急联系人地址")]
     public string EmergencyAddress { get; set; }
+
     /// <summary>
-    /// 员工编号 
+    /// 员工编号
     ///</summary>
     [ImporterHeader(Name = "员工编号")]
     public string EmpNo { get; set; }
+
     /// <summary>
-    /// 入职日期 
+    /// 入职日期
     ///</summary>
     [ImporterHeader(Name = "入职日期")]
     [AntTable(IsDate = true)]
     public DateTime? EntryDate { get; set; }
-
-
 
     /// <summary>
     /// 部门Id
@@ -312,6 +309,4 @@ public class SysUserImportInput : ImportTemplateInput
     /// </summary>
     [ImporterHeader(IsIgnore = true)]
     public long PositionId { get; set; }
-
 }
-

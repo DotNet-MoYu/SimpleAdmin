@@ -10,15 +10,16 @@ public enum AuthDeviceTypeEumu
     /// </summary>
     [Description("PC端")]
     PC,
+
     /// <summary>
     /// 移动端
     /// </summary>
     [Description("移动端")]
     APP,
+
     /// <summary>
     /// 小程序
     /// </summary>
     [Description("小程序")]
     MINI
-
 }

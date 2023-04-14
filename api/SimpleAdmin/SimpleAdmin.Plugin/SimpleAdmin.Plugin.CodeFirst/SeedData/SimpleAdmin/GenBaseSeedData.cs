@@ -9,5 +9,4 @@ public class GenBaseSeedData : ISqlSugarEntitySeedData<GenBasic>
     {
         return SeedDataUtil.GetSeedData<GenBasic>(SqlsugarConst.DB_Default, "gen_basic.json");
     }
-
 }

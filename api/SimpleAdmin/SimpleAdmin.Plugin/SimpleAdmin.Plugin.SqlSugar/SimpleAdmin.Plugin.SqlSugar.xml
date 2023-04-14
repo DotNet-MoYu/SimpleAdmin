@@ -571,7 +571,7 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenTest.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.PrimaryKeyEntity">
@@ -646,27 +646,27 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEdit.Code">
              <summary>
-             唯一编码 
+             唯一编码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEdit.ConfigId">
              <summary>
-             所属库 
+             所属库
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEdit.EntityName">
              <summary>
-             实体名 
+             实体名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEdit.TableName">
              <summary>
-             表名 
+             表名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEdit.TableDescription">
              <summary>
-             表描述 
+             表描述
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig">
@@ -676,32 +676,32 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.UId">
              <summary>
-             批量配置Id 
+             批量配置Id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.ColumnName">
              <summary>
-             字段名 
+             字段名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.ColumnComment">
              <summary>
-             字段描述 
+             字段描述
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.DataType">
              <summary>
-             作用类型 
+             作用类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.DictTypeCode">
              <summary>
-             字典值 
+             字典值
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.NetType">
              <summary>
-             数据库类型 
+             数据库类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.BatchEditConfig.RequestUrl">
@@ -736,227 +736,227 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Avatar">
              <summary>
-             头像 
+             头像
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Signature">
              <summary>
-             签名 
+             签名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Password">
              <summary>
-             密码 
+             密码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Nickname">
              <summary>
-             昵称 
+             昵称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Gender">
              <summary>
-             性别 
+             性别
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Age">
              <summary>
-             年龄 
+             年龄
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Birthday">
              <summary>
-             出生日期 
+             出生日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Nation">
              <summary>
-             民族 
+             民族
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.NativePlace">
              <summary>
-             籍贯 
+             籍贯
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.MailingAddress">
              <summary>
-             通信地址 
+             通信地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.IdCardType">
              <summary>
-             证件类型 
+             证件类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.IdCardNumber">
              <summary>
-             证件号码 
+             证件号码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.CultureLevel">
              <summary>
-             文化程度 
+             文化程度
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.PoliticalOutlook">
              <summary>
-             政治面貌 
+             政治面貌
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.College">
              <summary>
-             毕业院校 
+             毕业院校
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Education">
              <summary>
-             学历 
+             学历
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EduLength">
              <summary>
-             学制 
+             学制
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Degree">
              <summary>
-             学位 
+             学位
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Phone">
              <summary>
-             手机 
+             手机
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.Email">
              <summary>
-             邮箱 
+             邮箱
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.HomeTel">
              <summary>
-             家庭电话 
+             家庭电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.OfficeTel">
              <summary>
-             办公电话 
+             办公电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EmergencyContact">
              <summary>
-             紧急联系人 
+             紧急联系人
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EmergencyPhone">
              <summary>
-             紧急联系人电话 
+             紧急联系人电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EmergencyAddress">
              <summary>
-             紧急联系人地址 
+             紧急联系人地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EmpNo">
              <summary>
-             员工编号 
+             员工编号
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.EntryDate">
              <summary>
-             入职日期 
+             入职日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.OrgId">
              <summary>
-             机构id 
+             机构id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.PositionId">
              <summary>
-             职位id 
+             职位id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.PositionLevel">
              <summary>
-             职级 
+             职级
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.DirectorId">
              <summary>
-             主管id 
+             主管id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.PositionJson">
              <summary>
-             兼任信息 
+             兼任信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LastLoginIp">
              <summary>
-             上次登录ip 
+             上次登录ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LastLoginAddress">
              <summary>
-             上次登录地点 
+             上次登录地点
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LastLoginTime">
              <summary>
-             上次登录时间 
+             上次登录时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LastLoginDevice">
              <summary>
-             上次登录设备 
+             上次登录设备
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LatestLoginIp">
              <summary>
-             最新登录ip 
+             最新登录ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LatestLoginAddress">
              <summary>
-             最新登录地点 
+             最新登录地点
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LatestLoginTime">
              <summary>
-             最新登录时间 
+             最新登录时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.LatestLoginDevice">
              <summary>
-             最新登录设备 
+             最新登录设备
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.UserStatus">
              <summary>
-             用户状态 
+             用户状态
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.ClientUser.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevConfig">
@@ -966,27 +966,27 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevConfig.ConfigKey">
              <summary>
-             配置键 
+             配置键
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevConfig.ConfigValue">
              <summary>
-             配置值 
+             配置值
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevConfig.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevConfig.Remark">
              <summary>
-             备注 
+             备注
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevConfig.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevDict">
@@ -996,27 +996,27 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.ParentId">
              <summary>
-             父id 
+             父id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.DictLabel">
              <summary>
-             字典文字 
+             字典文字
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.DictValue">
              <summary>
-             字典值 
+             字典值
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevDict.Children">
@@ -1031,52 +1031,52 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.Engine">
              <summary>
-             存储引擎 
+             存储引擎
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.Bucket">
              <summary>
-             存储桶 
+             存储桶
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.Name">
              <summary>
-             文件名称 
+             文件名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.Suffix">
              <summary>
-             文件后缀 
+             文件后缀
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.SizeKb">
              <summary>
-             文件大小kb 
+             文件大小kb
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.SizeInfo">
              <summary>
-             文件大小（格式化后） 
+             文件大小（格式化后）
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.ObjName">
              <summary>
-             文件的对象名（唯一名称） 
+             文件的对象名（唯一名称）
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.StoragePath">
              <summary>
-             文件存储路径 
+             文件存储路径
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.DownloadPath">
              <summary>
-             文件下载路径 
+             文件下载路径
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevFile.Thumbnail">
              <summary>
-             图片缩略图 
+             图片缩略图
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevLogOperate">
@@ -1086,37 +1086,37 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ExeMessage">
              <summary>
-             具体消息 
+             具体消息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ClassName">
              <summary>
-             类名称 
+             类名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.MethodName">
              <summary>
-             方法名称 
+             方法名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ReqMethod">
              <summary>
-             请求方式 
+             请求方式
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ReqUrl">
              <summary>
-             请求地址 
+             请求地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ParamJson">
              <summary>
-             请求参数 
+             请求参数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogOperate.ResultJson">
              <summary>
-             返回结果 
+             返回结果
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevLogVisit">
@@ -1126,52 +1126,52 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.Category">
              <summary>
-             日志分类 
+             日志分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.Name">
              <summary>
-             日志名称 
+             日志名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.ExeStatus">
              <summary>
-             执行状态 
+             执行状态
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpIp">
              <summary>
-             操作ip 
+             操作ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpAddress">
              <summary>
-             操作地址 
+             操作地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpBrowser">
              <summary>
-             操作浏览器 
+             操作浏览器
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpOs">
              <summary>
-             操作系统 
+             操作系统
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpTime">
              <summary>
-             操作时间 
+             操作时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpUser">
              <summary>
-             操作人姓名 
+             操作人姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevLogVisit.OpAccount">
              <summary>
-             操作人姓名 
+             操作人姓名
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevMessage">
@@ -1181,17 +1181,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessage.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessage.Subject">
              <summary>
-             主题 
+             主题
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessage.Content">
              <summary>
-             正文 
+             正文
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessage.Read">
@@ -1206,17 +1206,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.MessageId">
              <summary>
-             消息Id 
+             消息Id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.UserId">
              <summary>
-             用户Id 
+             用户Id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.DevMessageUser.Read">
              <summary>
-             已读未读 
+             已读未读
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DevRelation">
@@ -1231,12 +1231,12 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ConfigId">
              <summary>
-             所属库 
+             所属库
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.DbTable">
              <summary>
-             主表 
+             主表
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.EntityName">
@@ -1246,67 +1246,67 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.TablePrefix">
              <summary>
-             移除表前缀 
+             移除表前缀
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.GenerateType">
              <summary>
-             生成方式 
+             生成方式
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.Module">
              <summary>
-             所属模块 
+             所属模块
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.MenuPid">
              <summary>
-             上级目录 
+             上级目录
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.RouteName">
              <summary>
-             业务名 
+             业务名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.Icon">
              <summary>
-             图标 
+             图标
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FunctionName">
              <summary>
-             功能名 
+             功能名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FunctionNameSuffix">
              <summary>
-             功能名后缀 
+             功能名后缀
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.BusName">
              <summary>
-             业务名 
+             业务名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ClassName">
              <summary>
-             类名 
+             类名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FormLayout">
              <summary>
-             表单布局 
+             表单布局
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.GridWhether">
              <summary>
-             使用栅格 
+             使用栅格
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FrontedPath">
              <summary>
-             前端项目路径 
+             前端项目路径
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ServicePosition">
@@ -1316,17 +1316,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ControllerPosition">
              <summary>
-             控制器代码存放位置 
+             控制器代码存放位置
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.AuthorName">
              <summary>
-             作者 
+             作者
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.SortCode">
              <summary>
-             排序 
+             排序
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.GenConfig">
@@ -1336,77 +1336,77 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.BasicId">
              <summary>
-             基础ID 
+             基础ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.IsPrimarykey">
              <summary>
-             是否主键 
+             是否主键
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldName">
              <summary>
-             字段 
+             字段
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldRemark">
              <summary>
-             名称 
+             名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldType">
              <summary>
-             类型 
+             类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldNetType">
              <summary>
-             实体类型 
+             实体类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.EffectType">
              <summary>
-             作用类型 
+             作用类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.DictTypeCode">
              <summary>
-             字典 
+             字典
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherTable">
              <summary>
-             列表显示 
+             列表显示
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherRetract">
              <summary>
-             列省略 
+             列省略
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherAddUpdate">
              <summary>
-             是否增改 
+             是否增改
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherRequired">
              <summary>
-             必填 
+             必填
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.QueryWhether">
              <summary>
-             查询 
+             查询
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.QueryType">
              <summary>
-             查询方式 
+             查询方式
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.SortCode">
              <summary>
-             排序 
+             排序
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldNameFirstLower">
@@ -1426,17 +1426,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.ParentId">
              <summary>
-             父id 
+             父id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.DirectorId">
              <summary>
-             主管ID 
+             主管ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Name">
              <summary>
-             名称 
+             名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Names">
@@ -1446,17 +1446,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Code">
              <summary>
-             编码 
+             编码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Children">
@@ -1471,27 +1471,27 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysPosition.OrgId">
              <summary>
-             组织id 
+             组织id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysPosition.Name">
              <summary>
-             名称 
+             名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysPosition.Code">
              <summary>
-             编码 
+             编码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysPosition.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysPosition.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.SysRelation">
@@ -1501,17 +1501,17 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRelation.ObjectId">
              <summary>
-             对象ID 
+             对象ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRelation.TargetId">
              <summary>
-             目标ID 
+             目标ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRelation.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.SysResource">
@@ -1521,62 +1521,62 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.ParentId">
              <summary>
-             父id 
+             父id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Title">
              <summary>
-             标题 
+             标题
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Name">
              <summary>
-             别名 
+             别名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Code">
              <summary>
-             编码 
+             编码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Module">
              <summary>
-             模块 
+             模块
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.MenuType">
              <summary>
-             菜单类型 
+             菜单类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Path">
              <summary>
-             路径 
+             路径
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Component">
              <summary>
-             组件 
+             组件
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Icon">
              <summary>
-             图标 
+             图标
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Color">
              <summary>
-             颜色 
+             颜色
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysResource.Meta">
@@ -1626,22 +1626,22 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.OrgId">
              <summary>
-             组织id 
+             组织id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.Name">
              <summary>
-             名称 
+             名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.Code">
              <summary>
-             编码 
+             编码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.DefaultDataScope">
@@ -1651,7 +1651,7 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysRole.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.DefaultDataScope">
@@ -1681,223 +1681,223 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Avatar">
              <summary>
-             头像 
+             头像
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Signature">
              <summary>
-             签名 
+             签名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Account">
              <summary>
-             账号 
+             账号
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Password">
              <summary>
-             密码 
+             密码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Name">
              <summary>
-             姓名 
+             姓名
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Nickname">
              <summary>
-             昵称 
+             昵称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Gender">
              <summary>
-             性别 
+             性别
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Birthday">
              <summary>
-             出生日期 
+             出生日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Nation">
              <summary>
-             民族 
+             民族
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.NativePlace">
              <summary>
-             籍贯 
+             籍贯
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.HomeAddress">
              <summary>
-             家庭住址 
+             家庭住址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.MailingAddress">
              <summary>
-             通信地址 
+             通信地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.IdCardType">
              <summary>
-             证件类型 
+             证件类型
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.IdCardNumber">
              <summary>
-             证件号码 
+             证件号码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.CultureLevel">
              <summary>
-             文化程度 
+             文化程度
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.PoliticalOutlook">
              <summary>
-             政治面貌 
+             政治面貌
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.College">
              <summary>
-             毕业院校 
+             毕业院校
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Education">
              <summary>
-             学历 
+             学历
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EduLength">
              <summary>
-             学制 
+             学制
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Degree">
              <summary>
-             学位 
+             学位
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Phone">
              <summary>
-             手机 
+             手机
              这里使用了SM4自动加密解密
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.Email">
              <summary>
-             邮箱 
+             邮箱
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.HomeTel">
              <summary>
-             家庭电话 
+             家庭电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.OfficeTel">
              <summary>
-             办公电话 
+             办公电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EmergencyContact">
              <summary>
-             紧急联系人 
+             紧急联系人
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EmergencyPhone">
              <summary>
-             紧急联系人电话 
+             紧急联系人电话
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EmergencyAddress">
              <summary>
-             紧急联系人地址 
+             紧急联系人地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EmpNo">
              <summary>
-             员工编号 
+             员工编号
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.EntryDate">
              <summary>
-             入职日期 
+             入职日期
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.OrgId">
              <summary>
-             机构id 
+             机构id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.PositionId">
              <summary>
-             职位id 
+             职位id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.PositionLevel">
              <summary>
-             职级 
+             职级
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.DirectorId">
              <summary>
-             主管id 
+             主管id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.PositionJson">
              <summary>
-             兼任信息 
+             兼任信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LastLoginIp">
              <summary>
-             上次登录ip 
+             上次登录ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LastLoginAddress">
              <summary>
-             上次登录地点 
+             上次登录地点
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LastLoginTime">
              <summary>
-             上次登录时间 
+             上次登录时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LastLoginDevice">
              <summary>
-             上次登录设备 
+             上次登录设备
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LatestLoginIp">
              <summary>
-             最新登录ip 
+             最新登录ip
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LatestLoginAddress">
              <summary>
-             最新登录地点 
+             最新登录地点
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LatestLoginTime">
              <summary>
-             最新登录时间 
+             最新登录时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.LatestLoginDevice">
              <summary>
-             最新登录设备 
+             最新登录设备
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.UserStatus">
              <summary>
-             用户状态 
+             用户状态
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.SortCode">
              <summary>
-             排序码 
+             排序码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysUser.OrgName">
@@ -2306,7 +2306,7 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SqlSugarTableInfo.ConfigId">
              <summary>
-             所属库 
+             所属库
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SqlSugarTableInfo.TableName">
@@ -2372,17 +2372,17 @@
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.ObjectId">
              <summary>
-             对象ID 
+             对象ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.TargetId">
              <summary>
-             目标ID 
+             目标ID
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.Category">
              <summary>
-             分类 
+             分类
             </summary>
         </member>
     </members>

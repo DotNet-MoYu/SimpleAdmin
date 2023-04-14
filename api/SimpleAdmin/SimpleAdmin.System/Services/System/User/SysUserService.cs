@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// <inheritdoc cref="ISysUserService"/>
 /// </summary>
@@ -92,7 +91,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             }
         }
         return userId;
-
     }
 
     /// <inheritdoc/>
@@ -130,7 +128,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
         return sysUser;
     }
-
 
     /// <inheritdoc/>
     public async Task<long> GetIdByAccount(string account)
@@ -230,7 +227,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return permissions;
     }
 
-
     /// <inheritdoc/>
     public async Task<List<long>> GetLoginUserApiDataScope()
     {
@@ -259,8 +255,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                          .ToListAsync();
         return result;
     }
-
-
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysUser>> Page(UserPageInput input)
@@ -321,7 +315,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return roleOwnPermission;
     }
 
-
     /// <inheritdoc />
     public async Task<List<string>> UserPermissionTreeSelector(BaseIdInput input)
     {
@@ -339,12 +332,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 permissionTreeSelectors = permissions.Select(it => it.PermissionName).ToList();//返回授权树权限名称列表
             }
-
         }
         return permissionTreeSelectors;
     }
 
-    #endregion
+    #endregion 查询
 
     #region 新增
 
@@ -360,7 +352,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         sysUser.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//默认状态
         await InsertAsync(sysUser);//添加数据
     }
-    #endregion
+
+    #endregion 新增
 
     #region 编辑
 
@@ -395,7 +388,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             }).ExecuteCommandAsync() > 0)//修改数据
                 DeleteUserFromRedis(sysUser.Id);//用户缓存到redis
         }
-
     }
 
     /// <inheritdoc/>
@@ -408,7 +400,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             await Context.Updateable<SysUser>(data).Where(it => input.Ids.Contains(it.Id)).ExecuteCommandAsync();
         }
     }
-
 
     /// <inheritdoc/>
     public async Task DisableUser(BaseIdInput input)
@@ -424,8 +415,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (await UpdateAsync(it => new SysUser { UserStatus = DevDictConst.COMMON_STATUS_DISABLED }, it => it.Id == input.Id))
                 DeleteUserFromRedis(input.Id);//从redis删除用户信息
         }
-
     }
+
     /// <inheritdoc/>
     public async Task EnableUser(BaseIdInput input)
     {
@@ -443,6 +434,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (await UpdateAsync(it => new SysUser { Password = password }, it => it.Id == input.Id))
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
     }
+
     /// <inheritdoc />
     public async Task GrantRole(UserGrantRoleInput input)
     {
@@ -469,6 +461,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (sysUser != null)
         {
             #region 用户资源处理
+
             //遍历角色列表
             for (int i = 0; i < menuIds.Count; i++)
             {
@@ -481,8 +474,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     ExtJson = extJsons == null ? null : extJsons[i]
                 });
             }
-            #endregion
+
+            #endregion 用户资源处理
+
             #region 用户权限处理.
+
             var relationRolePer = new List<SysRelation>();//要添加的角色有哪些权限列表
             var defaultDataScope = input.DefaultDataScope;//获取默认数据范围
 
@@ -502,13 +498,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                         Category = CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
                         ExtJson = new RelationRolePermission { ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory, ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList }.ToJson()
                     });
-
                 });
-
             }
             relationRoles.AddRange(relationRolePer);//合并列表
-            #endregion
+
+            #endregion 用户权限处理.
+
             #region 保存数据库
+
             //事务
             var result = await itenant.UseTranAsync(async () =>
            {
@@ -528,12 +525,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 _logger.LogError(result.ErrorMessage, result.ErrorException);
                 throw Oops.Oh(ErrorCodeEnum.A0003);
             }
-            #endregion
 
+            #endregion 保存数据库
         }
-
     }
-
 
     /// <inheritdoc />
     public async Task GrantPermission(GrantPermissionInput input)
@@ -548,7 +543,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
     }
 
-    #endregion
+    #endregion 编辑
 
     #region 删除
 
@@ -584,7 +579,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                         {
                             it.DirectorId = null;//移除
                             update = true;//需要更新
-
                         }
                     }
                 });
@@ -601,7 +595,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     await Context.Updateable(updatePositionJsonUser).UpdateColumns(it => it.PositionJson).ExecuteCommandAsync();
                 //删除用户
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());
-
             });
             if (result.IsSuccess)//如果成功了
             {
@@ -614,8 +607,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 _logger.LogError(result.ErrorMessage, result.ErrorException);
                 throw Oops.Oh(ErrorCodeEnum.A0002);
             }
-
-
         }
     }
 
@@ -624,7 +615,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         DeleteUserFromRedis(new List<long> { userId });
     }
-
 
     /// <inheritdoc />
     public void DeleteUserFromRedis(List<long> ids)
@@ -646,8 +636,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         }
     }
 
-
-    #endregion
+    #endregion 删除
 
     #region 导入导出
 
@@ -658,7 +647,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //var result = _importExportService.GenerateLocalTemplate(templateName);
         var result = await _importExportService.GenerateTemplate<SysUserImportInput>(templateName);
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -678,7 +666,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         await SetUserDefault(sysUsers);//设置默认值
         await InsertOrBulkCopy(sysUsers);// 数据导入
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -694,6 +681,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<List<T>> CheckImport<T>(List<T> data, bool clearError = false) where T : SysUserImportInput
     {
         #region 校验要用到的数据
+
         var accounts = data.Select(it => it.Account).ToList();//当前导入数据账号列表
         var phones = data.Where(it => !string.IsNullOrEmpty(it.Phone)).Select(it => it.Phone).ToList();//当前导入数据手机号列表
         var emails = data.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//当前导入数据邮箱列表
@@ -704,7 +692,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var sysOrgs = await _sysOrgService.GetListAsync();
         var sysPositions = await _sysPositionService.GetListAsync();
         var dicts = await _dictService.GetListAsync();
-        #endregion
+
+        #endregion 校验要用到的数据
+
         foreach (var item in data)
         {
             if (clearError)//如果需要清除错误
@@ -712,13 +702,18 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 item.ErrorInfo = new Dictionary<string, string>();
                 item.HasError = false;
             }
+
             #region 校验账号
+
             if (dbAccounts.Contains(item.Account))
                 item.ErrorInfo.Add(nameof(item.Account), $"系统已存在账号{item.Account}");
             if (accounts.Where(u => u == item.Account).Count() > 1)
                 item.ErrorInfo.Add(nameof(item.Account), $"账号重复");
-            #endregion
+
+            #endregion 校验账号
+
             #region 校验手机号
+
             if (!string.IsNullOrEmpty(item.Phone))
             {
                 if (dbPhones.Contains(item.Phone))
@@ -726,8 +721,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 if (phones.Where(u => u == item.Phone).Count() > 1)
                     item.ErrorInfo.Add(nameof(item.Phone), $"手机号重复");
             }
-            #endregion
+
+            #endregion 校验手机号
+
             #region 校验邮箱
+
             if (!string.IsNullOrEmpty(item.Email))
             {
                 if (dbEmails.Contains(item.Email))
@@ -735,8 +733,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 if (emails.Where(u => u == item.Email).Count() > 1)
                     item.ErrorInfo.Add(nameof(item.Email), $"邮箱重复");
             }
-            #endregion
+
+            #endregion 校验邮箱
+
             #region 校验部门和职位
+
             if (!string.IsNullOrEmpty(item.OrgName))
             {
                 var org = sysOrgs.Where(u => u.Names == item.OrgName).FirstOrDefault();
@@ -754,10 +755,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     if (position != null) item.PositionId = position.Id;
                     else item.ErrorInfo.Add(nameof(item.PositionName), $"职位{item.PositionName}不存在");
                 }
-
             }
-            #endregion
+
+            #endregion 校验部门和职位
+
             #region 校验性别等字典
+
             var genders = await _dictService.GetValuesByDictValue(DevDictConst.GENDER, dicts);
             if (!genders.Contains(item.Gender)) item.ErrorInfo.Add(nameof(item.Gender), $"性别只能是男和女");
             if (!string.IsNullOrEmpty(item.Nation))
@@ -775,13 +778,13 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 var cultrueLevels = await _dictService.GetValuesByDictValue(DevDictConst.CULTURE_LEVEL, dicts);
                 if (!cultrueLevels.Contains(item.CultureLevel)) item.ErrorInfo.Add(nameof(item.CultureLevel), $"文化程度有误");
             }
-            #endregion
-            if (item.ErrorInfo.Count > 0) item.HasError = true;//如果错误信息数量大于0则表示有错误
 
+            #endregion 校验性别等字典
+
+            if (item.ErrorInfo.Count > 0) item.HasError = true;//如果错误信息数量大于0则表示有错误
         }
         data = data.OrderByDescending(it => it.HasError).ToList();//排序
         return data;
-
     }
 
     /// <inheritdoc/>
@@ -789,17 +792,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var defaultPassword = await GetDefaultPassWord(true);//默认密码
 
-        //默认值赋值                                            
+        //默认值赋值
         sysUsers.ForEach(user =>
         {
             user.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//状态
             user.Phone = CryptogramUtil.Sm4Encrypt(user.Phone);//手机号
             user.Password = defaultPassword;//默认密码
             user.Avatar = AvatarUtil.GetNameImageBase64(user.Name);//默认头像
-
         });
     }
-    #endregion
+
+    #endregion 导入导出
 
     #region 方法
 
@@ -820,7 +823,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <param name="sysUser"></param>
     private async Task CheckInput(SysUser sysUser)
     {
-
         //判断账号重复,直接从redis拿
         var account_Id = await GetIdByAccount(sysUser.Account);
         if (account_Id > 0 && account_Id != sysUser.Id)
@@ -873,9 +875,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             age--;
         }
         return age < 0 ? 0 : age;
-
     }
-
 
     /// <summary>
     /// 获取Sqlsugar的ISugarQueryable
@@ -900,7 +900,6 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
          });
         return query;
     }
-    #endregion
+
+    #endregion 方法
 }
-
-

@@ -119,7 +119,7 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.UseSignalR">
             <summary>
-            是否开启SignalR 
+            是否开启SignalR
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.Core.PluginSettingsOptions.UseMqtt">

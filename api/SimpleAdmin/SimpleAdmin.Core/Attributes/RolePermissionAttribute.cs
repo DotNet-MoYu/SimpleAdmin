@@ -5,7 +5,6 @@
 /// </summary>
 public class RolePermissionAttribute : Attribute
 {
-
 }
 
 /// <summary>
@@ -13,6 +12,4 @@ public class RolePermissionAttribute : Attribute
 /// </summary>
 public class IgnoreRolePermissionAttribute : Attribute
 {
-
-
 }

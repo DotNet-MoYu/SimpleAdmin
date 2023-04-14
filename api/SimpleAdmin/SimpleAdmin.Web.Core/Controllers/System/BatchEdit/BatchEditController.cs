@@ -27,7 +27,6 @@ public class BatchEditController : BaseController
         return await _batchEditService.Page(input);
     }
 
-
     /// <summary>
     /// 获取表信息
     /// </summary>
@@ -38,13 +37,11 @@ public class BatchEditController : BaseController
         return _batchEditService.GetTables();
     }
 
-
     /// <summary>
     /// 获取批量配置信息
     /// </summary>
     /// <returns></returns>
     [HttpGet("configs")]
-
     public async Task<dynamic> ConfigList([FromQuery] BaseIdInput input)
     {
         return await _batchEditService.ConfigList(input);
@@ -56,13 +53,12 @@ public class BatchEditController : BaseController
     /// <returns></returns>
     [HttpGet("columns")]
     [IgnoreSuperAdmin]
-
     public async Task<dynamic> Columns([FromQuery] string code)
     {
         return await _batchEditService.Columns(code);
     }
 
-    #endregion
+    #endregion Get请求
 
     #region Post请求
 
@@ -90,7 +86,6 @@ public class BatchEditController : BaseController
         await _batchEditService.Config(input);
     }
 
-
     /// <summary>
     /// 删除批量
     /// </summary>
@@ -114,6 +109,6 @@ public class BatchEditController : BaseController
     {
         await _batchEditService.SyncColumns(input);
     }
-    #endregion
-}
 
+    #endregion Post请求
+}

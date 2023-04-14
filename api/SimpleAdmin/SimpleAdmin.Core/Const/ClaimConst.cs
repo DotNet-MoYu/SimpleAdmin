@@ -29,6 +29,4 @@ public class ClaimConst
     /// 组织机构Id
     /// </summary>
     public const string OrgId = "OrgId";
-
-
 }

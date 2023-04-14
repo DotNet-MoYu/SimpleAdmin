@@ -30,10 +30,9 @@ public class Startup : AppStartup
                      .AddNewtonsoftJson(options =>//配置json
                      {
                          options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver(); // 首字母小写（驼峰样式）
-                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化                                          
+                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化
                          options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
                      });
-
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -66,7 +65,6 @@ public class Startup : AppStartup
 
         //);
         app.UseCorsAccessor();
-
 
         app.UseAuthentication();
         app.UseAuthorization();

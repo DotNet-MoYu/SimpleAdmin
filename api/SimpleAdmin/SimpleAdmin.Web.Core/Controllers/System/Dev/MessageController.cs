@@ -14,7 +14,6 @@ public class MessageController : BaseController
         this._messageService = messageService;
     }
 
-
     /// <summary>
     /// 分页查询
     /// </summary>
@@ -60,5 +59,4 @@ public class MessageController : BaseController
     {
         await _messageService.Delete(input);
     }
-
 }

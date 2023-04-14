@@ -2,7 +2,6 @@
 
 namespace SimpleAdmin.Web.Core.Controllers.System.Gen;
 
-
 /// <summary>
 /// 代码生成配置控制器
 /// </summary>
@@ -27,7 +26,6 @@ public class GenConfigController : BaseController
     public async Task<dynamic> List(string basicId)
     {
         return await _genConfigSerivce.List(basicId.ToLong());
-
     }
 
     /// <summary>

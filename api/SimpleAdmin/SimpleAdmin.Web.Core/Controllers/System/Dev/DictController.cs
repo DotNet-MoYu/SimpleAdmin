@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 系统字典控制器
 /// </summary>

@@ -6,20 +6,21 @@
 public class GenViewModel : GenBasic
 {
     #region 基础
+
     /// <summary>
     /// 生成时间
     /// </summary>
     public string GenTime { get; set; } = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-
 
     /// <summary>
     /// 表字段
     /// </summary>
     public List<GenConfig> TableFields { get; set; }
 
-    #endregion
+    #endregion 基础
 
     #region 菜单
+
     /// <summary>
     /// 菜单ID
     /// </summary>
@@ -46,8 +47,7 @@ public class GenViewModel : GenBasic
         get { return $"{RouteName}/{BusName}/index"; }
     }
 
-    #endregion
-
+    #endregion 菜单
 
     #region 按钮
 
@@ -61,20 +61,20 @@ public class GenViewModel : GenBasic
     /// </summary>
     public long BatchDeleteButtonId { get; set; } = CommonUtils.GetSingleId();
 
-
     /// <summary>
     /// 编辑按钮ID
     /// </summary>
     public long EditButtonId { get; set; } = CommonUtils.GetSingleId();
 
-
     /// <summary>
     /// 删除按钮ID
     /// </summary>
     public long DeleteButtonId { get; set; } = CommonUtils.GetSingleId();
-    #endregion
+
+    #endregion 按钮
 
     #region 后端
+
     /// <summary>
     /// 类名首字母小写
     /// </summary>
@@ -82,7 +82,6 @@ public class GenViewModel : GenBasic
     {
         get { return StringHelper.FirstCharToLower(ClassName); }
     }
-
 
     /// <summary>
     /// swagger分组名称
@@ -110,9 +109,11 @@ public class GenViewModel : GenBasic
     {
         get { return ClassNameFirstLower + "Service"; }
     }
-    #endregion
+
+    #endregion 后端
 
     #region 注释描述
+
     /// <summary>
     /// 分页查询
     /// </summary>
@@ -152,25 +153,28 @@ public class GenViewModel : GenBasic
     {
         get { return FunctionName + "详情"; }
     }
-    #endregion
+
+    #endregion 注释描述
 
     #region 参数
 
     /// <summary>
     /// 分页参数
     /// </summary>
-    public string PageInput { get { return ClassName + "PageInput"; } }
+    public string PageInput
+    { get { return ClassName + "PageInput"; } }
 
     /// <summary>
     /// 添加参数
     /// </summary>
-    public string AddInput { get { return ClassName + "AddInput"; } }
+    public string AddInput
+    { get { return ClassName + "AddInput"; } }
 
     /// <summary>
     /// 编辑参数
     /// </summary>
-    public string EditInput { get { return ClassName + "EditInput"; } }
+    public string EditInput
+    { get { return ClassName + "EditInput"; } }
 
-    #endregion
-
+    #endregion 参数
 }

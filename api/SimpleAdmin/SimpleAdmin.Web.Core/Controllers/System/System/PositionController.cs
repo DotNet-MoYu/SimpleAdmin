@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 职位管理控制器
 /// </summary>
@@ -60,6 +61,4 @@ public class PositionController : BaseController
     {
         await _sysPositionService.Delete(input);
     }
-
-
 }

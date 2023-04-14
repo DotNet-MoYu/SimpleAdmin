@@ -7,9 +7,8 @@ namespace SimpleAdmin.Plugin.Core;
 /// </summary>
 public class PluginSettingsOptions : IConfigurableOptions
 {
-
     /// <summary>
-    /// 是否开启SignalR 
+    /// 是否开启SignalR
     /// </summary>
     public bool UseSignalR { get; set; } = true;
 
@@ -23,8 +22,4 @@ public class PluginSettingsOptions : IConfigurableOptions
     /// SignalR/Mqtt
     /// </summary>
     public NoticeComponent NoticeComponent { get; set; } = NoticeComponent.Signalr;
-
-
 }
-
-

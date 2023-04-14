@@ -2,7 +2,6 @@
 
 public class ScheduleListOutput : RelationUserSchedule
 {
-
     /// <summary>
     /// ID
     /// </summary>

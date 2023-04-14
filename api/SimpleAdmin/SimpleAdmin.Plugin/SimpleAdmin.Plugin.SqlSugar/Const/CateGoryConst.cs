@@ -6,11 +6,11 @@
 public class CateGoryConst
 {
     #region 系统配置
+
     /// <summary>
     /// 系统基础
     /// </summary>
     public const string Config_SYS_BASE = "SYS_BASE";
-
 
     /// <summary>
     /// 业务定义
@@ -22,12 +22,12 @@ public class CateGoryConst
     /// </summary>
     public const string Config_FILE_LOCAL = "FILE_LOCAL";
 
-
     /// <summary>
     /// 文件-MINIO
     /// </summary>
     public const string Config_FILE_MINIO = "FILE_MINIO";
-    #endregion
+
+    #endregion 系统配置
 
     #region Mqtt配置
 
@@ -36,22 +36,19 @@ public class CateGoryConst
     /// </summary>
     public const string Config_MQTT_BASE = "MQTT_BASE";
 
-
-
-    #endregion
+    #endregion Mqtt配置
 
     #region 关系表
+
     /// <summary>
     /// 用户有哪些角色
     /// </summary>
     public const string Relation_SYS_USER_HAS_ROLE = "SYS_USER_HAS_ROLE";
 
-
     /// <summary>
     /// 角色有哪些资源
     /// </summary>
     public const string Relation_SYS_ROLE_HAS_RESOURCE = "SYS_ROLE_HAS_RESOURCE";
-
 
     /// <summary>
     ///用户有哪些资源
@@ -62,7 +59,6 @@ public class CateGoryConst
     /// 角色有哪些权限
     /// </summary>
     public const string Relation_SYS_ROLE_HAS_PERMISSION = "SYS_ROLE_HAS_PERMISSION";
-
 
     /// <summary>
     /// 角色有哪些权限
@@ -83,9 +79,11 @@ public class CateGoryConst
     /// 站内信与接收用户
     /// </summary>
     public const string Relation_MSG_TO_USER = "MSG_TO_USER";
-    #endregion
+
+    #endregion 关系表
 
     #region 数据范围
+
     /// <summary>
     /// 本人
     /// </summary>
@@ -95,6 +93,7 @@ public class CateGoryConst
     /// 所有
     /// </summary>
     public const string SCOPE_ALL = "SCOPE_ALL";
+
     /// <summary>
     /// 仅所属组织
     /// </summary>
@@ -109,9 +108,11 @@ public class CateGoryConst
     /// 自定义
     /// </summary>
     public const string SCOPE_ORG_DEFINE = "SCOPE_ORG_DEFINE";
-    #endregion
+
+    #endregion 数据范围
 
     #region 资源表
+
     /// <summary>
     /// 模块
     /// </summary>
@@ -131,9 +132,11 @@ public class CateGoryConst
     /// 按钮
     /// </summary>
     public const string Resource_BUTTON = "BUTTON";
-    #endregion
+
+    #endregion 资源表
 
     #region 日志表
+
     /// <summary>
     /// 登录
     /// </summary>
@@ -143,7 +146,6 @@ public class CateGoryConst
     /// 登出
     /// </summary>
     public const string Log_LOGOUT = "LOGOUT";
-
 
     /// <summary>
     /// 操作
@@ -155,9 +157,10 @@ public class CateGoryConst
     /// </summary>
     public const string Log_EXCEPTION = "EXCEPTION";
 
-    #endregion
+    #endregion 日志表
 
     #region 字典表
+
     /// <summary>
     /// 框架
     /// </summary>
@@ -167,9 +170,11 @@ public class CateGoryConst
     /// 业务
     /// </summary>
     public const string Dict_BIZ = "BIZ";
-    #endregion
+
+    #endregion 字典表
 
     #region 组织表
+
     /// <summary>
     /// 部门
     /// </summary>
@@ -179,9 +184,11 @@ public class CateGoryConst
     /// 公司
     /// </summary>
     public const string Org_COMPANY = "COMPANY";
-    #endregion
+
+    #endregion 组织表
 
     #region 职位表
+
     /// <summary>
     /// 高层
     /// </summary>
@@ -197,7 +204,7 @@ public class CateGoryConst
     /// </summary>
     public const string Position_LOW = "LOW";
 
-    #endregion
+    #endregion 职位表
 
     #region 角色表
 
@@ -210,7 +217,8 @@ public class CateGoryConst
     /// 机构
     /// </summary>
     public const string Role_ORG = "ORG";
-    #endregion
+
+    #endregion 角色表
 
     #region 站内信表
 
@@ -224,6 +232,5 @@ public class CateGoryConst
     /// </summary>
     public const string Message_NOTICE = "NOTICE";
 
-    #endregion
-
+    #endregion 站内信表
 }

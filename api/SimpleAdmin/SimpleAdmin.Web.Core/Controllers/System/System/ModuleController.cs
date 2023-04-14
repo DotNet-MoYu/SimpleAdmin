@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 模块管理控制器
 /// </summary>
@@ -9,7 +10,6 @@ public class ModuleController : BaseController
 
     public ModuleController(IModuleService moduleService)
     {
-
         _moduleService = moduleService;
     }
 
@@ -60,6 +60,4 @@ public class ModuleController : BaseController
     {
         await _moduleService.Delete(input);
     }
-
-
 }

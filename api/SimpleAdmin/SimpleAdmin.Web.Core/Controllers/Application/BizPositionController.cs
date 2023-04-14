@@ -63,6 +63,4 @@ public class BizPositionController
     {
         await _positionService.Delete(input);
     }
-
-
 }

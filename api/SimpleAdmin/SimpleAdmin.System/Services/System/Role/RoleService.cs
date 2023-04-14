@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <inheritdoc cref="IRoleService"/>
 //[Injection(Proxy = typeof(GlobalDispatchProxy))]
 public class RoleService : DbRepository<SysRole>, IRoleService
@@ -31,7 +30,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// 获取所有橘色
     /// </summary>
     /// <returns></returns>
-    public async override Task<List<SysRole>> GetListAsync()
+    public override async Task<List<SysRole>> GetListAsync()
     {
         //先从Redis拿
         var sysRoles = _simpleCacheService.Get<List<SysRole>>(CacheConst.Cache_SysRole);
@@ -43,7 +42,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             {
                 //插入Redis
                 _simpleCacheService.Set(CacheConst.Cache_SysRole, sysRoles);
-
             }
         }
         return sysRoles;
@@ -61,7 +59,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         }
         return cods;
     }
-
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysRole>> Page(RolePageInput input)
@@ -116,7 +113,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                         rolePermission.ScopeDefineOrgIdList = input.DefaultDataScope.ScopeDefineOrgIdList;
                         it.ExtJson = rolePermission.ToJson();
                     }
-
                 });
             }
             var sysRole = input.Adapt<SysRole>();//实体转换
@@ -141,7 +137,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 throw Oops.Oh(ErrorCodeEnum.A0002);
             }
         }
-
     }
 
     /// <inheritdoc />
@@ -186,7 +181,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         }
     }
 
-
     /// <inheritdoc />
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
     {
@@ -205,7 +199,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         return roleOwnResource;
     }
 
-
     /// <inheritdoc />
     public async Task GrantResource(GrantResourceInput input)
     {
@@ -216,6 +209,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         if (sysRole != null)
         {
             #region 角色资源处理
+
             //遍历角色列表
             for (int i = 0; i < menuIds.Count; i++)
             {
@@ -228,8 +222,11 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                     ExtJson = extJsons == null ? null : extJsons[i]
                 });
             }
-            #endregion
+
+            #endregion 角色资源处理
+
             #region 角色权限处理.
+
             var relationRolePer = new List<SysRelation>();//要添加的角色有哪些权限列表
             var defaultDataScope = sysRole.DefaultDataScope;//获取默认数据范围
 
@@ -249,13 +246,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                         Category = CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION,
                         ExtJson = new RelationRolePermission { ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory, ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList }.ToJson()
                     });
-
                 });
-
             }
             relationRoles.AddRange(relationRolePer);//合并列表
-            #endregion
+
+            #endregion 角色权限处理.
+
             #region 保存数据库
+
             //事务
             var result = await itenant.UseTranAsync(async () =>
            {
@@ -277,10 +275,9 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 _logger.LogError(result.ErrorMessage, result.ErrorException);
                 throw Oops.Oh(ErrorCodeEnum.A0003);
             }
-            #endregion
 
+            #endregion 保存数据库
         }
-
     }
 
     /// <inheritdoc />
@@ -314,7 +311,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         }
     }
 
-
     /// <inheritdoc />
     public async Task<List<long>> OwnUser(BaseIdInput input)
     {
@@ -323,11 +319,9 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         return relations.Select(it => it.ObjectId).ToList();
     }
 
-
     /// <inheritdoc />
     public async Task GrantUser(GrantUserInput input)
     {
-
         var sysRelations = new List<SysRelation>();//关系列表
         //遍历用户ID
         input.GrantInfoList.ForEach(it =>
@@ -352,7 +346,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_ROLE);//刷新关系表SYS_USER_HAS_ROLE缓存
             await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
-
         }
         else
         {
@@ -360,7 +353,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             _logger.LogError(result.ErrorMessage, result.ErrorException);
             throw Oops.Oh(ErrorCodeEnum.A0003);
         }
-
     }
 
     /// <inheritdoc />
@@ -397,7 +389,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             {
                 permissionTreeSelectors = permissions.Select(it => it.PermissionName).ToList();//返回授权树权限名称列表
             }
-
         }
         return permissionTreeSelectors;
     }
@@ -405,12 +396,12 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-
         _simpleCacheService.Remove(CacheConst.Cache_SysRole);//删除KEY
         await GetListAsync();//重新缓存
     }
 
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -437,5 +428,5 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         }
     }
 
-    #endregion
+    #endregion 方法
 }

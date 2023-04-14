@@ -5,7 +5,6 @@
 /// </summary>
 public class MqttMessage
 {
-
     /// <summary>
     /// 消息分类
     /// </summary>

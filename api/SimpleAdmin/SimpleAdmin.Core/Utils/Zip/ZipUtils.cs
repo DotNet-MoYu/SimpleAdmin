@@ -102,7 +102,7 @@ public class ZipUtils
 
     /// <summary>
     /// 压缩多个文件到指定路径
-    /// </summary>        
+    /// </summary>
     /// <param name="sourceFileNames">压缩到哪个路径</param>
     /// <param name="zipFileName">压缩文件名称</param>
     public static void ZipFile(List<string> sourceFileNames, string zipFileName)
@@ -123,7 +123,6 @@ public class ZipUtils
                 }
                 else // 否则直接压缩文件
                 {
-
                     ZipEntry entry = new ZipEntry(Path.GetFileName(file));
                     entry.DateTime = DateTime.Now;
                     s.PutNextEntry(entry);
@@ -142,7 +141,6 @@ public class ZipUtils
             s.Close();
         }
     }
-
 
     /// <summary>
     /// 压缩多层目录
@@ -226,7 +224,6 @@ public class ZipUtils
                         sourceBytes = fs.Read(buffer, 0, buffer.Length);
                         s.Write(buffer, 0, sourceBytes);
                     } while (sourceBytes > 0);
-
                 }
             }
         }
@@ -241,7 +238,6 @@ public class ZipUtils
     /// <param name="overWrite">是否覆盖已存在的文件。</param>
     public static void UnZip(string zipedFile, string strDirectory, bool overWrite, string password)
     {
-
         if (strDirectory == "")
             strDirectory = Directory.GetCurrentDirectory();
         if (!strDirectory.EndsWith("\\"))
@@ -369,7 +365,6 @@ public class ZipUtils
         return GetFiles(zipedFile, null);
     }
 
-
     /// <summary>
     /// 打包线上线下文件
     /// </summary>
@@ -426,9 +421,9 @@ public class ZipUtils
         return url;
     }
 
-    /// 压缩文件夹   
-    /// 要打包的文件夹   
-    /// 是否删除原文件夹 
+    /// 压缩文件夹
+    /// 要打包的文件夹
+    /// 是否删除原文件夹
     public static string CompressDirectory(string dirPath, bool deleteDir)
     {
         //压缩文件路径
@@ -464,10 +459,11 @@ public class ZipUtils
         }
         return pCompressPath;
     }
-    ///    
-    /// 获取所有文件   
-    ///    
-    ///    
+
+    ///
+    /// 获取所有文件
+    ///
+    ///
     private static Dictionary<string, DateTime> GetAllFies(string dir)
     {
         Dictionary<string, DateTime> FilesList = new Dictionary<string, DateTime>();
@@ -480,11 +476,12 @@ public class ZipUtils
         GetAllDirsFiles(fileDire.GetDirectories(), FilesList);
         return FilesList;
     }
-    ///    
-    /// 获取一个文件夹下的所有文件夹里的文件   
-    ///    
-    ///    
-    ///    
+
+    ///
+    /// 获取一个文件夹下的所有文件夹里的文件
+    ///
+    ///
+    ///
     private static void GetAllDirsFiles(DirectoryInfo[] dirs, Dictionary<string, DateTime> filesList)
     {
         foreach (DirectoryInfo dir in dirs)
@@ -496,11 +493,12 @@ public class ZipUtils
             GetAllDirsFiles(dir.GetDirectories(), filesList);
         }
     }
-    ///    
-    /// 获取一个文件夹下的文件   
-    ///    
-    /// 目录名称   
-    /// 文件列表HastTable   
+
+    ///
+    /// 获取一个文件夹下的文件
+    ///
+    /// 目录名称
+    /// 文件列表HastTable
     private static void GetAllDirFiles(DirectoryInfo dir, Dictionary<string, DateTime> filesList)
     {
         foreach (FileInfo file in dir.GetFiles())
@@ -509,7 +507,6 @@ public class ZipUtils
         }
     }
 }
-
 
 /// <summary>
 /// 文件对象
@@ -520,6 +517,7 @@ public class FileItem
     /// 文件名称
     /// </summary>
     public string FileName { get; set; }
+
     /// <summary>
     /// 文件路径
     /// </summary>

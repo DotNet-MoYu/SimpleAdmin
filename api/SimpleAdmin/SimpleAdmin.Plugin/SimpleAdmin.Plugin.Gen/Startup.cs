@@ -16,9 +16,8 @@ public class Startup : AppStartup
         //试图引擎
         services.AddViewEngine();
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-
     }
-
 }

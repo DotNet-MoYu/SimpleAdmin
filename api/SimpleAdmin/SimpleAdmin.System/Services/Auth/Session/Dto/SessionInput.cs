@@ -6,18 +6,18 @@
 public class SessionPageInput : BasePageInput
 {
     /// <summary>
-    /// 账号 
+    /// 账号
     ///</summary>
     public virtual string Account { get; set; }
 
     /// <summary>
-    /// 姓名 
+    /// 姓名
     ///</summary>
 
     public virtual string Name { get; set; }
 
     /// <summary>
-    /// 最新登录ip 
+    /// 最新登录ip
     ///</summary>
     public string LatestLoginIp { get; set; }
 }
@@ -27,11 +27,9 @@ public class SessionPageInput : BasePageInput
 /// </summary>
 public class ExitTokenInput : BaseIdInput
 {
-
     /// <summary>
     /// token
     /// </summary>
     [Required(ErrorMessage = "Tokens不能为空")]
     public List<string> Tokens { get; set; }
-
 }

@@ -49,15 +49,12 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SessionOutput>> PageC(SessionPageInput input)
     {
-
         return new SqlSugarPagedList<SessionOutput>() { Current = 1, Size = 20, Total = 0, Pages = 1, HasNextPages = false };
     }
-
 
     /// <inheritdoc/>
     public SessionAnalysisOutPut Analysis()
     {
-
         Dictionary<string, List<TokenInfo>> tokenDic = GetTokenDicFromRedis();//redistoken会话字典信息
         var tokenInfosList = tokenDic.Values.ToList();//端token列表
         var dicB = new Dictionary<string, List<TokenInfo>>();
@@ -105,7 +102,6 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <inheritdoc/>
     public async Task ExitToken(ExitTokenInput input)
     {
-
         var userId = input.Id.ToString();
         //获取该用户的token信息
         var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
@@ -119,8 +115,8 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { userId });//否则直接删除key
         await NoticeUserLoginOut(userId, deleteTokens);
     }
-    #region 方法
 
+    #region 方法
 
     /// <summary>
     /// 获取redis中token信息列表
@@ -144,7 +140,6 @@ public class SessionService : DbRepository<SysUser>, ISessionService
                 {
                     bTokenDic[it.Key] = tokens;//重新赋值token
                 }
-
             });
             if (bTokenDic.Count > 0)
             {
@@ -160,9 +155,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         {
             return new Dictionary<string, List<TokenInfo>>();
         }
-
     }
-
 
     /// <summary>
     /// 获取token剩余时间信息
@@ -181,7 +174,6 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             var tokenRemainPercent = 1 - ((now.ConvertDateTimeToLong() - tokenSecond) * 1.0 / (timeoutSecond - tokenSecond));//求百分比,用现在时间-token颁布时间除以超时时间-token颁布时间
             it.TokenRemainPercent = tokenRemainPercent;
         });
-
     }
 
     /// <summary>
@@ -197,5 +189,6 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             UserId = userId
         }); //通知用户下线
     }
-    #endregion
+
+    #endregion 方法
 }

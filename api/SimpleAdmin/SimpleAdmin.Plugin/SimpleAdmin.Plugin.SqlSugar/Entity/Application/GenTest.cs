@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.SqlSugar;
+﻿namespace SimpleAdmin.Plugin.SqlSugar;
 
 /// <summary>
 /// 代码生成基础
@@ -11,19 +9,15 @@ namespace SimpleAdmin.Plugin.SqlSugar;
 [BatchEdit]
 public class GenTest : DataEntityBase
 {
-
     /// <summary>
     /// 姓名
     /// </summary>
     public string Name { get; set; }
 
-
     /// <summary>
     /// 性别
     /// </summary>
     public string Sex { get; set; }
-
-
 
     /// <summary>
     /// 民族
@@ -41,17 +35,13 @@ public class GenTest : DataEntityBase
     /// </summary>
     public DateTime Bir { get; set; }
 
-
     /// <summary>
     /// 存款
     /// </summary>
     public decimal Money { get; set; }
 
-
     /// <summary>
-    /// 排序码 
+    /// 排序码
     ///</summary>
     public int SortCode { get; set; }
-
-
 }

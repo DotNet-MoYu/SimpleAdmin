@@ -9,5 +9,4 @@ public class BatchEditSeedData : ISqlSugarEntitySeedData<BatchEdit>
     {
         return SeedDataUtil.GetSeedData<BatchEdit>(SqlsugarConst.DB_Default, "batch_edit.json");
     }
-
 }

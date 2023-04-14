@@ -1,9 +1,6 @@
-﻿
-
-using Masuit.Tools.Models;
+﻿using Masuit.Tools.Models;
 
 namespace SimpleAdmin.Plugin.SqlSugar;
-
 
 /// <summary>
 /// Sqlsugar分页拓展类
@@ -184,4 +181,3 @@ public class SqlSugarPagedList<TEntity>
     /// </summary>
     public bool HasNextPages { get; set; }
 }
-

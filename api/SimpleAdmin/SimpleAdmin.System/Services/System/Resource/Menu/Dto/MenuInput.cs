@@ -6,7 +6,6 @@
 
 public class MenuTreeInput
 {
-
     /// <summary>
     /// 模块
     /// </summary>
@@ -114,5 +113,4 @@ public class MenuChangeModuleInput : BaseIdInput
     /// </summary>
     [Required(ErrorMessage = "Module不能为空")]
     public long? Module { get; set; }
-
 }

@@ -5,7 +5,6 @@
 /// </summary>
 public class ConfigPageInput : BasePageInput
 {
-
 }
 
 /// <summary>
@@ -24,10 +23,7 @@ public class ConfigAddInput : DevConfig
     /// </summary>
 
     [Required(ErrorMessage = "ConfigValue不能为空")]
-
     public override string ConfigValue { get; set; }
-
-
 }
 
 /// <summary>
@@ -48,7 +44,6 @@ public class ConfigEditInput : ConfigAddInput
 
 public class ConfigDeleteInput : BaseIdInput
 {
-
 }
 
 /// <summary>
@@ -56,13 +51,10 @@ public class ConfigDeleteInput : BaseIdInput
 /// </summary>
 public class ConfigEditBatchInput
 {
-
     /// <summary>
     /// 分类
     /// </summary>
     public string CateGory { get; set; }
 
-
     public List<DevConfig> DevConfigs { get; set; }
-
 }

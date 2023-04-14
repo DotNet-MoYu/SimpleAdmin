@@ -15,9 +15,7 @@ public class UserIdProvider : IUserIdProvider
         var userId = claims.FirstOrDefault(u => u.Type == ClaimConst.UserId)?.Value;//获取用户ID
         if (!string.IsNullOrEmpty(userId))//如果不为空
             return $"{userId}_{RandomHelper.CreateLetterAndNumber(5)}";//返回用户ID
-
         else
             return connection.ConnectionId;
-
     }
 }

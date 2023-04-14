@@ -2,7 +2,6 @@
 
 public class AuthOutPut
 {
-
 }
 
 /// <summary>
@@ -19,7 +18,6 @@ public class PicValidCodeOutPut
     /// 验证码请求号
     /// </summary>
     public string ValidCodeReqNo { get; set; }
-
 }
 
 /// <summary>
@@ -32,18 +30,15 @@ public class LoginOutPut
     /// </summary>
     public string Token { get; set; }
 
-
     /// <summary>
     /// 账号
     /// </summary>
     public string Account { get; set; }
 
-
     /// <summary>
     /// 姓名
     /// </summary>
     public string Name { get; set; }
-
 }
 
 /// <summary>
@@ -52,28 +47,27 @@ public class LoginOutPut
 public class LoginUserOutput
 {
     /// <summary>
-    /// 头像 
+    /// 头像
     ///</summary>
     public string Avatar { get; set; }
 
     /// <summary>
-    /// 签名 
+    /// 签名
     ///</summary>
     public string Signature { get; set; }
 
     /// <summary>
-    /// 账号 
+    /// 账号
     ///</summary>
     public string Account { get; set; }
 
-
     /// <summary>
-    /// 姓名 
+    /// 姓名
     ///</summary>
     public string Name { get; set; }
 
     /// <summary>
-    /// 昵称 
+    /// 昵称
     ///</summary>
     public string Nickname { get; set; }
 
@@ -94,12 +88,12 @@ public class LoginUserOutput
     public string Email { get; set; }
 
     /// <summary>
-    /// 性别 
+    /// 性别
     ///</summary>
     public string Gender { get; set; }
 
     /// <summary>
-    /// 家庭住址 
+    /// 家庭住址
     ///</summary>
     public string HomeAddress { get; set; }
 
@@ -127,5 +121,4 @@ public class LoginUserOutput
     /// 按钮码集合
     /// </summary>
     public List<string> ButtonCodeList { get; set; }
-
 }

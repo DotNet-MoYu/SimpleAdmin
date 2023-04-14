@@ -5,7 +5,6 @@
 /// </summary>
 public sealed class SignalRComponent : IServiceComponent
 {
-
     /// <summary>
     /// ConfigureServices中不能解析服务，比如App.GetService()，尤其是不能在ConfigureServices中获取诸如缓存等数据进行初始化，应该在Configure中进行
     /// 服务都还没初始化完成，会导致内存中存在多份 IOC 容器！！

@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 系统首页控制器
 /// </summary>
@@ -25,7 +26,6 @@ public class IndexController : IDynamicApiController
     [HttpGet("visLog/list")]
     public async Task<dynamic> VisLogList()
     {
-
         return await _visitLogService.Page(new VisitLogPageInput { Account = UserManager.UserAccount });
     }
 

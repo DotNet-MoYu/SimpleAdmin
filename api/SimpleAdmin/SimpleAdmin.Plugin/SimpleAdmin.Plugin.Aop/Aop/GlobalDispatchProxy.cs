@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.Aop;
+﻿namespace SimpleAdmin.Plugin.Aop;
 
 /// <summary>
 /// 全局异常处理
@@ -39,7 +38,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
             After(method, result, args);//方法执行之后干的事
             return result;//返回结果
         }
-
     }
 
     /// <summary>
@@ -49,13 +47,11 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
     /// <param name="args"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async override Task InvokeAsync(MethodInfo method, object[] args)
+    public override async Task InvokeAsync(MethodInfo method, object[] args)
     {
-
         var task = method.Invoke(Target, args) as Task;
         await task;
         After(method, null, args);
-
     }
 
     /// <summary>
@@ -66,7 +62,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
     /// <param name="args"></param>
     /// <returns></returns>
     /// <exception cref="NotImplementedException"></exception>
-    public async override Task<T> InvokeAsyncT<T>(MethodInfo method, object[] args)
+    public override async Task<T> InvokeAsyncT<T>(MethodInfo method, object[] args)
     {
         var result = Before(method, args);//方法执行之前判断是否有缓存的数据
         if (result == null)
@@ -77,7 +73,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         After(method, result, args);//方法执行之后干的事
         return result;//返回结果
     }
-
 
     /// <summary>
     /// 方法执行之后
@@ -159,10 +154,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
                 {
                     return cacheValue;
                 }
-
-
-
-
             }
         }
         return null;
@@ -179,7 +170,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         var cacheAttribute = method.GetActualCustomAttribute<CacheAttribute>(Target);
         if (cacheAttribute != null)
         {
-
             //获取自定义缓存键
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);
             if (!string.IsNullOrWhiteSpace(cacheKey))//如果有key
@@ -209,13 +199,10 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
                             _redisManager.Set(cacheKey, returnValue);//插入redis
                         }
                     }
-
                 }
-
             }
         }
     }
-
 
     /// <summary>
     /// 自定义缓存Key
@@ -247,7 +234,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         }
         return key.TrimEnd(':');
     }
-
 }
 
 /// <summary>
@@ -255,9 +241,6 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
 /// </summary>
 internal static class GetCacheKey
 {
-
-
-
     /// <summary>
     /// object 转 string
     /// </summary>
@@ -319,13 +302,13 @@ internal static class GetCacheKey
             UnaryExpression unary = expression as UnaryExpression;
             if (unary.Operand is MethodCallExpression)//解析!x=>x.Name.Contains("xxx")或!array.Contains(x.Name)这类
                 return ResolveLinqToObject(unary.Operand, false);
-            if (unary.Operand is MemberExpression && unary.NodeType == ExpressionType.Not)//解析x=>!x.isDeletion这样的 
+            if (unary.Operand is MemberExpression && unary.NodeType == ExpressionType.Not)//解析x=>!x.isDeletion这样的
             {
                 ConstantExpression constant = Expression.Constant(false);
                 return ResolveFunc(unary.Operand, constant, ExpressionType.Equal);
             }
         }
-        if (expression is MemberExpression && expression.NodeType == ExpressionType.MemberAccess)//解析x=>x.isDeletion这样的 
+        if (expression is MemberExpression && expression.NodeType == ExpressionType.MemberAccess)//解析x=>x.isDeletion这样的
         {
             MemberExpression member = expression as MemberExpression;
             ConstantExpression constant = Expression.Constant(true);
@@ -364,10 +347,13 @@ internal static class GetCacheKey
                 if (MethodCall.Object != null)
                     return Like(MethodCall);
                 return In(MethodCall, value);
+
             case "Count":
                 return Len(MethodCall, value, expressiontype.Value);
+
             case "LongCount":
                 return Len(MethodCall, value, expressiontype.Value);
+
             default:
                 throw new Exception(string.Format("不支持{0}方法的查找！", MethodName));
         }
@@ -400,7 +386,6 @@ internal static class GetCacheKey
         List<string> SetInPara = new List<string>();
         for (int i = 0; i < Array.Length; i++)
         {
-
             string Value = Array[i].ToString();
             SetInPara.Add(Value);
         }
@@ -410,9 +395,9 @@ internal static class GetCacheKey
         string Result = string.Format("{0} {1} ({2})", Name, Operator, CompName);
         return Result;
     }
+
     private static string Like(MethodCallExpression expression)
     {
-
         var Temp = expression.Arguments[0];
         LambdaExpression lambda = Expression.Lambda(Temp);
         Delegate fn = lambda.Compile();
@@ -422,6 +407,7 @@ internal static class GetCacheKey
         string Result = string.Format("{0} like {1}", Name, Value);
         return Result;
     }
+
     private static string Len(MethodCallExpression expression, object value, ExpressionType expressiontype)
     {
         object Name = (expression.Arguments[0] as MemberExpression).Member.Name;

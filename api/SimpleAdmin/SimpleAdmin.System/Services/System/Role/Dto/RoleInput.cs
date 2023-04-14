@@ -1,12 +1,10 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// 角色查询参数
 /// </summary>
 public class RolePageInput : PositionPageInput
 {
-
 }
 
 /// <summary>
@@ -108,8 +106,6 @@ public class RoleSelectorInput
     /// </summary>
     public long OrgId { get; set; }
 
-
-
     /// <summary>
     /// 机构ID列表
     /// </summary>
@@ -125,4 +121,3 @@ public class RoleSelectorInput
     /// </summary>
     public string Category { get; set; }
 }
-

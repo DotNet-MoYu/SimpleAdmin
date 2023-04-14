@@ -1,13 +1,7 @@
 ﻿using SimpleAdmin.Plugin.Mqtt;
 using SimpleAdmin.Plugin.SignalR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleAdmin.Web.Core;
-
 
 /// <summary>
 /// 插件设置组件
@@ -17,7 +11,6 @@ public sealed class PluginSettingComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-
         //插件设置配置转实体
         services.AddConfigurableOptions<PluginSettingsOptions>();
         //获取插件配置
@@ -26,7 +19,6 @@ public sealed class PluginSettingComponent : IServiceComponent
             services.AddComponent<SignalRComponent>();
         if (pluginSettings.UseMqtt)//如果使用mqtt则启用mqtt插件
             services.AddComponent<MqttComponent>();
-
     }
 }
 
@@ -41,7 +33,5 @@ public sealed class PluginSettingsApplicationComponent : IApplicationComponent
         //通过 App.GetOptions<TOptions> 获取选项
         var pluginSettings = App.GetOptions<PluginSettingsOptions>();
         if (pluginSettings.UseMqtt) app.UseComponent<MqttApplicationComponent>(env);
-
     }
 }
-

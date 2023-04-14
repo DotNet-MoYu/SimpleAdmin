@@ -49,6 +49,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
+
     /// <inheritdoc />
     public async Task Send(MessageSendInput input)
     {
@@ -74,7 +75,6 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
                 UserIds = input.ReceiverIdList.Select(it => it.ToString()).ToList(),
                 Message = input.Subject
             }); //通知用户有新的消息
-
         }
         else
         {
@@ -168,6 +168,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
         var messageUserRep = ChangeRepository<DbRepository<DevMessageUser>>();//切换仓储
         await Context.Deleteable<DevMessageUser>().Where(it => it.UserId == userId && it.MessageId == input.Id).IsLogic().ExecuteCommandAsync();//逻辑删除
     }
+
     /// <inheritdoc />
     public async Task<int> UnReadCount(long userId)
     {
@@ -176,5 +177,4 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
         var unRead = await messageUserRep.CountAsync(it => it.UserId == userId && it.Read == false && it.IsDelete == false);
         return unRead;
     }
-
 }

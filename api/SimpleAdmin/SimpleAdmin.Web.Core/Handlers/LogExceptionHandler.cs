@@ -26,7 +26,6 @@ public class LogExceptionHandler : IGlobalExceptionHandler, ISingleton
             _logger.LogError(exception, exception.Message);
             //重新定义异常
             context.Exception = new AppFriendlyException("系统异常，请联系管理员", ErrorCodeEnum.A0000);
-
         }
         await Task.CompletedTask;
     }

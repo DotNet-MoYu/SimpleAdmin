@@ -13,9 +13,7 @@ public class MqttService : IMqttService
 
     public MqttService(ISimpleCacheService simpleCacheService)
     {
-
         this._simpleCacheService = simpleCacheService;
-
     }
 
     /// <inheritdoc/>
@@ -30,16 +28,23 @@ public class MqttService : IMqttService
         var userName = mqttconfig.Where(it => it.ConfigKey == DevConfigConst.MQTT_PARAM_USERNAME).Select(it => it.ConfigValue).FirstOrDefault();
         //密码
         var password = mqttconfig.Where(it => it.ConfigKey == DevConfigConst.MQTT_PARAM_PASSWORD).Select(it => it.ConfigValue).FirstOrDefault();
+
         #region 用户名特殊处理
+
         if (userName.ToLower() == "$username")
             userName = user.Account;
         else if (userName.ToLower() == "$userid")
             userName = user.Id.ToString();
-        #endregion
+
+        #endregion 用户名特殊处理
+
         #region 密码特殊处理
+
         if (password.ToLower() == "$username")
             password = token; // 当前token作为mqtt密码
-        #endregion
+
+        #endregion 密码特殊处理
+
         var clientId = $"{user.Id}_{RandomHelper.CreateLetterAndNumber(5)}";//客户端ID
         _simpleCacheService.Set(CacheConst.Cache_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
         return new MqttParameterOutput
@@ -67,7 +72,6 @@ public class MqttService : IMqttService
         return mqttAuthOutput;
     }
 
-
     #region 方法
 
     private async Task<List<DevConfig>> GetMqttConfig()
@@ -86,5 +90,6 @@ public class MqttService : IMqttService
         }
         return configList;
     }
-    #endregion
+
+    #endregion 方法
 }

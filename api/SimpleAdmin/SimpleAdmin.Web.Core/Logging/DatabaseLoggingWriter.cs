@@ -1,10 +1,9 @@
-﻿using SqlSugar;
-using IPTools.Core;
+﻿using IPTools.Core;
 using Masuit.Tools;
-using UAParser;
 using Microsoft.Extensions.Logging;
 using NewLife.Serialization;
-
+using SqlSugar;
+using UAParser;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -21,6 +20,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         _db = DbContext.Db;
         this._logger = logger;
     }
+
     public async void Write(LogMessage logMsg, bool flush)
     {
         //获取请求json字符串
@@ -50,7 +50,6 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                     //添加到异常日志
                     await CreateOperationLog(operation, path, loggingMonitor, client);
                 }
-
             }
             else
             {
@@ -60,12 +59,9 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                     //添加到操作日志
                     await CreateOperationLog(operation, path, loggingMonitor, client);
                 }
-
             }
         }
-
     }
-
 
     /// <summary>
     /// 创建访问日志
@@ -75,7 +71,6 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <param name="clientInfo">客户端信息</param>
     private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
     {
-
         var name = "";//用户姓名
         var opAccount = "";//用户账号
         if (operation == EventSubscriberConst.LoginB)
@@ -108,7 +103,6 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         };
         await _db.InsertableWithAttr(devLogVisit).IgnoreColumns(true).ExecuteCommandAsync();//入库
     }
-
 
     /// <summary>
     /// 创建操作日志
@@ -151,7 +145,6 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             ClassName = loggingMonitor.DisplayName,
             MethodName = loggingMonitor.ActionName,
             ParamJson = paramJson
-
         };
         //如果异常不为空
         if (loggingMonitor.Exception != null)
@@ -182,6 +175,5 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             _logger.LogError("IP解析错误" + ex, ex);
         }
         return LoginAddress;
-
     }
 }

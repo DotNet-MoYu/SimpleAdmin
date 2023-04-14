@@ -1,7 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Web.Core.Controllers.System.System;
-
+﻿namespace SimpleAdmin.Web.Core.Controllers.System.System;
 
 /// <summary>
 /// 用户管理控制器
@@ -22,8 +19,8 @@ public class UserController : BaseController
         this._roleService = roleService;
     }
 
-
     #region Get请求
+
     /// <summary>
     /// 获取组织树选择器
     /// </summary>
@@ -43,7 +40,6 @@ public class UserController : BaseController
     {
         return await _roleService.RoleSelector(input);
     }
-
 
     /// <summary>
     /// 用户分页查询
@@ -144,7 +140,8 @@ public class UserController : BaseController
     {
         return await _sysUserService.Template();
     }
-    #endregion
+
+    #endregion Get请求
 
     #region Post请求
 
@@ -160,7 +157,6 @@ public class UserController : BaseController
         await _sysUserService.Add(input);
     }
 
-
     /// <summary>
     /// 修改用户
     /// </summary>
@@ -173,7 +169,6 @@ public class UserController : BaseController
         await _sysUserService.Edit(input);
     }
 
-
     /// <summary>
     /// 批量修改用户
     /// </summary>
@@ -185,7 +180,6 @@ public class UserController : BaseController
     {
         await _sysUserService.Edits(input);
     }
-
 
     /// <summary>
     /// 删除用户
@@ -235,7 +229,6 @@ public class UserController : BaseController
         await _sysUserService.ResetPassword(input);
     }
 
-
     /// <summary>
     /// 给用户授权角色
     /// </summary>
@@ -260,7 +253,6 @@ public class UserController : BaseController
         await _sysUserService.GrantResource(input);
     }
 
-
     /// <summary>
     /// 给用户授权权限
     /// </summary>
@@ -272,6 +264,7 @@ public class UserController : BaseController
     {
         await _sysUserService.GrantPermission(input);
     }
+
     /// <summary>
     /// 用户导入
     /// </summary>
@@ -279,13 +272,10 @@ public class UserController : BaseController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("用户导入")]
-
     public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
     {
-
         return await _sysUserService.Import(input);
     }
-
 
     /// <summary>
     /// 用户导出
@@ -298,6 +288,6 @@ public class UserController : BaseController
     {
         return await _sysUserService.Export(input);
     }
-    #endregion
 
+    #endregion Post请求
 }

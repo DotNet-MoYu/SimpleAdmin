@@ -12,7 +12,6 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
         this._services = services;
     }
 
-
     /// <summary>
     /// 根据角色ID列表清除用户缓存
     /// </summary>

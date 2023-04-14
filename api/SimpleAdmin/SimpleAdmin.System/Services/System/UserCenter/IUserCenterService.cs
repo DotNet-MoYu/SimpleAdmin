@@ -19,7 +19,6 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task<string> GetLoginWorkbench();
 
-
     /// <summary>
     /// 获取组织架构
     /// </summary>
@@ -45,10 +44,10 @@ public interface IUserCenterService : ITransient
     /// </summary>
     /// <returns>未读消息数量</returns>
     Task<int> UnReadCount();
-    #endregion
+
+    #endregion 查询
+
     #region 编辑
-
-
 
     /// <summary>
     /// 更新个人信息
@@ -64,8 +63,6 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task UpdateSignature(UpdateSignatureInput input);
 
-
-
     /// <summary>
     /// 编辑个人工作台
     /// </summary>
@@ -73,14 +70,12 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task UpdateWorkbench(UpdateWorkbenchInput input);
 
-
     /// <summary>
     /// 删除我的消息
     /// </summary>
     /// <param name="input">消息Id</param>
     /// <returns></returns>
     Task DeleteMyMessage(BaseIdInput input);
-
 
     /// <summary>
     /// 修改个人密码
@@ -96,5 +91,5 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task<string> UpdateAvatar(BaseFileInput input);
 
-    #endregion
+    #endregion 编辑
 }

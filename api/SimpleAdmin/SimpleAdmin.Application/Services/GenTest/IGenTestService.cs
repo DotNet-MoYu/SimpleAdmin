@@ -5,7 +5,6 @@
 /// </summary>
 public interface IGenTestService : ITransient
 {
-
     /// <summary>
     /// 测试分页查询
     /// </summary>
@@ -40,8 +39,11 @@ public interface IGenTestService : ITransient
     /// <param name="input">Id参数</param>
     /// <returns>详细信息</returns>
     Task<GenTest> Detail(BaseIdInput input);
+
     Task<dynamic> Preview(ImportPreviewInput input);
+
     Task<dynamic> Export(GenTestPageInput input);
+
     Task<FileStreamResult> Template();
 
     Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input);

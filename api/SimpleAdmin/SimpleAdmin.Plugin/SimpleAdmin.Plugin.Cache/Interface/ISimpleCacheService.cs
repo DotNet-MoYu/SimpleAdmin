@@ -6,6 +6,7 @@
 public partial interface ISimpleCacheService
 {
     #region 基础操作
+
     /// <summary>是否包含缓存项</summary>
     /// <param name="key"></param>
     /// <returns></returns>
@@ -53,9 +54,11 @@ public partial interface ISimpleCacheService
     /// </summary>
     /// <param name="pattern">匹配关键字</param>
     void DelByPattern(string pattern);
-    #endregion
+
+    #endregion 基础操作
 
     #region 集合操作
+
     /// <summary>批量获取缓存项</summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="keys"></param>
@@ -97,9 +100,11 @@ public partial interface ISimpleCacheService
     /// <param name="key"></param>
     /// <returns></returns>
     ICollection<T> GetSet<T>(string key);
-    #endregion
+
+    #endregion 集合操作
 
     #region 高级操作
+
     /// <summary>添加，已存在时不更新</summary>
     /// <typeparam name="T">值类型</typeparam>
     /// <param name="key">键</param>
@@ -125,8 +130,6 @@ public partial interface ISimpleCacheService
     /// <returns>返回是否包含值，即使反序列化失败</returns>
     bool TryGetValue<T>(string key, out T value);
 
-
-
     /// <summary>累加，原子操作</summary>
     /// <param name="key">键</param>
     /// <param name="value">变化量</param>
@@ -150,9 +153,11 @@ public partial interface ISimpleCacheService
     /// <param name="value">变化量</param>
     /// <returns></returns>
     double Decrement(string key, double value);
-    #endregion
+
+    #endregion 高级操作
 
     #region 事务
+
     /// <summary>提交变更。部分提供者需要刷盘</summary>
     /// <returns></returns>
     int Commit();
@@ -171,7 +176,5 @@ public partial interface ISimpleCacheService
     /// <returns></returns>
     IDisposable AcquireLock(string key, int msTimeout, int msExpire, bool throwOnFailure);
 
-    #endregion
-
-
+    #endregion 事务
 }

@@ -13,15 +13,13 @@ public class Startup : AppStartup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
-
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-
         //遍历配置
         DbContext.DbConfigs.ForEach(it =>
         {
-
             //是否需要初始化数据库
             if (it.IsInitDb)
             {
@@ -33,7 +31,6 @@ public class Startup : AppStartup
                 InitSeedData(it);//初始化种子数据
             }
         });
-
     }
 
     /// <summary>
@@ -105,14 +102,10 @@ public class Startup : AppStartup
             }
             else // 没有主键或者不是预定义的主键(有重复的可能)
             {
-
                 //全量插入
                 var storage = db.Storageable(seedDataTable).ToStorage();
                 if (ignoreAdd == null) storage.AsInsertable.ExecuteCommand();
             }
         }
     }
-
-
-
 }

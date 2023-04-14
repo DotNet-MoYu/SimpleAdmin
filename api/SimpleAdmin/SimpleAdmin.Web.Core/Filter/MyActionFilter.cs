@@ -35,7 +35,6 @@ public class MyActionFilter : IAsyncActionFilter
                 //如果不是匿名访问,抛出
                 throw Oops.Bah("演示环境,禁止操作");
             }
-
         }
         await next();
     }

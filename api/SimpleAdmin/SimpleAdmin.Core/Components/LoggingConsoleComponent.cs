@@ -6,6 +6,7 @@
 public sealed class LoggingConsoleComponent : IServiceComponent
 {
     private readonly bool ConsoleMonitor = App.GetConfig<bool>("Logging:Monitor:Console");
+
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
         services.AddConsoleFormatter(options =>
@@ -40,9 +41,11 @@ public sealed class LoggingConsoleComponent : IServiceComponent
                      case LogLevel.Information:
                          consoleColor = ConsoleColor.DarkGreen;
                          break;
+
                      case LogLevel.Warning:
                          consoleColor = ConsoleColor.DarkYellow;
                          break;
+
                      case LogLevel.Error:
                          consoleColor = ConsoleColor.DarkRed;
                          break;
@@ -50,17 +53,13 @@ public sealed class LoggingConsoleComponent : IServiceComponent
                  writer.WriteWithColor(fmtMsg, ConsoleColor.Black, consoleColor);
              };
          });
-
-
     }
 }
 
-
-
 public static class TextWriterExtensions
 {
-    const string DefaultForegroundColor = "\x1B[39m\x1B[22m";
-    const string DefaultBackgroundColor = "\x1B[49m";
+    private const string DefaultForegroundColor = "\x1B[39m\x1B[22m";
+    private const string DefaultBackgroundColor = "\x1B[49m";
 
     public static void WriteWithColor(
         this TextWriter textWriter,
@@ -99,7 +98,7 @@ public static class TextWriterExtensions
         }
     }
 
-    static string GetForegroundColorEscapeCode(ConsoleColor color) =>
+    private static string GetForegroundColorEscapeCode(ConsoleColor color) =>
         color switch
         {
             ConsoleColor.Black => "\x1B[30m",
@@ -121,7 +120,7 @@ public static class TextWriterExtensions
             _ => DefaultForegroundColor
         };
 
-    static string GetBackgroundColorEscapeCode(ConsoleColor color) =>
+    private static string GetBackgroundColorEscapeCode(ConsoleColor color) =>
         color switch
         {
             ConsoleColor.Black => "\x1B[40m",

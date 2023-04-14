@@ -36,14 +36,12 @@ public interface IFileService : ITransient
     /// <returns></returns>
     FileStreamResult GetFileStreamResult(byte[] byteArray, string fileName);
 
-
     /// <summary>
     /// 文件分页查询
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>文件列表</returns>
     Task<SqlSugarPagedList<DevFile>> Page(FilePageInput input);
-
 
     /// <summary>
     /// 上传文件到本地返回下载url

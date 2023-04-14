@@ -19,5 +19,4 @@ public sealed class SqlSugarConfig : ConnectionConfig
     /// 是否驼峰转下划线
     /// </summary>
     public bool IsUnderLine { get; set; }
-
 }

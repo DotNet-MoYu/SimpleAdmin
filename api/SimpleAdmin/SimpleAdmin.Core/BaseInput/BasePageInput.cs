@@ -28,7 +28,6 @@ public class BasePageInput : IValidatableObject
     /// </summary>
     public virtual string SortOrder { get; set; } = "desc";
 
-
     /// <summary>
     /// 关键字
     /// </summary>

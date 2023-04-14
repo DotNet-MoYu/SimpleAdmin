@@ -11,6 +11,7 @@ public enum ErrorCodeEnum
     /// </summary>
     [ErrorCodeItemMetadata("系统异常")]
     A0000,
+
     /// <summary>
     /// 数据不存在
     /// </summary>
@@ -22,11 +23,13 @@ public enum ErrorCodeEnum
     /// </summary>
     [ErrorCodeItemMetadata("删除失败")]
     A0002,
+
     /// <summary>
     /// 操作失败
     /// </summary>
     [ErrorCodeItemMetadata("操作失败")]
     A0003,
+
     /// <summary>
     /// 没有权限
     /// </summary>

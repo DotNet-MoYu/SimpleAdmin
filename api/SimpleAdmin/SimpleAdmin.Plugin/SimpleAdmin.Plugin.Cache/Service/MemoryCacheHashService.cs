@@ -1,6 +1,4 @@
-﻿using Masuit.Tools;
-
-namespace SimpleAdmin.Plugin.Cache;
+﻿namespace SimpleAdmin.Plugin.Cache;
 
 /// <summary>
 /// <inheritdoc cref="ISimpleCacheService"/>
@@ -8,7 +6,6 @@ namespace SimpleAdmin.Plugin.Cache;
 /// </summary>
 public partial class MemoryCacheService : ISimpleCacheService
 {
-
     /// <inheritdoc/>
     public void HashAdd<T>(string key, string hashKey, T value)
     {
@@ -88,7 +85,4 @@ public partial class MemoryCacheService : ISimpleCacheService
         var data = _memoryCache.GetDictionary<T>(key);
         return data;
     }
-
-
-
 }

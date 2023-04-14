@@ -5,7 +5,6 @@
 /// </summary>
 public interface IMenuService : ITransient
 {
-
     /// <summary>
     /// 添加菜单
     /// </summary>

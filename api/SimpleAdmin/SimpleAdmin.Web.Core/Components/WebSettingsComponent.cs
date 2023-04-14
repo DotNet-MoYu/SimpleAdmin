@@ -1,7 +1,4 @@
-﻿using SimpleAdmin.Plugin.Mqtt;
-using SimpleAdmin.Plugin.SignalR;
-
-namespace SimpleAdmin.Web.Core;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// Web设置组件
@@ -19,7 +16,6 @@ public sealed class WebSettingsComponent : IServiceComponent
         //如果是演示环境,加上操作筛选器,禁止操作数据库
         if (appSettings.EnvPoc)
             services.AddMvcFilter<MyActionFilter>();
-
     }
 }
 
@@ -31,6 +27,5 @@ public sealed class WebSettingsApplicationComponent : IApplicationComponent
 {
     public void Load(IApplicationBuilder app, IWebHostEnvironment env, ComponentContext componentContext)
     {
-
     }
 }

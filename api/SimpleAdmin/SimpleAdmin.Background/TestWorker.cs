@@ -13,8 +13,7 @@ public class TestWorker : BackgroundService
         this._simpleCacheService = simpleCacheService;
     }
 
-    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-
     }
 }

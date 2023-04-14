@@ -6,7 +6,6 @@
 /// </summary>
 public class RelationRoleResuorce
 {
-
     /// <summary>
     /// 菜单ID
     /// </summary>
@@ -16,5 +15,4 @@ public class RelationRoleResuorce
     /// 按钮信息
     /// </summary>
     public List<long> ButtonInfo { get; set; } = new List<long>();
-
 }

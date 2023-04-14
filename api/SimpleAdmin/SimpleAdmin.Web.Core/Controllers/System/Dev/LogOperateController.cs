@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 操作日志控制器
 /// </summary>
@@ -23,7 +24,6 @@ public class LogOperateController : BaseController
     {
         return await _operateLogService.Page(input);
     }
-
 
     /// <summary>
     /// 操作日志周统计柱状图图

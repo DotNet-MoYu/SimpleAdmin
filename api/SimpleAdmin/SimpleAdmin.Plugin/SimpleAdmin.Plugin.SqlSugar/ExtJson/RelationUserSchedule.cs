@@ -6,7 +6,6 @@
 /// </summary>
 public class RelationUserSchedule
 {
-
     /// <summary>
     /// 日程日期
     /// </summary>
@@ -17,23 +16,18 @@ public class RelationUserSchedule
     /// </summary>
     public virtual string ScheduleTime { get; set; }
 
-
     /// <summary>
     /// 日程内容
     /// </summary>
     public virtual string ScheduleContent { get; set; }
-
 
     /// <summary>
     /// 用户id
     /// </summary>
     public long ScheduleUserId { get; set; }
 
-
     /// <summary>
     /// 用户姓名
     /// </summary>
     public string ScheduleUserName { get; set; }
-
-
 }

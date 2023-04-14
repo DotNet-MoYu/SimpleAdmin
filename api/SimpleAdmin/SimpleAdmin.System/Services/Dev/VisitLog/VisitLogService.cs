@@ -5,10 +5,8 @@
 /// </summary>
 public class VisitLogService : DbRepository<DevLogVisit>, IVisitLogService
 {
-
     public VisitLogService()
     {
-
     }
 
     /// <inheritdoc />
@@ -59,7 +57,6 @@ public class VisitLogService : DbRepository<DevLogVisit>, IVisitLogService
             {
                 Category = it.Category,//分类
                 Count = SqlFunc.AggregateCount(it.Category)//数量
-
             }).ToListAsync();
         //定义结果数组
         List<VisitLogTotalCountOutput> visitLogTotalCounts = new List<VisitLogTotalCountOutput>

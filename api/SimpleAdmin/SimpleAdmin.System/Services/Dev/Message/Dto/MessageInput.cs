@@ -2,12 +2,10 @@
 
 public class MessagePageInput : BasePageInput
 {
-
     /// <summary>
     /// 站内信分类
     /// </summary>
     public string Category { get; set; }
-
 }
 
 /// <summary>
@@ -21,13 +19,11 @@ public class MessageSendInput : DevMessage, IValidatableObject
     [Required(ErrorMessage = "Subject不能为空")]
     public override string Subject { get; set; }
 
-
     /// <summary>
     /// 分类
     /// </summary>
     [Required(ErrorMessage = "Category不能为空")]
     public override string Category { get; set; }
-
 
     /// <summary>
     /// 接收人Id

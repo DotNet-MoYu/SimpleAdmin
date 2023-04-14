@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.ImportExport;
+﻿namespace SimpleAdmin.Plugin.ImportExport;
 
 /// <summary>
 /// 前端表格特性

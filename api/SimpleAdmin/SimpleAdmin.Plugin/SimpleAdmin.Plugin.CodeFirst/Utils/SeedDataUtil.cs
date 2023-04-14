@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.CodeFirst;
+﻿namespace SimpleAdmin.Plugin.CodeFirst;
 
 /// <summary>
 /// 种子数据工具类
@@ -9,19 +7,19 @@ public class SeedDataUtil
 {
     public static List<T> GetSeedData<T>(string db, string jsonName)
     {
-
         var seedData = new List<T>();//种子数据结果
         var basePath = AppContext.BaseDirectory;//获取项目目录
         var json = basePath.CombinePath("SeedData", db, "Json", jsonName);//获取文件路径
         var dataString = FileHelper.ReadFile(json);//读取文件
         if (!string.IsNullOrEmpty(dataString))//如果有内容
         {
-
             //字段没有数据的替换成null
             dataString = dataString.Replace("\"\"", "null");
             //将json字符串转为实体，这里extjson可以正常转换为字符串
             var seedDataRecord1 = dataString.ToJsonEntity<SeedDataRecords<T>>();
-            #region  针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
+            #region 针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
             //字符串是\"的替换成"
             dataString = dataString.Replace("\\\"", "\"");
             //字符串是\{替换成{
@@ -30,11 +28,14 @@ public class SeedDataUtil
             dataString = dataString.Replace("}\"", "}");
             //将json字符串转为实体,这里extjson会转为null，替换字符串把extjson值变为实体类型而实体类是string类型
             var seedDataRecord2 = dataString.ToJsonEntity<SeedDataRecords<T>>();
-            #endregion
+
+            #endregion 针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
             //遍历seedDataRecord2
             for (int i = 0; i < seedDataRecord2.Records.Count; i++)
             {
                 #region 处理ExtJosn
+
                 //获取extjson属性
                 var propertyExtJosn = typeof(T).GetProperty(nameof(PrimaryKeyEntity.ExtJson));
                 if (propertyExtJosn != null)
@@ -51,8 +52,10 @@ public class SeedDataUtil
                     }
                 }
 
-                #endregion
+                #endregion 处理ExtJosn
+
                 #region 处理ConfigValue
+
                 //获取extjson属性
                 var propertyConfigValue = typeof(T).GetProperty(nameof(DevConfig.ConfigValue));
                 if (propertyConfigValue != null)
@@ -68,7 +71,8 @@ public class SeedDataUtil
                         propertyConfigValue.SetValue(seedDataRecord2.Records[i], configValue);
                     }
                 }
-                #endregion
+
+                #endregion 处理ConfigValue
             }
             //种子数据赋值
             seedData = seedDataRecord2.Records;

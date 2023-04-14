@@ -14,7 +14,6 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         this._sysPositionService = sysPositionService;
     }
 
-
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysPosition>> Page(PositionPageInput input)
     {
@@ -32,7 +31,6 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
     {
         await CheckInput(input, SimpleAdminConst.Add);//检查参数
         await _sysPositionService.Add(input, SimpleAdminConst.BizPos);//添加岗位
-
     }
 
     /// <inheritdoc />
@@ -44,7 +42,6 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope.Count > 0)//如果有机构
         {
-
             //获取职位下所有机构ID
             var orgIds = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id)).Select(it => it.OrgId).ToList();
             if (!dataScope.ContainsAll(orgIds))
@@ -68,7 +65,6 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         await _sysPositionService.Edit(input, SimpleAdminConst.BizPos);//编辑
     }
 
-
     /// <inheritdoc/>
     public async Task<List<SysPosition>> PositionSelector(PositionSelectorInput input)
     {
@@ -79,8 +75,8 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         return result;
     }
 
-
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -110,5 +106,6 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
             }
         }
     }
-    #endregion
+
+    #endregion 方法
 }

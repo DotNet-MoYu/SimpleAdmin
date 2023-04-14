@@ -14,8 +14,4 @@ public class RoleConst
     /// 业务管理员
     /// </summary>
     public const string BizAdmin = "bizAdmin";
-
-
-
-
 }

@@ -5,28 +5,28 @@
 /// </summary>
 public class EventSubscriberConst
 {
-
     #region AuthEventSubscriber
+
     /// <summary>
     /// B端登录
     /// </summary>
     public const string LoginB = "B端登录";
-
 
     /// <summary>
     /// B端登录
     /// </summary>
     public const string LoginOutB = "B端登出";
 
-
-    #endregion
+    #endregion AuthEventSubscriber
 
     #region UserEventSubscriber
+
     /// <summary>
     /// 清除用户缓存
     /// </summary>
     public const string ClearUserCache = "清除用户缓存";
-    #endregion
+
+    #endregion UserEventSubscriber
 
     #region NoticeEventSubscriber
 
@@ -39,6 +39,6 @@ public class EventSubscriberConst
     /// 新消息
     /// </summary>
     public const string NewMessage = "新消息";
-    #endregion
 
+    #endregion NoticeEventSubscriber
 }

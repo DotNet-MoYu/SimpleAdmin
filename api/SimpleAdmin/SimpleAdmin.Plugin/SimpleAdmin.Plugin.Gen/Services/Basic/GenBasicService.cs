@@ -1,7 +1,4 @@
-﻿
-
-
-namespace SimpleAdmin.Plugin.Gen;
+﻿namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
 /// <inheritdoc cref="IGenbasicService"/>
@@ -35,7 +32,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<GenBasic>> Page(BasePageInput input)
     {
-
         var query = Context.Queryable<GenBasic>()
                          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
                          .OrderBy(it => it.SortCode);
@@ -48,7 +44,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         return SqlSugarUtils.GetTablesByAttribute<CodeGenAttribute>();
     }
-
 
     /// <inheritdoc/>
     public List<string> GetAssemblies()
@@ -63,7 +58,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         return names;
     }
 
-
     /// <inheritdoc/>
     public async Task<GenBasic> Add(GenBasicAddInput input)
     {
@@ -76,13 +70,15 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         tableColumns.ForEach(it =>
         {
             #region 判断是否想显示
+
             var yesOrNo = GenConst.Yes;
             if (it.IsPrimarykey || SqlSugarUtils.IsCommonColumn(it.ColumnName))//如果是主键或者是公共字段则不显示
                 yesOrNo = GenConst.No;
-
             else
                 yesOrNo = GenConst.Yes;
-            #endregion
+
+            #endregion 判断是否想显示
+
             //添加到字段集合
             genConfigs.Add(new GenConfig
             {
@@ -111,7 +107,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             entity = await InsertReturnEntityAsync(entity);//输入参数转实体并插入
             genConfigs.ForEach(it => { it.BasicId = entity.Id; });//遍历字段赋值基础Id
             await Context.Insertable(genConfigs).ExecuteCommandAsync();
-
         });
         if (!result.IsSuccess)//如果失败了
         {
@@ -122,7 +117,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
 
         return entity;
     }
-
 
     /// <inheritdoc/>
     public async Task Delete(List<BaseIdInput> input)
@@ -136,7 +130,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除基础表
                 await Context.Deleteable<GenConfig>().Where(it => ids.Contains(it.BasicId)).ExecuteCommandAsync();//删除配置表
-
             });
             if (!result.IsSuccess)//如果失败了
             {
@@ -153,7 +146,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var entity = input.Adapt<GenBasic>();//输入参数转实体
         await UpdateAsync(entity);
         return entity;
-
     }
 
     /// <inheritdoc/>
@@ -162,7 +154,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         return await PreviewGen(genBasic);
     }
-
 
     /// <inheritdoc/>
     public async Task ExecGenPro(BaseIdInput input)
@@ -186,7 +177,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         }
     }
 
-
     /// <inheritdoc/>
     public async Task<FileStreamResult> ExecGenZip(BaseIdInput input)
     {
@@ -202,6 +192,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var result = new FileStreamResult(new FileStream(zipPath, FileMode.Open), "application/octet-stream") { FileDownloadName = $"{genBasic.ClassName}.zip" };
         return result;
     }
+
     #region 方法
 
     /// <summary>
@@ -264,9 +255,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             //path = path.CombinePath(fileName);//最终生成文件地址
             File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
         });
-
     }
-
 
     /// <summary>
     /// 生成前端代码文件
@@ -294,7 +283,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                Directory.CreateDirectory(path);
            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
        });
-
     }
 
     /// <summary>
@@ -327,7 +315,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         FileInfo[] files = GetAllFileInfo(sqlTemplatePath);
         foreach (FileInfo fileInfo in files)
         {
-
             var fileName = fileInfo.Name;//文件名
             var fileNoPrefix = fileName.Split(fileInfo.Extension)[0];//不带模板后缀的文件名
             var tContent = File.ReadAllText(fileInfo.FullName);//读取文件
@@ -341,9 +328,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             });
         }
 
-
         return sqlCodeResults;
-
     }
 
     /// <summary>
@@ -377,7 +362,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         }
 
         return backendCodeResults;
-
     }
 
     /// <summary>
@@ -388,7 +372,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <returns></returns>
     public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetForntCodeResult(GenViewModel genViewModel, string templatePath)
     {
-
         var frontCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var frontTemplatePath = Path.Combine(templatePath, _frontDir);//获取前端模板文件路径
         FileInfo[] files = GetAllFileInfo(frontTemplatePath);
@@ -409,7 +392,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         }
         return frontCodeResults;
     }
-
 
     /// <summary>
     /// 获取代码生成视图
@@ -458,7 +440,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         DirectoryInfo dir = new DirectoryInfo(path);
         return dir.GetFiles(".", SearchOption.AllDirectories);
-
     }
 
     /// <inheritdoc/>
@@ -490,7 +471,6 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         if (genBasic == null)
             throw Oops.Bah("代码生成配置不存在");
         return genBasic;
-
     }
 
     /// <summary>
@@ -502,8 +482,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         try
         {
-
             #region 菜单
+
             var title = genBasic.FunctionName + genBasic.FunctionNameSuffix;
             var menuRep = ChangeRepository<DbRepository<SysResource>>();//切换仓储
                                                                         //获取已经存在的旧菜单
@@ -529,8 +509,11 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 SortCode = 99
             };
             await _menuService.Add(menu);//添加菜单
-            #endregion
+
+            #endregion 菜单
+
             #region 按钮
+
             //添加按钮参数
             ButtonAddInput button = new ButtonAddInput
             {
@@ -539,8 +522,11 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 Code = StringHelper.FirstCharToLower(genBasic.ClassName)
             };
             var buttonIds = await _buttonService.AddBatch(button);//添加按钮
-            #endregion
+
+            #endregion 按钮
+
             #region 角色授权
+
             var roleRep = ChangeRepository<DbRepository<SysRole>>();//切换仓储
             var superAdmin = await roleRep.GetFirstAsync(it => it.Code == RoleConst.SuperAdmin && it.Category == CateGoryConst.Role_GLOBAL);//获取超级管理员
                                                                                                                                             //授权菜单参数
@@ -551,7 +537,9 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 IsCodeGen = true,
             };
             await _roleService.GrantResource(grantResource);//授权菜单
-            #endregion
+
+            #endregion 角色授权
+
             return true;
         }
         catch (Exception ex)
@@ -561,6 +549,5 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         }
     }
 
-
-    #endregion
+    #endregion 方法
 }

@@ -29,12 +29,8 @@ public class Startup : AppStartup
         {
             services.AddSingleton<ISimpleCacheService, MemoryCacheService>();
         }
-
-
-
-
-
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //通过 App.GetOptions<TOptions> 获取选项
@@ -46,10 +42,5 @@ public class Startup : AppStartup
             //删除redis的key
             redis.DelByPattern(CacheConst.Cache_Prefix_Web);
         }
-
-
     }
-
-
-
 }

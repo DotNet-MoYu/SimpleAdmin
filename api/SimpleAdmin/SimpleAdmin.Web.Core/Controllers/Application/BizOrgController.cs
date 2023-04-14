@@ -47,7 +47,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("add")]
     [DisplayName("添加机构")]
-    public async Task Add([FromBody]  SysOrgAddInput input)
+    public async Task Add([FromBody] SysOrgAddInput input)
     {
         await _orgService.Add(input);
     }
@@ -59,11 +59,10 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("edit")]
     [DisplayName("修改机构")]
-    public async Task Edit([FromBody]  SysOrgEditInput input)
+    public async Task Edit([FromBody] SysOrgEditInput input)
     {
         await _orgService.Edit(input);
     }
-
 
     /// <summary>
     /// 复制组织
@@ -72,7 +71,7 @@ public class BizOrgController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("copy")]
     [DisplayName("复制组织")]
-    public async Task Copy( SysOrgCopyInput input)
+    public async Task Copy(SysOrgCopyInput input)
     {
         await _orgService.Copy(input);
     }
@@ -101,7 +100,6 @@ public class BizOrgController : IDynamicApiController
         return await _orgService.Tree();
     }
 
-
     /// <summary>
     /// 获取人员选择器
     /// </summary>
@@ -112,5 +110,4 @@ public class BizOrgController : IDynamicApiController
     {
         return await _userService.UserSelector(input);
     }
-
 }

@@ -1,4 +1,3 @@
-
 try
 {
     Console.Title = "SimpleAdmin后台服务";
@@ -16,6 +15,3 @@ Serve.Run(GenericRunOptions.Default
         })
 
 );
-
-
-

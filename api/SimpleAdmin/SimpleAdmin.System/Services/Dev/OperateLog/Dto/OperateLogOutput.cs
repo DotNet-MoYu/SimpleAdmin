@@ -5,7 +5,6 @@
 /// </summary>
 public class OperateLogDayStatisticsOutput
 {
-
     /// <summary>
     /// 日期
     /// </summary>
@@ -16,13 +15,10 @@ public class OperateLogDayStatisticsOutput
     /// </summary>
     public string Name { get; set; }
 
-
     /// <summary>
     /// 数量
     /// </summary>
     public int Count { get; set; }
-
-
 }
 
 /// <summary>
@@ -30,5 +26,4 @@ public class OperateLogDayStatisticsOutput
 /// </summary>
 public class OperateLogTotalCountOutpu : VisitLogTotalCountOutput
 {
-
 }

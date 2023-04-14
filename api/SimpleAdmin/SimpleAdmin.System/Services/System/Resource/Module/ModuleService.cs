@@ -1,6 +1,4 @@
-﻿
-using DnsClient.Internal;
-
+﻿using DnsClient.Internal;
 
 namespace SimpleAdmin.System;
 
@@ -27,7 +25,6 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(ModulePageInput input)
     {
-
         var query = Context.Queryable<SysResource>()
                          .Where(it => it.Category == CateGoryConst.Resource_MODULE)//模块
                          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey))//根据关键字查询
@@ -87,11 +84,9 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             //事务
             var result = await itenant.UseTranAsync(async () =>
             {
-
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
                 .Where(it => it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId))).ExecuteCommandAsync();
-
             });
             if (result.IsSuccess)//如果成功了
             {
@@ -106,8 +101,6 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             }
         }
     }
-
-
 
     #region 方法
 
@@ -127,6 +120,6 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         //设置为模块
         sysResource.Category = CateGoryConst.Resource_MODULE;
     }
-    #endregion
 
+    #endregion 方法
 }

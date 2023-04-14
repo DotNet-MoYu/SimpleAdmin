@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.Application;
 
-
 /// <summary>
 /// 学生信息
 /// </summary>
@@ -33,6 +32,4 @@ public class GenTestExport
     /// </summary>
     [ExporterHeader(DisplayName = "出生日期", Format = "yyyy-mm-DD")]
     public DateTime? Bir { get; set; }
-
-
 }

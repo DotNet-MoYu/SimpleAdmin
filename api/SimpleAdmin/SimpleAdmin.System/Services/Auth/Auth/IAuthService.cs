@@ -5,7 +5,6 @@
 /// </summary>
 public interface IAuthService : ITransient
 {
-
     /// <summary>
     /// 获取图形验证码
     /// </summary>

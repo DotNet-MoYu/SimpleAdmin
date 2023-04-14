@@ -34,6 +34,5 @@ public class SM2Util
     {
         if (!cipherText.StartsWith("04")) cipherText = "04" + cipherText;//如果不是04开头加上04
         return SM2CryptoUtil.Decrypt(PrivateKey, cipherText);
-
     }
 }

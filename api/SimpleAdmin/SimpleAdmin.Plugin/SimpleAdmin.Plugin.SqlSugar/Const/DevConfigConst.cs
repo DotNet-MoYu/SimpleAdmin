@@ -26,6 +26,7 @@ public class DevConfigConst
     public const string SYS_DEFAULT_WORKBENCH_DATA = "SYS_DEFAULT_WORKBENCH_DATA";
 
     #region MQTT
+
     /// <summary>
     /// mqtt连接地址
     /// </summary>
@@ -41,11 +42,10 @@ public class DevConfigConst
     /// </summary>
     public const string MQTT_PARAM_PASSWORD = "MQTT_PARAM_PASSWORD";
 
-
-    #endregion
-
+    #endregion MQTT
 
     #region 存储引擎
+
     /// <summary>
     /// windows系统本地目录
     /// </summary>
@@ -56,34 +56,25 @@ public class DevConfigConst
     /// </summary>
     public const string FILE_LOCAL_FOLDER_FOR_UNIX = "FILE_LOCAL_FOLDER_FOR_UNIX";
 
-
     /// <summary>
     /// MINIO文件AccessKey
     /// </summary>
     public const string FILE_MINIO_ACCESS_KEY = "FILE_MINIO_ACCESS_KEY";
-
 
     /// <summary>
     /// MINIO文件SecetKey
     /// </summary>
     public const string FILE_MINIO_SECRET_KEY = "FILE_MINIO_SECRET_KEY";
 
-
     /// <summary>
     /// MINIO文件EndPoint
     /// </summary>
     public const string FILE_MINIO_END_POINT = "FILE_MINIO_END_POINT";
-
-
 
     /// <summary>
     /// MINIO文件默认存储桶
     /// </summary>
     public const string FILE_MINIO_DEFAULT_BUCKET_NAME = "FILE_MINIO_DEFAULT_BUCKET_NAME";
 
-
-
-
-    #endregion
-
+    #endregion 存储引擎
 }

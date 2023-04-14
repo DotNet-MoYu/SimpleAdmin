@@ -6,12 +6,10 @@
 /// </summary>
 public class RelationUserWorkBench
 {
-
     /// <summary>
     /// 快捷方式列表
     /// </summary>
     public List<WorkBenchShortcut> Shortcut { get; set; }
-
 }
 
 /// <summary>
@@ -24,24 +22,18 @@ public class WorkBenchShortcut
     /// </summary>
     public long Id { get; set; }
 
-
     /// <summary>
     /// 标题
     /// </summary>
     public string Title { get; set; }
-
 
     /// <summary>
     /// 图标
     /// </summary>
     public string Icon { get; set; }
 
-
     /// <summary>
     /// 路由地址
     /// </summary>
     public string Path { get; set; }
-
-
-
 }

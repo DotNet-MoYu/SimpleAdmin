@@ -12,12 +12,10 @@ public class CacheSettingsOptions : IConfigurableOptions
     /// </summary>
     public bool UserRedis { get; set; }
 
-
     /// <summary>
     /// 是否每次启动都清空
     /// </summary>
     public RedisSettings RedisSettings { get; set; }
-
 }
 
 /// <summary>
@@ -40,12 +38,8 @@ public class RedisSettings
     /// </summary>
     public int Db { get; set; } = 0;
 
-
     /// <summary>
     /// 是否每次启动都清空
     /// </summary>
     public bool ClearRedis { get; set; } = false;
-
 }
-
-

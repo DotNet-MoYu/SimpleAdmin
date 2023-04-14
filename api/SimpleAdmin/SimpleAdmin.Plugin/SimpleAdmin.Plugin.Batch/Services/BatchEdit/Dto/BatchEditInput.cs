@@ -1,13 +1,10 @@
-﻿
-
-namespace SimpleAdmin.Plugin.Batch;
+﻿namespace SimpleAdmin.Plugin.Batch;
 
 /// <summary>
 /// 批量分页查询参数
 /// </summary>
 public class BatchEditPageInput : BasePageInput
 {
-
     /// <summary>
     /// 唯一编码
     /// </summary>
@@ -27,7 +24,6 @@ public class BatchEditPageInput : BasePageInput
     /// 表名
     /// </summary>
     public string Tablename { get; set; }
-
 }
 
 /// <summary>
@@ -63,7 +59,6 @@ public class BatchEditAddInput
     /// 表描述
     /// </summary>
     public string Tabledescription { get; set; }
-
 }
 
 /// <summary>
@@ -105,6 +100,7 @@ public class BatchEditInput
     /// </summary>
     [Required(ErrorMessage = "Code不能为空")]
     public string Code { get; set; }
+
     /// <summary>
     /// Id列表
     /// </summary>
@@ -116,7 +112,6 @@ public class BatchEditInput
     /// </summary>
     [Required(ErrorMessage = "Columns不能为空")]
     public List<BatchEditColumn>? Columns { get; set; }
-
 }
 
 /// <summary>
@@ -124,12 +119,9 @@ public class BatchEditInput
 /// </summary>
 public class BatchEditColumn
 {
-
     [Required(ErrorMessage = "字段名必填")]
     public string TableColumn { get; set; }
 
     [Required(ErrorMessage = "字段值必填")]
     public object ColumnValue { get; set; }
-
-
 }

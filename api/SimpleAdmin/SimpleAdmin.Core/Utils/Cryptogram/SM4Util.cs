@@ -4,7 +4,7 @@ namespace SimpleAdmin.Core.Utils;
 
 //加密和解密结构相同，只不过，解密密钥是加密密钥的逆序
 /// <summary>
-/// Sm4算法  
+/// Sm4算法
 /// 对标国际DES算法
 /// </summary>
 public class SM4Util
@@ -16,22 +16,27 @@ public class SM4Util
         HexString = false;
         CryptoMode = Sm4CryptoEnum.ECB;
     }
+
     /// <summary>
     /// 数据
     /// </summary>
     public string Data { get; set; }
+
     /// <summary>
     /// 秘钥
     /// </summary>
     public string Key { get; }//不同的key，加密出来的数据不一样，所以此处设定好key以后，禁止修改
+
     /// <summary>
     /// 向量
     /// </summary>
     public string Iv { get; set; }
+
     /// <summary>
     /// 明文是否是十六进制
     /// </summary>
     public bool HexString { get; }//set;
+
     /// <summary>
     /// 加密模式(默认ECB)
     /// 统一改为ECB模式
@@ -39,10 +44,12 @@ public class SM4Util
     public Sm4CryptoEnum CryptoMode { get; }
 
     #region 加密
+
     public static string Encrypt(SM4Util entity)
     {
         return entity.CryptoMode == Sm4CryptoEnum.CBC ? EncryptCBC(entity) : EncryptECB(entity);
     }
+
     /// <summary>
     /// ECB加密
     /// </summary>
@@ -60,6 +67,7 @@ public class SM4Util
         byte[] encrypted = sm4.Sm4CryptEcb(ctx, Encoding.Default.GetBytes(entity.Data));
         return Encoding.Default.GetString(Hex.Encode(encrypted));
     }
+
     /// <summary>
     /// CBC加密
     /// </summary>
@@ -78,8 +86,11 @@ public class SM4Util
         byte[] encrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Encoding.Default.GetBytes(entity.Data));
         return Convert.ToBase64String(encrypted);
     }
-    #endregion
+
+    #endregion 加密
+
     #region 解密
+
     /// <summary>
     /// 解密
     /// </summary>
@@ -89,6 +100,7 @@ public class SM4Util
     {
         return entity.CryptoMode == Sm4CryptoEnum.CBC ? DecryptCBC(entity) : DecryptECB(entity);
     }
+
     /// <summary>
     ///  ECB解密
     /// </summary>
@@ -107,6 +119,7 @@ public class SM4Util
         byte[] decrypted = sm4.Sm4CryptEcb(ctx, Hex.Decode(entity.Data));
         return Encoding.Default.GetString(decrypted);
     }
+
     /// <summary>
     /// CBC解密
     /// </summary>
@@ -126,7 +139,9 @@ public class SM4Util
         byte[] decrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Convert.FromBase64String(entity.Data));
         return Encoding.Default.GetString(decrypted);
     }
-    #endregion
+
+    #endregion 解密
+
     /// <summary>
     /// 加密类型
     /// </summary>
@@ -137,6 +152,7 @@ public class SM4Util
         /// </summary>
         [Description("ECB模式")]
         ECB = 0,
+
         /// <summary>
         /// CBC(密码分组链接模式)
         /// </summary>

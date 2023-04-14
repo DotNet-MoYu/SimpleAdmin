@@ -11,6 +11,7 @@ public class ScheduleListInput
     [Required(ErrorMessage = "ScheduleDate不能为空")]
     public string ScheduleDate { get; set; }
 }
+
 public class ScheduleAddInput : RelationUserSchedule
 {
     /// <summary>
@@ -18,6 +19,7 @@ public class ScheduleAddInput : RelationUserSchedule
     /// </summary>
     [Required(ErrorMessage = "scheduleDate不能为空")]
     public override string ScheduleDate { get; set; }
+
     /// <summary>
     /// 日程内容
     /// </summary>

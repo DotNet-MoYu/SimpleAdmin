@@ -1,7 +1,7 @@
-﻿using System.Security.Claims;
-using Furion.Authorization;
+﻿using Furion.Authorization;
 using Furion.DataEncryption;
 using Furion.Logging.Extensions;
+using System.Security.Claims;
 
 namespace SimpleAdmin.Web.Core;
 
@@ -37,8 +37,6 @@ public class JwtHandler : AppAuthorizeHandler
                 return;
             currentHttpContext.SignoutToSwagger();
         }
-
-
     }
 
     /// <summary>
@@ -49,7 +47,6 @@ public class JwtHandler : AppAuthorizeHandler
     /// <returns></returns>
     private bool CheckTokenFromRedis(DefaultHttpContext context, int expire)
     {
-
         var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
         var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
         var _simpleCacheService = App.GetService<ISimpleCacheService>();//获取redis实例
@@ -77,8 +74,6 @@ public class JwtHandler : AppAuthorizeHandler
             {
                 return false;
             }
-
-
         }
         return true;
     }
@@ -90,7 +85,7 @@ public class JwtHandler : AppAuthorizeHandler
     /// <param name="httpContext"></param>
     /// <returns></returns>
 
-    public async override Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
+    public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
     {
         // 这里写您的授权判断逻辑，授权通过返回 true，否则返回 false
 
@@ -138,7 +133,6 @@ public class JwtHandler : AppAuthorizeHandler
                     return false;//没有用户信息则返回认证失败
                 }
             }
-
         }
         return true;
     }

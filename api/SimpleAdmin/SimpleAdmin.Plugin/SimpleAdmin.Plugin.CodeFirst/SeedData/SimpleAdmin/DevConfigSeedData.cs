@@ -9,5 +9,4 @@ public class DevConfigSeedData : ISqlSugarEntitySeedData<DevConfig>
     {
         return SeedDataUtil.GetSeedData<DevConfig>(SqlsugarConst.DB_Default, "dev_config.json");
     }
-
 }

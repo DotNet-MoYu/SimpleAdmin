@@ -1,10 +1,7 @@
-
-
 using Masuit.Tools;
 using NewLife.MQTT;
 using SimpleAdmin.Core;
 using SimpleAdmin.Plugin.Cache;
-using SimpleMQTT;
 
 namespace SimpleAdmin.Background;
 
@@ -51,7 +48,6 @@ public class MqttWorker : BackgroundService
                             tokenInfo.ClientIds.Add(clientId);//添加到客户端列表
                             _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
                         }
-
                     }
                     else //下线
                     {

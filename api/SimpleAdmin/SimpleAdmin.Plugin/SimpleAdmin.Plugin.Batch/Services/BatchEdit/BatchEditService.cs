@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.Batch;
+﻿namespace SimpleAdmin.Plugin.Batch;
 
 /// <summary>
 /// <inheritdoc cref="IBatchEditService"/>
@@ -12,7 +11,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     {
         this._logger = logger;
     }
-
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<BatchEdit>> Page(BatchEditPageInput input)
@@ -53,7 +51,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             entity = await InsertReturnEntityAsync(entity);//输入参数转实体并插入
             batchEdiConfig.ForEach(it => { it.UId = entity.Id; });//遍历字段赋值基础Id
             await Context.Insertable(batchEdiConfig).ExecuteCommandAsync();
-
         });
         if (!result.IsSuccess)//如果失败了
         {
@@ -61,7 +58,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             _logger.LogError(result.ErrorMessage, result.ErrorException);
             throw Oops.Oh(ErrorCodeEnum.A0003);
         }
-
     }
 
     /// <inheritdoc />
@@ -75,9 +71,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             await configRep.DeleteAsync(it => !ids.Contains(it.Id) && it.UId == input.First().UId);//删除没有的
             await Context.Updateable(updateBatch).ExecuteCommandAsync();//更新数据
         }
-
     }
-
 
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input)
@@ -86,12 +80,11 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         var ids = input.Select(it => it.Id).ToList();
         if (ids.Count > 0)
         {
-            //事务  
+            //事务
             var result = await itenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
                 await Context.Deleteable<BatchEditConfig>().Where(it => ids.Contains(it.UId)).ExecuteCommandAsync();
-
             });
             if (!result.IsSuccess)//如果失败了
             {
@@ -99,7 +92,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
                 _logger.LogError(result.ErrorMessage, result.ErrorException);
                 throw Oops.Oh(ErrorCodeEnum.A0003);
             }
-
         }
     }
 
@@ -128,7 +120,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
                         newColumns.Add(GetUpdateBatchConfig(tableColumn));
                     }
                 }
-
             }
             if (newColumns.Count > 0)
             {
@@ -136,7 +127,6 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
                 await Context.Insertable(newColumns).ExecuteCommandAsync();//插入新的字段数据
             }
         }
-
     }
 
     /// <inheritdoc />
@@ -150,10 +140,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it => it.UId == updateBatch.Id && it.Status == DevDictConst.COMMON_STATUS_ENABLE).ToListAsync();
         }
         return batchEdiConfig;
-
-
     }
-
 
     /// <inheritdoc/>
     public List<SqlSugarTableInfo> GetTables()
@@ -177,13 +164,9 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             var config = configs.Where(it => it.ColumnName == item.TableColumn).FirstOrDefault();
             if (config == null) throw Oops.Bah("不存在的列");
             dic.Add(item.TableColumn, item.ColumnValue.ToString());
-
         }
         return dic;
     }
-
-
-
 
     #region 方法
 
@@ -217,9 +200,5 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         }
     }
 
-
-    #endregion
-
+    #endregion 方法
 }
-
-

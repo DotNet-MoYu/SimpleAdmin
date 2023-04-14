@@ -14,7 +14,6 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
         this._resourceService = resourceService;
     }
 
-
     /// <inheritdoc/>
     public async Task<List<SysRelation>> GetRelationByCategory(string category)
     {
@@ -29,7 +28,6 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             {
                 //插入Redis
                 _simpleCacheService.Set(key, sysRelations);
-
             }
         }
         return sysRelations;
@@ -49,7 +47,6 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
         var sysRelations = await GetRelationByCategory(CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA);
         var result = sysRelations.Where(it => it.ObjectId == userId).FirstOrDefault();//获取个人工作台
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -96,7 +93,6 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
                 TargetId = targetIds[i],
                 Category = category,
                 ExtJson = extJsons == null ? null : extJsons[i]
-
             });
         }
         //事务
@@ -115,9 +111,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             //写日志
             _logger.LogError(result.ErrorMessage, result.ErrorException);
             throw Oops.Oh(ErrorCodeEnum.A0003);
-
         }
-
     }
 
     /// <inheritdoc/>
@@ -147,9 +141,6 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             //写日志
             _logger.LogError(result.ErrorMessage, result.ErrorException);
             throw Oops.Oh(ErrorCodeEnum.A0003);
-
         }
     }
-
-
 }

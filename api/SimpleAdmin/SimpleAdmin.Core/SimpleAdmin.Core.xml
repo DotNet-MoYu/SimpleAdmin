@@ -597,7 +597,7 @@
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM4Util">
             <summary>
-            Sm4算法  
+            Sm4算法
             对标国际DES算法
             </summary>
         </member>
@@ -705,12 +705,12 @@
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Decrypt(System.String,System.String)">
-            <summary>
+             <summary>
             
-            </summary>
-            <param name="privateKey"></param>
-            <param name="encryptedData"></param>
-            <returns></returns>
+             </summary>
+             <param name="privateKey"></param>
+             <param name="encryptedData"></param>
+             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Decrypt(System.Byte[],System.Byte[])">
             <summary>
@@ -768,7 +768,7 @@
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4CryptoUtil.SboxTable">
             <summary>
-            S盒 
+            S盒
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4CryptoUtil.FK">
@@ -901,7 +901,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.AvatarUtil.GetNameImage(System.String,System.Int32,System.Int32)">
             <summary>
-            获取姓名对应的图片 
+            获取姓名对应的图片
             </summary>
             <param name="name"></param>
             <param name="width"></param>
@@ -943,7 +943,7 @@
             图片转换成base64
             </summary>
             <param name="bmp"></param>
-            <returns></returns>		
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetBitmapFromBase64(System.String)">
             <summary>
@@ -1004,7 +1004,7 @@
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.Collections.Generic.List{System.String},System.String)">
             <summary>
             压缩多个文件到指定路径
-            </summary>        
+            </summary>
             <param name="sourceFileNames">压缩到哪个路径</param>
             <param name="zipFileName">压缩文件名称</param>
         </member>
@@ -1082,29 +1082,29 @@
             <param name="isLocal">是否本地</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.CompressDirectory(System.String,System.Boolean)">
-            压缩文件夹   
-            要打包的文件夹   
-            是否删除原文件夹 
+            压缩文件夹
+            要打包的文件夹
+            是否删除原文件夹
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllFies(System.String)">
-               
-            获取所有文件   
-               
-               
+            
+             获取所有文件
+            
+            
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirsFiles(System.IO.DirectoryInfo[],System.Collections.Generic.Dictionary{System.String,System.DateTime})">
-               
-            获取一个文件夹下的所有文件夹里的文件   
-               
-               
-               
+            
+             获取一个文件夹下的所有文件夹里的文件
+            
+            
+            
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirFiles(System.IO.DirectoryInfo,System.Collections.Generic.Dictionary{System.String,System.DateTime})">
-               
-            获取一个文件夹下的文件   
-               
-            目录名称   
-            文件列表HastTable   
+            
+             获取一个文件夹下的文件
+            
+             目录名称
+             文件列表HastTable
         </member>
         <member name="T:SimpleAdmin.Core.Utils.FileItem">
             <summary>

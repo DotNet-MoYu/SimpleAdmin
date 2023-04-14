@@ -1,14 +1,12 @@
-﻿
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 /// <summary>
 /// 人员管理服务
 /// </summary>
 public interface IUserService : ITransient
 {
-
     #region 查询
+
     /// <summary>
     /// 人员选择器
     /// </summary>
@@ -36,18 +34,22 @@ public interface IUserService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<SysRole>> RoleSelector(RoleSelectorInput input);
-    #endregion
+
+    #endregion 查询
 
     #region 添加
+
     /// <summary>
     /// 添加用户
     /// </summary>
     /// <param name="input">添加参数</param>
     /// <returns></returns>
     Task Add(UserAddInput input);
-    #endregion
+
+    #endregion 添加
 
     #region 编辑
+
     /// <summary>
     /// 编辑
     /// </summary>
@@ -82,7 +84,8 @@ public interface IUserService : ITransient
     /// <param name="input">授权参数</param>
     /// <returns></returns>
     Task GrantRole(UserGrantRoleInput input);
-    #endregion
+
+    #endregion 编辑
 
     #region 删除
 
@@ -92,9 +95,11 @@ public interface IUserService : ITransient
     /// <param name="input">Id列表</param>
     /// <returns></returns>
     Task Delete(List<BaseIdInput> input);
-    #endregion
+
+    #endregion 删除
 
     #region 导入导出
+
     /// <summary>
     /// 导入预览
     /// </summary>
@@ -128,5 +133,6 @@ public interface IUserService : ITransient
     /// <param name="input">编辑字段信息</param>
     /// <returns></returns>
     Task Edits(BatchEditInput input);
-    #endregion
+
+    #endregion 导入导出
 }

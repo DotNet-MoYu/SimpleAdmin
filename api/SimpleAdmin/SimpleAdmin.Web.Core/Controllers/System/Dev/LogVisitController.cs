@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 访问日志控制器
 /// </summary>
@@ -23,7 +24,6 @@ public class LogVisitController : BaseController
     {
         return await _visitLogService.Page(input);
     }
-
 
     /// <summary>
     /// 访问日志周统计折线图
@@ -55,5 +55,4 @@ public class LogVisitController : BaseController
     {
         await _visitLogService.Delete(input.Category);
     }
-
 }

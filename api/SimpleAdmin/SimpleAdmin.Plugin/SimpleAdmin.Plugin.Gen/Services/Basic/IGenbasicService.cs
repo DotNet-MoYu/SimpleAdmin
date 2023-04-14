@@ -46,7 +46,6 @@ public interface IGenbasicService : ITransient
     /// <returns>程序集列表</returns>
     List<string> GetAssemblies();
 
-
     /// <summary>
     /// 获取所有表信息
     /// </summary>

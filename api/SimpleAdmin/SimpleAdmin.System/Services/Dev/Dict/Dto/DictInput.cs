@@ -5,8 +5,6 @@
 /// </summary>
 public class DictInput
 {
-
-
 }
 
 /// <summary>
@@ -14,12 +12,10 @@ public class DictInput
 /// </summary>
 public class DictTreeInput
 {
-
     /// <summary>
     /// 字典分类
     /// </summary>
     public string Category { get; set; }
-
 }
 
 /// <summary>
@@ -28,16 +24,14 @@ public class DictTreeInput
 public class DictPageInput : BasePageInput
 {
     /// <summary>
-    /// 父id 
+    /// 父id
     ///</summary>
     public long? ParentId { get; set; }
 
-
     /// <summary>
-    /// 分类 
+    /// 分类
     ///</summary>
     public string Category { get; set; }
-
 }
 
 /// <summary>
@@ -62,9 +56,6 @@ public class DictAddInput : DevDict
 
     [Required(ErrorMessage = "DictValue不能为空")]
     public override string DictValue { get; set; }
-
-
-
 }
 
 /// <summary>
@@ -77,15 +68,11 @@ public class DictEditInput : DictAddInput
     /// </summary>
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
-
 }
-
 
 /// <summary>
 /// 删除字典参数
 /// </summary>
 public class DictDeleteInput : BaseIdInput
 {
-
-
 }

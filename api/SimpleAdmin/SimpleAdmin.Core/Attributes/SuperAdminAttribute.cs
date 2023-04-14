@@ -5,7 +5,6 @@
 /// </summary>
 public class SuperAdminAttribute : Attribute
 {
-
 }
 
 /// <summary>
@@ -13,5 +12,4 @@ public class SuperAdminAttribute : Attribute
 /// </summary>
 public class IgnoreSuperAdminAttribute : Attribute
 {
-
 }

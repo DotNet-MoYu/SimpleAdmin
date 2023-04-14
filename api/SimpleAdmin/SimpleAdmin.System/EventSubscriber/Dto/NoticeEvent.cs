@@ -5,7 +5,6 @@
 /// </summary>
 public class UserLoginOutEvent
 {
-
     /// <summary>
     /// 用户Id
     /// </summary>
@@ -21,7 +20,6 @@ public class UserLoginOutEvent
     /// 内容
     /// </summary>
     public string Message { get; set; }
-
 }
 
 /// <summary>

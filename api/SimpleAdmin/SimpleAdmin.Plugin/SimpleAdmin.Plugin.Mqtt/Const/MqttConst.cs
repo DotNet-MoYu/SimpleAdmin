@@ -5,7 +5,6 @@
 /// </summary>
 public class MqttConst
 {
-
     /// <summary>
     /// mqtt主题前缀
     /// </summary>

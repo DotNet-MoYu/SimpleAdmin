@@ -5,24 +5,20 @@
 /// </summary>
 public class TokenInfo
 {
-
     /// <summary>
     /// MQTT客户端ID列表
     /// </summary>
     public List<string> ClientIds { get; set; } = new List<string>();
-
 
     /// <summary>
     /// 设备
     /// </summary>
     public string Device { get; set; }
 
-
     /// <summary>
     /// 登录端
     /// </summary>
     public LoginClientTypeEnum LoginClientType { get; set; }
-
 
     /// <summary>
     /// 过期时间

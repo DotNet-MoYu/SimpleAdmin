@@ -11,6 +11,7 @@ public interface IConfigService : ITransient
     /// <param name="input">新增参数</param>
     /// <returns></returns>
     Task Add(ConfigAddInput input);
+
     /// <summary>
     /// 删除配置
     /// </summary>
@@ -39,7 +40,6 @@ public interface IConfigService : ITransient
     /// <param name="configKey">配置键</param>
     /// <returns>配置信息</returns>
     Task<DevConfig> GetByConfigKey(string category, string configKey);
-
 
     /// <summary>
     /// 根据分类获取配置列表

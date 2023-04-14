@@ -1,7 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Application;
-
+﻿namespace SimpleAdmin.Application;
 
 /// <inheritdoc cref="IOrgService"/>
 public class OrgService : DbRepository<SysOrg>, IOrgService
@@ -17,7 +14,6 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         this._sysUserService = sysUserService;
     }
 
-
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input)
     {
@@ -29,7 +25,6 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         return pageInfo;
     }
 
-
     /// <inheritdoc />
     public async Task<List<SysOrg>> Tree()
     {
@@ -39,7 +34,6 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         var result = await _sysOrgService.Tree(dataScope);
         return result;
     }
-
 
     /// <inheritdoc />
     public async Task Add(SysOrgAddInput input)
@@ -66,7 +60,6 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
                 throw Oops.Bah($"您没有权限复制这些机构");
             await _sysOrgService.Copy(input);//复制操作
         }
-
     }
 
     /// <inheritdoc />
@@ -90,10 +83,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
                 throw Oops.Bah($"只能删除自己创建的机构");
         }
         await _sysOrgService.Delete(input, SimpleAdminConst.BizOrg);//删除操作
-
     }
-
-
 
     #region 方法
 
@@ -128,8 +118,6 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
             }
         }
     }
-    #endregion
 
-
-
+    #endregion 方法
 }

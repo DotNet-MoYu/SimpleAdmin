@@ -17,7 +17,6 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(SpaPageInput input)
     {
-
         var query = Context.Queryable<SysResource>()
                          .Where(it => it.Category == CateGoryConst.Resource_SPA)//单页
                          .WhereIF(!string.IsNullOrEmpty(input.MenuType), it => it.MenuType == input.MenuType)//根据菜单类型查询
@@ -70,7 +69,6 @@ public class SpaService : DbRepository<SysResource>, ISpaService
 
     #region 方法
 
-
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -101,5 +99,6 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         //设置为单页
         sysResource.Category = CateGoryConst.Resource_SPA;
     }
-    #endregion
+
+    #endregion 方法
 }

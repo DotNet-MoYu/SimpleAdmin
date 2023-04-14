@@ -27,12 +27,10 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             {
                 //插入Redis
                 _simpleCacheService.Set(CacheConst.Cache_SysPosition, sysPositions);
-
             }
         }
         return sysPositions;
     }
-
 
     /// <inheritdoc/>
     public async Task<List<SysPosition>> PositionSelector(PositionSelectorInput input)
@@ -53,7 +51,6 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         var result = sysPositions.Where(it => it.Id == id).FirstOrDefault();
         return result;
     }
-
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysPosition>> Page(PositionPageInput input)
@@ -89,7 +86,6 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             await RefreshCache();//刷新缓存
     }
 
-
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysPos)
     {
@@ -121,7 +117,6 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             //删除职位
             if (await DeleteByIdsAsync(ids.Cast<object>().ToArray()))
                 await RefreshCache();//刷新缓存
-
         }
     }
 
@@ -131,7 +126,9 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         _simpleCacheService.Remove(CacheConst.Cache_SysPosition);//删除Key
         await GetListAsync();//重新写入缓存
     }
+
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -139,7 +136,6 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <param name="name">名称</param>
     private async Task CheckInput(SysPosition sysPosition, string name)
     {
-
         //所有分类放一个列表
         var positionCategorys = new List<string>() { CateGoryConst.Position_HIGH, CateGoryConst.Position_LOW, CateGoryConst.Position_MIDDLE };
         if (!positionCategorys.Contains(sysPosition.Category))
@@ -160,8 +156,8 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             }
             else
                 throw Oops.Bah($"{name}不存在");
-
         }
     }
-    #endregion
+
+    #endregion 方法
 }

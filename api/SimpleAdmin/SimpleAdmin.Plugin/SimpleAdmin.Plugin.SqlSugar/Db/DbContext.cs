@@ -10,8 +10,6 @@ public static class DbContext
     /// </summary>
     public static readonly List<SqlSugarConfig> DbConfigs = App.GetConfig<List<SqlSugarConfig>>("SqlSugarSettings:ConnectionStrings");
 
-
-
     /// <summary>
     /// SqlSugar 数据库实例
     /// </summary>
@@ -62,12 +60,8 @@ public static class DbContext
                  //    p.IsNullable = true;
                  if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_'))
                      p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName); // 驼峰转下划线
-
              }
         };
-
-
-
     }
 
     /// <summary>
@@ -76,7 +70,6 @@ public static class DbContext
     /// <param name="db"></param>
     public static void AopSetting(SqlSugarScopeProvider db)
     {
-
         var config = db.CurrentConnectionConfig;
 
         // 设置超时时间
@@ -170,11 +163,10 @@ public static class DbContext
                     if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUser))
                         entityInfo.SetValue(App.User?.FindFirst(ClaimConst.Account)?.Value);
                 }
-
             }
         };
 
-        //查询数据转换 
+        //查询数据转换
         db.Aop.DataExecuted = (value, entity) =>
            {
                if (entity.Entity.Type == typeof(SysUser))
@@ -193,11 +185,9 @@ public static class DbContext
                        var passwd = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Password)).ToString());
                        entity.SetValue(nameof(SysUser.Password), passwd);
                    }
-
                }
            };
     }
-
 
     /// <summary>
     /// 实体更多配置
@@ -227,7 +217,6 @@ public static class DbContext
     /// <param name="db"></param>
     private static void LogicDeletedEntityFilter(SqlSugarScopeProvider db)
     {
-
     }
 
     private static void WriteSqlLog(string msg)

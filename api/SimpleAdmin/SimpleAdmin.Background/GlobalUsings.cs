@@ -1,2 +1,1 @@
-﻿global using Furion;
-global using SimpleMQTT;
+﻿global using SimpleMQTT;

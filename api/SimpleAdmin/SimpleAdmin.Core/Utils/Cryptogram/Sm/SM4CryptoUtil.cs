@@ -19,6 +19,7 @@ public class SM4CryptoUtil
             (long)(b[i + 3] & 0xff) & 0xffffffffL;
         return n;
     }
+
     /// <summary>
     /// 解密 非线性τ函数B=τ(A)
     /// </summary>
@@ -32,6 +33,7 @@ public class SM4CryptoUtil
         b[i + 2] = (byte)(int)(0xFF & n >> 8);
         b[i + 3] = (byte)(int)(0xFF & n);
     }
+
     /// <summary>
     /// 循环移位,为32位的x循环左移n位
     /// </summary>
@@ -42,6 +44,7 @@ public class SM4CryptoUtil
     {
         return ((x & 0xFFFFFFFF) << n) | x >> (32 - n);
     }
+
     /// <summary>
     /// 将密钥逆序
     /// </summary>
@@ -53,8 +56,9 @@ public class SM4CryptoUtil
         sk[i] = sk[(31 - i)];
         sk[(31 - i)] = t;
     }
+
     /// <summary>
-    /// S盒 
+    /// S盒
     /// </summary>
     public byte[] SboxTable = new byte[] {
      //   0     1     2     3     4     5     6     7     8     9     a     b     c     d     e     f
@@ -75,10 +79,12 @@ public class SM4CryptoUtil
         0x89, 0x69, 0x97, 0x4a, 0x0c, 0x96, 0x77, 0x7e, 0x65, 0xb9, 0xf1, 0x09, 0xc5, 0x6e, 0xc6, 0x84,
         0x18, 0xf0, 0x7d, 0xec, 0x3a, 0xdc, 0x4d, 0x20, 0x79, 0xee, 0x5f, 0x3e, 0xd7, 0xcb, 0x39, 0x48
     };
+
     /// <summary>
     /// 系统参数FK
     /// </summary>
     public uint[] FK = { 0xa3b1bac6, 0x56aa3350, 0x677d9197, 0xb27022dc };
+
     /// <summary>
     /// 固定参数CK
     /// </summary>
@@ -92,6 +98,7 @@ public class SM4CryptoUtil
         0xa0a7aeb5,0xbcc3cad1,0xd8dfe6ed,0xf4fb0209,
         0x10171e25,0x2c333a41,0x484f565d,0x646b7279
     };
+
     /// <summary>
     /// Sm4的S盒取值
     /// </summary>
@@ -103,6 +110,7 @@ public class SM4CryptoUtil
         byte retVal = SboxTable[i];
         return retVal;
     }
+
     /// <summary>
     /// 线性变换 L
     /// </summary>
@@ -121,6 +129,7 @@ public class SM4CryptoUtil
         long c = bb ^ Rotl(bb, 2) ^ Rotl(bb, 10) ^ Rotl(bb, 18) ^ Rotl(bb, 24);
         return c;
     }
+
     /// <summary>
     /// 轮函数 F
     /// </summary>
@@ -134,6 +143,7 @@ public class SM4CryptoUtil
     {
         return x0 ^ Sm4Lt(x1 ^ x2 ^ x3 ^ rk);
     }
+
     /// <summary>
     /// 轮密钥rk
     /// </summary>
@@ -152,6 +162,7 @@ public class SM4CryptoUtil
         long rk = bb ^ Rotl(bb, 13) ^ Rotl(bb, 23);
         return rk;
     }
+
     /// <summary>
     /// 加密密钥
     /// </summary>
@@ -178,6 +189,7 @@ public class SM4CryptoUtil
             SK[i] = k[(i + 4)];
         }
     }
+
     /// <summary>
     /// 解密函数
     /// </summary>
@@ -202,6 +214,7 @@ public class SM4CryptoUtil
         PutULongToBe(ulbuf[33], output, 8);
         PutULongToBe(ulbuf[32], output, 12);
     }
+
     /// <summary>
     /// 补足 16 进制字符串的 0 字符，返回不带 0x 的16进制字符串
     /// </summary>
@@ -233,6 +246,7 @@ public class SM4CryptoUtil
         }
         return ret;
     }
+
     /// <summary>
     /// 设置加密的key
     /// </summary>
@@ -243,6 +257,7 @@ public class SM4CryptoUtil
         ctx.Mode = 1;
         SetKey(ctx.Key, key);
     }
+
     /// <summary>
     /// 设置解密的key
     /// </summary>
@@ -258,6 +273,7 @@ public class SM4CryptoUtil
             Swap(ctx.Key, i);
         }
     }
+
     /// <summary>
     /// ECB
     /// </summary>
@@ -288,6 +304,7 @@ public class SM4CryptoUtil
         }
         return bous;
     }
+
     /// <summary>
     /// CBC
     /// </summary>
@@ -371,14 +388,17 @@ public class Sm4Context
         IsPadding = true;
         Key = new long[32];
     }
+
     /// <summary>
     /// 1表示加密，0表示解密
     /// </summary>
     public int Mode;
+
     /// <summary>
     /// 密钥
     /// </summary>
     public long[] Key;
+
     /// <summary>
     /// 是否补足16进制字符串
     /// </summary>

@@ -6,11 +6,8 @@
 [Injection(Named = "signalr")]
 public class SignalrNoticeService : INoticeService
 {
-
-
     public SignalrNoticeService()
     {
-
     }
 
     /// <inheritdoc/>
@@ -39,5 +36,6 @@ public class SignalrNoticeService : INoticeService
         var service = App.GetService<IHubContext<SimpleHub, ISimpleHub>>();
         return service;
     }
-    #endregion
+
+    #endregion MyRegion
 }

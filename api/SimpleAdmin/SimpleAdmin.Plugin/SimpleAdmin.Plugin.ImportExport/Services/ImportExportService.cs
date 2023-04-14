@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.ImportExport;
+﻿namespace SimpleAdmin.Plugin.ImportExport;
 
 /// <summary>
 ///  <inheritdoc cref="IImportExportService"/>
@@ -11,19 +10,16 @@ public class ImportExportService : IImportExportService
     /// <inheritdoc/>
     public void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null)
     {
-
         if (file == null) throw Oops.Bah("文件不能为空");
         if (file.Length > maxSzie * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSzie}M");
         var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1]; // 文件后缀
         string[] allowTypeS = allowTypes == null ? new string[] { "xlsx" } : allowTypes;//允许上传的文件类型
         if (!allowTypeS.Contains(fileSuffix)) throw Oops.Bah(errorMessage: "文件格式错误");
-
     }
 
     /// <inheritdoc/>
     public ImportPreviewOutput<T> TemplateDataVerification<T>(ImportResult<T> importResult) where T : ImportTemplateInput
     {
-
         if (importResult.Exception != null) throw Oops.Bah("导入异常,请检查文件格式!");
         ////遍历模板错误
         importResult.TemplateErrors.ForEach(error =>
@@ -77,9 +73,7 @@ public class ImportExportService : IImportExportService
         data = data.OrderByDescending(it => it.HasError).ToList();//排序
         importPreview.Data = data;//重新赋值data
         return importPreview;
-
     }
-
 
     /// <inheritdoc/>
     public async Task<FileStreamResult> GenerateTemplate<T>(string fileName) where T : class, new()
@@ -95,7 +89,6 @@ public class ImportExportService : IImportExportService
     {
         var folder = App.WebHostEnvironment.WebRootPath.CombinePath(templateFolder);
         return GetFileStreamResult(folder, fileName, true);
-
     }
 
     /// <inheritdoc/>
@@ -126,12 +119,10 @@ public class ImportExportService : IImportExportService
         result.ImportCount = importData.Count;
         return result;
     }
-    #endregion
 
-
+    #endregion 导入
 
     #region 导出
-
 
     public async Task<FileStreamResult> Export<T>(List<T> data, string fileName) where T : class, new()
     {
@@ -141,10 +132,10 @@ public class ImportExportService : IImportExportService
         return result;
     }
 
-    #endregion
-
+    #endregion 导出
 
     #region 方法
+
     /// <summary>
     /// 获取文件流
     /// </summary>
@@ -160,7 +151,6 @@ public class ImportExportService : IImportExportService
         var result = new FileStreamResult(new FileStream(path, FileMode.Open), "application/octet-stream") { FileDownloadName = fileName };
         return result;
     }
-
 
     /// <summary>
     /// 获取文件流
@@ -198,5 +188,6 @@ public class ImportExportService : IImportExportService
         var folder = App.WebHostEnvironment.WebRootPath.CombinePath("Template");
         return folder;
     }
-    #endregion
+
+    #endregion 方法
 }

@@ -94,14 +94,12 @@ public class GenTestController : IDynamicApiController
         return await _genTestService.Export(input);
     }
 
-
     [HttpGet(template: "template")]
     [DisplayName("模板")]
     public async Task<dynamic> Template()
     {
         return await _genTestService.Template();
     }
-
 
     [HttpPost("import")]
     [DisplayName("导入")]
@@ -112,4 +110,3 @@ public class GenTestController : IDynamicApiController
         return await _genTestService.Import(input);
     }
 }
-

@@ -5,7 +5,6 @@
 /// </summary>
 public static class SqlSugarUtils
 {
-
     /// <summary>
     /// 根据特性获取所有表信息
     /// </summary>
@@ -19,7 +18,6 @@ public static class SqlSugarUtils
         var entityTypes = App.EffectiveTypes
             .Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))//有SugarTable特性
             .Where(u => u.IsDefined(typeof(T), false));//具有代码生成特性
-
 
         foreach (var entityType in entityTypes)
         {
@@ -40,11 +38,9 @@ public static class SqlSugarUtils
                     });
                 }
             }
-
         }
         return tables;
     }
-
 
     /// <summary>
     /// 获取字段信息
@@ -59,7 +55,6 @@ public static class SqlSugarUtils
         var dbColumnInfos = connection.DbMaintenance.GetColumnInfosByTableName(tableName);//根据表名获取表信息
         if (dbColumnInfos != null)
         {
-
             //遍历字段获取信息
             dbColumnInfos.ForEach(it =>
             {
@@ -72,7 +67,6 @@ public static class SqlSugarUtils
                         column += StringHelper.FirstCharToUpper(it);//首字母大写
                     });
                     it.DbColumnName = column;//赋值给数据库字段
-
                 }
                 else
                 {
@@ -85,13 +79,10 @@ public static class SqlSugarUtils
                     ColumnDescription = it.ColumnDescription,
                     DataType = it.DataType
                 });
-
             });
-
         }
         return columns;
     }
-
 
     /// <summary>
     /// 数据库字段类型转.NET类型
@@ -100,7 +91,6 @@ public static class SqlSugarUtils
     /// <returns></returns>
     public static string ConvertDataType(string dataType)
     {
-
         switch (dataType)
         {
             case "text":
@@ -165,7 +155,6 @@ public static class SqlSugarUtils
         }
     }
 
-
     /// <summary>
     /// 数据类型转显示类型
     /// </summary>
@@ -205,5 +194,4 @@ public static class SqlSugarUtils
         };
         return columnList.Contains(columnName);
     }
-
 }

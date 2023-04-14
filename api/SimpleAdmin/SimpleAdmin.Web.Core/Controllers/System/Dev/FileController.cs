@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core.Controllers.System.Dev;
 
-
 /// <summary>
 /// 文件管理控制器
 /// </summary>
@@ -15,7 +14,6 @@ public class FileController : BaseController
         this._fileService = fileService;
     }
 
-
     /// <summary>
     /// 文件查询分页
     /// </summary>
@@ -26,7 +24,6 @@ public class FileController : BaseController
     {
         return await _fileService.Page(input);
     }
-
 
     /// <summary>
     /// 上传本地文件
@@ -49,7 +46,6 @@ public class FileController : BaseController
     [HttpPost("uploadMinio")]
     [DisplayName("上传MINIO文件")]
     [DisableRequestSizeLimit]
-
     public async Task UploadMinio([FromForm] IFormFile File)
     {
         await _fileService.UploadFile(DevDictConst.FILE_ENGINE_MINIO, File);
@@ -78,5 +74,4 @@ public class FileController : BaseController
     {
         return await _fileService.Download(input);
     }
-
 }

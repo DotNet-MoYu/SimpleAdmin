@@ -1,13 +1,10 @@
-﻿
-
-namespace SimpleAdmin.Plugin.ImportExport;
+﻿namespace SimpleAdmin.Plugin.ImportExport;
 
 /// <summary>
 /// 导入服务
 /// </summary>
 public interface IImportExportService : ITransient
 {
-
     /// <summary>
     /// 导出数据
     /// </summary>

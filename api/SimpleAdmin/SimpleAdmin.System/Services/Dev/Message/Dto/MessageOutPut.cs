@@ -5,7 +5,6 @@
 /// </summary>
 public class MessageDetailOutPut : DevMessage
 {
-
     public List<ReceiveInfo> ReceiveInfoList { get; set; } = new List<ReceiveInfo>();
 
     /// <summary>

@@ -6,7 +6,6 @@
 /// </summary>
 public class RelationRolePermission
 {
-
     /// <summary>
     /// 数据范围
     /// </summary>
@@ -17,11 +16,8 @@ public class RelationRolePermission
     /// </summary>
     public List<long> ScopeDefineOrgIdList { get; set; } = new List<long>();
 
-
     /// <summary>
     /// 接口Url
     /// </summary>
     public string ApiUrl { get; set; }
-
-
 }

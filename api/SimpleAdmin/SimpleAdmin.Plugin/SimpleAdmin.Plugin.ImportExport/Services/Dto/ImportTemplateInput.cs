@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.Plugin.ImportExport;
+﻿namespace SimpleAdmin.Plugin.ImportExport;
 
 /// <summary>
 /// 导入基础输入
@@ -7,7 +6,6 @@ namespace SimpleAdmin.Plugin.ImportExport;
 [ExcelImporter(IsLabelingError = true)]
 public class ImportTemplateInput
 {
-
     /// <summary>
     /// Id
     /// </summary>

@@ -7,7 +7,6 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class LoginEvent
 {
-
     /// <summary>
     /// 请求上下文
     /// </summary>
@@ -17,7 +16,6 @@ public class LoginEvent
     /// 用户信息
     /// </summary>
     public SysUser SysUser { get; set; }
-
 
     /// <summary>
     /// 地址
@@ -29,12 +27,10 @@ public class LoginEvent
     /// </summary>
     public string Ip { get; set; }
 
-
     /// <summary>
     /// 登录设备
     /// </summary>
     public AuthDeviceTypeEumu Device { get; set; }
-
 
     /// <summary>
     /// Tokens

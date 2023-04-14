@@ -5,18 +5,15 @@
 /// </summary>
 public class ResTreeSelector
 {
-
     /// <summary>
     /// 模块id
     /// </summary>
     public long Id { get; set; }
 
-
     /// <summary>
     /// 模块名称
     /// </summary>
     public string Title { get; set; }
-
 
     /// <summary>
     /// 模块图标
@@ -38,12 +35,10 @@ public class ResTreeSelector
         /// </summary>
         public long Id { get; set; }
 
-
         /// <summary>
         /// 父id
         /// </summary>
         public long ParentId { get; set; }
-
 
         /// <summary>
         /// 父名称
@@ -60,12 +55,10 @@ public class ResTreeSelector
         /// </summary>
         public long Module { get; set; }
 
-
         /// <summary>
         /// 菜单下按钮集合
         /// </summary>
         public List<RoleGrantResourceButton> Button { get; set; } = new List<RoleGrantResourceButton>();
-
     }
 
     public class RoleGrantResourceButton
@@ -79,29 +72,23 @@ public class ResTreeSelector
         /// 标题
         /// </summary>
         public string Title { get; set; }
-
     }
 }
 
-
 public class PermissionTreeSelector
 {
-
     /// <summary>
     /// 接口描述
     /// </summary>
     public string ApiName { get; set; }
-
 
     /// <summary>
     /// 路由名称
     /// </summary>
     public string ApiRoute { get; set; }
 
-
     /// <summary>
     /// 权限名称
     /// </summary>
     public string PermissionName { get; set; }
-
 }

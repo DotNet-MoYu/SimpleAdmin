@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Application;
+﻿namespace SimpleAdmin.Application;
 
 /// <summary>
 /// <inheritdoc cref="IUserService"/>
@@ -36,7 +34,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         return pageInfo;
     }
 
-
     /// <inheritdoc/>
     public async Task<List<long>> OwnRole(BaseIdInput input)
     {
@@ -58,7 +55,6 @@ public class UserService : DbRepository<SysUser>, IUserService
             //返回自己
             return new List<UserSelectorOutPut> { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } };
         }
-
     }
 
     /// <inheritdoc />
@@ -74,7 +70,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         }
         return sysRoles;
     }
-    #endregion
+
+    #endregion 查询
 
     #region 新增
 
@@ -85,7 +82,7 @@ public class UserService : DbRepository<SysUser>, IUserService
         await _sysUserService.Add(input);//添加
     }
 
-    #endregion
+    #endregion 新增
 
     #region 编辑
 
@@ -141,7 +138,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         await CheckPermission(input.Id, SimpleAdminConst.ResestPwd);//检查权限
         await _sysUserService.ResetPassword(input);//重置密码
     }
-    #endregion
+
+    #endregion 编辑
 
     #region 删除
 
@@ -165,9 +163,9 @@ public class UserService : DbRepository<SysUser>, IUserService
         {
             throw Oops.Bah($"您没有权限删除这些人员");
         }
-
     }
-    #endregion
+
+    #endregion 删除
 
     #region 导入导出
 
@@ -178,7 +176,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         //var result = _importExportService.GenerateLocalTemplate(templateName);
         var result = await _importExportService.GenerateTemplate<BizUserImportInput>(templateName);
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -204,7 +201,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         var data = users.Adapt<List<SysUserExportOutput>>();//转为Dto
         var result = await _importExportService.Export(data, "人员信息");
         return result;
-
     }
 
     /// <inheritdoc/>
@@ -223,7 +219,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         }
         else throw Oops.Bah("您无权导入用户");
     }
-    #endregion
+
+    #endregion 导入导出
 
     #region 方法
 
@@ -254,7 +251,6 @@ public class UserService : DbRepository<SysUser>, IUserService
             {
                 throw Oops.Bah(errorMessage);
             }
-
         }
     }
 
@@ -317,7 +313,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         return bizUsers;
     }
 
-
     /// <summary>
     /// 获取查询条件
     /// </summary>
@@ -335,5 +330,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         input.Expression = exp;
         return input;
     }
-    #endregion
+
+    #endregion 方法
 }

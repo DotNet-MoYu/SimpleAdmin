@@ -14,8 +14,8 @@ namespace SimpleAdmin.Core.Utils;
 /// </summary>
 public class SM2CryptoUtil
 {
-
     #region 获取公钥私钥
+
     /// <summary>
     /// 获取公钥私钥
     /// </summary>
@@ -33,9 +33,11 @@ public class SM2CryptoUtil
         sM2Model.PublicKey = Encoding.UTF8.GetString(Hex.Encode(publicKey.GetEncoded())).ToUpper();
         return sM2Model;
     }
-    #endregion
+
+    #endregion 获取公钥私钥
 
     #region 加密
+
     /// <summary>
     /// 加密
     /// </summary>
@@ -85,12 +87,13 @@ public class SM2CryptoUtil
 
         return (sc1 + sc2 + sc3).ToUpper();
     }
-    #endregion
+
+    #endregion 加密
 
     #region 解密
 
     /// <summary>
-    /// 
+    ///
     /// </summary>
     /// <param name="privateKey"></param>
     /// <param name="encryptedData"></param>
@@ -100,6 +103,7 @@ public class SM2CryptoUtil
         var data = Encoding.UTF8.GetString(Decrypt(Hex.Decode(privateKey), Hex.Decode(encryptedData)));
         return data;
     }
+
     /// <summary>
     /// 解密
     /// </summary>
@@ -137,7 +141,8 @@ public class SM2CryptoUtil
 
         return c2;
     }
-    #endregion
+
+    #endregion 解密
 
     private class Cipher
     {
@@ -264,6 +269,7 @@ public class SM2CryptoUtil
             Reset();
         }
     }
+
     private class SM2
     {
         public static SM2 Instance
@@ -272,15 +278,14 @@ public class SM2CryptoUtil
             {
                 return new SM2();
             }
-
         }
+
         public static SM2 InstanceTest
         {
             get
             {
                 return new SM2();
             }
-
         }
 
         public static readonly string[] sm2_param = {
@@ -321,7 +326,6 @@ public class SM2CryptoUtil
             ecc_n = new BigInteger(ecc_param[3], 16);
             ecc_gx = new BigInteger(ecc_param[4], 16);
             ecc_gy = new BigInteger(ecc_param[5], 16);
-
 
             ecc_gx_fieldelement = new FpFieldElement(ecc_p, ecc_gx);
             ecc_gy_fieldelement = new FpFieldElement(ecc_p, ecc_gy);
@@ -374,12 +378,14 @@ public class SM2CryptoUtil
             return md;
         }
     }
+
     public class SM2Model
     {
         /// <summary>
         /// 公钥
         /// </summary>
         public string PublicKey { get; set; }
+
         /// <summary>
         /// 私钥
         /// </summary>

@@ -12,7 +12,6 @@ public sealed class AuthComponent : IServiceComponent
         // JWT配置
         services.AddJwt<JwtHandler>(enableGlobalAuthorize: true, jwtBearerConfigure: options =>
         {
-
             //signalr jwt配置
             options.Events = new JwtBearerEvents
             {
@@ -31,13 +30,11 @@ public sealed class AuthComponent : IServiceComponent
                     return Task.CompletedTask;
                 }
             };
-
         });
         // 允许跨域
         services.AddCorsAccessor();
 
         //注册自定义授权筛选器
         services.AddMvcFilter<MyAuthorizationFilter>();
-
     }
 }

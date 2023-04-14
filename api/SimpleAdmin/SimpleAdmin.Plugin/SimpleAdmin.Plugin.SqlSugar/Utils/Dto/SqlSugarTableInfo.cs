@@ -6,7 +6,7 @@
 public class SqlSugarTableInfo
 {
     /// <summary>
-    /// 所属库 
+    /// 所属库
     ///</summary>
     public virtual string ConfigId { get; set; }
 

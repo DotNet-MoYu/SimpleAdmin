@@ -19,7 +19,6 @@ public class RoleController : BaseController
         this._sysUserService = sysUserService;
     }
 
-
     /// <summary>
     /// 角色分页查询
     /// </summary>
@@ -111,7 +110,6 @@ public class RoleController : BaseController
         return await _roleService.RolePermissionTreeSelector(input);
     }
 
-
     /// <summary>
     /// 获取角色拥有权限
     /// </summary>
@@ -177,5 +175,4 @@ public class RoleController : BaseController
     {
         await _roleService.GrantUser(input);
     }
-
 }

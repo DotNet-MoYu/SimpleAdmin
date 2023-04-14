@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 通知事件总线
@@ -12,6 +10,7 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
 
     public IServiceScopeFactory _scopeFactory { get; }
     private readonly SqlSugarScope _db;
+
     public NoticeEventSubsciber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
     {
         _db = DbContext.Db;
@@ -19,9 +18,6 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
         this._scopeFactory = scopeFactory;
         this._namedServiceProvider = namedServiceProvider;
     }
-
-
-
 
     /// <summary>
     /// 通知用户下线事件
@@ -31,7 +27,6 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     [EventSubscribe(EventSubscriberConst.UserLoginOut)]
     public async Task UserLoginOut(EventHandlerExecutingContext context)
     {
-
         var loginEvent = (UserLoginOutEvent)context.Source.Payload;//获取参数
         //客户端ID列表
         var clientIds = new List<string>();
@@ -41,7 +36,6 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
             clientIds.AddRange(it.ClientIds);
         });
         await GetNoticeService().UserLoginOut(loginEvent.UserId, clientIds, loginEvent.Message);//发送消息
-
     }
 
     /// <summary>
@@ -52,7 +46,6 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     [EventSubscribe(EventSubscriberConst.NewMessage)]
     public async Task NewMessage(EventHandlerExecutingContext context)
     {
-
         var newMessageEvent = (NewMessageEvent)context.Source.Payload;//获取参数
 
         var clientIds = new List<string>();
@@ -72,9 +65,7 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
         });
 
         await GetNoticeService().NewMesage(newMessageEvent.UserIds, clientIds, newMessageEvent.Message);//发送消息
-
     }
-
 
     /// <summary>
     /// 获取服务

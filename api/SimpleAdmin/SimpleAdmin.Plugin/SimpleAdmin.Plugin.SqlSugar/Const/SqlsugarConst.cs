@@ -10,13 +10,13 @@ public class SqlsugarConst
     /// </summary>
     public const string DB_Default = "SimpleAdmin";
 
-
     /// <summary>
     /// 默认表主键
     /// </summary>
     public const string DB_PrimaryKey = "Id";
 
     #region 数据库字段类型
+
     /// <summary>
     /// varchar(max)
     /// </summary>
@@ -31,5 +31,6 @@ public class SqlsugarConst
     /// sqlite的text
     /// </summary>
     public const string Text = "text";
-    #endregion
+
+    #endregion 数据库字段类型
 }

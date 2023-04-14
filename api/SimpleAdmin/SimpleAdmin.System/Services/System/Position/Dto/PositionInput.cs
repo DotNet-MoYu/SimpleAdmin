@@ -5,7 +5,6 @@
 /// </summary>
 public class PositionPageInput : BasePageInput
 {
-
     /// <summary>
     /// 组织ID
     /// </summary>
@@ -63,5 +62,4 @@ public class PositionEditInput : PositionAddInput
 /// </summary>
 public class PositionSelectorInput : UserSelectorInput
 {
-
 }

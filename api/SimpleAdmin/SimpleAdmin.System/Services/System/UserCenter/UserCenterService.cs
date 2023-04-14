@@ -1,5 +1,4 @@
-﻿
-namespace SimpleAdmin.System;
+﻿namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IUserCenterService"/>
 public class UserCenterService : DbRepository<SysUser>, IUserCenterService
@@ -30,6 +29,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     }
 
     #region 查询
+
     /// <inheritdoc />
     public async Task<List<SysResource>> GetOwnMenu()
     {
@@ -63,9 +63,11 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                         it.Name = it.Title;//设置Name等于title
                         allModuleList.Add(it);//添加到模块列表
                         break;
+
                     case CateGoryConst.Resource_MENU://菜单
                         allMenuList.Add(it);//添加到菜单列表
                         break;
+
                     case CateGoryConst.Resource_SPA://单页
                         allSpaList.Add(it);//添加到单页列表
                         break;
@@ -96,7 +98,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             ConstructMeta(myMenus, allSpaList[0].Id);
             //构建菜单树
             result = _menuService.ConstructMenuTrees(myMenus);
-
         }
         return result;
     }
@@ -123,10 +124,8 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             {
                 return "";
             }
-
         }
     }
-
 
     /// <inheritdoc />
     public async Task<List<LoginOrgTreeOutput>> LoginOrgTree()
@@ -141,7 +140,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             return orgTree;
         }
         return new List<LoginOrgTreeOutput>();
-
     }
 
     /// <inheritdoc />
@@ -163,7 +161,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return await _messageService.UnReadCount(UserManager.UserId);
     }
 
-    #endregion
+    #endregion 查询
 
     #region 编辑
 
@@ -216,12 +214,10 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var result = await UpdateAsync(it => new SysUser
         {
             Signature = newSignature
-
         }, it => it.Id == UserManager.UserId);
         if (result)
             _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
-
 
     /// <inheritdoc />
     public async Task UpdateWorkbench(UpdateWorkbenchInput input)
@@ -268,11 +264,10 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return avatar;
     }
 
-
-
-    #endregion
+    #endregion 编辑
 
     #region 方法
+
     /// <summary>
     /// 获取父菜单集合
     /// </summary>
@@ -290,11 +285,9 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             {
                 parentList.Add(parent);//添加到父列表
             }
-
         });
         return parentList;
     }
-
 
     /// <summary>
     /// 获取我的模块集合
@@ -326,7 +319,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                     sysResource.Category = CateGoryConst.Resource_MODULE;
                     allModuleList.Add(sysResource);
                     myModules.Add(sysResource);
-
                 }
             }
             else
@@ -334,12 +326,9 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 // 否则将系统中第一个模块作为拥有的模块
                 myModules.Add(allModuleList[0]);
             }
-
         }
         return myModules;
-
     }
-
 
     /// <summary>
     /// 构建Meta
@@ -363,7 +352,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 {
                     it.ParentId = it.Module;
                 }
-
             }
             //定义meta
             Meta meta = new Meta { Icon = it.Icon, Title = it.Title, Type = it.Category.ToLower() };
@@ -374,7 +362,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 {
                     meta.Type = it.MenuType.ToLower();
                 }
-
             }
             // 如果是单页面
             if (it.Category == CateGoryConst.Resource_SPA)
@@ -395,7 +382,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         });
     }
 
-
     /// <summary>
     /// 构建机构树
     /// </summary>
@@ -414,7 +400,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             {
                 var loginOrg = new LoginOrgTreeOutput
                 {
-                    Children = ConstrucOrgTrees(orgList, item.Id, orgId),//添加子节点 
+                    Children = ConstrucOrgTrees(orgList, item.Id, orgId),//添加子节点
                     Id = item.Id,
                     Label = item.Name,
                     Pid = item.ParentId,
@@ -427,7 +413,5 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return new List<LoginOrgTreeOutput>();
     }
 
-
-    #endregion
-
+    #endregion 方法
 }

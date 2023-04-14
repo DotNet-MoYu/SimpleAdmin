@@ -8,22 +8,25 @@
 public class SysRole : DataEntityBase
 {
     /// <summary>
-    /// 组织id 
+    /// 组织id
     ///</summary>
     [SugarColumn(ColumnName = "OrgId", ColumnDescription = "组织id", IsNullable = true)]
     public long? OrgId { get; set; }
+
     /// <summary>
-    /// 名称 
+    /// 名称
     ///</summary>
     [SugarColumn(ColumnName = "Name", ColumnDescription = "名称", Length = 200, IsNullable = false)]
     public virtual string Name { get; set; }
+
     /// <summary>
-    /// 编码 
+    /// 编码
     ///</summary>
     [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200, IsNullable = false)]
     public string Code { get; set; }
+
     /// <summary>
-    /// 分类 
+    /// 分类
     ///</summary>
     [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = false)]
     public virtual string Category { get; set; }
@@ -35,11 +38,10 @@ public class SysRole : DataEntityBase
     public virtual DefaultDataScope DefaultDataScope { get; set; }
 
     /// <summary>
-    /// 排序码 
+    /// 排序码
     ///</summary>
     [SugarColumn(ColumnName = "SortCode", ColumnDescription = "排序码", IsNullable = true)]
     public int? SortCode { get; set; }
-
 }
 
 /// <summary>

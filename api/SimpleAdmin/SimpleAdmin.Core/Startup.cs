@@ -17,11 +17,8 @@ public class Startup : AppStartup
             WorkerId = 1// 取值范围0~63,默认1
         });
     }
+
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-
     }
-
-
-
 }

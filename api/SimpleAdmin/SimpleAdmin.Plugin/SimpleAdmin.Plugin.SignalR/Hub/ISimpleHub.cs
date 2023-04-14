@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.Plugin.SignalR;
 
-
 /// <summary>
 /// 即时通讯集线器
 /// </summary>

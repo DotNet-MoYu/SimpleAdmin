@@ -1,6 +1,4 @@
-﻿
-
-global using Microsoft.Extensions.Logging;
+﻿global using Microsoft.Extensions.Logging;
 
 namespace SimpleAdmin.Core;
 
@@ -13,9 +11,9 @@ public sealed class LoggingFileComponent : IServiceComponent
     /// 是否写入LoggingMonitor日志
     /// </summary>
     private readonly bool WriteMonitor = App.GetConfig<bool>("Logging:Monitor:Write");
+
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-
         //获取默认日志等级
         var defaultLevel = App.GetConfig<LogLevel?>("Logging:LogLevel:Default");
         //获取最大日志等级，默认Error
@@ -50,8 +48,6 @@ public sealed class LoggingFileComponent : IServiceComponent
                 SetLogOptions(options, null);//日志格式化
             });
         }
-
-
     }
 
     /// <summary>

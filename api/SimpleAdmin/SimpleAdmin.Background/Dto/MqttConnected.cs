@@ -5,7 +5,6 @@
 /// </summary>
 public class MqttConnected
 {
-
     /// <summary>
     /// 用户名
     /// </summary>
@@ -15,5 +14,4 @@ public class MqttConnected
     /// 客户端ID
     /// </summary>
     public string clientid { get; set; }
-
 }

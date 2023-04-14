@@ -1,19 +1,16 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 菜单管理控制器
 /// </summary>
 [ApiDescriptionSettings(Tag = "菜单管理")]
 public class MenuController : BaseController
 {
-
-
     private readonly IMenuService _menuService;
     private readonly IResourceService _resourceService;
 
     public MenuController(IMenuService menuService, IResourceService resourceService)
     {
-
-
         _menuService = menuService;
         _resourceService = resourceService;
     }
@@ -31,24 +28,22 @@ public class MenuController : BaseController
     /// <summary>
     /// 获取菜单树
     /// </summary>
-    /// <returns></returns> 
+    /// <returns></returns>
     [HttpGet("tree")]
     public async Task<dynamic> Tree([FromQuery] MenuTreeInput input)
     {
         return await _menuService.Tree(input); ;
     }
 
-
     /// <summary>
     /// 获取菜单树选择器
     /// </summary>
-    /// <returns></returns> 
+    /// <returns></returns>
     [HttpGet("menuTreeSelector")]
     public async Task<dynamic> MenuTreeSelector([FromQuery] MenuTreeInput input)
     {
         return await _menuService.Tree(input); ;
     }
-
 
     /// <summary>
     /// 添加菜单
@@ -77,13 +72,12 @@ public class MenuController : BaseController
     /// <summary>
     /// 获取菜单详情
     /// </summary>
-    /// <returns></returns> 
+    /// <returns></returns>
     [HttpGet("detail")]
     public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
     {
         return await _menuService.Detail(input); ;
     }
-
 
     /// <summary>
     /// 删除菜单

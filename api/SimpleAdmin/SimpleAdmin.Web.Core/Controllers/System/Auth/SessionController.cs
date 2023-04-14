@@ -26,7 +26,6 @@ public class SessionController
         return await _sessionService.PageB(input);
     }
 
-
     /// <summary>
     /// C端会话分页
     /// </summary>
@@ -54,12 +53,10 @@ public class SessionController
     /// <param name="input"></param>
     [HttpPost("b/exitSession")]
     [DisplayName("强退B端会话")]
-
     public async Task ExitSessionForB([FromBody] BaseIdInput input)
     {
         await _sessionService.ExitSession(input);
     }
-
 
     /// <summary>
     /// 强退C端会话
@@ -67,7 +64,6 @@ public class SessionController
     /// <param name="input"></param>
     [HttpPost("c/exitSession")]
     [DisplayName("强退C端会话")]
-
     public async Task ExitSessionForC([FromBody] BaseIdInput input)
     {
         await _sessionService.ExitSession(input);
@@ -79,7 +75,6 @@ public class SessionController
     /// <param name="input"></param>
     [HttpPost("b/ExitToken")]
     [DisplayName("强退B端Token")]
-
     public async Task ExitTokenForB([FromBody] ExitTokenInput input)
     {
         await _sessionService.ExitToken(input);
@@ -91,7 +86,6 @@ public class SessionController
     /// <param name="input"></param>
     [HttpPost("c/ExitToken")]
     [DisplayName("强退C端Token")]
-
     public async Task ExitTokenForC([FromBody] ExitTokenInput input)
     {
         await _sessionService.ExitToken(input);

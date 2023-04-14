@@ -32,7 +32,6 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
     /// <inheritdoc />
     public async Task<List<OperateLogDayStatisticsOutput>> StatisticsByDay(int day)
     {
-
         //取最近七天
         var dayArray = Enumerable.Range(0, day).Select(it => DateTime.Now.Date.AddDays(it * -1)).ToList();
         //生成时间表
@@ -58,12 +57,9 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
         {
             result.Add(new OperateLogDayStatisticsOutput { Date = it.Date, Name = NameOperate, Count = it.OperateCount });//添加访问日志
             result.Add(new OperateLogDayStatisticsOutput { Date = it.Date, Name = NameExecption, Count = it.ExceptionCount });//添加异常日志
-
         });
         return result;
     }
-
-
 
     /// <inheritdoc />
     public async Task<List<OperateLogTotalCountOutpu>> TotalCount()
@@ -74,7 +70,6 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
             {
                 Category = it.Category,//分类
                 Count = SqlFunc.AggregateCount(it.Category)//数量
-
             }).ToListAsync();
         //定义结果数组
         List<OperateLogTotalCountOutpu> operageLogTotalCounts = new List<OperateLogTotalCountOutpu>
@@ -106,5 +101,4 @@ public class OperateLogService : DbRepository<DevLogOperate>, IOperateLogService
     {
         return await GetFirstAsync(it => it.Id == input.Id);//删除对应分类日志
     }
-
 }

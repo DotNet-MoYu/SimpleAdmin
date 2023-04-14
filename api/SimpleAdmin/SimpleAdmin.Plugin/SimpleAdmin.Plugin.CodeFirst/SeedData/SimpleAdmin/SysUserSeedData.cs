@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.CodeFirst;
+﻿namespace SimpleAdmin.Plugin.CodeFirst;
 
 /// <summary>
 /// 用户表种子数据

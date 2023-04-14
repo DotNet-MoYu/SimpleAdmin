@@ -1,13 +1,10 @@
-﻿
-
-namespace SimpleAdmin.Plugin.Batch;
+﻿namespace SimpleAdmin.Plugin.Batch;
 
 /// <summary>
 /// 批量服务
 /// </summary>
 public interface IBatchEditService : ITransient
 {
-
     /// <summary>
     /// 批量分页查询
     /// </summary>
@@ -28,8 +25,6 @@ public interface IBatchEditService : ITransient
     /// <param name="input">删除参数</param>
     /// <returns></returns>
     Task Delete(List<BaseIdInput> input);
-
-
 
     /// <summary>
     /// 获取需要批量修改的表

@@ -10,7 +10,6 @@ public partial class RedisCacheService : ISimpleCacheService
 
     public RedisCacheService(ISimpleRedis simpleRedis)
     {
-
         this._simpleRedis = simpleRedis;
     }
 
@@ -22,14 +21,11 @@ public partial class RedisCacheService : ISimpleCacheService
         return _simpleRedis.Get<T>(key);
     }
 
-
     /// <inheritdoc/>
     public int Remove(params string[] keys)
     {
         return _simpleRedis.GetFullRedis().Remove(keys);
     }
-
-
 
     /// <inheritdoc/>
     public bool Set<T>(string key, T value, int expire = -1)
@@ -43,21 +39,17 @@ public partial class RedisCacheService : ISimpleCacheService
         return _simpleRedis.Set(key, value, expire);
     }
 
-
     /// <inheritdoc/>
     public bool SetExpire(string key, TimeSpan expire)
     {
         return _simpleRedis.GetFullRedis().SetExpire(key, expire);
     }
 
-
-
     /// <inheritdoc/>
     public TimeSpan GetExpire(string key)
     {
         return _simpleRedis.GetFullRedis().GetExpire(key);
     }
-
 
     /// <inheritdoc/>
     public bool ContainsKey(string key)
@@ -76,7 +68,8 @@ public partial class RedisCacheService : ISimpleCacheService
     {
         _simpleRedis.DelByPattern(pattern);
     }
-    #endregion
+
+    #endregion 普通操作
 
     #region 集合操作
 
@@ -115,7 +108,8 @@ public partial class RedisCacheService : ISimpleCacheService
     {
         return _simpleRedis.GetFullRedis().GetSet<T>(key);
     }
-    #endregion
+
+    #endregion 集合操作
 
     #region 高级操作
 
@@ -137,7 +131,6 @@ public partial class RedisCacheService : ISimpleCacheService
         return _simpleRedis.GetFullRedis().Replace(key, value);
     }
 
-
     /// <inheritdoc/>
     public bool TryGetValue<T>(string key, out T value)
     {
@@ -156,7 +149,6 @@ public partial class RedisCacheService : ISimpleCacheService
         return _simpleRedis.GetFullRedis().Decrement(key, value);
     }
 
-
     /// <inheritdoc/>
     public long Increment(string key, long value)
     {
@@ -168,7 +160,8 @@ public partial class RedisCacheService : ISimpleCacheService
     {
         return _simpleRedis.GetFullRedis().Increment(key, value);
     }
-    #endregion
+
+    #endregion 高级操作
 
     #region 事务
 
@@ -189,6 +182,6 @@ public partial class RedisCacheService : ISimpleCacheService
     {
         return _simpleRedis.GetFullRedis().AcquireLock(key, msTimeout, msExpire, throwOnFailure);
     }
-    #endregion
 
+    #endregion 事务
 }

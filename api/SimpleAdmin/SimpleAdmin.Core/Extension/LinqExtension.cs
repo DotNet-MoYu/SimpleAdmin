@@ -17,6 +17,4 @@ public static class LinqExtension
     {
         return secend.All(s => first.Any(f => f.Equals(s)));
     }
-
-
 }

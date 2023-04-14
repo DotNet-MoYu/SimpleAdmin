@@ -1,6 +1,5 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// <inheritdoc cref="IButtonService"/>
 /// </summary>
@@ -22,7 +21,6 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(ButtonPageInput input)
     {
-
         var query = Context.Queryable<SysResource>()
                          .Where(it => it.ParentId == input.ParentId && it.Category == CateGoryConst.Resource_BUTTON)
                          .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey) || it.Path.Contains(input.SearchKey))//根据关键字查询
@@ -32,7 +30,6 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         return pageInfo;
     }
 
-
     /// <inheritdoc />
     public async Task Add(ButtonAddInput input)
     {
@@ -41,7 +38,6 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         if (await InsertAsync(sysResource))//插入数据
             await _resourceService.RefreshCache(CateGoryConst.Resource_BUTTON);//刷新缓存
     }
-
 
     /// <inheritdoc />
     public async Task<List<long>> AddBatch(ButtonAddInput input)
@@ -78,8 +74,6 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         {
             return new List<long>();
         }
-
-
     }
 
     /// <inheritdoc />
@@ -104,7 +98,6 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         }
     }
 
-
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input)
     {
@@ -112,7 +105,9 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         var ids = input.Select(it => it.Id).ToList();
         //获取所有按钮集合
         var buttonList = await _resourceService.GetListByCategory(CateGoryConst.Resource_BUTTON);
+
         #region 处理关系表角色资源信息
+
         //获取所有菜单集合
         var menuList = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
         //获取按钮的父菜单id集合
@@ -136,8 +131,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
             }
         });
 
-        #endregion
-
+        #endregion 处理关系表角色资源信息
 
         //事务
         var result = await itenant.UseTranAsync(async () =>
@@ -161,9 +155,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         }
     }
 
-
-
     #region 方法
+
     /// <summary>
     /// 检查输入参数
     /// </summary>
@@ -181,5 +174,5 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         sysResource.Category = CateGoryConst.Resource_BUTTON;//设置分类为按钮
     }
 
-    #endregion
+    #endregion 方法
 }

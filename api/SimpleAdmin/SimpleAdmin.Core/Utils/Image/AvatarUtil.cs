@@ -8,6 +8,7 @@ namespace SimpleAdmin.Core.Utils;
 public static class AvatarUtil
 {
     #region 姓名生成图片处理
+
     /// <summary>
     /// 获取姓名对应的颜色值
     /// </summary>
@@ -30,8 +31,9 @@ public static class AvatarUtil
         string color = "#" + str.Substring(1, 3);
         return color;
     }
+
     /// <summary>
-    /// 获取姓名对应的图片 
+    /// 获取姓名对应的图片
     /// </summary>
     /// <param name="name"></param>
     /// <param name="width"></param>
@@ -56,7 +58,6 @@ public static class AvatarUtil
                 // 截取前面的两个英文字母
                 nameWritten = name.Substring(0, 2).ToUpper();
             }
-
         }
         //string firstName = name.Substring(0, 1);
         Bitmap img = new Bitmap(width, height);
@@ -85,8 +86,6 @@ public static class AvatarUtil
         return $"data:image/png;base64," + imgByte;
     }
 
-
-
     /// <summary>
     /// 用 正则表达式 判断字符是不是汉字
     /// </summary>
@@ -96,6 +95,6 @@ public static class AvatarUtil
     {
         return System.Text.RegularExpressions.Regex.IsMatch(text, @"[\u4e00-\u9fbb]");
     }
-    #endregion
 
+    #endregion 姓名生成图片处理
 }

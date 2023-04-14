@@ -1,12 +1,10 @@
 ﻿namespace SimpleAdmin.System;
 
-
 /// <summary>
 /// 组织分页查询参数
 /// </summary>
 public class SysOrgPageInput : BasePageInput
 {
-
     /// <summary>
     /// 父ID
     /// </summary>
@@ -16,7 +14,6 @@ public class SysOrgPageInput : BasePageInput
     /// 机构列表
     /// </summary>
     public List<long> OrgIds { get; set; }
-
 }
 
 /// <summary>
@@ -24,7 +21,6 @@ public class SysOrgPageInput : BasePageInput
 /// </summary>
 public class SysOrgAddInput : SysOrg
 {
-
 }
 
 /// <summary>
@@ -44,12 +40,10 @@ public class SysOrgEditInput : SysOrgAddInput
 /// </summary>
 public class SysOrgCopyInput
 {
-
     /// <summary>
     /// 目标ID
     /// </summary>
     public long TargetId { get; set; }
-
 
     /// <summary>
     /// 组织Id列表
@@ -61,7 +55,6 @@ public class SysOrgCopyInput
     /// 是否包含下级
     /// </summary>
     public bool ContainsChild { get; set; } = false;
-
 }
 
 /// <summary>
@@ -70,7 +63,7 @@ public class SysOrgCopyInput
 public class SysOrgImportInput : ImportTemplateInput
 {
     /// <summary>
-    /// 名称 
+    /// 名称
     ///</summary>
     [ImporterHeader(Name = "名称")]
     [Required(ErrorMessage = "名称不能为空")]
@@ -84,19 +77,20 @@ public class SysOrgImportInput : ImportTemplateInput
     public string Names { get; set; }
 
     /// <summary>
-    /// 分类 
+    /// 分类
     ///</summary>
     [ImporterHeader(Name = "分类")]
     [Required(ErrorMessage = "分类不能为空")]
     public string Category { get; set; }
+
     /// <summary>
-    /// 排序码 
+    /// 排序码
     ///</summary>
     [ImporterHeader(Name = "排序码")]
     public int SortCode { get; set; } = 1;
 
     /// <summary>
-    /// 主管账号 
+    /// 主管账号
     ///</summary>
     [ImporterHeader(Name = "主管账号")]
     [Required(ErrorMessage = "主管账号不能为空")]

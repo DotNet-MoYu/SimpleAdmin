@@ -20,7 +20,6 @@ public class SimpleHub : Hub<ISimpleHub>
         _simpleCacheService = simpleCacheService;
     }
 
-
     /// <summary>
     /// 连接
     /// </summary>
@@ -33,7 +32,6 @@ public class SimpleHub : Hub<ISimpleHub>
             var userIdentifier = Context.UserIdentifier;//自定义的Id
             UpdateRedis(userIdentifier, token);//更新redis
         }
-
     }
 
     /// <summary>
@@ -59,6 +57,7 @@ public class SimpleHub : Hub<ISimpleHub>
     }
 
     #region 方法
+
     /// <summary>
     /// 更新redis
     /// </summary>
@@ -97,6 +96,6 @@ public class SimpleHub : Hub<ISimpleHub>
             }
         }
     }
-    #endregion
 
+    #endregion 方法
 }

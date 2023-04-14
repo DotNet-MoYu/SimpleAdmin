@@ -1,4 +1,5 @@
 ﻿namespace SimpleAdmin.Web.Core;
+
 /// <summary>
 /// 组织管理控制器
 /// </summary>
@@ -14,14 +15,7 @@ public class OrgController : BaseController
         this._sysUserService = sysUserService;
     }
 
-
-
-
-
-
-
     #region Get
-
 
     /// <summary>
     /// 获取组织树
@@ -54,7 +48,6 @@ public class OrgController : BaseController
         return await _sysOrgService.Page(input);
     }
 
-
     /// <summary>
     /// 获取用户选择器
     /// </summary>
@@ -76,7 +69,7 @@ public class OrgController : BaseController
         return await _sysOrgService.Detail(input); ;
     }
 
-    #endregion
+    #endregion Get
 
     #region Post
 
@@ -104,7 +97,6 @@ public class OrgController : BaseController
         await _sysOrgService.Add(input);
     }
 
-
     /// <summary>
     /// 修改组织
     /// </summary>
@@ -129,5 +121,6 @@ public class OrgController : BaseController
     {
         await _sysOrgService.Delete(input);
     }
-    #endregion
+
+    #endregion Post
 }

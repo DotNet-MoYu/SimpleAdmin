@@ -1,6 +1,4 @@
-﻿
-
-namespace SimpleAdmin.Plugin.SqlSugar;
+﻿namespace SimpleAdmin.Plugin.SqlSugar;
 
 /// <summary>
 /// 仓储模式对象
@@ -9,12 +7,12 @@ namespace SimpleAdmin.Plugin.SqlSugar;
 public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
 {
     protected ITenant itenant = null;//多租户事务、GetConnection、IsAnyConnection等功能
+
     public DbRepository(ISqlSugarClient context = null) : base(context)//注意这里要有默认值等于null
     {
         Context = DbContext.Db.GetConnectionScopeWithAttr<T>();//ioc注入的对象
         itenant = DbContext.Db;
     }
-
 
     #region 仓储方法拓展
 
@@ -32,12 +30,12 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
             return await Context.Fastest<T>().BulkCopyAsync(data);//大数据导入
         else
             return await Context.Insertable(data).ExecuteCommandAsync();//普通导入
-
-
     }
 
-    #endregion
+    #endregion 插入
+
     #region 列表
+
     /// <summary>
     /// 获取列表指定多个字段
     /// </summary>
@@ -60,7 +58,6 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
         return Context.Queryable<T>().Where(whereExpression).Select(selectExpression).ToListAsync();
     }
 
-
     /// <summary>
     /// 获取列表指定单个字段
     /// </summary>
@@ -72,8 +69,10 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
         return Context.Queryable<T>().Where(whereExpression).Select(selectExpression).ToListAsync();
     }
 
-    #endregion
+    #endregion 列表
+
     #region 单查
+
     /// <summary>
     /// 获取指定表的单个字段
     /// </summary>
@@ -95,6 +94,8 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
     {
         return Context.Queryable<T>().Where(whereExpression).Select(selectExpression).FirstAsync();
     }
-    #endregion
-    #endregion
+
+    #endregion 单查
+
+    #endregion 仓储方法拓展
 }

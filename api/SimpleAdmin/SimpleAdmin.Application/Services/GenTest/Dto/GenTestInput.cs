@@ -34,7 +34,6 @@ public class GenTestPageInput : BasePageInput
     /// 扩展信息
     /// </summary>
     public string ExtJson { get; set; }
-
 }
 
 /// <summary>
@@ -86,7 +85,6 @@ public class GenTestAddInput
     /// 扩展信息
     /// </summary>
     public string ExtJson { get; set; }
-
 }
 
 /// <summary>
@@ -103,7 +101,6 @@ public class GenTestEditInput : GenTestAddInput
 
 public class GenTestImportInput : ImportTemplateInput
 {
-
     /// <summary>
     /// 姓名
     /// </summary>
@@ -116,7 +113,6 @@ public class GenTestImportInput : ImportTemplateInput
     /// </summary>
     [ImporterHeader(Name = "性别")]
     [Required(ErrorMessage = "学生性别不能为空")]
-    //[InDict(DevDictConst.GENDER)]
     public string Sex { get; set; }
 
     /// <summary>
@@ -126,7 +122,6 @@ public class GenTestImportInput : ImportTemplateInput
     [Range(1, 200, ErrorMessage = "年龄不符合要求")]
     [Required(ErrorMessage = "学生年龄不能为空")]
     public int? Age { get; set; }
-
 
     [ImporterHeader(Name = "民族")]
     public string Nation { get; set; }
@@ -138,53 +133,58 @@ public class GenTestImportInput : ImportTemplateInput
     [AntTable(IsDate = true)]
     public DateTime? Bir { get; set; }
 
-
     /// <summary>
-    /// 籍贯 
+    /// 籍贯
     ///</summary>
     [ImporterHeader(Name = "籍贯")]
     public string NativePlace { get; set; }
+
     /// <summary>
-    /// 家庭住址 
+    /// 家庭住址
     ///</summary>
     [ImporterHeader(Name = "家庭住址")]
     [AntTable(Width = 200, Ellipsis = true)]
     public string HomeAddress { get; set; }
+
     /// <summary>
-    /// 通信地址 
+    /// 通信地址
     ///</summary>
     [ImporterHeader(Name = "通信地址")]
     public string MailingAddress { get; set; }
+
     /// <summary>
-    /// 证件类型 
+    /// 证件类型
     ///</summary>
     [ImporterHeader(Name = "证件类型")]
     public string IdCardType { get; set; }
+
     /// <summary>
-    /// 证件号码 
+    /// 证件号码
     ///</summary>
     [ImporterHeader(Name = "证件号码")]
     public string IdCardNumber { get; set; }
+
     /// <summary>
-    /// 文化程度 
+    /// 文化程度
     ///</summary>
     [ImporterHeader(Name = "文化程度")]
     public string CultureLevel { get; set; }
+
     /// <summary>
-    /// 政治面貌 
+    /// 政治面貌
     ///</summary>
     [ImporterHeader(Name = "政治面貌")]
     public string PoliticalOutlook { get; set; }
+
     /// <summary>
-    /// 毕业院校 
+    /// 毕业院校
     ///</summary>
     [ImporterHeader(Name = "毕业院校")]
     public string College { get; set; }
+
     /// <summary>
-    /// 学历 
+    /// 学历
     ///</summary>
     [ImporterHeader(Name = "学历")]
     public string Education { get; set; }
 }
-
-

@@ -1,17 +1,14 @@
 ﻿namespace SimpleAdmin.Plugin.Gen;
 
-
 /// <summary>
 /// 表字段信息输出
 /// </summary>
 public class GenBasicColumnOutput
 {
-
     /// <summary>
     /// 字段名称
     /// </summary>
     public string ColumnName { get; set; }
-
 
     /// <summary>
     /// 是否主键
@@ -27,7 +24,6 @@ public class GenBasicColumnOutput
     /// 字段注释
     /// </summary>
     public string ColumnRemark { get; set; }
-
 }
 
 /// <summary>
@@ -50,7 +46,6 @@ public class GenBasePreviewOutput
     /// </summary>
 
     public List<GenBaseCodeResult> CodeBackendResults { get; set; } = new List<GenBaseCodeResult>();
-
 
     public class GenBaseCodeResult
     {

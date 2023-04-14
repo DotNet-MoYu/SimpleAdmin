@@ -44,8 +44,6 @@ public interface IRelationService : ITransient
     /// <returns></returns>
     Task<List<SysRelation>> GetRelationListByTargetIdListAndCategory(List<string> targetIds, string category);
 
-
-
     /// <summary>
     /// 获取关系表用户工作台
     /// </summary>

@@ -7,7 +7,6 @@ public class ButtonPageInput : BasePageInput
     /// </summary>
     [Required(ErrorMessage = "ParentId不能为空")]
     public long? ParentId { get; set; }
-
 }
 
 /// <summary>
@@ -32,19 +31,13 @@ public class ButtonAddInput : SysResource
     /// </summary>
     [Required(ErrorMessage = "Code不能为空")]
     public override string Code { get; set; }
-
-
-
-
 }
 
 public class ButtonEditInput : ButtonAddInput
 {
-
     /// <summary>
     /// ID
     /// </summary>
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
-
