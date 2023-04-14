@@ -1,16 +1,16 @@
 <div align="center"><img  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/ikun.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
-<div align="left"><h1 align="center">SimpleAdmin</a></h1></div>
-<div align="center"><h4 align="center">✨没有花里胡哨，只有简单、稳定、灵活、高效✨</h4></div>
+<div align="center"><strong><span style="font-size: x-large;">SimpleAdmin</span></strong></div>
+<div align="center"><h4 align="center">🐔没有花里胡哨，只有简单、稳定、灵活、高效🐔</h4></div>
 
 <div align="center">
 
-<label>[![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://gitee.com/zxzyjs/SimpleAdmin/blob/master/LICENSE)</label>  <label>[![](https://img.shields.io/badge/Author-少林寺驻北固山办事处大神父王喇嘛-orange.svg)](https://gitee.com/huguodong520)</label>  <label>[![](https://img.shields.io/badge/Blog-个人博客-blue.svg)](https://www.cnblogs.com/huguodong/)</label>  <label>[![star](https://gitee.com/zxzyjs/SimpleAdmin/badge/star.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/stargazers)</label>  <label>[![fork](https://gitee.com/zxzyjs/SimpleAdmin/badge/fork.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/members)</label>
+<label>[![AUR](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg)](https://gitee.com/zxzyjs/SimpleAdmin/blob/master/LICENSE)</label>  <label>[![](https://img.shields.io/badge/Author-少林寺驻北固山办事处大神父王喇嘛-orange.svg)](https://gitee.com/huguodong520)</label> <label>[![](https://img.shields.io/badge/🏀-酝酿时长两年半-orange.svg)](https://gitee.com/huguodong520)</label> <label>[![](https://img.shields.io/badge/Blog-个人博客-blue.svg)](https://www.cnblogs.com/huguodong/)</label>  <label>[![star](https://gitee.com/zxzyjs/SimpleAdmin/badge/star.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/stargazers)</label>  <label>[![fork](https://gitee.com/zxzyjs/SimpleAdmin/badge/fork.svg?theme=dark)](https://gitee.com/zxzyjs/SimpleAdmin/members)</label>
 </div>
 
 ### 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
 ## 🎨框架介绍🎨
-💥SimpleAdmin一个小而美的通用业务型后台管理系统。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发,采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
+🪶SimpleAdmin是一个小而美的通用业务型后台管理系统。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发,采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
 
 ## 🍕选择SimpleAdmin的N个理由🍕
 
