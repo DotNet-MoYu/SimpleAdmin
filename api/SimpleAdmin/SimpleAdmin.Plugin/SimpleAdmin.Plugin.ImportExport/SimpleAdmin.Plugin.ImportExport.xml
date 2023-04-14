@@ -29,11 +29,6 @@
             导入预览输入
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Plugin.ImportExport.ImportPreviewInput.File">
-            <summary>
-            文件
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Plugin.ImportExport.ImportPreviewOutput`1">
             <summary>
             文件导入通用输出

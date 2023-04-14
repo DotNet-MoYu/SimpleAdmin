@@ -29,6 +29,16 @@
             验证Id不能为 空
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.BaseFileInput">
+            <summary>
+            文件上传输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseFileInput.File">
+            <summary>
+            文件
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.BaseIdInput">
             <summary>
             主键Id输入参数
@@ -938,6 +948,13 @@
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetBitmapFromBase64(System.String)">
             <summary>
             base64转bitmap
+            </summary>
+            <param name="base64string"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ToImageBase64(System.String)">
+            <summary>
+            base64转image格式
             </summary>
             <param name="base64string"></param>
             <returns></returns>

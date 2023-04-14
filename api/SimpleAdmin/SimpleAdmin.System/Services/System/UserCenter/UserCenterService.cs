@@ -1,4 +1,5 @@
-﻿namespace SimpleAdmin.System;
+﻿
+namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IUserCenterService"/>
 public class UserCenterService : DbRepository<SysUser>, IUserCenterService
@@ -28,6 +29,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         this._messageService = messageService;
     }
 
+    #region 查询
     /// <inheritdoc />
     public async Task<List<SysResource>> GetOwnMenu()
     {
@@ -125,6 +127,46 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         }
     }
 
+
+    /// <inheritdoc />
+    public async Task<List<LoginOrgTreeOutput>> LoginOrgTree()
+    {
+        var orgList = await _sysOrgService.GetListAsync();//获取全部机构
+        var parentOrgs = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
+        var topOrg = parentOrgs.Where(it => it.ParentId == SimpleAdminConst.Zero).FirstOrDefault();//获取顶级节点
+        if (topOrg != null)
+        {
+            var orgs = await _sysOrgService.GetChildListById(topOrg.Id);//获取下级
+            var orgTree = ConstrucOrgTrees(orgs, 0, UserManager.OrgId);//获取组织架构
+            return orgTree;
+        }
+        return new List<LoginOrgTreeOutput>();
+
+    }
+
+    /// <inheritdoc />
+    public async Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input)
+    {
+        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
+        return messages;
+    }
+
+    /// <inheritdoc />
+    public async Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input)
+    {
+        return await _messageService.Detail(input, true);//返回详情，不带用户列表
+    }
+
+    /// <inheritdoc />
+    public async Task<int> UnReadCount()
+    {
+        return await _messageService.UnReadCount(UserManager.UserId);
+    }
+
+    #endregion
+
+    #region 编辑
+
     /// <inheritdoc />
     public async Task UpdateUserInfo(UpdateInfoInput input)
     {
@@ -182,22 +224,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
 
 
     /// <inheritdoc />
-    public async Task<List<LoginOrgTreeOutput>> LoginOrgTree()
-    {
-        var orgList = await _sysOrgService.GetListAsync();//获取全部机构
-        var parentOrgs = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
-        var topOrg = parentOrgs.Where(it => it.ParentId == SimpleAdminConst.Zero).FirstOrDefault();//获取顶级节点
-        if (topOrg != null)
-        {
-            var orgs = await _sysOrgService.GetChildListById(topOrg.Id);//获取下级
-            var orgTree = ConstrucOrgTrees(orgs, 0, UserManager.OrgId);//获取组织架构
-            return orgTree;
-        }
-        return new List<LoginOrgTreeOutput>();
-
-    }
-
-    /// <inheritdoc />
     public async Task UpdateWorkbench(UpdateWorkbenchInput input)
     {
         //关系表保存个人工作台
@@ -205,29 +231,47 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input)
-    {
-        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
-        return messages;
-    }
-
-    /// <inheritdoc />
-    public async Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input)
-    {
-        return await _messageService.Detail(input, true);//返回详情，不带用户列表
-    }
-
-    /// <inheritdoc />
-    public async Task<int> UnReadCount()
-    {
-        return await _messageService.UnReadCount(UserManager.UserId);
-    }
-
-    /// <inheritdoc />
     public async Task DeleteMyMessage(BaseIdInput input)
     {
         await _messageService.DeleteMyMessage(input, UserManager.UserId);
     }
+
+    /// <inheritdoc />
+    public async Task UpdatePassword(UpdatePasswordInput input)
+    {
+        //获取用户信息
+        var userInfo = await _userService.GetUserById(UserManager.UserId);
+        var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
+        if (userInfo.Password != password) throw Oops.Bah("原密码错误");
+        var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
+        newPassword = CryptogramUtil.Sm4Encrypt(newPassword);//SM4加密
+        userInfo.Password = newPassword;
+        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Password }).ExecuteCommandAsync();//修改密码
+        _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
+    }
+
+    /// <inheritdoc />
+    public async Task<string> UpdateAvatar(BaseFileInput input)
+    {
+        var userInfo = await _userService.GetUserById(UserManager.UserId);
+
+        var file = input.File;
+        using var fileStream = file.OpenReadStream();//获取文件流
+        byte[] bytes = new byte[fileStream.Length];
+        fileStream.Read(bytes, 0, bytes.Length);
+        fileStream.Close();
+        var base64String = Convert.ToBase64String(bytes);//转base64
+        var avatar = base64String.ToImageBase64();//转图片
+        userInfo.Avatar = avatar;
+        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Avatar }).ExecuteCommandAsync();//修改密码
+        _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
+        return avatar;
+    }
+
+
+
+    #endregion
+
     #region 方法
     /// <summary>
     /// 获取父菜单集合

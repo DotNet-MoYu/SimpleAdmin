@@ -3150,6 +3150,21 @@
             工作台数据
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.UpdatePasswordInput">
+            <summary>
+            更新个人密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdatePasswordInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdatePasswordInput.NewPassword">
+            <summary>
+            新密码
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.LoginOrgTreeOutput">
             <summary>
             我的机构数样式
@@ -3212,32 +3227,11 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <summary>
-            更新个人信息
-            </summary>
-            <param name="input">信息参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
-            <summary>
-            更新签名
-            </summary>
-            <param name="input">签名图片</param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.LoginOrgTree">
             <summary>
             获取组织架构
             </summary>
             <returns>组织架构</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
-            <summary>
-            编辑个人工作台
-            </summary>
-            <param name="input">工作台字符串</param>
-            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
             <summary>
@@ -3259,11 +3253,46 @@
             </summary>
             <returns>未读消息数量</returns>
         </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <summary>
+            更新个人信息
+            </summary>
+            <param name="input">信息参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <summary>
+            更新签名
+            </summary>
+            <param name="input">签名图片</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <summary>
+            编辑个人工作台
+            </summary>
+            <param name="input">工作台字符串</param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             删除我的消息
             </summary>
-            <param name="input"></param>
+            <param name="input">消息Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <summary>
+            修改个人密码
+            </summary>
+            <param name="input">密码信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <summary>
+            修改头像
+            </summary>
+            <param name="input">头像文件</param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.UserCenterService">
@@ -3275,16 +3304,7 @@
         <member name="M:SimpleAdmin.System.UserCenterService.GetLoginWorkbench">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
-            <inheritdoc />
-        </member>
         <member name="M:SimpleAdmin.System.UserCenterService.LoginOrgTree">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
@@ -3296,7 +3316,22 @@
         <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
             <inheritdoc />
         </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <inheritdoc />
+        </member>
         <member name="M:SimpleAdmin.System.UserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource})">

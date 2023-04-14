@@ -41,3 +41,22 @@ public class UpdateWorkbenchInput
     [Required(ErrorMessage = "WorkbenchData不能为空")]
     public string WorkbenchData { get; set; }
 }
+
+/// <summary>
+/// 更新个人密码
+/// </summary>
+public class UpdatePasswordInput
+{
+    /// <summary>
+    /// 密码
+    /// </summary>
+    [Required(ErrorMessage = "Password不能为空")]
+    public string Password { get; set; }
+
+    /// <summary>
+    /// 新密码
+    /// </summary>
+    [Required(ErrorMessage = "NewPassword不能为空")]
+    public string NewPassword { get; set; }
+
+}

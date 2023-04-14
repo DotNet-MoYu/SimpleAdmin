@@ -80,6 +80,16 @@ public static class ImageUtil
         return bitmap;
     }
 
+    /// <summary>
+    /// base64转image格式
+    /// </summary>
+    /// <param name="base64string"></param>
+    /// <returns></returns>
+    public static string ToImageBase64(this string base64string)
+    {
+        return "data:image/png;base64," + base64string;
+    }
+
 
 
     /// <summary>

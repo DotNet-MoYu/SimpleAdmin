@@ -5,6 +5,8 @@
 /// </summary>
 public interface IUserCenterService : ITransient
 {
+    #region 查询
+
     /// <summary>
     /// 获取个人菜单
     /// </summary>
@@ -17,32 +19,12 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task<string> GetLoginWorkbench();
 
-    /// <summary>
-    /// 更新个人信息
-    /// </summary>
-    /// <param name="input">信息参数</param>
-    /// <returns></returns>
-    Task UpdateUserInfo(UpdateInfoInput input);
-
-    /// <summary>
-    /// 更新签名
-    /// </summary>
-    /// <param name="input">签名图片</param>
-    /// <returns></returns>
-    Task UpdateSignature(UpdateSignatureInput input);
 
     /// <summary>
     /// 获取组织架构
     /// </summary>
     /// <returns>组织架构</returns>
     Task<List<LoginOrgTreeOutput>> LoginOrgTree();
-
-    /// <summary>
-    /// 编辑个人工作台
-    /// </summary>
-    /// <param name="input">工作台字符串</param>
-    /// <returns></returns>
-    Task UpdateWorkbench(UpdateWorkbenchInput input);
 
     /// <summary>
     /// 获取登录用户的站内信分页
@@ -63,11 +45,56 @@ public interface IUserCenterService : ITransient
     /// </summary>
     /// <returns>未读消息数量</returns>
     Task<int> UnReadCount();
+    #endregion
+    #region 编辑
+
+
+
+    /// <summary>
+    /// 更新个人信息
+    /// </summary>
+    /// <param name="input">信息参数</param>
+    /// <returns></returns>
+    Task UpdateUserInfo(UpdateInfoInput input);
+
+    /// <summary>
+    /// 更新签名
+    /// </summary>
+    /// <param name="input">签名图片</param>
+    /// <returns></returns>
+    Task UpdateSignature(UpdateSignatureInput input);
+
+
+
+    /// <summary>
+    /// 编辑个人工作台
+    /// </summary>
+    /// <param name="input">工作台字符串</param>
+    /// <returns></returns>
+    Task UpdateWorkbench(UpdateWorkbenchInput input);
+
 
     /// <summary>
     /// 删除我的消息
     /// </summary>
-    /// <param name="input"></param>
+    /// <param name="input">消息Id</param>
     /// <returns></returns>
     Task DeleteMyMessage(BaseIdInput input);
+
+
+    /// <summary>
+    /// 修改个人密码
+    /// </summary>
+    /// <param name="input">密码信息</param>
+    /// <returns></returns>
+    Task UpdatePassword(UpdatePasswordInput input);
+
+    /// <summary>
+    /// 修改头像
+    /// </summary>
+    /// <param name="input">头像文件</param>
+    /// <returns></returns>
+    Task<string> UpdateAvatar(BaseFileInput input);
+
+    #endregion
 }

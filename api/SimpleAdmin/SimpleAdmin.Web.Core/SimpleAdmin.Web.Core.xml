@@ -1432,6 +1432,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <summary>
+            修改头像
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.MyActionFilter">
             <summary>
             操作筛选器

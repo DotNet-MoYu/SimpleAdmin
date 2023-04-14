@@ -124,4 +124,28 @@ public class UserCenterController : IDynamicApiController
         await _userCenterService.DeleteMyMessage(input);
     }
 
+    /// <summary>
+    /// 修改密码
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("updatePassword")]
+    [DisplayName("修改密码")]
+    public async Task UpdatePassword([FromBody] UpdatePasswordInput input)
+    {
+        await _userCenterService.UpdatePassword(input);
+    }
+
+    /// <summary>
+    /// 修改头像
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("updateAvatar")]
+    [DisplayName("修改头像")]
+    public async Task<dynamic> UpdateAvatar([FromForm] BaseFileInput input)
+    {
+        return await _userCenterService.UpdateAvatar(input);
+    }
+
 }
