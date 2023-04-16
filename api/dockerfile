@@ -1,0 +1,16 @@
+ENV ASPNETCORE_ENVIRONMENT=Production
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+WORKDIR /app
+#FROM mcr.microsoft.com/dotnet/sdk:7.0-buster AS build
+WORKDIR /src
+COPY ["SimpleAdmin/","SimpleAdmin/"]
+WORKDIR "/src/SimpleAdmin"
+FROM build AS publish
+RUN dotnet publish "SimpleAdmin.Web.Entry/SimpleAdmin.Web.Entry.csproj" --framework net7.0 -c Release -o /app/publish
+
+# 最后 使用7.0作为运行环境
+FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "SimpleAdmin.Web.Entry.dll"]
