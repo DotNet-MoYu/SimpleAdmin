@@ -5,7 +5,7 @@
     "RedisSettings": {
       "Address": "127.0.0.1:6379", //地址
       "Password": "123456", //Redis服务密码
-      "defaultDatabase": 9, //默认库
+      "Db": 9, //默认库
       "ClearRedis": true //是否每次启动都清除Redis缓存
     }
   }
