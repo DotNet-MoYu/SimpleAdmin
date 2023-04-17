@@ -16,7 +16,7 @@ public class SM4CryptoUtil
         long n = (long)(b[i] & 0xff) << 24 |
             (long)((b[i + 1] & 0xff) << 16) |
             (long)((b[i + 2] & 0xff) << 8) |
-            (long)(b[i + 3] & 0xff) & 0xffffffffL;
+            b[i + 3] & 0xff & 0xffffffffL;
         return n;
     }
 
@@ -179,13 +179,13 @@ public class SM4CryptoUtil
         MK[3] = GetULongByBe(key, 12);
         long[] k = new long[36];
         //轮密钥生成方法
-        k[0] = MK[0] ^ (long)FK[0];
-        k[1] = MK[1] ^ (long)FK[1];
-        k[2] = MK[2] ^ (long)FK[2];
-        k[3] = MK[3] ^ (long)FK[3];
+        k[0] = MK[0] ^ FK[0];
+        k[1] = MK[1] ^ FK[1];
+        k[2] = MK[2] ^ FK[2];
+        k[3] = MK[3] ^ FK[3];
         for (; i < 32; i++)
         {
-            k[(i + 4)] = (k[i] ^ Sm4CalciRk(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ (long)CK[i]));
+            k[(i + 4)] = (k[i] ^ Sm4CalciRk(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ CK[i]));
             SK[i] = k[(i + 4)];
         }
     }
@@ -227,7 +227,7 @@ public class SM4CryptoUtil
         {
             return null;
         }
-        byte[] ret = (byte[])null;
+        byte[] ret = null;
         if (mode == 1)
         {
             int p = 16 - input.Length % 16;

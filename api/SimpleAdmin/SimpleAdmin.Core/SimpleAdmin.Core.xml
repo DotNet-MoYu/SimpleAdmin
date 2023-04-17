@@ -1078,7 +1078,7 @@
             </summary>
             <param name="zipName">压缩文件名称</param>
             <param name="fileList">文件列表</param>
-            <param name="savepath">保存路径</param>
+            <param name="error">保存路径</param>
             <param name="isLocal">是否本地</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.CompressDirectory(System.String,System.Boolean)">

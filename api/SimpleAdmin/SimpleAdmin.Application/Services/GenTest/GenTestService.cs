@@ -85,7 +85,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     {
         var data = await CheckImport(input.Data, true);
         var result = _importExportService.GetImportResultPreview(data, out List<GenTestImportInput> importData);
-        var genTests = importData.Adapt<List<GenTest>>();//转实体
+        _ = importData.Adapt<List<GenTest>>();//转实体
         //await InsertRangeAsync(genTests);//导入用户
         //DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
         return result;

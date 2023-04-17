@@ -58,7 +58,7 @@ public static class ImageUtil
             ms.Read(arr, 0, (int)ms.Length); ms.Close();
             return Convert.ToBase64String(arr);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             return "";
         }
@@ -105,9 +105,9 @@ public static class ImageUtil
         float nPercentW = 0;
         float nPercentH = 0;
         //计算宽度的缩放比例
-        nPercentW = ((float)size.Width / (float)sourceWidth);
+        nPercentW = (size.Width / (float)sourceWidth);
         //计算高度的缩放比例
-        nPercentH = ((float)size.Height / (float)sourceHeight);
+        nPercentH = (size.Height / (float)sourceHeight);
 
         if (nPercentH < nPercentW)
             nPercent = nPercentH;

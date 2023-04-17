@@ -72,7 +72,7 @@ public static class CaptchaUtil
             Font font = new Font(fontStr, fontSize);
             Color color = colors[random.Next(colors.Length)];
             //graphics.DrawString(charCode[i].ToString(), font, new SolidBrush(color), (float)i * 30 + 5, (float)0);
-            graphics.DrawString(charCode[i].ToString(), font, new SolidBrush(color), (float)i * 25, (float)5);
+            graphics.DrawString(charCode[i].ToString(), font, new SolidBrush(color), (float)i * 25, 5);
         }
         //写入内存流
         try

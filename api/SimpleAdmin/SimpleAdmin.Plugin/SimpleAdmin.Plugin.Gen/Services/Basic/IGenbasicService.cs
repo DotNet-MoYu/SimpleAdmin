@@ -56,7 +56,7 @@ public interface IGenbasicService : ITransient
     /// 获取代码生成基础分页
     /// </summary>
     /// <param name="input">查询参数</param>
-    /// <returns代码生成基础分页列表</returns>
+    /// <returns>代码生成基础分页列表</returns>
     Task<SqlSugarPagedList<GenBasic>> Page(BasePageInput input);
 
     /// <summary>

@@ -11,6 +11,7 @@ public sealed class SignalRComponent : IServiceComponent
     /// 正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
     /// </summary>
     /// <param name="services"></param>
+    /// <param name="componentContext"></param>
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
         Console.WriteLine("注册SignalR插件");

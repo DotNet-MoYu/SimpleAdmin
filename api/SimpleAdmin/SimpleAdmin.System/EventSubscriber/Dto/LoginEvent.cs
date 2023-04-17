@@ -17,10 +17,6 @@ public class LoginEvent
     /// </summary>
     public SysUser SysUser { get; set; }
 
-    /// <summary>
-    /// 地址
-    /// </summary>
-    //public IpInfo IpInfo { get; set; }
 
     /// <summary>
     /// Ip地址

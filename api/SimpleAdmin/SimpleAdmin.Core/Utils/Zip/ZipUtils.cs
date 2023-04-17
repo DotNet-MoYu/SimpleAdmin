@@ -370,7 +370,7 @@ public class ZipUtils
     /// </summary>
     /// <param name="zipName">压缩文件名称</param>
     /// <param name="fileList">文件列表</param>
-    /// <param name="savepath">保存路径</param>
+    /// <param name="error">保存路径</param>
     /// <param name="isLocal">是否本地</param>
     public static string ZipFiles(string zipName, List<FileItem> fileList, out string error, bool isLocal = true)
     {

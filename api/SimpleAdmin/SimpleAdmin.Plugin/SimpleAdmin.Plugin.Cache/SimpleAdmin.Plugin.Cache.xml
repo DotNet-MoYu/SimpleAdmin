@@ -312,7 +312,7 @@
             缓存设置
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.UserRedis">
+        <member name="P:SimpleAdmin.Plugin.Cache.CacheSettingsOptions.UseRedis">
             <summary>
             使用Redis
             </summary>

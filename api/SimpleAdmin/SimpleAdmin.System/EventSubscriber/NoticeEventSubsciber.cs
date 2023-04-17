@@ -72,13 +72,11 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>
-    private T GetService<T>()
+    private T GetService<T>() where T : class, new()
     {
         // 创建新的作用域
         using var scope = _scopeFactory.CreateScope();
-        // 解析服务
-        T scopedProcessingService = scope.ServiceProvider.GetRequiredService<T>();
-        return scopedProcessingService;
+        return scope.ServiceProvider.GetRequiredService<T>();
     }
 
     /// <summary>

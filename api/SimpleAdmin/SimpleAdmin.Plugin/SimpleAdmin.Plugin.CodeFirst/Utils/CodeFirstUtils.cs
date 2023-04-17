@@ -64,7 +64,7 @@ public static class CodeFirstUtils
                 {
                     if (IsIgnoreColumn(pi))
                         continue;
-                    object obj = pi.GetValue(list[i], null);
+                    object? obj = pi.GetValue(list[i], null);
                     if (IsJsonColumn(pi))//如果是json特性就是转化为json格式
                         obj = obj?.ToJson();//如果json字符串是空就传null
                     tempList.Add(obj);

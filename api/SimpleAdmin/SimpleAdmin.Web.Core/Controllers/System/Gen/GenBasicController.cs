@@ -30,7 +30,6 @@ public class GenBasicController : BaseController
     /// <summary>
     /// 获取所有表信息
     /// </summary>
-    /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("tables")]
     public dynamic Tables()

@@ -19,6 +19,7 @@ public sealed class SqlSugarUnitOfWork : IUnitOfWork
     /// 构造函数
     /// </summary>
     /// <param name="sqlSugarClient"></param>
+    /// <param name="logger"></param>
     public SqlSugarUnitOfWork(ISqlSugarClient sqlSugarClient, ILogger<SqlSugarUnitOfWork> logger)
     {
         _sqlSugarClient = sqlSugarClient;

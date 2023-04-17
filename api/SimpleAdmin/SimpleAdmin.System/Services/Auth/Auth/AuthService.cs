@@ -37,7 +37,8 @@ public class AuthService : IAuthService
     public async Task<string> GetPhoneValidCode(GetPhoneValidCodeInput input, LoginClientTypeEnum loginClientType)
     {
         await ValidPhoneValidCode(input, loginClientType);//校验手机号验证码
-        var phoneValidCode = RandomHelper.CreateNum(6);//生产随机数字
+        string? phoneValidCode;
+        _ = RandomHelper.CreateNum(6);//生产随机数字
 
         #region 发送短信和记录数据库等操作
 
@@ -229,7 +230,7 @@ public class AuthService : IAuthService
             {ClaimConst.OrgId, sysUser.OrgId},
         });
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
-        var expirtTime = DateTime.UtcNow.AddMinutes(expire).ToLong();
+        _ = DateTime.UtcNow.AddMinutes(expire).ToLong();
         // 生成刷新Token令牌
         var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, expire * 2);
         // 设置Swagger自动登录

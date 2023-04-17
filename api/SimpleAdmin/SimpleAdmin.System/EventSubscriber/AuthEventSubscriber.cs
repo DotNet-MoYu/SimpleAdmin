@@ -67,7 +67,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     [EventSubscribe(EventSubscriberConst.LoginOutB)]
     public async Task LoginOut(EventHandlerExecutingContext context)
     {
-        var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
+        _ = (LoginEvent)context.Source.Payload;//获取参数
     }
 
     /// <summary>

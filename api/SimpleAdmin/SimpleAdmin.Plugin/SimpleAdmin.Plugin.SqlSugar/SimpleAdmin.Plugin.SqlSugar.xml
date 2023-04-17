@@ -2107,6 +2107,7 @@
             构造函数
             </summary>
             <param name="sqlSugarClient"></param>
+            <param name="logger"></param>
         </member>
         <member name="M:SimpleAdmin.Plugin.SqlSugar.SqlSugarUnitOfWork.BeginTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
             <summary>

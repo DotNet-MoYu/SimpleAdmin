@@ -164,7 +164,7 @@ public partial class MemoryCacheService : ISimpleCacheService
     public bool TryGetValue<T>(string key, out T value)
     {
         var result = string.Empty;
-        var data = _memoryCache.TryGetValue<string>(key, out result);
+        _ = _memoryCache.TryGetValue<string>(key, out result);
         value = result.ToObject<T>();
         return value == null;
     }

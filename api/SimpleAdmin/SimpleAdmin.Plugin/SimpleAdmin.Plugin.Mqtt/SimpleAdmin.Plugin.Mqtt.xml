@@ -36,6 +36,7 @@
             正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
             </summary>
             <param name="services"></param>
+            <param name="componentContext"></param>
         </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttApplicationComponent">
             <summary>
