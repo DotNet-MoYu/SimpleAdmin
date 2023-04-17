@@ -49,5 +49,5 @@ public interface IFileService : ITransient
     /// <param name="engine">文件引擎</param>
     /// <param name="file">文件</param>
     /// <returns></returns>
-    Task UploadFile(string engine, IFormFile file);
+    Task<long> UploadFile(string engine, IFormFile file);
 }

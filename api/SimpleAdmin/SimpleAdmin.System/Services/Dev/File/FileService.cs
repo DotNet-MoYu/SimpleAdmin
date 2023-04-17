@@ -29,9 +29,9 @@ public class FileService : DbRepository<DevFile>, IFileService
     }
 
     /// <inheritdoc/>
-    public async Task UploadFile(string engine, IFormFile file)
+    public async Task<long> UploadFile(string engine, IFormFile file)
     {
-        await StorageFile(engine, file);
+        return await StorageFile(engine, file);
     }
 
     /// <inheritdoc/>
@@ -84,7 +84,7 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// </summary>
     /// <param name="engine"></param>
     /// <param name="file"></param>
-    private async Task StorageFile(string engine, IFormFile file)
+    private async Task<long> StorageFile(string engine, IFormFile file)
     {
         string bucketName = string.Empty;    // 存储桶名称
         string storageUrl = string.Empty;// 定义存储的url，本地文件返回文件实际路径，其他引擎返回网络地址
@@ -140,6 +140,7 @@ public class FileService : DbRepository<DevFile>, IFileService
             devFile.Thumbnail = $"data:image/png;base64," + thubnailBase64;
         }
         await InsertAsync(devFile);
+        return objectId;
     }
 
     /// <summary>
