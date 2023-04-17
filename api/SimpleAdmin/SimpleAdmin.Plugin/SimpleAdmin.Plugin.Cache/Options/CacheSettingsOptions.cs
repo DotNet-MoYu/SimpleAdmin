@@ -10,7 +10,7 @@ public class CacheSettingsOptions : IConfigurableOptions
     /// <summary>
     /// 使用Redis
     /// </summary>
-    public bool UserRedis { get; set; }
+    public bool UseRedis { get; set; }
 
     /// <summary>
     /// 是否每次启动都清空
