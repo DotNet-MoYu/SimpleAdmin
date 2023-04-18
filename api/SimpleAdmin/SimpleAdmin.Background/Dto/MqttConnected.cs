@@ -13,5 +13,5 @@ public class MqttConnected
     /// <summary>
     /// 客户端ID
     /// </summary>
-    public string clientid { get; set; }
+    public string Clientid { get; set; }
 }
