@@ -5,11 +5,6 @@
 /// </summary>
 public class UpdateInfoInput : SysUser
 {
-    /// <summary>
-    /// Id
-    /// </summary>
-    [IdNotNull(ErrorMessage = "Id不能为空")]
-    public override long Id { get; set; }
 
     /// <summary>
     /// 姓名
