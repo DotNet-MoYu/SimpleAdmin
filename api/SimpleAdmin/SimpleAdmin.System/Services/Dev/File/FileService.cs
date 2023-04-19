@@ -51,6 +51,17 @@ public class FileService : DbRepository<DevFile>, IFileService
         return result;
     }
 
+    public async Task<FileStreamResult> GetFileStreamResultFromMinio(string objectName, string fileName)
+    {
+        var minioService = App.GetService<MinioUtils>();
+        var stream = await minioService.DownloadFileAsync(objectName);
+
+        fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+        //文件转流
+        var result = new FileStreamResult(stream, "application/octet-stream") { FileDownloadName = fileName };
+        return result;
+    }
+
     /// <inheritdoc/>
     public FileStreamResult GetFileStreamResult(byte[] byteArray, string fileName)
     {
@@ -66,10 +77,12 @@ public class FileService : DbRepository<DevFile>, IFileService
         var devFile = await GetByIdAsync(input.Id);
         if (devFile != null)
         {
-            if (devFile.Engine != DevDictConst.FILE_ENGINE_LOCAL)
-                throw Oops.Bah($"非本地文件不支持此方式下载");
-            var result = GetFileStreamResult(devFile.StoragePath, devFile.Name);
-            return result;
+            if (devFile.Engine == DevDictConst.FILE_ENGINE_LOCAL)
+                return GetFileStreamResult(devFile.StoragePath, devFile.Name);
+            else if (devFile.Engine == DevDictConst.FILE_ENGINE_MINIO)
+                return await GetFileStreamResultFromMinio(devFile.ObjName, devFile.Name);
+            else
+                return null;
         }
         else
         {
@@ -88,6 +101,8 @@ public class FileService : DbRepository<DevFile>, IFileService
     {
         string bucketName = string.Empty;    // 存储桶名称
         string storageUrl = string.Empty;// 定义存储的url，本地文件返回文件实际路径，其他引擎返回网络地址
+        string objName = string.Empty;// 定义存储的url，本地文件返回文件实际路径，其他引擎返回网络地址
+
         var objectId = CommonUtils.GetSingleId();//生成id
 
         switch (engine)
@@ -103,7 +118,7 @@ public class FileService : DbRepository<DevFile>, IFileService
                 if (config != null)
                 {
                     bucketName = config.ConfigValue;// 存储桶名称
-                    storageUrl = await StorageMinio(objectId, file);
+                    (objName, storageUrl) = await StorageMinio(objectId, file);
                 }
                 break;
 
@@ -120,7 +135,7 @@ public class FileService : DbRepository<DevFile>, IFileService
             Bucket = bucketName,
             Name = file.FileName,
             Suffix = fileSuffix.Split(".")[1],
-            ObjName = $"{objectId}{fileSuffix}",
+            ObjName = objName,
             SizeKb = fileSizeKb,
             SizeInfo = GetSizeInfo(fileSizeKb),
             StoragePath = storageUrl,
@@ -194,13 +209,14 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// <param name="file"></param>
     /// <returns></returns>
 
-    private async Task<string> StorageMinio(long fileId, IFormFile file)
+    private async Task<(string objName, string downloadUrl)> StorageMinio(long fileId, IFormFile file)
     {
         var minioService = App.GetService<MinioUtils>();
         var now = DateTime.Now.ToString("d");
         var fileSuffix = Path.GetExtension(file.FileName).ToLower(); // 文件后缀
         var fileObjectName = $"{now}/{fileId}{fileSuffix}";//存储后的文件名
-        return await minioService.PutObjectAsync(fileObjectName, file);
+        var downloadUrl = await minioService.PutObjectAsync(fileObjectName, file);
+        return (fileObjectName, downloadUrl);
     }
 
     /// <summary>

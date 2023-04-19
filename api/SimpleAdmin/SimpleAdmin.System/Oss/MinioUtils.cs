@@ -56,7 +56,7 @@ public class MinioUtils : ITransient
     }
 
     /// <summary>
-    /// 上传文件
+    /// 上传文件 - 返回Minio文件完整Url
     /// </summary>
     /// <param name="objectName">存储桶里的对象名称,例:/mnt/photos/island.jpg</param>
     /// <param name="file">文件</param>
@@ -78,6 +78,41 @@ public class MinioUtils : ITransient
         catch (Exception e)
         {
             throw Oops.Oh($"上传文件失败!", e);
+        }
+    }
+
+    /// <summary>
+    /// 下载文件
+    /// </summary>
+    /// <param name="objectName"></param>
+    /// <returns></returns>
+    public async Task<MemoryStream> DownloadFileAsync(string objectName)
+    {
+        var stream = new MemoryStream();
+        try
+        {
+            var getObjectArgs = new GetObjectArgs().WithBucket(defaultBucketName)
+                                                   .WithObject(objectName)
+                                                   .WithCallbackStream(cb =>
+                                                   {
+                                                       cb.CopyTo(stream);
+                                                   });
+            await minioClient.GetObjectAsync(getObjectArgs);
+
+            //System.InvalidOperationException: Response Content-Length mismatch: too few bytes written (0 of 30788)
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+            return stream;
+        }
+        catch (MinioException e)
+        {
+            throw Oops.Oh($"下载文件失败!", e);
+        }
+        catch (Exception e)
+        {
+            throw Oops.Oh($"下载文件失败!", e);
         }
     }
 }
