@@ -475,7 +475,13 @@
             </summary>
             <returns>所有表信息</returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:SimpleAdmin.Plugin.Gen.IGenbasicService.Page(SimpleAdmin.Core.BasePageInput)" -->
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.Page(SimpleAdmin.Core.BasePageInput)">
+            <summary>
+            获取代码生成基础分页
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>代码生成基础分页列表</returns>
+        </member>
         <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             代码生成预览

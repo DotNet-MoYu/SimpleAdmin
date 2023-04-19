@@ -94,16 +94,16 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<SysUser> GetUserById(long Id)
+    public async Task<SysUser> GetUserById(long userId)
     {
         //先从Redis拿
-        var sysUser = _simpleCacheService.HashGetOne<SysUser>(CacheConst.Cache_SysUser, Id.ToString());
+        var sysUser = _simpleCacheService.HashGetOne<SysUser>(CacheConst.Cache_SysUser, userId.ToString());
         if (sysUser == null)
         {
             sysUser = await Context.Queryable<SysUser>()
             .LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)//连表
             .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)//连表
-            .Where(u => u.Id == Id)
+            .Where(u => u.Id == userId)
             .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name })
             .FirstAsync();
             if (sysUser != null)
@@ -153,7 +153,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         List<string> buttonCodeList = new();//按钮ID集合
         //获取用户资源集合
         var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
-        List<long>? buttonIdList = new List<long>();//按钮ID集合
+        var  buttonIdList = new List<long>();//按钮ID集合
         if (resourceList.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
             //获取用户角色关系集合
@@ -283,7 +283,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
     {
         RoleOwnResourceOutput roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
-        List<RelationRoleResuorce> GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        List<RelationRoleResuorce> grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
         //遍历关系表
@@ -291,9 +291,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             //将扩展信息转为实体
             var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();
-            GrantInfoList.Add(relationRole);//添加到已授权信息
+            grantInfoList.Add(relationRole);//添加到已授权信息
         });
-        roleOwnResource.GrantInfoList = GrantInfoList;//赋值已授权信息
+        roleOwnResource.GrantInfoList = grantInfoList;//赋值已授权信息
         return roleOwnResource;
     }
 
@@ -301,7 +301,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input)
     {
         RoleOwnPermissionOutput roleOwnPermission = new RoleOwnPermissionOutput { Id = input.Id };//定义结果集
-        List<RelationRolePermission> GrantInfoList = new List<RelationRolePermission>();//已授权信息集合
+        List<RelationRolePermission> grantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);
         //遍历关系表
@@ -309,9 +309,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             //将扩展信息转为实体
             var relationPermission = it.ExtJson.ToJsonEntity<RelationRolePermission>();
-            GrantInfoList.Add(relationPermission);//添加到已授权信息
+            grantInfoList.Add(relationPermission);//添加到已授权信息
         });
-        roleOwnPermission.GrantInfoList = GrantInfoList;//赋值已授权信息
+        roleOwnPermission.GrantInfoList = grantInfoList;//赋值已授权信息
         return roleOwnPermission;
     }
 
@@ -563,8 +563,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             //需要更新兼任信息的用户列表
             var updatePositionJsonUser = new List<SysUser>();
             //获取兼任主管不是空的用户信息
-            var PositionJsons = await GetListAsync(it => !SqlFunc.IsNullOrEmpty(it.PositionJson), it => new SysUser { Id = it.Id, PositionJson = it.PositionJson });
-            PositionJsons.ForEach(position =>
+            var positionJsons = await GetListAsync(it => !SqlFunc.IsNullOrEmpty(it.PositionJson), it => new SysUser { Id = it.Id, PositionJson = it.PositionJson });
+            positionJsons.ForEach(position =>
             {
                 bool update = false;//是否要更新标致
 
@@ -824,16 +824,16 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private async Task CheckInput(SysUser sysUser)
     {
         //判断账号重复,直接从redis拿
-        var account_Id = await GetIdByAccount(sysUser.Account);
-        if (account_Id > 0 && account_Id != sysUser.Id)
+        var accountId = await GetIdByAccount(sysUser.Account);
+        if (accountId > 0 && accountId != sysUser.Id)
             throw Oops.Bah($"存在重复的账号:{sysUser.Account}");
         //如果手机号不是空
         if (!string.IsNullOrEmpty(sysUser.Phone))
         {
             if (!sysUser.Phone.MatchPhoneNumber())//验证手机格式
                 throw Oops.Bah($"手机号码：{sysUser.Phone} 格式错误");
-            var phone_Id = await GetIdByPhone(sysUser.Phone);
-            if (phone_Id > 0 && sysUser.Id != phone_Id)//判断重复
+            var phoneId = await GetIdByPhone(sysUser.Phone);
+            if (phoneId > 0 && sysUser.Id != phoneId)//判断重复
                 throw Oops.Bah($"存在重复的手机号:{sysUser.Phone}");
             sysUser.Phone = CryptogramUtil.Sm4Encrypt(sysUser.Phone);
         }

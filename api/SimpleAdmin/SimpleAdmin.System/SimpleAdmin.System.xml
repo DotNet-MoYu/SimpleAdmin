@@ -3125,11 +3125,6 @@
             编辑个人信息参数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.UpdateInfoInput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.System.UpdateInfoInput.Name">
             <summary>
             姓名
