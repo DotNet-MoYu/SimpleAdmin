@@ -3853,7 +3853,7 @@
             <summary>
             根据用户Id获取用户信息
             </summary>
-            <param name="Id">用户ID</param>
+            <param name="userId">用户ID</param>
             <returns>用户信息</returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysUserService.GetIdByAccount(System.String)">
