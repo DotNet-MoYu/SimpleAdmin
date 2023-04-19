@@ -9,11 +9,11 @@ namespace SimpleAdmin.Web.Core.Controllers.System.Gen;
 [Route("gen/config")]
 public class GenConfigController : BaseController
 {
-    private readonly IGenConfigSerivce _genConfigSerivce;
+    private readonly IGenConfigService _genConfigService;
 
-    public GenConfigController(IGenConfigSerivce genConfigSerivce)
+    public GenConfigController(IGenConfigService genConfigService)
     {
-        _genConfigSerivce = genConfigSerivce;
+        _genConfigService = genConfigService;
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class GenConfigController : BaseController
     [QueryParameters]
     public async Task<dynamic> List(string basicId)
     {
-        return await _genConfigSerivce.List(basicId.ToLong());
+        return await _genConfigService.List(basicId.ToLong());
     }
 
     /// <summary>
@@ -37,6 +37,6 @@ public class GenConfigController : BaseController
     [HttpPost("editBatch")]
     public async Task EditBatch([FromBody] List<GenConfig> input)
     {
-        await _genConfigSerivce.EditBatch(input);
+        await _genConfigService.EditBatch(input);
     }
 }
