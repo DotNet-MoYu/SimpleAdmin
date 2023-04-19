@@ -890,7 +890,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
          .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//根据组织
          .WhereIF(input.Expression != null, input.Expression?.ToExpression())//动态查询
          .WhereIF(!string.IsNullOrEmpty(input.UserStatus), u => u.UserStatus == input.UserStatus)//根据状态查询
-         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(u.Account))//根据关键字查询
+         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
          .OrderBy(u => u.Id)//排序
          .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name, OrgNames = o.Names })
