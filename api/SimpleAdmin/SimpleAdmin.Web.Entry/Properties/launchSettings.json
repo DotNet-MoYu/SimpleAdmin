@@ -1,6 +1,5 @@
 ﻿{
   "$schema": "http://json.schemastore.org/launchsettings.json",
-
   "profiles": {
     "SimpleAdmin.Web.Entry": {
       "commandName": "Project",
@@ -11,16 +10,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "SimpleAdmin.Web.Entry.Pro": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": true,
-      "launchUrl": "http://localhost:5566",
-      "applicationUrl": "http://localhost:5566",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Production"
-      }
-    },
+    }
   }
 }

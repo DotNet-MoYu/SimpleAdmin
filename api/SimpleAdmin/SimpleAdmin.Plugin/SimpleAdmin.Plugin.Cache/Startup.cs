@@ -20,7 +20,8 @@ public class Startup : AppStartup
         //如果有redis连接字符串
         if (cacheSettings.UseRedis)
         {
-            var connectionString = $"server={cacheSettings.RedisSettings.Address};password={cacheSettings.RedisSettings.Password};db={cacheSettings.RedisSettings.Db}";
+            var connectionString =
+                $"server={cacheSettings.RedisSettings.Address};password={cacheSettings.RedisSettings.Password};db={cacheSettings.RedisSettings.Db}";
             //注入redis
             services.AddSimpleRedis(connectionString);
             services.AddSingleton<ISimpleCacheService, RedisCacheService>();
@@ -38,7 +39,7 @@ public class Startup : AppStartup
         //如果需要清除缓存
         if (cacheSettings.UseRedis && cacheSettings.RedisSettings.ClearRedis)
         {
-            var redis = App.GetService<ISimpleCacheService>();//获取redis服务
+            var redis = App.GetService<ISimpleCacheService>(); //获取redis服务
             //删除redis的key
             redis.DelByPattern(CacheConst.Cache_Prefix_Web);
         }
