@@ -1,21 +1,21 @@
-﻿using Furion.Authorization;
+﻿using System.Security.Claims;
+using Furion.Authorization;
 using Furion.DataEncryption;
 using Furion.Logging.Extensions;
-using System.Security.Claims;
 
 namespace SimpleAdmin.Web.Core;
 
 public class JwtHandler : AppAuthorizeHandler
 {
     /// <summary>
-    /// 重写 Handler 添加自动刷新
+    ///     重写 Handler 添加自动刷新
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
     public override async Task HandleAsync(AuthorizationHandlerContext context)
     {
-        var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
-        DefaultHttpContext currentHttpContext = context.GetCurrentHttpContext();
+        var expire = App.GetConfig<int>("JWTSettings:ExpiredTime"); //获取过期时间(分钟)
+        var currentHttpContext = context.GetCurrentHttpContext();
         //自动刷新Token
         if (JWTEncryption.AutoRefreshToken(context, currentHttpContext, expire, expire * 2))
         {
@@ -26,8 +26,7 @@ public class JwtHandler : AppAuthorizeHandler
             }
             else
             {
-                currentHttpContext.Response.StatusCode = 401;//返回401给授权筛选器用
-                return;
+                currentHttpContext.Response.StatusCode = 401; //返回401给授权筛选器用
             }
         }
         else
@@ -40,51 +39,50 @@ public class JwtHandler : AppAuthorizeHandler
     }
 
     /// <summary>
-    /// 检查token有效性
+    ///     检查token有效性
     /// </summary>
     /// <param name="context">DefaultHttpContext</param>
     /// <param name="expire">token有效期/分钟</param>
     /// <returns></returns>
     private bool CheckTokenFromRedis(DefaultHttpContext context, int expire)
     {
-        var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
-        var userId = App.User?.FindFirstValue(ClaimConst.UserId);//获取用户ID
-        var _simpleCacheService = App.GetService<ISimpleCacheService>();//获取redis实例
-        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);//获取token信息
-        if (tokenInfos == null)//如果还是空
+        var token = JWTEncryption.GetJwtBearerToken(context); //获取当前token
+        var userId = App.User?.FindFirstValue(ClaimConst.UserId); //获取用户ID
+        var _simpleCacheService = App.GetService<ISimpleCacheService>(); //获取redis实例
+        var tokenInfos =
+            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId); //获取token信息
+        if (tokenInfos == null) //如果还是空
         {
             return false;
         }
-        else
+
+        var tokenInfo = tokenInfos.Where(it => it.Token == token).FirstOrDefault(); //获取redis中token值是当前token的对象
+        if (tokenInfo != null)
         {
-            var tokenInfo = tokenInfos.Where(it => it.Token == token).FirstOrDefault();//获取redis中token值是当前token的对象
-            if (tokenInfo != null)
+            // 自动刷新token返回新的Token
+            var accessToken = context.Response.Headers["access-token"].ToString();
+            if (!string.IsNullOrEmpty(accessToken)) //如果有新的刷新token
             {
-                // 自动刷新token返回新的Token
-                var accessToken = context.Response.Headers["access-token"].ToString();
-                if (!string.IsNullOrEmpty(accessToken))//如果有新的刷新token
-                {
-                    "返回新的刷新token".LogDebug<JwtHandler>();
-                    tokenInfo.Token = accessToken;//新的token
-                    tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
-                    _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新tokne信息到redis
-                }
-            }
-            else
-            {
-                return false;
+                "返回新的刷新token".LogDebug<JwtHandler>();
+                tokenInfo.Token = accessToken; //新的token
+                tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire); //新的过期时间
+                _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos); //更新tokne信息到redis
             }
         }
+        else
+        {
+            return false;
+        }
+
         return true;
     }
 
     /// <summary>
-    /// 授权判断逻辑，授权通过返回 true，否则返回 false
+    ///     授权判断逻辑，授权通过返回 true，否则返回 false
     /// </summary>
     /// <param name="context"></param>
     /// <param name="httpContext"></param>
     /// <returns></returns>
-
     public override async Task<bool> PipelineAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
     {
         // 这里写您的授权判断逻辑，授权通过返回 true，否则返回 false
@@ -94,7 +92,7 @@ public class JwtHandler : AppAuthorizeHandler
     }
 
     /// <summary>
-    /// 检查权限
+    ///     检查权限
     /// </summary>
     /// <param name="httpContext"></param>
     /// <returns></returns>
@@ -104,13 +102,14 @@ public class JwtHandler : AppAuthorizeHandler
         if (UserManager.SuperAdmin) return true;
         // 获取超级管理员特性
         var isSpuerAdmin = httpContext.GetMetadata<SuperAdminAttribute>();
-        if (isSpuerAdmin != null)//如果是超级管理员才能访问的接口
+        if (isSpuerAdmin != null) //如果是超级管理员才能访问的接口
         {
             //获取忽略超级管理员特性
             var ignoreSpuerAdmin = httpContext.GetMetadata<IgnoreSuperAdminAttribute>();
-            if (ignoreSpuerAdmin == null && !UserManager.SuperAdmin)//如果只能超级管理员访问并且用户不是超级管理员
-                return false;//直接没权限
+            if (ignoreSpuerAdmin == null && !UserManager.SuperAdmin) //如果只能超级管理员访问并且用户不是超级管理员
+                return false; //直接没权限
         }
+
         //获取角色授权特性
         var isRolePermission = httpContext.GetMetadata<RolePermissionAttribute>();
         if (isRolePermission != null)
@@ -125,15 +124,16 @@ public class JwtHandler : AppAuthorizeHandler
                 var userInfo = await App.GetService<ISysUserService>().GetUserById(UserManager.UserId);
                 if (userInfo != null)
                 {
-                    if (!userInfo.PermissionCodeList.Contains(routeName))//如果当前路由信息不包含在角色授权路由列表中则认证失败
+                    if (!userInfo.PermissionCodeList.Contains(routeName)) //如果当前路由信息不包含在角色授权路由列表中则认证失败
                         return false;
                 }
                 else
                 {
-                    return false;//没有用户信息则返回认证失败
+                    return false; //没有用户信息则返回认证失败
                 }
             }
         }
+
         return true;
     }
 }
