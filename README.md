@@ -94,11 +94,9 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 在系统一些常用的功能直接封装成vue组件，如批量导入，批量导出，批量删除，批量编辑等,只需按照规范传入相应参数就可以很好的实现功能，减少了很多不必要的前端代码。最典型的就是批量导入组件，只需传入api接口,通过后端接口自动生成表头，并实现字段级别的错误信息提示和预览,大数据支持分段导入，非常好用。
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/数据导入.gif"/>
 
-#### 📖最详细的注释和使用文档，开发效率直线提升
-作为一个开源项目，如何让使用者看懂代码是非常重要的，很多作者会忽视这一点，导致我们阅读其代码的时候很难理解其为什么要这么写,如果没有详细的文档，想要二次开发需要花精力去研究源码。而本系统完全不用担心这个问题，后端源码注释覆盖率超过<font color="#dd0000">90%</font><br />,每一个方法,每一步都有详细的解释和说明，
-并且推出了手摸手教学文档，目的就是让使用者能够轻易上手，就算不是自己的代码，根据注释和文档也能轻易看懂和二次开发,不用每天在群里问一些非常基础的问题，节约了大量的开发时间。
+#### 📖最详细的注释和手摸手教学文档，开发效率直线提升
+作为一个开源项目，如何让使用者看懂代码是非常重要的，很多作者会忽视这一点，导致我们阅读其代码的时候很难理解其为什么要这么写,如果没有详细的文档，想要二次开发需要花精力去研究源码。而本系统完全不用担心这个问题，后端源码注释覆盖率超过<font color="#dd0000">90%</font><br />,每一个方法,每一步都有详细的解释和说明，并且推出了手摸手教学文档，目的就是让使用者能够轻易上手，就算不是自己的代码，根据注释和文档也能轻易看懂和二次开发,不用每天在群里问一些非常基础的问题，节约了大量的开发时间。
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/wendang.png"/>
-
 
 
 ## 📺效果图📺
@@ -165,9 +163,20 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 -  👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
 -  👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
   
+## 🌏加入知识星球
+如果您在使用过程中遇到问题，或者发现bug，可以直接发issues描述您的问题，只要是系统bug第一时间修复。或者您对当前系统有什么建议或意见，也欢迎您提出，只要是符合大部分业务场景的都会考虑支持。如果您觉得本分系统非常适合您，那么您也可以选择加入`SimpleAdmin`的知识星球。
+<!-- <img width="200" height="200"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/星球.png"/>
+<img width="200" height="200"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/> -->
+<table>
+    <tr>
+       <td><img width="500" height="600"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/></td>
+    </tr>
+    
+
+</table>
 ## 💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码授权请[加我](https://qm.qq.com/cgi-bin/qm/qr?k=of373DKaD1xCdNfz8DskOwauCguHfMrS&noverify=0&personal_qrcode_source=4)获取授权，或者直接咸鱼搜simpleadmin
+- 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码可以加入星球或者直接闲鱼APP搜`simpleadmin`
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
