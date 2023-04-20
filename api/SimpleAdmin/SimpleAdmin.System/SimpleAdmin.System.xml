@@ -214,11 +214,18 @@
         </member>
         <member name="M:SimpleAdmin.System.MinioUtils.PutObjectAsync(System.String,Microsoft.AspNetCore.Http.IFormFile,System.String)">
             <summary>
-            上传文件
+            上传文件 - 返回Minio文件完整Url
             </summary>
             <param name="objectName">存储桶里的对象名称,例:/mnt/photos/island.jpg</param>
             <param name="file">文件</param>
             <param name="contentType">文件的Content type，默认是"application/octet-stream"</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.MinioUtils.DownloadFileAsync(System.String)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="objectName"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.Services.Auth.AuthService">
