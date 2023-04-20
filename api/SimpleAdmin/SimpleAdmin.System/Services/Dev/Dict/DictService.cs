@@ -16,11 +16,11 @@ public class DictService : DbRepository<DevDict>, IDictService
     public async Task<SqlSugarPagedList<DevDict>> Page(DictPageInput input)
     {
         var query = Context.Queryable<DevDict>()
-                           .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
-                           .WhereIF(input.ParentId != null, it => it.ParentId == input.ParentId)//根据父ID查询
-                           .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.DictLabel.Contains(input.SearchKey) || it.DictValue.Contains(input.SearchKey))//根据关键字查询
-                           .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
-                           .OrderBy(it => it.SortCode);//排序
+            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
+            .WhereIF(input.ParentId != null, it => it.ParentId == input.ParentId || it.Id == input.ParentId)//根据父ID查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.DictLabel.Contains(input.SearchKey) || it.DictValue.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
