@@ -1457,14 +1457,14 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
             <summary>
-            重写 Handler 添加自动刷新
+                重写 Handler 添加自动刷新
             </summary>
             <param name="context"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.CheckTokenFromRedis(Microsoft.AspNetCore.Http.DefaultHttpContext,System.Int32)">
             <summary>
-            检查token有效性
+                检查token有效性
             </summary>
             <param name="context">DefaultHttpContext</param>
             <param name="expire">token有效期/分钟</param>
@@ -1472,7 +1472,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.PipelineAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">
             <summary>
-            授权判断逻辑，授权通过返回 true，否则返回 false
+                授权判断逻辑，授权通过返回 true，否则返回 false
             </summary>
             <param name="context"></param>
             <param name="httpContext"></param>
@@ -1480,7 +1480,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.CheckAuthorizationAsync(Microsoft.AspNetCore.Http.DefaultHttpContext)">
             <summary>
-            检查权限
+                检查权限
             </summary>
             <param name="httpContext"></param>
             <returns></returns>
