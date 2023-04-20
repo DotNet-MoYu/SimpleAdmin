@@ -171,10 +171,9 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
     <tr>
        <td><img width="500" height="600"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/></td>
     </tr>
-    
-
 </table>
-## 💾版权声明💾
+
+##  💾版权声明💾
 
 - 后端源码完全免费开源商用。
 - 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码可以加入星球或者直接闲鱼APP搜`simpleadmin`
