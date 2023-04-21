@@ -8,14 +8,14 @@ public class BasePageInput : IValidatableObject
     /// <summary>
     /// 当前页码
     /// </summary>
-    [System.ComponentModel.DataAnnotations.DataValidation(ValidationTypes.Numeric)]
+    [DataValidation(ValidationTypes.Numeric)]
     public virtual int Current { get; set; } = 1;
 
     /// <summary>
     /// 每页条数
     /// </summary>
     [Range(1, 100, ErrorMessage = "页码容量超过最大限制")]
-    [System.ComponentModel.DataAnnotations.DataValidation(ValidationTypes.Numeric)]
+    [DataValidation(ValidationTypes.Numeric)]
     public virtual int Size { get; set; } = 10;
 
     /// <summary>
@@ -47,10 +47,13 @@ public class BasePageInput : IValidatableObject
         if (!string.IsNullOrEmpty(SortField))
         {
             //分割排序字段
-            var fields = SortField.Split();
-            if (fields.Length > 0)
+            var fields = SortField.Split(" ");
+            if (fields.Length > 1)
             {
-                yield return new ValidationResult($"排序字段错误", new[] { nameof(SortField) });
+                yield return new ValidationResult($"排序字段错误", new[]
+                {
+                    nameof(SortField)
+                });
             }
         }
         yield break;
