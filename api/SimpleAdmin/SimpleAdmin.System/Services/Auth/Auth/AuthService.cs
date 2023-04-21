@@ -10,16 +10,16 @@ public class AuthService : IAuthService
     private readonly IRoleService _roleService;
 
     public AuthService(ISimpleCacheService simpleCacheService,
-                       IEventPublisher eventPublisher,
-                       IConfigService configService,
-                       ISysUserService userService,
-                       IRoleService roleService)
+        IEventPublisher eventPublisher,
+        IConfigService configService,
+        ISysUserService userService,
+        IRoleService roleService)
     {
         _simpleCacheService = simpleCacheService;
-        this._eventPublisher = eventPublisher;
+        _eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
-        this._roleService = roleService;
+        _roleService = roleService;
     }
 
     /// <inheritdoc/>
@@ -30,7 +30,11 @@ public class AuthService : IAuthService
         //生成请求号，并将验证码放入redis
         var reqNo = AddValidCodeToRedis(captchInfo.Code);
         //返回验证码和请求号
-        return new PicValidCodeOutPut { ValidCodeBase64 = captchInfo.Base64Str, ValidCodeReqNo = reqNo };
+        return new PicValidCodeOutPut
+        {
+            ValidCodeBase64 = captchInfo.Base64Str,
+            ValidCodeReqNo = reqNo
+        };
     }
 
     /// <inheritdoc/>
@@ -53,6 +57,8 @@ public class AuthService : IAuthService
         var reqNo = AddValidCodeToRedis(phoneValidCode);
         return reqNo;
     }
+
+
 
     /// <inheritdoc/>
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
@@ -112,7 +118,7 @@ public class AuthService : IAuthService
         var userinfo = await _userService.GetUserByAccount(UserManager.UserAccount);
         if (userinfo != null)
         {
-            LoginEvent loginEvent = new LoginEvent
+            var loginEvent = new LoginEvent
             {
                 Ip = App.HttpContext.GetRemoteIpAddressToIPv4(),
                 SysUser = userinfo,
@@ -145,7 +151,7 @@ public class AuthService : IAuthService
     /// <param name="isDelete">是否从Redis删除</param>
     public void ValidValidCode(string validCode, string validCodeReqNo, bool isDelete = true)
     {
-        var key = CacheConst.Cache_Captcha + validCodeReqNo; //获取验证码Key值
+        var key = CacheConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
         var code = _simpleCacheService.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
         if (code != null)//如果有
@@ -165,7 +171,7 @@ public class AuthService : IAuthService
     /// <param name="validCodeReqNo"></param>
     public void RemoveValidCodeFromRedis(string validCodeReqNo)
     {
-        var key = CacheConst.Cache_Captcha + validCodeReqNo; //获取验证码Key值
+        var key = CacheConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
         _simpleCacheService.Remove(key);//删除验证码
     }
 
@@ -223,11 +229,21 @@ public class AuthService : IAuthService
         //生成Token
         var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
         {
-            {ClaimConst.UserId, sysUser.Id},
-            {ClaimConst.Account, sysUser.Account},
-            {ClaimConst.Name, sysUser.Name},
-            {ClaimConst.IsSuperAdmin, sysUser.RoleCodeList.Contains(RoleConst.SuperAdmin)},
-            {ClaimConst.OrgId, sysUser.OrgId},
+            {
+                ClaimConst.UserId, sysUser.Id
+            },
+            {
+                ClaimConst.Account, sysUser.Account
+            },
+            {
+                ClaimConst.Name, sysUser.Name
+            },
+            {
+                ClaimConst.IsSuperAdmin, sysUser.RoleCodeList.Contains(RoleConst.SuperAdmin)
+            },
+            {
+                ClaimConst.OrgId, sysUser.OrgId
+            }
         });
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
         _ = DateTime.UtcNow.AddMinutes(expire).ToLong();
@@ -247,9 +263,14 @@ public class AuthService : IAuthService
             Token = accessToken
         };
         await WriteTokenToRedis(logingEvent, loginClientType);//写入token到redis
-        await _eventPublisher.PublishAsync(EventSubscriberConst.LoginB, logingEvent); //发布登录事件总线
+        await _eventPublisher.PublishAsync(EventSubscriberConst.LoginB, logingEvent);//发布登录事件总线
         //返回结果
-        return new LoginOutPut { Token = accessToken, Account = sysUser.Account, Name = sysUser.Name };
+        return new LoginOutPut
+        {
+            Token = accessToken,
+            Account = sysUser.Account,
+            Name = sysUser.Name
+        };
     }
 
     /// <summary>
@@ -260,7 +281,7 @@ public class AuthService : IAuthService
     private async Task WriteTokenToRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
     {
         //获取token列表
-        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
+        var tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
         var tokenTimeout = loginEvent.DateTime.AddMinutes(loginEvent.Expire);
         //生成token信息
         var tokenInfo = new TokenInfo
@@ -269,12 +290,12 @@ public class AuthService : IAuthService
             Expire = loginEvent.Expire,
             TokenTimeout = tokenTimeout,
             LoginClientType = loginClientType,
-            Token = loginEvent.Token,
+            Token = loginEvent.Token
         };
         //如果redis有数据
         if (tokenInfos != null)
         {
-            bool isSingle = false;//默认不开启单用户登录
+            var isSingle = false;//默认不开启单用户登录
             var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_SINGLE_OPEN);//获取系统单用户登录选项
             if (singleConfig != null) isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
             //判断是否单用户登录
@@ -291,7 +312,10 @@ public class AuthService : IAuthService
         }
         else
         {
-            tokenInfos = new List<TokenInfo> { tokenInfo };//直接就一个
+            tokenInfos = new List<TokenInfo>
+            {
+                tokenInfo
+            };//直接就一个
         }
 
         //添加到token列表
@@ -306,7 +330,7 @@ public class AuthService : IAuthService
     private void RemoveTokenFromRedis(LoginEvent loginEvent, LoginClientTypeEnum loginClientType)
     {
         //获取token列表
-        List<TokenInfo> tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
+        var tokenInfos = GetTokenInfos(loginEvent.SysUser.Id);
         if (tokenInfos != null)
         {
             //获取当前用户的token
@@ -321,7 +345,10 @@ public class AuthService : IAuthService
             else
             {
                 //从列表中删除
-                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { loginEvent.SysUser.Id.ToString() });
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[]
+                {
+                    loginEvent.SysUser.Id.ToString()
+                });
             }
         }
     }
@@ -334,7 +361,7 @@ public class AuthService : IAuthService
     private List<TokenInfo> GetTokenInfos(long userId)
     {
         //redis获取用户token列表
-        List<TokenInfo> tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId.ToString());
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId.ToString());
         if (tokenInfos != null)
         {
             tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
@@ -354,7 +381,7 @@ public class AuthService : IAuthService
             Message = "您的账号已在别处登录!",
             TokenInfos = tokenInfos,
             UserId = userId
-        }); //通知用户下线
+        });//通知用户下线
     }
 
     #endregion 方法
