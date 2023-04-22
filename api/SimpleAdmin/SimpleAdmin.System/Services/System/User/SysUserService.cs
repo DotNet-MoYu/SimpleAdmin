@@ -18,26 +18,26 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private readonly IBatchEditService _batchEditService;
 
     public SysUserService(ILogger<ILogger> logger, ISimpleCacheService simpleCacheService,
-                       IRelationService relationService,
-                       IResourceService resourceService,
-                       ISysOrgService orgService,
-                       IRoleService roleService,
-                       IImportExportService importExportService,
-                       ISysPositionService sysPositionService,
-                       IDictService dictService,
-                       IConfigService configService, IBatchEditService updateBatchService)
+        IRelationService relationService,
+        IResourceService resourceService,
+        ISysOrgService orgService,
+        IRoleService roleService,
+        IImportExportService importExportService,
+        ISysPositionService sysPositionService,
+        IDictService dictService,
+        IConfigService configService, IBatchEditService updateBatchService)
     {
-        this._logger = logger;
+        _logger = logger;
         _simpleCacheService = simpleCacheService;
         _relationService = relationService;
         _resourceService = resourceService;
         _sysOrgService = orgService;
         _roleService = roleService;
-        this._importExportService = importExportService;
-        this._sysPositionService = sysPositionService;
-        this._dictService = dictService;
-        this._configService = configService;
-        this._batchEditService = updateBatchService;
+        _importExportService = importExportService;
+        _sysPositionService = sysPositionService;
+        _dictService = dictService;
+        _configService = configService;
+        _batchEditService = updateBatchService;
     }
 
     #region 查询
@@ -101,13 +101,20 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (sysUser == null)
         {
             sysUser = await Context.Queryable<SysUser>()
-            .LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)//连表
-            .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)//连表
-            .Where(u => u.Id == userId)
-            .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name })
-            .FirstAsync();
+                .LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)//连表
+                .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)//连表
+                .Where(u => u.Id == userId)
+                .Select((u, o, p) => new SysUser
+                {
+                    Id = u.Id.SelectAll(),
+                    OrgName = o.Name,
+                    PositionName = p.Name
+                })
+                .FirstAsync();
             if (sysUser != null)
             {
+                sysUser.Password = CryptogramUtil.Sm4Decrypt(sysUser.Password);//解密密码
+                sysUser.Phone = CryptogramUtil.Sm4Decrypt(sysUser.Phone);//解密手机号
                 //获取按钮码
                 var buttonCodeList = await GetButtonCodeList(sysUser.Id);
                 //获取数据权限
@@ -150,10 +157,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task<List<string>> GetButtonCodeList(long userId)
     {
-        List<string> buttonCodeList = new();//按钮ID集合
+        List<string> buttonCodeList = new List<string>();//按钮ID集合
         //获取用户资源集合
         var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
-        var  buttonIdList = new List<long>();//按钮ID集合
+        var buttonIdList = new List<long>();//按钮ID集合
         if (resourceList.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
             //获取用户角色关系集合
@@ -195,7 +202,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //遍历分组
         foreach (var it in relationGroup)
         {
-            HashSet<long> scopeSet = new HashSet<long>();//定义不可重复列表
+            var scopeSet = new HashSet<long>();//定义不可重复列表
             var relationList = it.ToList();//关系列表
             foreach (var relation in relationList)
             {
@@ -222,7 +229,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     }
                 }
             }
-            permissions.Add(new DataScope { ApiUrl = it.Key, DataScopes = scopeSet.ToList() });//将改URL的权限集合加入权限集合列表
+            permissions.Add(new DataScope
+            {
+                ApiUrl = it.Key,
+                DataScopes = scopeSet.ToList()
+            });//将改URL的权限集合加入权限集合列表
         }
         return permissions;
     }
@@ -248,11 +259,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var result = await Context.Queryable<SysUser>()
-                         .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//指定机构
-                         .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.Account.Contains(input.SearchKey))//根据关键字查询
-                         .Select<UserSelectorOutPut>()//映射成SysUserSelectorOutPut
-                         .ToListAsync();
+            .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//指定机构
+            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.Account.Contains(input.SearchKey))//根据关键字查询
+            .Select<UserSelectorOutPut>()//映射成SysUserSelectorOutPut
+            .ToListAsync();
         return result;
     }
 
@@ -282,7 +293,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
     {
-        RoleOwnResourceOutput roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
+        var roleOwnResource = new RoleOwnResourceOutput()
+        {
+            Id = input.Id
+        };//定义结果集
         List<RelationRoleResuorce> grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
@@ -300,7 +314,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public async Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input)
     {
-        RoleOwnPermissionOutput roleOwnPermission = new RoleOwnPermissionOutput { Id = input.Id };//定义结果集
+        var roleOwnPermission = new RoleOwnPermissionOutput
+        {
+            Id = input.Id
+        };//定义结果集
         List<RelationRolePermission> grantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);
@@ -348,7 +365,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //默认头像
         sysUser.Avatar = AvatarUtil.GetNameImageBase64(sysUser.Name);
         //获取默认密码
-        sysUser.Password = await GetDefaultPassWord();//设置密码
+        sysUser.Password = await GetDefaultPassWord(true);//设置密码
         sysUser.UserStatus = DevDictConst.COMMON_STATUS_ENABLE;//默认状态
         await InsertAsync(sysUser);//添加数据
     }
@@ -373,19 +390,19 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 //默认头像
                 sysUser.Avatar = AvatarUtil.GetNameImageBase64(input.Name);
             if (await Context.Updateable(sysUser).IgnoreColumns(it =>
-            new
-            {
-                //忽略更新字段
-                it.Password,
-                it.LastLoginAddress,
-                it.LastLoginDevice,
-                it.LastLoginIp,
-                it.LastLoginTime,
-                it.LatestLoginAddress,
-                it.LatestLoginDevice,
-                it.LatestLoginIp,
-                it.LatestLoginTime
-            }).ExecuteCommandAsync() > 0)//修改数据
+                    new
+                    {
+                        //忽略更新字段
+                        it.Password,
+                        it.LastLoginAddress,
+                        it.LastLoginDevice,
+                        it.LastLoginIp,
+                        it.LastLoginTime,
+                        it.LatestLoginAddress,
+                        it.LatestLoginDevice,
+                        it.LatestLoginIp,
+                        it.LatestLoginTime
+                    }).ExecuteCommandAsync() > 0)//修改数据
                 DeleteUserFromRedis(sysUser.Id);//用户缓存到redis
         }
     }
@@ -412,7 +429,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 throw Oops.Bah($"不可禁用系统内置超管用户账号");
             CheckSelf(input.Id, SimpleAdminConst.Disable);//判断是不是自己
             //设置状态为禁用
-            if (await UpdateAsync(it => new SysUser { UserStatus = DevDictConst.COMMON_STATUS_DISABLED }, it => it.Id == input.Id))
+            if (await UpdateAsync(it => new SysUser
+            {
+                UserStatus = DevDictConst.COMMON_STATUS_DISABLED
+            }, it => it.Id == input.Id))
                 DeleteUserFromRedis(input.Id);//从redis删除用户信息
         }
     }
@@ -422,7 +442,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         CheckSelf(input.Id, SimpleAdminConst.Enable);//判断是不是自己
         //设置状态为启用
-        if (await UpdateAsync(it => new SysUser { UserStatus = DevDictConst.COMMON_STATUS_ENABLE }, it => it.Id == input.Id))
+        if (await UpdateAsync(it => new SysUser
+        {
+            UserStatus = DevDictConst.COMMON_STATUS_ENABLE
+        }, it => it.Id == input.Id))
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
     }
 
@@ -431,7 +454,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var password = await GetDefaultPassWord(true);//获取默认密码,这里不走Aop所以需要加密一下
         //重置密码
-        if (await UpdateAsync(it => new SysUser { Password = password }, it => it.Id == input.Id))
+        if (await UpdateAsync(it => new SysUser
+        {
+            Password = password
+        }, it => it.Id == input.Id))
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
     }
 
@@ -463,7 +489,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             #region 用户资源处理
 
             //遍历角色列表
-            for (int i = 0; i < menuIds.Count; i++)
+            for (var i = 0; i < menuIds.Count; i++)
             {
                 //将用户资源添加到列表
                 relationRoles.Add(new SysRelation
@@ -496,7 +522,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                         ObjectId = sysUser.Id,
                         TargetId = it.ApiRoute,
                         Category = CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
-                        ExtJson = new RelationRolePermission { ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory, ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList }.ToJson()
+                        ExtJson = new RelationRolePermission
+                        {
+                            ApiUrl = it.ApiRoute,
+                            ScopeCategory = defaultDataScope.ScopeCategory,
+                            ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList
+                        }.ToJson()
                     });
                 });
             }
@@ -508,11 +539,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
             //事务
             var result = await itenant.UseTranAsync(async () =>
-           {
-               var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
-               await relatioRep.DeleteAsync(it => it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
-               await relatioRep.InsertRangeAsync(relationRoles);//添加新的
-           });
+            {
+                var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
+                await relatioRep.DeleteAsync(it => it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
+                await relatioRep.InsertRangeAsync(relationRoles);//添加新的
+            });
             if (result.IsSuccess)//如果成功了
             {
                 await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//刷新关系缓存
@@ -563,10 +594,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             //需要更新兼任信息的用户列表
             var updatePositionJsonUser = new List<SysUser>();
             //获取兼任主管不是空的用户信息
-            var positionJsons = await GetListAsync(it => !SqlFunc.IsNullOrEmpty(it.PositionJson), it => new SysUser { Id = it.Id, PositionJson = it.PositionJson });
+            var positionJsons = await GetListAsync(it => !SqlFunc.IsNullOrEmpty(it.PositionJson), it => new SysUser
+            {
+                Id = it.Id,
+                PositionJson = it.PositionJson
+            });
             positionJsons.ForEach(position =>
             {
-                bool update = false;//是否要更新标致
+                var update = false;//是否要更新标致
 
                 //过滤主管是空的
                 var positionJson = position.PositionJson.Where(it => it.DirectorId != null).ToList();
@@ -589,7 +624,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var result = await itenant.UseTranAsync(async () =>
             {
                 //清除该用户作为主管信息
-                await UpdateAsync(it => new SysUser { DirectorId = null }, it => ids.Contains(it.DirectorId.Value));
+                await UpdateAsync(it => new SysUser
+                {
+                    DirectorId = null
+                }, it => ids.Contains(it.DirectorId.Value));
                 //如果有兼任主管就清除兼任主管信息
                 if (updatePositionJsonUser.Count > 0)
                     await Context.Updateable(updatePositionJsonUser).UpdateColumns(it => it.PositionJson).ExecuteCommandAsync();
@@ -613,7 +651,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public void DeleteUserFromRedis(long userId)
     {
-        DeleteUserFromRedis(new List<long> { userId });
+        DeleteUserFromRedis(new List<long>
+        {
+            userId
+        });
     }
 
     /// <inheritdoc />
@@ -661,7 +702,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<ImportResultOutPut<SysUserImportInput>> Import(ImportResultInput<SysUserImportInput> input)
     {
         var data = await CheckImport(input.Data, true);//检查数据格式
-        var result = _importExportService.GetImportResultPreview(data, out List<SysUserImportInput> importData);
+        var result = _importExportService.GetImportResultPreview(data, out var importData);
         var sysUsers = importData.Adapt<List<SysUser>>();//转实体
         await SetUserDefault(sysUsers);//设置默认值
         await InsertOrBulkCopy(sysUsers);// 数据导入
@@ -685,7 +726,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var accounts = data.Select(it => it.Account).ToList();//当前导入数据账号列表
         var phones = data.Where(it => !string.IsNullOrEmpty(it.Phone)).Select(it => it.Phone).ToList();//当前导入数据手机号列表
         var emails = data.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//当前导入数据邮箱列表
-        var sysUsers = await GetListAsync(it => true, it => new SysUser { Account = it.Account, Phone = it.Phone, Email = it.Email });//获取数据用户信息
+        var sysUsers = await GetListAsync(it => true, it => new SysUser
+        {
+            Account = it.Account,
+            Phone = it.Phone,
+            Email = it.Email
+        });//获取数据用户信息
         var dbAccounts = sysUsers.Select(it => it.Account).ToList();//数据库账号列表
         var dbPhones = sysUsers.Where(it => !string.IsNullOrEmpty(it.Phone)).Select(it => it.Phone).ToList();//数据库手机号列表
         var dbEmails = sysUsers.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email).ToList();//邮箱账号列表
@@ -868,9 +914,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <returns></returns>
     public int GetAgeByBirthdate(DateTime birthdate)
     {
-        DateTime now = DateTime.Now;
-        int age = now.Year - birthdate.Year;
-        if (now.Month < birthdate.Month || (now.Month == birthdate.Month && now.Day < birthdate.Day))
+        var now = DateTime.Now;
+        var age = now.Year - birthdate.Year;
+        if (now.Month < birthdate.Month || now.Month == birthdate.Month && now.Day < birthdate.Day)
         {
             age--;
         }
@@ -886,18 +932,25 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var query = Context.Queryable<SysUser>().LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)
-         .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)
-         .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//根据组织
-         .WhereIF(input.Expression != null, input.Expression?.ToExpression())//动态查询
-         .WhereIF(!string.IsNullOrEmpty(input.UserStatus), u => u.UserStatus == input.UserStatus)//根据状态查询
-         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
-         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
-         .OrderBy(u => u.Id)//排序
-         .Select((u, o, p) => new SysUser { Id = u.Id.SelectAll(), OrgName = o.Name, PositionName = p.Name, OrgNames = o.Names })
-         .Mapper(u =>
-         {
-             u.Password = null;//密码清空
-         });
+            .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)
+            .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//根据组织
+            .WhereIF(input.Expression != null, input.Expression?.ToExpression())//动态查询
+            .WhereIF(!string.IsNullOrEmpty(input.UserStatus), u => u.UserStatus == input.UserStatus)//根据状态查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}")
+            .OrderBy(u => u.Id)//排序
+            .Select((u, o, p) => new SysUser
+            {
+                Id = u.Id.SelectAll(),
+                OrgName = o.Name,
+                PositionName = p.Name,
+                OrgNames = o.Names
+            })
+            .Mapper(u =>
+            {
+                u.Password = null;//密码清空
+                u.Phone = CryptogramUtil.Sm4Decrypt(u.Phone);//手机号解密
+            });
         return query;
     }
 

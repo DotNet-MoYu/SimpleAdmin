@@ -13,20 +13,18 @@ public static class DbContext
     /// <summary>
     /// SqlSugar 数据库实例
     /// </summary>
-    public static readonly SqlSugarScope Db = new(
-        DbConfigs.Adapt<List<ConnectionConfig>>()
-        , db =>
+    public static readonly SqlSugarScope Db = new SqlSugarScope(DbConfigs.Adapt<List<ConnectionConfig>>(), db =>
+    {
+        //遍历配置的数据库
+        DbConfigs.ForEach(it =>
         {
-            //遍历配置的数据库
-            DbConfigs.ForEach(it =>
-                {
-                    var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
-                    MoreSetting(sqlsugarScope);//更多设置
-                    ExternalServicesSetting(sqlsugarScope, it);//实体拓展配置
-                    AopSetting(sqlsugarScope);//aop配置
-                    FilterSetting(sqlsugarScope);//过滤器配置
-                });
+            var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
+            MoreSetting(sqlsugarScope);//更多设置
+            ExternalServicesSetting(sqlsugarScope, it);//实体拓展配置
+            AopSetting(sqlsugarScope);//aop配置
+            FilterSetting(sqlsugarScope);//过滤器配置
         });
+    });
 
     /// <summary>
     /// 实体拓展配置,自定义类型多库兼容
@@ -41,26 +39,26 @@ public static class DbContext
             EntityNameService = (type, entity) =>
             {
                 if (config.IsUnderLine && !entity.DbTableName.Contains('_'))
-                    entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName); // 驼峰转下划线
+                    entity.DbTableName = UtilMethods.ToUnderLine(entity.DbTableName);// 驼峰转下划线
             },
             //自定义类型多库兼容
             EntityService = (c, p) =>
-             {
-                 //如果是mysql并且是varchar(max) 已弃用
-                 //if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
-                 //{
-                 //    p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
-                 //}
-                 //else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
-                 //{
-                 //    p.DataType = SqlsugarConst.Text;//转成sqlite的text
-                 //}
-                 //默认不写IsNullable为非必填
-                 //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
-                 //    p.IsNullable = true;
-                 if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_'))
-                     p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName); // 驼峰转下划线
-             }
+            {
+                //如果是mysql并且是varchar(max) 已弃用
+                //if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
+                //{
+                //    p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
+                //}
+                //else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
+                //{
+                //    p.DataType = SqlsugarConst.Text;//转成sqlite的text
+                //}
+                //默认不写IsNullable为非必填
+                //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
+                //    p.IsNullable = true;
+                if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_'))
+                    p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName);// 驼峰转下划线
+            }
         };
     }
 
@@ -104,18 +102,18 @@ public static class DbContext
         };
         //异常
         db.Aop.OnError = (ex) =>
-       {
-           //如果不是开发环境就打印日志
-           if (App.WebHostEnvironment.IsDevelopment())
-           {
-               if (ex.Parametres == null) return;
-               Console.ForegroundColor = ConsoleColor.Red;
-               var pars = db.Utilities.SerializeObject(((SugarParameter[])ex.Parametres).ToDictionary(it => it.ParameterName, it => it.Value));
-               WriteSqlLog($"{config.ConfigId}库操作异常");
-               Console.WriteLine(UtilMethods.GetSqlString(config.DbType, ex.Sql, (SugarParameter[])ex.Parametres) + "\r\n");
-               Console.ForegroundColor = ConsoleColor.White;
-           }
-       };
+        {
+            //如果不是开发环境就打印日志
+            if (App.WebHostEnvironment.IsDevelopment())
+            {
+                if (ex.Parametres == null) return;
+                Console.ForegroundColor = ConsoleColor.Red;
+                var pars = db.Utilities.SerializeObject(((SugarParameter[])ex.Parametres).ToDictionary(it => it.ParameterName, it => it.Value));
+                WriteSqlLog($"{config.ConfigId}库操作异常");
+                Console.WriteLine(UtilMethods.GetSqlString(config.DbType, ex.Sql, (SugarParameter[])ex.Parametres) + "\r\n");
+                Console.ForegroundColor = ConsoleColor.White;
+            }
+        };
         //插入和更新过滤器
         db.Aop.DataExecuting = (oldValue, entityInfo) =>
         {
@@ -132,9 +130,6 @@ public static class DbContext
                 if (entityInfo.PropertyName == nameof(BaseEntity.CreateTime))
                     entityInfo.SetValue(DateTime.Now);
 
-                //手机号和密码自动加密
-                if (entityInfo.EntityName == nameof(SysUser) && (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone)))
-                    entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
                 if (App.User != null)
                 {
                     //创建人和创建机构ID
@@ -149,9 +144,6 @@ public static class DbContext
             // 更新操作
             if (entityInfo.OperationType == DataFilterType.UpdateByObject)
             {
-                //这里不能自动加密，不然redis数据会有问题
-                //if (entityInfo.PropertyName == nameof(SysUser.Password) || entityInfo.PropertyName == nameof(SysUser.Phone))
-                //    entityInfo.SetValue(CryptogramUtil.Sm4Encrypt(oldValue?.ToString()));
                 //更新时间
                 if (entityInfo.PropertyName == nameof(BaseEntity.UpdateTime))
                     entityInfo.SetValue(DateTime.Now);
@@ -168,25 +160,8 @@ public static class DbContext
 
         //查询数据转换
         db.Aop.DataExecuted = (value, entity) =>
-           {
-               if (entity.Entity.Type == typeof(SysUser))
-               {
-                   //如果手机号不为空
-                   if (entity.GetValue(nameof(SysUser.Phone)) != null)
-                   {
-                       //手机号数据转换
-                       var phone = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Phone)).ToString());
-                       entity.SetValue(nameof(SysUser.Phone), phone);
-                   }
-                   //如果密码不为空
-                   if (entity.GetValue(nameof(SysUser.Password)) != null)
-                   {
-                       //密码数据转换
-                       var passwd = CryptogramUtil.Sm4Decrypt(entity.GetValue(nameof(SysUser.Password)).ToString());
-                       entity.SetValue(nameof(SysUser.Password), passwd);
-                   }
-               }
-           };
+        {
+        };
     }
 
     /// <summary>
@@ -197,7 +172,7 @@ public static class DbContext
     {
         db.CurrentConnectionConfig.MoreSettings = new ConnMoreSettings
         {
-            SqlServerCodeFirstNvarchar = true,//设置默认nvarchar
+            SqlServerCodeFirstNvarchar = true//设置默认nvarchar
         };
     }
 
