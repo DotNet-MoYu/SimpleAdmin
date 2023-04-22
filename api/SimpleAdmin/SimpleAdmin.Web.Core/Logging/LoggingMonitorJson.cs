@@ -141,7 +141,35 @@ public class ReturnInformation
     /// <summary>
     /// 返回值
     /// </summary>
-    public object Value { get; set; }
+    public RetrunValue Value { get; set; }
+
+    public class RetrunValue
+    {
+        /// <summary>
+        /// 返回码
+        /// </summary>
+        public int Code { get; set; }
+
+        /// <summary>
+        /// 消息
+        /// </summary>
+        public string Msg { get; set; }
+
+        /// <summary>
+        /// 额外信息
+        /// </summary>
+        public object extras { get; set; }
+
+        /// <summary>
+        /// 内如
+        /// </summary>
+        public object Data { get; set; }
+
+        /// <summary>
+        /// 时间
+        /// </summary>
+        public string Time { get; set; }
+    }
 }
 
 /// <summary>

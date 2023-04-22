@@ -3,6 +3,7 @@ using Masuit.Tools;
 using Microsoft.Extensions.Logging;
 using NewLife.Serialization;
 using SqlSugar;
+using System.Globalization;
 using UAParser;
 
 namespace SimpleAdmin.Web.Core;
@@ -18,7 +19,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     public DatabaseLoggingWriter(ILogger<DatabaseLoggingWriter> logger)
     {
         _db = DbContext.Db;
-        this._logger = logger;
+        _logger = logger;
     }
 
     public async void Write(LogMessage logMsg, bool flush)
@@ -29,6 +30,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var loggingMonitor = jsonString.ToJsonEntity<LoggingMonitorJson>();
         //日志时间赋值
         loggingMonitor.LogDateTime = logMsg.LogDateTime;
+        // loggingMonitor.ReturnInformation.Value
         //验证失败和没有DisplayTitle之类的不记录日志
         if (loggingMonitor.Validation == null && loggingMonitor.DisplayTitle != null)
         {
@@ -99,7 +101,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             OpOs = clientInfo.OS.Family + clientInfo.OS.Major,
             OpTime = loggingMonitor.LogDateTime,
             OpUser = name,
-            OpAccount = opAccount,
+            OpAccount = opAccount
         };
         await _db.InsertableWithAttr(devLogVisit).IgnoreColumns(true).ExecuteCommandAsync();//入库
     }
@@ -120,12 +122,20 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var opAccount = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
-        var paramJson = (loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0) ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
+        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0 ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
 
         //获取结果json字符串
         var resultJson = string.Empty;
-        if (loggingMonitor.ReturnInformation != null)
-            resultJson = loggingMonitor.ReturnInformation.Value == null ? null : loggingMonitor.ReturnInformation.Value.ToJsonString();
+        if (loggingMonitor.ReturnInformation != null)//如果有返回值
+        {
+            if (loggingMonitor.ReturnInformation.Value != null)//如果返回值不为空
+            {
+                var time = DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time);//转成时间
+                loggingMonitor.ReturnInformation.Value.Time = time.ToString(CultureInfo.CurrentCulture);//转成字符串
+                resultJson = loggingMonitor.ReturnInformation.Value.ToJsonString();
+            }
+        }
+
         //操作日志表实体
         var devLogOperate = new DevLogOperate
         {
@@ -167,7 +177,13 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         try
         {
             var ipInfo = IpTool.Search(ip);//解析IP信息
-            List<string> LoginAddressList = new List<string>() { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
+            var LoginAddressList = new List<string>()
+            {
+                ipInfo.Country,
+                ipInfo.Province,
+                ipInfo.City,
+                ipInfo.NetworkOperator
+            };//定义登录地址列表
             LoginAddress = string.Join("|", LoginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
         }
         catch (global::System.Exception ex)

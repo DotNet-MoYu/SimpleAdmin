@@ -14,6 +14,7 @@ public class Startup : AppStartup
     {
         //启动LoggingMonitor操作日志写入数据库组件
         services.AddComponent<LoggingMonitorComponent>();
+
         //认证组件
         services.AddComponent<AuthComponent>();
         //启动Web设置ConfigureServices组件
@@ -26,13 +27,13 @@ public class Startup : AppStartup
         //services.AddSchedule();
         //添加控制器相关
         services.AddControllers()
-                     .AddInjectWithUnifyResult<SimpleAdminResultProvider>()//配置统一返回模型
-                     .AddNewtonsoftJson(options =>//配置json
-                     {
-                         options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver(); // 首字母小写（驼峰样式）
-                         options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; // 时间格式化
-                         options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore; // 忽略循环引用
-                     });
+            .AddInjectWithUnifyResult<SimpleAdminResultProvider>()//配置统一返回模型
+            .AddNewtonsoftJson(options => //配置json
+            {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();// 首字母小写（驼峰样式）
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 时间格式化
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
+            });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

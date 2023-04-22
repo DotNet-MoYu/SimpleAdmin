@@ -1685,6 +1685,31 @@
             返回值
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Code">
+            <summary>
+            返回码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Msg">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.extras">
+            <summary>
+            额外信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Data">
+            <summary>
+            内如
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.Exception">
             <summary>
             异常信息
