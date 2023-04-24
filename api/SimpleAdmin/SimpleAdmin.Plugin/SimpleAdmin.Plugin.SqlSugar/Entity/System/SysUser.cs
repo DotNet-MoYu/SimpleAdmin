@@ -210,7 +210,7 @@ public class SysUser : BaseEntity
     /// <summary>
     /// 兼任信息
     ///</summary>
-    [SugarColumn(ColumnName = "PositionJson", ColumnDescription = "兼任信息", IsJson = true, Length = 100, IsNullable = true)]
+    [SugarColumn(ColumnName = "PositionJson", ColumnDescription = "兼任信息", IsJson = true, ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public List<PositionJson> PositionJson { get; set; }
 
     /// <summary>
