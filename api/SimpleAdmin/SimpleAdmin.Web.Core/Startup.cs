@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -34,6 +35,15 @@ public class Startup : AppStartup
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 时间格式化
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
             });
+
+        //Nginx代理的话获取真实IP
+        services.Configure<ForwardedHeadersOptions>(options =>
+        {
+            options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            //新增如下两行
+            options.KnownNetworks.Clear();
+            options.KnownProxies.Clear();
+        });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -77,6 +87,7 @@ public class Startup : AppStartup
         //{
         //    options.DisableOnProduction = true;//配置生产环境关闭
         //});
+        app.UseForwardedHeaders();//Nginx代理的话获取真实IP
         app.UseEndpoints(endpoints =>
         {
             // 获取插件选项
