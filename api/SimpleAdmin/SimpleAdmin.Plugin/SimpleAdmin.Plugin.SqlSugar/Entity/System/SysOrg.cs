@@ -50,7 +50,7 @@ public class SysOrg : BaseEntity
     public int? SortCode { get; set; }
 
     /// <summary>
-    /// 字节点
+    /// 子节点
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     public List<SysOrg> Children { get; set; }
