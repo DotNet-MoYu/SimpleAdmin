@@ -130,7 +130,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             if (loggingMonitor.ReturnInformation.Value != null)//如果返回值不为空
             {
-                var time = DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time);//转成时间
+                var time = loggingMonitor.ReturnInformation.Value.Time != null ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time) : DateTime.Now;//转成时间
                 loggingMonitor.ReturnInformation.Value.Time = time.ToString(CultureInfo.CurrentCulture);//转成字符串
                 resultJson = loggingMonitor.ReturnInformation.Value.ToJsonString();
             }
