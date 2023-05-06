@@ -4168,7 +4168,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.GetQuery(SimpleAdmin.System.UserPageInput)">
             <summary>
             获取Sqlsugar的ISugarQueryable
-            </summary>
+            </summary>  
             <param name="input"></param>
             <returns></returns>
         </member>

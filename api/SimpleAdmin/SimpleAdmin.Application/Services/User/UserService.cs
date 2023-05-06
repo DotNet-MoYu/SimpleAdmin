@@ -15,12 +15,12 @@ public class UserService : DbRepository<SysUser>, IUserService
         IRoleService roleService,
         ISysOrgService sysOrgService,
         IImportExportService importExportService
-)
+    )
     {
-        this._sysUserService = sysUserService;
-        this._roleService = roleService;
-        this._sysOrgService = sysOrgService;
-        this._importExportService = importExportService;
+        _sysUserService = sysUserService;
+        _roleService = roleService;
+        _sysOrgService = sysOrgService;
+        _importExportService = importExportService;
     }
 
     #region 查询
@@ -60,7 +60,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc />
     public async Task<List<SysRole>> RoleSelector(RoleSelectorInput input)
     {
-        List<SysRole> sysRoles = new List<SysRole>();
+        var sysRoles = new List<SysRole>();
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope.Count > 0)//如果有机构
@@ -98,17 +98,13 @@ public class UserService : DbRepository<SysUser>, IUserService
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        if (dataScope.Count > 0)
+        var ids = input.Ids;//获取用户id
+        var sysUsers = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
+        sysUsers.ForEach(it =>
         {
-            var ids = input.Ids;//获取用户id
-            var orgIds = await GetListAsync(it => ids.Contains(it.Id), it => it.OrgId);//根据用户ID获取机构id、
-            orgIds.ForEach(it =>
-            {
-                if (!dataScope.Contains(it)) throw Oops.Bah(ErrorCodeEnum.A0004);
-            });
-            await _sysUserService.Edits(input);
-        }
-        else throw Oops.Bah(ErrorCodeEnum.A0004);
+            if (!dataScope.Contains(it.OrgId) && it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        });
+        await _sysUserService.Edits(input);
     }
 
     /// <inheritdoc/>
@@ -211,7 +207,7 @@ public class UserService : DbRepository<SysUser>, IUserService
         if (dataScope.Count > 0)
         {
             var data = await CheckImport(input.Data, dataScope, true);//检查数据格式
-            var result = _importExportService.GetImportResultPreview(data, out List<BizUserImportInput> importData);
+            var result = _importExportService.GetImportResultPreview(data, out var importData);
             var sysUsers = importData.Adapt<List<SysUser>>();//转实体
             await _sysUserService.SetUserDefault(sysUsers);//设置用户默认值
             await InsertOrBulkCopy(sysUsers);// 数据导入
