@@ -129,6 +129,16 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 
 </table>
 
+## 🛒项目展示
+🎰xxx彩票进销存管理系统:一个使用SimpleAdmin开发的小型的彩票进销存系统，开发周期一个月，开发者反馈:"框架太省时间了，配合代码生成器，贼快，只需考虑业务的问题"。
+<table>
+    <tr>
+        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/彩票1.png"/></td>
+        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/彩票2.png"/></td>
+        <td><img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/彩票3.png"/></td>
+    </tr>
+</table>
+
 ## 🎞️演示地址
 1. 地址：[http://admin.zxzyjs.com](http://admin.zxzyjs.com)
 2. 账号：superAdmin
@@ -169,7 +179,7 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 <img width="200" height="200"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/> -->
 <table>
     <tr>
-       <td><img width="500" height="600"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/></td>
+       <td><img width="300" height="300"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/></td>
     </tr>
 </table>
 
