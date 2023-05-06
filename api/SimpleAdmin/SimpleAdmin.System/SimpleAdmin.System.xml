@@ -3967,6 +3967,20 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysUser})">
+            <summary>
+            设置用户默认值
+            </summary>
+            <param name="sysUsers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+            <summary>
+            批量编辑
+            </summary>
+            <param name="input">批量编辑信息</param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.ISysUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除用户
@@ -4019,20 +4033,6 @@
             </summary>
             <param name="data">数据</param>
             <param name="clearError">是否初始化错误</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysUser})">
-            <summary>
-            设置用户默认值
-            </summary>
-            <param name="sysUsers"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
-            <summary>
-            批量编辑
-            </summary>
-            <param name="input">批量编辑信息</param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.SysUserService">

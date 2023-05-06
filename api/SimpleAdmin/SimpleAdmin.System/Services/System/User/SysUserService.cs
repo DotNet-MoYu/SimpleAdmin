@@ -157,7 +157,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task<List<string>> GetButtonCodeList(long userId)
     {
-        List<string> buttonCodeList = new List<string>();//按钮ID集合
+        var buttonCodeList = new List<string>();//按钮ID集合
         //获取用户资源集合
         var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
         var buttonIdList = new List<long>();//按钮ID集合
@@ -297,7 +297,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             Id = input.Id
         };//定义结果集
-        List<RelationRoleResuorce> grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        var grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
         //遍历关系表
@@ -318,7 +318,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             Id = input.Id
         };//定义结果集
-        List<RelationRolePermission> grantInfoList = new List<RelationRolePermission>();//已授权信息集合
+        var grantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);
         //遍历关系表
@@ -335,7 +335,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public async Task<List<string>> UserPermissionTreeSelector(BaseIdInput input)
     {
-        List<string> permissionTreeSelectors = new List<string>();//授权树结果集
+        var permissionTreeSelectors = new List<string>();//授权树结果集
         //获取用户资源关系
         var relationsRes = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id).Select(it => it.TargetId.ToLong()).ToList();
@@ -541,7 +541,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var result = await itenant.UseTranAsync(async () =>
             {
                 var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
-                await relatioRep.DeleteAsync(it => it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
+                await relatioRep.DeleteAsync(it =>
+                    it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
@@ -925,7 +926,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
     /// <summary>
     /// 获取Sqlsugar的ISugarQueryable
-    /// </summary>
+    /// </summary>  
     /// <param name="input"></param>
     /// <returns></returns>
     private async Task<ISugarQueryable<SysUser>> GetQuery(UserPageInput input)
