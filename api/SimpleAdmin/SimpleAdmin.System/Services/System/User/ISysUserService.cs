@@ -176,6 +176,20 @@ public partial interface ISysUserService : ITransient
     /// <returns></returns>
     Task GrantPermission(GrantPermissionInput input);
 
+    /// <summary>
+    /// 设置用户默认值
+    /// </summary>
+    /// <param name="sysUsers"></param>
+    /// <returns></returns>
+    Task SetUserDefault(List<SysUser> sysUsers);
+
+    /// <summary>
+    /// 批量编辑
+    /// </summary>
+    /// <param name="input">批量编辑信息</param>
+    /// <returns></returns>
+    Task Edits(BatchEditInput input);
+
     #endregion 编辑
 
     #region 删除
@@ -237,20 +251,6 @@ public partial interface ISysUserService : ITransient
     /// <param name="clearError">是否初始化错误</param>
     /// <returns></returns>
     Task<List<T>> CheckImport<T>(List<T> data, bool clearError = false) where T : SysUserImportInput;
-
-    /// <summary>
-    /// 设置用户默认值
-    /// </summary>
-    /// <param name="sysUsers"></param>
-    /// <returns></returns>
-    Task SetUserDefault(List<SysUser> sysUsers);
-
-    /// <summary>
-    /// 批量编辑
-    /// </summary>
-    /// <param name="input">批量编辑信息</param>
-    /// <returns></returns>
-    Task Edits(BatchEditInput input);
 
     #endregion 导入导出
 }
