@@ -12,20 +12,20 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
 
     public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService, IRelationService relationService, IEventPublisher eventPublisher)
     {
-        this._logger = logger;
-        this._resourceService = resourceService;
-        this._relationService = relationService;
-        this._eventPublisher = eventPublisher;
+        _logger = logger;
+        _resourceService = resourceService;
+        _relationService = relationService;
+        _eventPublisher = eventPublisher;
     }
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(ButtonPageInput input)
     {
         var query = Context.Queryable<SysResource>()
-                         .Where(it => it.ParentId == input.ParentId && it.Category == CateGoryConst.Resource_BUTTON)
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey) || it.Path.Contains(input.SearchKey))//根据关键字查询
-                         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
-                         .OrderBy(it => it.SortCode);//排序
+            .Where(it => it.ParentId == input.ParentId && it.Category == CateGoryConst.Resource_BUTTON)
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey) || it.Path.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
@@ -42,11 +42,11 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     /// <inheritdoc />
     public async Task<List<long>> AddBatch(ButtonAddInput input)
     {
-        List<SysResource> sysResources = new List<SysResource>();//按钮列表
-        var codeList = new List<string>() { "Add", "Edit", "Delete", "BatchDelete", "BatchEdit" };//code后缀
-        var titleList = new List<string>() { "新增", "编辑", "删除", "批量删除", "批量编辑" };//title前缀
+        var sysResources = new List<SysResource>();//按钮列表
+        var codeList = new List<string>() { "Add", "Edit", "Delete", "BatchDelete", "Import", "Export", "BatchEdit" };//code后缀
+        var titleList = new List<string>() { "新增", "编辑", "删除", "批量删除", "导入", "导出", "批量编辑" };//title前缀
         var idList = new List<long>();//Id列表
-        for (int i = 0; i < codeList.Count; i++)
+        for (var i = 0; i < codeList.Count; i++)
         {
             var id = CommonUtils.GetSingleId();
             sysResources.Add(new SysResource
@@ -55,7 +55,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
                 Title = titleList[i] + input.Title,//标题等于前缀输入的值
                 Code = input.Code + codeList[i],//code等于输入的值加后缀
                 ParentId = input.ParentId,
-                SortCode = i + 1,
+                SortCode = i + 1
             });
             idList.Add(id);
         }
@@ -84,7 +84,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         //事务
         var result = await itenant.UseTranAsync(async () =>
         {
-            await UpdateAsync(sysResource); //更新按钮
+            await UpdateAsync(sysResource);//更新按钮
         });
         if (result.IsSuccess)//如果成功了
         {
@@ -116,8 +116,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         var roleResources = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
         //获取相关关系表数据
         var relationList = roleResources
-                .Where(it => parentIds.Contains(it.TargetId))//目标ID是父ID中
-                .Where(it => it.ExtJson != null).ToList();//扩展信息不为空
+            .Where(it => parentIds.Contains(it.TargetId))//目标ID是父ID中
+            .Where(it => it.ExtJson != null).ToList();//扩展信息不为空
         //遍历关系表
         relationList.ForEach(it =>
         {
@@ -125,7 +125,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
             var buttonInfo = relationRoleResuorce.ButtonInfo;//获取按钮信息
             if (buttonInfo.Count > 0)
             {
-                var diffArr = buttonInfo.Where(it => !buttonInfo.Contains(it)).ToList(); //找出不同的元素(即交集的补集)
+                var diffArr = buttonInfo.Where(it => !buttonInfo.Contains(it)).ToList();//找出不同的元素(即交集的补集)
                 relationRoleResuorce.ButtonInfo = diffArr;//重新赋值按钮信息
                 it.ExtJson = relationRoleResuorce.ToJson();//重新赋值拓展信息
             }
