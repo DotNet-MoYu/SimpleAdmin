@@ -24,4 +24,9 @@ public class SqlSugarTableInfo
     /// 表注释
     /// </summary>
     public string TableDescription { get; set; }
+
+    /// <summary>
+    /// 表字段
+    /// </summary>
+    public List<SqlsugarColumnInfo> Columns { get; set; }
 }

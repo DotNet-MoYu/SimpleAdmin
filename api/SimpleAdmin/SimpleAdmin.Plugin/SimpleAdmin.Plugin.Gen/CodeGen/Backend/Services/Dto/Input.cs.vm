@@ -1,3 +1,6 @@
+@{
+  var tableFieIds=@Model.TableFields;//获取字段
+}
 using System;
 using System.ComponentModel.DataAnnotations;
 using Masuit.Tools.Core.Validator;
@@ -9,6 +12,12 @@ namespace @(@Model.ServicePosition);
 public class @Model.PageInput : BasePageInput
 {
   @{PageInput();}
+  @if(@Model.LeftTree=="org"){
+  @:/// <summary>
+  @:/// 组织机构Id
+  @:/// </summary>
+  @:public long OrgId { get; set; }
+  }
 }
 
 /// <summary>
@@ -31,13 +40,56 @@ public class @Model.EditInput : @Model.AddInput
     public long Id { get; set; }
 }
 
-
+@{OtherInput();
 
 @{
+
+void OtherInput(){
+var funcList=@Model.FuncList;//获取功能列表
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+@:/// <summary>
+@:/// @(@Model.DescriptionImport)
+@:/// </summary>
+@:public class @(@Model.ClassName)ImportInput : ImportTemplateInput
+@:{
+  ImportInput();
+@:}
+break;
+}}
+
+}
+
+//生成导入字段
+void ImportInput(){
+  foreach (var column in tableFieIds){
+  if(column.WhetherImportExport=="Y")//判断是否新增
+  {
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  @:[ImporterHeader(Name = "@column.FieldRemark")]
+  if(column.WhetherImportExport=="Y")//判断是否必填
+  {
+  @:[Required(ErrorMessage = "@(@column.FieldRemark)不能为空")]
+  }
+  if(column.FieldNetType!="string")//如果不是string类型后面要加?号
+  {
+  @:public @(@column.FieldNetType)? @column.FieldName { get; set; }
+  }else{
+  @:public @column.FieldNetType @column.FieldName { get; set; }
+  }
+  @:
+  }
+  }
+}
+
 //生成分页字段
 void PageInput()
 {
-  var tableFieIds=@Model.TableFields;//获取字段
   foreach (var column in tableFieIds){
   if(column.QueryWhether=="Y")//判断是否查询
   {
@@ -71,7 +123,6 @@ void PageInput()
 //生成新增字段
 void AddInput()
 {
-  var tableFieIds=@Model.TableFields;
   foreach (var column in tableFieIds){//遍历字段
   if(column.WhetherAddUpdate=="Y")//判断是否新增
   {

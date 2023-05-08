@@ -1,18 +1,11 @@
-<template>
-@if(1==2)//后面支持树形菜单生成
-{
-<a-row>
-<a-col :span="5">
-
-</a-col>
-<a-col :span="19">
-  @{Main();}
-</a-col>
-</a-row>
+@{
+var dataPermission=@Model.DataPermission=="Y";//是否需要数据权限
+var isLeftTree=@Model.LeftTree!="null";//是否有左侧树
+var tableFieIds=@Model.TableFields;//获取字段
+var funcList=@Model.FuncList;//获取功能列表
 }
-else{
-@{Main();}
-}		
+<template>
+@{Template();}
 </template>
 @
 @{Script();}
@@ -20,11 +13,50 @@ else{
 @{Style();}
 
 @{
+void Template()
+{
+//如果左侧树不为空则生成左侧树
+if(isLeftTree){
+LeftTree(@Model.LeftTree);
+}
+else{
+Main();//否则直接生成主体
+}
+}
+
+//左侧树
+void LeftTree(string tree){
+@:<a-row>
+@:<a-col :span="5">
+@if(tree=="org"){
+orgTree();
+}
+@:</a-col>
+@:<a-col :span="19">
+@{Main();}
+@:</a-col>
+@:</a-row>
+}
+
+//机构树
+void orgTree(){
+<a-card class="cardImp" :bordered="false" :loading="cardLoading">
+    <a-tree
+        v-if="treeData.length > 0"
+        v-model:expandedKeys="defaultExpandedKeys"
+        :tree-data="treeData"
+        :field-names="treeFieldNames"
+        @@select="treeSelect"
+    />
+    <a-empty v-else :image="Empty.PRESENTED_IMAGE_SIMPLE" />
+</a-card>
+
+}
+
 //主体
 void Main()
 {
 var columnCount = 0;//字段数量
-var tableFieIds=@Model.TableFields;//获取字段
 var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//获取需要查询的字段
 <a-card :bordered="false" style="margin-bottom: 10px">
   <a-form ref="searchFormRef" name="advanced_search" class="ant-advanced-search-form" :model="searchFormState">
@@ -135,7 +167,6 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 //表格部分
 void Table()
 {
-var tableFieIds=@Model.TableFields;//获取字段
 var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获取需要显示的字段
 <a-card :bordered="false">
   <s-table
@@ -154,9 +185,40 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
   >
     <template #operator>
       <a-space>
-        <a-button type="primary" @@click="formRef.onOpen()" v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
-        <template #icon><plus-outlined /></template>新增@(@Model.FunctionName)</a-button>
-		<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"  title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="deleteBatch@(@Model.ClassName)"/>
+        <a-button type="primary" @@click="formRef.onOpen()" 
+        @if(dataPermission){
+        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')"
+        } 
+        ><template #icon><plus-outlined /></template>新增@(@Model.FunctionName)</a-button>
+        @if(funcList.Contains("batchEdit")){//如果有批量删除
+        @:<a-button @@click="batchEditRef.onOpen(selectedRowKeys)" :disabled="selectedRowKeys.length === 0"
+        @if(dataPermission){
+        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchEdit')"
+        }
+              @:><template #icon><edit-outlined /></template>编辑@(@Model.FunctionName)</a-button>
+        }
+        @if(funcList.Contains("batchDelete")){//如果有批量删除
+        @:<batch-delete 
+        @if(dataPermission){
+        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"
+        
+        }
+              @:title="确定要删除选中@(@Model.FunctionName)吗?" buttonName="删除@(@Model.FunctionName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="batchDelete@(@Model.ClassName)"/>
+        }
+        @if(funcList.Contains("import")){//如果有导入
+        @:<a-button @@click="openImport"
+        @if(dataPermission){
+        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Import')"
+        }
+              @:><template #icon><download-outlined /></template>导入@(@Model.FunctionName)</a-button>
+        }
+        @if(funcList.Contains("export")){//如果有导出
+        @:<data-export  buttonName="导出人员" @@dataExport="dataExport@(@Model.ClassNameFirstLower)"
+        @if(dataPermission){
+        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Export')" 
+        }
+              @:/>
+        }
       </a-space>
     </template>
     <template #bodyCell="{ column, record }">
@@ -189,10 +251,22 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
 	}
       <template v-if="column.dataIndex === 'action'">
         <a-space>
-          <a @@click="formRef.onOpen(record)" v-if="hasPerm('@(@Model.ClassNameFirstLower)Edit')">编辑</a>
-          <a-divider type="vertical" v-if="hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'], 'and')" />
+          <a @@click="formRef.onOpen(record)"
+          @if(dataPermission){
+          @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Edit')"
+          }
+              >编辑</a>
+          <a-divider type="vertical" 
+          @if(dataPermission){
+          @:        v-if="hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'], 'and')" 
+          }
+          />
           <a-popconfirm title="确定要删除吗？" @@confirm="delete@(@Model.ClassName)(record)">
-            <a-button type="link" danger size="small" v-if="hasPerm('@(@Model.ClassNameFirstLower)Delete')">删除</a-button>
+            <a-button type="link" danger size="small"
+          @if(dataPermission){ 
+          @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Delete')"
+          }
+          >删除</a-button>
           </a-popconfirm>
       </a-space>
       </template>
@@ -200,12 +274,17 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
   </s-table>
 </a-card>
 <Form ref="formRef" @@successful="table.refresh(true)" />
+@if(funcList.Contains("import")){//如果有导入
+<data-import ref="importRef" title="导入@(@Model.FunctionName)" :api="@(@Model.ClassNameFirstLower)Api" :max-upload-count="2000" @@successful="table.refresh(true)"/>
+}
+@if(funcList.Contains("batchEdit")){//如果有批量编辑
+<batch-edit ref="batchEditRef" title="编辑@(@Model.FunctionName)" :api="@(@Model.ClassNameFirstLower)Api" code="@(@Model.ClassNameFirstLower)" @@successful="table.refresh(true)" />
+}
 }
 
 //Js部分
 void Script()
 {
-var tableFieIds=@Model.TableFields;//获取字段
 var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//获取需要查询的字段
 var searchCount=searchColumns.Count;//查询字段数量
 var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="radio"||it.EffectType=="checkbox");//是否有选择框
@@ -217,64 +296,15 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
   import Form from './form.vue'
   import @(@Model.ClassNameFirstLower)Api from '@@/api/@(@Model.RouteName)/@(@Model.ClassNameFirstLower)Api'
   
-  @if(searchCount>0){
-  @:let searchFormState = reactive({})//查询表单状态
-  @:const searchFormRef = ref()//查询表单
-  }
-  const table = ref()//表格
-  const formRef = ref()//新增/编辑表单页
-  const toolConfig = { refresh: true, height: true, columnSetting: true, striped: false }//表格工具配置
+  @{FormConst(searchCount);}
   
-  @if(searchCount>0){//如果查询字段数量大于
-  @:// 查询区域显示更多控制
-  @:const advanced = ref(false)
-  @:const toggleAdvanced = () => {
-  @:    advanced.value = !advanced.value
-  @:}
+  @if(isLeftTree){ //如果左侧树不为空则生成左侧树const
+  @{LeftTreeConst();}
   }
-  const columns = [
-  @foreach (var column in tableFieIds){//遍历字段
-  @if(column.WhetherTable=="Y"){//如果列表显示
-      @:{
-        @:title: '@column.FieldRemark',
-	    @if(column.WhetherRetract=="Y")//如果列省略
-		{
-        @:dataIndex: '@column.FieldNameFirstLower',
-        @:ellipsis: true
-	    }
-		else{
-        @:dataIndex: '@column.FieldNameFirstLower'
-		}
-      @:},
-  }
-  }
-  ]
-  
-  // 操作栏通过权限判断是否显示
-  if(hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'])) {
-      columns.push({
-          title: '操作',
-          dataIndex: 'action',
-          align: 'center',
-          width: '150px'
-        })
-    }  
-  //选择项
-  let selectedRowKeys = ref([])
-  // 列表选择配置
-  const options = reactive({
-      alert: {
-          show: false, //显示选择多少个
-          clear: () => {
-              selectedRowKeys = ref([])
-          }
-      },
-      rowSelection: {
-          onChange: (selectedRowKey, selectedRows) => {
-              selectedRowKeys.value = selectedRowKey
-          }
-      }
-  })
+
+  @{OtherConst();}
+
+  @{TableConst();}
   
   // 表格查询 返回 Promise 对象
   const loadData = (parameter) => {
@@ -299,51 +329,230 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
         return data
       })
     }
+    
+  @{DeleteScript();}
   
-  // 删除
-  const delete@(@Model.ClassName) = (record) => {
-      let params = [
-          {
-		    @foreach (var column in tableFieIds){//遍历字段
-            @if(column.IsPrimarykey=="Y"){//如果是主键
-            @:@column.FieldNameFirstLower: record.@column.FieldNameFirstLower
-			}}
-          }
-      ]
-      @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {
-        table.value.refresh(true)
-      })
-  }
-  
-  // 批量删除
-  const deleteBatch@(@Model.ClassName) = (params,callback) => {
-    @(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params)
-	                         .then(() => {})
-                             .finally(() => {
-						         table.value.clearRefreshSelected()
-				                 callback() //调用组件中的回调方法
-			                  })
-  }
   @if(searchCount>0){
   @foreach (var column in searchColumns){//遍历字段
   @if(column.EffectType=="select"||column.EffectType=="radio"||column.EffectType=="checkbox"){//如果有选择，加载字典
   @:
   @://@(@column.FieldRemark)字典
   @:const @(@column.FieldNameFirstLower)Options = tool.dictList('@column.DictTypeCode')
+  }}}
+  
+  @if(isLeftTree){ //如果左侧树不为空则生成左侧树方法
+  @{LeftTreeMethod(@Model.LeftTree);}
   }
-  }
-  }
+
+  @{OtherMethod();}
+
 </script>
 }
+
+
+//表格属性配置
+void TableConst()
+{
+  @://表格配置
+  @:const table = ref() //表格
+  @:let selectedRowKeys = ref([]) //选中项
+  @:const toolConfig = { refresh: true, height: true, columnSetting: true, striped: false } //表格工具配置
+  @:const columns = [
+  @foreach (var column in tableFieIds){//遍历字段
+  @if(column.WhetherTable=="Y"){//如果列表显示
+      @:{
+        @:title: '@column.FieldRemark',
+	    @if(column.WhetherRetract=="Y")//如果列省略
+		{
+        @:dataIndex: '@column.FieldNameFirstLower',
+        @:ellipsis: true
+	    }
+		else{
+        @:dataIndex: '@column.FieldNameFirstLower'
+		}
+      @:},
+  }
+  }
+  @if(!dataPermission){
+         @:{
+		 @:title: '操作',
+	  	 @:dataIndex: 'action',
+	     @:align: 'center',
+		 @:width: '150px'
+	     @:}
+  }
+  @:]
+
+  @if(dataPermission){//如果有选择框
+  @:if (hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'])) {
+	  @:columns.push({
+		  @:title: '操作',
+	  	  @:dataIndex: 'action',
+	      @:align: 'center',
+		  @:width: '240px'
+	  @:})
+  @:}
+  }
+  @:
+  @:// 列表选择配置
+  @:const options = reactive({
+		@:alert: {
+			@:show: true, //显示选择多少个
+			@:clear: () => {
+				@:selectedRowKeys = ref([])
+			@:}
+		@:},
+		@:rowSelection: {
+			@:onChange: (selectedRowKey, selectedRows) => {
+				@:selectedRowKeys.value = selectedRowKey
+			@:}
+		@:}
+	@:})
+
+}
+
+//表单属性配置
+void FormConst(int searchCount){
+  if(searchCount>0){
+  @:let searchFormState = reactive({}) //查询表单状态
+  @:const searchFormRef = ref() //查询表单
+  @:// 查询区域显示更多控制
+  @:const advanced = ref(false)
+  @:const toggleAdvanced = () => {
+  @:    advanced.value = !advanced.value
+  @:}
+  }
+  @:const formRef = ref()//新增/编辑表单页
+}
+
+//删除方法
+void DeleteScript(){
+  @if(funcList.Contains("delete")){//如果有删除功能
+  @:// 删除
+  @:const delete@(@Model.ClassName) = (record) => {
+      @:let params = [
+          @:{
+		    @foreach (var column in tableFieIds){//遍历字段
+            @if(column.IsPrimarykey=="Y"){//如果是主键
+            @:@column.FieldNameFirstLower: record.@column.FieldNameFirstLower
+			}}
+          @:}
+      @:]
+      @:@(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {
+        @:table.value.refresh(true)
+      @:})
+  @:}
+  }
+  @: 
+  @if(funcList.Contains("batchDelete")){//如果有删除功能
+  @:// 批量删除
+  @:const batchDelete@(@Model.ClassName) = (params,callback) => {
+      @:@(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Delete(params).then(() => {})
+          @:.finally(() => {
+		  @:table.value.clearRefreshSelected()
+		      @:callback() //调用组件中的回调方法
+		  @:})
+      @:}
+  }
+}
+
+//其他常定义
+void OtherConst(){
+  @if(funcList.Contains("import")) @:  const importRef = ref() //导入组件
+  @if(funcList.Contains("batchEdit")) @:  const batchEditRef = ref() //批量更新组件
+}
+
+//其他方法
+void OtherMethod()
+{
+@if(funcList.Contains("import")) {
+  @:// 打开导入界面
+  @:const openImport = (record) => {
+	@:nextTick(() => {
+		@:importRef.value.importSteps(record)
+	@:})
+  @:}
+}
+
+@if(funcList.Contains("export")) {
+  @:// 导出数据
+  @:const dataExport@(@Model.ClassNameFirstLower) = (callback) => {
+	@:@(@Model.ClassNameFirstLower)Api.@(@Model.ClassNameFirstLower)Export(searchFormState)
+		@:.then((data) => {
+			@:callback(data)
+		@:})
+		@:.catch(() => {
+			@:callback(null)
+		@:})
+	@:}
+}
+
+}
+
+//左侧树属性配置
+void LeftTreeConst()
+{
+  @://左侧树配置
+  @:let defaultExpandedKeys = ref([]) // 默认展开的节点
+  @:const treeData = ref([]) // 左侧树数据
+  @:// 替换treeNode 中 title,key,children
+  @:const treeFieldNames = { children: 'children', title: 'name', key: 'id' }
+  @:const cardLoading = ref(true) // 左侧树加载状态
+}
+
+//左侧树方法定义
+void LeftTreeMethod(string leftTree)
+{
+  @:// 点击树查询
+  @:const treeSelect = (selectedKeys) => {
+  @:	if (selectedKeys.length > 0) {
+  @:		searchFormState.@(leftTree)Id = selectedKeys.toString()
+  @:	} else {
+  @:		delete searchFormState.@(leftTree)Id
+  @:		}
+  @:		table.value.refresh(true)
+  @:	}
+
+  @:// 左侧树查询
+  @:@(@Model.ClassNameFirstLower)Api.@(leftTree)TreeSelector()
+	@:.then((res) => {
+		@:cardLoading.value = false
+		@:if (res !== null) {
+			@:treeData.value = res
+			@:// 默认展开2级
+			@:treeData.value.forEach((item) => {
+				@:// 因为0的顶级
+				@:if (item.parentId === 0) {
+					@:defaultExpandedKeys.value.push(item.id)
+					@:// 取到下级ID
+					@:if (item.children) {
+						@:item.children.forEach((items) => {
+							@:defaultExpandedKeys.value.push(items.id)
+						@:})
+					@:}
+				@:}
+			@:})
+		@:}
+	@:})
+	@:.finally(() => {
+		@:cardLoading.value = false
+	@:})
+}
+
 
 //Css部分
 void Style()
 {
 @:
 <style scoped>
-  .buttom-left {
-    margin-left: 8px;
-  }
+@if(isLeftTree){
+    @:.cardImp {
+    @:	margin-right: 10px;
+    @:}
+}
+    .buttom-left {
+      margin-left: 8px;
+    }
 </style>
 }
 }

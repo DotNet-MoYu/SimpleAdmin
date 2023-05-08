@@ -3,8 +3,7 @@
 /// <summary>
 /// 代码生成基础添加参数
 /// </summary>
-
-public class GenBasicAddInput : GenBasic
+public class GenBasicAddInput : GenBasic, IValidatableObject
 {
     /// <summary>
     /// 所属库名称
@@ -17,6 +16,24 @@ public class GenBasicAddInput : GenBasic
     /// </summary>
     [Required(ErrorMessage = "BbTable不能为空")]
     public override string DbTable { get; set; }
+
+    /// <summary>
+    ///  功能列表
+    /// </summary>
+    [Required(ErrorMessage = "FuncList不能为空")]
+    public override List<string>? FuncList { get; set; }
+
+    /// <summary>
+    /// 生成模版
+    /// </summary>
+    [Required(ErrorMessage = "ModuleType不能为空")]
+    public override string ModuleType { get; set; }
+
+    /// <summary>
+    ///  数据权限
+    /// </summary>
+    [Required(ErrorMessage = "DataPermission不能为空")]
+    public override string DataPermission { get; set; }
 
     /// <summary>
     /// 实体名称
@@ -47,6 +64,7 @@ public class GenBasicAddInput : GenBasic
     /// </summary>
     [Required(ErrorMessage = "RouteName不能为空")]
     public override string RouteName { get; set; }
+
 
     /// <summary>
     /// 图标
@@ -85,6 +103,12 @@ public class GenBasicAddInput : GenBasic
     public override string GridWhether { get; set; }
 
     /// <summary>
+    /// 左侧树
+    /// </summary>
+    [Required(ErrorMessage = "LeftTree不能为空")]
+    public override string LeftTree { get; set; }
+
+    /// <summary>
     /// 前端路径
     /// </summary>
     [Required(ErrorMessage = "FrontedPath不能为空")]
@@ -113,6 +137,26 @@ public class GenBasicAddInput : GenBasic
     /// </summary>
     [Required(ErrorMessage = "AuthorName不能为空")]
     public override string AuthorName { get; set; }
+
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+        //如果是树形结构
+        if (ModuleType.Contains("tree"))
+        {
+            if (string.IsNullOrEmpty(TreeId) || string.IsNullOrEmpty(TreeName) || string.IsNullOrEmpty(TreePid))
+                yield return new ValidationResult($"必须配置树表相关信息", new[] { nameof(TreeId), nameof(TreeName), nameof(TreePid) });
+        }
+        //如果是树形结构
+        if (ModuleType.Contains("master"))
+        {
+            if (string.IsNullOrEmpty(ChildFk) || string.IsNullOrEmpty(ChildTable))
+                yield return new ValidationResult($"必须配置主子表相关信息", new[] { nameof(ChildTable), nameof(ChildFk) });
+        }
+        if (!FuncList.Contains("curd"))
+        {
+            yield return new ValidationResult($"必须包含基础的增删改查功能", new[] { nameof(FuncList) });
+        }
+    }
 }
 
 /// <summary>

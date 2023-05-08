@@ -1,3 +1,8 @@
+@{
+var dataPermission=@Model.DataPermission=="Y";//是否启用数据权限
+var isOrgTree=@Model.LeftTree=="org";//是否启用组织树
+var funcList=@Model.FuncList;//获取功能列表
+}
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
 using Furion.DynamicApiController;
@@ -10,13 +15,38 @@ namespace @(@Model.ControllerPosition);
 /// </summary>
 [ApiDescriptionSettings("@(@Model.ApiGroup)", Tag = "@(@Model.FunctionName)")]
 [Route("/@(@Model.RouteName)/@(@Model.BusName)")]
+@if(dataPermission) @:[RolePermission]
 public class @(@Model.ClassName)Controller: IDynamicApiController
 {
     private readonly I@(@Model.ServiceName) _@(@Model.ServiceFirstLower);
-
-    public @(@Model.ClassName)Controller(I@(@Model.ServiceName) @(@Model.ServiceFirstLower))
+    @if(isOrgTree){
+    @if(dataPermission){
+    @:private readonly IOrgService _orgService;
+    }
+    else{
+    @:private readonly ISysOrgService _sysOrgService;
+    }
+    }
+    public @(@Model.ClassName)Controller(I@(@Model.ServiceName) @(@Model.ServiceFirstLower)
+    @if(isOrgTree){
+    @if(dataPermission){
+    @:,IOrgService orgService
+    }
+    else{
+    @:,ISysOrgService sysOrgService,
+    }
+    }
+    )
     {
         this._@(@Model.ServiceFirstLower) = @(@Model.ServiceFirstLower);
+        @if(isOrgTree){
+        @if(dataPermission){
+        @:_orgService = orgService;
+        }
+        else{
+        @:_sysOrgService = sysOrgService;
+        }
+        }
     }
     #region Get请求
 	
@@ -33,6 +63,18 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
     }
 
     /// <summary>
+    /// @(@Model.DescriptionList)
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("list")]
+    [DisplayName("@(@Model.DescriptionList)")]
+    public async Task<dynamic> List([FromQuery] @Model.PageInput input)
+    {
+        return await _@(@Model.ServiceFirstLower).List(input);
+    }
+
+    /// <summary>
     /// @(@Model.DescriptionDetail)
     /// </summary>
     /// <param name="input"></param>
@@ -43,6 +85,10 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
     {
         return await _@(@Model.ServiceFirstLower).Detail(input);
     }
+
+    @{OtherGet();}
+
+    @{LeftTree();}
     #endregion
 	
 
@@ -83,6 +129,114 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
     {
         await _@(@Model.ServiceFirstLower).Delete(input);
     }
+
+   @{OtherPost();}
 	#endregion
 }
 
+@{
+void OtherGet(){
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionPreview)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:[HttpGet("preview")]
+    @:[DisableRequestSizeLimit]
+    @:[SuppressMonitor]
+    @:public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Preview(input);
+    @:}
+    @:
+    @:/// <summary>
+    @:/// @(@Model.DescriptionTemplate)
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:[HttpGet("template")]
+    @:[SuppressMonitor]
+    @:public async Task<dynamic> Template()
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Template();
+    @:}
+    @:
+break;
+}
+}
+}
+
+void LeftTree(){
+if(isOrgTree){
+    @:/// <summary>
+    @:/// 获取组织树选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:[HttpGet("orgTreeSelector")]
+    @:[DisplayName("组织树查询")]
+    @:public async Task<dynamic> OrgTreeSelector()
+    @:{
+        @:return await _orgService.Tree();
+    @:}
+}
+}
+
+void OtherPost(){
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionImport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:[HttpPost("import")]
+    @:[DisplayName("@(@Model.DescriptionImport)")]
+    @:public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<@(@Model.ClassName)ImportInput> input)
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Import(input);
+    @:}
+    @:
+break;
+//导出
+case "export":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionExport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:[HttpPost("export")]
+    @:[DisplayName("@(@Model.DescriptionExport)")]
+    @:public async Task<dynamic> Export([FromBody] @Model.PageInput input)
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Export(input);
+    @:}
+    @:
+break;
+//批量编辑
+case "batchEdit":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionEdits)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:[HttpPost("edits")]
+    @:[DisplayName("@(@Model.DescriptionEdits)")]
+    @:public async Task Edits([FromBody] BatchEditInput input)
+    @:{
+        @:await _@(@Model.ServiceFirstLower).Edits(input);
+    @:}
+    @:
+break;
+}
+}
+}
+
+
+}

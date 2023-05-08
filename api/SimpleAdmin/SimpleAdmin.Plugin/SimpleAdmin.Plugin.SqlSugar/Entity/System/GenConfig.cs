@@ -74,6 +74,12 @@ public class GenConfig : BaseEntity
     public string WhetherAddUpdate { get; set; }
 
     /// <summary>
+    /// 是否导入导出
+    ///</summary>
+    [SugarColumn(ColumnName = "WhetherImportExport", ColumnDescription = "是否导入导出", Length = 200)]
+    public string WhetherImportExport { get; set; }
+
+    /// <summary>
     /// 必填
     ///</summary>
     [SugarColumn(ColumnName = "WhetherRequired", ColumnDescription = "必填", Length = 200)]

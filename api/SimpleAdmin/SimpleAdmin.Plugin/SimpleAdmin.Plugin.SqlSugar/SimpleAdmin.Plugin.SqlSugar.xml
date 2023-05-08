@@ -1244,6 +1244,46 @@
             表实体名称
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.Functions">
+             <summary>
+             功能列表 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.DataPermission">
+             <summary>
+             数据权限 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ModuleType">
+             <summary>
+             生成模版 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.TreeId">
+             <summary>
+             树Id字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.TreePid">
+             <summary>
+             树父Id字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.TreeName">
+             <summary>
+             树名称字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ChildTable">
+             <summary>
+             关联子表名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.ChildFk">
+             <summary>
+             关联子表外键 
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.TablePrefix">
              <summary>
              移除表前缀
@@ -1304,6 +1344,11 @@
              使用栅格
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.LeftTree">
+             <summary>
+             左侧树
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FrontedPath">
              <summary>
              前端项目路径
@@ -1327,6 +1372,11 @@
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.SortCode">
              <summary>
              排序
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenBasic.FuncList">
+             <summary>
+             功能列表
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.GenConfig">
@@ -1387,6 +1437,11 @@
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherAddUpdate">
              <summary>
              是否增改
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherImportExport">
+             <summary>
+             是否导入导出
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherRequired">
@@ -1461,7 +1516,7 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SysOrg.Children">
             <summary>
-            字节点
+            子节点
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.SysPosition">
@@ -2323,6 +2378,11 @@
         <member name="P:SimpleAdmin.Plugin.SqlSugar.SqlSugarTableInfo.TableDescription">
             <summary>
             表注释
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.SqlSugarTableInfo.Columns">
+            <summary>
+            表字段
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.SqlSugar.SqlSugarUtils">

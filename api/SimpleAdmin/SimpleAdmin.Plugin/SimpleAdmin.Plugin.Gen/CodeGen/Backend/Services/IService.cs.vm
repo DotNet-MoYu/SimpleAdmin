@@ -8,20 +8,60 @@ namespace @(@Model.ServicePosition);
 /// </summary>
 public interface I@(@Model.ServiceName) : ITransient
 {
+    #region 查询
 
     /// <summary>
     /// @Model.DescriptionPage
     /// </summary>
     /// <param name="input">查询参数</param>
-    /// <returns>分页结果</returns>
+    /// <returns>@(@Model.FunctionName)分页</returns>
     Task<SqlSugarPagedList<@(@Model.EntityName)>> Page(@Model.PageInput input);	
   
+    /// <summary>
+    /// @Model.DescriptionList
+    /// </summary>
+    /// <param name="input">查询参数</param>
+    /// <returns>@(@Model.FunctionName)列表</returns>
+    Task<List<@(@Model.EntityName)>> List(@Model.PageInput input);	
+
+    /// <summary>
+    /// @Model.DescriptionDetail
+    /// </summary>
+    /// <param name="input">Id参数</param>
+    /// <returns>详细信息</returns>
+    Task<@(@Model.EntityName)> Detail(BaseIdInput input);
+    #endregion
+    
+    #region 新增
+
     /// <summary>
     /// @Model.DescriptionAdd
     /// </summary>
     /// <param name="input">添加参数</param>
     /// <returns></returns>
     Task Add(@Model.AddInput input);
+
+    #endregion
+    
+    #region 编辑
+    /// <summary>
+    /// @Model.DescriptionEdit
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <returns></returns>
+    Task Edit(@Model.EditInput input);
+    
+    @if(@Model.FuncList.Contains("batchEdit")){
+    @:/// <summary>
+    @:/// @(@Model.DescriptionEdits)
+    @:/// </summary>
+    @:/// <param name="input">批量编辑信息</param>
+    @:/// <returns></returns>
+    @:Task Edits(BatchEditInput input);
+    }
+    #endregion
+
+    #region 删除
 
     /// <summary>
     /// @Model.DescriptionDelete
@@ -30,17 +70,60 @@ public interface I@(@Model.ServiceName) : ITransient
     /// <returns></returns>
     Task Delete(List<BaseIdInput> input);
 
-    /// <summary>
-    /// @Model.DescriptionEdit
-    /// </summary>
-    /// <param name="input">编辑参数</param>
-    /// <returns></returns>
-    Task Edit(@Model.EditInput input);
-	
-    /// <summary>
-    /// @Model.DescriptionDetail
-    /// </summary>
-    /// <param name="input">Id参数</param>
-    /// <returns>详细信息</returns>
-    Task<@(@Model.EntityName)> Detail(BaseIdInput input);
+    #endregion
+
+    #region 导入导出
+
+    @{ImportExport();}
+
+    #endregion
+}
+
+@{
+
+void ImportExport(){
+
+var funcList=@Model.FuncList;//获取功能列表
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionTemplate)
+    @:/// </summary>
+    @:/// <returns>模板</returns>
+    @:Task<FileStreamResult> Template();
+    @:
+    @:/// <summary>
+    @:/// @(@Model.DescriptionPreview)
+    @:/// </summary>
+    @:/// <param name="input">预览参数</param>
+    @:/// <returns>预览结果</returns>
+    @:Task<ImportPreviewOutput<@(@Model.ClassName)ImportInput>> Preview(ImportPreviewInput input);
+    @:
+    @:/// <summary>
+    @:/// @(@Model.DescriptionImport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:Task<ImportResultOutPut<@(@Model.ClassName)ImportInput>> Import(ImportResultInput<@(@Model.ClassName)ImportInput> input);
+    @:
+break;
+//导出
+case "export":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionExport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:Task<FileStreamResult> Export(@Model.PageInput input);
+break;
+}
+}
+
+}
+
+
+
 }

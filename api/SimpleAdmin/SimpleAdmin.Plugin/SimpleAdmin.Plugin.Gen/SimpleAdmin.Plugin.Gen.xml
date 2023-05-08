@@ -44,6 +44,21 @@
             主表名称
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.FuncList">
+            <summary>
+             功能列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.ModuleType">
+            <summary>
+            生成模版
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.DataPermission">
+            <summary>
+             数据权限
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.EntityName">
             <summary>
             实体名称
@@ -97,6 +112,11 @@
         <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.GridWhether">
             <summary>
             使用栅格
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.LeftTree">
+            <summary>
+            左侧树
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenBasicAddInput.FrontedPath">
@@ -269,6 +289,11 @@
             分页查询
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionList">
+            <summary>
+            列表查询
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionAdd">
             <summary>
             添加
@@ -286,7 +311,32 @@
         </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionDetail">
             <summary>
-            修改
+            详情
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionImport">
+            <summary>
+            导入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionTemplate">
+            <summary>
+            导入模板下载
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionPreview">
+            <summary>
+            导入预览
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionExport">
+            <summary>
+            导入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionEdits">
+            <summary>
+            批量编辑
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.PageInput">
@@ -303,6 +353,9 @@
             <summary>
             编辑参数
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenBasicService.GetTableColumns(System.String,System.String)">
+            <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicService">
             <summary>
@@ -407,7 +460,11 @@
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
-            <inheritdoc/>
+            <summary>
+            代码生成预览
+            </summary>
+            <param name="genBasic">基础配置</param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenBasic(System.Int64)">
             <summary>

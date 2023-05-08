@@ -123,6 +123,14 @@ public class GenViewModel : GenBasic
     }
 
     /// <summary>
+    /// 列表查询
+    /// </summary>
+    public string DescriptionList
+    {
+        get { return FunctionName + "列表查询"; }
+    }
+
+    /// <summary>
     /// 添加
     /// </summary>
     public string DescriptionAdd
@@ -147,11 +155,52 @@ public class GenViewModel : GenBasic
     }
 
     /// <summary>
-    /// 修改
+    /// 详情
     /// </summary>
     public string DescriptionDetail
     {
         get { return FunctionName + "详情"; }
+    }
+
+
+    /// <summary>
+    /// 导入
+    /// </summary>
+    public string DescriptionImport
+    {
+        get { return FunctionName + "导入"; }
+    }
+
+    /// <summary>
+    /// 导入模板下载
+    /// </summary>
+    public string DescriptionTemplate
+    {
+        get { return FunctionName + "导入模板下载"; }
+    }
+
+    /// <summary>
+    /// 导入预览
+    /// </summary>
+    public string DescriptionPreview
+    {
+        get { return FunctionName + "导入预览"; }
+    }
+
+    /// <summary>
+    /// 导入
+    /// </summary>
+    public string DescriptionExport
+    {
+        get { return FunctionName + "导出"; }
+    }
+
+    /// <summary>
+    /// 批量编辑
+    /// </summary>
+    public string DescriptionEdits
+    {
+        get { return FunctionName + "批量编辑"; }
     }
 
     #endregion 注释描述
@@ -162,19 +211,25 @@ public class GenViewModel : GenBasic
     /// 分页参数
     /// </summary>
     public string PageInput
-    { get { return ClassName + "PageInput"; } }
+    {
+        get { return ClassName + "PageInput"; }
+    }
 
     /// <summary>
     /// 添加参数
     /// </summary>
     public string AddInput
-    { get { return ClassName + "AddInput"; } }
+    {
+        get { return ClassName + "AddInput"; }
+    }
 
     /// <summary>
     /// 编辑参数
     /// </summary>
     public string EditInput
-    { get { return ClassName + "EditInput"; } }
+    {
+        get { return ClassName + "EditInput"; }
+    }
 
     #endregion 参数
 }

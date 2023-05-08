@@ -29,12 +29,14 @@ public static class SqlSugarUtils
                 var entityInfo = connection.EntityMaintenance.GetEntityInfo(entityType);//获取实体信息
                 if (entityInfo != null)
                 {
+                    var columns = GetTableColumns(configId, entityInfo.DbTableName);//获取字段信息
                     tables.Add(new SqlSugarTableInfo
                     {
                         TableName = entityInfo.DbTableName,
                         EntityName = entityInfo.EntityName,
                         TableDescription = entityInfo.TableDescription,
-                        ConfigId = configId
+                        ConfigId = configId,
+                        Columns = columns
                     });
                 }
             }
@@ -173,7 +175,7 @@ public static class SqlSugarUtils
             "bool" => EffTypeConst.SWITCH,
             "Guid" => EffTypeConst.INPUT,
             "DateTime" => EffTypeConst.DATEPICKER,
-            _ => EffTypeConst.INPUT,
+            _ => EffTypeConst.INPUT
         };
     }
 
@@ -186,11 +188,11 @@ public static class SqlSugarUtils
     {
         var columnList = new List<string>()
         {
-        nameof(BaseEntity.CreateTime) , nameof(BaseEntity.UpdateTime),
-        nameof(BaseEntity.CreateUserId),nameof(BaseEntity.CreateUser),
-        nameof(BaseEntity.UpdateUserId), nameof(BaseEntity.UpdateUser),
-        nameof(BaseEntity.IsDelete),nameof(DataEntityBase.CreateOrgId),
-        nameof(PrimaryKeyEntity.ExtJson)
+            nameof(BaseEntity.CreateTime), nameof(BaseEntity.UpdateTime),
+            nameof(BaseEntity.CreateUserId), nameof(BaseEntity.CreateUser),
+            nameof(BaseEntity.UpdateUserId), nameof(BaseEntity.UpdateUser),
+            nameof(BaseEntity.IsDelete), nameof(DataEntityBase.CreateOrgId),
+            nameof(PrimaryKeyEntity.ExtJson)
         };
         return columnList.Contains(columnName);
     }
