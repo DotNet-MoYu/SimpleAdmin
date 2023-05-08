@@ -1,4 +1,9 @@
-﻿namespace SimpleAdmin.Web.Core;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
+using Furion.DynamicApiController;
+using SimpleAdmin.Application;
+
+namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 测试控制器
@@ -9,10 +14,13 @@ public class GenTestController : IDynamicApiController
 {
     private readonly IGenTestService _genTestService;
 
-    public GenTestController(IGenTestService genTestService)
+    public GenTestController(IGenTestService genTestService
+    )
     {
-        this._genTestService = genTestService;
+        _genTestService = genTestService;
     }
+
+    #region Get请求
 
     /// <summary>
     /// 测试分页查询
@@ -25,6 +33,59 @@ public class GenTestController : IDynamicApiController
     {
         return await _genTestService.Page(input);
     }
+
+    /// <summary>
+    /// 测试列表查询
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("list")]
+    [DisplayName("测试列表查询")]
+    public async Task<dynamic> List([FromQuery] GenTestPageInput input)
+    {
+        return await _genTestService.List(input);
+    }
+
+    /// <summary>
+    /// 测试详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("测试详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _genTestService.Detail(input);
+    }
+
+    /// <summary>
+    /// 测试导入预览
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("preview")]
+    [DisableRequestSizeLimit]
+    [SuppressMonitor]
+    public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
+    {
+        return await _genTestService.Preview(input);
+    }
+
+    /// <summary>
+    /// 测试导入模板下载
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("template")]
+    [SuppressMonitor]
+    public async Task<dynamic> Template()
+    {
+        return await _genTestService.Template();
+    }
+
+    #endregion
+
+
+    #region Post请求
 
     /// <summary>
     /// 添加测试
@@ -63,50 +124,28 @@ public class GenTestController : IDynamicApiController
     }
 
     /// <summary>
-    /// 测试详情
+    /// 测试导入
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpGet("detail")]
-    [DisplayName("测试详情")]
-    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    [HttpPost("import")]
+    [DisplayName("测试导入")]
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<GenTestImportInput> input)
     {
-        return await _genTestService.Detail(input);
+        return await _genTestService.Import(input);
     }
 
     /// <summary>
-    /// 预览
+    /// 测试导出
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpPost("preview")]
-    [DisableRequestSizeLimit]
-    [SuppressMonitor]
-    public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
-    {
-        return await _genTestService.Preview(input);
-    }
-
     [HttpPost("export")]
-    [DisplayName("导出")]
+    [DisplayName("测试导出")]
     public async Task<dynamic> Export([FromBody] GenTestPageInput input)
     {
         return await _genTestService.Export(input);
     }
 
-    [HttpGet(template: "template")]
-    [DisplayName("模板")]
-    public async Task<dynamic> Template()
-    {
-        return await _genTestService.Template();
-    }
-
-    [HttpPost("import")]
-    [DisplayName("导入")]
-    [SuppressMonitor]
-    [LoggingMonitor()]
-    public async Task<dynamic> Import([FromBody] ImportResultInput<GenTestImportInput> input)
-    {
-        return await _genTestService.Import(input);
-    }
+    #endregion
 }

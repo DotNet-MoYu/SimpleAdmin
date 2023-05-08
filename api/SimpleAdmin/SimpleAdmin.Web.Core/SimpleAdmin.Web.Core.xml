@@ -268,6 +268,39 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.List(SimpleAdmin.Application.GenTestPageInput)">
+            <summary>
+            测试列表查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+            <summary>
+            测试导入预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Template">
+            <summary>
+            测试导入模板下载
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.OrgTreeSelector">
+            <summary>
+            获取组织树选择器
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
             <summary>
             添加测试
@@ -289,16 +322,23 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
             <summary>
-            测试详情
+            测试导入
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Export(SimpleAdmin.Application.GenTestPageInput)">
             <summary>
-            预览
+            测试导出
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+            <summary>
+            测试批量编辑
             </summary>
             <param name="input"></param>
             <returns></returns>

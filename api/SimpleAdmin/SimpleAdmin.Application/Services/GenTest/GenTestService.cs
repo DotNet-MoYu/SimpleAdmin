@@ -1,5 +1,9 @@
-﻿using Masuit.Tools;
+﻿using Furion.FriendlyException;
+using Mapster;
+using SimpleAdmin.Core;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
 
 namespace SimpleAdmin.Application;
 
@@ -9,25 +13,46 @@ namespace SimpleAdmin.Application;
 public class GenTestService : DbRepository<GenTest>, IGenTestService
 {
     private readonly ILogger<GenTestService> _logger;
-    private readonly IFileService _fileService;
-    private readonly IDictService _dictService;
+    private readonly ISysUserService _sysUserService;
     private readonly IImportExportService _importExportService;
 
-    public GenTestService(ILogger<GenTestService> logger, IFileService fileService, IDictService dictService, IImportExportService importExportService)
+    public GenTestService(ILogger<GenTestService> logger, ISysUserService sysUserService
+        , IImportExportService importExportService
+    )
     {
-        this._logger = logger;
-        this._fileService = fileService;
-        this._dictService = dictService;
-        this._importExportService = importExportService;
+        _sysUserService = sysUserService;
+        _logger = logger;
+        _importExportService = importExportService;
     }
+
+    #region 查询
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<GenTest>> Page(GenTestPageInput input)
     {
-        var query = GetQuery(input);
+        var query = await GetQuery(input);//获取查询条件
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
+
+    /// <inheritdoc/>
+    public async Task<List<GenTest>> List(GenTestPageInput input)
+    {
+        var query = await GetQuery(input);//获取查询条件
+        var list = await query.ToListAsync();
+        return list;
+    }
+
+    /// <inheritdoc />
+    public async Task<GenTest> Detail(BaseIdInput input)
+    {
+        var genTest = await GetFirstAsync(it => it.Id == input.Id);
+        return genTest;
+    }
+
+    #endregion
+
+    #region 新增
 
     /// <inheritdoc />
     public async Task Add(GenTestAddInput input)
@@ -37,6 +62,10 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         await InsertAsync(genTest);//插入数据
     }
 
+    #endregion
+
+    #region 编辑
+
     /// <inheritdoc />
     public async Task Edit(GenTestEditInput input)
     {
@@ -44,6 +73,10 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         await CheckInput(genTest);//检查参数
         await UpdateAsync(genTest);//更新数据
     }
+
+    #endregion
+
+    #region 删除
 
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input)
@@ -56,73 +89,47 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         }
     }
 
-    /// <inheritdoc />
-    /// <inheritdoc />
-    public async Task<GenTest> Detail(BaseIdInput input)
-    {
-        var genTest = await GetFirstAsync(it => it.Id == input.Id);
-        return genTest;
-    }
+    #endregion
 
+    #region 导入导出
+
+    /// <inheritdoc/>
     public async Task<FileStreamResult> Template()
     {
-        var templateName = "学生信息";
+        var templateName = "测试信息";
         //var result = _importExportService.GenerateLocalTemplate(templateName);
         var result = await _importExportService.GenerateTemplate<GenTestImportInput>(templateName);
         return result;
     }
 
     /// <inheritdoc/>
-    public async Task<dynamic> Preview(ImportPreviewInput input)
+    public async Task<ImportPreviewOutput<GenTestImportInput>> Preview(ImportPreviewInput input)
     {
         var importPreview = await _importExportService.GetImportPreview<GenTestImportInput>(input.File);
-        importPreview.Data = await CheckImport(importPreview.Data);
+        importPreview.Data = await CheckImport(importPreview.Data);//检查导入数据
         return importPreview;
     }
 
     /// <inheritdoc/>
     public async Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input)
     {
-        var data = await CheckImport(input.Data, true);
-        var result = _importExportService.GetImportResultPreview(data, out List<GenTestImportInput> importData);
-        _ = importData.Adapt<List<GenTest>>();//转实体
-        //await InsertRangeAsync(genTests);//导入用户
-        //DbContext.Db.Fastest<GenTest>().BulkCopy(genTests);//性能 比现有任何Bulkcopy都要快30%
+        var data = await CheckImport(input.Data, true);//检查数据格式
+        var result = _importExportService.GetImportResultPreview(data, out var importData);
+        var genTest = importData.Adapt<List<GenTest>>();//转实体
+        await InsertOrBulkCopy(genTest);// 数据导入
         return result;
-    }
-
-    public async Task<List<GenTestImportInput>> CheckImport(List<GenTestImportInput> genTestImports, bool clearError = false)
-    {
-        //自己的业务
-        var dicts = await _dictService.GetListAsync();
-
-        foreach (var data in genTestImports)
-        {
-            if (clearError)//如果需要清除错误
-            {
-                data.ErrorInfo = new Dictionary<string, string>();
-                data.HasError = false;
-            }
-            var genders = await _dictService.GetValuesByDictValue(DevDictConst.GENDER, dicts);
-            if (!genders.Contains(data.Sex)) data.ErrorInfo.Add(nameof(data.Sex), $"性别只能是男和女");
-
-            var nations = await _dictService.GetValuesByDictValue(DevDictConst.NATION, dicts);
-            if (!nations.Contains(data.Nation)) data.ErrorInfo.Add(nameof(data.Nation), $"不存在的民族");
-            if (data.ErrorInfo.Count > 0) data.HasError = true;//如果错误信息数量大于0则表示有错误
-        }
-        genTestImports = genTestImports.OrderByDescending(it => it.HasError).ToList();//排序
-        return genTestImports;
     }
 
     /// <inheritdoc/>
-    public async Task<dynamic> Export(GenTestPageInput input)
+    public async Task<FileStreamResult> Export(GenTestPageInput input)
     {
-        var query = GetQuery(input);
-        var genTests = await query.ToListAsync();//分页
-        var data = genTests.Adapt<List<GenTestExport>>();
-        var result = await _importExportService.Export(data, "学生信息");
+        var genTests = await List(input);
+        var data = genTests.Adapt<List<GenTestExportOutput>>();//转为Dto
+        var result = await _importExportService.Export(data, "测试信息");
         return result;
     }
+
+    #endregion
 
     #region 方法
 
@@ -132,21 +139,38 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     /// <param name="genTest"></param>
     private async Task CheckInput(GenTest genTest)
     {
+        var errorMessage = $"您没有权限操作该数据";
+        if (genTest.Id == SimpleAdminConst.Zero)
+        {
+            //表示新增
+        }
+        else
+        {
+            //表示编辑
+        }
     }
 
-    private ISugarQueryable<GenTest> GetQuery(GenTestPageInput input)
+    /// <summary>
+    /// 获取Sqlsugar的ISugarQueryable
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    private async Task<ISugarQueryable<GenTest>> GetQuery(GenTestPageInput input)
     {
         var query = Context.Queryable<GenTest>()
-                        .WhereIF(input.Sex != null, it => it.Sex == input.Sex)
-                        .WhereIF(input.Age != null, it => it.Age == input.Age)
-                        .WhereIF(input.StartBir != null || input.EndBir != null, it => SqlFunc.Between(it.Bir, input.StartBir, input.EndBir))
-                        .WhereIF(input.ExtJson != null, it => it.ExtJson == input.ExtJson)
-                        .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-                        .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
-                        .OrderBy(it => it.SortCode);//排序
-
+            .WhereIF(!string.IsNullOrWhiteSpace(input.Name), it => it.Name.Contains(input.Name.Trim()))
+            .WhereIF(!string.IsNullOrWhiteSpace(input.Sex), it => it.Sex == input.Sex)
+            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .OrderBy(it => it.SortCode);//排序
         return query;
     }
 
-    #endregion 方法
+    /// <inheritdoc/>
+    public async Task<List<GenTestImportInput>> CheckImport<GenTestImportInput>(List<GenTestImportInput> data, bool clearError = false)
+    {
+        return data;
+    }
+
+    #endregion
 }
