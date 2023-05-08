@@ -381,7 +381,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetBackendCodeResult(GenViewModel genViewModel,
         string templatePath)
     {
-        templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";//测试用
+        // templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";//测试用
         var backendCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var backendTemplatePath = Path.Combine(templatePath, _backendDir);//获取后端模板文件路径
         var files = GetAllFileInfo(backendTemplatePath);
@@ -416,7 +416,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetForntCodeResult(GenViewModel genViewModel,
         string templatePath)
     {
-        templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";
+        // templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";//测试用
         var frontCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var frontTemplatePath = Path.Combine(templatePath, _frontDir);//获取前端模板文件路径
         var files = GetAllFileInfo(frontTemplatePath);
