@@ -295,12 +295,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
             <summary>
             添加测试
@@ -332,13 +326,6 @@
         <member name="M:SimpleAdmin.Web.Core.GenTestController.Export(SimpleAdmin.Application.GenTestPageInput)">
             <summary>
             测试导出
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
-            <summary>
-            测试批量编辑
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -619,14 +606,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <summary>
             执行代码生成(本地)"
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <summary>
             执行代码生成(压缩包)
             </summary>
