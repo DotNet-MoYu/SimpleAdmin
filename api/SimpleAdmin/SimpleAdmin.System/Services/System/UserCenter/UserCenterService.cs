@@ -205,7 +205,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var user = await _userService.GetUserById(UserManager.UserId);//获取信息
         var signatureArray = input.Signature.Split(",");//分割
         var base64String = signatureArray[1];//根据逗号分割取到base64字符串
-        var image = base64String.GetBitmapFromBase64();//转成图片
+        var image = base64String.GetSKBitmapFromBase64();//转成图片
         var resizeImage = image.ResizeImage(100, 50);//重新裁剪
         var newBase64String = resizeImage.ImgToBase64String();//重新转为base64
         var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名

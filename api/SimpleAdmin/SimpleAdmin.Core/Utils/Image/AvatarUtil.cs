@@ -1,4 +1,4 @@
-﻿using System.DrawingCore;
+﻿using SkiaSharp;
 
 namespace SimpleAdmin.Core.Utils;
 
@@ -19,7 +19,7 @@ public static class AvatarUtil
         if (string.IsNullOrEmpty(name) || name.Length <= 0)
             throw new Exception("name不能为空");
         //获取名字第一个字,转换成 16进制 图片
-        string str = "";
+        var str = "";
         foreach (var item in name)
         {
             str += Convert.ToUInt16(item);
@@ -28,7 +28,7 @@ public static class AvatarUtil
         {
             str += new Random().Next(100, 1000);
         }
-        string color = "#" + str.Substring(1, 3);
+        var color = "#" + str.Substring(1, 3);
         return color;
     }
 
@@ -39,15 +39,15 @@ public static class AvatarUtil
     /// <param name="width"></param>
     /// <param name="height"></param>
     /// <returns></returns>
-    public static Bitmap GetNameImage(string name, int width = 100, int height = 100)
+    public static SKBitmap GetNameImage(string name, int width = 100, int height = 100)
     {
-        string color = GetNameColor(name);//获取颜色
+        var color = GetNameColor(name);//获取颜色
         var nameLength = name.Length;//获取姓名长度
-        string nameWritten = name;//需要绘制的文字
+        var nameWritten = name;//需要绘制的文字
         if (nameLength > 2)//如果名字长度超过2个
         {
             // 如果用户输入的姓名大于等于3个字符，截取后面两位
-            string firstName = name.Substring(0, 1);
+            var firstName = name.Substring(0, 1);
             if (IsChinese(firstName))
             {
                 // 截取倒数两位汉字
@@ -59,17 +59,25 @@ public static class AvatarUtil
                 nameWritten = name.Substring(0, 2).ToUpper();
             }
         }
-        //string firstName = name.Substring(0, 1);
-        Bitmap img = new Bitmap(width, height);
-        Graphics g = Graphics.FromImage(img);
-        Brush brush = new SolidBrush(ColorTranslator.FromHtml(color));
-        g.FillRectangle(brush, 0, 0, width, height);
-        //填充文字
-        Font font = new Font("微软雅黑", 25);
-        SizeF firstSize = g.MeasureString(nameWritten, font);
-        g.DrawString(nameWritten, font, Brushes.White, new PointF((img.Width - firstSize.Width) / 2, (img.Height - firstSize.Height) / 2));
-        g.Dispose();
-        return img;
+        var bmp = new SKBitmap(width, height);
+        using (var canvas = new SKCanvas(bmp))
+        {
+            canvas.DrawColor(SKColor.Parse(color));
+            using (var sKPaint = new SKPaint())
+            {
+                sKPaint.Color = SKColors.White;//字体颜色
+                sKPaint.TextSize = 25;//字体大小
+                sKPaint.IsAntialias = true;//开启抗锯齿
+                sKPaint.Typeface = SKTypeface.FromFamilyName("微软雅黑");//字体
+                var size = new SKRect();
+                sKPaint.MeasureText(nameWritten, ref size);//计算文字宽度以及高度
+                var temp = (bmp.Width - size.Size.Width) / 2;
+                var temp1 = (bmp.Height - size.Size.Height) / 2;
+                canvas.DrawText(nameWritten, temp, temp1 - size.Top, sKPaint);//画文字
+            }
+        }
+
+        return bmp;
     }
 
     /// <summary>
@@ -81,7 +89,7 @@ public static class AvatarUtil
     /// <returns></returns>
     public static string GetNameImageBase64(string name, int width = 100, int height = 100)
     {
-        Bitmap img = GetNameImage(name, width, height);
+        var img = GetNameImage(name, width, height);
         var imgByte = img.ImgToBase64String();
         return $"data:image/png;base64," + imgByte;
     }

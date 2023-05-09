@@ -1,4 +1,4 @@
-﻿using System.DrawingCore;
+﻿using SkiaSharp;
 using System.Runtime.InteropServices;
 using System.Web;
 
@@ -157,9 +157,10 @@ public class FileService : DbRepository<DevFile>, IFileService
         if (IsPic(fileSuffix))
         {
             //$"data:image/png;base64," + imgByte;
-            using var fileStream = file.OpenReadStream();//获取文件流
-            var image = Image.FromStream(fileStream);//获取图片
-            var thubnail = image.GetThumbnailImage(100, 100, () => false, IntPtr.Zero);//压缩图片
+            await using var fileStream = file.OpenReadStream();//获取文件流
+            var image = SKImage.FromEncodedData(fileStream);//获取图片
+            var bmp = SKBitmap.FromImage(image);
+            var thubnail = bmp.GetPicThumbnail(100, 100);//压缩图片
             var thubnailBase64 = ImageUtil.ImgToBase64String(thubnail);//转base64
             devFile.Thumbnail = $"data:image/png;base64," + thubnailBase64;
         }

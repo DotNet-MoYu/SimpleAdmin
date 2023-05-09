@@ -924,21 +924,14 @@
             <param name="text">待判断字符或字符串</param>
             <returns>真：是汉字；假：不是</returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetBytesFromBitmap(System.DrawingCore.Bitmap)">
-            <summary>
-            bitmap转byte数组
-            </summary>
-            <param name="bitmap"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(System.DrawingCore.Bitmap)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(SkiaSharp.SKImage)">
             <summary>
             图片转换成base64
             </summary>
-            <param name="bmp"></param>
+            <param name="img"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(System.DrawingCore.Image)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(SkiaSharp.SKBitmap)">
             <summary>
             图片转换成base64
             </summary>
@@ -952,6 +945,13 @@
             <param name="base64string"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetSKBitmapFromBase64(System.String)">
+            <summary>
+            base64转bitmap
+            </summary>
+            <param name="base64string"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ToImageBase64(System.String)">
             <summary>
             base64转image格式
@@ -959,7 +959,7 @@
             <param name="base64string"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.DrawingCore.Image,System.DrawingCore.Size)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.Drawing.Image,System.Drawing.Size)">
             <summary>
             重新修改尺寸
             </summary>
@@ -967,7 +967,7 @@
             <param name="size">尺寸</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.DrawingCore.Bitmap,System.Int32,System.Int32)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.Drawing.Bitmap,System.Int32,System.Int32)">
             <summary>
             Resize图片
             </summary>
@@ -976,7 +976,25 @@
             <param name="newH">新的高度</param>
             <returns>处理以后的图片</returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(System.DrawingCore.Bitmap,System.Int32,System.Int32)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(SkiaSharp.SKBitmap,System.Int32,System.Int32)">
+            <summary>
+            Resize图片
+            </summary>
+            <param name="bmp">原始Bitmap </param>
+            <param name="newW">新的宽度</param>
+            <param name="newH">新的高度</param>
+            <returns>处理以后的图片</returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(System.Drawing.Bitmap,System.Int32,System.Int32)">
+            <summary>
+            获取缩略图
+            </summary>
+            <param name="bmp"></param>
+            <param name="w">宽</param>
+            <param name="h">高</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(SkiaSharp.SKBitmap,System.Int32,System.Int32)">
             <summary>
             获取缩略图
             </summary>

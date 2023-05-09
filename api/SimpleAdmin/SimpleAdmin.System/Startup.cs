@@ -12,6 +12,8 @@ public class Startup : AppStartup
     {
         //事件总线
         services.AddEventBus();
+        //配置验证码
+        services.AddCaptcha(App.Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

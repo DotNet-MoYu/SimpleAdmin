@@ -13,7 +13,7 @@ public class CaptchaInfo
     /// <summary>
     /// 验证码数据流
     /// </summary>
-    public byte[] Image { get; set; }
+    public byte[] Image { get; set; } 
 
     /// <summary>
     /// base64

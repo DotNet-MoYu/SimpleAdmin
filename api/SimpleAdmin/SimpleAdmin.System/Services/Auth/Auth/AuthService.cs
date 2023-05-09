@@ -26,7 +26,7 @@ public class AuthService : IAuthService
     public PicValidCodeOutPut GetCaptchaInfo()
     {
         //生成验证码
-        var captchInfo = CaptchaUtil.CreateCaptcha(CaptchaType.CHAR, 4, 100, 38);
+        var captchInfo = CaptchaUtil.CreateCaptcha(CaptchaType.ARITH, 4, 100, 38);
         //生成请求号，并将验证码放入redis
         var reqNo = AddValidCodeToRedis(captchInfo.Code);
         //返回验证码和请求号
