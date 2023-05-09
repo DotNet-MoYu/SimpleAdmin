@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SimpleRedis" Version="1.1.2" />
+		<PackageReference Include="SimpleRedis" Version="1.1.4" />
 	</ItemGroup>
 
 	<ItemGroup>

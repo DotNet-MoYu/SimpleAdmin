@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.3" />
+		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.4" />
 	</ItemGroup>
 
 	<ItemGroup>

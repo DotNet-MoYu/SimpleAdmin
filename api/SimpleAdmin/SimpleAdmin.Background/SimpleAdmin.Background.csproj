@@ -37,4 +37,8 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="SimpleMQTT" Version="1.0.4" />
+	</ItemGroup>
 </Project>

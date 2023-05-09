@@ -10,18 +10,17 @@
 
 
 	<ItemGroup>
-		<PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.7.43" />
-		<PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.7.43" />
-		<PackageReference Include="Furion.Pure" Version="4.8.7.43" />
+		<PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.8.13" />
+		<PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.8.13" />
+		<PackageReference Include="Furion.Pure" Version="4.8.8.13" />
 		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.3" />
-		<PackageReference Include="Minio" Version="4.0.7" />
+		<PackageReference Include="Minio" Version="5.0.0" />
 		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-		<PackageReference Include="SimpleMQTT" Version="1.0.3" />
-		<PackageReference Include="SimpleRedis" Version="1.1.2" />
+		<PackageReference Include="SimpleRedis" Version="1.1.4" />
 		<PackageReference Include="SimpleTool" Version="1.0.5" />
 
 		<PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
-		<PackageReference Include="Masuit.Tools.Core" Version="2.5.9.6" />
+		<PackageReference Include="Masuit.Tools.Core" Version="2.6.1" />
 		<PackageReference Include="SharpZipLib" Version="1.4.2" />
 
 	</ItemGroup>
