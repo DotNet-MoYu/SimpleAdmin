@@ -2,6 +2,7 @@
 var orgField=@Model.TableFields.Any(it=>it.FieldName=="OrgId")?"OrgId":"CreateOrgId";//机构字段
 var dataPermission=@Model.DataPermission=="Y";//是否有数据权限
 var tableFieIds=@Model.TableFields;//获取字段
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 }
 
 using Furion.FriendlyException;
@@ -16,7 +17,7 @@ namespace @(@Model.ServicePosition);
 /// <summary>
 /// <inheritdoc cref="I@(@Model.ServiceName)"/>
 /// </summary>
-public class @(@Model.ServiceName) : DbRepository<@(@Model.ClassName)>, I@(@Model.ServiceName)
+public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Model.ServiceName)
 {
     private readonly ILogger<@(@Model.ServiceName)> _logger;
     private readonly ISysUserService _sysUserService;
@@ -87,6 +88,15 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.ClassName)>, I@(@Mode
         }
         return @Model.ClassNameFirstLower ;
 
+    }
+    @if(isTreeList){
+    @:/// <inheritdoc />
+    @:public async Task<List<@(@Model.EntityName)>> Tree()
+    @:{
+        @://第三个参数为0 表示 ： parentid为 0 设置成根目录, 正常情况下最顶层的parentid不是0就是null
+        @:var tree = Context.Queryable<SysOrg>().ToTree(it => it.Children, it => it.ParentId, 0);
+        @:return tree;
+    @:}
     }
 
     #endregion
@@ -188,6 +198,9 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.ClassName)>, I@(@Mode
                          }
                          @if(@Model.LeftTree=="org"){
                          @:.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.@(orgField)))//根据机构ID查询
+                         }
+                         @if(isTreeList){
+                         @:.WhereIF(input.@(@Model.TreePid) > 0, it => it.@(@Model.TreePid) ==input.@(@Model.TreePid))//父级
                          }
                          //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
                          .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")

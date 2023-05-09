@@ -5,6 +5,7 @@
 ///</summary>
 [SugarTable("sys_org", TableDescription = "组织")]
 [Tenant(SqlsugarConst.DB_Default)]
+[CodeGen]
 public class SysOrg : BaseEntity
 {
     /// <summary>

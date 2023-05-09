@@ -364,6 +364,11 @@
             批量编辑
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.DescriptionTree">
+            <summary>
+            树查询
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.PageInput">
             <summary>
             分页参数

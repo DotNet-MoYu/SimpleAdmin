@@ -496,6 +496,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         {
             builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
             builder.AddAssemblyReferenceByName("System.Collections");//添加程序集
+            builder.AddAssemblyReferenceByName("SimpleTool");//添加程序集
         });
         return tResult;
     }

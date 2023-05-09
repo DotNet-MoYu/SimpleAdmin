@@ -1,3 +1,11 @@
+@{
+var tableFieIds=@Model.TableFields;//获取字段
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var treeId=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeId);//获取树的id
+var treeName=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeName);//获取树的名称
+var treePid=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreePid);//获取树的父级id
+var funcName=@Model.FunctionName;
+}
 <template>
   @{Main();}
 </template>
@@ -8,7 +16,6 @@
 //主体
 void Main()
 {
-var tableFieIds=@Model.TableFields;//获取字段
 <form-container
     @foreach (var column in tableFieIds){//遍历字段
 	@if(column.IsPrimarykey=="Y"){//如果是主键
@@ -22,6 +29,9 @@ var tableFieIds=@Model.TableFields;//获取字段
     <a-form ref="formRef" :model="formData" :rules="formRules" layout="@Model.FormLayout">
 	@if(@Model.GridWhether=="Y"){//使用栅格
       @:<a-row :gutter="16">
+      @if(isTreeList){
+      @{parent();}
+	  }
 	  @foreach (var column in tableFieIds){//遍历字段
 	  @if(column.WhetherAddUpdate=="Y"){//如果增改
         @:<a-col :span="12">
@@ -33,6 +43,9 @@ var tableFieIds=@Model.TableFields;//获取字段
       @:</a-row>	  
 	}
 	else{
+    @if(isTreeList){
+    @{parent();}
+    }
 	@foreach (var column in tableFieIds){//遍历字段
 	@if(column.WhetherAddUpdate=="Y"){//如果增改
         @:<a-form-item label="@column.FieldRemark" name="@column.FieldNameFirstLower">
@@ -47,7 +60,14 @@ var tableFieIds=@Model.TableFields;//获取字段
     </template>
 </form-container>
 }
-
+//父节点选择
+void parent(){
+    <a-form-item label="上级@(funcName)：" name="@(treePid)">
+      <a-tree-select v-model:value="formData.@(treePid)" style="width: 100%" :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }" placeholder="请选择上级@(funcName)"
+        allow-clear tree-default-expand-all :tree-data="treeData" :field-names="{ children: 'children',label: '@(treeName)', value: '@(treeId)'}"
+        selectable="false" tree-line></a-tree-select>
+    </a-form-item>
+}
 //表单控件
 void FormItem(dynamic column){
 switch (@column.EffectType)//根据类型生成不同控件
@@ -92,7 +112,7 @@ default:
 break;}}
 
 void Script(){
-var tableFieIds=@Model.TableFields;//获取字段
+
 var primaryKey=tableFieIds.Where(it => it.IsPrimarykey=="Y").First();//主键字段
 var selectColumns=tableFieIds.Where(it => it.EffectType=="select"||it.EffectType=="radio"||it.EffectType=="checkbox").ToList();//选择框字段列表
 var addOrUpdateColumns=tableFieIds.Where(it => it.WhetherAddUpdate=="Y").ToList();//增改字段列表
@@ -116,6 +136,8 @@ var selectCount=selectColumns.Count;//选择框数量
   //提交等待
   const submitLoading = ref(false)
   
+  @{TreeListConst();}
+
   @foreach (var column in selectColumns){//遍历选择框
   @://@(column.FieldRemark)选项
   @:const @(column.FieldNameFirstLower)Options = ref([])
@@ -155,6 +177,7 @@ var selectCount=selectColumns.Count;//选择框数量
 		}
         //  })
       }  
+      @{TreeListMethod();}
 	  @foreach (var column in selectColumns){//遍历选择框
       @:@(column.FieldNameFirstLower)Options.value = tool.dictList('@column.DictTypeCode')
 	  }
@@ -187,7 +210,7 @@ var selectCount=selectColumns.Count;//选择框数量
 		  }
 		  }
           @(@Model.ClassNameFirstLower)Api
-              .@(@Model.ClassNameFirstLower)SubmitForm(formDataParam, !formDataParam.@primaryKey.FieldNameFirstLower)
+              .submitForm(formDataParam, !formDataParam.@primaryKey.FieldNameFirstLower)
               .then(() => {
                   onClose()
                   emit('successful')
@@ -202,6 +225,32 @@ var selectCount=selectColumns.Count;//选择框数量
   onOpen
   })
 </script>
+}
+
+//定义树列表常量
+void TreeListConst(){
+if(isTreeList){
+  @:// 定义机构元素 
+@:const treeData = ref([])
+}
+}
+
+//定义树列表方法
+void TreeListMethod()
+{
+if(isTreeList){
+	@:// 获取@(funcName)树并加入顶级
+	@:@(@Model.ClassNameFirstLower)Api.@(@Model.BusName)Tree().then((res) => {
+		@:treeData.value = [
+			@:{
+				@:id: 0,
+				@:parentId: '-1',
+				@:name: '顶级',
+				@:children: res
+			@:}
+		@:]
+	@:})
+}
 }
 
 }

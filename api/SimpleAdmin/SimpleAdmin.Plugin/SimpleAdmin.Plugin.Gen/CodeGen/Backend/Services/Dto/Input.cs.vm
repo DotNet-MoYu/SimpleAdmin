@@ -1,5 +1,6 @@
 @{
   var tableFieIds=@Model.TableFields;//获取字段
+  var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 }
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -17,6 +18,12 @@ public class @Model.PageInput : BasePageInput
   @:/// 组织机构Id
   @:/// </summary>
   @:public long OrgId { get; set; }
+  }
+  @if(isTreeList){
+  @:/// <summary>
+  @:/// 父Id
+  @:/// </summary>
+  @:public long @Model.TreePid { get; set; }
   }
 }
 

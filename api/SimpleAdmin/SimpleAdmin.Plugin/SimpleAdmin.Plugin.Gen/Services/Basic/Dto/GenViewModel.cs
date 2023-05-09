@@ -203,6 +203,14 @@ public class GenViewModel : GenBasic
         get { return FunctionName + "批量编辑"; }
     }
 
+    /// <summary>
+    /// 树查询
+    /// </summary>
+    public string DescriptionTree
+    {
+        get { return FunctionName + "树"; }
+    }
+
     #endregion 注释描述
 
     #region 参数

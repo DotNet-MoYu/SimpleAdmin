@@ -1,3 +1,9 @@
+@{ 
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var isMasterChild = @Model.ModuleType=="masterChild";//是否是主子表
+var busName= @Model.BusName;
+}
 import { baseRequest } from '@@/utils/request'
 
 const request = (url, ...arg) => baseRequest(`/@(@Model.RouteName)/@(@Model.BusName)/` + url, ...arg)
@@ -11,25 +17,31 @@ const request = (url, ...arg) => baseRequest(`/@(@Model.RouteName)/@(@Model.BusN
 
  export default {
     // 获取@(@Model.FunctionName)分页
-    @(@Model.ClassNameFirstLower)Page(data) {
+    @(busName)Page(data) {
        return request('page', data, 'get')
     },
     // 获取@(@Model.FunctionName)列表
-    @(@Model.ClassNameFirstLower)List(data) {
+    @(busName)List(data) {
        return request('list', data, 'get')
     },
     // 提交@(@Model.FunctionName)表单 edit为true时为编辑，默认为新增
-    @(@Model.ClassNameFirstLower)SubmitForm(data, edit = false) {
+    submitForm(data, edit = false) {
        return request(edit ? 'add' : 'edit', data)
     },
     // 获取@(@Model.FunctionName)详情
-    @(@Model.ClassNameFirstLower)Detail(data) {
+    @(busName)Detail(data) {
        return request('detail', data, 'get')
     },
     // 删除@(@Model.FunctionName)
-    @(@Model.ClassNameFirstLower)Delete(data) {
+    @(busName)Delete(data) {
        return request('delete', data)
     },
+    @if(isTreeList){
+    @:// 获取@(@Model.FunctionName)树
+    @:@(busName)Tree(data) {
+       @:return request('tree', data, 'get')
+    @:},
+    }
     @{Func();}
     @{LeftTree();}
 }
@@ -62,7 +74,7 @@ break;
 //导出
 case "export":
     @:// 导出@(@Model.FunctionName)数据
-    @:@(@Model.ClassNameFirstLower)Export(data) {
+    @:@(busName)Export(data) {
     @:   return request('export', data, 'post', {
     @:       responseType: 'blob'
     @:   })
@@ -85,7 +97,7 @@ switch (leftTree)//根据类型生成不同控件
 //获取组织选择器
 case "org":
     @:// 获取组织选择器
-    @:@(leftTree)TreeSelector(data) {
+    @:@(leftTree)Tree(data) {
     @:   return request('@(leftTree)TreeSelector', data, 'get')
     @:},
 break;
