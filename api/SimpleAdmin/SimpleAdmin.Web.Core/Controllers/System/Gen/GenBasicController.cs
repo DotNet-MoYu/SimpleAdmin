@@ -101,7 +101,7 @@ public class GenBasicController : BaseController
     /// <returns></returns>
     [DisplayName("执行代码生成(本地)")]
     [HttpPost("execGenPro")]
-    public async Task ExecGenPro([FromBody] BaseIdInput input)
+    public async Task ExecGenPro([FromBody] ExecGenInput input)
     {
         await _genbasicService.ExecGenPro(input);
     }
@@ -113,7 +113,7 @@ public class GenBasicController : BaseController
     /// <returns></returns>
     [DisplayName("执行代码生成(压缩包)")]
     [HttpGet("execGenZip")]
-    public async Task<IActionResult> ExecGenZip([FromQuery] BaseIdInput input)
+    public async Task<IActionResult> ExecGenZip([FromQuery] ExecGenInput input)
     {
         return await _genbasicService.ExecGenZip(input);
     }
