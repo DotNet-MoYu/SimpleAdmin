@@ -29,6 +29,21 @@
             项目中
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.ExecAll">
+            <summary>
+            全部
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.ExecFrontend">
+            <summary>
+            前端
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Gen.GenConst.ExecBackend">
+            <summary>
+            后端
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicAddInput">
             <summary>
             代码生成基础添加参数
@@ -147,6 +162,16 @@
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicEditInput">
             <summary>
             代码生成基础编辑参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.ExecGenInput">
+            <summary>
+            执行代码生成参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.ExecGenInput.ExecType">
+            <summary>
+            生成类型
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicColumnOutput">
@@ -383,10 +408,10 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenPro(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenZip(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecBackend(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.SqlSugar.GenBasic,System.String,System.Boolean)">
@@ -506,14 +531,14 @@
             <param name="input"></param>
             <returns>代码生产基础</returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.ExecGenPro(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.ExecGenPro(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <summary>
             执行代码生成:本地
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.ExecGenZip(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.ExecGenZip(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <summary>
             执行代码生成:压缩包
             </summary>

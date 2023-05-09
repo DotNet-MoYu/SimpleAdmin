@@ -167,3 +167,14 @@ public class GenBasicEditInput : GenBasicAddInput
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public override long Id { get; set; }
 }
+
+/// <summary>
+/// 执行代码生成参数
+/// </summary>
+public class ExecGenInput : BaseIdInput
+{
+    /// <summary>
+    /// 生成类型
+    /// </summary>
+    public string ExecType { get; set; }
+}

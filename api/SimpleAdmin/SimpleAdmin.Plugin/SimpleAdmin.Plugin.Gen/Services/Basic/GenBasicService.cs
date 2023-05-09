@@ -188,21 +188,32 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     }
 
     /// <inheritdoc/>
-    public async Task ExecGenPro(BaseIdInput input)
+    public async Task ExecGenPro(ExecGenInput input)
     {
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         if (genBasic.GenerateType != GenConst.Pro) throw Oops.Bah("当前配置生成方式为：项目中");
+        var backendPath =
+            Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName);//获取主工程目录
+        var srcDir = "src";//默认都是代码放在src文件夹
+        var frontedPath = genBasic.FrontedPath;//获取前端代码路径,
+        if (!frontedPath.Contains(srcDir))//如果不包含src
+            frontedPath = genBasic.FrontedPath.CombinePath(srcDir);
         if (await CreateMenuButtonAndRelation(genBasic))
         {
             var previewCode = await PreviewGen(genBasic);//获取代码生成预览
-            var backendPath =
-                Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName);//获取主工程目录
-            ExecBackend(previewCode.CodeBackendResults, genBasic, backendPath);//执行后端代码生成
-            var srcDir = "src";//默认都是代码放在src文件夹
-            var frontedPath = genBasic.FrontedPath;//获取前端代码路径,
-            if (!frontedPath.Contains(srcDir))//如果不包含src
-                frontedPath = genBasic.FrontedPath.CombinePath(srcDir);
-            ExecFronted(previewCode.CodeFrontendResults, genBasic, frontedPath);
+            if (input.ExecType != GenConst.ExecAll)//如果不是全部执行
+            {
+                if (input.ExecType == GenConst.ExecBackend)
+                    ExecBackend(previewCode.CodeBackendResults, genBasic, backendPath);//执行后端代码生成
+                else if (input.ExecType == GenConst.ExecFrontend)
+                    ExecFronted(previewCode.CodeFrontendResults, genBasic, frontedPath);//执行前端代码生成
+            }
+            else
+            {
+                ExecBackend(previewCode.CodeBackendResults, genBasic, backendPath);//执行后端代码生成
+
+                ExecFronted(previewCode.CodeFrontendResults, genBasic, frontedPath);//执行前端代码生成
+            }
         }
         else
         {
@@ -211,16 +222,28 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     }
 
     /// <inheritdoc/>
-    public async Task<FileStreamResult> ExecGenZip(BaseIdInput input)
+    public async Task<FileStreamResult> ExecGenZip(ExecGenInput input)
     {
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         if (genBasic.GenerateType != GenConst.Zip) throw Oops.Bah("当前配置生成方式为：压缩包");
         var temDir = Path.GetTempPath().CombinePath(genBasic.ClassName);//获取临时目录并用类名做存放代码文件文件夹
         File.Delete(temDir + ".zip");// 先删除压缩包
         var previewCode = await PreviewGen(genBasic);//获取代码生成预览
-        ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
-        ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
-        ExecSql(previewCode.SqlResults, temDir);//执行sql生成
+        if (input.ExecType != GenConst.ExecAll)//如果不是全部执行
+        {
+            if (input.ExecType == GenConst.ExecBackend)
+            {
+                ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
+                ExecSql(previewCode.SqlResults, temDir);//执行sql生成
+            }
+            else if (input.ExecType == GenConst.ExecFrontend)
+                ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
+        }
+        else
+        {
+            ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
+            ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
+        }
         var zipPath = ZipUtils.CompressDirectory(temDir, true);//压缩文件夹
         var result = new FileStreamResult(new FileStream(zipPath, FileMode.Open), "application/octet-stream")
             { FileDownloadName = $"{genBasic.ClassName}.zip" };

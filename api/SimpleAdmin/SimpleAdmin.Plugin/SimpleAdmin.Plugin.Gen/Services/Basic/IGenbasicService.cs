@@ -31,14 +31,14 @@ public interface IGenbasicService : ITransient
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task ExecGenPro(BaseIdInput input);
+    Task ExecGenPro(ExecGenInput input);
 
     /// <summary>
     /// 执行代码生成:压缩包
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<FileStreamResult> ExecGenZip(BaseIdInput input);
+    Task<FileStreamResult> ExecGenZip(ExecGenInput input);
 
     /// <summary>
     /// 获取项目所有程序集

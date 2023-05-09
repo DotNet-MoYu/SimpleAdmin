@@ -28,4 +28,19 @@ public class GenConst
     /// 项目中
     /// </summary>
     public const string Pro = "PRO";
+
+    /// <summary>
+    /// 全部
+    /// </summary>
+    public const string ExecAll = "ALL";
+
+    /// <summary>
+    /// 前端
+    /// </summary>
+    public const string ExecFrontend = "FRONTEND";
+
+    /// <summary>
+    /// 后端
+    /// </summary>
+    public const string ExecBackend = "BACKEND";
 }
