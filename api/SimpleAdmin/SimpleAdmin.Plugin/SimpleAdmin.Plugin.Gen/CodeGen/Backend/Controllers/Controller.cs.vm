@@ -3,6 +3,7 @@ var dataPermission=@Model.DataPermission=="Y";//是否启用数据权限
 var isOrgTree=@Model.LeftTree=="org";//是否启用组织树
 var funcList=@Model.FuncList;//获取功能列表
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 }
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -87,7 +88,7 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
         return await _@(@Model.ServiceFirstLower).Detail(input);
     }
     
-    @{LeftTree();}
+    @{Tree();}
     
     @{OtherGet();}
 
@@ -173,7 +174,7 @@ break;
 }
 
 //左侧树接口
-void LeftTree(){
+void Tree(){
 if(isOrgTree){
     @:/// <summary>
     @:/// 获取组织树选择器
@@ -198,6 +199,19 @@ else if(isTreeList){
         @:return await _@(@Model.ServiceFirstLower).Tree();
     @:}
 }
+else if(isTreeTree){
+    @:/// <summary>
+    @:/// @(@Model.DescriptionTree)
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:[HttpGet("tree")]
+    @:[DisplayName("@(@Model.DescriptionTree)")]
+    @:public async Task<dynamic> Tree([FromQuery] @Model.TreeInput input)
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Tree(input);
+    @:}
+}
+
 }
 
 void OtherPost(){

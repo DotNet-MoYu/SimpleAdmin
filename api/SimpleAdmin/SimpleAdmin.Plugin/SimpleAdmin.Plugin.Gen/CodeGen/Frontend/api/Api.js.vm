@@ -36,7 +36,7 @@ const request = (url, ...arg) => baseRequest(`/@(@Model.RouteName)/@(@Model.BusN
     @(busName)Delete(data) {
        return request('delete', data)
     },
-    @if(isTreeList){
+    @if(isTreeList||isTreeTree){
     @:// 获取@(@Model.FunctionName)树
     @:@(busName)Tree(data) {
        @:return request('tree', data, 'get')

@@ -178,9 +178,12 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     :expand-row-by-click="true"
     :alert="options.alert.show"
     bordered
+    @if(isTreeTree){
+@::show-pagination="false"
+    }
     @foreach (var column in tableFieIds){//遍历字段
     @if(column.IsPrimarykey=="Y"){//如果是主键
-@::row-key="(record) => record.@column.FieldNameFirstLower"
+    @::row-key="(record) => record.@column.FieldNameFirstLower"
     }}
     :row-selection="options.rowSelection"
     :tool-config="toolConfig"
@@ -294,13 +297,28 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
       @:}
 	  }
 	  }
+      @if(isTreeTree){//如果是树形结构
+      @:return @(@Model.ClassNameFirstLower)Api.@(busName)Tree(Object.assign(parameter, searchFormParam)).then((data) => {
+      @:  if (data) { return data } else { return [] }
+      @:})
+      }
+      else{
       @:return @(@Model.ClassNameFirstLower)Api.@(busName)Page(Object.assign(parameter, searchFormParam)).then((data) => {
+      @:   return data })
+      }
 	  }
 	  else{
+      @if(isTreeTree){//如果是树形结构
       @:return @(@Model.ClassNameFirstLower)Api.@(busName)Page(Object.assign(parameter)).then((data) => {
+         @:  if (data) { return data } else { return [] }
+      @: })
+      }
+      else{
+      @:@:return @(@Model.ClassNameFirstLower)Api.@(busName)Page(Object.assign(parameter)).then((data) => {
+      @:   return data })
+      }
+      
 	  }
-        return data
-      })
     }
     
   @{DeleteScript();}

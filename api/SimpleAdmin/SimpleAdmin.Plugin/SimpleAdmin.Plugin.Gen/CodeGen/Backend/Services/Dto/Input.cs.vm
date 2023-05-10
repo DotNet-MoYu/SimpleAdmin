@@ -1,6 +1,7 @@
 @{
   var tableFieIds=@Model.TableFields;//获取字段
   var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+  var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 }
 using System;
 using System.ComponentModel.DataAnnotations;
@@ -27,6 +28,7 @@ public class @Model.PageInput : BasePageInput
   }
 }
 
+
 /// <summary>
 /// @(@Model.DescriptionAdd)参数
 /// </summary>
@@ -47,9 +49,23 @@ public class @Model.EditInput : @Model.AddInput
     public long Id { get; set; }
 }
 
-@{OtherInput();
+@if(isTreeTree){
+@{TreeTree();}
+}
+
+@{OtherInput();}
 
 @{
+
+void TreeTree(){
+@:/// <summary>
+@:/// @(@Model.DescriptionTree)参数
+@:/// </summary>
+@:public class @Model.TreeInput 
+@:{
+  @{PageInput();}
+@:}
+}
 
 void OtherInput(){
 var funcList=@Model.FuncList;//获取功能列表

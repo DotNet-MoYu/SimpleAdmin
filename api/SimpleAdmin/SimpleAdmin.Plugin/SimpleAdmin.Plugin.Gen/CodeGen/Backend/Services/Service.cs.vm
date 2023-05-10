@@ -3,6 +3,7 @@ var orgField=@Model.TableFields.Any(it=>it.FieldName=="OrgId")?"OrgId":"CreateOr
 var dataPermission=@Model.DataPermission=="Y";//是否有数据权限
 var tableFieIds=@Model.TableFields;//获取字段
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 }
 
 using Furion.FriendlyException;
@@ -94,10 +95,24 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
     @:public async Task<List<@(@Model.EntityName)>> Tree()
     @:{
         @://第三个参数为0 表示 ： parentid为 0 设置成根目录, 正常情况下最顶层的parentid不是0就是null
-        @:var tree = Context.Queryable<SysOrg>().ToTree(it => it.Children, it => it.ParentId, 0);
+        @:var tree = Context.Queryable<@(@Model.EntityName)>().ToTree(it => it.Children, it => it.ParentId, 0);
         @:return tree;
     @:}
     }
+    @if(isTreeTree){
+    @:/// <inheritdoc />
+    @:public async Task<List<@(@Model.EntityName)>> Tree(@Model.TreeInput input)
+    @:{
+        @://第三个参数为0 表示 ： parentid为 0 设置成根目录, 正常情况下最顶层的parentid不是0就是null
+        @:var tree = Context.Queryable<@(@Model.EntityName)>()
+                     @if(isTreeTree){
+                     @{PageWhereIf();}//查询条件
+                     }
+                     @:.ToTree(it => it.Children, it => it.ParentId, 0);
+        @:return tree;
+    @:}
+    }
+
 
     #endregion
 

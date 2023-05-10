@@ -384,6 +384,11 @@
             编辑参数
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenViewModel.TreeInput">
+            <summary>
+            树查询参数
+            </summary>
+        </member>
         <member name="M:SimpleAdmin.Plugin.Gen.IGenBasicService.GetTableColumns(System.String,System.String)">
             <inheritdoc/>
         </member>

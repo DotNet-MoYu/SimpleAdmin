@@ -1,5 +1,6 @@
 @{
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 }
 using Furion.DependencyInjection;
 using SimpleAdmin.Core;
@@ -40,6 +41,13 @@ public interface I@(@Model.ServiceName) : ITransient
     @:/// </summary>
     @:/// <returns>@(@Model.FunctionName)树</returns>
     @:Task<List<@(@Model.EntityName)>> Tree();
+    }
+    @if(isTreeTree){
+    @:/// <summary>
+    @:/// @Model.DescriptionTree
+    @:/// </summary>
+    @:/// <returns>@(@Model.FunctionName)树</returns>
+    @:Task<List<@(@Model.EntityName)>> Tree(@Model.TreeInput input);
     }
     #endregion
     

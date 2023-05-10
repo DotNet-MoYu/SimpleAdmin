@@ -239,5 +239,13 @@ public class GenViewModel : GenBasic
         get { return ClassName + "EditInput"; }
     }
 
+    /// <summary>
+    /// 树查询参数
+    /// </summary>
+    public string TreeInput
+    {
+        get { return ClassName + "TreeInput"; }
+    }
+
     #endregion 参数
 }

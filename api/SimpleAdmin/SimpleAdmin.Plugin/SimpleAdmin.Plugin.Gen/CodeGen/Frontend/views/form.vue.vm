@@ -1,6 +1,7 @@
 @{
 var tableFieIds=@Model.TableFields;//获取字段
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 var treeId=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeId);//获取树的id
 var treeName=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeName);//获取树的名称
 var treePid=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreePid);//获取树的父级id
@@ -29,7 +30,7 @@ void Main()
     <a-form ref="formRef" :model="formData" :rules="formRules" layout="@Model.FormLayout">
 	@if(@Model.GridWhether=="Y"){//使用栅格
       @:<a-row :gutter="16">
-      @if(isTreeList){
+      @if(isTreeList||isTreeTree){
       @{parent();}
 	  }
 	  @foreach (var column in tableFieIds){//遍历字段
@@ -43,7 +44,7 @@ void Main()
       @:</a-row>	  
 	}
 	else{
-    @if(isTreeList){
+    @if(isTreeList||isTreeTree){
     @{parent();}
     }
 	@foreach (var column in tableFieIds){//遍历字段
@@ -229,7 +230,7 @@ var selectCount=selectColumns.Count;//选择框数量
 
 //定义树列表常量
 void TreeListConst(){
-if(isTreeList){
+if(isTreeList||isTreeTree){
   @:// 定义机构元素 
 @:const treeData = ref([])
 }
@@ -238,7 +239,7 @@ if(isTreeList){
 //定义树列表方法
 void TreeListMethod()
 {
-if(isTreeList){
+if(isTreeList||isTreeTree){
 	@:// 获取@(funcName)树并加入顶级
 	@:@(@Model.ClassNameFirstLower)Api.@(@Model.BusName)Tree().then((res) => {
 		@:treeData.value = [
