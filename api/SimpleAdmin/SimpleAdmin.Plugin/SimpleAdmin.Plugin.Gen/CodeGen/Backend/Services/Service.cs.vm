@@ -4,6 +4,7 @@ var dataPermission=@Model.DataPermission=="Y";//是否有数据权限
 var tableFieIds=@Model.TableFields;//获取字段
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var isMasterChild = @Model.ModuleType=="masterChild"; //是否是主子表
 }
 
 using Furion.FriendlyException;
@@ -87,6 +88,9 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @:if (!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId)//判断机构ID是否在数据范围或者创建人是否为当前登录人
            @:throw Oops.Bah(errorMessage);
         }
+        @if(isMasterChild){
+        @:var child=await Context.Queryable<@Model.ChildTable>().Where(it => it.@(Model.ChildFk) == @(@Model.ClassNameFirstLower).Id).ToListAsync();
+        }
         return @Model.ClassNameFirstLower ;
 
     }
@@ -165,7 +169,38 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
     /// <inheritdoc />
     public async Task Delete(List<BaseIdInput> input)
     {
-       @{Delete();}
+        //获取所有ID
+        var ids = input.Select(it => it.Id).ToList();
+        if (ids.Count > 0)
+        {
+        @if(dataPermission){
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
+        @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
+        @:{
+        @:    if (!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        @:});
+        }
+        //如果@(Model.FunctionName)下有下级数据则不允许删除
+        if (await Context.Queryable<@(@Model.ChildTable)>().AnyAsync(it => ids.Contains(it.@(Model.ChildFk))))
+        {
+          throw Oops.Bah($"有数据依赖@(Model.FunctionName),无法删除");
+        }                    
+        await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
+        ////事务
+        //var result = await itenant.UseTranAsync(async () =>
+        //{
+             //await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
+             //Context.Deleteable<@(@Model.ChildTable)>().Where(it => ids.Contains(it.@(Model.ChildFk))).ExecuteCommandAsync();//删除子表数据
+        //});
+        //if (!result.IsSuccess)//如果成功了
+        //{
+             ////写日志
+             //_logger.LogError(result.ErrorMessage, result.ErrorException);
+             //throw Oops.Oh(ErrorCodeEnum.A0002);
+        //} 
+        }
     }
 
     #endregion
@@ -236,21 +271,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
 
 //删除
 void Delete(){
-        @://获取所有ID
-        @:var ids = input.Select(it => it.Id).ToList();
-        @:if (ids.Count > 0)
-        @:{
-        @if(dataPermission){
-        @://获取数据范围
-        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
-        @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
-        @:{
-        @:    if (!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
-        @:});
-        }
-        @:await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
-        @:}
+
 }
 
 //批量编辑
