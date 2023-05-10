@@ -261,7 +261,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             if (hasRole) throw Oops.Bah($"请先删除{name}下的角色");
             // 判断组织下是否有职位
             var hasPosition = await Context.Queryable<SysPosition>().Where(it => sysDeleteOrgList.Contains(it.OrgId)).CountAsync() > 0;
-            if (hasRole) throw Oops.Bah($"请先删除{name}下的职位");
+            if (hasPosition) throw Oops.Bah($"请先删除{name}下的职位");
             //删除组织
             if (await DeleteByIdsAsync(sysDeleteOrgList.Cast<object>().ToArray()))
                 await RefreshCache();//刷新缓存
