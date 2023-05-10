@@ -187,39 +187,22 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
   >
     <template #operator>
       <a-space>
-        <a-button type="primary" @@click="formRef.onOpen()" 
-        @if(dataPermission){
-        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')"
-        } 
-        ><template #icon><plus-outlined /></template>新增@(funcName)</a-button>
+        <a-button type="primary" @@click="formRef.onOpen()"  v-if="hasPerm('@(@Model.ClassNameFirstLower)Add')">
+        <template #icon><plus-outlined /></template>新增@(funcName)</a-button>
         @if(funcList.Contains("batchEdit")){//如果有批量删除
-        @:<a-button @@click="batchEditRef.onOpen(selectedRowKeys)" :disabled="selectedRowKeys.length === 0"
-        @if(dataPermission){
-        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchEdit')"
-        }
-              @:><template #icon><edit-outlined /></template>编辑@(funcName)</a-button>
+        @:<a-button @@click="batchEditRef.onOpen(selectedRowKeys)" :disabled="selectedRowKeys.length === 0" v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchEdit')">
+        @:<template #icon><edit-outlined /></template>编辑@(funcName)</a-button>
         }
         @if(funcList.Contains("batchDelete")){//如果有批量删除
-        @:<batch-delete 
-        @if(dataPermission){
-        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"
-        
-        }
-              @:title="确定要删除选中@(funcName)吗?" buttonName="删除@(funcName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="batchDelete@(@Model.ClassName)"/>
+        @:<batch-delete  v-if="hasPerm('@(@Model.ClassNameFirstLower)BatchDelete')"
+        @:    title="确定要删除选中@(funcName)吗?" buttonName="删除@(funcName)" :selectedRowKeys="selectedRowKeys" @@batchDelete="batchDelete@(@Model.ClassName)"/>
         }
         @if(funcList.Contains("import")){//如果有导入
-        @:<a-button @@click="openImport"
-        @if(dataPermission){
-        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Import')"
-        }
-              @:><template #icon><download-outlined /></template>导入@(funcName)</a-button>
+        @:<a-button @@click="openImport" v-if="hasPerm('@(@Model.ClassNameFirstLower)Import')">
+        @:<template #icon><download-outlined /></template>导入@(funcName)</a-button>
         }
         @if(funcList.Contains("export")){//如果有导出
-        @:<data-export  buttonName="导出@(funcName)" @@dataExport="dataExport@(@Model.ClassNameFirstLower)"
-        @if(dataPermission){
-        @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Export')" 
-        }
-              @:/>
+        @:<data-export  buttonName="导出@(funcName)" @@dataExport="dataExport@(@Model.ClassNameFirstLower)" v-if="hasPerm('@(@Model.ClassNameFirstLower)Export')" />
         }
       </a-space>
     </template>
@@ -253,22 +236,10 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
 	}
       <template v-if="column.dataIndex === 'action'">
         <a-space>
-          <a @@click="formRef.onOpen(record)"
-          @if(dataPermission){
-          @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Edit')"
-          }
-              >编辑</a>
-          <a-divider type="vertical" 
-          @if(dataPermission){
-          @:        v-if="hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'], 'and')" 
-          }
-          />
+          <a @@click="formRef.onOpen(record)" v-if="hasPerm('@(@Model.ClassNameFirstLower)Edit')" >编辑</a>
+          <a-divider type="vertical"  v-if="hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'], 'and')" />
           <a-popconfirm title="确定要删除吗？" @@confirm="delete@(@Model.ClassName)(record)">
-            <a-button type="link" danger size="small"
-          @if(dataPermission){ 
-          @:        v-if="hasPerm('@(@Model.ClassNameFirstLower)Delete')"
-          }
-          >删除</a-button>
+            <a-button type="link" danger size="small"  v-if="hasPerm('@(@Model.ClassNameFirstLower)Delete')">删除</a-button>
           </a-popconfirm>
       </a-space>
       </template>
@@ -378,17 +349,8 @@ void TableConst()
       @:},
   }
   }
-  @if(!dataPermission){
-         @:{
-		 @:title: '操作',
-	  	 @:dataIndex: 'action',
-	     @:align: 'center',
-		 @:width: '150px'
-	     @:}
-  }
   @:]
 
-  @if(dataPermission){//如果有选择框
   @:if (hasPerm(['@(@Model.ClassNameFirstLower)Edit', '@(@Model.ClassNameFirstLower)Delete'])) {
 	  @:columns.push({
 		  @:title: '操作',
@@ -397,7 +359,6 @@ void TableConst()
 		  @:width: '240px'
 	  @:})
   @:}
-  }
   @:
   @:// 列表选择配置
   @:const options = reactive({
@@ -412,7 +373,7 @@ void TableConst()
 				@:selectedRowKeys.value = selectedRowKey
 			@:}
 		@:}
-	@:})
+	@:}) 
 
 }
 
