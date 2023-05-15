@@ -1389,6 +1389,11 @@
              基础ID
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FieldIndex">
+            <summary>
+            字段排序
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.IsPrimarykey">
              <summary>
              是否主键
