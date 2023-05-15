@@ -14,6 +14,12 @@ public class GenConfig : BaseEntity
     public long BasicId { get; set; }
 
     /// <summary>
+    /// 字段排序
+    /// </summary>
+    [SugarColumn(ColumnName = "FieldIndex", ColumnDescription = "字段排序")]
+    public int FieldIndex { get; set; }
+
+    /// <summary>
     /// 是否主键
     ///</summary>
     [SugarColumn(ColumnName = "IsPrimarykey", ColumnDescription = "是否主键", Length = 200)]

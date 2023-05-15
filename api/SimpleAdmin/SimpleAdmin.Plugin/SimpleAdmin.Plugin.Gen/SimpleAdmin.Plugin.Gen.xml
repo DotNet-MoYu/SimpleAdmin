@@ -389,9 +389,6 @@
             树查询参数
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenBasicService.GetTableColumns(System.String,System.String)">
-            <inheritdoc/>
-        </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Plugin.Gen.IGenbasicService"/>

@@ -1,10 +1,6 @@
-﻿namespace SimpleAdmin.Plugin.Gen;
+﻿using SqlSugar;
 
-public interface IGenBasicService
-{
-    /// <inheritdoc/>
-    List<SqlsugarColumnInfo> GetTableColumns(string configId, string tableName);
-}
+namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
 /// <inheritdoc cref="IGenbasicService"/>
@@ -40,7 +36,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var query = Context.Queryable<GenBasic>()
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
-            .OrderBy(it => it.SortCode)
+            .OrderBy(it => it.SortCode, OrderByType.Desc)//默认排序
+            .OrderBy(it => it.CreateTime, OrderByType.Desc)//默认排序
             .Mapper(it =>
             {
                 it.FuncList = it.Functions.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();//功能集合转为列表
@@ -125,6 +122,13 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 SortCode = yesOrNo == GenConst.No ? 99 : sortCode//如果是公共字段就排最后
             });
             sortCode++;
+        });
+        var index = 0;
+        genConfigs = genConfigs.OrderBy(it => it.SortCode).ToList();//排序
+        genConfigs.ForEach(it =>
+        {
+            it.FieldIndex = index;
+            index++;
         });
         if (!genConfigs.Any(it => it.IsPrimarykey == GenConst.Yes))//判断是否有主键
         {

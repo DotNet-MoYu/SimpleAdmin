@@ -235,6 +235,12 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
       @:</template>
       }
 	  break;
+      //图片
+	  case "image":
+      <template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+         <a-image :src="record.@(@column.FieldNameFirstLower)" />
+      </template>
+	  break;
 	}
 	}
       <template v-if="column.dataIndex === 'action'">
