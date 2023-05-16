@@ -13,6 +13,7 @@
       "Write": false, //是否文件写入LoggingMonitor日志
       "Console": false, //是否控制台输出LoggingMonitor日志
     },
+    "MessageFormat": true, //是否格式化日志
     "LogLevel": {
       "Default": "Information", //默认日志级别
       "Max": "Error", //最大日志级别

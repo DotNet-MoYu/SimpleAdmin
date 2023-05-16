@@ -17,3 +17,4 @@ global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
 global using Yitter.IdGenerator;
+global using Microsoft.Extensions.Logging;

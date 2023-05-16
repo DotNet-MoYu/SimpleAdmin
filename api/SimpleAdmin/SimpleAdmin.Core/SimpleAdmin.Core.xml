@@ -94,11 +94,6 @@
             日志写入文件的组件
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.LoggingFileComponent.WriteMonitor">
-            <summary>
-            是否写入LoggingMonitor日志
-            </summary>
-        </member>
         <member name="M:SimpleAdmin.Core.LoggingFileComponent.SetLogOptions(Furion.Logging.FileLoggerOptions,System.Nullable{Microsoft.Extensions.Logging.LogLevel})">
             <summary>
             日志格式化
@@ -361,6 +356,56 @@
             </summary>
             <param name="json"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Core.LoggingSetting">
+            <summary>
+            日志配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.Monitor">
+            <summary>
+            LoggingMonitor配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.MessageFormat">
+            <summary>
+            是否日志消息格式化
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevel">
+            <summary>
+            日志等级
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.LoggingSetting.MonitorOptions">
+            <summary>
+            LoggingMonitor配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.MonitorOptions.Write">
+            <summary>
+            写入文件
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.MonitorOptions.Console">
+            <summary>
+            写入控制台
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.LoggingSetting.LogLevelOptions">
+            <summary>
+            日志等级
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevelOptions.Default">
+            <summary>
+            默认日志等级
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevelOptions.MaxLevel">
+            <summary>
+            最大日志等级
+            </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Startup">
             <summary>

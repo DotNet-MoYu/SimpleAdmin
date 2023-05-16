@@ -5,54 +5,55 @@
 /// </summary>
 public sealed class LoggingConsoleComponent : IServiceComponent
 {
-    private readonly bool ConsoleMonitor = App.GetConfig<bool>("Logging:Monitor:Console");
+    private readonly LoggingSetting _loggingSetting = App.GetConfig<LoggingSetting>("Logging", true);
+    private readonly string _monitorName = "System.Logging.LoggingMonitor";
 
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
         services.AddConsoleFormatter(options =>
-         {
-             options.MessageFormat = (logMsg) =>
-             {
-                 //如果不是LoggingMonitor日志才格式化
-                 if (logMsg.LogName != "System.Logging.LoggingMonitor")
-                 {
-                     var stringBuilder = new StringBuilder();
-                     stringBuilder.AppendLine("【日志级别】：" + logMsg.LogLevel);
-                     stringBuilder.AppendLine("【日志类名】：" + logMsg.LogName);
-                     stringBuilder.AppendLine("【日志时间】：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-                     stringBuilder.AppendLine("【日志内容】：" + logMsg.Message);
-                     if (logMsg.Exception != null)
-                     {
-                         stringBuilder.AppendLine("【异常信息】：" + logMsg.Exception);
-                     }
-                     return stringBuilder.ToString();
-                 }
-                 else
-                 {
-                     return logMsg.Message;
-                 }
-             };
-             options.WriteHandler = (logMsg, scopeProvider, writer, fmtMsg, opt) =>
-             {
-                 if (logMsg.LogName == "System.Logging.LoggingMonitor" && !ConsoleMonitor) return;
-                 ConsoleColor consoleColor = ConsoleColor.White;
-                 switch (logMsg.LogLevel)
-                 {
-                     case LogLevel.Information:
-                         consoleColor = ConsoleColor.DarkGreen;
-                         break;
+        {
+            options.MessageFormat = (logMsg) =>
+            {
+                //如果不是LoggingMonitor日志或者开启了格式化才格式化
+                if (logMsg.LogName != _monitorName && _loggingSetting.MessageFormat)
+                {
+                    var stringBuilder = new StringBuilder();
+                    stringBuilder.AppendLine("【日志级别】：" + logMsg.LogLevel);
+                    stringBuilder.AppendLine("【日志类名】：" + logMsg.LogName);
+                    stringBuilder.AppendLine("【日志时间】：" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    stringBuilder.AppendLine("【日志内容】：" + logMsg.Message);
+                    if (logMsg.Exception != null)
+                    {
+                        stringBuilder.AppendLine("【异常信息】：" + logMsg.Exception);
+                    }
+                    return stringBuilder.ToString();
+                }
+                else
+                {
+                    return logMsg.Message;
+                }
+            };
+            options.WriteHandler = (logMsg, scopeProvider, writer, fmtMsg, opt) =>
+            {
+                if (logMsg.LogName == _monitorName && !_loggingSetting.Monitor.Console) return;
+                var consoleColor = ConsoleColor.White;
+                switch (logMsg.LogLevel)
+                {
+                    case LogLevel.Information:
+                        consoleColor = ConsoleColor.DarkGreen;
+                        break;
 
-                     case LogLevel.Warning:
-                         consoleColor = ConsoleColor.DarkYellow;
-                         break;
+                    case LogLevel.Warning:
+                        consoleColor = ConsoleColor.DarkYellow;
+                        break;
 
-                     case LogLevel.Error:
-                         consoleColor = ConsoleColor.DarkRed;
-                         break;
-                 }
-                 writer.WriteWithColor(fmtMsg, ConsoleColor.Black, consoleColor);
-             };
-         });
+                    case LogLevel.Error:
+                        consoleColor = ConsoleColor.DarkRed;
+                        break;
+                }
+                writer.WriteWithColor(fmtMsg, ConsoleColor.Black, consoleColor);
+            };
+        });
     }
 }
 
@@ -98,8 +99,9 @@ public static class TextWriterExtensions
         }
     }
 
-    private static string GetForegroundColorEscapeCode(ConsoleColor color) =>
-        color switch
+    private static string GetForegroundColorEscapeCode(ConsoleColor color)
+    {
+        return color switch
         {
             ConsoleColor.Black => "\x1B[30m",
             ConsoleColor.DarkRed => "\x1B[31m",
@@ -119,9 +121,11 @@ public static class TextWriterExtensions
 
             _ => DefaultForegroundColor
         };
+    }
 
-    private static string GetBackgroundColorEscapeCode(ConsoleColor color) =>
-        color switch
+    private static string GetBackgroundColorEscapeCode(ConsoleColor color)
+    {
+        return color switch
         {
             ConsoleColor.Black => "\x1B[40m",
             ConsoleColor.DarkRed => "\x1B[41m",
@@ -134,4 +138,5 @@ public static class TextWriterExtensions
 
             _ => DefaultBackgroundColor
         };
+    }
 }
