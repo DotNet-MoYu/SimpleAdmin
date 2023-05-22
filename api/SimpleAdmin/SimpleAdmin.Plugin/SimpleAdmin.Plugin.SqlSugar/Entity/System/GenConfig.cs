@@ -58,19 +58,19 @@ public class GenConfig : BaseEntity
     /// <summary>
     /// 外键显示字段
     /// </summary>
-    [SugarColumn(ColumnName = "FkEntityName", ColumnDescription = "外键实体名称", Length = 200)]
+    [SugarColumn(ColumnName = "FkEntityName", ColumnDescription = "外键实体名称", Length = 200, IsNullable = true)]
     public string FkEntityName { get; set; }
 
     /// <summary>
     /// 外键ID
     /// </summary>
-    [SugarColumn(ColumnName = "FkColumnId", ColumnDescription = "外键ID", Length = 200)]
+    [SugarColumn(ColumnName = "FkColumnId", ColumnDescription = "外键ID", Length = 200, IsNullable = true)]
     public string FkColumnId { get; set; }
 
     /// <summary>
     /// 外键显示字段
     /// </summary>
-    [SugarColumn(ColumnName = "FkColumnName", ColumnDescription = "外键显示字段", Length = 200)]
+    [SugarColumn(ColumnName = "FkColumnName", ColumnDescription = "外键显示字段", Length = 200, IsNullable = true)]
     public string FkColumnName { get; set; }
 
     /// <summary>
