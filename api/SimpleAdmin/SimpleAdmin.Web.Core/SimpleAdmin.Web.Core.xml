@@ -566,7 +566,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Tables">
+        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Gen.GenBasicController.Tables(System.Boolean)">
             <summary>
             获取所有表信息
             </summary>
