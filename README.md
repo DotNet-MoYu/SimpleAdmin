@@ -173,19 +173,10 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 -  👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
 -  👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
   
-## 🌏加入知识星球
-如果您在使用过程中遇到问题，或者发现bug，可以直接发issues描述您的问题，只要是系统bug第一时间修复。或者您对当前系统有什么建议或意见，也欢迎您提出，只要是符合大部分业务场景的都会考虑支持。如果您觉得本分系统非常适合您，那么您也可以选择加入`SimpleAdmin`的知识星球。
-<!-- <img width="200" height="200"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/星球.png"/>
-<img width="200" height="200"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/> -->
-<table>
-    <tr>
-       <td><img width="300" height="300"  src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/优惠卷.png"/></td>
-    </tr>
-</table>
 
 ##  💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码可以加入星球或者直接闲鱼APP搜`simpleadmin`
+- 前端源码尊重小诺开源协议，不能作为开源竞品，但你任然可以用于个人项目等接私活或企业项目脚手架使用，为防止侵权，如需获取前端源码可加群927460240获取(有门槛)
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
