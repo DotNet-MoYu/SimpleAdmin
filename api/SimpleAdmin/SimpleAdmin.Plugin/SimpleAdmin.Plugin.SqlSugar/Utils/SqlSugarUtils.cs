@@ -17,7 +17,7 @@ public static class SqlSugarUtils
         // 获取实体表
         var entityTypes = App.EffectiveTypes
             .Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))//有SugarTable特性
-            .Where(u => u.IsDefined(typeof(T), false));//具有代码生成特性
+            .Where(u => u.IsDefined(typeof(T), false));//具有指定特性
 
         foreach (var entityType in entityTypes)
         {
@@ -52,7 +52,7 @@ public static class SqlSugarUtils
     /// <returns></returns>
     public static List<SqlsugarColumnInfo> GetTableColumns(string configId, string tableName)
     {
-        List<SqlsugarColumnInfo> columns = new List<SqlsugarColumnInfo>();//结果集
+        var columns = new List<SqlsugarColumnInfo>();//结果集
         var connection = DbContext.Db.GetConnection(configId);
         var dbColumnInfos = connection.DbMaintenance.GetColumnInfosByTableName(tableName);//根据表名获取表信息
         if (dbColumnInfos != null)

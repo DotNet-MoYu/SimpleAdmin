@@ -1,6 +1,7 @@
 @{
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var tableFieIds=@Model.TableFields;//获取字段
 }
 using Furion.DependencyInjection;
 using SimpleAdmin.Core;
@@ -49,6 +50,8 @@ public interface I@(@Model.ServiceName) : ITransient
     @:/// <returns>@(@Model.FunctionName)树</returns>
     @:Task<List<@(@Model.EntityName)>> Tree(@Model.TreeInput input);
     }
+
+    @{Fk();}
     #endregion
     
     #region 新增
@@ -99,6 +102,19 @@ public interface I@(@Model.ServiceName) : ITransient
 }
 
 @{
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:/// <summary>
+    @:/// @(column.FieldRemark)选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:Task<List<BaseSelectorOutput>> Fk@(column.FkEntityName)Selector();
+
+}
+}
+}
 
 void ImportExport(){
 

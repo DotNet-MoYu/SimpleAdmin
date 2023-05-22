@@ -397,7 +397,7 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.Page(SimpleAdmin.Core.BasePageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetTables">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetTables(System.Boolean)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetAssemblies">
@@ -558,11 +558,12 @@
             </summary>
             <returns>程序集列表</returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.GetTables">
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.GetTables(System.Boolean)">
             <summary>
-            获取所有表信息
+            获取表信息
             </summary>
-            <returns>所有表信息</returns>
+            <param name="isAll">是否所有表</param>
+            <returns>实体表列表</returns>
         </member>
         <member name="M:SimpleAdmin.Plugin.Gen.IGenbasicService.Page(SimpleAdmin.Core.BasePageInput)">
             <summary>

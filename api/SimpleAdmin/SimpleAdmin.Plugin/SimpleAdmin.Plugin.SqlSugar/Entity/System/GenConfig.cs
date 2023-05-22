@@ -56,10 +56,35 @@ public class GenConfig : BaseEntity
     public string EffectType { get; set; }
 
     /// <summary>
+    /// 外键显示字段
+    /// </summary>
+    [SugarColumn(ColumnName = "FkEntityName", ColumnDescription = "外键实体名称", Length = 200)]
+    public string FkEntityName { get; set; }
+
+    /// <summary>
+    /// 外键ID
+    /// </summary>
+    [SugarColumn(ColumnName = "FkColumnId", ColumnDescription = "外键ID", Length = 200)]
+    public string FkColumnId { get; set; }
+
+    /// <summary>
+    /// 外键显示字段
+    /// </summary>
+    [SugarColumn(ColumnName = "FkColumnName", ColumnDescription = "外键显示字段", Length = 200)]
+    public string FkColumnName { get; set; }
+
+    /// <summary>
     /// 字典
     ///</summary>
     [SugarColumn(ColumnName = "DictTypeCode", ColumnDescription = "字典", Length = 200, IsNullable = true)]
     public string DictTypeCode { get; set; }
+
+    /// <summary>
+    /// 列宽度
+    ///</summary>
+    [SugarColumn(ColumnName = "Width", ColumnDescription = "列宽度")]
+    public int Width { get; set; }
+
 
     /// <summary>
     /// 列表显示
@@ -72,6 +97,12 @@ public class GenConfig : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "WhetherRetract", ColumnDescription = "列省略", Length = 200)]
     public string WhetherRetract { get; set; }
+
+    /// <summary>
+    /// 可伸缩列
+    ///</summary>
+    [SugarColumn(ColumnName = "WhetherResizable", ColumnDescription = "可伸缩列", Length = 200)]
+    public string WhetherResizable { get; set; }
 
     /// <summary>
     /// 是否增改

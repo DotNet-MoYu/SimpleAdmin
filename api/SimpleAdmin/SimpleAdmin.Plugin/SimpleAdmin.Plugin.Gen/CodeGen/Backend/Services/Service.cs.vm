@@ -117,7 +117,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
     @:}
     }
 
-
+    @{Fk();}//外键查询
     #endregion
 
     #region 新增
@@ -182,17 +182,21 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @:    if (!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
         @:});
         }
-        //如果@(Model.FunctionName)下有下级数据则不允许删除
-        if (await Context.Queryable<@(@Model.ChildTable)>().AnyAsync(it => ids.Contains(it.@(Model.ChildFk))))
-        {
-          throw Oops.Bah($"有数据依赖@(Model.FunctionName),无法删除");
+        @if(isMasterChild){
+        @://如果@(Model.FunctionName)下有下级数据则不允许删除
+        @:if (await Context.Queryable<@(@Model.ChildTable)>().AnyAsync(it => ids.Contains(it.@(Model.ChildFk))))
+        @:{
+          @:throw Oops.Bah($"有数据依赖@(Model.FunctionName),无法删除");
+        @:}
         }                    
         await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
         ////事务
         //var result = await itenant.UseTranAsync(async () =>
         //{
              //await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
-             //Context.Deleteable<@(@Model.ChildTable)>().Where(it => ids.Contains(it.@(Model.ChildFk))).ExecuteCommandAsync();//删除子表数据
+             @if(isMasterChild){
+             @://Context.Deleteable<@(@Model.ChildTable)>().Where(it => ids.Contains(it.@(Model.ChildFk))).ExecuteCommandAsync();//删除子表数据
+             }
         //});
         //if (!result.IsSuccess)//如果成功了
         //{
@@ -268,6 +272,30 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
 }
 
 @{
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:/// <summary>
+    @:/// @(column.FieldRemark)选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:public async Task<List<BaseSelectorOutput>> Fk@(column.FkEntityName)Selector()
+    @:{
+    @if(dataPermission){
+          @://获取数据范围
+          @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+    }
+          @:return await Context.Queryable<@(column.FkEntityName)>()
+    @if(dataPermission){
+          @://.Where(it => it.CreateOrgId == UserManager.OrgId || dataScope.Contains(it.Id))
+    }
+          @:.Select(it => new BaseSelectorOutput { Value = it.@(column.FkColumnId), Label = it.@(column.FkColumnName) }).ToListAsync();
+    @:}
+
+}
+}
+}
 
 //删除
 void Delete(){

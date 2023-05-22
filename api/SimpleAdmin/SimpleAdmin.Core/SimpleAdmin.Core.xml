@@ -79,6 +79,21 @@
             关键字
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.BaseSelectorOutput">
+            <summary>
+            基础选择器输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseSelectorOutput.Value">
+            <summary>
+             值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseSelectorOutput.Label">
+            <summary>
+             显示文本
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.GzipCompressionComponent">
             <summary>
             Gzip压缩组件

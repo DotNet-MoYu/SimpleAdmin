@@ -1424,9 +1424,29 @@
              作用类型
             </summary>
         </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FkEntityName">
+            <summary>
+            外键显示字段
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FkColumnId">
+            <summary>
+            外键ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.FkColumnName">
+            <summary>
+            外键显示字段
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.DictTypeCode">
              <summary>
              字典
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.Width">
+             <summary>
+             列宽度
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherTable">
@@ -1437,6 +1457,11 @@
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherRetract">
              <summary>
              列省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherResizable">
+             <summary>
+             可伸缩列
             </summary>
         </member>
         <member name="P:SimpleAdmin.Plugin.SqlSugar.GenConfig.WhetherAddUpdate">

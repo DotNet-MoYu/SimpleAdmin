@@ -32,9 +32,9 @@ public class GenBasicController : BaseController
     /// </summary>
     /// <returns></returns>
     [HttpGet("tables")]
-    public dynamic Tables()
+    public dynamic Tables(bool isAll = false)
     {
-        return _genbasicService.GetTables();
+        return _genbasicService.GetTables(isAll);
     }
 
     /// <summary>

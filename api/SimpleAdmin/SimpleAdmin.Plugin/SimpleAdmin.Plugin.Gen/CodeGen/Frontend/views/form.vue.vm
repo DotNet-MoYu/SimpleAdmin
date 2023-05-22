@@ -82,13 +82,13 @@ case "textarea":
 break;
 //选择
 case "select":
-  <a-select v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+  <a-select v-model:value="formData.@column.FieldNameFirstLower" show-search placeholder="请选择@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
 break;
 case "radio":
-  <a-radio-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+  <a-radio-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请选择@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
 break;
 case "checkbox":
-  <a-checkbox-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请输入@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
+  <a-checkbox-group v-model:value="formData.@column.FieldNameFirstLower" placeholder="请选择@(@column.FieldRemark)" :options="@(@column.FieldNameFirstLower)Options" />
 break;
 //数字
 case "inputNumber":
@@ -108,6 +108,9 @@ case "datepicker":
 break;
 case "timepicker":
   <a-time-picker v-model:value="formData.@column.FieldNameFirstLower" placeholder="请选择@(@column.FieldRemark)" style="width: 100%" />
+break;
+case "fk":
+  <a-select v-model:value="formData.@column.FieldNameFirstLower" show-search placeholder="请选择@(@column.FieldRemark)" :options="fk@(@column.FkEntityName)Options" />
 break;
 default:
 break;}}
@@ -138,12 +141,14 @@ var selectCount=selectColumns.Count;//选择框数量
   const submitLoading = ref(false)
   
   @{TreeListConst();}
-
+  
   @foreach (var column in selectColumns){//遍历选择框
   @://@(column.FieldRemark)选项
   @:const @(column.FieldNameFirstLower)Options = ref([])
   }
   
+  @{FkOptions();}
+   
   // 打开抽屉 
   const onOpen = (record) => {
       visible.value = true //显示抽屉
@@ -226,6 +231,18 @@ var selectCount=selectColumns.Count;//选择框数量
   onOpen
   })
 </script>
+}
+
+void FkOptions(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+  @:const fk@(column.FkEntityName)Options = ref() //@(column.FieldRemark)数据
+  @:@(@Model.ClassNameFirstLower)Api.@(@Model.BusName)Fk@(column.FkEntityName)Selector().then((data) => {
+  @:  fk@(column.FkEntityName)Options.value = data
+  @:})
+  @:
+}
+}
 }
 
 //定义树列表常量

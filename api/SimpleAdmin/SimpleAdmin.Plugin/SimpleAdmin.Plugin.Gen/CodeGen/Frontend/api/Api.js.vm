@@ -2,7 +2,8 @@
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
 var isMasterChild = @Model.ModuleType=="masterChild";//是否是主子表
-var busName= @Model.BusName;
+var busName= @Model.BusName;//业务名称
+var tableFieIds=@Model.TableFields;//获取字段
 }
 import { baseRequest } from '@@/utils/request'
 
@@ -44,6 +45,7 @@ const request = (url, ...arg) => baseRequest(`/@(@Model.RouteName)/@(@Model.BusN
     }
     @{Func();}
     @{LeftTree();}
+    @{Fk();}
 }
 
 @{
@@ -103,4 +105,17 @@ case "org":
 break;
 }
 }
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:// @(@Model.FunctionName)@(column.FieldRemark)选择器
+    @:@(busName)Fk@(column.FkEntityName)Selector(data) {
+    @:   return request('fk@(column.FkEntityName)Selector', data,'get')
+    @:},
+
+}
+}
+}
+
 }

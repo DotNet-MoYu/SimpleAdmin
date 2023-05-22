@@ -4,6 +4,7 @@ var isOrgTree=@Model.LeftTree=="org";//是否启用组织树
 var funcList=@Model.FuncList;//获取功能列表
 var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
 var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var tableFieIds=@Model.TableFields;//获取字段
 }
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
@@ -88,6 +89,8 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
         return await _@(@Model.ServiceFirstLower).Detail(input);
     }
     
+    @{Fk();} 
+   
     @{Tree();}
     
     @{OtherGet();}
@@ -138,6 +141,25 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
 }
 
 @{
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:/// <summary>
+    @:/// @(column.FieldRemark)选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:[HttpGet("fk@(column.FkEntityName)Selector")]
+    @:[DisplayName("@(column.FieldRemark)选择器")]
+    @:public async Task<dynamic> Fk@(column.FkEntityName)Selector()
+    @:{
+        @:return await _@(@Model.ServiceFirstLower).Fk@(column.FkEntityName)Selector();
+    @:}
+    @:
+}
+}
+}
+
 void OtherGet(){
 foreach(var func in funcList){
 switch (func)//根据类型生成不同请求

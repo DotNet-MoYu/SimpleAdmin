@@ -175,8 +175,8 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     ref="table"
     :columns="columns"
     :data="loadData"
-    :expand-row-by-click="true"
     :alert="options.alert.show"
+    :scroll="{ x: '1000px' | true }"
     bordered
     @if(isTreeTree){
 @::show-pagination="false"
@@ -184,7 +184,11 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     @foreach (var column in tableFieIds){//遍历字段
     @if(column.IsPrimarykey=="Y"){//如果是主键
     @::row-key="(record) => record.@column.FieldNameFirstLower"
-    }}
+    }
+    @if(column.WhetherResizable=="Y"){//如果是可伸缩列
+@:@@resizeColumn="handleResizeColumn"
+    }
+    }
     :row-selection="options.rowSelection"
     :tool-config="toolConfig"
   >
@@ -239,6 +243,12 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
 	  case "image":
       <template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
          <a-image :src="record.@(@column.FieldNameFirstLower)" />
+      </template>
+	  break;
+      //外键
+	  case "fk":
+      <template v-if="column.dataIndex === '@column.FieldNameFirstLower'">
+         {{ fk@(@column.FkEntityName)Options.find((item) => item.value === record.@column.FieldNameFirstLower)?.label }}
       </template>
 	  break;
 	}
@@ -320,7 +330,7 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
       @: })
       }
       else{
-      @:@:return @(@Model.ClassNameFirstLower)Api.@(busName)Page(Object.assign(parameter)).then((data) => {
+      @:return @(@Model.ClassNameFirstLower)Api.@(busName)Page(Object.assign(parameter)).then((data) => {
       @:   return data })
       }
       
@@ -337,6 +347,8 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
   @:const @(@column.FieldNameFirstLower)Options = tool.dictList('@column.DictTypeCode')
   }}}
   
+  @{FkOptions();}
+  
   @if(isLeftTree){ //如果左侧树不为空则生成左侧树方法
   @{LeftTreeMethod(@Model.LeftTree);}
   }
@@ -349,6 +361,17 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
 </script>
 }
 
+void FkOptions(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+  @:const fk@(column.FkEntityName)Options = ref() //@(column.FieldRemark)数据
+  @:@(@Model.ClassNameFirstLower)Api.@(busName)Fk@(column.FkEntityName)Selector().then((data) => {
+  @:  fk@(column.FkEntityName)Options.value = data
+  @:})
+  @:
+}
+}
+}
 
 //表格属性配置
 void TableConst()
@@ -362,6 +385,12 @@ void TableConst()
   @if(column.WhetherTable=="Y"){//如果列表显示
       @:{
         @:title: '@column.FieldRemark',
+        @if(@column.Width!=0){
+        @:width: @column.Width,
+        }
+        @if(@column.WhetherResizable=="Y"){//如果列可伸缩
+        @:resizable: true,
+        }
 	    @if(column.WhetherRetract=="Y")//如果列省略
 		{
         @:dataIndex: '@column.FieldNameFirstLower',
@@ -380,7 +409,8 @@ void TableConst()
 		  @:title: '操作',
 	  	  @:dataIndex: 'action',
 	      @:align: 'center',
-		  @:width: '240px'
+          @:fixed: 'right',
+		  @:width: '130px'
 	  @:})
   @:}
   @:
@@ -398,7 +428,15 @@ void TableConst()
 			@:}
 		@:}
 	@:}) 
-
+  @:
+  @foreach (var column in tableFieIds){//遍历字段
+  @if(column.WhetherResizable=="Y"){//如果可伸缩列
+  @:const handleResizeColumn = (w, col) => {
+        @:col.width = w
+  @:}
+  }
+  } 
+ 
 }
 
 //表单属性配置
@@ -423,7 +461,7 @@ void DeleteScript(){
           @:{
 		    @foreach (var column in tableFieIds){//遍历字段
             @if(column.IsPrimarykey=="Y"){//如果是主键
-            @:@column.FieldNameFirstLower: record.@column.FieldNameFirstLower
+            @:@column.FieldNameFirstLower: record.@column.FieldNameFirstLower ,
 			}}
           @:}
       @:]

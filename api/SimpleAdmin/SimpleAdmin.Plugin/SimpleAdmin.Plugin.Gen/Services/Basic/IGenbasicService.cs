@@ -47,10 +47,11 @@ public interface IGenbasicService : ITransient
     List<string> GetAssemblies();
 
     /// <summary>
-    /// 获取所有表信息
+    /// 获取表信息
     /// </summary>
-    /// <returns>所有表信息</returns>
-    List<SqlSugarTableInfo> GetTables();
+    /// <param name="isAll">是否所有表</param>
+    /// <returns>实体表列表</returns>
+    List<SqlSugarTableInfo> GetTables(bool isAll = false);
 
     /// <summary>
     /// 获取代码生成基础分页

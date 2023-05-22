@@ -47,10 +47,14 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     }
 
     /// <inheritdoc/>
-    public List<SqlSugarTableInfo> GetTables()
+    public List<SqlSugarTableInfo> GetTables(bool isAll = false)
     {
+        if (isAll)
+            return SqlSugarUtils.GetTablesByAttribute<SugarTable>();
         return SqlSugarUtils.GetTablesByAttribute<CodeGenAttribute>();
     }
+
+
 
     /// <inheritdoc/>
     public List<string> GetAssemblies()
@@ -113,9 +117,11 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 FieldNetType = SqlSugarUtils.ConvertDataType(it.DataType),
                 FieldRemark = it.ColumnDescription ?? it.ColumnName,
                 EffectType = EffTypeConst.INPUT,
+                Width = 100,
                 WhetherTable = yesOrNo,
                 WhetherAddUpdate = yesOrNo,
                 WhetherImportExport = yesOrNo,
+                WhetherResizable = GenConst.No,
                 WhetherRequired = GenConst.No,
                 WhetherRetract = GenConst.No,
                 QueryWhether = GenConst.No,
