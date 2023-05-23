@@ -13,7 +13,7 @@ public partial class MemoryCacheService : ISimpleCacheService
         var exist = _memoryCache.GetDictionary<T>(key);
         if (exist.ContainsKey(hashKey))//如果包含Key
             exist[hashKey] = value;//重新赋值
-        else exist.Add(hashKey, value);//加上新的值
+        else exist.TryAdd(hashKey, value);//加上新的值
         _memoryCache.Set(key, exist);
     }
 
@@ -37,7 +37,7 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public int HashDel<T>(string key, params string[] fields)
     {
-        int result = 0;
+        var result = 0;
         //获取字典
         var exist = _memoryCache.GetDictionary<T>(key);
         foreach (var field in fields)
@@ -74,7 +74,7 @@ public partial class MemoryCacheService : ISimpleCacheService
         //获取字典
         var exist = _memoryCache.GetDictionary<T>(key);
 
-        exist.TryGetValue(field, out T result);
+        exist.TryGetValue(field, out var result);
         var data = result.DeepClone();
         return data;
     }
