@@ -8,7 +8,7 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="SqlSugarCore" Version="5.1.4.73" />
+		<PackageReference Include="SqlSugarCore" Version="5.1.4.77" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Plugin.Core\SimpleAdmin.Plugin.Core.csproj" />
