@@ -1,7 +1,7 @@
 ﻿namespace SimpleAdmin.Plugin.Aop;
 
 /// <summary>
-/// 全局异常处理
+/// Aop
 /// 这里没有继承IGlobalDispatchProxy是因为IGlobalDispatchProxy会把一些没有必要的方法也aop了
 /// </summary>
 public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
@@ -109,16 +109,16 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         //判断需不需要读取缓存
         if (cacheAttribute != null)
         {
-            var _redisManager = Services.GetService<ISimpleCacheService>(); // 获取redis服务
+            var _redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
             var cacheValue = string.Empty;
             if (cacheAttribute.StoreType == CacheConst.Cache_Hash)//如果存的是Hash值
             {
-                cacheValue = _redisManager.HashGet<string>(cacheKey, new string[] { args[0].ToString() })[0]; //从redis获取Hash数据取第一个,注意是 string 类型
+                cacheValue = _redisManager.HashGet<string>(cacheKey, new string[] { args[0].ToString() })[0];//从redis获取Hash数据取第一个,注意是 string 类型
             }
             else
             {
-                cacheValue = _redisManager.Get<string>(cacheKey); //注意是 string 类型，方法GetValue
+                cacheValue = _redisManager.Get<string>(cacheKey);//注意是 string 类型，方法GetValue
             }
             if (!string.IsNullOrEmpty(cacheValue))//如果返回值不是空
             {
@@ -174,7 +174,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);
             if (!string.IsNullOrWhiteSpace(cacheKey))//如果有key
             {
-                var _redisManager = Services.GetService<ISimpleCacheService>(); // 获取redis服务
+                var _redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
                 if (cacheAttribute.IsDelete)//判断是否是删除操作
                 {
                     //删除Redis整个KEY
@@ -274,49 +274,49 @@ internal static class GetCacheKey
     {
         if (expression is LambdaExpression)
         {
-            LambdaExpression lambda = expression as LambdaExpression;
+            var lambda = expression as LambdaExpression;
             expression = lambda.Body;
             return Resolve(expression);
         }
         if (expression is BinaryExpression)
         {
-            BinaryExpression binary = expression as BinaryExpression;
+            var binary = expression as BinaryExpression;
             if (binary.Left is MemberExpression && binary.Right is ConstantExpression)//解析x=>x.Name=="123" x.Age==123这类
                 return ResolveFunc(binary.Left, binary.Right, binary.NodeType);
             if (binary.Left is MethodCallExpression && binary.Right is ConstantExpression)//解析x=>x.Name.Contains("xxx")==false这类的
             {
-                object value = (binary.Right as ConstantExpression).Value;
+                var value = (binary.Right as ConstantExpression).Value;
                 return ResolveLinqToObject(binary.Left, value, binary.NodeType);
             }
-            if ((binary.Left is MemberExpression && binary.Right is MemberExpression)
-                || (binary.Left is MemberExpression && binary.Right is UnaryExpression))//解析x=>x.Date==DateTime.Now这种
+            if (binary.Left is MemberExpression && binary.Right is MemberExpression
+                || binary.Left is MemberExpression && binary.Right is UnaryExpression)//解析x=>x.Date==DateTime.Now这种
             {
-                LambdaExpression lambda = Expression.Lambda(binary.Right);
-                Delegate fn = lambda.Compile();
-                ConstantExpression value = Expression.Constant(fn.DynamicInvoke(null), binary.Right.Type);
+                var lambda = Expression.Lambda(binary.Right);
+                var fn = lambda.Compile();
+                var value = Expression.Constant(fn.DynamicInvoke(null), binary.Right.Type);
                 return ResolveFunc(binary.Left, value, binary.NodeType);
             }
         }
         if (expression is UnaryExpression)
         {
-            UnaryExpression unary = expression as UnaryExpression;
+            var unary = expression as UnaryExpression;
             if (unary.Operand is MethodCallExpression)//解析!x=>x.Name.Contains("xxx")或!array.Contains(x.Name)这类
                 return ResolveLinqToObject(unary.Operand, false);
             if (unary.Operand is MemberExpression && unary.NodeType == ExpressionType.Not)//解析x=>!x.isDeletion这样的
             {
-                ConstantExpression constant = Expression.Constant(false);
+                var constant = Expression.Constant(false);
                 return ResolveFunc(unary.Operand, constant, ExpressionType.Equal);
             }
         }
         if (expression is MemberExpression && expression.NodeType == ExpressionType.MemberAccess)//解析x=>x.isDeletion这样的
         {
-            MemberExpression member = expression as MemberExpression;
-            ConstantExpression constant = Expression.Constant(true);
+            var member = expression as MemberExpression;
+            var constant = Expression.Constant(true);
             return ResolveFunc(member, constant, ExpressionType.Equal);
         }
         if (expression is MethodCallExpression)//x=>x.Name.Contains("xxx")或array.Contains(x.Name)这类
         {
-            MethodCallExpression methodcall = expression as MethodCallExpression;
+            var methodcall = expression as MethodCallExpression;
             return ResolveLinqToObject(methodcall, true);
         }
         //已经修改过代码body应该不会是null值了
@@ -325,7 +325,7 @@ internal static class GetCacheKey
         var Operator = GetOperator(body.NodeType);
         var Left = Resolve(body.Left);
         var Right = Resolve(body.Right);
-        string Result = string.Format("({0} {1} {2})", Left, Operator, Right);
+        var Result = string.Format("({0} {1} {2})", Left, Operator, Right);
         return Result;
     }
 
@@ -373,7 +373,7 @@ internal static class GetCacheKey
             ExpressionType.LessThanOrEqual => "<=",
             ExpressionType.GreaterThan => ">",
             ExpressionType.GreaterThanOrEqual => ">=",
-            _ => throw new Exception(string.Format("不支持{0}此种运算符查找！" + expressiontype)),
+            _ => throw new Exception(string.Format("不支持{0}此种运算符查找！" + expressiontype))
         };
     }
 
@@ -384,35 +384,35 @@ internal static class GetCacheKey
         var Field_Array = Argument1.Value.GetType().GetFields().First();
         object[] Array = Field_Array.GetValue(Argument1.Value) as object[];
         List<string> SetInPara = new List<string>();
-        for (int i = 0; i < Array.Length; i++)
+        for (var i = 0; i < Array.Length; i++)
         {
-            string Value = Array[i].ToString();
+            var Value = Array[i].ToString();
             SetInPara.Add(Value);
         }
-        string Name = Argument2.Member.Name;
-        string Operator = Convert.ToBoolean(isTrue) ? "in" : " not in";
-        string CompName = string.Join(",", SetInPara);
-        string Result = string.Format("{0} {1} ({2})", Name, Operator, CompName);
+        var Name = Argument2.Member.Name;
+        var Operator = Convert.ToBoolean(isTrue) ? "in" : " not in";
+        var CompName = string.Join(",", SetInPara);
+        var Result = string.Format("{0} {1} ({2})", Name, Operator, CompName);
         return Result;
     }
 
     private static string Like(MethodCallExpression expression)
     {
         var Temp = expression.Arguments[0];
-        LambdaExpression lambda = Expression.Lambda(Temp);
-        Delegate fn = lambda.Compile();
+        var lambda = Expression.Lambda(Temp);
+        var fn = lambda.Compile();
         var tempValue = Expression.Constant(fn.DynamicInvoke(null), Temp.Type);
-        string Value = string.Format("%{0}%", tempValue);
-        string Name = (expression.Object as MemberExpression).Member.Name;
-        string Result = string.Format("{0} like {1}", Name, Value);
+        var Value = string.Format("%{0}%", tempValue);
+        var Name = (expression.Object as MemberExpression).Member.Name;
+        var Result = string.Format("{0} like {1}", Name, Value);
         return Result;
     }
 
     private static string Len(MethodCallExpression expression, object value, ExpressionType expressiontype)
     {
         object Name = (expression.Arguments[0] as MemberExpression).Member.Name;
-        string Operator = GetOperator(expressiontype);
-        string Result = string.Format("len({0}){1}{2}", Name, Operator, value.ToString());
+        var Operator = GetOperator(expressiontype);
+        var Result = string.Format("len({0}){1}{2}", Name, Operator, value.ToString());
         return Result;
     }
 }
