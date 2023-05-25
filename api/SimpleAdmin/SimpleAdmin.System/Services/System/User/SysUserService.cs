@@ -403,7 +403,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                         it.LatestLoginIp,
                         it.LatestLoginTime
                     }).ExecuteCommandAsync() > 0)//修改数据
-                DeleteUserFromRedis(sysUser.Id);//用户缓存到redis
+            {
+                DeleteUserFromRedis(sysUser.Id);//删除用户缓存
+                //删除用户token缓存
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, new string[] { sysUser.Id.ToString() });
+            }
         }
     }
 
@@ -639,6 +643,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 DeleteUserFromRedis(ids);//redis删除用户
                 // TODO 此处需要将这些用户踢下线，并永久注销这些用户
+                var idArray = ids.Select(it => it.ToString()).ToArray();
+                //从列表中删除
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, idArray);
             }
             else
             {
