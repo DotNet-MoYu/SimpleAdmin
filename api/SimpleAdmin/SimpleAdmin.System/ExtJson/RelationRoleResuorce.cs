@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.SqlSugar;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// SYS_ROLE_HAS_RESOURCE

@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.SqlSugar;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// SYS_USER_SCHEDULE_DATA
