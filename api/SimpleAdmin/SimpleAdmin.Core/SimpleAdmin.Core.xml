@@ -4,6 +4,31 @@
         <name>SimpleAdmin.Core</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.Core.BatchEditAttribute">
+            <summary>
+            批量更新
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.CodeGenAttribute">
+            <summary>
+            代码生成
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.IgnoreInitTableAttribute">
+            <summary>
+            忽略初始化表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.IgnoreSeedDataAddAttribute">
+            <summary>
+            种子数据忽略新增
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.IgnoreSeedDataUpdateAttribute">
+            <summary>
+            种子数据忽略修改
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.RolePermissionAttribute">
             <summary>
             需要角色授权权限
@@ -371,6 +396,21 @@
             </summary>
             <param name="json"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Core.BaseOptions">
+            <summary>
+            默认业务配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseOptions.InitTable">
+            <summary>
+            初始化表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseOptions.InitSeedData">
+            <summary>
+            初始化数据
+            </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingSetting">
             <summary>

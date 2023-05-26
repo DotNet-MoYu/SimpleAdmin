@@ -17,37 +17,21 @@
 		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
 	</PropertyGroup>
 
-	<ItemGroup>
-		<Compile Remove="SeedData\**" />
-		<Compile Remove="Services\BatchEdit\**" />
-		<Compile Remove="Services\Gen\**" />
-		<Compile Remove="Services\ImportExport\**" />
-		<EmbeddedResource Remove="SeedData\**" />
-		<EmbeddedResource Remove="Services\BatchEdit\**" />
-		<EmbeddedResource Remove="Services\Gen\**" />
-		<EmbeddedResource Remove="Services\ImportExport\**" />
-		<None Remove="SeedData\**" />
-		<None Remove="Services\BatchEdit\**" />
-		<None Remove="Services\Gen\**" />
-		<None Remove="Services\ImportExport\**" />
-	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="..\.editorconfig" Link=".editorconfig" />
+		<None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="IPTools.China" Version="1.6.0" />
 		<PackageReference Include="UAParser" Version="3.1.47" />
+		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Batch\SimpleAdmin.Plugin.Batch.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.CodeFirst\SimpleAdmin.Plugin.CodeFirst.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.ImportExport\SimpleAdmin.Plugin.ImportExport.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mqtt\SimpleAdmin.Plugin.Mqtt.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
+		<ProjectReference Include="..\SimpleAdmin.SqlSugar\SimpleAdmin.SqlSugar.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -57,6 +41,39 @@
 		<None Update="System.Production.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="SeedData\Json\seed_batch_edit.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_batch_edit_config.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_dev_config.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_dev_dict.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_org.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_position.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_relation.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_resource.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_role.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="SeedData\Json\seed_sys_user.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 </Project>

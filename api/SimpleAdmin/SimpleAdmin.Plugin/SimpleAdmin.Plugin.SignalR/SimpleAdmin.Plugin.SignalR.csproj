@@ -9,7 +9,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Plugin.Cache\SimpleAdmin.Plugin.Cache.csproj" />
+	  <ProjectReference Include="..\..\SimpleAdmin.Cache\SimpleAdmin.Cache.csproj" />
+	  <ProjectReference Include="..\SimpleAdmin.Plugin.Core\SimpleAdmin.Plugin.Core.csproj" />
 	</ItemGroup>
 
 </Project>

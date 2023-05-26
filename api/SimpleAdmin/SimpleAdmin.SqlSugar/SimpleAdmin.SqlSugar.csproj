@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+		<DocumentationFile>SimpleAdmin.SqlSugar.xml</DocumentationFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="SqlSugarCore" Version="5.1.4.77" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="SqlSugar.Development.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="SqlSugar.Production.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Remove="CodeFirst\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="CodeFirst\**" />
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Remove="CodeFirst\**" />
+	</ItemGroup>
+
+</Project>

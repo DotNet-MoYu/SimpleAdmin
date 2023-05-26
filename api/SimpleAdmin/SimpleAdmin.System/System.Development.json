@@ -1,2 +1,7 @@
 {
+  //系统层设置
+  "SystemSettings": {
+    "InitTable": true, //是否初始化表结构
+    "InitSeedData": true, //是否初始化种子数据
+  }
 }

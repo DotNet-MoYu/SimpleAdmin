@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿using SimpleAdmin.Plugin.Core;
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 通知事件总线
@@ -14,9 +16,9 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     public NoticeEventSubsciber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
     {
         _db = DbContext.Db;
-        this._simpleCacheService = simpleCacheService;
-        this._scopeFactory = scopeFactory;
-        this._namedServiceProvider = namedServiceProvider;
+        _simpleCacheService = simpleCacheService;
+        _scopeFactory = scopeFactory;
+        _namedServiceProvider = namedServiceProvider;
     }
 
     /// <summary>

@@ -17,10 +17,13 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="6.0.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="MqttWorker.cs" />
+	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\SimpleAdmin.Cache\SimpleAdmin.Cache.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Cache\SimpleAdmin.Plugin.Cache.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

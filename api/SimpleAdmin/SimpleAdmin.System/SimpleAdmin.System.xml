@@ -4,6 +4,26 @@
         <name>SimpleAdmin.System</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.System.AntTableAttribute">
+            <summary>
+            前端表格特性
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.AntTableAttribute.IsDate">
+            <summary>
+            是否是日期格式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.AntTableAttribute.Ellipsis">
+            <summary>
+            是否自动省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.AntTableAttribute.Width">
+            <summary>
+            宽度
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.InDictAttribute">
             <summary>
             验证值是否在字典中,大数据慎用
@@ -20,6 +40,1152 @@
             </summary>
             <param name="value">值</param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEdit">
+             <summary>
+             批量修改
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEdit.Code">
+             <summary>
+             唯一编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEdit.ConfigId">
+             <summary>
+             所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEdit.EntityName">
+             <summary>
+             实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEdit.TableName">
+             <summary>
+             表名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEdit.TableDescription">
+             <summary>
+             表描述
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditConfig">
+             <summary>
+             批量修改配置表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.UId">
+             <summary>
+             批量配置Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.ColumnName">
+             <summary>
+             字段名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.ColumnComment">
+             <summary>
+             字段描述
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.DataType">
+             <summary>
+             作用类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.DictTypeCode">
+             <summary>
+             字典值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.NetType">
+             <summary>
+             数据库类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.RequestUrl">
+            <summary>
+            接口名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.RequestType">
+            <summary>
+            接口类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.RequestLabel">
+            <summary>
+            接口结果标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.RequestValue">
+            <summary>
+            接口结果值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfig.Status">
+            <summary>
+            启用状态
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ClientUser">
+             <summary>
+             C端用户
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Avatar">
+             <summary>
+             头像
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Signature">
+             <summary>
+             签名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Account">
+             <summary>
+             账号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Password">
+             <summary>
+             密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Name">
+             <summary>
+             姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Nickname">
+             <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Gender">
+             <summary>
+             性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Age">
+             <summary>
+             年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Birthday">
+             <summary>
+             出生日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Nation">
+             <summary>
+             民族
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.NativePlace">
+             <summary>
+             籍贯
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.HomeAddress">
+             <summary>
+             家庭住址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.MailingAddress">
+             <summary>
+             通信地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.IdCardType">
+             <summary>
+             证件类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.IdCardNumber">
+             <summary>
+             证件号码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.CultureLevel">
+             <summary>
+             文化程度
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.PoliticalOutlook">
+             <summary>
+             政治面貌
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.College">
+             <summary>
+             毕业院校
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Education">
+             <summary>
+             学历
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EduLength">
+             <summary>
+             学制
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Degree">
+             <summary>
+             学位
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Phone">
+             <summary>
+             手机
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.Email">
+             <summary>
+             邮箱
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.HomeTel">
+             <summary>
+             家庭电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.OfficeTel">
+             <summary>
+             办公电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EmergencyContact">
+             <summary>
+             紧急联系人
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EmergencyPhone">
+             <summary>
+             紧急联系人电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EmergencyAddress">
+             <summary>
+             紧急联系人地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EmpNo">
+             <summary>
+             员工编号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.EntryDate">
+             <summary>
+             入职日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.OrgId">
+             <summary>
+             机构id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.PositionId">
+             <summary>
+             职位id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.PositionLevel">
+             <summary>
+             职级
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.DirectorId">
+             <summary>
+             主管id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.PositionJson">
+             <summary>
+             兼任信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LastLoginIp">
+             <summary>
+             上次登录ip
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LastLoginAddress">
+             <summary>
+             上次登录地点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LastLoginTime">
+             <summary>
+             上次登录时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LastLoginDevice">
+             <summary>
+             上次登录设备
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LatestLoginIp">
+             <summary>
+             最新登录ip
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LatestLoginAddress">
+             <summary>
+             最新登录地点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LatestLoginTime">
+             <summary>
+             最新登录时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.LatestLoginDevice">
+             <summary>
+             最新登录设备
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.UserStatus">
+             <summary>
+             用户状态
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ClientUser.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevConfig">
+             <summary>
+             配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevConfig.ConfigKey">
+             <summary>
+             配置键
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevConfig.ConfigValue">
+             <summary>
+             配置值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevConfig.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevConfig.Remark">
+             <summary>
+             备注
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevConfig.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevDict">
+             <summary>
+             字典
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.ParentId">
+             <summary>
+             父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.DictLabel">
+             <summary>
+             字典文字
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.DictValue">
+             <summary>
+             字典值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevDict.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevFile">
+             <summary>
+             文件表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.Engine">
+             <summary>
+             存储引擎
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.Bucket">
+             <summary>
+             存储桶
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.Name">
+             <summary>
+             文件名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.Suffix">
+             <summary>
+             文件后缀
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.SizeKb">
+             <summary>
+             文件大小kb
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.SizeInfo">
+             <summary>
+             文件大小（格式化后）
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.ObjName">
+             <summary>
+             文件的对象名（唯一名称）
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.StoragePath">
+             <summary>
+             文件存储路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.DownloadPath">
+             <summary>
+             文件下载路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevFile.Thumbnail">
+             <summary>
+             图片缩略图
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevLogOperate">
+             <summary>
+             操作日志表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ExeMessage">
+             <summary>
+             具体消息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ClassName">
+             <summary>
+             类名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.MethodName">
+             <summary>
+             方法名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ReqMethod">
+             <summary>
+             请求方式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ReqUrl">
+             <summary>
+             请求地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ParamJson">
+             <summary>
+             请求参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogOperate.ResultJson">
+             <summary>
+             返回结果
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevLogVisit">
+             <summary>
+             访问日志表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.Category">
+             <summary>
+             日志分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.Name">
+             <summary>
+             日志名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.ExeStatus">
+             <summary>
+             执行状态
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpIp">
+             <summary>
+             操作ip
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpAddress">
+             <summary>
+             操作地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpBrowser">
+             <summary>
+             操作浏览器
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpOs">
+             <summary>
+             操作系统
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpTime">
+             <summary>
+             操作时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpUser">
+             <summary>
+             操作人姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevLogVisit.OpAccount">
+             <summary>
+             操作人姓名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevMessage">
+             <summary>
+             站内信
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessage.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessage.Subject">
+             <summary>
+             主题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessage.Content">
+             <summary>
+             正文
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessage.Read">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevMessageUser">
+             <summary>
+             用户消息表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessageUser.MessageId">
+             <summary>
+             消息Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessageUser.UserId">
+             <summary>
+             用户Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DevMessageUser.Read">
+             <summary>
+             已读未读
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevRelation">
+             <summary>
+             开发关系表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysOrg">
+             <summary>
+             组织
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.ParentId">
+             <summary>
+             父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.DirectorId">
+             <summary>
+             主管ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.Name">
+             <summary>
+             名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.Names">
+             <summary>
+             全称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.Code">
+             <summary>
+             编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysOrg.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysPosition">
+             <summary>
+             职位表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysPosition.OrgId">
+             <summary>
+             组织id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysPosition.Name">
+             <summary>
+             名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysPosition.Code">
+             <summary>
+             编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysPosition.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysPosition.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysRelation">
+             <summary>
+             系统关系表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRelation.ObjectId">
+             <summary>
+             对象ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRelation.TargetId">
+             <summary>
+             目标ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRelation.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysResource">
+             <summary>
+             资源
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.ParentId">
+             <summary>
+             父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Title">
+             <summary>
+             标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Name">
+             <summary>
+             别名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Code">
+             <summary>
+             编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Module">
+             <summary>
+             模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.MenuType">
+             <summary>
+             菜单类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Path">
+             <summary>
+             路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Component">
+             <summary>
+             组件
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Icon">
+             <summary>
+             图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Color">
+             <summary>
+             颜色
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Meta">
+            <summary>
+            菜单元标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Children">
+            <summary>
+            字节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.Meta">
+            <summary>
+            菜单元标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.Affix">
+            <summary>
+            是否首页
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.hidden">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysRole">
+             <summary>
+             角色
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.OrgId">
+             <summary>
+             组织id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.Name">
+             <summary>
+             名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.Code">
+             <summary>
+             编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.DefaultDataScope">
+             <summary>
+             默认数据范围
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysRole.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DefaultDataScope">
+            <summary>
+            默认数据范围
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DefaultDataScope.Level">
+            <summary>
+            数据范围等级
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DefaultDataScope.ScopeCategory">
+            <summary>
+            数据范围
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DefaultDataScope.ScopeDefineOrgIdList">
+            <summary>
+            自定义机构范围列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysUser">
+             <summary>
+             用户信息表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Avatar">
+             <summary>
+             头像
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Signature">
+             <summary>
+             签名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Account">
+             <summary>
+             账号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Password">
+             <summary>
+             密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Name">
+             <summary>
+             姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Nickname">
+             <summary>
+             昵称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Gender">
+             <summary>
+             性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Birthday">
+             <summary>
+             出生日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Nation">
+             <summary>
+             民族
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.NativePlace">
+             <summary>
+             籍贯
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.HomeAddress">
+             <summary>
+             家庭住址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.MailingAddress">
+             <summary>
+             通信地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.IdCardType">
+             <summary>
+             证件类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.IdCardNumber">
+             <summary>
+             证件号码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.CultureLevel">
+             <summary>
+             文化程度
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PoliticalOutlook">
+             <summary>
+             政治面貌
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.College">
+             <summary>
+             毕业院校
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Education">
+             <summary>
+             学历
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EduLength">
+             <summary>
+             学制
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Degree">
+             <summary>
+             学位
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Phone">
+             <summary>
+             手机
+             这里使用了SM4自动加密解密
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.Email">
+             <summary>
+             邮箱
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.HomeTel">
+             <summary>
+             家庭电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.OfficeTel">
+             <summary>
+             办公电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EmergencyContact">
+             <summary>
+             紧急联系人
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EmergencyPhone">
+             <summary>
+             紧急联系人电话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EmergencyAddress">
+             <summary>
+             紧急联系人地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EmpNo">
+             <summary>
+             员工编号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.EntryDate">
+             <summary>
+             入职日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.OrgId">
+             <summary>
+             机构id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PositionId">
+             <summary>
+             职位id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PositionLevel">
+             <summary>
+             职级
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.DirectorId">
+             <summary>
+             主管id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PositionJson">
+             <summary>
+             兼任信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LastLoginIp">
+             <summary>
+             上次登录ip
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LastLoginAddress">
+             <summary>
+             上次登录地点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LastLoginTime">
+             <summary>
+             上次登录时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LastLoginDevice">
+             <summary>
+             上次登录设备
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LatestLoginIp">
+             <summary>
+             最新登录ip
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LatestLoginAddress">
+             <summary>
+             最新登录地点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LatestLoginTime">
+             <summary>
+             最新登录时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.LatestLoginDevice">
+             <summary>
+             最新登录设备
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.UserStatus">
+             <summary>
+             用户状态
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.OrgName">
+            <summary>
+            机构信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.OrgNames">
+            <summary>
+            机构信息全称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PositionName">
+            <summary>
+            职位信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.ButtonCodeList">
+            <summary>
+            按钮码集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.PermissionCodeList">
+            <summary>
+            权限码集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.RoleCodeList">
+            <summary>
+            角色码集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.RoleIdList">
+            <summary>
+            角色ID集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.DataScopeList">
+            <summary>
+            数据范围集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.DefaultDataScope">
+            <summary>
+            默认数据范围
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DataScope">
+            <summary>
+            数据范围类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DataScope.ApiUrl">
+            <summary>
+            API接口
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DataScope.DataScopes">
+            <summary>
+            数据范围
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.PositionJson">
+            <summary>
+            兼任信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionJson.OrgId">
+            <summary>
+            组织ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionJson.PositionId">
+            <summary>
+            机构ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionJson.DirectorId">
+            <summary>
+            主管ID
+            </summary>
         </member>
         <member name="T:SimpleAdmin.System.AuthEventSubscriber">
             <summary>
@@ -201,6 +1367,11 @@
             对象映射
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.SystemSettingsOptions">
+            <summary>
+             系统配置
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.MinioUtils">
             <summary>
             Minio功能类
@@ -227,6 +1398,56 @@
             </summary>
             <param name="objectName"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditConfigSeedData">
+            <summary>
+            批量修改字段种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditSeedData">
+            <summary>
+            批量修改配置种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevConfigSeedData">
+            <summary>
+            系统配置种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DevDictSeedData">
+            <summary>
+            字典表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysOrgSeedData">
+            <summary>
+            机构种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysPositionSeedData">
+            <summary>
+            职位表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysRelationSeedData">
+            <summary>
+            关系表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysResourceSeedData">
+            <summary>
+            资源表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysRoleSeedData">
+            <summary>
+            角色种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysUserSeedData">
+            <summary>
+            用户表种子数据
+            </summary>
         </member>
         <member name="T:SimpleAdmin.System.Services.Auth.AuthService">
             <inheritdoc cref="T:SimpleAdmin.System.IAuthService"/>
@@ -280,7 +1501,7 @@
             <param name="expire">过期时间</param>
             <returns>验证码请求号</returns>
         </member>
-        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.ExecLoginB(SimpleAdmin.Plugin.SqlSugar.SysUser,SimpleAdmin.Core.AuthDeviceTypeEumu,SimpleAdmin.Core.LoginClientTypeEnum)">
+        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.ExecLoginB(SimpleAdmin.System.SysUser,SimpleAdmin.Core.AuthDeviceTypeEumu,SimpleAdmin.Core.LoginClientTypeEnum)">
             <summary>
             执行B端登录
             </summary>
@@ -736,6 +1957,208 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.System.BatchEditService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IBatchEditService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.Page(SimpleAdmin.System.BatchEditPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.Add(SimpleAdmin.System.BatchEditAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.SyncColumns(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.Columns(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.GetTables">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.GetUpdateBatchConfigDict(System.String,System.Collections.Generic.List{SimpleAdmin.System.BatchEditColumn})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.GetUpdateBatchConfig(SimpleAdmin.SqlSugar.SqlsugarColumnInfo)">
+            <summary>
+            获取配置
+            </summary>
+            <param name="columnInfo"></param>
+        </member>
+        <member name="M:SimpleAdmin.System.BatchEditService.CheckInput(SimpleAdmin.System.BatchEdit)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="updateBatch"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditPageInput">
+            <summary>
+            批量分页查询参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditPageInput.Code">
+            <summary>
+            唯一编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditPageInput.ConfigId">
+            <summary>
+            所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditPageInput.Entityname">
+            <summary>
+            实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditPageInput.Tablename">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditAddInput">
+            <summary>
+            添加批量参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditAddInput.Code">
+            <summary>
+            唯一编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditAddInput.ConfigId">
+            <summary>
+            所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditAddInput.EntityName">
+            <summary>
+            实体名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditAddInput.TableName">
+            <summary>
+            表名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditAddInput.Tabledescription">
+            <summary>
+            表描述
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditConfigInput">
+            <summary>
+            修改批量参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditConfigInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditInput">
+            <summary>
+            批量修改输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditInput.Code">
+            <summary>
+            批量编辑Code
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditInput.Ids">
+            <summary>
+            Id列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.BatchEditInput.Columns">
+            <summary>
+            字段列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.BatchEditColumn">
+            <summary>
+            批量修改DTO
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IBatchEditService">
+            <summary>
+            批量服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.Page(SimpleAdmin.System.BatchEditPageInput)">
+            <summary>
+            批量分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>分页结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.Add(SimpleAdmin.System.BatchEditAddInput)">
+            <summary>
+            添加批量
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除批量
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.GetTables">
+            <summary>
+            获取需要批量修改的表
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取批量修改配置
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
+            <summary>
+            配置字段
+            </summary>
+            <param name="input">字段信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.Columns(System.String)">
+            <summary>
+            批量配置字段列表
+            </summary>
+            <param name="code">唯一编码</param>
+            <returns>列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.GetUpdateBatchConfigDict(System.String,System.Collections.Generic.List{SimpleAdmin.System.BatchEditColumn})">
+            <summary>
+            获取字典配置
+            </summary>
+            <param name="code">唯一编码</param>
+            <param name="columns">字段信息</param>
+            <returns>sqlsugar对应字典</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IBatchEditService.SyncColumns(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            同步字段
+            </summary>
+            <param name="input">id</param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ConfigService">
             <inheritdoc cref="T:SimpleAdmin.System.IConfigService"/>
         </member>
@@ -757,7 +2180,7 @@
         <member name="M:SimpleAdmin.System.ConfigService.Delete(SimpleAdmin.System.ConfigDeleteInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.ConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevConfig})">
+        <member name="M:SimpleAdmin.System.ConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.DevConfig})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.ConfigService.RefreshCache(System.String)">
@@ -767,7 +2190,7 @@
             <param name="category">分类</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ConfigService.CheckInput(SimpleAdmin.Plugin.SqlSugar.DevConfig)">
+        <member name="M:SimpleAdmin.System.ConfigService.CheckInput(SimpleAdmin.System.DevConfig)">
             <summary>
             检查输入参数
             </summary>
@@ -844,7 +2267,7 @@
             <param name="input">修改参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevConfig})">
+        <member name="M:SimpleAdmin.System.IConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.DevConfig})">
             <summary>
             批量编辑
             </summary>
@@ -896,7 +2319,7 @@
         <member name="M:SimpleAdmin.System.DictService.GetDict(System.String)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevDict})">
+        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.DevDict})">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String[])">
@@ -905,7 +2328,7 @@
         <member name="M:SimpleAdmin.System.DictService.Tree(SimpleAdmin.System.DictTreeInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.DictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevDict},System.Int64)">
+        <member name="M:SimpleAdmin.System.DictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.DictService.RefreshCache">
@@ -913,13 +2336,13 @@
             刷新缓存
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.DictService.CheckInput(SimpleAdmin.Plugin.SqlSugar.DevDict)">
+        <member name="M:SimpleAdmin.System.DictService.CheckInput(SimpleAdmin.System.DevDict)">
             <summary>
             检查输入参数
             </summary>
             <param name="devDict"></param>
         </member>
-        <member name="M:SimpleAdmin.System.DictService.GetDevDictChilden(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevDict},System.Int64)">
+        <member name="M:SimpleAdmin.System.DictService.GetDevDictChilden(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
             <summary>
             获取字典所有下级
             </summary>
@@ -1004,7 +2427,7 @@
             <param name="input">输入参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IDictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevDict},System.Int64)">
+        <member name="M:SimpleAdmin.System.IDictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
             <summary>
             构建字典树形结构
             </summary>
@@ -1039,7 +2462,7 @@
             </summary>
             <returns>字典列表</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.DevDict})">
+        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.DevDict})">
             <summary>
             根据字典DictValue获取字典值列表
             </summary>
@@ -1534,6 +2957,238 @@
         <member name="M:SimpleAdmin.System.VisitLogService.Delete(System.String)">
             <inheritdoc />
         </member>
+        <member name="T:SimpleAdmin.System.ImportPreviewInput">
+            <summary>
+            导入预览输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ImportPreviewOutput`1">
+            <summary>
+            文件导入通用输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportPreviewOutput`1.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportPreviewOutput`1.TableColumns">
+            <summary>
+            动态表头
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportPreviewOutput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.TableColumns">
+            <summary>
+            动态表头
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.TableColumns.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.TableColumns.DataIndex">
+            <summary>
+            数据源
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.TableColumns.Width">
+            <summary>
+            宽度
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.TableColumns.Ellipsis">
+            <summary>
+            超过宽度将自动省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.TableColumns.Date">
+            <summary>
+            是否是日期格式
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ImportResultInput`1">
+            <summary>
+            批量导入结果输入
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultInput`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ImportResultOutPut`1">
+            <summary>
+            导入结果输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultOutPut`1.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultOutPut`1.Total">
+            <summary>
+            总数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultOutPut`1.ImportCount">
+            <summary>
+            导入数量
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultOutPut`1.FailCount">
+            <summary>
+            错误数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportResultOutPut`1.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ImportTemplateInput">
+            <summary>
+            导入基础输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportTemplateInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportTemplateInput.HasError">
+            <summary>
+            是否有错误
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ImportTemplateInput.ErrorInfo">
+            <summary>
+            错误详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IImportExportService">
+            <summary>
+            导入服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.Export``1(System.Collections.Generic.List{``0},System.String)">
+            <summary>
+            导出数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">数据</param>
+            <param name="fileName">文件名</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.GenerateLocalTemplate(System.String,System.String)">
+            <summary>
+            获取本地模板
+            </summary>
+            <param name="fileName">文件名</param>
+            <param name="templateFolder">模板文件夹路径:默认wwwroot下的Template</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.GenerateTemplate``1(System.String)">
+            <summary>
+            生成模板
+            </summary>
+            <typeparam name="T">实体类</typeparam>
+            <param name="fileName">文件名</param>
+            <returns>文件流</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.GetImportPreview``1(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            获取导入预览
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="file">文件</param>
+            <returns>导入预览结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.GetImportResultPreview``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0}@)">
+            <summary>
+            获取预计导入结果
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="data">数据</param>
+            <param name="importData">成功导入数据</param>
+            <returns>预计导入结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.ImportVerification(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.String[])">
+            <summary>
+            导入文件验证
+            </summary>
+            <param name="file">文件</param>
+            <param name="maxSzie">文件最大体积(M)</param>
+            <param name="allowTypes">允许的格式</param>
+        </member>
+        <member name="M:SimpleAdmin.System.IImportExportService.TemplateDataVerification``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <summary>
+            模板数据验证
+            </summary>
+            <typeparam name="T">模板类实体</typeparam>
+            <param name="importResult">结果</param>
+            <returns>导入预览数据</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.ImportExportService">
+            <summary>
+             <inheritdoc cref="T:SimpleAdmin.System.IImportExportService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.ImportVerification(Microsoft.AspNetCore.Http.IFormFile,System.Int32,System.String[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.TemplateDataVerification``1(Magicodes.ExporterAndImporter.Core.Models.ImportResult{``0})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GenerateTemplate``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GenerateLocalTemplate(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetImportPreview``1(Microsoft.AspNetCore.Http.IFormFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetImportResultPreview``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetFileStreamResult(System.String,System.String,System.Boolean)">
+            <summary>
+            获取文件流
+            </summary>
+            <param name="path"></param>
+            <param name="fileName"></param>
+            <param name="isPathFolder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetFileStreamResult(System.Byte[],System.String)">
+            <summary>
+            获取文件流
+            </summary>
+            <param name="byteArray"></param>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetFileName(System.String)">
+            <summary>
+            获取文件名
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ImportExportService.GetTemplateFolder">
+            <summary>
+            获取本地模板路径
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ScheduleListInput">
             <summary>
             日程列表查询参数
@@ -1689,7 +3344,7 @@
             组织架构服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.ISysOrgService.IsExistOrgByName(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.String,System.Int64,System.Int64@)">
+        <member name="M:SimpleAdmin.System.ISysOrgService.IsExistOrgByName(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.String,System.Int64,System.Int64@)">
             <summary>
             检查组织是否存在
             </summary>
@@ -1728,7 +3383,7 @@
             <param name="isContainOneself"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysOrgService.GetOrgParents(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64,System.Boolean)">
+        <member name="M:SimpleAdmin.System.ISysOrgService.GetOrgParents(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Boolean)">
             <summary>
             根据组织Id递归获取上级
             </summary>
@@ -1782,7 +3437,7 @@
             <param name="name">名称</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysOrgService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64)">
+        <member name="M:SimpleAdmin.System.ISysOrgService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64)">
             <summary>
             构建组织树形结构
             </summary>
@@ -1827,10 +3482,10 @@
         <member name="M:SimpleAdmin.System.SysOrgService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetOrgParents(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64,System.Boolean)">
+        <member name="M:SimpleAdmin.System.SysOrgService.GetOrgParents(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.IsExistOrgByName(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.String,System.Int64,System.Int64@)">
+        <member name="M:SimpleAdmin.System.SysOrgService.IsExistOrgByName(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.String,System.Int64,System.Int64@)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.Add(SimpleAdmin.System.SysOrgAddInput,System.String)">
@@ -1848,17 +3503,17 @@
         <member name="M:SimpleAdmin.System.SysOrgService.RefreshCache">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64)">
+        <member name="M:SimpleAdmin.System.SysOrgService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysOrg,System.String)">
+        <member name="M:SimpleAdmin.System.SysOrgService.CheckInput(SimpleAdmin.System.SysOrg,System.String)">
             <summary>
             检查输入参数
             </summary>
             <param orgName="sysOrg"></param>
             <param orgName="name">名称</param>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetParentListByIds(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.SysOrgService.GetParentListByIds(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Collections.Generic.List{System.Int64})">
             <summary>
             根据组织Id列表获取所有父级组织
             </summary>
@@ -1866,7 +3521,7 @@
             <param orgName="orgIds">机构Id列表</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetSysOrgChilden(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64)">
+        <member name="M:SimpleAdmin.System.SysOrgService.GetSysOrgChilden(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64)">
             <summary>
             获取组织所有下级
             </summary>
@@ -1874,7 +3529,7 @@
             <param orgName="parentId">父ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.CopySysOrgChilden(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64,System.Int64)">
+        <member name="M:SimpleAdmin.System.SysOrgService.CopySysOrgChilden(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Int64)">
             <summary>
             赋值组织的所有下级
             </summary>
@@ -1883,13 +3538,13 @@
             <param orgName="newParentId">新父Id</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.RedirectOrg(SimpleAdmin.Plugin.SqlSugar.SysOrg)">
+        <member name="M:SimpleAdmin.System.SysOrgService.RedirectOrg(SimpleAdmin.System.SysOrg)">
             <summary>
             重新生成组织实体
             </summary>
             <param orgName="org"></param>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetNames(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64,System.String)">
+        <member name="M:SimpleAdmin.System.SysOrgService.GetNames(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.String)">
             <summary>
             获取全称
             </summary>
@@ -2043,7 +3698,7 @@
         <member name="M:SimpleAdmin.System.SysPositionService.RefreshCache">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysPosition,System.String)">
+        <member name="M:SimpleAdmin.System.SysPositionService.CheckInput(SimpleAdmin.System.SysPosition,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -2181,7 +3836,7 @@
         <member name="M:SimpleAdmin.System.ButtonService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysResource)">
+        <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.System.SysResource)">
             <summary>
             检查输入参数
             </summary>
@@ -2354,7 +4009,7 @@
             <param name="input">id</param>
             <returns>详细信息</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.IMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <summary>
             构建菜单树形结构
             </summary>
@@ -2395,7 +4050,7 @@
             <inheritdoc cref="T:SimpleAdmin.System.IMenuService"/>
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.MenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.MenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.MenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
@@ -2416,7 +4071,7 @@
         <member name="M:SimpleAdmin.System.MenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.MenuService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysResource)">
+        <member name="M:SimpleAdmin.System.MenuService.CheckInput(SimpleAdmin.System.SysResource)">
             <summary>
             检查输入参数
             </summary>
@@ -2492,7 +4147,7 @@
         <member name="M:SimpleAdmin.System.ModuleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysResource)">
+        <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.System.SysResource)">
             <summary>
             检查输入参数
             </summary>
@@ -2602,7 +4257,7 @@
             <param name="isContainOneself">是否包含自己</param>
             <returns>资源列表</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64,System.Boolean)">
+        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
             <summary>
             根据资源ID获取所有下级资源
             </summary>
@@ -2678,7 +4333,7 @@
         <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Int64,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64,System.Boolean)">
+        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetListByCategory(System.String)">
@@ -2701,7 +4356,7 @@
             <param name="template">路由名称</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceChilden(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceChilden(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <summary>
             获取资源所有下级
             </summary>
@@ -2709,7 +4364,7 @@
             <param name="parentId">父ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <summary>
             获取上级
             </summary>
@@ -2724,7 +4379,7 @@
             <param name="moduleId">模块ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenuTitle(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},SimpleAdmin.Plugin.SqlSugar.SysResource)">
+        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenuTitle(System.Collections.Generic.List{SimpleAdmin.System.SysResource},SimpleAdmin.System.SysResource)">
             <summary>
             获取授权菜单类菜单名称
             </summary>
@@ -2827,7 +4482,7 @@
         <member name="M:SimpleAdmin.System.SpaService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysResource)">
+        <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.System.SysResource)">
             <summary>
             检查输入参数
             </summary>
@@ -3121,7 +4776,7 @@
         <member name="M:SimpleAdmin.System.RoleService.RefreshCache">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysRole)">
+        <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.System.SysRole)">
             <summary>
             检查输入参数
             </summary>
@@ -3336,7 +4991,7 @@
         <member name="M:SimpleAdmin.System.UserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource})">
+        <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
             <summary>
             获取父菜单集合
             </summary>
@@ -3344,7 +4999,7 @@
             <param name="myMenus">我的菜单列表</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetMyModules(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Collections.Generic.List{System.Int64},System.Int32)">
+        <member name="M:SimpleAdmin.System.UserCenterService.GetMyModules(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{System.Int64},System.Int32)">
             <summary>
             获取我的模块集合
             </summary>
@@ -3353,14 +5008,14 @@
             <param name="spaCount"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <summary>
             构建Meta
             </summary>
             <param name="myMenus">我的菜单集合</param>
             <param name="firstSpaId">第一个单页面ID</param>
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysOrg},System.Int64,System.Int64)">
+        <member name="M:SimpleAdmin.System.UserCenterService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Int64)">
             <summary>
             构建机构树
             </summary>
@@ -3967,14 +5622,14 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysUser})">
+        <member name="M:SimpleAdmin.System.ISysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.System.SysUser})">
             <summary>
             设置用户默认值
             </summary>
             <param name="sysUsers"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+        <member name="M:SimpleAdmin.System.ISysUserService.Edits(SimpleAdmin.System.BatchEditInput)">
             <summary>
             批量编辑
             </summary>
@@ -4013,14 +5668,14 @@
             </summary>
             <returns>模板</returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.System.ISysUserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
             <param name="input">预览参数</param>
             <returns>预览结果</returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
+        <member name="M:SimpleAdmin.System.ISysUserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
             <summary>
             用户导入
             </summary>
@@ -4091,7 +5746,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.Edit(SimpleAdmin.System.UserEditInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+        <member name="M:SimpleAdmin.System.SysUserService.Edits(SimpleAdmin.System.BatchEditInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.DisableUser(SimpleAdmin.Core.BaseIdInput)">
@@ -4124,10 +5779,10 @@
         <member name="M:SimpleAdmin.System.SysUserService.Template">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.System.SysUserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
+        <member name="M:SimpleAdmin.System.SysUserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.Export(SimpleAdmin.System.UserPageInput)">
@@ -4136,7 +5791,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.CheckImport``1(System.Collections.Generic.List{``0},System.Boolean)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.SysUser})">
+        <member name="M:SimpleAdmin.System.SysUserService.SetUserDefault(System.Collections.Generic.List{SimpleAdmin.System.SysUser})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.GetDefaultPassWord(System.Boolean)">
@@ -4145,7 +5800,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysUser)">
+        <member name="M:SimpleAdmin.System.SysUserService.CheckInput(SimpleAdmin.System.SysUser)">
             <summary>
             检查输入参数
             </summary>
@@ -4177,6 +5832,14 @@
             AppStartup启动类
             </summary>
         </member>
+        <member name="M:SimpleAdmin.System.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices中不能解析服务，比如App.GetService()，尤其是不能在ConfigureServices中获取诸如缓存等数据进行初始化，应该在Configure中进行
+            服务都还没初始化完成，会导致内存中存在多份 IOC 容器！！
+            正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
+            </summary>
+            <param name="services"></param>
+        </member>
         <member name="T:SimpleAdmin.System.UserManager">
             <summary>
             当前登录用户信息
@@ -4205,6 +5868,26 @@
         <member name="P:SimpleAdmin.System.UserManager.OrgId">
             <summary>
             机构ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.Entity.System.ClientRelation">
+            <summary>
+             C端用户关系
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.ObjectId">
+             <summary>
+             对象ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.TargetId">
+             <summary>
+             目标ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.Entity.System.ClientRelation.Category">
+             <summary>
+             分类
             </summary>
         </member>
     </members>

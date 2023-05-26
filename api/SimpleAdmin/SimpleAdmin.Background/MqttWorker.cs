@@ -1,7 +1,7 @@
 using Masuit.Tools;
 using NewLife.MQTT;
 using SimpleAdmin.Core;
-using SimpleAdmin.Plugin.Cache;
+using SimpleAdmin.Cache;
 
 namespace SimpleAdmin.Background;
 

@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.Plugin.Gen;
+﻿using System.Reflection;
+
+namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
 /// AppStartup启动类
@@ -13,11 +15,17 @@ public class Startup : AppStartup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
+        //代码生成器配置转实体
+        services.AddConfigurableOptions<GenSettingsOptions>();
         //试图引擎
         services.AddViewEngine();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        var fullName = Assembly.GetExecutingAssembly().FullName;//获取程序集全名
+        //通过 App.GetOptions<TOptions> 获取选项
+        var settings = App.GetOptions<GenSettingsOptions>();
+        CodeFirstUtils.CodeFirst(settings, fullName);//CodeFirst
     }
 }

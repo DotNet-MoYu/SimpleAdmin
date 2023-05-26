@@ -4,6 +4,51 @@
         <name>SimpleAdmin.Application</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.System.GenTest">
+             <summary>
+             代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Nation">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Money">
+            <summary>
+            存款
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ApplicationSettingsOptions">
+            <summary>
+             系统配置
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Application.GenTestPageInput">
             <summary>
             测试分页查询参数
@@ -17,11 +62,6 @@
         <member name="P:SimpleAdmin.Application.GenTestPageInput.Sex">
             <summary>
             性别
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.Application.GenTestPageInput.OrgId">
-            <summary>
-            组织机构Id
             </summary>
         </member>
         <member name="T:SimpleAdmin.Application.GenTestAddInput">
@@ -174,25 +214,22 @@
         <member name="M:SimpleAdmin.Application.GenTestService.Edit(SimpleAdmin.Application.GenTestEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
-            <inheritdoc/>
-        </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Template">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.GenTestService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
+        <member name="M:SimpleAdmin.Application.GenTestService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Export(SimpleAdmin.Application.GenTestPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.CheckInput(SimpleAdmin.Plugin.SqlSugar.GenTest)">
+        <member name="M:SimpleAdmin.Application.GenTestService.CheckInput(SimpleAdmin.System.GenTest)">
             <summary>
             检查输入参数
             </summary>
@@ -248,13 +285,6 @@
             <param name="input">编辑参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IGenTestService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
-            <summary>
-            测试批量编辑
-            </summary>
-            <param name="input">批量编辑信息</param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Application.IGenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除测试
@@ -268,14 +298,14 @@
             </summary>
             <returns>模板</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IGenTestService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.IGenTestService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             测试导入预览
             </summary>
             <param name="input">预览参数</param>
             <returns>预览结果</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IGenTestService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
+        <member name="M:SimpleAdmin.Application.IGenTestService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.GenTestImportInput})">
             <summary>
             测试导入
             </summary>
@@ -356,7 +386,7 @@
         <member name="M:SimpleAdmin.Application.OrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysOrg,System.String)">
+        <member name="M:SimpleAdmin.Application.OrgService.CheckInput(SimpleAdmin.System.SysOrg,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -423,7 +453,7 @@
         <member name="M:SimpleAdmin.Application.PositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysPosition,System.String)">
+        <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.System.SysPosition,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -522,7 +552,7 @@
             <param name="input">Id列表</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <summary>
             导入预览
             </summary>
@@ -542,14 +572,14 @@
             <param name="input">查询参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+        <member name="M:SimpleAdmin.Application.IUserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <summary>
             导入数据
             </summary>
             <param name="input">数据</param>
             <returns>导入结果</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Edits(SimpleAdmin.System.BatchEditInput)">
             <summary>
             批量编辑
             </summary>
@@ -579,7 +609,7 @@
         <member name="M:SimpleAdmin.Application.UserService.Edit(SimpleAdmin.System.UserEditInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Edits(SimpleAdmin.Plugin.Batch.BatchEditInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Edits(SimpleAdmin.System.BatchEditInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.DisableUser(SimpleAdmin.Core.BaseIdInput)">
@@ -600,16 +630,16 @@
         <member name="M:SimpleAdmin.Application.UserService.Template">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Preview(SimpleAdmin.Plugin.ImportExport.ImportPreviewInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Preview(SimpleAdmin.System.ImportPreviewInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Export(SimpleAdmin.System.UserPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.Plugin.ImportExport.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
+        <member name="M:SimpleAdmin.Application.UserService.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.Application.BizUserImportInput})">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.Plugin.SqlSugar.SysUser,System.String)">
+        <member name="M:SimpleAdmin.Application.UserService.CheckInput(SimpleAdmin.System.SysUser,System.String)">
             <summary>
             检查输入参数
             </summary>
@@ -645,6 +675,14 @@
             <summary>
             AppStartup启动类
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Application.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices中不能解析服务，比如App.GetService()，尤其是不能在ConfigureServices中获取诸如缓存等数据进行初始化，应该在Configure中进行
+            服务都还没初始化完成，会导致内存中存在多份 IOC 容器！！
+            正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
+            </summary>
+            <param name="services"></param>
         </member>
     </members>
 </doc>

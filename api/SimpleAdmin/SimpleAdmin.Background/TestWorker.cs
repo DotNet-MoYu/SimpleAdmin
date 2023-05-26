@@ -1,4 +1,4 @@
-﻿using SimpleAdmin.Plugin.Cache;
+﻿using SimpleAdmin.Cache;
 
 namespace SimpleAdmin.Background;
 
@@ -15,5 +15,6 @@ public class TestWorker : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
+
     }
 }

@@ -10,18 +10,23 @@ namespace SimpleAdmin.Plugin.Mqtt;
 public class MqttService : IMqttService
 {
     private readonly ISimpleCacheService _simpleCacheService;
+    private readonly ISysUserService _sysUserService;
+    private readonly IConfigService _configService;
 
-    public MqttService(ISimpleCacheService simpleCacheService)
+    public MqttService(ISimpleCacheService simpleCacheService, ISysUserService sysUserService, IConfigService configService)
     {
         this._simpleCacheService = simpleCacheService;
+        this._sysUserService = sysUserService;
+        this._configService = configService;
     }
 
     /// <inheritdoc/>
-    public async Task<MqttParameterOutput> GetWebLoginParameter(SysUser user)
+    public async Task<MqttParameterOutput> GetWebLoginParameter()
     {
+        var user = await _sysUserService.GetUserById(UserManager.UserId);//获取用户信息
         var token = JWTEncryption.GetJwtBearerToken((DefaultHttpContext)App.HttpContext); // 获取当前token
         //获取mqtt配置
-        var mqttconfig = await GetMqttConfig();
+        var mqttconfig = await _configService.GetListByCategory(CateGoryConst.Config_MQTT_BASE);
         //地址
         var url = mqttconfig.Where(it => it.ConfigKey == DevConfigConst.MQTT_PARAM_URL).Select(it => it.ConfigValue).FirstOrDefault();
         //用户名
@@ -58,12 +63,13 @@ public class MqttService : IMqttService
     }
 
     /// <inheritdoc/>
-    public async Task<MqttAuthOutput> Auth(MqttAuthInput input, string userId)
+    public async Task<MqttAuthOutput> Auth(MqttAuthInput input)
     {
+        var user = await _sysUserService.GetUserByAccount(input.Username);
         MqttAuthOutput mqttAuthOutput = new MqttAuthOutput { Is_superuser = false, Result = "deny" };
 
         //获取用户token
-        var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
+        var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, user.Id.ToString());
         if (tokens != null)
         {
             if (tokens.Any(it => it.Token == input.Password))//判断是否有token
@@ -74,22 +80,6 @@ public class MqttService : IMqttService
 
     #region 方法
 
-    private async Task<List<DevConfig>> GetMqttConfig()
-    {
-        var key = CacheConst.Cache_DevConfig + CateGoryConst.Config_MQTT_BASE;//mqtt配置key
-        //先从redis拿配置
-        var configList = _simpleCacheService.Get<List<DevConfig>>(key);
-        if (configList == null)
-        {
-            //redis没有再去数据可拿
-            configList = await DbContext.Db.Queryable<DevConfig>().Where(it => it.Category == CateGoryConst.Config_MQTT_BASE).ToListAsync();//获取mqtt配置配置列表
-            if (configList.Count > 0)
-            {
-                _simpleCacheService.Set(key, configList);//如果不为空,插入redis
-            }
-        }
-        return configList;
-    }
 
     #endregion 方法
 }

@@ -44,6 +44,386 @@
             后端
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenBasicController">
+            <summary>
+            代码生成基础控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.Page(SimpleAdmin.Core.BasePageInput)">
+            <summary>
+            代码生成基础分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.Tables(System.Boolean)">
+            <summary>
+            获取所有表信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.GetAssemblies">
+            <summary>
+            获取项目所有程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.Add(SimpleAdmin.Plugin.Gen.GenBasicAddInput)">
+            <summary>
+            添加代码生成器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.Edit(SimpleAdmin.Plugin.Gen.GenBasicEditInput)">
+            <summary>
+            编辑代码生成器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除代码生成配置
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            代码生成预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.ExecGenPro(SimpleAdmin.Plugin.Gen.ExecGenInput)">
+            <summary>
+            执行代码生成(本地)"
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicController.ExecGenZip(SimpleAdmin.Plugin.Gen.ExecGenInput)">
+            <summary>
+            执行代码生成(压缩包)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenConfigController">
+            <summary>
+            代码生成配置控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigController.List(System.String)">
+            <summary>
+            查询代码生成详细配置列表
+            </summary>
+            <param name="basicId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenConfig})">
+            <summary>
+            编辑代码生成详细
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenBasic">
+             <summary>
+             代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ConfigId">
+             <summary>
+             所属库
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.DbTable">
+             <summary>
+             主表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.EntityName">
+            <summary>
+            表实体名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.Functions">
+             <summary>
+             功能列表 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.DataPermission">
+             <summary>
+             数据权限 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ModuleType">
+             <summary>
+             生成模版 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.TreeId">
+             <summary>
+             树Id字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.TreePid">
+             <summary>
+             树父Id字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.TreeName">
+             <summary>
+             树名称字段 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ChildTable">
+             <summary>
+             关联子表名 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ChildFk">
+             <summary>
+             关联子表外键 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.TablePrefix">
+             <summary>
+             移除表前缀
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.GenerateType">
+             <summary>
+             生成方式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.Module">
+             <summary>
+             所属模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.MenuPid">
+             <summary>
+             上级目录
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.RouteName">
+             <summary>
+             业务名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.Icon">
+             <summary>
+             图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.FunctionName">
+             <summary>
+             功能名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.FunctionNameSuffix">
+             <summary>
+             功能名后缀
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.BusName">
+             <summary>
+             业务名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ClassName">
+             <summary>
+             类名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.FormLayout">
+             <summary>
+             表单布局
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.GridWhether">
+             <summary>
+             使用栅格
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.LeftTree">
+             <summary>
+             左侧树
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.FrontedPath">
+             <summary>
+             前端项目路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ServicePosition">
+             <summary>
+             服务代码存放位置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.ControllerPosition">
+             <summary>
+             控制器代码存放位置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.AuthorName">
+             <summary>
+             作者
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.SortCode">
+             <summary>
+             排序
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenBasic.FuncList">
+             <summary>
+             功能列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenConfig">
+             <summary>
+             代码生成配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.BasicId">
+             <summary>
+             基础ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldIndex">
+            <summary>
+            字段排序
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.IsPrimarykey">
+             <summary>
+             是否主键
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldName">
+             <summary>
+             字段
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldRemark">
+             <summary>
+             名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldType">
+             <summary>
+             类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldNetType">
+             <summary>
+             实体类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.EffectType">
+             <summary>
+             作用类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FkEntityName">
+            <summary>
+            外键显示字段
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FkColumnId">
+            <summary>
+            外键ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FkColumnName">
+            <summary>
+            外键显示字段
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.DictTypeCode">
+             <summary>
+             字典
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.Width">
+             <summary>
+             列宽度
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherTable">
+             <summary>
+             列表显示
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherRetract">
+             <summary>
+             列省略
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherResizable">
+             <summary>
+             可伸缩列
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherAddUpdate">
+             <summary>
+             是否增改
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherImportExport">
+             <summary>
+             是否导入导出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.WhetherRequired">
+             <summary>
+             必填
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.QueryWhether">
+             <summary>
+             查询
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.QueryType">
+             <summary>
+             查询方式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.SortCode">
+             <summary>
+             排序
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldNameFirstLower">
+            <summary>
+            字段名首字母小写
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Gen.GenConfig.FieldNameFirstUpper">
+            <summary>
+            字段名首字母大写
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenSettingsOptions">
+            <summary>
+            代码生成器配置
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenBaseSeedData">
+            <summary>
+            系统配置种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Gen.GenConfigSeedData">
+            <summary>
+            系统配置种子数据
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Gen.GenBasicAddInput">
             <summary>
             代码生成基础添加参数
@@ -421,7 +801,7 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecGenZip(SimpleAdmin.Plugin.Gen.ExecGenInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecBackend(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.SqlSugar.GenBasic,System.String,System.Boolean)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecBackend(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.Gen.GenBasic,System.String,System.Boolean)">
             <summary>
             生成后端代码文件
             </summary>
@@ -430,7 +810,7 @@
             <param name="backendPath">后端生成路径</param>
             <param name="isZip">是否是zip方式</param>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecFronted(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.SqlSugar.GenBasic,System.String)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.ExecFronted(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenBasePreviewOutput.GenBaseCodeResult},SimpleAdmin.Plugin.Gen.GenBasic,System.String)">
             <summary>
             生成前端代码文件
             </summary>
@@ -469,7 +849,7 @@
             <param name="templatePath">模板路径</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenViewModel(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.GetGenViewModel(SimpleAdmin.Plugin.Gen.GenBasic)">
             <summary>
             获取代码生成视图
             </summary>
@@ -491,7 +871,7 @@
             <param name="path">文件夹路径</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.PreviewGen(SimpleAdmin.Plugin.Gen.GenBasic)">
             <summary>
             代码生成预览
             </summary>
@@ -505,7 +885,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.CreateMenuButtonAndRelation(SimpleAdmin.Plugin.SqlSugar.GenBasic)">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenBasicService.CreateMenuButtonAndRelation(SimpleAdmin.Plugin.Gen.GenBasic)">
             <summary>
             创建代码生成相关的菜单按钮和授权关系
             </summary>
@@ -587,7 +967,7 @@
         <member name="M:SimpleAdmin.Plugin.Gen.GenConfigService.List(System.Int64)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.GenConfig})">
+        <member name="M:SimpleAdmin.Plugin.Gen.GenConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenConfig})">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.Plugin.Gen.IGenConfigService">
@@ -595,7 +975,7 @@
             代码生成详细配置服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Gen.IGenConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.SqlSugar.GenConfig})">
+        <member name="M:SimpleAdmin.Plugin.Gen.IGenConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.Plugin.Gen.GenConfig})">
             <summary>
             批量更新
             </summary>

@@ -13,8 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Plugin.Cache\SimpleAdmin.Plugin.Cache.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin.SqlSugar\SimpleAdmin.Plugin.SqlSugar.csproj" />
+		<ProjectReference Include="..\..\SimpleAdmin.System\SimpleAdmin.System.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

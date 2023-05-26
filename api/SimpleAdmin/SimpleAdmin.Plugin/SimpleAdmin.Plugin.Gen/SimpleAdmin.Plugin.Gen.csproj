@@ -12,6 +12,18 @@
 		<Compile Remove="CodeGen\Backend\Service\**" />
 		<EmbeddedResource Remove="CodeGen\Backend\Service\**" />
 		<None Remove="CodeGen\Backend\Service\**" />
+		<None Update="Gen.Development.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Gen.Production.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="SeedData\Json\seed_gen_basic.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="SeedData\Json\seed_gen_config.json">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 
 	<ItemGroup>

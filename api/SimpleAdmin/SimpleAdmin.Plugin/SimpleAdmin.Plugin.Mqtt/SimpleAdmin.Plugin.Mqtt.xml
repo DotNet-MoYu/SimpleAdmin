@@ -24,6 +24,24 @@
             新消息
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Plugin.Mqtt.MqttController">
+            <summary>
+            mqtt服务控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttController.GetParameter">
+            <summary>
+            获取mqtt登录参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttController.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
+            <summary>
+            mqtt认证
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttComponent">
             <summary>
              mqtt组件
@@ -119,7 +137,7 @@
             Mqtt服务
              </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput,System.String)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
             <summary>
             mqtt登录http认证
             </summary>
@@ -127,7 +145,7 @@
             <param name="userId">用户Id</param>
             <returns>认证结果</returns>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.GetWebLoginParameter(SimpleAdmin.Plugin.SqlSugar.SysUser)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.IMqttService.GetWebLoginParameter">
             <summary>
             获取mqtt登录web端参数
             </summary>
@@ -138,10 +156,10 @@
             <inheritdoc cref="T:SimpleAdmin.Plugin.Mqtt.IMqttService"/>
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.GetWebLoginParameter(SimpleAdmin.Plugin.SqlSugar.SysUser)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.GetWebLoginParameter">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput,System.String)">
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttService.Auth(SimpleAdmin.Plugin.Mqtt.MqttAuthInput)">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttNoticeService">

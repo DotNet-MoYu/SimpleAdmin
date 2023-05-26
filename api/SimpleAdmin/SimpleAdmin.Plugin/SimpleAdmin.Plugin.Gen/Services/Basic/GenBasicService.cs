@@ -1,6 +1,4 @@
-﻿using SqlSugar;
-
-namespace SimpleAdmin.Plugin.Gen;
+﻿namespace SimpleAdmin.Plugin.Gen;
 
 /// <summary>
 /// <inheritdoc cref="IGenbasicService"/>
