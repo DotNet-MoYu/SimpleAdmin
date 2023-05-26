@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.System;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 用户管理控制器
@@ -13,10 +13,10 @@ public class UserController : BaseController
 
     public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService, IRoleService roleService)
     {
-        this._sysUserService = sysUserService;
-        this._sysOrgService = sysOrgService;
-        this._sysPositionService = sysPositionService;
-        this._roleService = roleService;
+        _sysUserService = sysUserService;
+        _sysOrgService = sysOrgService;
+        _sysPositionService = sysPositionService;
+        _roleService = roleService;
     }
 
     #region Get请求

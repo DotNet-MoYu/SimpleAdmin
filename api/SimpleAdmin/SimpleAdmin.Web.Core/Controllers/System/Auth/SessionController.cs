@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.Auth;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 会话管理控制器
@@ -12,7 +12,7 @@ public class SessionController
 
     public SessionController(ISessionService sessionService)
     {
-        this._sessionService = sessionService;
+        _sessionService = sessionService;
     }
 
     /// <summary>

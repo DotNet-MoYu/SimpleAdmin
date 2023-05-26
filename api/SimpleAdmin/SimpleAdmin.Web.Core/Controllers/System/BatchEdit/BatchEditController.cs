@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.BatchEdit;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 批量控制器
@@ -11,7 +11,7 @@ public class BatchEditController : BaseController
 
     public BatchEditController(IBatchEditService updateBatchService)
     {
-        this._batchEditService = updateBatchService;
+        _batchEditService = updateBatchService;
     }
 
     #region Get请求

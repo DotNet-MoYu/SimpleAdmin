@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.Dev;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 站内信控制器
@@ -11,7 +11,7 @@ public class MessageController : BaseController
 
     public MessageController(IMessageService messageService)
     {
-        this._messageService = messageService;
+        _messageService = messageService;
     }
 
     /// <summary>

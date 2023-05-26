@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.Dev;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 文件管理控制器
@@ -11,7 +11,7 @@ public class FileController : BaseController
 
     public FileController(IFileService fileService)
     {
-        this._fileService = fileService;
+        _fileService = fileService;
     }
 
     /// <summary>

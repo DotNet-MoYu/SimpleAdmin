@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Web.Core.Controllers.System.System;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 角色管理控制器
@@ -13,10 +13,10 @@ public class RoleController : BaseController
 
     public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService, ISysUserService sysUserService)
     {
-        this._roleService = roleService;
-        this._resourceService = resourceService;
-        this._sysOrgService = sysOrgService;
-        this._sysUserService = sysUserService;
+        _roleService = roleService;
+        _resourceService = resourceService;
+        _sysOrgService = sysOrgService;
+        _sysUserService = sysUserService;
     }
 
     /// <summary>
@@ -59,7 +59,6 @@ public class RoleController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除角色")]
     public async Task Delete([FromBody] List<BaseIdInput> input)

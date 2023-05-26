@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
-using Furion.DynamicApiController;
-using SimpleAdmin.Application;
-
-namespace SimpleAdmin.Web.Core;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// 测试控制器
