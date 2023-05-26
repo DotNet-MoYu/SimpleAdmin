@@ -939,18 +939,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.SqlSugar.Startup.InitDb(SimpleAdmin.SqlSugar.SqlSugarConfig)">
-            <summary>
-            初始化数据库表结构
-            </summary>
-            <param name="config">数据库配置</param>
-        </member>
-        <member name="M:SimpleAdmin.SqlSugar.Startup.InitSeedData(SimpleAdmin.SqlSugar.SqlSugarConfig)">
-            <summary>
-            初始化种子数据
-            </summary>
-            <param name="config"></param>
-        </member>
         <member name="T:SimpleAdmin.SqlSugar.CodeFirstUtils">
             <summary>
             CodeFirst功能类
@@ -960,20 +948,20 @@
             <summary>
              CodeFirst生成数据库表结构和种子数据
             </summary>
-            <param name="options">选项</param>
-            <param name="assemblyName">程序集</param>
+            <param name="options">codefirst选项</param>
+            <param name="assemblyName">程序集名称</param>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.CodeFirstUtils.InitTable(System.String)">
             <summary>
             初始化数据库表结构
             </summary>
-            <param name="assemblyName"></param>
+            <param name="assemblyName">程序集名称</param>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.CodeFirstUtils.InitSeedData(System.String)">
             <summary>
             初始化种子数据
             </summary>
-            <param name="config"></param>
+            <param name="assemblyName">程序集名称</param>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.CodeFirstUtils.HasImplementedRawGeneric(System.Type,System.Type)">
             <summary>
