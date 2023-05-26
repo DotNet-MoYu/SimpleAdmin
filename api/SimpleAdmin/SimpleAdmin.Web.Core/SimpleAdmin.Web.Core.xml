@@ -374,451 +374,117 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController">
+        <member name="T:SimpleAdmin.Web.Core.SessionController">
             <summary>
             会话管理控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.PageB(SimpleAdmin.System.SessionPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.PageB(SimpleAdmin.System.SessionPageInput)">
             <summary>
             B端会话分页
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.PageC(SimpleAdmin.System.SessionPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.PageC(SimpleAdmin.System.SessionPageInput)">
             <summary>
             C端会话分页
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.Analysis">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.Analysis">
             <summary>
             会话统计
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitSessionForB(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.ExitSessionForB(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             强退B端会话
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitSessionForC(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.ExitSessionForC(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             强退C端会话
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitTokenForB(SimpleAdmin.System.ExitTokenInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.ExitTokenForB(SimpleAdmin.System.ExitTokenInput)">
             <summary>
             强退B端Token
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Auth.SessionController.ExitTokenForC(SimpleAdmin.System.ExitTokenInput)">
+        <member name="M:SimpleAdmin.Web.Core.SessionController.ExitTokenForC(SimpleAdmin.System.ExitTokenInput)">
             <summary>
             强退C端Token
             </summary>
             <param name="input"></param>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController">
+        <member name="T:SimpleAdmin.Web.Core.BaseController">
+            <summary>
+            基础控制器
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.BatchEditController">
             <summary>
             批量控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Page(SimpleAdmin.System.BatchEditPageInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Page(SimpleAdmin.System.BatchEditPageInput)">
             <summary>
             批量分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Tables">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Tables">
             <summary>
             获取表信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.ConfigList(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.ConfigList(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取批量配置信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Columns(System.String)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Columns(System.String)">
             <summary>
             获取批量配置信息
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Add(SimpleAdmin.System.BatchEditAddInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Add(SimpleAdmin.System.BatchEditAddInput)">
             <summary>
             添加批量
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
             <summary>
             配置修改批量
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除批量
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.BatchEdit.BatchEditController.Sync(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Sync(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             批量更新同步
             </summary>
             <param name="input"></param>
             <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController">
-            <summary>
-            文件管理控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController.Page(SimpleAdmin.System.FilePageInput)">
-            <summary>
-            文件查询分页
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController.UploadLocal(Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            上传本地文件
-            </summary>
-            <param name="File"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController.UploadMinio(Microsoft.AspNetCore.Http.IFormFile)">
-            <summary>
-            上传MINIO文件
-            </summary>
-            <param name="File"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除文件
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.FileController.DownLoad(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            下载文件
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController">
-            <summary>
-            站内信控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Page(SimpleAdmin.System.MessagePageInput)">
-            <summary>
-            分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Send(SimpleAdmin.System.MessageSendInput)">
-            <summary>
-            发送站内信
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            消息详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.Dev.MessageController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除站内信
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.System.RoleController">
-            <summary>
-            角色管理控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.Page(SimpleAdmin.System.RolePageInput)">
-            <summary>
-            角色分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.Add(SimpleAdmin.System.RoleAddInput)">
-            <summary>
-            添加角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.Edit(SimpleAdmin.System.RoleEditInput)">
-            <summary>
-            修改角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.ResourceTreeSelector">
-            <summary>
-            获取角色授权资源树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色拥有资源
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.GrantResource(SimpleAdmin.System.GrantResourceInput)">
-            <summary>
-            给角色授权资源
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.PermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取权限授权树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色拥有权限
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
-            <summary>
-            给角色授权权限
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
-            <summary>
-            获取用户选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.OwnUser(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色下的用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.RoleController.GrantUser(SimpleAdmin.System.GrantUserInput)">
-            <summary>
-            给角色授权用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.Controllers.System.System.UserController">
-            <summary>
-            用户管理控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <summary>
-            获取角色选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Page(SimpleAdmin.System.UserPageInput)">
-            <summary>
-            用户分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
-            <summary>
-            获取用户选择器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
-            <summary>
-            职位选择器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取用户拥有角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取用户拥有资源
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取用户拥有权限
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.PermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取权限授权树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
-            <summary>
-            导入预览
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Template">
-            <summary>
-            模板下载
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Add(SimpleAdmin.System.UserAddInput)">
-            <summary>
-            添加用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Edit(SimpleAdmin.System.UserEditInput)">
-            <summary>
-            修改用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Edits(SimpleAdmin.System.BatchEditInput)">
-            <summary>
-            批量修改用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
-            <summary>
-            删除用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.DisableUser(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            禁用用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.EnableUser(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            启用用户
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.ResetPassword(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            重置密码
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
-            <summary>
-            给用户授权角色
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantResource(SimpleAdmin.System.UserGrantResourceInput)">
-            <summary>
-            给用户授权资源
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
-            <summary>
-            给用户授权权限
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
-            <summary>
-            用户导入
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.Controllers.System.System.UserController.Export(SimpleAdmin.System.UserPageInput)">
-            <summary>
-            用户导出
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.BaseController">
-            <summary>
-            基础控制器
-            </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.ConfigController">
             <summary>
@@ -911,6 +577,46 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.FileController">
+            <summary>
+            文件管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.FileController.Page(SimpleAdmin.System.FilePageInput)">
+            <summary>
+            文件查询分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.FileController.UploadLocal(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传本地文件
+            </summary>
+            <param name="File"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.FileController.UploadMinio(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            上传MINIO文件
+            </summary>
+            <param name="File"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.FileController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除文件
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.FileController.DownLoad(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            下载文件
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.LogOperateController">
             <summary>
             操作日志控制器
@@ -976,6 +682,39 @@
         <member name="M:SimpleAdmin.Web.Core.LogVisitController.Delete(SimpleAdmin.System.VisitLogDeleteInput)">
             <summary>
             清空日志
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.MessageController">
+            <summary>
+            站内信控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Page(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Send(SimpleAdmin.System.MessageSendInput)">
+            <summary>
+            发送站内信
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            消息详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除站内信
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1251,6 +990,105 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.RoleController">
+            <summary>
+            角色管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Page(SimpleAdmin.System.RolePageInput)">
+            <summary>
+            角色分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Add(SimpleAdmin.System.RoleAddInput)">
+            <summary>
+            添加角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Edit(SimpleAdmin.System.RoleEditInput)">
+            <summary>
+            修改角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.ResourceTreeSelector">
+            <summary>
+            获取角色授权资源树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色拥有资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            给角色授权资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.PermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取权限授权树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色拥有权限
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+            <summary>
+            给角色授权权限
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.OrgTreeSelector">
+            <summary>
+            获取组织树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+            <summary>
+            获取用户选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色下的用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <summary>
+            给角色授权用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.SpaController">
             <summary>
             单页管理控制器
@@ -1365,6 +1203,168 @@
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
             <summary>
             修改头像
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.UserController">
+            <summary>
+            用户管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.OrgTreeSelector">
+            <summary>
+            获取组织树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            获取角色选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Page(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            用户分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+            <summary>
+            获取用户选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
+            <summary>
+            职位选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取用户拥有权限
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.PermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取权限授权树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Preview(SimpleAdmin.System.ImportPreviewInput)">
+            <summary>
+            导入预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Template">
+            <summary>
+            模板下载
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Add(SimpleAdmin.System.UserAddInput)">
+            <summary>
+            添加用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Edit(SimpleAdmin.System.UserEditInput)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Edits(SimpleAdmin.System.BatchEditInput)">
+            <summary>
+            批量修改用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <summary>
+            删除用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.DisableUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            禁用用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.EnableUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            启用用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.ResetPassword(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            重置密码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.GrantRole(SimpleAdmin.System.UserGrantRoleInput)">
+            <summary>
+            给用户授权角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.GrantResource(SimpleAdmin.System.UserGrantResourceInput)">
+            <summary>
+            给用户授权资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+            <summary>
+            给用户授权权限
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Import(SimpleAdmin.System.ImportResultInput{SimpleAdmin.System.SysUserImportInput})">
+            <summary>
+            用户导入
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Export(SimpleAdmin.System.UserPageInput)">
+            <summary>
+            用户导出
             </summary>
             <param name="input"></param>
             <returns></returns>

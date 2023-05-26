@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.System
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// 站内信与接收用户拓展

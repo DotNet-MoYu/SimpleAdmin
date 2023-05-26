@@ -1362,6 +1362,121 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.System.RelationMsgUser">
+            <summary>
+            站内信与接收用户拓展
+            MSG_TO_USER
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationMsgUser.Read">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RelationRolePermission">
+            <summary>
+            SYS_ROLE_HAS_PERMISSION
+            角色权限关系扩展
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationRolePermission.ScopeCategory">
+            <summary>
+            数据范围
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationRolePermission.ScopeDefineOrgIdList">
+            <summary>
+            自定义机构范围列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationRolePermission.ApiUrl">
+            <summary>
+            接口Url
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RelationRoleResuorce">
+            <summary>
+            SYS_ROLE_HAS_RESOURCE
+            角色有哪些资源扩展
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationRoleResuorce.MenuId">
+            <summary>
+            菜单ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationRoleResuorce.ButtonInfo">
+            <summary>
+            按钮信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RelationUserSchedule">
+            <summary>
+            SYS_USER_SCHEDULE_DATA
+            用户日程扩展
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserSchedule.ScheduleDate">
+            <summary>
+            日程日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserSchedule.ScheduleTime">
+            <summary>
+            日程时间
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserSchedule.ScheduleContent">
+            <summary>
+            日程内容
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserSchedule.ScheduleUserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserSchedule.ScheduleUserName">
+            <summary>
+            用户姓名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RelationUserWorkBench">
+            <summary>
+            SYS_USER_WORKBENCH_DATA
+            用户工作台扩展
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RelationUserWorkBench.Shortcut">
+            <summary>
+            快捷方式列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.WorkBenchShortcut">
+            <summary>
+            工作台快捷方式信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.WorkBenchShortcut.Id">
+            <summary>
+            id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.WorkBenchShortcut.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.WorkBenchShortcut.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.WorkBenchShortcut.Path">
+            <summary>
+            路由地址
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.Mapper">
             <summary>
             对象映射
