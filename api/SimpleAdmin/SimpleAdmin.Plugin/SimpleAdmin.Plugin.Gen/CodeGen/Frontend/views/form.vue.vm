@@ -152,6 +152,7 @@ var selectCount=selectColumns.Count;//选择框数量
   // 打开抽屉 
   const onOpen = (record) => {
       visible.value = true //显示抽屉
+      @{FkGet();}
 	  //表单数据
       formData.value = {
 	    @foreach (var column in addOrUpdateColumns){//遍历增改字段
@@ -233,14 +234,27 @@ var selectCount=selectColumns.Count;//选择框数量
 </script>
 }
 
+//外键选项
 void FkOptions(){
 foreach (var column in tableFieIds){//遍历字段
 if(column.EffectType=="fk"){//如果是外键
   @:const fk@(column.FkEntityName)Options = ref() //@(column.FieldRemark)数据
+  @:const getFk@(column.FkEntityName)Options= () => {
   @:@(@Model.ClassNameFirstLower)Api.@(@Model.BusName)Fk@(column.FkEntityName)Selector().then((data) => {
   @:  fk@(column.FkEntityName)Options.value = data
   @:})
+  @:}
   @:
+}
+}
+}
+
+//获取外键
+void FkGet(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+      @:getFk@(column.FkEntityName)Options()
+      @:
 }
 }
 }

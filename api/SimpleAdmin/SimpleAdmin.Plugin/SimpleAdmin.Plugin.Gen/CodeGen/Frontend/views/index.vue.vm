@@ -298,6 +298,8 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
 
   @{TableConst();}
   
+  @{FkOptions();}
+  
   // 表格查询 返回 Promise 对象
   const loadData = (parameter) => {
       @if(searchCount>0){
@@ -347,7 +349,6 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
   @:const @(@column.FieldNameFirstLower)Options = tool.dictList('@column.DictTypeCode')
   }}}
   
-  @{FkOptions();}
   
   @if(isLeftTree){ //如果左侧树不为空则生成左侧树方法
   @{LeftTreeMethod(@Model.LeftTree);}
@@ -364,7 +365,7 @@ var isSelect=searchColumns.Any(it => it.EffectType=="select"||it.EffectType=="ra
 void FkOptions(){
 foreach (var column in tableFieIds){//遍历字段
 if(column.EffectType=="fk"){//如果是外键
-  @:const fk@(column.FkEntityName)Options = ref() //@(column.FieldRemark)数据
+  @:const fk@(column.FkEntityName)Options = ref([]) //@(column.FieldRemark)数据
   @:@(@Model.ClassNameFirstLower)Api.@(busName)Fk@(column.FkEntityName)Selector().then((data) => {
   @:  fk@(column.FkEntityName)Options.value = data
   @:})

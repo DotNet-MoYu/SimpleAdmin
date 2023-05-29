@@ -60,9 +60,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var names = new List<string>();//结果集
         var excludeList = new List<string>
         {
-            "Web.Entry", "Core", "Plugin.Core", "Plugin.Gen", "Plugin.ImportExport",
-            "Plugin.Batch", "Plugin.Mqtt", "Plugin.SignalR", "Plugin.Cache", "Plugin.CodeFirst", "Plugin.SqlSugar",
-            "Plugin.Aop"
+            "Web.Entry", "Core", "Cache", "SqlSugar", "Plugin.Core", "Plugin.Gen", "Plugin.Mqtt", "Plugin.SignalR", "Plugin.Aop"
         };//排除的程序集
         //获取所有程序集名称
         var assemblies = App.Assemblies
