@@ -246,7 +246,6 @@ public class AuthService : IAuthService
             }
         });
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
-        _ = DateTime.UtcNow.AddMinutes(expire).ToLong();
         // 生成刷新Token令牌
         var refreshToken = JWTEncryption.GenerateRefreshToken(accessToken, expire * 2);
         // 设置Swagger自动登录
