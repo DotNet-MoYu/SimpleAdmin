@@ -16,7 +16,7 @@ public class GenConfig : BaseEntity
     /// <summary>
     /// 字段排序
     /// </summary>
-    [SugarColumn(ColumnName = "FieldIndex", ColumnDescription = "字段排序")]
+    [SugarColumn(ColumnName = "FieldIndex", ColumnDescription = "字段排序", IsNullable = true)]
     public int FieldIndex { get; set; }
 
     /// <summary>
