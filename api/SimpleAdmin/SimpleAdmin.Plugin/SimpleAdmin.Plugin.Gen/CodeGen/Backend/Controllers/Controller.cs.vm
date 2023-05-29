@@ -36,7 +36,7 @@ public class @(@Model.ClassName)Controller: IDynamicApiController
     @:,IOrgService orgService
     }
     else{
-    @:,ISysOrgService sysOrgService,
+    @:,ISysOrgService sysOrgService
     }
     }
     )
@@ -206,7 +206,12 @@ if(isOrgTree){
     @:[DisplayName("组织树查询")]
     @:public async Task<dynamic> OrgTreeSelector()
     @:{
-        @:return await _orgService.Tree();
+         @if(dataPermission){
+          @:return _orgService.Tree();
+         }
+         else{
+          @:return _sysOrgService.Tree();
+        }
     @:}
 }
 else if(isTreeList){
