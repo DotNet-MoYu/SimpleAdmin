@@ -12,20 +12,20 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     private readonly IMessageService _messageService;
 
     public UserCenterService(ISysUserService userService,
-                             IRelationService relationService,
-                             IResourceService resourceService,
-                             IMenuService menuService,
-                             IConfigService configService,
-                             ISysOrgService sysOrgService,
-                             IMessageService messageService)
+        IRelationService relationService,
+        IResourceService resourceService,
+        IMenuService menuService,
+        IConfigService configService,
+        ISysOrgService sysOrgService,
+        IMessageService messageService)
     {
         _userService = userService;
         _relationService = relationService;
         _resourceService = resourceService;
-        this._menuService = menuService;
+        _menuService = menuService;
         _configService = configService;
-        this._sysOrgService = sysOrgService;
-        this._messageService = messageService;
+        _sysOrgService = sysOrgService;
+        _messageService = messageService;
     }
 
     #region 查询
@@ -44,7 +44,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 //获取角色所拥有的资源集合
                 resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
-            HashSet<long> menuIdList = new HashSet<long>();
+            var menuIdList = new HashSet<long>();
 
             //获取菜单集合
             menuIdList.AddRange(resourceList.Select(r => r.TargetId.ToLong()).ToList());
@@ -85,12 +85,12 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             myMenus.AddRange(myModules);//模块添加到菜单列表
             // 遍历单页列表
             allSpaList.ForEach(it =>
-             {
-                 // 将第一个模块作为所有单页面的所属模块，并添加
-                 var firstModuleId = myModules[0].Id;
-                 it.ParentId = firstModuleId;
-                 it.Module = firstModuleId;
-             });
+            {
+                // 将第一个模块作为所有单页面的所属模块，并添加
+                var firstModuleId = myModules[0].Id;
+                it.ParentId = firstModuleId;
+                it.Module = firstModuleId;
+            });
 
             myMenus.AddRange(allSpaList);//但也添加到菜单
 
@@ -193,7 +193,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             Phone = input.Phone,
             Nickname = input.Nickname,
             Gender = input.Gender,
-            Birthday = input.Birthday,
+            Birthday = input.Birthday
         }, it => it.Id == UserManager.UserId);
         if (result)
             _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
@@ -240,6 +240,9 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
         if (userInfo.Password != password) throw Oops.Bah("原密码错误");
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
+        // var similarity = PwdUtil.Similarity(password, newPassword);
+        // if (similarity > 80)
+        //     throw Oops.Bah($"新密码请勿与旧密码过于相似");
         newPassword = CryptogramUtil.Sm4Encrypt(newPassword);//SM4加密
         userInfo.Password = newPassword;
         await Context.Updateable(userInfo).UpdateColumns(it => new { it.Password }).ExecuteCommandAsync();//修改密码
@@ -253,7 +256,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
 
         var file = input.File;
         using var fileStream = file.OpenReadStream();//获取文件流
-        byte[] bytes = new byte[fileStream.Length];
+        var bytes = new byte[fileStream.Length];
         fileStream.Read(bytes, 0, bytes.Length);
         fileStream.Close();
         var base64String = Convert.ToBase64String(bytes);//转base64
@@ -313,7 +316,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 else
                 {
                     // 否则构造一个模块，并添加到拥有模块
-                    SysResource sysResource = new SysResource();
+                    var sysResource = new SysResource();
                     sysResource.Id = CommonUtils.GetSingleId();
                     sysResource.Path = "/" + RandomHelper.CreateRandomString(10);
                     sysResource.Category = CateGoryConst.Resource_MODULE;
@@ -354,7 +357,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 }
             }
             //定义meta
-            Meta meta = new Meta { Icon = it.Icon, Title = it.Title, Type = it.Category.ToLower() };
+            var meta = new Meta { Icon = it.Icon, Title = it.Title, Type = it.Category.ToLower() };
             // 如果是菜单，则设置type菜单类型为小写
             if (it.Category == CateGoryConst.Resource_MENU)
             {
