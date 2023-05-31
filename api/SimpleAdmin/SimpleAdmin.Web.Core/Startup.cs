@@ -28,13 +28,13 @@ public class Startup : AppStartup
         //services.AddSchedule();
         //添加控制器相关
         services.AddControllers()
-            .AddInjectWithUnifyResult<SimpleAdminResultProvider>()//配置统一返回模型
             .AddNewtonsoftJson(options => //配置json
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();// 首字母小写（驼峰样式）
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 时间格式化
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;// 忽略循环引用
-            });
+            }).AddInjectWithUnifyResult<SimpleAdminResultProvider>()//配置统一返回模型
+            ;
 
         //Nginx代理的话获取真实IP
         services.Configure<ForwardedHeadersOptions>(options =>

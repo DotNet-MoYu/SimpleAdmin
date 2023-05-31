@@ -207,10 +207,10 @@ if(isOrgTree){
     @:public async Task<dynamic> OrgTreeSelector()
     @:{
          @if(dataPermission){
-          @:return _orgService.Tree();
+          @:return await _orgService.Tree();
          }
          else{
-          @:return _sysOrgService.Tree();
+          @:return await _sysOrgService.Tree();
         }
     @:}
 }
