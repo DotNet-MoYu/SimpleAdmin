@@ -1103,6 +1103,27 @@
             <param name="h">高</param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.Core.Utils.PwdUtil">
+            <summary>
+            密码相关通用类
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.PwdUtil.Similarity(System.String,System.String)">
+            <summary>
+            密码相似度
+            </summary>
+            <param name="oldPassword"></param>
+            <param name="newPassword"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Core.Utils.PwdUtil.LevenshteinDistance(System.String,System.String)">
+            <summary>
+            计算莱文斯坦距离算法
+            </summary>
+            <param name="s1"></param>
+            <param name="s2"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String,System.Int32,System.Int32)">
             <summary>
             压缩单个文件
