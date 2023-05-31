@@ -5,6 +5,7 @@ namespace SimpleAdmin.SqlSugar;
 /// <summary>
 /// AppStartup启动类
 /// </summary>
+[AppStartup(98)]
 public class Startup : AppStartup
 {
     /// <summary>

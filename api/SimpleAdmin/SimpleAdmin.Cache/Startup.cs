@@ -3,6 +3,7 @@
 /// <summary>
 /// AppStartup启动类
 /// </summary>
+[AppStartup(97)]
 public class Startup : AppStartup
 {
     /// <summary>
@@ -39,7 +40,7 @@ public class Startup : AppStartup
         //如果需要清除缓存
         if (cacheSettings.UseRedis && cacheSettings.RedisSettings.ClearRedis)
         {
-            var redis = App.GetService<ISimpleCacheService>(); //获取redis服务
+            var redis = App.GetService<ISimpleCacheService>();//获取redis服务
             //删除redis的key
             redis.DelByPattern(CacheConst.Cache_Prefix_Web);
         }
