@@ -625,6 +625,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 if (update)//如果需要更新主管信息
                     updatePositionJsonUser.Add(position);
             });
+            //定义删除的关系
+            var delRelations = new List<string> { CateGoryConst.Relation_SYS_USER_HAS_RESOURCE, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, CateGoryConst.Relation_SYS_USER_HAS_ROLE };
             //事务
             var result = await itenant.UseTranAsync(async () =>
             {
@@ -638,10 +640,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     await Context.Updateable(updatePositionJsonUser).UpdateColumns(it => it.PositionJson).ExecuteCommandAsync();
                 //删除用户
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());
+
+                var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
+                //删除关系表用户与资源关系，用户与权限关系,用户与角色关系
+                await relationRep.DeleteAsync(it => ids.Contains(it.ObjectId) && delRelations.Contains(it.Category));
             });
             if (result.IsSuccess)//如果成功了
             {
                 DeleteUserFromRedis(ids);//redis删除用户
+                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
+                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);//关系表刷新SYS_USER_HAS_ROLE缓存
+                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//关系表刷新SYS_USER_HAS_ROLE缓存
                 // TODO 此处需要将这些用户踢下线，并永久注销这些用户
                 var idArray = ids.Select(it => it.ToString()).ToArray();
                 //从列表中删除
