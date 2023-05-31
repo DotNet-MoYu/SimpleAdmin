@@ -136,8 +136,9 @@ public interface ISysOrgService : ITransient
     /// 获取组织树型结构
     /// </summary>
     /// <param name="orgIds">机构ID列表</param>
+    /// <param name="treeInput">组织选择器(懒加载用)</param>
     /// <returns>组织树列表</returns>
-    Task<List<SysOrg>> Tree(List<long> orgIds = null);
+    Task<List<SysOrg>> Tree(List<long> orgIds = null, SysOrgTreeInput treeInput = null);
 
     #endregion 其他
 }

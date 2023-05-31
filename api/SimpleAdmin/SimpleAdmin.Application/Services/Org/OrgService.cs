@@ -10,8 +10,8 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
     public OrgService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService, ISysUserService sysUserService)
     {
         _simpleCacheService = simpleCacheService;
-        this._sysOrgService = sysOrgService;
-        this._sysUserService = sysUserService;
+        _sysOrgService = sysOrgService;
+        _sysUserService = sysUserService;
     }
 
     /// <inheritdoc/>
@@ -26,12 +26,12 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
     }
 
     /// <inheritdoc />
-    public async Task<List<SysOrg>> Tree()
+    public async Task<List<SysOrg>> Tree(SysOrgTreeInput input = null)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //构建机构树
-        var result = await _sysOrgService.Tree(dataScope);
+        var result = await _sysOrgService.Tree(dataScope, input);
         return result;
     }
 

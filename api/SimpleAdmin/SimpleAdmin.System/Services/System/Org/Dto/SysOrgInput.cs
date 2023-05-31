@@ -96,3 +96,15 @@ public class SysOrgImportInput : ImportTemplateInput
     [Required(ErrorMessage = "主管账号不能为空")]
     public string Director { get; set; }
 }
+
+/// <summary>
+/// 组织树查询参数
+/// 懒加载用
+/// </summary>
+public class SysOrgTreeInput
+{
+    /// <summary>
+    /// 父Id
+    /// </summary>
+    public long? ParentId { get; set; }
+}
