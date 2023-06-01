@@ -14,9 +14,9 @@ public class BizUserController : IDynamicApiController
 
     public BizUserController(IUserService userService, IOrgService orgService, IPositionService positionService)
     {
-        this._userService = userService;
-        this._orgService = orgService;
-        this._positionService = positionService;
+        _userService = userService;
+        _orgService = orgService;
+        _positionService = positionService;
     }
 
     #region Get请求
@@ -29,6 +29,7 @@ public class BizUserController : IDynamicApiController
     [HttpPost("preview")]
     [DisableRequestSizeLimit]
     [SuppressMonitor]
+    [DisplayName("导入预览")]
     public async Task<dynamic> Preview([FromForm] ImportPreviewInput input)
     {
         return await _userService.Preview(input);
