@@ -359,10 +359,11 @@
             <param name="input">查询参数</param>
             <returns>分页信息</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Tree">
+        <member name="M:SimpleAdmin.Application.IOrgService.Tree(SimpleAdmin.System.SysOrgTreeInput)">
             <summary>
             机构树结构
             </summary>
+            <param name="input">机构选择器</param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Application.OrgService">
@@ -371,7 +372,7 @@
         <member name="M:SimpleAdmin.Application.OrgService.Page(SimpleAdmin.System.SysOrgPageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Tree">
+        <member name="M:SimpleAdmin.Application.OrgService.Tree(SimpleAdmin.System.SysOrgTreeInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.Add(SimpleAdmin.System.SysOrgAddInput)">
