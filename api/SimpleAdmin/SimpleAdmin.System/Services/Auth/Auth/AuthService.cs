@@ -154,7 +154,7 @@ public class AuthService : IAuthService
         var key = CacheConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
         var code = _simpleCacheService.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
-        if (code != null)//如果有
+        if (code != null && validCode != null)//如果有
         {
             //验证码如果不匹配直接抛错误，这里忽略大小写
             if (validCode.ToLower() != code.ToLower()) throw Oops.Bah("验证码错误");
