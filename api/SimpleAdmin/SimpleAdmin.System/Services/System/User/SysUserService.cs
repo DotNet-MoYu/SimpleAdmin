@@ -1,4 +1,7 @@
-﻿namespace SimpleAdmin.System;
+﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.Text;
+using System.Linq.Expressions;
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="ISysUserService"/>
@@ -100,41 +103,29 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var sysUser = _simpleCacheService.HashGetOne<SysUser>(CacheConst.Cache_SysUser, userId.ToString());
         if (sysUser == null)
         {
-            sysUser = await Context.Queryable<SysUser>()
-                .LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)//连表
-                .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)//连表
-                .Where(u => u.Id == userId)
-                .Select((u, o, p) => new SysUser
-                {
-                    Id = u.Id.SelectAll(),
-                    OrgName = o.Name,
-                    PositionName = p.Name
-                })
-                .FirstAsync();
+            sysUser = await GetUserFromDb(userId);//从数据库拿用户信息
+        }
+        return sysUser;
+    }
+
+    /// <inheritdoc/>
+    public async Task<T> GetUserById<T>(long userId)
+    {
+        //先从Redis拿
+        var sysUser = _simpleCacheService.HashGetOne<T>(CacheConst.Cache_SysUser, userId.ToString());
+        if (sysUser == null)
+        {
+            var user = await GetUserFromDb(userId);//从数据库拿用户信息
             if (sysUser != null)
             {
-                sysUser.Password = CryptogramUtil.Sm4Decrypt(sysUser.Password);//解密密码
-                sysUser.Phone = CryptogramUtil.Sm4Decrypt(sysUser.Phone);//解密手机号
-                //获取按钮码
-                var buttonCodeList = await GetButtonCodeList(sysUser.Id);
-                //获取数据权限
-                var dataScopeList = await GetPermissionListByUserId(sysUser.Id, sysUser.OrgId);
-                //获取权限码
-                var permissionCodeList = dataScopeList.Select(it => it.ApiUrl).ToList();
-                //获取角色码
-                var roleCodeList = await _roleService.GetRoleListByUserId(sysUser.Id);
-                //权限码赋值
-                sysUser.ButtonCodeList = buttonCodeList;
-                sysUser.RoleCodeList = roleCodeList.Select(it => it.Code).ToList();
-                sysUser.RoleIdList = roleCodeList.Select(it => it.Id).ToList();
-                sysUser.PermissionCodeList = permissionCodeList;
-                sysUser.DataScopeList = dataScopeList;
-                //插入Redis
-                _simpleCacheService.HashAdd(CacheConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
+                sysUser = user.Adapt<T>();
             }
         }
         return sysUser;
     }
+
+
+
 
     /// <inheritdoc/>
     public async Task<long> GetIdByAccount(string account)
@@ -969,6 +960,50 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 u.Phone = CryptogramUtil.Sm4Decrypt(u.Phone);//手机号解密
             });
         return query;
+    }
+
+
+    /// <summary>
+    /// 数据库获取用户信息
+    /// </summary>
+    /// <param name="userId">用户ID</param>
+    /// <returns></returns>
+    private async Task<SysUser> GetUserFromDb(long userId)
+    {
+        var sysUser = await Context.Queryable<SysUser>()
+            .LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)//连表
+            .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)//连表
+            .Where(u => u.Id == userId)
+            .Select((u, o, p) => new SysUser
+            {
+                Id = u.Id.SelectAll(),
+                OrgName = o.Name,
+                PositionName = p.Name
+            })
+            .FirstAsync();
+        if (sysUser != null)
+        {
+            sysUser.Password = CryptogramUtil.Sm4Decrypt(sysUser.Password);//解密密码
+            sysUser.Phone = CryptogramUtil.Sm4Decrypt(sysUser.Phone);//解密手机号
+            //获取按钮码
+            var buttonCodeList = await GetButtonCodeList(sysUser.Id);
+            //获取数据权限
+            var dataScopeList = await GetPermissionListByUserId(sysUser.Id, sysUser.OrgId);
+            //获取权限码
+            var permissionCodeList = dataScopeList.Select(it => it.ApiUrl).ToList();
+            //获取角色码
+            var roleCodeList = await _roleService.GetRoleListByUserId(sysUser.Id);
+            //权限码赋值
+            sysUser.ButtonCodeList = buttonCodeList;
+            sysUser.RoleCodeList = roleCodeList.Select(it => it.Code).ToList();
+            sysUser.RoleIdList = roleCodeList.Select(it => it.Id).ToList();
+            sysUser.PermissionCodeList = permissionCodeList;
+            sysUser.DataScopeList = dataScopeList;
+            //插入Redis
+            _simpleCacheService.HashAdd(CacheConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
+            return sysUser;
+        }
+        return null;
     }
 
     #endregion 方法

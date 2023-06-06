@@ -65,6 +65,14 @@ public partial interface ISysUserService : ITransient
     Task<SysUser> GetUserById(long userId);
 
     /// <summary>
+    /// 根据用户Id获取用户信息
+    /// </summary>
+    /// <param name="userId">用户ID</param>
+    /// <typeparam name="T">转换的实体</typeparam>
+    /// <returns></returns>
+    Task<T> GetUserById<T>(long userId);
+
+    /// <summary>
     ///根据用户账号获取用户ID
     /// </summary>
     /// <param name="account">用户账号</param>
