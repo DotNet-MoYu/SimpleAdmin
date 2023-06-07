@@ -11,7 +11,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public SysPositionService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService)
     {
         _simpleCacheService = simpleCacheService;
-        this._sysOrgService = sysOrgService;
+        _sysOrgService = sysOrgService;
     }
 
     /// <inheritdoc />
@@ -38,9 +38,9 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var positions = await GetListAsync();
         var result = positions.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//父级
-                         .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-                         .ToList();
+            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .ToList();
         return result;
     }
 
@@ -57,12 +57,12 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var query = Context.Queryable<SysPosition>()
-                         .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//根据组织ID查询
-                         .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-                         .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-                         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
-                         .OrderBy(it => it.SortCode);//排序
+            .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//根据组织ID查询
+            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
+            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
@@ -98,7 +98,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             {
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
-            //获取用户表有兼任组织的信息
+            //获取用户表有兼任组织的信息 oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
             var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
             if (positionJsons.Count > 0)
             {

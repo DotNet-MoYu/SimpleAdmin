@@ -128,7 +128,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     }
 
     /// <inheritdoc />
-    public bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId, out long orgId)
+    public bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId,
+        out long orgId)
     {
         orgId = 0;
         var sysOrg = sysOrgs.Where(it => it.ParentId == parentId && it.Name == orgName).FirstOrDefault();
@@ -246,7 +247,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             {
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
-            //获取用户表有兼任组织的信息
+            //获取用户表有兼任组织的信息，oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
             var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
             if (positionJsons.Count > 0)
             {
