@@ -187,6 +187,14 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 -  👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
 -  👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
   
+## 鸣谢
+
+- 感谢 JetBrains 提供的免费开源 License：
+
+<p>
+<img src="https://images.gitee.com/uploads/images/2020/0406/220236_f5275c90_5531506.png" >
+</p>
+
 
 ##  💾版权声明💾
 
