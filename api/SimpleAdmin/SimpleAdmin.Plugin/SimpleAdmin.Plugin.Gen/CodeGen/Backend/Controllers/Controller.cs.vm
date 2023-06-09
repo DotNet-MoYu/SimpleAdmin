@@ -171,7 +171,7 @@ case "import":
     @:/// </summary>
     @:/// <param name="input"></param>
     @:/// <returns></returns>
-    @:[HttpGet("preview")]
+    @:[HttpPost("preview")]
     @:[DisableRequestSizeLimit]
     @:[SuppressMonitor]
     @:[DisplayName("@(@Model.DescriptionPreview)")]
