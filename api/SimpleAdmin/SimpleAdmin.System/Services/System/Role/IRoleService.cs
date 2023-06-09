@@ -6,6 +6,12 @@
 public interface IRoleService : ITransient
 {
     /// <summary>
+    /// 获取所有角色
+    /// </summary>
+    /// <returns></returns>
+    Task<List<SysRole>> GetListAsync();
+
+    /// <summary>
     /// 添加角色
     /// </summary>
     /// <param name="input">添加参数</param>
@@ -65,8 +71,9 @@ public interface IRoleService : ITransient
     /// 角色拥有资源
     /// </summary>
     /// <param name="input">角色id</param>
+    /// <param name="category">资源类型</param>
     /// <returns>角色拥有资源信息</returns>
-    Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input);
+    Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input, string category);
 
     /// <summary>
     /// 获取角色下的用户

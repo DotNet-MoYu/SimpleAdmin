@@ -11,7 +11,8 @@ public class RoleController : BaseController
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService, ISysUserService sysUserService)
+    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService,
+        ISysUserService sysUserService)
     {
         _roleService = roleService;
         _resourceService = resourceService;
@@ -84,7 +85,7 @@ public class RoleController : BaseController
     [HttpGet("ownResource")]
     public async Task<dynamic> OwnResource([FromQuery] BaseIdInput input)
     {
-        return await _roleService.OwnResource(input);
+        return await _roleService.OwnResource(input, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
     }
 
     /// <summary>

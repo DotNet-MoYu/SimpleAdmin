@@ -26,10 +26,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         _eventPublisher = eventPublisher;
     }
 
-    /// <summary>
-    /// 获取所有橘色
-    /// </summary>
-    /// <returns></returns>
+    /// <inheritdoc/>
     public override async Task<List<SysRole>> GetListAsync()
     {
         //先从Redis拿
@@ -183,12 +180,12 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     }
 
     /// <inheritdoc />
-    public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
+    public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input, string category)
     {
         var roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
         List<RelationRoleResuorce> GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
-        var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
+        var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, category);
         //遍历关系表
         relations.ForEach(it =>
         {
@@ -211,7 +208,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             #region 角色资源处理
 
-            //遍历角色列表
+            //遍历菜单列表
             for (var i = 0; i < menuIds.Count; i++)
             {
                 //将角色资源添加到列表
@@ -220,7 +217,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                     ObjectId = sysRole.Id,
                     TargetId = menuIds[i].ToString(),
                     Category = CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE,
-                    ExtJson = extJsons == null ? null : extJsons[i]
+                    ExtJson = extJsons?[i]
                 });
             }
 

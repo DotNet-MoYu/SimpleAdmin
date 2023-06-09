@@ -284,22 +284,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc />
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
     {
-        var roleOwnResource = new RoleOwnResourceOutput()
-        {
-            Id = input.Id
-        };//定义结果集
-        var grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
-        //获取关系列表
-        var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
-        //遍历关系表
-        relations.ForEach(it =>
-        {
-            //将扩展信息转为实体
-            var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();
-            grantInfoList.Add(relationRole);//添加到已授权信息
-        });
-        roleOwnResource.GrantInfoList = grantInfoList;//赋值已授权信息
-        return roleOwnResource;
+        return await _roleService.OwnResource(input, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
     }
 
     /// <inheritdoc />
