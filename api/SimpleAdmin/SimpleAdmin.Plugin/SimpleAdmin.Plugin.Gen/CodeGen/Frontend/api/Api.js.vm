@@ -68,7 +68,7 @@ case "import":
     @:},
     @:// @(@Model.FunctionName)导入数据
     @:import(data={}) {
-    @:   return request('preview', data, 'post', {
+    @:   return request('import', data, 'post', {
     @:       ignoreError: true
     @:   })
     @:},
