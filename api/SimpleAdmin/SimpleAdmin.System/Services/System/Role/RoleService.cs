@@ -47,7 +47,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc/>
     public async Task<List<SysRole>> GetRoleListByUserId(long userId)
     {
-        List<SysRole> cods = new List<SysRole>();//角色代码集合
+        var cods = new List<SysRole>();//角色代码集合
         var roleList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
         var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
         if (roleIdList.Count > 0)
@@ -183,7 +183,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input, string category)
     {
         var roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
-        List<RelationRoleResuorce> GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        var GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, category);
         //遍历关系表
@@ -284,7 +284,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input)
     {
         var roleOwnPermission = new RoleOwnPermissionOutput { Id = input.Id };//定义结果集
-        List<RelationRolePermission> GrantInfoList = new List<RelationRolePermission>();//已授权信息集合
+        var GrantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
         //遍历关系表
@@ -375,7 +375,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task<List<string>> RolePermissionTreeSelector(BaseIdInput input)
     {
-        List<string> permissionTreeSelectors = new List<string>();//授权树结果集
+        var permissionTreeSelectors = new List<string>();//授权树结果集
         //获取角色资源关系
         var relationsRes = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id).Select(it => it.TargetId.ToLong()).ToList();

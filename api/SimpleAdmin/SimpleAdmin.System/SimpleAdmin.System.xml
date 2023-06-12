@@ -4768,6 +4768,12 @@
             角色服务
             </summary>
         </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GetListAsync">
+            <summary>
+            获取所有角色
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.IRoleService.Add(SimpleAdmin.System.RoleAddInput)">
             <summary>
             添加角色
@@ -4824,11 +4830,12 @@
             <param name="input">角色ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
             <summary>
             角色拥有资源
             </summary>
             <param name="input">角色id</param>
+            <param name="category">资源类型</param>
             <returns>角色拥有资源信息</returns>
         </member>
         <member name="M:SimpleAdmin.System.IRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
@@ -4869,10 +4876,7 @@
             <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
         </member>
         <member name="M:SimpleAdmin.System.RoleService.GetListAsync">
-            <summary>
-            获取所有橘色
-            </summary>
-            <returns></returns>
+            <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.RoleService.GetRoleListByUserId(System.Int64)">
             <inheritdoc/>
@@ -4889,7 +4893,7 @@
         <member name="M:SimpleAdmin.System.RoleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.RoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
@@ -5658,6 +5662,14 @@
             <param name="userId">用户ID</param>
             <returns>用户信息</returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysUserService.GetUserById``1(System.Int64)">
+            <summary>
+            根据用户Id获取用户信息
+            </summary>
+            <param name="userId">用户ID</param>
+            <typeparam name="T">转换的实体</typeparam>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.ISysUserService.GetIdByAccount(System.String)">
              <summary>
             根据用户账号获取用户ID
@@ -5847,6 +5859,9 @@
         <member name="M:SimpleAdmin.System.SysUserService.GetUserById(System.Int64)">
             <inheritdoc/>
         </member>
+        <member name="M:SimpleAdmin.System.SysUserService.GetUserById``1(System.Int64)">
+            <inheritdoc/>
+        </member>
         <member name="M:SimpleAdmin.System.SysUserService.GetIdByAccount(System.String)">
             <inheritdoc/>
         </member>
@@ -5965,6 +5980,13 @@
             获取Sqlsugar的ISugarQueryable
             </summary>  
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.SysUserService.GetUserFromDb(System.Int64)">
+            <summary>
+            数据库获取用户信息
+            </summary>
+            <param name="userId">用户ID</param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.Startup">
