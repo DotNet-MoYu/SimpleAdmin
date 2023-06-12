@@ -14,11 +14,11 @@ public class GenTestPageInput : BasePageInput
   public string Name { get; set; }
   
   /// <summary>
-  /// 性别
+  /// 组织机构Id
   /// </summary>
-  public string Sex { get; set; }
-  
+  public long OrgId { get; set; }
 }
+
 
 /// <summary>
 /// 添加测试参数
@@ -28,43 +28,36 @@ public class GenTestAddInput
   /// <summary>
   /// 姓名
   /// </summary>
-  [Required(ErrorMessage = "Name不能为空")]
   public string Name { get; set; }
   
   /// <summary>
   /// 性别
   /// </summary>
-  [Required(ErrorMessage = "Sex不能为空")]
   public string Sex { get; set; }
   
   /// <summary>
   /// 民族
   /// </summary>
-  [Required(ErrorMessage = "Nation不能为空")]
   public string Nation { get; set; }
   
   /// <summary>
   /// 年龄
   /// </summary>
-  [Required(ErrorMessage = "Age不能为空")]
   public int? Age { get; set; }
   
   /// <summary>
   /// 生日
   /// </summary>
-  [Required(ErrorMessage = "Bir不能为空")]
   public DateTime? Bir { get; set; }
   
   /// <summary>
   /// 排序码
   /// </summary>
-  [Required(ErrorMessage = "SortCode不能为空")]
   public int? SortCode { get; set; }
   
   /// <summary>
   /// 存款
   /// </summary>
-  [Required(ErrorMessage = "Money不能为空")]
   public decimal? Money { get; set; }
   
 }
@@ -80,6 +73,7 @@ public class GenTestEditInput : GenTestAddInput
     [IdNotNull(ErrorMessage = "Id不能为空")]
     public long Id { get; set; }
 }
+
 
 /// <summary>
 /// 测试导入
@@ -136,3 +130,6 @@ public class GenTestImportInput : ImportTemplateInput
   public decimal? Money { get; set; }
   
 }
+
+
+

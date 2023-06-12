@@ -59,9 +59,9 @@
             姓名
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Application.GenTestPageInput.Sex">
+        <member name="P:SimpleAdmin.Application.GenTestPageInput.OrgId">
             <summary>
-            性别
+            组织机构Id
             </summary>
         </member>
         <member name="T:SimpleAdmin.Application.GenTestAddInput">
