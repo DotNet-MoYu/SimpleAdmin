@@ -45,16 +45,15 @@ public class UserService : DbRepository<SysUser>, IUserService
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        if (dataScope == null)
+            return await _sysUserService.UserSelector(input);//查询
         if (dataScope.Count > 0)
         {
             input.OrgIds = dataScope;//赋值机构列表
             return await _sysUserService.UserSelector(input);//查询
         }
-        else
-        {
-            //返回自己
-            return new List<UserSelectorOutPut> { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } };
-        }
+        //返回自己
+        return new List<UserSelectorOutPut> { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } };
     }
 
     /// <inheritdoc />
@@ -63,12 +62,26 @@ public class UserService : DbRepository<SysUser>, IUserService
         var sysRoles = new List<SysRole>();
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        if (dataScope.Count > 0)//如果有机构
+        if (dataScope == null)
+            sysRoles = await _roleService.RoleSelector(input);//获取角色选择器列表
+        else if (dataScope.Count > 0)//如果有机构
         {
             input.OrgIds = dataScope;//将数据范传进去
             sysRoles = await _roleService.RoleSelector(input);//获取角色选择器列表
         }
         return sysRoles;
+    }
+
+    /// <inheritdoc />
+    public async Task<SysUser> Detail(BaseIdInput input)
+    {
+        var user = await _sysUserService.GetUserById(input.Id);
+        if (user != null)
+        {
+            user.Password = null;//清空密码
+            user.Phone = CryptogramUtil.Sm4Decrypt(user.Phone);//手机号解密
+        }
+        return user;
     }
 
     #endregion 查询
@@ -102,7 +115,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         var sysUsers = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
         sysUsers.ForEach(it =>
         {
-            if (!dataScope.Contains(it.OrgId) && it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+            if (dataScope != null && !dataScope.Contains(it.OrgId) && it.CreateUserId != UserManager.UserId)
+                throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
         });
         await _sysUserService.Edits(input);
     }
@@ -148,6 +162,11 @@ public class UserService : DbRepository<SysUser>, IUserService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //获取用户下信息
         var users = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, Id = it.Id });
+        if (dataScope == null)//全部数据权限
+        {
+            await _sysUserService.Delete(input);//删除
+            return;
+        }
         if (dataScope.Count > 0)//如果有机构
         {
             var orgIds = users.Select(it => it.OrgId).ToList();//获取所有用户机构列表
@@ -179,7 +198,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        if (dataScope.Count > 0)
+        if (dataScope == null || dataScope.Count > 0)
         {
             var importPreview = await _importExportService.GetImportPreview<BizUserImportInput>(input.File);
             importPreview.Data = await CheckImport(importPreview.Data, dataScope);//检查导入数据
@@ -263,15 +282,14 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         if (dataScope == null)
             dataScope = await _sysUserService.GetLoginUserApiDataScope();
-
-        if (dataScope.Count > 0)//如果有机构
+        if (dataScope is { Count: > 0 })//如果有机构
         {
             //获取用户信息
             var user = await _sysUserService.GetUserById(userId);
             if (!dataScope.Contains(user.OrgId))//判断用户机构ID是否在数据范围
                 throw Oops.Bah(errorMessage);
         }
-        else
+        else if (dataScope is { Count: 0 })//如果没有机构
         {
             if (userId != UserManager.UserId)//如果不是自己
                 throw Oops.Bah(errorMessage);
@@ -296,7 +314,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             if (!it.ErrorInfo.ContainsKey(nameof(it.OrgName)))
             {
                 //判断是否包含数据范围,如果不包含
-                if (!dataScope.Contains(it.OrgId))
+                if (dataScope != null && !dataScope.Contains(it.OrgId))
                 {
                     it.ErrorInfo.Add(nameof(it.OrgName), errorMessage);
                     if (!it.ErrorInfo.ContainsKey(nameof(it.PositionName)))//如果机构没错
@@ -321,8 +339,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         //动态查询条件
         var exp = Expressionable.Create<SysUser>();
         exp.And(u => u.Account != RoleConst.SuperAdmin);
-        exp.AndIF(dataScope.Count > 0, u => dataScope.Contains(u.OrgId));//用户机构在数据范围内
-        exp.AndIF(dataScope.Count == 0, u => u.Id == UserManager.UserId);//用户ID等于自己
+        exp.AndIF(dataScope is { Count: > 0 }, u => dataScope.Contains(u.OrgId));//用户机构在数据范围内
+        exp.AndIF(dataScope is { Count: 0 }, u => u.Id == UserManager.UserId);//用户ID等于自己
         input.Expression = exp;
         return input;
     }

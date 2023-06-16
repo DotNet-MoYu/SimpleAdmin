@@ -342,7 +342,7 @@ public class DataScope
     /// <summary>
     /// 数据范围
     /// </summary>
-    public List<long> DataScopes { get; set; }
+    public List<long>? DataScopes { get; set; }
 }
 
 /// <summary>

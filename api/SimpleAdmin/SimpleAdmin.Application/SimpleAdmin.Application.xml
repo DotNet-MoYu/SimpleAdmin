@@ -366,6 +366,13 @@
             <param name="input">机构选择器</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Application.IOrgService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            机构详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Application.OrgService">
             <inheritdoc cref="T:SimpleAdmin.Application.IOrgService"/>
         </member>
@@ -385,6 +392,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.OrgService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.CheckInput(SimpleAdmin.System.SysOrg,System.String)">
@@ -434,6 +444,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Application.IPositionService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            岗位详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Application.PositionService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Application.IPositionService"/>
@@ -453,6 +470,9 @@
         </member>
         <member name="M:SimpleAdmin.Application.PositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
             <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.PositionService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.System.SysPosition,System.String)">
             <summary>
@@ -500,6 +520,13 @@
         <member name="M:SimpleAdmin.Application.IUserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
             <summary>
             角色选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IUserService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            人员详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -602,6 +629,9 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.UserService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Add(SimpleAdmin.System.UserAddInput)">

@@ -3,7 +3,6 @@
 /// <summary>
 /// 岗位管理
 /// </summary>
-
 public interface IPositionService : ITransient
 {
     /// <summary>
@@ -40,4 +39,11 @@ public interface IPositionService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<SysPosition>> PositionSelector(PositionSelectorInput input);
+
+    /// <summary>
+    /// 岗位详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysPosition> Detail(BaseIdInput input);
 }

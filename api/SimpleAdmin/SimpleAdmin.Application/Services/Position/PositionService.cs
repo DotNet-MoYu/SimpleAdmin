@@ -39,14 +39,14 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         var ids = input.Select(it => it.Id).ToList();
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        if (dataScope.Count > 0)//如果有机构
+        if (dataScope is { Count: > 0 })//如果有机构
         {
             //获取职位下所有机构ID
             var orgIds = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id)).Select(it => it.OrgId).ToList();
             if (!dataScope.ContainsAll(orgIds))
                 throw Oops.Bah($"您没有权限删除这些岗位");
         }
-        else
+        else if (dataScope is { Count: 0 })//表示仅自己
         {
             //获取要删除的岗位列表
             var positions = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id)).ToList();
@@ -74,6 +74,13 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         return result;
     }
 
+    /// <inheritdoc />
+    public async Task<SysPosition> Detail(BaseIdInput input)
+    {
+        var position = await _sysPositionService.GetSysPositionById(input.Id);
+        return position;
+    }
+
     #region 方法
 
     /// <summary>
@@ -86,12 +93,12 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
         var errorMessage = $"您没有权限在该机构下{operate}岗位";
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        if (dataScope.Count > 0)//如果有机构
+        if (dataScope is { Count: > 0 })//如果有机构
         {
             if (!dataScope.Contains(sysPosition.OrgId))//判断机构ID是否在数据范围
                 throw Oops.Bah(errorMessage);
         }
-        else
+        else if (dataScope is { Count: 0 })// 仅自己
         {
             //如果id大于0表示编辑
             if (sysPosition.Id > 0)

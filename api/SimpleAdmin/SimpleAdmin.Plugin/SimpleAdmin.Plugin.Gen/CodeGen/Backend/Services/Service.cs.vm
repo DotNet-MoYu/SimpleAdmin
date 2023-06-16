@@ -85,7 +85,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @:var errorMessage = $"您没有权限查看该数据";
         @://获取数据范围
         @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        @:if (!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId)//判断机构ID是否在数据范围或者创建人是否为当前登录人
+        @:if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId))//判断机构ID是否在数据范围或者创建人是否为当前登录人
            @:throw Oops.Bah(errorMessage);
         }
         @if(isMasterChild){
@@ -131,7 +131,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @://获取数据范围
         @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         @://判断机构ID是否在数据范围,这里只是简单示例，根据实际情况判断
-        @://if (!dataScope.Contains(@(@Model.ClassNameFirstLower).OrgId))
+        @://if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).OrgId)))
         @://throw Oops.Bah("您没有权限添加该数据");
         }
         await InsertAsync(@Model.ClassNameFirstLower);//插入数据
@@ -148,7 +148,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         await CheckInput(@Model.ClassNameFirstLower);//检查参数
         @if(dataPermission){
         @://判断机构ID是否在数据范围并且创建者是自己,这里只是简单示例，根据实际情况判断
-        @://if (!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId)
+        @://if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId))
             @://throw Oops.Bah("您没有权限编辑该数据");
         }
         await UpdateAsync(@Model.ClassNameFirstLower);//更新数据
@@ -179,7 +179,7 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
         @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
         @:{
-        @:    if (!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        @:    if (dataScope!=null&&!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
         @:});
         }
         @if(isMasterChild){
@@ -239,8 +239,8 @@ public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Mod
         @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         @://动态查询条件,如果是连表查询,里面的it要改成连表里对应的别名
         @:var exp = Expressionable.Create<@(@Model.EntityName)>();
-        @:exp.AndIF(dataScope.Count > 0, it => dataScope.Contains(it.@(orgField)));//用户机构在数据范围内
-        @:exp.AndIF(dataScope.Count == 0, it => it.CreateUserId == UserManager.UserId);//默认创建者ID等于自己,根据实际情况修改条件        
+        @:exp.AndIF(dataScope is { Count: > 0 }, it => dataScope.Contains(it.@(orgField)));//用户机构在数据范围内
+        @:exp.AndIF(dataScope is { Count: 0 }, it => it.CreateUserId == UserManager.UserId);//默认创建者ID等于自己,根据实际情况修改条件        
         }
         @if(@Model.LeftTree=="org"){
         @:var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
@@ -288,7 +288,7 @@ if(column.EffectType=="fk"){//如果是外键
     }
           @:return await Context.Queryable<@(column.FkEntityName)>()
     @if(dataPermission){
-          @://.Where(it => it.CreateOrgId == UserManager.OrgId || dataScope.Contains(it.Id))
+          @://.WhereIf(dataScope!=null,it => it.CreateOrgId == UserManager.OrgId || (dataScope.Contains(it.Id)))
     }
           @:.Select(it => new BaseSelectorOutput { Value = it.@(column.FkColumnId), Label = it.@(column.FkColumnName) }).ToListAsync();
     @:}
@@ -311,7 +311,7 @@ void Edits(){
         @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
         @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
         @:{
-        @:    if (!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        @:    if (dataScope!=null&&!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
         @:});
         }
         @://获取参数字典

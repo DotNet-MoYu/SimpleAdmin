@@ -194,6 +194,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         foreach (var it in relationGroup)
         {
             var scopeSet = new HashSet<long>();//定义不可重复列表
+            var isAll = false;//是否全部
             var relationList = it.ToList();//关系列表
             foreach (var relation in relationList)
             {
@@ -203,7 +204,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 {
                     if (scopeCategory == CateGoryConst.SCOPE_ALL)//全部数据范围
                     {
-                        scopeSet.AddRange(scopeAllList);//添加到范围列表
+                        // scopeSet.AddRange(scopeAllList);//添加到范围列表,针对组织太多的情况，做优化
+                        isAll = true;//标记为全部
                     }
                     else if (scopeCategory == CateGoryConst.SCOPE_ORG)//只有自己机构
                     {
@@ -220,17 +222,20 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     }
                 }
             }
+            var dataScopes = scopeSet.ToList();//获取范围列表转列表
+            if (isAll)
+                dataScopes = null;//如果是全部数据范围,设置dataScopes为空
             permissions.Add(new DataScope
             {
                 ApiUrl = it.Key,
-                DataScopes = scopeSet.ToList()
+                DataScopes = dataScopes
             });//将改URL的权限集合加入权限集合列表
         }
         return permissions;
     }
 
     /// <inheritdoc/>
-    public async Task<List<long>> GetLoginUserApiDataScope()
+    public async Task<List<long>?> GetLoginUserApiDataScope()
     {
         var orgList = new List<long>();
         var userInfo = await GetUserById(UserManager.UserId);//获取用户信息
@@ -238,11 +243,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var routeName = App.HttpContext.Request.Path.Value;
         //获取当前url的数据范围
         var dataScope = userInfo.DataScopeList.Where(it => it.ApiUrl == routeName).FirstOrDefault();
-        if (dataScope != null)
-        {
-            orgList.AddRange(dataScope.DataScopes);//添加到机构列表
-        }
-        return orgList;
+        return dataScope.DataScopes;
     }
 
     /// <inheritdoc/>

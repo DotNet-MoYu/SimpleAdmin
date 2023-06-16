@@ -46,4 +46,11 @@ public interface IOrgService : ITransient
     /// <param name="input">机构选择器</param>
     /// <returns></returns>
     Task<List<SysOrg>> Tree(SysOrgTreeInput input = null);
+
+    /// <summary>
+    /// 机构详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysOrg> Detail(BaseIdInput input);
 }

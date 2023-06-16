@@ -97,7 +97,7 @@ public partial interface ISysUserService : ITransient
     /// 获取当前API用户的数据范围
     /// </summary>
     /// <returns>机构列表</returns>
-    Task<List<long>> GetLoginUserApiDataScope();
+    Task<List<long>?> GetLoginUserApiDataScope();
 
     /// <summary>
     /// 获取用户拥有的资源
