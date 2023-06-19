@@ -1157,6 +1157,11 @@
             默认数据范围
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysUser.ScopeOrgChildList">
+            <summary>
+            机构及以下机构ID集合
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.DataScope">
             <summary>
             数据范围类
@@ -1167,9 +1172,14 @@
             API接口
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.DataScope.ScopeCategory">
+            <summary>
+            数据范围分类
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.DataScope.DataScopes">
             <summary>
-            数据范围
+            数据范围的机构ID列表
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.PositionJson">
@@ -5692,10 +5702,13 @@
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysUserService.GetLoginUserApiDataScope">
-            <summary>
-            获取当前API用户的数据范围
-            </summary>
-            <returns>机构列表</returns>
+             <summary>
+             获取当前API用户的数据范围
+            null:代表拥有全部数据权限
+            [xx,xx]:代表拥有部分机构的权限
+            []：代表仅自己权限
+             </summary>
+             <returns>机构列表</returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysUserService.OwnResource(SimpleAdmin.Core.BaseIdInput)">
             <summary>
