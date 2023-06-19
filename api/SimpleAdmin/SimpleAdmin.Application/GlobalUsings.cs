@@ -18,3 +18,4 @@ global using SimpleAdmin.SqlSugar;
 global using SimpleTool;
 global using SqlSugar;
 global using System.ComponentModel.DataAnnotations;
+global using SimpleAdmin.Core.Utils;
