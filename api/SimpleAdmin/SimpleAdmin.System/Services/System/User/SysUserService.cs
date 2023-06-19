@@ -188,46 +188,33 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             }
         }
         var relationGroup = sysRelations.GroupBy(it => it.TargetId).ToList();//根据目标ID,也就是接口名分组，因为存在一个用户多个角色
-        var orgs = await _sysOrgService.GetListAsync();//获取所有机构
-        var scopeAllList = orgs.Select(it => it.Id).ToList();//获取所有机构ID
         //遍历分组
         foreach (var it in relationGroup)
         {
             var scopeSet = new HashSet<long>();//定义不可重复列表
-            var isAll = false;//是否全部
             var relationList = it.ToList();//关系列表
-            foreach (var relation in relationList)
+            var scopeCategory = CateGoryConst.SCOPE_SELF;//数据权限分类,默认为仅自己
+            //获取角色权限信息列表
+            var rolePermissions = relationList.Select(it => it.ExtJson.ToJsonEntity<RelationRolePermission>()).ToList();
+            if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ALL))//如果有全部
+                scopeCategory = CateGoryConst.SCOPE_ALL;//标记为全部
+            if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG_CHILD))//如果有机构及以下机构
+                scopeCategory = CateGoryConst.SCOPE_ORG_CHILD;//标记为机构及以下机构
+            else if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG))//如果有仅自己机构
+                scopeCategory = CateGoryConst.SCOPE_ORG;//标记为仅自己机构
+            else if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG_DEFINE))//如果有自定义机构
             {
-                var rolePermission = relation.ExtJson.ToJsonEntity<RelationRolePermission>();
-                var scopeCategory = rolePermission.ScopeCategory;//根据数据权限分类
-                if (scopeCategory != CateGoryConst.SCOPE_SELF)//如果不是仅自己
+                scopeCategory = CateGoryConst.SCOPE_ORG_DEFINE;//标记为仅自己
+                rolePermissions.ForEach(s =>
                 {
-                    if (scopeCategory == CateGoryConst.SCOPE_ALL)//全部数据范围
-                    {
-                        // scopeSet.AddRange(scopeAllList);//添加到范围列表,针对组织太多的情况，做优化
-                        isAll = true;//标记为全部
-                    }
-                    else if (scopeCategory == CateGoryConst.SCOPE_ORG)//只有自己机构
-                    {
-                        scopeSet.Add(orgId);//添加到范围列表
-                    }
-                    else if (scopeCategory == CateGoryConst.SCOPE_ORG_CHILD)//机构及以下机构
-                    {
-                        var scopeOrgChildList = (await _sysOrgService.GetChildListById(orgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
-                        scopeSet.AddRange(scopeOrgChildList);//添加到范围列表
-                    }
-                    else
-                    {
-                        scopeSet.AddRange(rolePermission.ScopeDefineOrgIdList);//添加自定义范围的机构ID
-                    }
-                }
+                    scopeSet.AddRange(s.ScopeDefineOrgIdList);//添加自定义范围的机构ID
+                });
             }
             var dataScopes = scopeSet.ToList();//获取范围列表转列表
-            if (isAll)
-                dataScopes = null;//如果是全部数据范围,设置dataScopes为空
             permissions.Add(new DataScope
             {
                 ApiUrl = it.Key,
+                ScopeCategory = scopeCategory,
                 DataScopes = dataScopes
             });//将改URL的权限集合加入权限集合列表
         }
@@ -237,13 +224,32 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task<List<long>?> GetLoginUserApiDataScope()
     {
-        var orgList = new List<long>();
         var userInfo = await GetUserById(UserManager.UserId);//获取用户信息
         // 路由名称
         var routeName = App.HttpContext.Request.Path.Value;
         //获取当前url的数据范围
         var dataScope = userInfo.DataScopeList.Where(it => it.ApiUrl == routeName).FirstOrDefault();
-        return dataScope.DataScopes;
+        if (dataScope != null)
+        {
+            //根据数据范围分类获取数据范围
+            //null:代表拥有全部数据权限
+            //[xx,xx]:代表拥有部分机构的权限
+            //[]：代表仅自己权限
+            switch (dataScope.ScopeCategory)
+            {
+                case CateGoryConst.SCOPE_ALL:
+                    return null;
+                case CateGoryConst.SCOPE_ORG_CHILD:
+                    return userInfo.ScopeOrgChildList;
+                case CateGoryConst.SCOPE_ORG:
+                    return new List<long> { userInfo.OrgId };
+                case CateGoryConst.SCOPE_ORG_DEFINE:
+                    return dataScope.DataScopes;
+                case CateGoryConst.SCOPE_SELF:
+                    return new List<long>();
+            }
+        }
+        return new List<long>();
     }
 
     /// <inheritdoc/>
@@ -985,6 +991,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             sysUser.RoleIdList = roleCodeList.Select(it => it.Id).ToList();
             sysUser.PermissionCodeList = permissionCodeList;
             sysUser.DataScopeList = dataScopeList;
+            var scopeOrgChildList = (await _sysOrgService.GetChildListById(sysUser.OrgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
+            sysUser.ScopeOrgChildList = scopeOrgChildList;
             //插入Redis
             _simpleCacheService.HashAdd(CacheConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
             return sysUser;

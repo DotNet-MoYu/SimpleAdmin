@@ -327,6 +327,12 @@ public class SysUser : BaseEntity
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     public DefaultDataScope DefaultDataScope { get; set; }
+
+    /// <summary>
+    /// 机构及以下机构ID集合
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public List<long> ScopeOrgChildList { get; set; }
 }
 
 /// <summary>
@@ -340,7 +346,12 @@ public class DataScope
     public string ApiUrl { get; set; }
 
     /// <summary>
-    /// 数据范围
+    /// 数据范围分类
+    /// </summary>
+    public string ScopeCategory { get; set; }
+
+    /// <summary>
+    /// 数据范围的机构ID列表
     /// </summary>
     public List<long>? DataScopes { get; set; }
 }
