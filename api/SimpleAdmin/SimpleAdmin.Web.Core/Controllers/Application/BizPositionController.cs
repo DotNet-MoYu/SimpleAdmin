@@ -12,7 +12,7 @@ public class BizPositionController
 
     public BizPositionController(IPositionService positionService)
     {
-        this._positionService = positionService;
+        _positionService = positionService;
     }
 
     /// <summary>
@@ -56,11 +56,22 @@ public class BizPositionController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除岗位")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
     {
         await _positionService.Delete(input);
+    }
+
+    /// <summary>
+    /// 测试详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("岗位详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _positionService.Detail(input);
     }
 }

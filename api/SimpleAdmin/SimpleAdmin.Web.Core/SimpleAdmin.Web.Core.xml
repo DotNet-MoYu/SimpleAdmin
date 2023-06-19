@@ -96,6 +96,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.BizPositionController">
             <summary>
             岗位管理控制器
@@ -125,6 +132,13 @@
         <member name="M:SimpleAdmin.Web.Core.BizPositionController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
             <summary>
             删除岗位
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -184,6 +198,13 @@
             <summary>
             获取角色选择器
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Add(SimpleAdmin.System.UserAddInput)">

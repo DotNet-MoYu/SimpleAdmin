@@ -14,7 +14,7 @@ public class BizOrgController : IDynamicApiController
     public BizOrgController(IOrgService orgService, IUserService userService)
     {
         _orgService = orgService;
-        this._userService = userService;
+        _userService = userService;
     }
 
     /// <summary>
@@ -81,7 +81,6 @@ public class BizOrgController : IDynamicApiController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除机构")]
     public async Task Delete([FromBody] List<BaseIdInput> input)
@@ -109,5 +108,17 @@ public class BizOrgController : IDynamicApiController
     public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
     {
         return await _userService.UserSelector(input);
+    }
+
+    /// <summary>
+    /// 测试详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("机构详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _orgService.Detail(input);
     }
 }

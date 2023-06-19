@@ -115,6 +115,19 @@ public class BizUserController : IDynamicApiController
         return await _userService.RoleSelector(input);
     }
 
+
+    /// <summary>
+    /// 测试详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("人员详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _userService.Detail(input);
+    }
+
     #endregion Get请求
 
     #region Post请求
