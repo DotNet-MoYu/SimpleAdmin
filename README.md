@@ -10,12 +10,12 @@
 ### 如果您觉得有帮助，请点右上角 "Star" 支持一下谢谢
 
 ## 🎨框架介绍🎨
-🪶SimpleAdmin是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发。采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备超牛皮的代码生成器和超详细的手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
+🪶SimpleAdmin是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发。采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备超牛皮的代码生成器和超详细的手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
 
 ## 🐥选择SimpleAdmin的N个理由🐥
 
 #### 📕前端采用Vue3+JavaScript
-本系统是基于前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能。市面上主流的Vue3框架大部分都是采用`TypeScript`开发，虽然是官方推荐，但是也增加了一些学习成本，如果您之前使用的事vue2+js的开发方式，那么再使用本系统就非常的好上手，也不用担心vue2打包之后第一次加载巨慢的问题。
+本系统是基于前端Vue3+Vite+Vuex+JS,。市面上主流的Vue3框架大部分都是采用`TypeScript`开发，虽然是官方推荐，但是也增加了一些学习成本，如果您之前使用的事vue2+js的开发方式，那么再使用本系统就非常的好上手，也不用担心vue2打包之后第一次加载巨慢的问题。
 
 
 #### 📗后台基于Furion脚手架
@@ -99,10 +99,6 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 <img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/wendang.png"/>
 
 
-## 🎞️演示地址
-1. 地址：[http://admin.zxzyjs.com](http://admin.zxzyjs.com)
-2. 账号：superAdmin
-3. 密码：123456
 
 ## 分支说明
 
@@ -127,7 +123,6 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 - 👉 Furion：[https://dotnetchina.gitee.io/furion](https://dotnetchina.gitee.io/furion)
 -  👉 SqlSugar：[https://www.donet5.com/Doc/1/1180](https://www.donet5.com/Doc/1/1180)
 -  👉 NewLife：[https://www.newlifex.com/](https://www.newlifex.com/)
--  👉 Snowy：[https://xiaonuo.vip/doc](https://xiaonuo.vip/doc)
 -  👉 IdGenerator：[https://github.com/yitter/idgenerator](https://github.com/yitter/idgenerator)
 -  👉 Masuit.Tools：[https://gitee.com/masuit/Masuit.Tools](https://gitee.com/masuit/Masuit.Tools)
 -  👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
@@ -145,6 +140,6 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 ##  💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码尊重小诺开源协议，不开源
+- 前端源码不开源
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
