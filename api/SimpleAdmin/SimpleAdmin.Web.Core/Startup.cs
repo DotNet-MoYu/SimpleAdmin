@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -68,6 +69,18 @@ public class Startup : AppStartup
         // 添加状态码拦截中间件
         app.UseUnifyResultStatusCodes();
 
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            ServeUnknownFileTypes = true,
+            FileProvider = new PhysicalFileProvider(
+                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
+            OnPrepareResponse = (c) =>
+            {
+                c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+                c.Context.Response.Headers.Append("Cache-Control", $"public, max-age=604800");
+            },
+            RequestPath = new PathString("/src")//src相当于别名，为了安全
+        });
         app.UseRouting();
 
         //跨域设置
@@ -81,7 +94,7 @@ public class Startup : AppStartup
         app.UseAuthorization();
 
         app.UseInject(string.Empty);
-        app.UseStaticFiles();
+
         ////定时任务Dashboard
         //app.UseScheduleUI(options =>
         //{
