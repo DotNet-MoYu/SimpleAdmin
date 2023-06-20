@@ -86,8 +86,6 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 
 文档地址：[https://www.cnblogs.com/huguodong/p/16991947.html](https://www.cnblogs.com/huguodong/p/16991947.html)
 
-<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/即时通讯.gif"/>
-
 #### 🔧代码生成器
 大部分项目里，其实有很多代码是重复的，几乎每个模块都有 CRUD 增删改查的功能，而这些功能的实现代码往往是大同小异的。如果这些功能都要自己去手写，非常无聊枯燥，浪费时间且效率很低，还可能会写错。代码生成功能通过选择数据库表，完成单表的增删改查管理功能，还支持树形结构的表的生成可以生成包括前端、后端、和SQL语句，支持预览的同时还支持ZIP压缩包和直接生成到项目两种模式，解放你的双手，大大减少了重复代码的编写,无需复制提升开发效率。
 
