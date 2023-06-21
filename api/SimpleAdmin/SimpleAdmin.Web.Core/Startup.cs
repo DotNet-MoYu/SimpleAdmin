@@ -79,7 +79,7 @@ public class Startup : AppStartup
                 c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 c.Context.Response.Headers.Append("Cache-Control", $"public, max-age=604800");
             },
-            RequestPath = new PathString("/src")//src相当于别名，为了安全
+            RequestPath = new PathString("/images")//src相当于别名，为了安全
         });
         app.UseRouting();
 
