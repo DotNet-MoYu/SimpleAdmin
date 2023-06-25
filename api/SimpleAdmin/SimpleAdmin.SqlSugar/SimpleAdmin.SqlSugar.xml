@@ -14,6 +14,16 @@
             系统基础
             </summary>
         </member>
+        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_LOGIN_POLICY">
+            <summary>
+            登录策略
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_PWD_POLICY">
+            <summary>
+            密码策略
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_BIZ_DEFINE">
             <summary>
             业务定义
@@ -199,24 +209,84 @@
             系统配置常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.SYS_DEFAULT_CAPTCHA_OPEN">
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA">
+            <summary>
+            系统默认工作台
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_CAPTCHA_OPEN">
             <summary>
             登录验证码开关
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.SYS_DEFAULT_SINGLE_OPEN">
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_CAPTCHA_TYPE">
+            <summary>
+            登录验证码开关
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_SINGLE_OPEN">
             <summary>
             单用户登录开关
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.SYS_DEFAULT_PASSWORD">
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_ERROR_LOCK">
+            <summary>
+             登录错误锁定时长
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_ERROR_RESET_TIME">
+            <summary>
+             登录错误锁定时长
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.LOGIN_ERROR_COUNT">
+            <summary>
+            登录错误次数
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_DEFAULT_PASSWORD">
             <summary>
             默认用户密码
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA">
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_REMIND">
             <summary>
-            系统默认工作台
+            密码定期提醒更新
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_REMIND_DAY">
+            <summary>
+            密码定期提醒更新时间
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_UPDATE_DEFAULT">
+            <summary>
+            修改初始密码提醒
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_MIN_LENGTH">
+            <summary>
+            密码最小长度
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_CONTAIN_NUM">
+            <summary>
+            包含数字
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_CONTAIN_LOWER">
+            <summary>
+            包含小写字母
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_CONTAIN_UPPER">
+            <summary>
+            包含大写字母
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.PWD_CONTAIN_CHARACTER">
+            <summary>
+            包含特殊字符
             </summary>
         </member>
         <member name="F:SimpleAdmin.SqlSugar.DevConfigConst.MQTT_PARAM_URL">

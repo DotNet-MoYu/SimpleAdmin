@@ -18,7 +18,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public override async Task<List<SysOrg>> GetListAsync()
     {
         //先从Redis拿
-        var sysOrgs = _simpleCacheService.Get<List<SysOrg>>(CacheConst.Cache_SysOrg);
+        var sysOrgs = _simpleCacheService.Get<List<SysOrg>>(SystemConst.Cache_SysOrg);
         if (sysOrgs == null)
         {
             //redis没有就去数据库拿
@@ -26,7 +26,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             if (sysOrgs.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(CacheConst.Cache_SysOrg, sysOrgs);
+                _simpleCacheService.Set(SystemConst.Cache_SysOrg, sysOrgs);
             }
         }
         return sysOrgs;
@@ -283,8 +283,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(CacheConst.Cache_SysOrg);//从redis删除
-        _simpleCacheService.Remove(CacheConst.Cache_SysUser);//清空redis所有的用户信息
+        _simpleCacheService.Remove(SystemConst.Cache_SysOrg);//从redis删除
+        _simpleCacheService.Remove(SystemConst.Cache_SysUser);//清空redis所有的用户信息
         await GetListAsync();//刷新缓存
     }
 

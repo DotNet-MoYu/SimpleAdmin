@@ -215,6 +215,12 @@ public class SysUser : BaseEntity
     public List<PositionJson> PositionJson { get; set; }
 
     /// <summary>
+    /// 上次修改密码时间
+    ///</summary>
+    [SugarColumn(ColumnName = "PwdRemindUpdateTime", ColumnDescription = "密码提醒修改时间", IsNullable = true)]
+    public DateTime? PwdRemindUpdateTime { get; set; }
+
+    /// <summary>
     /// 上次登录ip
     ///</summary>
     [SugarColumn(ColumnName = "LastLoginIp", ColumnDescription = "上次登录ip", Length = 200, IsNullable = true)]

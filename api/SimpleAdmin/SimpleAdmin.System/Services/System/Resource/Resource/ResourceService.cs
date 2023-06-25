@@ -61,13 +61,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (category == null)
         {
             //删除全部key
-            _simpleCacheService.DelByPattern(CacheConst.Cache_SysResource);
+            _simpleCacheService.DelByPattern(SystemConst.Cache_SysResource);
             await GetListAsync();
         }
         else
         {
             //否则只删除一个Key
-            _simpleCacheService.Remove(CacheConst.Cache_SysResource + category);
+            _simpleCacheService.Remove(SystemConst.Cache_SysResource + category);
             await GetListByCategory(category);
         }
     }
@@ -103,11 +103,10 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     /// <inheritdoc />
-
     public async Task<List<SysResource>> GetListByCategory(string category)
     {
         //先从Redis拿
-        var sysResources = _simpleCacheService.Get<List<SysResource>>(CacheConst.Cache_SysResource + category);
+        var sysResources = _simpleCacheService.Get<List<SysResource>>(SystemConst.Cache_SysResource + category);
         if (sysResources == null)
         {
             //redis没有就去数据库拿
@@ -115,7 +114,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             if (sysResources.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(CacheConst.Cache_SysResource + category, sysResources);
+                _simpleCacheService.Set(SystemConst.Cache_SysResource + category, sysResources);
             }
         }
         return sysResources;
@@ -144,8 +143,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         List<PermissionTreeSelector> permissions = new List<PermissionTreeSelector>();//权限列表
 
         // 获取所有需要数据权限的控制器
-        var controllerTypes = App.EffectiveTypes.
-            Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
+        var controllerTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
             //获取数据权限特性
@@ -329,7 +327,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                                 ParentId = parent.Id,
                                 ParentName = parent.Title,
                                 Module = moduleId,
-                                Title = menu.Title,
+                                Title = menu.Title
                             });
                         }
                     }
@@ -355,7 +353,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                     ParentId = parent.Id,
                     ParentName = parent.Title,
                     Module = moduleId,
-                    Title = parent.Title,
+                    Title = parent.Title
                 };
                 //如果菜单类型是菜单
                 if (parent.MenuType == ResourceConst.MENU)

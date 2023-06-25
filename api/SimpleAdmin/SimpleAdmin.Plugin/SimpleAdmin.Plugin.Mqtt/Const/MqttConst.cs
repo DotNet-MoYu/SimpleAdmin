@@ -6,6 +6,11 @@
 public class MqttConst
 {
     /// <summary>
+    /// mqtt认证登录信息key
+    /// </summary>
+    public const string Cache_MqttClientUser = CacheConst.Cache_Prefix_Web + "MqttClientUser:";
+
+    /// <summary>
     /// mqtt主题前缀
     /// </summary>
     public const string Mqtt_TopicPrefix = "SimpleAdmin/";
@@ -19,4 +24,9 @@ public class MqttConst
     /// 新消息
     /// </summary>
     public const string Mqtt_Message_New = "NewMessage";
+
+    /// <summary>
+    /// 修改密码
+    /// </summary>
+    public const string Mqtt_Message_UpdatePassword = "UpdatePassword";
 }

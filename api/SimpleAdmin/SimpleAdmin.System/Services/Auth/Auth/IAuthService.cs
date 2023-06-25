@@ -9,7 +9,7 @@ public interface IAuthService : ITransient
     /// 获取图形验证码
     /// </summary>
     /// <returns></returns>
-    PicValidCodeOutPut GetCaptchaInfo();
+    Task<PicValidCodeOutPut> GetCaptchaInfo();
 
     /// <summary>
     /// 获取登录用户信息

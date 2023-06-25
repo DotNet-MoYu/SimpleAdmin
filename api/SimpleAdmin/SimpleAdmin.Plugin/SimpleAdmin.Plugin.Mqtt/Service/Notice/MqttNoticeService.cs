@@ -11,6 +11,18 @@ public class MqttNoticeService : INoticeService
     }
 
     /// <inheritdoc/>
+    public async Task UpdatePassWord(string userId, List<string> clientIds, string message)
+    {
+        var _mqttClientManager = GetMqttClientManager();
+        //发送修改密码消息
+        await _mqttClientManager.GetClient().PublishAsync(MqttConst.Mqtt_TopicPrefix + userId, new MqttMessage
+        {
+            Data = new { Message = message, ClientIds = clientIds },
+            MsgType = MqttConst.Mqtt_Message_UpdatePassword
+        });
+    }
+
+    /// <inheritdoc/>
     public async Task NewMesage(List<string> userIds, List<string> clientIds, string message)
     {
         var _mqttClientManager = GetMqttClientManager();

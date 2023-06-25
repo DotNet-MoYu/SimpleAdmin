@@ -11,6 +11,13 @@ public class SignalrNoticeService : INoticeService
     }
 
     /// <inheritdoc/>
+    public async Task UpdatePassWord(string userId, List<string> clientIds, string message)
+    {
+        //发送消息给用户
+        await GetHubContext().Clients.Users(clientIds).NewMessage(message);
+    }
+
+    /// <inheritdoc/>
     public async Task NewMesage(List<string> userIds, List<string> clientIds, string message)
     {
         //发送消息给用户

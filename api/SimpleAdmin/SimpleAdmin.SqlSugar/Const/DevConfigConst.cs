@@ -6,24 +6,93 @@ namespace SimpleAdmin.SqlSugar;
 public class DevConfigConst
 {
     /// <summary>
+    /// 系统默认工作台
+    /// </summary>
+    public const string SYS_DEFAULT_WORKBENCH_DATA = "SYS_DEFAULT_WORKBENCH_DATA";
+
+    #region 登录策略
+
+    /// <summary>
     /// 登录验证码开关
     /// </summary>
-    public const string SYS_DEFAULT_CAPTCHA_OPEN = "SYS_DEFAULT_CAPTCHA_OPEN";
+    public const string LOGIN_CAPTCHA_OPEN = "LOGIN_CAPTCHA_OPEN";
+
+    /// <summary>
+    /// 登录验证码开关
+    /// </summary>
+    public const string LOGIN_CAPTCHA_TYPE = "LOGIN_CAPTCHA_TYPE";
 
     /// <summary>
     /// 单用户登录开关
     /// </summary>
-    public const string SYS_DEFAULT_SINGLE_OPEN = "SYS_DEFAULT_SINGLE_OPEN";
+    public const string LOGIN_SINGLE_OPEN = "LOGIN_DEFAULT_SINGLE_OPEN";
+
+    /// <summary>
+    ///  登录错误锁定时长
+    /// </summary>
+    public const string LOGIN_ERROR_LOCK = "LOGIN_ERROR_LOCK";
+
+
+    /// <summary>
+    ///  登录错误锁定时长
+    /// </summary>
+    public const string LOGIN_ERROR_RESET_TIME = "LOGIN_ERROR_RESET_TIME";
+
+    /// <summary>
+    /// 登录错误次数
+    /// </summary>
+    public const string LOGIN_ERROR_COUNT = "LOGIN_ERROR_COUNT";
+
+    #endregion
+
+    #region 密码策略
 
     /// <summary>
     /// 默认用户密码
     /// </summary>
-    public const string SYS_DEFAULT_PASSWORD = "SYS_DEFAULT_PASSWORD";
+    public const string PWD_DEFAULT_PASSWORD = "PWD_DEFAULT_PASSWORD";
 
     /// <summary>
-    /// 系统默认工作台
+    /// 密码定期提醒更新
     /// </summary>
-    public const string SYS_DEFAULT_WORKBENCH_DATA = "SYS_DEFAULT_WORKBENCH_DATA";
+    public const string PWD_REMIND = "PWD_REMIND";
+
+    /// <summary>
+    /// 密码定期提醒更新时间
+    /// </summary>
+    public const string PWD_REMIND_DAY = "PWD_REMIND_DAY";
+
+    /// <summary>
+    /// 修改初始密码提醒
+    /// </summary>
+    public const string PWD_UPDATE_DEFAULT = "PWD_UPDATE_DEFAULT";
+
+    /// <summary>
+    /// 密码最小长度
+    /// </summary>
+    public const string PWD_MIN_LENGTH = "PWD_MIN_LENGTH";
+
+    /// <summary>
+    /// 包含数字
+    /// </summary>
+    public const string PWD_CONTAIN_NUM = "PWD_CONTAIN_NUM";
+
+    /// <summary>
+    /// 包含小写字母
+    /// </summary>
+    public const string PWD_CONTAIN_LOWER = "PWD_CONTAIN_LOWER";
+
+    /// <summary>
+    /// 包含大写字母
+    /// </summary>
+    public const string PWD_CONTAIN_UPPER = "PWD_CONTAIN_UPPER";
+
+    /// <summary>
+    /// 包含特殊字符
+    /// </summary>
+    public const string PWD_CONTAIN_CHARACTER = "PWD_CONTAIN_UPPER";
+
+    #endregion
 
     #region MQTT
 

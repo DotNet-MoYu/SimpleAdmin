@@ -81,7 +81,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<long> GetIdByPhone(string phone)
     {
         //先从Redis拿
-        var userId = _simpleCacheService.HashGetOne<long>(CacheConst.Cache_SysUserPhone, phone);
+        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.Cache_SysUserPhone, phone);
         if (userId == 0)
         {
             phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
@@ -90,7 +90,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId > 0)
             {
                 //插入Redis
-                _simpleCacheService.HashAdd(CacheConst.Cache_SysUserPhone, phone, userId);
+                _simpleCacheService.HashAdd(SystemConst.Cache_SysUserPhone, phone, userId);
             }
         }
         return userId;
@@ -100,7 +100,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<SysUser> GetUserById(long userId)
     {
         //先从Redis拿
-        var sysUser = _simpleCacheService.HashGetOne<SysUser>(CacheConst.Cache_SysUser, userId.ToString());
+        var sysUser = _simpleCacheService.HashGetOne<SysUser>(SystemConst.Cache_SysUser, userId.ToString());
         if (sysUser == null)
         {
             sysUser = await GetUserFromDb(userId);//从数据库拿用户信息
@@ -112,7 +112,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<T> GetUserById<T>(long userId)
     {
         //先从Redis拿
-        var sysUser = _simpleCacheService.HashGetOne<T>(CacheConst.Cache_SysUser, userId.ToString());
+        var sysUser = _simpleCacheService.HashGetOne<T>(SystemConst.Cache_SysUser, userId.ToString());
         if (sysUser == null)
         {
             var user = await GetUserFromDb(userId);//从数据库拿用户信息
@@ -131,7 +131,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<long> GetIdByAccount(string account)
     {
         //先从Redis拿
-        var userId = _simpleCacheService.HashGetOne<long>(CacheConst.Cache_SysUserAccount, account);
+        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.Cache_SysUserAccount, account);
         if (userId == 0)
         {
             //单查获取用户账号对应ID
@@ -139,7 +139,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId != 0)
             {
                 //插入Redis
-                _simpleCacheService.HashAdd(CacheConst.Cache_SysUserAccount, account, userId);
+                _simpleCacheService.HashAdd(SystemConst.Cache_SysUserAccount, account, userId);
             }
         }
         return userId;
@@ -661,19 +661,19 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public void DeleteUserFromRedis(List<long> ids)
     {
         var userIds = ids.Select(it => it.ToString()).ToArray();//id转string列表
-        var sysUsers = _simpleCacheService.HashGet<SysUser>(CacheConst.Cache_SysUser, userIds);//获取用户列表
+        var sysUsers = _simpleCacheService.HashGet<SysUser>(SystemConst.Cache_SysUser, userIds);//获取用户列表
         sysUsers = sysUsers.Where(it => it != null).ToList();//过滤掉不存在的
         if (sysUsers.Count > 0)
         {
             var accounts = sysUsers.Select(it => it.Account).ToArray();//账号集合
             var phones = sysUsers.Select(it => it.Phone).ToArray();//手机号集合
             //删除用户信息
-            _simpleCacheService.HashDel<SysUser>(CacheConst.Cache_SysUser, userIds);
+            _simpleCacheService.HashDel<SysUser>(SystemConst.Cache_SysUser, userIds);
             //删除账号
-            _simpleCacheService.HashDel<long>(CacheConst.Cache_SysUserAccount, accounts);
+            _simpleCacheService.HashDel<long>(SystemConst.Cache_SysUserAccount, accounts);
             //删除手机
             if (phones != null)
-                _simpleCacheService.HashDel<long>(CacheConst.Cache_SysUserPhone, phones);
+                _simpleCacheService.HashDel<long>(SystemConst.Cache_SysUserPhone, phones);
         }
     }
 
@@ -859,7 +859,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private async Task<string> GetDefaultPassWord(bool isSm4 = false)
     {
         //获取默认密码
-        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_PASSWORD)).ConfigValue;
+        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.PWD_DEFAULT_PASSWORD)).ConfigValue;
         return isSm4 ? CryptogramUtil.Sm4Encrypt(defaultPassword) : defaultPassword;//判断是否需要加密
     }
 
@@ -994,7 +994,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var scopeOrgChildList = (await _sysOrgService.GetChildListById(sysUser.OrgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
             sysUser.ScopeOrgChildList = scopeOrgChildList;
             //插入Redis
-            _simpleCacheService.HashAdd(CacheConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
+            _simpleCacheService.HashAdd(SystemConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
             return sysUser;
         }
         return null;

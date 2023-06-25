@@ -15,16 +15,16 @@ public class MqttService : IMqttService
 
     public MqttService(ISimpleCacheService simpleCacheService, ISysUserService sysUserService, IConfigService configService)
     {
-        this._simpleCacheService = simpleCacheService;
-        this._sysUserService = sysUserService;
-        this._configService = configService;
+        _simpleCacheService = simpleCacheService;
+        _sysUserService = sysUserService;
+        _configService = configService;
     }
 
     /// <inheritdoc/>
     public async Task<MqttParameterOutput> GetWebLoginParameter()
     {
         var user = await _sysUserService.GetUserById(UserManager.UserId);//获取用户信息
-        var token = JWTEncryption.GetJwtBearerToken((DefaultHttpContext)App.HttpContext); // 获取当前token
+        var token = JWTEncryption.GetJwtBearerToken((DefaultHttpContext)App.HttpContext);// 获取当前token
         //获取mqtt配置
         var mqttconfig = await _configService.GetListByCategory(CateGoryConst.Config_MQTT_BASE);
         //地址
@@ -46,12 +46,12 @@ public class MqttService : IMqttService
         #region 密码特殊处理
 
         if (password.ToLower() == "$username")
-            password = token; // 当前token作为mqtt密码
+            password = token;// 当前token作为mqtt密码
 
         #endregion 密码特殊处理
 
         var clientId = $"{user.Id}_{RandomHelper.CreateLetterAndNumber(5)}";//客户端ID
-        _simpleCacheService.Set(CacheConst.Cache_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
+        _simpleCacheService.Set(MqttConst.Cache_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
         return new MqttParameterOutput
         {
             ClientId = clientId,
@@ -66,7 +66,7 @@ public class MqttService : IMqttService
     public async Task<MqttAuthOutput> Auth(MqttAuthInput input)
     {
         var user = await _sysUserService.GetUserByAccount(input.Username);
-        MqttAuthOutput mqttAuthOutput = new MqttAuthOutput { Is_superuser = false, Result = "deny" };
+        var mqttAuthOutput = new MqttAuthOutput { Is_superuser = false, Result = "deny" };
 
         //获取用户token
         var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, user.Id.ToString());
@@ -79,7 +79,6 @@ public class MqttService : IMqttService
     }
 
     #region 方法
-
 
     #endregion 方法
 }

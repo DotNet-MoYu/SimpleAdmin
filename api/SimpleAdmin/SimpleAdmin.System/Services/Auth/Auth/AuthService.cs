@@ -23,10 +23,12 @@ public class AuthService : IAuthService
     }
 
     /// <inheritdoc/>
-    public PicValidCodeOutPut GetCaptchaInfo()
+    public async Task<PicValidCodeOutPut> GetCaptchaInfo()
     {
+        var config = await _configService.GetByConfigKey(CateGoryConst.Config_LOGIN_POLICY, DevConfigConst.LOGIN_CAPTCHA_TYPE);
+        var captchaType = (CaptchaType)Enum.Parse(typeof(CaptchaType), config.ConfigValue);
         //生成验证码
-        var captchInfo = CaptchaUtil.CreateCaptcha(CaptchaType.ARITH, 4, 100, 38);
+        var captchInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100, 38);
         //生成请求号，并将验证码放入redis
         var reqNo = AddValidCodeToRedis(captchInfo.Code);
         //返回验证码和请求号
@@ -64,7 +66,7 @@ public class AuthService : IAuthService
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
     {
         //判断是否有验证码
-        var sysBase = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_CAPTCHA_OPEN);
+        var sysBase = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.LOGIN_CAPTCHA_OPEN);
         if (sysBase != null)//如果有这个配置项
         {
             if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
@@ -75,14 +77,20 @@ public class AuthService : IAuthService
             }
         }
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
-
+        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.Config_LOGIN_POLICY);
+        BeforeLogin(loginPolicy, input.Account);//登录前校验
         // 根据账号获取用户信息，根据B端或C端判断
         if (loginClientType == LoginClientTypeEnum.B)//如果是B端
         {
             var userInfo = await _userService.GetUserByAccount(input.Account);//获取用户信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
-            if (userInfo.Password != password) throw Oops.Bah("账号密码错误");//账号密码错误
-            return await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
+            if (userInfo.Password != password)
+            {
+                LoginError(loginPolicy, input.Account);//登录错误操作
+                throw Oops.Bah("账号密码错误");//账号密码错误
+            }
+            var result = await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
+            return result;
         }
         else
         {
@@ -144,6 +152,36 @@ public class AuthService : IAuthService
     #region 方法
 
     /// <summary>
+    /// 登录之前执行的方法
+    /// </summary>
+    /// <param name="loginPolicy"></param>
+    /// <param name="userName"></param>
+    public void BeforeLogin(List<DevConfig> loginPolicy, string userName)
+    {
+        var lockTime = loginPolicy.First(x => x.ConfigKey == DevConfigConst.LOGIN_ERROR_LOCK).ConfigValue.ToInt();//获取锁定时间
+        var errorCount = loginPolicy.First(x => x.ConfigKey == DevConfigConst.LOGIN_ERROR_COUNT).ConfigValue.ToInt();//获取错误次数
+        var key = SystemConst.Cache_LoginErrorCount + userName;//获取登录错误次数Key值
+        var errorCountCache = _simpleCacheService.Get<int>(key);//获取登录错误次数
+        if (errorCountCache >= errorCount)
+        {
+            throw Oops.Bah($"密码错误次数过多，请{lockTime}分钟后再试");
+        }
+    }
+
+    /// <summary>
+    /// 登录错误操作
+    /// </summary>
+    /// <param name="loginPolicy"></param>
+    /// <param name="userName"></param>
+    public void LoginError(List<DevConfig> loginPolicy, string userName)
+    {
+        var resetTime = loginPolicy.First(x => x.ConfigKey == DevConfigConst.LOGIN_ERROR_RESET_TIME).ConfigValue.ToInt();//获取重置时间
+        var key = SystemConst.Cache_LoginErrorCount + userName;//获取登录错误次数Key值
+        _simpleCacheService.Increment(key, 1);// 登录错误次数+1
+        _simpleCacheService.SetExpire(key, TimeSpan.FromMinutes(resetTime));//设置过期时间
+    }
+
+    /// <summary>
     /// 校验验证码方法
     /// </summary>
     /// <param name="validCode">验证码</param>
@@ -151,7 +189,7 @@ public class AuthService : IAuthService
     /// <param name="isDelete">是否从Redis删除</param>
     public void ValidValidCode(string validCode, string validCodeReqNo, bool isDelete = true)
     {
-        var key = CacheConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
+        var key = SystemConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
         var code = _simpleCacheService.Get<string>(key);//从redis拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
         if (code != null && validCode != null)//如果有
@@ -171,7 +209,7 @@ public class AuthService : IAuthService
     /// <param name="validCodeReqNo"></param>
     public void RemoveValidCodeFromRedis(string validCodeReqNo)
     {
-        var key = CacheConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
+        var key = SystemConst.Cache_Captcha + validCodeReqNo;//获取验证码Key值
         _simpleCacheService.Remove(key);//删除验证码
     }
 
@@ -211,7 +249,7 @@ public class AuthService : IAuthService
         //生成请求号
         var reqNo = CommonUtils.GetSingleId().ToString();
         //插入redis
-        _simpleCacheService.Set(CacheConst.Cache_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
+        _simpleCacheService.Set(SystemConst.Cache_Captcha + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
     }
 
@@ -295,7 +333,7 @@ public class AuthService : IAuthService
         if (tokenInfos != null)
         {
             var isSingle = false;//默认不开启单用户登录
-            var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.SYS_DEFAULT_SINGLE_OPEN);//获取系统单用户登录选项
+            var singleConfig = await _configService.GetByConfigKey(CateGoryConst.Config_LOGIN_POLICY, DevConfigConst.LOGIN_SINGLE_OPEN);//获取系统单用户登录选项
             if (singleConfig != null) isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
             //判断是否单用户登录
             if (isSingle)

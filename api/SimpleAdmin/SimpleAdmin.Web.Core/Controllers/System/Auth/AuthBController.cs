@@ -20,9 +20,9 @@ public class AuthBController : IDynamicApiController
     /// <returns></returns>
     [HttpGet("getPicCaptcha")]
     [AllowAnonymous]
-    public dynamic GetPicCaptcha()
+    public async Task<dynamic> GetPicCaptcha()
     {
-        return _authService.GetCaptchaInfo();
+        return await _authService.GetCaptchaInfo();
     }
 
     /// <summary>

@@ -13,6 +13,16 @@ public class CateGoryConst
     public const string Config_SYS_BASE = "SYS_BASE";
 
     /// <summary>
+    /// 登录策略
+    /// </summary>
+    public const string Config_LOGIN_POLICY = "LOGIN_POLICY";
+
+    /// <summary>
+    /// 密码策略
+    /// </summary>
+    public const string Config_PWD_POLICY = "PWD_POLICY";
+
+    /// <summary>
     /// 业务定义
     /// </summary>
     public const string Config_BIZ_DEFINE = "BIZ_DEFINE";

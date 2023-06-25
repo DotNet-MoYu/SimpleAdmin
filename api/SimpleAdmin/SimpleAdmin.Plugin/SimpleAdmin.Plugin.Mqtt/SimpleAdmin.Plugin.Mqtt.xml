@@ -9,6 +9,11 @@
             mqtt常量
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Cache_MqttClientUser">
+            <summary>
+            mqtt认证登录信息key
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_TopicPrefix">
             <summary>
             mqtt主题前缀
@@ -22,6 +27,11 @@
         <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_New">
             <summary>
             新消息
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_UpdatePassword">
+            <summary>
+            修改密码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttController">
@@ -166,6 +176,9 @@
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Plugin.Core.INoticeService"/>
             </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.UpdatePassWord(System.String,System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Plugin.Mqtt.MqttNoticeService.NewMesage(System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.String)">
             <inheritdoc/>

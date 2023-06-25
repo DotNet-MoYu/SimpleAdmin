@@ -30,7 +30,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public override async Task<List<SysRole>> GetListAsync()
     {
         //先从Redis拿
-        var sysRoles = _simpleCacheService.Get<List<SysRole>>(CacheConst.Cache_SysRole);
+        var sysRoles = _simpleCacheService.Get<List<SysRole>>(SystemConst.Cache_SysRole);
         if (sysRoles == null)
         {
             //redis没有就去数据库拿
@@ -38,7 +38,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             if (sysRoles.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(CacheConst.Cache_SysRole, sysRoles);
+                _simpleCacheService.Set(SystemConst.Cache_SysRole, sysRoles);
             }
         }
         return sysRoles;
@@ -396,7 +396,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(CacheConst.Cache_SysRole);//删除KEY
+        _simpleCacheService.Remove(SystemConst.Cache_SysRole);//删除KEY
         await GetListAsync();//重新缓存
     }
 

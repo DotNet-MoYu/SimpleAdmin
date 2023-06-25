@@ -13,7 +13,7 @@ public class CacheSettingsOptions : IConfigurableOptions
     public bool UseRedis { get; set; }
 
     /// <summary>
-    /// 是否每次启动都清空
+    /// Redis设置
     /// </summary>
     public RedisSettings RedisSettings { get; set; }
 }

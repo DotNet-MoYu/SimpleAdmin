@@ -24,66 +24,6 @@
             Redis Hash类型
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_DevConfig">
-            <summary>
-            系统配置表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_Captcha">
-            <summary>
-            登录验证码缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysUser">
-            <summary>
-            用户表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysUserPhone">
-            <summary>
-            用户手机号关系缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysUserAccount">
-            <summary>
-            用户手机号关系缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysResource">
-            <summary>
-            资源表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_DevDict">
-            <summary>
-            字典表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysRelation">
-            <summary>
-            关系表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysOrg">
-            <summary>
-            机构表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysRole">
-            <summary>
-            角色表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_SysPosition">
-            <summary>
-            职位表缓存Key
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_MqttClientUser">
-            <summary>
-            mqtt认证登录信息key
-            </summary>
-        </member>
         <member name="F:SimpleAdmin.Cache.CacheConst.Cache_UserToken">
             <summary>
             用户Token缓存Key
@@ -319,7 +259,7 @@
         </member>
         <member name="P:SimpleAdmin.Cache.CacheSettingsOptions.RedisSettings">
             <summary>
-            是否每次启动都清空
+            Redis设置
             </summary>
         </member>
         <member name="T:SimpleAdmin.Cache.RedisSettings">

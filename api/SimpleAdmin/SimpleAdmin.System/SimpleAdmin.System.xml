@@ -41,6 +41,71 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.System.SystemConst">
+            <summary>
+            系统层常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_DevConfig">
+            <summary>
+            系统配置表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_Captcha">
+            <summary>
+            登录验证码缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUser">
+            <summary>
+            用户表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUserPhone">
+            <summary>
+            用户手机号关系缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUserAccount">
+            <summary>
+            用户手机号关系缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysResource">
+            <summary>
+            资源表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_DevDict">
+            <summary>
+            字典表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysRelation">
+            <summary>
+            关系表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysOrg">
+            <summary>
+            机构表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysRole">
+            <summary>
+            角色表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysPosition">
+            <summary>
+            职位表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SystemConst.Cache_LoginErrorCount">
+            <summary>
+             登录错误次数缓存Key
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.BatchEdit">
              <summary>
              批量修改
@@ -1062,6 +1127,11 @@
              兼任信息
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysUser.PwdRemindUpdateTime">
+             <summary>
+             上次修改密码时间
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysUser.LastLoginIp">
              <summary>
              上次登录ip
@@ -1226,6 +1296,12 @@
             解析IP地址
             </summary>
             <param name="ip">ip地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.AuthEventSubscriber.GetNoticeService">
+            <summary>
+            获取通知服务
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.EventSubscriberConst">
@@ -1599,6 +1675,20 @@
         </member>
         <member name="M:SimpleAdmin.System.Services.Auth.AuthService.GetLoginUser">
             <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.BeforeLogin(System.Collections.Generic.List{SimpleAdmin.System.DevConfig},System.String)">
+            <summary>
+            登录之前执行的方法
+            </summary>
+            <param name="loginPolicy"></param>
+            <param name="userName"></param>
+        </member>
+        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.LoginError(System.Collections.Generic.List{SimpleAdmin.System.DevConfig},System.String)">
+            <summary>
+            登录错误操作
+            </summary>
+            <param name="loginPolicy"></param>
+            <param name="userName"></param>
         </member>
         <member name="M:SimpleAdmin.System.Services.Auth.AuthService.ValidValidCode(System.String,System.String,System.Boolean)">
             <summary>

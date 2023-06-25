@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿using System.Text.RegularExpressions;
+
+namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IUserCenterService"/>
 public class UserCenterService : DbRepository<SysUser>, IUserCenterService
@@ -51,9 +53,9 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
 
             //获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
             var allModuleAndMenuAndSpaList = await _resourceService.GetaModuleAndMenuAndSpaList();
-            List<SysResource> allModuleList = new List<SysResource>();//模块列表
-            List<SysResource> allMenuList = new List<SysResource>();//菜单列表
-            List<SysResource> allSpaList = new List<SysResource>();//单页列表
+            var allModuleList = new List<SysResource>();//模块列表
+            var allMenuList = new List<SysResource>();//菜单列表
+            var allSpaList = new List<SysResource>();//单页列表
             //遍历菜单集合
             allModuleAndMenuAndSpaList.ForEach(it =>
             {
@@ -240,6 +242,22 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
         if (userInfo.Password != password) throw Oops.Bah("原密码错误");
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
+        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.Config_PWD_POLICY);//获取密码策略
+        var containNumber = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_NUM).ConfigValue.ToBoolean();//是否包含数字
+        var containLower = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_LOWER).ConfigValue.ToBoolean();//是否包含小写
+        var containUpper = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_UPPER).ConfigValue.ToBoolean();//是否包含大写
+        var containChar = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_CHARACTER).ConfigValue.ToBoolean();//是否包含特殊字符
+        var minLength = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_MIN_LENGTH).ConfigValue.ToInt();//最小长度
+        if (minLength > newPassword.Length)
+            throw Oops.Bah($"密码长度不能小于{minLength}");
+        if (containNumber && !Regex.IsMatch(newPassword, "[0-9]"))
+            throw Oops.Bah($"密码必须包含数字");
+        if (containLower && !Regex.IsMatch(newPassword, "[a-z]"))
+            throw Oops.Bah($"密码必须包含小写字母");
+        if (containUpper && !Regex.IsMatch(newPassword, "[A-Z]"))
+            throw Oops.Bah($"密码必须包含大写字母");
+        if (containChar && !Regex.IsMatch(newPassword, "[~!@#$%^&*()_+`\\-={}|\\[\\]:\";'<>?,./]"))
+            throw Oops.Bah($"密码必须包含特殊字符");
         // var similarity = PwdUtil.Similarity(password, newPassword);
         // if (similarity > 80)
         //     throw Oops.Bah($"新密码请勿与旧密码过于相似");

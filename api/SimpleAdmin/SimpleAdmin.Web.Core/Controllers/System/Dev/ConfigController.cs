@@ -22,7 +22,10 @@ public class ConfigController : BaseController
     [AllowAnonymous]
     public async Task<List<DevConfig>> SysBaseList()
     {
-        return await _configService.GetListByCategory(CateGoryConst.Config_SYS_BASE);
+        var sysBase = await _configService.GetListByCategory(CateGoryConst.Config_SYS_BASE);//系统基础
+        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.Config_LOGIN_POLICY);//登录策略
+        sysBase.AddRange(loginPolicy);//合并登录策略
+        return sysBase;
     }
 
     /// <summary>
@@ -76,7 +79,6 @@ public class ConfigController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除配置")]
     public async Task Delete([FromBody] ConfigDeleteInput input)

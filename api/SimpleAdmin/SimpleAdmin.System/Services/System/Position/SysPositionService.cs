@@ -18,7 +18,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public override async Task<List<SysPosition>> GetListAsync()
     {
         //先从Redis拿
-        var sysPositions = _simpleCacheService.Get<List<SysPosition>>(CacheConst.Cache_SysPosition);
+        var sysPositions = _simpleCacheService.Get<List<SysPosition>>(SystemConst.Cache_SysPosition);
         if (sysPositions == null)
         {
             //redis没有就去数据库拿
@@ -26,7 +26,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             if (sysPositions.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(CacheConst.Cache_SysPosition, sysPositions);
+                _simpleCacheService.Set(SystemConst.Cache_SysPosition, sysPositions);
             }
         }
         return sysPositions;
@@ -123,7 +123,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(CacheConst.Cache_SysPosition);//删除Key
+        _simpleCacheService.Remove(SystemConst.Cache_SysPosition);//删除Key
         await GetListAsync();//重新写入缓存
     }
 

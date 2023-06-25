@@ -9,15 +9,15 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
 
     public Relationservice(ILogger<Relationservice> logger, ISimpleCacheService simpleCacheService, IResourceService resourceService)
     {
-        this._logger = logger;
+        _logger = logger;
         _simpleCacheService = simpleCacheService;
-        this._resourceService = resourceService;
+        _resourceService = resourceService;
     }
 
     /// <inheritdoc/>
     public async Task<List<SysRelation>> GetRelationByCategory(string category)
     {
-        var key = CacheConst.Cache_SysRelation + category;
+        var key = SystemConst.Cache_SysRelation + category;
         //先从Redis拿
         var sysRelations = _simpleCacheService.Get<List<SysRelation>>(key);
         if (sysRelations == null)
@@ -76,16 +76,17 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task RefreshCache(string category)
     {
-        var key = CacheConst.Cache_SysRelation + category;//key
+        var key = SystemConst.Cache_SysRelation + category;//key
         _simpleCacheService.Remove(key);//删除redis
         await GetRelationByCategory(category);//更新缓存
     }
 
     /// <inheritdoc/>
-    public async Task SaveRelationBatch(string category, long objectId, List<string> targetIds, List<string> extJsons, bool clear)
+    public async Task SaveRelationBatch(string category, long objectId, List<string> targetIds,
+        List<string> extJsons, bool clear)
     {
         var sysRelations = new List<SysRelation>();//要添加的列表
-        for (int i = 0; i < targetIds.Count; i++)
+        for (var i = 0; i < targetIds.Count; i++)
         {
             sysRelations.Add(new SysRelation
             {
@@ -97,11 +98,11 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
         }
         //事务
         var result = await itenant.UseTranAsync(async () =>
-       {
-           if (clear)
-               await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
-           await InsertRangeAsync(sysRelations);//添加新的
-       });
+        {
+            if (clear)
+                await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
+            await InsertRangeAsync(sysRelations);//添加新的
+        });
         if (result.IsSuccess)//如果成功了
         {
             await RefreshCache(category);
@@ -115,7 +116,8 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     }
 
     /// <inheritdoc/>
-    public async Task SaveRelation(string category, long objectId, string targetId, string extJson, bool clear, bool refreshCache = true)
+    public async Task SaveRelation(string category, long objectId, string targetId,
+        string extJson, bool clear, bool refreshCache = true)
     {
         var sysRelation = new SysRelation
         {
@@ -126,11 +128,11 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
         };
         //事务
         var result = await itenant.UseTranAsync(async () =>
-       {
-           if (clear)
-               await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
-           await InsertAsync(sysRelation);//添加新的
-       });
+        {
+            if (clear)
+                await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
+            await InsertAsync(sysRelation);//添加新的
+        });
         if (result.IsSuccess)//如果成功了
         {
             if (refreshCache)

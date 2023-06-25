@@ -66,13 +66,13 @@ public class DictService : DbRepository<DevDict>, IDictService
     public override async Task<List<DevDict>> GetListAsync()
     {
         //先从redis拿
-        var devDicts = _simpleCacheService.Get<List<DevDict>>(CacheConst.Cache_DevDict);
+        var devDicts = _simpleCacheService.Get<List<DevDict>>(SystemConst.Cache_DevDict);
         if (devDicts == null)
         {
             devDicts = await base.GetListAsync();//去数据库拿
             if (devDicts.Count > 0)
             {
-                _simpleCacheService.Set(CacheConst.Cache_DevDict, devDicts);//如果数据库有数,更新redis
+                _simpleCacheService.Set(SystemConst.Cache_DevDict, devDicts);//如果数据库有数,更新redis
                 return devDicts;
             }
         }
@@ -145,7 +145,7 @@ public class DictService : DbRepository<DevDict>, IDictService
     /// </summary>
     private async Task RefreshCache()
     {
-        _simpleCacheService.Remove(CacheConst.Cache_DevDict);
+        _simpleCacheService.Remove(SystemConst.Cache_DevDict);
         await GetListAsync();
     }
 

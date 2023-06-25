@@ -13,7 +13,7 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     /// <inheritdoc/>
     public async Task<List<DevConfig>> GetListByCategory(string category)
     {
-        var key = CacheConst.Cache_DevConfig + category;//系统配置key
+        var key = SystemConst.Cache_DevConfig + category;//系统配置key
         //先从redis拿配置
         var configList = _simpleCacheService.Get<List<DevConfig>>(key);
         if (configList == null)
@@ -40,10 +40,10 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     public async Task<SqlSugarPagedList<DevConfig>> Page(ConfigPageInput input)
     {
         var query = Context.Queryable<DevConfig>()
-                         .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
-                         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
-                         .OrderBy(it => it.SortCode);
+            .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
+            .OrderBy(it => it.SortCode);
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
         return pageInfo;
     }
@@ -114,7 +114,7 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     /// <returns></returns>
     private async Task RefreshCache(string category)
     {
-        _simpleCacheService.Remove(CacheConst.Cache_DevConfig + category);//redis删除
+        _simpleCacheService.Remove(SystemConst.Cache_DevConfig + category);//redis删除
         await GetListByCategory(category);//重新获取
     }
 
