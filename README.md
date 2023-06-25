@@ -128,7 +128,7 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 -  👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
 -  👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
   
-## 鸣谢
+## 👏鸣谢👏
 
 - 感谢 JetBrains 提供的免费开源 License：
 
@@ -136,10 +136,15 @@ MQTT客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/New
 <img src="https://images.gitee.com/uploads/images/2020/0406/220236_f5275c90_5531506.png" >
 </p>
 
+## 🤌赞助🤌
+```
+如果对您有帮助，请点击右上角⭐Star关注或扫码捐赠，感谢支持开源！
+```
+<img src="https://gitee.com/zxzyjs/SimpleAdmin/raw/master/doc/Image/微信.jpg"/>
 
 ##  💾版权声明💾
 
 - 后端源码完全免费开源商用。
-- 前端源码不开源
+- 前端源码因版权问题暂不开源，后续推出。
 - 不能以任何形式用于非法为目的的行为。
 - 任何基于本软件而产生的一切法律纠纷和责任，均于作者无关。
