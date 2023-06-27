@@ -11,6 +11,8 @@ var treeName=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeName);//获取
 var treePid=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreePid);//获取树的父级id
 var busName= @Model.BusName;//获取业务名称
 var funcName= @Model.FunctionName;//获取功能名称
+var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获取需要显示的字段
+var resizeColumn=showColumns.Any(it => it.WhetherResizable == "Y");//获取需要显示的字段
 }
 <template>
 @{Template();}
@@ -169,7 +171,6 @@ var searchColumns= tableFieIds.Where(it => it.QueryWhether == "Y").ToList();//�
 //表格部分
 void Table()
 {
-var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获取需要显示的字段
 <a-card :bordered="false">
   <s-table
     ref="table"
@@ -185,9 +186,9 @@ var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获�
     @if(column.IsPrimarykey=="Y"){//如果是主键
     @::row-key="(record) => record.@column.FieldNameFirstLower"
     }
-    @if(column.WhetherResizable=="Y"){//如果是可伸缩列
-@:@@resizeColumn="handleResizeColumn"
     }
+    @if(resizeColumn){
+@:@@resizeColumn="handleResizeColumn"
     }
     :row-selection="options.rowSelection"
     :tool-config="toolConfig"
@@ -377,6 +378,7 @@ if(column.EffectType=="fk"){//如果是外键
 //表格属性配置
 void TableConst()
 {
+
   @://表格配置
   @:const table = ref() //表格
   @:let selectedRowKeys = ref([]) //选中项
@@ -430,13 +432,11 @@ void TableConst()
 		@:}
 	@:}) 
   @:
-  @foreach (var column in tableFieIds){//遍历字段
-  @if(column.WhetherResizable=="Y"){//如果可伸缩列
+  @if(resizeColumn){//如果可伸缩列
   @:const handleResizeColumn = (w, col) => {
         @:col.width = w
   @:}
   }
-  } 
  
 }
 
