@@ -124,7 +124,7 @@ public static class CodeFirstUtils
         {
             isTheRawGenericType = IsTheRawGenericType(type);
             if (isTheRawGenericType) return true;
-            type = type.BaseType;
+            type = type.BaseType ?? default;
         }
 
         return false;
