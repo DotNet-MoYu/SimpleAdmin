@@ -198,7 +198,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var rolePermissions = relationList.Select(it => it.ExtJson.ToJsonEntity<RelationRolePermission>()).ToList();
             if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ALL))//如果有全部
                 scopeCategory = CateGoryConst.SCOPE_ALL;//标记为全部
-            if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG_CHILD))//如果有机构及以下机构
+            else if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG_CHILD))//如果有机构及以下机构
                 scopeCategory = CateGoryConst.SCOPE_ORG_CHILD;//标记为机构及以下机构
             else if (rolePermissions.Any(role => role.ScopeCategory == CateGoryConst.SCOPE_ORG))//如果有仅自己机构
                 scopeCategory = CateGoryConst.SCOPE_ORG;//标记为仅自己机构
@@ -256,11 +256,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<List<UserSelectorOutPut>> UserSelector(UserSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
-        var result = await Context.Queryable<SysUser>()
-            .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//指定机构
-            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.Account.Contains(input.SearchKey))//根据关键字查询
-            .Select<UserSelectorOutPut>()//映射成SysUserSelectorOutPut
+        var result = await Context.Queryable<SysUser>().LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)
+            .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id)
+            .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//指定机构
+            .WhereIF(input.OrgIds != null, u => input.OrgIds.Contains(u.OrgId))//在指定机构列表查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
+            .Select((u, o, p) => new UserSelectorOutPut
+            {
+                Id = u.Id.SelectAll(),
+                OrgName = o.Name,
+                PositionName = p.Name
+            })
             .ToListAsync();
         return result;
     }
@@ -334,6 +340,13 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             }
         }
         return permissionTreeSelectors;
+    }
+
+    /// <inheritdoc />
+    public async Task<List<UserSelectorOutPut>> GetUserListByIdList(IdListInput input)
+    {
+        var userList = await Context.Queryable<SysUser>().Where(it => input.IdList.Contains(it.Id)).Select<UserSelectorOutPut>().ToListAsync();
+        return userList;
     }
 
     #endregion 查询

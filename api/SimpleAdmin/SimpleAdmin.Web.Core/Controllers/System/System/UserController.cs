@@ -11,7 +11,8 @@ public class UserController : BaseController
     private readonly ISysPositionService _sysPositionService;
     private readonly IRoleService _roleService;
 
-    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService, IRoleService roleService)
+    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService,
+        IRoleService roleService)
     {
         _sysUserService = sysUserService;
         _sysOrgService = sysOrgService;

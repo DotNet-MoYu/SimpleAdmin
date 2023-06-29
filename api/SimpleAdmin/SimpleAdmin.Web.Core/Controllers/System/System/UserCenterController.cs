@@ -8,10 +8,14 @@
 public class UserCenterController : IDynamicApiController
 {
     private readonly IUserCenterService _userCenterService;
+    private readonly ISysUserService _sysUserService;
+    private readonly ISysPositionService _sysPositionService;
 
-    public UserCenterController(IUserCenterService userCenterService)
+    public UserCenterController(IUserCenterService userCenterService, ISysUserService sysUserService, ISysPositionService sysPositionService)
     {
         _userCenterService = userCenterService;
+        _sysUserService = sysUserService;
+        _sysPositionService = sysPositionService;
     }
 
     /// <summary>

@@ -32,6 +32,15 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         return sysPositions;
     }
 
+    /// <inheritdoc />
+    public async Task<List<SysPosition>> GetPositionListByIdList(IdListInput input)
+    {
+        var positions = await GetListAsync();
+        var positionList = positions.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
+        return positionList;
+    }
+
+
     /// <inheritdoc/>
     public async Task<List<SysPosition>> PositionSelector(PositionSelectorInput input)
     {

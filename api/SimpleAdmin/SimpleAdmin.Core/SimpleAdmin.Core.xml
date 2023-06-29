@@ -74,6 +74,11 @@
             主键Id
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.IdListInput">
+            <summary>
+            Id列表输入
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.BasePageInput">
             <summary>
             全局分页查询输入参数

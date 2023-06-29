@@ -123,6 +123,13 @@ public partial interface ISysUserService : ITransient
     /// <returns>权限列表</returns>
     Task<List<string>> UserPermissionTreeSelector(BaseIdInput input);
 
+    /// <summary>
+    /// 根据id集合获取用户集合
+    /// </summary>
+    /// <param name="input">Id集合</param>
+    /// <returns></returns>
+    Task<List<UserSelectorOutPut>> GetUserListByIdList(IdListInput input);
+
     #endregion 查询
 
     #region 新增

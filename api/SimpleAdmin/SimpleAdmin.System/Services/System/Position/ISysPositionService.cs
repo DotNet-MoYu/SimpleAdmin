@@ -61,4 +61,11 @@ public interface ISysPositionService : ITransient
     /// </summary>
     /// <returns></returns>
     Task RefreshCache();
+
+    /// <summary>
+    /// 根据id集合获取职位集合
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<List<SysPosition>> GetPositionListByIdList(IdListInput input);
 }
