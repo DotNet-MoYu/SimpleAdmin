@@ -3909,12 +3909,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+            根据id集合获取职位集合
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.SysPositionService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.ISysPositionService"/>
             </summary>
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.GetListAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SysPositionService.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
@@ -5544,6 +5554,26 @@
             姓名
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.UserSelectorOutPut.Gender">
+             <summary>
+             性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UserSelectorOutPut.OrgName">
+            <summary>
+            组织名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UserSelectorOutPut.PositionName">
+            <summary>
+            职位名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UserSelectorOutPut.Avatar">
+            <summary>
+             头像
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.UserInfoOutPut">
             <summary>
             用户信息输出
@@ -5821,6 +5851,13 @@
             <param name="input">用户id</param>
             <returns>权限列表</returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysUserService.GetUserListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+            根据id集合获取用户集合
+            </summary>
+            <param name="input">Id集合</param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.ISysUserService.Add(SimpleAdmin.System.UserAddInput)">
             <summary>
             添加用户
@@ -5996,6 +6033,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.UserPermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SysUserService.GetUserListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.Add(SimpleAdmin.System.UserAddInput)">
