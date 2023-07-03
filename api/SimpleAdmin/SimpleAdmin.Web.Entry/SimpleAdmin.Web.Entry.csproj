@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-	<PropertyGroup>
-		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <SatelliteResourceLanguages>en-US</SatelliteResourceLanguages>
+    </PropertyGroup>
 
 
-	<ItemGroup>
-		<None Update="ip2region.db">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
-	</ItemGroup>
-	<ProjectExtensions>
-		<VisualStudio>
-			<UserProperties properties_4launchsettings_1json__JsonSchema="" />
-		</VisualStudio>
-	</ProjectExtensions>
+    <ItemGroup>
+        <None Update="ip2region.db">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj"/>
+        <PackageReference Include="Colorful.Console" Version="1.2.15"/>
+    </ItemGroup>
+    <ProjectExtensions>
+        <VisualStudio>
+            <UserProperties properties_4launchsettings_1json__JsonSchema=""/>
+        </VisualStudio>
+    </ProjectExtensions>
 
 </Project>
