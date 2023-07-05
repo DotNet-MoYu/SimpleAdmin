@@ -872,7 +872,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private async Task<string> GetDefaultPassWord(bool isSm4 = false)
     {
         //获取默认密码
-        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.PWD_DEFAULT_PASSWORD)).ConfigValue;
+        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_PWD_POLICY, DevConfigConst.PWD_DEFAULT_PASSWORD)).ConfigValue;
         return isSm4 ? CryptogramUtil.Sm4Encrypt(defaultPassword) : defaultPassword;//判断是否需要加密
     }
 
