@@ -1,8 +1,13 @@
 ﻿{
   "$schema": "https://gitee.com/dotnetchina/Furion/raw/v4/schemas/v4/furion-schema.json",
+  //swagger分组设置
+  "[openapi:Application]": {
+    "Order": 90, //分组排序，int 类型，数字越大排前面，默认 0
+    "Title": "业务模块" //配置分组标题，string 类型
+  },
   //系统层设置
   "ApplicationSettings": {
     "InitTable": true, //是否初始化表结构
-    "InitSeedData": false, //是否初始化种子数据
+    "InitSeedData": true, //是否初始化种子数据
   }
 }

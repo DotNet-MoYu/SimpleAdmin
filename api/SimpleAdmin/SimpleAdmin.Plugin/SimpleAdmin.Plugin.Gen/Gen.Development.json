@@ -1,7 +1,7 @@
 {
   //代码生成器设置
   "GenSettings": {
-    "InitTable": true, //是否初始化表结构
-    "InitSeedData": true, //是否初始化种子数据
+    "InitTable": false, //是否初始化表结构
+    "InitSeedData": false, //是否初始化种子数据
   }
 }
