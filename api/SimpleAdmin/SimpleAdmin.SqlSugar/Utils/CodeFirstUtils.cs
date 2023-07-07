@@ -77,29 +77,24 @@ public static class CodeFirstUtils
             if (tenantAtt == null) continue;//如果没有租户特性就下一个
             var db = DbContext.Db.GetConnectionScope(tenantAtt.configId.ToString());//获取数据库对象
             var config = DbContext.DbConfigs.FirstOrDefault(u => u.ConfigId == tenantAtt.configId.ToString());//获取数据库配置
-            var seedDataTable = seedData.ToList().ToDataTable();//获取种子数据
-            seedDataTable.TableName = db.EntityMaintenance.GetEntityInfo(entityType).DbTableName;//获取表名
-            if (config.IsUnderLine)// 驼峰转下划线
-            {
-                foreach (DataColumn col in seedDataTable.Columns)
-                {
-                    col.ColumnName = UtilMethods.ToUnderLine(col.ColumnName);
-                }
-            }
+            // var seedDataTable = seedData.ToList().ToDataTable();//获取种子数据:已弃用
+            var entityInfo = db.EntityMaintenance.GetEntityInfo(entityType);
+            // seedDataTable.TableName = db.EntityMaintenance.GetEntityInfo(entityType).DbTableName;//获取表名
             var ignoreAdd = hasDataMethod.GetCustomAttribute<IgnoreSeedDataAddAttribute>();//读取忽略插入特性
             var ignoreUpdate = hasDataMethod.GetCustomAttribute<IgnoreSeedDataUpdateAttribute>();//读取忽略更新特性
-            if (seedDataTable.Columns.Contains(SqlsugarConst.DB_PrimaryKey))//判断种子数据是否有主键
+            if (entityInfo.Columns.Any(u => u.IsPrimarykey))//判断种子数据是否有主键
             {
-                //根据判断主键插入或更新
-                var storage = db.Storageable(seedDataTable).WhereColumns(SqlsugarConst.DB_PrimaryKey).ToStorage();
+                // 按主键进行批量增加和更新
+                var storage = db.StorageableByObject(seedData.ToList()).ToStorage();
                 if (ignoreAdd == null) storage.AsInsertable.ExecuteCommand();//执行插入
                 if (ignoreUpdate == null) storage.AsUpdateable.ExecuteCommand();//只有没有忽略更新的特性才执行更新
             }
             else// 没有主键或者不是预定义的主键(有重复的可能)
             {
                 //全量插入
-                var storage = db.Storageable(seedDataTable).ToStorage();
-                if (ignoreAdd == null) storage.AsInsertable.ExecuteCommand();
+                // 无主键则只进行插入
+                if (!db.Queryable(entityInfo.DbTableName, entityInfo.DbTableName).Any() && ignoreAdd == null)
+                    db.InsertableByObject(seedData.ToList()).ExecuteCommand();
             }
         }
     }
