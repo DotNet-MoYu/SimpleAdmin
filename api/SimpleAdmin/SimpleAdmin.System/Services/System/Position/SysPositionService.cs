@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿using Masuit.Tools.Models;
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="ISysPositionService"/>
@@ -42,14 +44,14 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
 
 
     /// <inheritdoc/>
-    public async Task<List<SysPosition>> PositionSelector(PositionSelectorInput input)
+    public async Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var positions = await GetListAsync();
         var result = positions.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//父级
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .ToList();
+            .ToList().LinqPagedList(input.Current, input.Size);
         return result;
     }
 

@@ -15,7 +15,8 @@ public interface ISysOrgService : ITransient
     /// <param name="parentId">父Id</param>
     /// <param name="orgId">组织Id</param>
     /// <returns>是否存在,存在返回组织ID</returns>
-    bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId, out long orgId);
+    bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId,
+        out long orgId);
 
     /// <summary>
     /// 组织详情
@@ -69,6 +70,13 @@ public interface ISysOrgService : ITransient
     /// <returns>分页信息</returns>
     Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input);
 
+    /// <summary>
+    /// 根据ID列表获取组织列表
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<List<SysOrg>> GetOrgListByIdList(IdListInput input);
+
     #endregion 查询
 
     #region 新增
@@ -89,8 +97,6 @@ public interface ISysOrgService : ITransient
     Task Copy(SysOrgCopyInput input);
 
     #endregion 新增
-
-
 
     #region 编辑
 

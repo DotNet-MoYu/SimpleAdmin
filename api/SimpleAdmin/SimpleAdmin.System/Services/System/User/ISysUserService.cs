@@ -41,7 +41,7 @@ public partial interface ISysUserService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns></returns>
-    Task<List<UserSelectorOutPut>> UserSelector(UserSelectorInput input);
+    Task<SqlSugarPagedList<UserSelectorOutPut>> UserSelector(UserSelectorInput input);
 
     /// <summary>
     /// 用户分页查询

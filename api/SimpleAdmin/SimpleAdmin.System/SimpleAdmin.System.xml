@@ -3637,6 +3637,13 @@
             <param name="input">查询参数</param>
             <returns>分页信息</returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysOrgService.GetOrgListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+            根据ID列表获取组织列表
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.ISysOrgService.Add(SimpleAdmin.System.SysOrgAddInput,System.String)">
             <summary>
             添加组织
@@ -3718,6 +3725,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.IsExistOrgByName(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.String,System.Int64,System.Int64@)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SysOrgService.GetOrgListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.Add(SimpleAdmin.System.SysOrgAddInput,System.String)">
@@ -4982,6 +4992,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+            根据id集合获取角色集合
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.RoleService">
             <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
         </member>
@@ -5028,6 +5045,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.RoleService.RefreshCache">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.System.SysRole)">

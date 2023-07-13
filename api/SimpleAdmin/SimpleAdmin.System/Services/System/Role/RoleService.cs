@@ -356,7 +356,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     }
 
     /// <inheritdoc />
-    public async Task<List<SysRole>> RoleSelector(RoleSelectorInput input)
+    public async Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级组织
         //如果机构ID列表不为空
@@ -368,7 +368,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             .WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId.Value))//组织ID
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//分类
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .ToListAsync();
+            .ToPagedListAsync(input.Current, input.Size);
         return result;
     }
 
@@ -398,6 +398,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     {
         _simpleCacheService.Remove(SystemConst.Cache_SysRole);//删除KEY
         await GetListAsync();//重新缓存
+    }
+
+    /// <inheritdoc />
+    public async Task<List<SysRole>> GetRoleListByIdList(IdListInput input)
+    {
+        var roles = await GetListAsync();
+        var roleList = roles.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
+        return roleList;
     }
 
     #region 方法

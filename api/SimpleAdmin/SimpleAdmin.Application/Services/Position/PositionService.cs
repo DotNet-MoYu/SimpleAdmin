@@ -65,7 +65,7 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
     }
 
     /// <inheritdoc/>
-    public async Task<List<SysPosition>> PositionSelector(PositionSelectorInput input)
+    public async Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();

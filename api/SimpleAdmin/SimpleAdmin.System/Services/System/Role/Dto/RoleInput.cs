@@ -99,7 +99,7 @@ public class GrantUserInput
 /// <summary>
 /// 角色选择器参数
 /// </summary>
-public class RoleSelectorInput
+public class RoleSelectorInput : BasePageInput
 {
     /// <summary>
     /// 组织ID

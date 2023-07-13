@@ -253,7 +253,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<List<UserSelectorOutPut>> UserSelector(UserSelectorInput input)
+    public async Task<SqlSugarPagedList<UserSelectorOutPut>> UserSelector(UserSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
         var result = await Context.Queryable<SysUser>().LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)
@@ -267,7 +267,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 OrgName = o.Name,
                 PositionName = p.Name
             })
-            .ToListAsync();
+            .ToPagedListAsync(input.Current, input.Size);
         return result;
     }
 

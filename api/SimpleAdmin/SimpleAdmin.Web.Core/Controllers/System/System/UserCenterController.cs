@@ -7,15 +7,20 @@
 [Route("sys/[controller]")]
 public class UserCenterController : IDynamicApiController
 {
+    private readonly IRoleService _roleService;
     private readonly IUserCenterService _userCenterService;
     private readonly ISysUserService _sysUserService;
     private readonly ISysPositionService _sysPositionService;
+    private readonly ISysOrgService _sysOrgService;
 
-    public UserCenterController(IUserCenterService userCenterService, ISysUserService sysUserService, ISysPositionService sysPositionService)
+    public UserCenterController(IUserCenterService userCenterService, ISysUserService sysUserService, ISysPositionService sysPositionService,
+        ISysOrgService sysOrgService, IRoleService roleService)
     {
         _userCenterService = userCenterService;
         _sysUserService = sysUserService;
         _sysPositionService = sysPositionService;
+        _sysOrgService = sysOrgService;
+        _roleService = roleService;
     }
 
     /// <summary>
@@ -150,5 +155,46 @@ public class UserCenterController : IDynamicApiController
     public async Task<dynamic> UpdateAvatar([FromForm] BaseFileInput input)
     {
         return await _userCenterService.UpdateAvatar(input);
+    }
+
+
+    /// <summary>
+    ///  根据id集合获取用户集合
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("getUserListByIdList")]
+    public async Task<dynamic> GetUserListByIdList([FromBody] IdListInput input)
+    {
+        return await _sysUserService.GetUserListByIdList(input);
+    }
+
+    /// <summary>
+    ///  根据id集合获取职位集合
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("getPositionListByIdList")]
+    public async Task<dynamic> GetPositionListByIdList([FromBody] IdListInput input)
+    {
+        return await _sysPositionService.GetPositionListByIdList(input);
+    }
+
+    /// <summary>
+    ///  根据id集合获取组织集合
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("getOrgListByIdList")]
+    public async Task<dynamic> GetOrgListByIdList([FromBody] IdListInput input)
+    {
+        return await _sysOrgService.GetOrgListByIdList(input);
+    }
+
+    /// <summary>
+    ///  根据id集合获取角色集合
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("getRoleListByIdList")]
+    public async Task<dynamic> GetRoleListByIdList([FromBody] IdListInput input)
+    {
+        return await _roleService.GetRoleListByIdList(input);
     }
 }

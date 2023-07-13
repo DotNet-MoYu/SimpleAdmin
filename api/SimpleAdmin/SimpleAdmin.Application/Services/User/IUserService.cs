@@ -12,7 +12,7 @@ public interface IUserService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>人员列表</returns>
-    Task<List<UserSelectorOutPut>> UserSelector(UserSelectorInput input);
+    Task<SqlSugarPagedList<UserSelectorOutPut>> UserSelector(UserSelectorInput input);
 
     /// <summary>
     /// 用户分页查询
@@ -33,7 +33,7 @@ public interface IUserService : ITransient
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<List<SysRole>> RoleSelector(RoleSelectorInput input);
+    Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input);
 
     /// <summary>
     /// 人员详情

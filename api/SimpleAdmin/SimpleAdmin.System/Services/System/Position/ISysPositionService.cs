@@ -54,7 +54,7 @@ public interface ISysPositionService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns></returns>
-    Task<List<SysPosition>> PositionSelector(PositionSelectorInput input);
+    Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input);
 
     /// <summary>
     /// 刷新缓存

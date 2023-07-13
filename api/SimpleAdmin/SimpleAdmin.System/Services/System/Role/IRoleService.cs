@@ -107,5 +107,12 @@ public interface IRoleService : ITransient
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<List<SysRole>> RoleSelector(RoleSelectorInput input);
+    Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input);
+
+    /// <summary>
+    /// 根据id集合获取角色集合
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<List<SysRole>> GetRoleListByIdList(IdListInput input);
 }

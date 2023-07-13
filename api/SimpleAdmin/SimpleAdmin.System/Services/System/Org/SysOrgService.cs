@@ -142,6 +142,15 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             return false;
     }
 
+
+    /// <inheritdoc />
+    public async Task<List<SysOrg>> GetOrgListByIdList(IdListInput input)
+    {
+        var sysOrgs = await GetListAsync();
+        var orgList = sysOrgs.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
+        return orgList;
+    }
+
     #endregion 查询
 
     #region 新增

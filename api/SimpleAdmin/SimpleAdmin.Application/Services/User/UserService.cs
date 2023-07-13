@@ -41,7 +41,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     }
 
     /// <inheritdoc/>
-    public async Task<List<UserSelectorOutPut>> UserSelector(UserSelectorInput input)
+    public async Task<SqlSugarPagedList<UserSelectorOutPut>> UserSelector(UserSelectorInput input)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
@@ -53,13 +53,27 @@ public class UserService : DbRepository<SysUser>, IUserService
             return await _sysUserService.UserSelector(input);//查询
         }
         //返回自己
-        return new List<UserSelectorOutPut> { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } };
+        return new SqlSugarPagedList<UserSelectorOutPut>
+        {
+            Total = 1,
+            Pages = 1,
+            HasPrevPages = false,
+            HasNextPages = false,
+            Records = new[] { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } }
+        };
     }
 
     /// <inheritdoc />
-    public async Task<List<SysRole>> RoleSelector(RoleSelectorInput input)
+    public async Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input)
     {
-        var sysRoles = new List<SysRole>();
+        var sysRoles = new SqlSugarPagedList<SysRole>()
+        {
+            Total = 1,
+            Pages = 1,
+            HasPrevPages = false,
+            HasNextPages = false,
+            Records = new List<SysRole>()
+        };
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null)
@@ -79,7 +93,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         if (user != null)
         {
             user.Password = null;//清空密码
-            user.Phone = CryptogramUtil.Sm4Decrypt(user.Phone);//手机号解密
         }
         return user;
     }

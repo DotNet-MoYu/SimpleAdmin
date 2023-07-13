@@ -3,7 +3,7 @@
 /// <summary>
 /// 用户选择器参数
 /// </summary>
-public class UserSelectorInput
+public class UserSelectorInput : BasePageInput
 {
     /// <summary>
     /// 组织ID
@@ -116,7 +116,6 @@ public class UserGrantResourceInput : GrantResourceInput
 /// <summary>
 /// 用户导入
 /// </summary>
-
 public class SysUserImportInput : ImportTemplateInput
 {
     /// <summary>
