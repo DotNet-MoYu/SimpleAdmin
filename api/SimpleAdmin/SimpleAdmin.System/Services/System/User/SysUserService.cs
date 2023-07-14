@@ -349,6 +349,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return userList;
     }
 
+    /// <inheritdoc />
+    public async Task<SysUser> Detail(BaseIdInput input)
+    {
+        var user = await GetUserById(input.Id);
+        if (user != null)
+        {
+            user.Password = null;//清空密码
+        }
+        return user;
+    }
+
     #endregion 查询
 
     #region 新增

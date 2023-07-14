@@ -142,6 +142,18 @@ public class UserController : BaseController
         return await _sysUserService.Template();
     }
 
+    /// <summary>
+    /// 用户详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("用户详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _sysUserService.Detail(input);
+    }
+
     #endregion Get请求
 
     #region Post请求

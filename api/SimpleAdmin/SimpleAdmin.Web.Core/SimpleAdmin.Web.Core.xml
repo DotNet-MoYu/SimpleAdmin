@@ -202,7 +202,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Detail(SimpleAdmin.Core.BaseIdInput)">
             <summary>
-            测试详情
+            人员详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1334,6 +1334,13 @@
             <summary>
             模板下载
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            用户详情
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.UserController.Add(SimpleAdmin.System.UserAddInput)">

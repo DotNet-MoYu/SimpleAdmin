@@ -117,7 +117,7 @@ public class BizUserController : IDynamicApiController
 
 
     /// <summary>
-    /// 测试详情
+    /// 人员详情
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

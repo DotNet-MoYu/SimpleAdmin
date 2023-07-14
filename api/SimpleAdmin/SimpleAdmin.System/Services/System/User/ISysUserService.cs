@@ -130,6 +130,13 @@ public partial interface ISysUserService : ITransient
     /// <returns></returns>
     Task<List<UserSelectorOutPut>> GetUserListByIdList(IdListInput input);
 
+    /// <summary>
+    /// 用户详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysUser> Detail(BaseIdInput input);
+
     #endregion 查询
 
     #region 新增

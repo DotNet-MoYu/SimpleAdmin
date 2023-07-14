@@ -89,11 +89,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc />
     public async Task<SysUser> Detail(BaseIdInput input)
     {
-        var user = await _sysUserService.GetUserById(input.Id);
-        if (user != null)
-        {
-            user.Password = null;//清空密码
-        }
+        var user = await _sysUserService.Detail(input);
         return user;
     }
 
