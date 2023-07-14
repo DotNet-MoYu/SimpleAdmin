@@ -217,7 +217,7 @@ var selectCount=selectColumns.Count;//选择框数量
 		  }
 		  }
           @(@Model.ClassNameFirstLower)Api
-              .submitForm(formDataParam, !formDataParam.@primaryKey.FieldNameFirstLower)
+              .submitForm(formDataParam, formDataParam.@primaryKey.FieldNameFirstLower)
               .then(() => {
                   onClose()
                   emit('successful')
