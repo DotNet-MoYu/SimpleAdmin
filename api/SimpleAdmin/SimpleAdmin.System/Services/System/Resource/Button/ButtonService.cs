@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿using SimpleAdmin.Core.Extension;
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="IButtonService"/>
@@ -10,7 +12,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     private readonly IRelationService _relationService;
     private readonly IEventPublisher _eventPublisher;
 
-    public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService, IRelationService relationService, IEventPublisher eventPublisher)
+    public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService, IRelationService relationService,
+        IEventPublisher eventPublisher)
     {
         _logger = logger;
         _resourceService = resourceService;
@@ -125,7 +128,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
             var buttonInfo = relationRoleResuorce.ButtonInfo;//获取按钮信息
             if (buttonInfo.Count > 0)
             {
-                var diffArr = buttonInfo.Where(it => !buttonInfo.Contains(it)).ToList();//找出不同的元素(即交集的补集)
+                // 使用 LINQ 查询找出交集的补集（即不同元素）
+                var diffArr = buttonInfo.Except(ids).Union(ids.Except(buttonInfo)).ToList();
                 relationRoleResuorce.ButtonInfo = diffArr;//重新赋值按钮信息
                 it.ExtJson = relationRoleResuorce.ToJson();//重新赋值拓展信息
             }
