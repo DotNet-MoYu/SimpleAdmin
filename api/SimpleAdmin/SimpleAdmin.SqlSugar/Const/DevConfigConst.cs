@@ -25,7 +25,7 @@ public class DevConfigConst
     /// <summary>
     /// 单用户登录开关
     /// </summary>
-    public const string LOGIN_SINGLE_OPEN = "LOGIN_DEFAULT_SINGLE_OPEN";
+    public const string LOGIN_SINGLE_OPEN = "LOGIN_SINGLE_OPEN";
 
     /// <summary>
     ///  登录错误锁定时长
