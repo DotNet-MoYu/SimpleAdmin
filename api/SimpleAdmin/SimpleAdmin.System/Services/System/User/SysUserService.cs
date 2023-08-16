@@ -331,7 +331,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (menuIds.Any())
         {
             //获取菜单信息
-            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            var menus = await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
             //获取权限授权树
             var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
             if (permissions.Count > 0)
@@ -520,7 +520,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var defaultDataScope = input.DefaultDataScope;//获取默认数据范围
 
             //获取菜单信息
-            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            var menus = await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
             if (menus.Count > 0)
             {
                 //获取权限授权树
@@ -1017,6 +1017,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             sysUser.DataScopeList = dataScopeList;
             var scopeOrgChildList = (await _sysOrgService.GetChildListById(sysUser.OrgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
             sysUser.ScopeOrgChildList = scopeOrgChildList;
+            var moduleIds = await _relationService.GetModuleByRoleId(sysUser.RoleIdList);//获取模块列表
+            var modules = await _resourceService.GetResourcesByIds(moduleIds, CateGoryConst.Resource_MODULE);//获取模块列表
+            sysUser.ModuleList = modules;//模块列表赋值给用户
             //插入Redis
             _simpleCacheService.HashAdd(SystemConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
             return sysUser;

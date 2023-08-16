@@ -54,6 +54,11 @@
             角色有哪些资源
             </summary>
         </member>
+        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_ROLE_HAS_MODULE">
+            <summary>
+            角色有哪些模块
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_HAS_RESOURCE">
              <summary>
             用户有哪些资源

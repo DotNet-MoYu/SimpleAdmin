@@ -811,6 +811,16 @@
              别名
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysResource.Description">
+             <summary>
+             别名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.Avatar">
+             <summary>
+             别名
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysResource.Code">
              <summary>
              编码
@@ -846,9 +856,29 @@
              图标
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.SysResource.Color">
+        <member name="P:SimpleAdmin.System.SysResource.ActiveMenu">
              <summary>
-             颜色
+             是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsHide">
+             <summary>
+             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsFull">
+             <summary>
+             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsAffix">
+             <summary>
+             菜单是否固定在标签页中 (首页通常是固定项)
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsKeepAlive">
+             <summary>
+             菜单是否固定在标签页中 (首页通常是固定项)
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysResource.SortCode">
@@ -863,7 +893,7 @@
         </member>
         <member name="P:SimpleAdmin.System.SysResource.Children">
             <summary>
-            字节点
+            子节点
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.Meta">
@@ -891,9 +921,29 @@
             是否首页
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.Meta.hidden">
-            <summary>
-            是否隐藏
+        <member name="P:SimpleAdmin.System.Meta.ActiveMenu">
+             <summary>
+             是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.IsHide">
+             <summary>
+             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.IsFull">
+             <summary>
+             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.IsAffix">
+             <summary>
+             菜单是否固定在标签页中 (首页通常是固定项)
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.IsKeepAlive">
+             <summary>
+             菜单是否固定在标签页中 (首页通常是固定项)
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.SysRole">
@@ -1182,6 +1232,11 @@
              排序码
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysUser.DefaultModule">
+             <summary>
+             默认模块
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysUser.OrgName">
             <summary>
             机构信息
@@ -1228,6 +1283,11 @@
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUser.ScopeOrgChildList">
+            <summary>
+            机构及以下机构ID集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.ModuleList">
             <summary>
             机构及以下机构ID集合
             </summary>
@@ -1862,6 +1922,16 @@
             姓名
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.LoginOutPut.DefaultModule">
+            <summary>
+            默认模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOutPut.ModuleList">
+            <summary>
+            模块列表
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.LoginUserOutput">
             <summary>
             登录用互信息
@@ -1940,6 +2010,16 @@
         <member name="P:SimpleAdmin.System.LoginUserOutput.ButtonCodeList">
             <summary>
             按钮码集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginUserOutput.ModuleList">
+            <summary>
+            机构及以下机构ID集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginUserOutput.DefaultModule">
+             <summary>
+             默认模块
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.IAuthService">
@@ -4046,6 +4126,13 @@
             <param name="clear">是否清除老的数据</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            根据角色ID获取模块ID列表
+            </summary>
+            <param name="roleIdList">角色ID列表</param>
+            <returns>模块ID列表</returns>
+        </member>
         <member name="T:SimpleAdmin.System.Relationservice">
             <inheritdoc cref="T:SimpleAdmin.System.IRelationService"/>
         </member>
@@ -4074,6 +4161,9 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.Relationservice.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.System.ButtonService">
@@ -4548,12 +4638,13 @@
             <param name="category">分类名称</param>
             <returns>资源列表</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetMenuByMenuIds(System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.IResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
             <summary>
             根据菜单ID获取菜单
             </summary>
-            <param name="menuIds">菜单id列表</param>
-            <returns>菜单列表</returns>
+            <param name="ids">id列表</param>
+            <param name="category">分类</param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
             <summary>
@@ -4605,7 +4696,7 @@
         <member name="M:SimpleAdmin.System.ResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetMenuByMenuIds(System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetRouteName(System.String,System.String)">
@@ -5096,6 +5187,21 @@
             新密码
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.SetDeafultModuleInput">
+            <summary>
+            设置默认模块输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.Id">
+            <summary>
+            模块Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.IfDefault">
+            <summary>
+            是否默认
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.LoginOrgTreeOutput">
             <summary>
             我的机构数样式
@@ -5226,6 +5332,13 @@
             <param name="input">头像文件</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+            <summary>
+            修改默认模块
+            </summary>
+            <param name="input">默认模块输入参数</param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.UserCenterService">
             <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
         </member>
@@ -5263,6 +5376,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">

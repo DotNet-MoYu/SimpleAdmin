@@ -66,9 +66,9 @@ public class AuthBController : IDynamicApiController
     /// 登出
     /// </summary>
     /// <returns></returns>
-    [HttpPost("loginOut")]
+    [HttpPost("logout")]
     [DisplayName(EventSubscriberConst.LoginOutB)]
-    public async Task LoginOut(LoginOutIput input)
+    public async Task LoginOut([FromBody] LoginOutIput input)
     {
         await _authService.LoginOut(input.Token, LoginClientTypeEnum.B);
     }

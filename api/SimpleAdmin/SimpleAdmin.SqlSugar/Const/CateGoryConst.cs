@@ -61,6 +61,11 @@ public class CateGoryConst
     public const string Relation_SYS_ROLE_HAS_RESOURCE = "SYS_ROLE_HAS_RESOURCE";
 
     /// <summary>
+    /// 角色有哪些模块
+    /// </summary>
+    public const string Relation_SYS_ROLE_HAS_MODULE = "SYS_ROLE_HAS_MODULE";
+
+    /// <summary>
     ///用户有哪些资源
     /// </summary>
     public const string Relation_SYS_USER_HAS_RESOURCE = "SYS_USER_HAS_RESOURCE";

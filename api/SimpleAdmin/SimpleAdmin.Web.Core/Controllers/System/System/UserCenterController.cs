@@ -158,6 +158,7 @@ public class UserCenterController : IDynamicApiController
     }
 
 
+
     /// <summary>
     ///  根据id集合获取用户集合
     /// </summary>
@@ -196,5 +197,15 @@ public class UserCenterController : IDynamicApiController
     public async Task<dynamic> GetRoleListByIdList([FromBody] IdListInput input)
     {
         return await _roleService.GetRoleListByIdList(input);
+    }
+
+    /// <summary>
+    /// 修改默认模块
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("setDefaultModule")]
+    public async Task SetDeafultModule([FromBody] SetDeafultModuleInput input)
+    {
+        await _userCenterService.SetDeafultModule(input);
     }
 }

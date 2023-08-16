@@ -68,7 +68,8 @@ public interface IRelationService : ITransient
     /// <param name="clear">是否清除老的数据</param>
     /// <param name="refreshCache">是否刷新缓存</param>
     /// <returns></returns>
-    Task SaveRelation(string category, long objectId, string targetId, string extJson, bool clear, bool refreshCache = true);
+    Task SaveRelation(string category, long objectId, string targetId,
+        string extJson, bool clear, bool refreshCache = true);
 
     /// <summary>
     /// 批量保存关系
@@ -79,5 +80,13 @@ public interface IRelationService : ITransient
     /// <param name="extJsons">拓展信息列表</param>
     /// <param name="clear">是否清除老的数据</param>
     /// <returns></returns>
-    Task SaveRelationBatch(string category, long objectId, List<string> targetIds, List<string> extJsons, bool clear);
+    Task SaveRelationBatch(string category, long objectId, List<string> targetIds,
+        List<string> extJsons, bool clear);
+
+    /// <summary>
+    /// 根据角色ID获取模块ID列表
+    /// </summary>
+    /// <param name="roleIdList">角色ID列表</param>
+    /// <returns>模块ID列表</returns>
+    Task<List<long>> GetModuleByRoleId(List<long> roleIdList);
 }

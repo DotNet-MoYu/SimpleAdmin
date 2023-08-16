@@ -280,6 +280,13 @@ public class SysUser : BaseEntity
     [SugarColumn(ColumnName = "SortCode", ColumnDescription = "排序码", IsNullable = true)]
     public int? SortCode { get; set; }
 
+
+    /// <summary>
+    /// 默认模块
+    ///</summary>
+    [SugarColumn(ColumnName = "DefaultModule", ColumnDescription = "默认模块", IsNullable = true)]
+    public long? DefaultModule { get; set; }
+
     /// <summary>
     /// 机构信息
     /// </summary>
@@ -339,6 +346,12 @@ public class SysUser : BaseEntity
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     public List<long> ScopeOrgChildList { get; set; }
+
+    /// <summary>
+    /// 机构及以下机构ID集合
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public List<SysResource> ModuleList { get; set; } = new List<SysResource>();
 }
 
 /// <summary>

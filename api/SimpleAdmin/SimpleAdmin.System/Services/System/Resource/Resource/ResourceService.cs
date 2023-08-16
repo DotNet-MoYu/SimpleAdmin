@@ -123,7 +123,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     /// <inheritdoc />
     public async Task<List<ResTreeSelector>> ResourceTreeSelector()
     {
-        List<ResTreeSelector> resourceTreeSelectors = new List<ResTreeSelector>();//定义结果
+        var resourceTreeSelectors = new List<ResTreeSelector>();//定义结果
         //获取模块列表
         var moduleList = await GetListByCategory(CateGoryConst.Resource_MODULE);
         //遍历模块
@@ -140,7 +140,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     /// <inheritdoc />
     public List<PermissionTreeSelector> PermissionTreeSelector(List<string> routes)
     {
-        List<PermissionTreeSelector> permissions = new List<PermissionTreeSelector>();//权限列表
+        var permissions = new List<PermissionTreeSelector>();//权限列表
 
         // 获取所有需要数据权限的控制器
         var controllerTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
@@ -201,14 +201,17 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     /// <inheritdoc />
-    public async Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds)
+    public async Task<List<SysResource>> GetResourcesByIds(List<long> ids, string category)
     {
         //获取所有菜单
-        var menuList = await GetListByCategory(CateGoryConst.Resource_MENU);
+        var menuList = await GetListByCategory(category);
         //获取菜单信息
-        var menus = menuList.Where(it => menuIds.Contains(it.Id)).ToList();
+        var menus = menuList.Where(it => ids.Contains(it.Id)).ToList();
         return menus;
     }
+
+
+
 
     #region 方法
 
@@ -285,8 +288,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<ResTreeSelector.RoleGrantResourceMenu>> GetRoleGrantResourceMenus(long moduleId)
     {
         var roleGrantResourceMenus = new List<ResTreeSelector.RoleGrantResourceMenu>();//定义结果
-        List<SysResource> allMenuList = (await GetListByCategory(CateGoryConst.Resource_MENU)).Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
-        List<SysResource> allButtonList = await GetListByCategory(CateGoryConst.Resource_BUTTON);//获取所有按钮列表
+        var allMenuList = (await GetListByCategory(CateGoryConst.Resource_MENU)).Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
+        var allButtonList = await GetListByCategory(CateGoryConst.Resource_BUTTON);//获取所有按钮列表
         var parentMenuList = allMenuList.Where(it => it.ParentId == SimpleAdminConst.Zero).ToList();//获取一级目录
 
         //遍历一级目录

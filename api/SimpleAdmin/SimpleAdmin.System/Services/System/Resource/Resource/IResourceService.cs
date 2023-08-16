@@ -53,9 +53,10 @@ public interface IResourceService : ITransient
     /// <summary>
     /// 根据菜单ID获取菜单
     /// </summary>
-    /// <param name="menuIds">菜单id列表</param>
-    /// <returns>菜单列表</returns>
-    Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds);
+    /// <param name="ids">id列表</param>
+    /// <param name="category">分类</param>
+    /// <returns></returns>
+    Task<List<SysResource>> GetResourcesByIds(List<long> ids, string category);
 
     /// <summary>
     /// 获取权限授权树

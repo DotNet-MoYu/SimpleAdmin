@@ -285,6 +285,20 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return avatar;
     }
 
+    /// <inheritdoc />
+    public async Task SetDeafultModule(SetDeafultModuleInput input)
+    {
+        //获取用户信息
+        var userInfo = await _userService.GetUserById(UserManager.UserId);
+        //如果是默认模块
+        if (input.IfDefault)
+            userInfo.DefaultModule = input.Id;
+        else
+            userInfo.DefaultModule = null;
+        await Context.Updateable(userInfo).UpdateColumns(it => new { it.DefaultModule }).ExecuteCommandAsync();//修改默认模块
+        _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
+    }
+
     #endregion 编辑
 
     #region 方法
@@ -396,7 +410,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 else
                 {
                     // 否则隐藏该单页面
-                    meta.hidden = true;
+                    meta.IsHide = true;
                 }
             }
             it.Meta = meta;

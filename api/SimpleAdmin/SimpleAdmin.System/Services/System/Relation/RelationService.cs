@@ -145,4 +145,16 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             throw Oops.Oh(ErrorCodeEnum.A0003);
         }
     }
+
+    /// <inheritdoc/>
+    public async Task<List<long>> GetModuleByRoleId(List<long> roleIdList)
+    {
+        var moduleIds = new List<long>();
+        var relation = await GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_MODULE);//获取关系集合
+        if (relation != null && relation.Count > 0)
+        {
+            moduleIds = relation.Where(it => roleIdList.Contains(it.ObjectId)).Select(it => it.TargetId.ToLong()).ToList();
+        }
+        return moduleIds;
+    }
 }

@@ -263,7 +263,7 @@ public class AuthService : IAuthService
     public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEumu device, LoginClientTypeEnum loginClientType)
     {
         if (sysUser.UserStatus == DevDictConst.COMMON_STATUS_DISABLED) throw Oops.Bah("账号已停用");//账号冻结
-
+        if (sysUser.ModuleList.Count == 0) throw Oops.Bah("该账号未分配模块,请联系管理员");//没有分配菜单权限
         //生成Token
         var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
         {
@@ -306,7 +306,9 @@ public class AuthService : IAuthService
         {
             Token = accessToken,
             Account = sysUser.Account,
-            Name = sysUser.Name
+            Name = sysUser.Name,
+            DefaultModule = sysUser.DefaultModule,
+            ModuleList = sysUser.ModuleList
         };
     }
 

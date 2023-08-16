@@ -91,5 +91,12 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task<string> UpdateAvatar(BaseFileInput input);
 
+    /// <summary>
+    /// 修改默认模块
+    /// </summary>
+    /// <param name="input">默认模块输入参数</param>
+    /// <returns></returns>
+    Task SetDeafultModule(SetDeafultModuleInput input);
+
     #endregion 编辑
 }

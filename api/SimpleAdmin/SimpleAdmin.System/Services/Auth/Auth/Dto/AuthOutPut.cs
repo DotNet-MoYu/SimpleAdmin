@@ -39,6 +39,16 @@ public class LoginOutPut
     /// 姓名
     /// </summary>
     public string Name { get; set; }
+
+    /// <summary>
+    /// 默认模块
+    /// </summary>
+    public long? DefaultModule { get; set; }
+
+    /// <summary>
+    /// 模块列表
+    /// </summary>
+    public List<SysResource> ModuleList { get; set; }
 }
 
 /// <summary>
@@ -121,4 +131,14 @@ public class LoginUserOutput
     /// 按钮码集合
     /// </summary>
     public List<string> ButtonCodeList { get; set; }
+
+    /// <summary>
+    /// 机构及以下机构ID集合
+    /// </summary>
+    public List<SysResource> ModuleList { get; set; } = new List<SysResource>();
+
+    /// <summary>
+    /// 默认模块
+    ///</summary>
+    public long? DefaultModule { get; set; }
 }

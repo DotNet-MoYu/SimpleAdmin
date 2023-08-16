@@ -200,12 +200,31 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task GrantResource(GrantResourceInput input)
     {
+        var allMenus = await _resourceService.GetListByCategory(ResourceConst.MENU);//获取所有菜单
         var menuIds = input.GrantInfoList.Select(it => it.MenuId).ToList();//菜单ID
         var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
         var relationRoles = new List<SysRelation>();//要添加的角色资源和授权关系表
         var sysRole = (await GetListAsync()).Where(it => it.Id == input.Id).FirstOrDefault();//获取角色
         if (sysRole != null)
         {
+            #region 角色模块处理
+
+            var menusList = allMenus.Where(it => menuIds.Contains(it.Id)).ToList();//获取菜单信息
+            //获取我的模块信息Id列表
+            var moduleIds = menusList.Select(it => it.Module.Value).Distinct().ToList();
+            moduleIds.ForEach(it =>
+            {
+                //将角色资源添加到列表
+                relationRoles.Add(new SysRelation
+                {
+                    ObjectId = sysRole.Id,
+                    TargetId = it.ToString(),
+                    Category = CateGoryConst.Relation_SYS_ROLE_HAS_MODULE
+                });
+            });
+
+            #endregion
+
             #region 角色资源处理
 
             //遍历菜单列表
@@ -229,7 +248,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var defaultDataScope = sysRole.DefaultDataScope;//获取默认数据范围
 
             //获取菜单信息
-            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            var menus = allMenus.Where(it => menuIds.Contains(it.Id)).ToList();
             if (menus.Count > 0)
             {
                 //获取权限授权树
@@ -260,7 +279,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 //如果不是代码生成,就删除老的
                 if (!input.IsCodeGen)
                     await relatioRep.DeleteAsync(it =>
-                        it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE));
+                        it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE
+                        || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_MODULE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
@@ -382,7 +402,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         if (menuIds.Any())
         {
             //获取菜单信息
-            var menus = await _resourceService.GetMenuByMenuIds(menuIds);
+            var menus = await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
             //获取权限授权树
             var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
             if (permissions.Count > 0)
