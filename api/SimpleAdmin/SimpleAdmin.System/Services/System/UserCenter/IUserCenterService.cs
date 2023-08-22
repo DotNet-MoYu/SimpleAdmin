@@ -8,10 +8,11 @@ public interface IUserCenterService : ITransient
     #region 查询
 
     /// <summary>
-    /// 获取个人菜单
+    /// 获取登录用户菜单
     /// </summary>
+    /// <param name="input"></param>
     /// <returns></returns>
-    Task<List<SysResource>> GetOwnMenu();
+    Task<List<SysResource>> GetLoginMenu(BaseIdInput input);
 
     /// <summary>
     /// 获取个人工作台

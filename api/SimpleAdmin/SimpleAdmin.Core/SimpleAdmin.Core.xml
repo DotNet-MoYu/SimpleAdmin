@@ -84,12 +84,12 @@
             全局分页查询输入参数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BasePageInput.Current">
+        <member name="P:SimpleAdmin.Core.BasePageInput.PageNum">
             <summary>
             当前页码
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Core.BasePageInput.Size">
+        <member name="P:SimpleAdmin.Core.BasePageInput.PageSize">
             <summary>
             每页条数
             </summary>

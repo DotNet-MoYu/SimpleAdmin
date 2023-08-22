@@ -742,8 +742,8 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="queryable"></param>
-            <param name="current"></param>
-            <param name="size"></param>
+            <param name="pageNum"></param>
+            <param name="pageSize"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.SqlSugarPageExtension.ToPagedListAsync``1(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32)">
@@ -752,8 +752,8 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
             <param name="queryable"></param>
-            <param name="current"></param>
-            <param name="size"></param>
+            <param name="pageNum"></param>
+            <param name="pageSize"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.SqlSugarPageExtension.ToPagedList``2(SqlSugar.ISugarQueryable{``0},System.Int32,System.Int32,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
@@ -763,7 +763,7 @@
             <typeparam name="TEntity"></typeparam>
             <typeparam name="TResult"></typeparam>
             <param name="queryable"></param>
-            <param name="pageIndex"></param>
+            <param name="pageNum"></param>
             <param name="pageSize"></param>
             <param name="expression"></param>
             <returns></returns>
@@ -775,7 +775,7 @@
             <typeparam name="TEntity"></typeparam>
             <typeparam name="TResult"></typeparam>
             <param name="queryable"></param>
-            <param name="pageIndex"></param>
+            <param name="pageNum"></param>
             <param name="pageSize"></param>
             <param name="expression"></param>
             <returns></returns>
@@ -786,7 +786,7 @@
             </summary>
             <typeparam name="T"></typeparam>
             <param name="list">数据列表</param>
-            <param name="pageIndex">当前页</param>
+            <param name="pageNum">当前页</param>
             <param name="pageSize">每页数量</param>
             <returns>分页集合</returns>
         </member>
@@ -796,12 +796,12 @@
             </summary>
             <typeparam name="TEntity"></typeparam>
         </member>
-        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.Current">
+        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.PageNum">
             <summary>
             页码
             </summary>
         </member>
-        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.Size">
+        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.PageSize">
             <summary>
             数量
             </summary>
@@ -816,7 +816,7 @@
             总页数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.Records">
+        <member name="P:SimpleAdmin.SqlSugar.SqlSugarPagedList`1.List">
             <summary>
             当前页集合
             </summary>

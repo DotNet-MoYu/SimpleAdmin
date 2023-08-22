@@ -13,24 +13,26 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     private readonly IRelationService _relationService;
 
     public ModuleService(ILogger<ModuleService> logger, ISimpleCacheService simpleCacheService,
-                         IResourceService resourceService,
-                         IRelationService relationService)
+        IResourceService resourceService,
+        IRelationService relationService)
     {
-        this._logger = logger;
-        this._simpleCacheService = simpleCacheService;
-        this._resourceService = resourceService;
-        this._relationService = relationService;
+        _logger = logger;
+        _simpleCacheService = simpleCacheService;
+        _resourceService = resourceService;
+        _relationService = relationService;
     }
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(ModulePageInput input)
     {
         var query = Context.Queryable<SysResource>()
-                         .Where(it => it.Category == CateGoryConst.Resource_MODULE)//模块
-                         .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey))//根据关键字查询
-                         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
-                         .OrderBy(it => it.SortCode);//排序
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+            .Where(it => it.Category == CateGoryConst.Resource_MODULE)//模块
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.Title.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")
+            .OrderBy(it => it.SortCode);//排序
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -68,7 +70,10 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             if (system != null)
                 throw Oops.Bah($"不可删除系统内置模块:{system.Title}");
             //获取模块下的所有菜单Id列表
-            var menuIds = resourceList.Where(it => ids.Contains(it.Module.ToLong()) && it.ParentId.ToLong() == SimpleAdminConst.Zero).Select(it => it.Id).ToList();
+            var menuIds = resourceList
+                .Where(it =>
+                    ids.Contains(it.Module.ToLong())
+                    && it.ParentId.ToLong() == SimpleAdminConst.Zero).Select(it => it.Id).ToList();
             //需要删除的资源ID列表
             var resourceIds = new List<long>();
             //遍历列表
@@ -86,12 +91,16 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
-                .Where(it => it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId))).ExecuteCommandAsync();
+                    .Where(it =>
+                        it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE
+                        && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId)))
+                    .ExecuteCommandAsync();
             });
             if (result.IsSuccess)//如果成功了
             {
                 await _resourceService.RefreshCache();//资源表刷新缓存
-                await _relationService.RefreshCache(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
+                await _relationService.RefreshCache(CateGoryConst
+                    .Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
             }
             else
             {
@@ -110,9 +119,11 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     /// <param name="sysResource"></param>
     private async Task CheckInput(SysResource sysResource)
     {
-        var sysResourceList = await _resourceService.GetListByCategory(CateGoryConst.Resource_MODULE);
+        var sysResourceList =
+            await _resourceService.GetListByCategory(CateGoryConst.Resource_MODULE);
         //判断是否从存在重复模块
-        var hasSameName = sysResourceList.Any(it => it.Title == sysResource.Title && it.Id != sysResource.Id);
+        var hasSameName =
+            sysResourceList.Any(it => it.Title == sysResource.Title && it.Id != sysResource.Id);
         if (hasSameName)
         {
             throw Oops.Bah($"存在重复的模块:{sysResource.Title}");

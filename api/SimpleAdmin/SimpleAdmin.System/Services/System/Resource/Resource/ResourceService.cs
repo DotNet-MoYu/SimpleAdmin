@@ -55,6 +55,21 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     /// <inheritdoc/>
+    public async Task<List<SysResource>> GetMenuAndSpaListByModuleId(long id)
+    {
+        //获取所有的菜单和模块以及单页面列表，
+        var sysResources = await GetListAsync(new List<string> { CateGoryConst.Resource_MENU, CateGoryConst.Resource_SPA });
+        if (sysResources != null)
+        {
+            //并按分类和排序码排序
+            sysResources = sysResources
+                .Where(it => it.Category == CateGoryConst.Resource_SPA || it.Module == id)//根据模块ID获取菜单
+                .OrderBy(it => it.Category).ThenBy(it => it.SortCode).ToList();//排序
+        }
+        return sysResources;
+    }
+
+    /// <inheritdoc/>
     public async Task RefreshCache(string category = null)
     {
         //如果分类是空的

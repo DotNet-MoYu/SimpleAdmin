@@ -22,20 +22,23 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 别名
     ///</summary>
-    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200,
+        IsNullable = true)]
     public string Name { get; set; }
 
     /// <summary>
     /// 别名
     ///</summary>
-    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200,
+        IsNullable = true)]
     public string Description { get; set; }
 
 
     /// <summary>
     /// 别名
     ///</summary>
-    [SugarColumn(ColumnName = "Avatar", ColumnDescription = "头像", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
+    [SugarColumn(ColumnName = "Avatar", ColumnDescription = "头像",
+        ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string Avatar { get; set; }
 
 
@@ -43,7 +46,8 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 编码
     ///</summary>
-    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200,
+        IsNullable = true)]
     public virtual string Code { get; set; }
 
     /// <summary>
@@ -61,7 +65,8 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 菜单类型
     ///</summary>
-    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200,
+        IsNullable = true)]
     public virtual string MenuType { get; set; }
 
     /// <summary>
@@ -73,39 +78,45 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 组件
     ///</summary>
-    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200,
+        IsNullable = true)]
     public string Component { get; set; }
 
     /// <summary>
     /// 图标
     ///</summary>
-    [SugarColumn(ColumnName = "Icon", ColumnDescription = "图标", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Icon", ColumnDescription = "图标", Length = 200,
+        IsNullable = true)]
     public virtual string Icon { get; set; }
 
     /// <summary>
     /// 是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
     ///</summary>
-    [SugarColumn(ColumnName = "ActiveMenu", ColumnDescription = "需要高亮的 path (通常用作详情页高亮父级菜单)", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "ActiveMenu", ColumnDescription = "需要高亮的 path (通常用作详情页高亮父级菜单)",
+        Length = 200, IsNullable = true)]
     public string ActiveMenu { get; set; }
 
 
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
     ///</summary>
-    [SugarColumn(ColumnName = "IsHide", ColumnDescription = "是否在菜单中隐藏 (通常列表详情页需要隐藏) ", IsNullable = true)]
+    [SugarColumn(ColumnName = "IsHide", ColumnDescription = "是否在菜单中隐藏 (通常列表详情页需要隐藏) ",
+        IsNullable = true)]
     public bool IsHide { get; set; }
 
 
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
     ///</summary>
-    [SugarColumn(ColumnName = "IsFull", ColumnDescription = "菜单是否全屏 (示例：数据大屏页面)", IsNullable = true)]
+    [SugarColumn(ColumnName = "IsFull", ColumnDescription = "菜单是否全屏 (示例：数据大屏页面)",
+        IsNullable = true)]
     public bool IsFull { get; set; }
 
     /// <summary>
     /// 菜单是否固定在标签页中 (首页通常是固定项)
     ///</summary>
-    [SugarColumn(ColumnName = "IsAffix", ColumnDescription = "菜单是否固定在标签页中 (首页通常是固定项)", IsNullable = true)]
+    [SugarColumn(ColumnName = "IsAffix", ColumnDescription = "菜单是否固定在标签页中 (首页通常是固定项)",
+        IsNullable = true)]
     public bool IsAffix { get; set; }
 
     /// <summary>
@@ -113,6 +124,12 @@ public class SysResource : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "IsKeepAlive", ColumnDescription = " 当前路由是否缓存", IsNullable = true)]
     public bool IsKeepAlive { get; set; }
+
+    /// <summary>
+    /// 是否为首页
+    ///</summary>
+    [SugarColumn(ColumnName = "IsHome", ColumnDescription = " 是否为首页", IsNullable = true)]
+    public bool IsHome { get; set; } = false;
 
     /// <summary>
     /// 排序码
@@ -148,15 +165,6 @@ public class Meta
     /// </summary>
     public string Title { get; set; }
 
-    /// <summary>
-    /// 类型
-    /// </summary>
-    public string Type { get; set; }
-
-    /// <summary>
-    /// 是否首页
-    /// </summary>
-    public bool Affix { get; set; } = false;
 
 
     /// <summary>
@@ -170,6 +178,10 @@ public class Meta
     ///</summary>
     public bool IsHide { get; set; } = false;
 
+    /// <summary>
+    /// 路由外链时填写的访问地址
+    /// </summary>
+    public string IsLink { get; set; } = "";
 
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 

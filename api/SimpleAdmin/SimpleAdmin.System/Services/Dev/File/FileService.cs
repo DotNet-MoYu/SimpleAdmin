@@ -21,10 +21,12 @@ public class FileService : DbRepository<DevFile>, IFileService
     {
         var query = Context.Queryable<DevFile>()
             .WhereIF(!string.IsNullOrEmpty(input.Engine), it => it.Engine == input.Engine)//根据关键字查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.Id);
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -42,24 +44,29 @@ public class FileService : DbRepository<DevFile>, IFileService
     }
 
     /// <inheritdoc/>
-    public FileStreamResult GetFileStreamResult(string path, string fileName, bool isPathFolder = false)
+    public FileStreamResult GetFileStreamResult(string path, string fileName,
+        bool isPathFolder = false)
     {
         if (isPathFolder) path = path.CombinePath(fileName);
-        fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+        fileName =
+            HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
         //文件转流
-        var result = new FileStreamResult(new FileStream(path, FileMode.Open), "application/octet-stream")
-        {
-            FileDownloadName = fileName
-        };
+        var result =
+            new FileStreamResult(new FileStream(path, FileMode.Open), "application/octet-stream")
+            {
+                FileDownloadName = fileName
+            };
         return result;
     }
 
-    public async Task<FileStreamResult> GetFileStreamResultFromMinio(string objectName, string fileName)
+    public async Task<FileStreamResult> GetFileStreamResultFromMinio(string objectName,
+        string fileName)
     {
         var minioService = App.GetService<MinioUtils>();
         var stream = await minioService.DownloadFileAsync(objectName);
 
-        fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+        fileName =
+            HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
         //文件转流
         var result = new FileStreamResult(stream, "application/octet-stream")
         {
@@ -71,7 +78,8 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// <inheritdoc/>
     public FileStreamResult GetFileStreamResult(byte[] byteArray, string fileName)
     {
-        fileName = HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
+        fileName =
+            HttpUtility.UrlEncode(fileName, Encoding.GetEncoding("UTF-8"));//文件名转utf8不然前端下载会乱码
         //文件转流
         var result = new FileStreamResult(new MemoryStream(byteArray), "application/octet-stream")
         {
@@ -123,7 +131,8 @@ public class FileService : DbRepository<DevFile>, IFileService
                 break;
             //存储本地
             case DevDictConst.FILE_ENGINE_MINIO:
-                var config = await _configService.GetByConfigKey(CateGoryConst.Config_FILE_MINIO, DevConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME);
+                var config = await _configService.GetByConfigKey(CateGoryConst.Config_FILE_MINIO,
+                    DevConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME);
                 if (config != null)
                 {
                     bucketName = config.ConfigValue;// 存储桶名称
@@ -187,7 +196,8 @@ public class FileService : DbRepository<DevFile>, IFileService
             configKey = DevConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS;//Windows
         }
         //获取路径配置
-        var config = await _configService.GetByConfigKey(CateGoryConst.Config_FILE_LOCAL, configKey);
+        var config =
+            await _configService.GetByConfigKey(CateGoryConst.Config_FILE_LOCAL, configKey);
         if (config != null)
         {
             uploadFileFolder = config.ConfigValue;//赋值路径
@@ -218,7 +228,8 @@ public class FileService : DbRepository<DevFile>, IFileService
     /// <param name="fileId"></param>
     /// <param name="file"></param>
     /// <returns></returns>
-    private async Task<(string objName, string downloadUrl)> StorageMinio(long fileId, IFormFile file)
+    private async Task<(string objName, string downloadUrl)> StorageMinio(long fileId,
+        IFormFile file)
     {
         var minioService = App.GetService<MinioUtils>();
         var now = DateTime.Now.ToString("d");

@@ -881,6 +881,11 @@
              菜单是否固定在标签页中 (首页通常是固定项)
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsHome">
+             <summary>
+             是否为首页
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysResource.SortCode">
              <summary>
              排序码
@@ -911,16 +916,6 @@
             标题
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.Meta.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.Meta.Affix">
-            <summary>
-            是否首页
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.System.Meta.ActiveMenu">
              <summary>
              是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
@@ -929,6 +924,11 @@
         <member name="P:SimpleAdmin.System.Meta.IsHide">
              <summary>
              是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.Meta.IsLink">
+            <summary>
+            路由外链时填写的访问地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.Meta.IsFull">
@@ -4599,6 +4599,13 @@
             </summary>
             <returns>所有的菜单和模块以及单页面列表</returns>
         </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
+            <summary>
+             根据模块ID获取菜单和单页面列表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Int64,System.Boolean)">
             <summary>
             根据资源ID获取所有下级资源
@@ -4676,6 +4683,9 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetaModuleAndMenuAndSpaList">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.RefreshCache(System.String)">
@@ -5252,10 +5262,11 @@
             个人信息中心服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.GetOwnMenu">
+        <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
             <summary>
-            获取个人菜单
+            获取登录用户菜单
             </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginWorkbench">
@@ -5342,7 +5353,7 @@
         <member name="T:SimpleAdmin.System.UserCenterService">
             <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetOwnMenu">
+        <member name="M:SimpleAdmin.System.UserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.GetLoginWorkbench">
@@ -5398,12 +5409,11 @@
             <param name="spaCount"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
             <summary>
             构建Meta
             </summary>
             <param name="myMenus">我的菜单集合</param>
-            <param name="firstSpaId">第一个单页面ID</param>
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Int64)">
             <summary>

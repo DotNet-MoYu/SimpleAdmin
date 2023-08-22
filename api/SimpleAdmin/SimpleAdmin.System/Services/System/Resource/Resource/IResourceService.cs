@@ -12,6 +12,13 @@ public interface IResourceService : ITransient
     Task<List<SysResource>> GetaModuleAndMenuAndSpaList();
 
     /// <summary>
+    ///  根据模块ID获取菜单和单页面列表
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    Task<List<SysResource>> GetMenuAndSpaListByModuleId(long id);
+
+    /// <summary>
     /// 根据资源ID获取所有下级资源
     /// </summary>
     /// <param name="resId">资源ID</param>

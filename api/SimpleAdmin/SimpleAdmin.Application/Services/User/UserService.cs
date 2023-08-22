@@ -59,7 +59,14 @@ public class UserService : DbRepository<SysUser>, IUserService
             Pages = 1,
             HasPrevPages = false,
             HasNextPages = false,
-            Records = new[] { new UserSelectorOutPut { Account = UserManager.UserAccount, Id = UserManager.UserId, Name = UserManager.Name, OrgId = UserManager.OrgId } }
+            List = new[]
+            {
+                new UserSelectorOutPut
+                {
+                    Account = UserManager.UserAccount, Id = UserManager.UserId,
+                    Name = UserManager.Name, OrgId = UserManager.OrgId
+                }
+            }
         };
     }
 
@@ -72,7 +79,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             Pages = 1,
             HasPrevPages = false,
             HasNextPages = false,
-            Records = new List<SysRole>()
+            List = new List<SysRole>()
         };
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
@@ -121,10 +128,12 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         var ids = input.Ids;//获取用户id
-        var sysUsers = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
+        var sysUsers = await GetListAsync(it => ids.Contains(it.Id),
+            it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
         sysUsers.ForEach(it =>
         {
-            if (dataScope != null && !dataScope.Contains(it.OrgId) && it.CreateUserId != UserManager.UserId)
+            if (dataScope != null && !dataScope.Contains(it.OrgId)
+                && it.CreateUserId != UserManager.UserId)
                 throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
         });
         await _sysUserService.Edits(input);
@@ -170,7 +179,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //获取用户下信息
-        var users = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, Id = it.Id });
+        var users = await GetListAsync(it => ids.Contains(it.Id),
+            it => new SysUser { OrgId = it.OrgId, Id = it.Id });
         if (dataScope == null)//全部数据权限
         {
             await _sysUserService.Delete(input);//删除
@@ -209,7 +219,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null || dataScope.Count > 0)
         {
-            var importPreview = await _importExportService.GetImportPreview<BizUserImportInput>(input.File);
+            var importPreview =
+                await _importExportService.GetImportPreview<BizUserImportInput>(input.File);
             importPreview.Data = await CheckImport(importPreview.Data, dataScope);//检查导入数据
             return importPreview;
         }
@@ -228,7 +239,8 @@ public class UserService : DbRepository<SysUser>, IUserService
     }
 
     /// <inheritdoc/>
-    public async Task<ImportResultOutPut<BizUserImportInput>> Import(ImportResultInput<BizUserImportInput> input)
+    public async Task<ImportResultOutPut<BizUserImportInput>> Import(
+        ImportResultInput<BizUserImportInput> input)
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
@@ -312,7 +324,8 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <param name="dataScope">数据范围ID数组</param>
     /// <param name="clearError">是否初始化错误</param>
     /// <returns></returns>
-    public async Task<List<BizUserImportInput>> CheckImport(List<BizUserImportInput> data, List<long> dataScope, bool clearError = false)
+    public async Task<List<BizUserImportInput>> CheckImport(List<BizUserImportInput> data,
+        List<long> dataScope, bool clearError = false)
     {
         var errorMessage = $"没有权限";
         //先经过系统用户检查

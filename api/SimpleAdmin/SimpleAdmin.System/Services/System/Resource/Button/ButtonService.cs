@@ -10,7 +10,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     private readonly IRelationService _relationService;
     private readonly IEventPublisher _eventPublisher;
 
-    public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService, IRelationService relationService,
+    public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService,
+        IRelationService relationService,
         IEventPublisher eventPublisher)
     {
         _logger = logger;
@@ -23,11 +24,15 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     public async Task<SqlSugarPagedList<SysResource>> Page(ButtonPageInput input)
     {
         var query = Context.Queryable<SysResource>()
-            .Where(it => it.ParentId == input.ParentId && it.Category == CateGoryConst.Resource_BUTTON)
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey) || it.Path.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .Where(it =>
+                it.ParentId == input.ParentId && it.Category == CateGoryConst.Resource_BUTTON)
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.Title.Contains(input.SearchKey)
+                    || it.Path.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")
             .OrderBy(it => it.SortCode);//排序
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -44,8 +49,10 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     public async Task<List<long>> AddBatch(ButtonAddInput input)
     {
         var sysResources = new List<SysResource>();//按钮列表
-        var codeList = new List<string>() { "Add", "Edit", "Delete", "BatchDelete", "Import", "Export", "BatchEdit" };//code后缀
-        var titleList = new List<string>() { "新增", "编辑", "删除", "批量删除", "导入", "导出", "批量编辑" };//title前缀
+        var codeList = new List<string>()
+            { "Add", "Edit", "Delete", "BatchDelete", "Import", "Export", "BatchEdit" };//code后缀
+        var titleList = new List<string>()
+            { "新增", "编辑", "删除", "批量删除", "导入", "导出", "批量编辑" };//title前缀
         var idList = new List<long>();//Id列表
         for (var i = 0; i < codeList.Count; i++)
         {
@@ -112,9 +119,12 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         //获取所有菜单集合
         var menuList = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
         //获取按钮的父菜单id集合
-        var parentIds = buttonList.Where(it => ids.Contains(it.Id)).Select(it => it.ParentId.Value.ToString()).ToList();
+        var parentIds = buttonList.Where(it => ids.Contains(it.Id))
+            .Select(it => it.ParentId.Value.ToString()).ToList();
         //获取关系表分类为SYS_ROLE_HAS_RESOURCE数据
-        var roleResources = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
+        var roleResources =
+            await _relationService.GetRelationByCategory(CateGoryConst
+                .Relation_SYS_ROLE_HAS_RESOURCE);
         //获取相关关系表数据
         var relationList = roleResources
             .Where(it => parentIds.Contains(it.TargetId))//目标ID是父ID中
@@ -141,13 +151,15 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
             await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除按钮
             if (relationList.Count > 0)
             {
-                await Context.Updateable(relationList).UpdateColumns(it => it.ExtJson).ExecuteCommandAsync();//修改拓展信息
+                await Context.Updateable(relationList).UpdateColumns(it => it.ExtJson)
+                    .ExecuteCommandAsync();//修改拓展信息
             }
         });
         if (result.IsSuccess)//如果成功了
         {
             await _resourceService.RefreshCache(CateGoryConst.Resource_BUTTON);//资源表按钮刷新缓存
-            await _relationService.RefreshCache(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新角色资源缓存
+            await _relationService.RefreshCache(CateGoryConst
+                .Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新角色资源缓存
         }
         else
         {
@@ -166,7 +178,8 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     private async Task CheckInput(SysResource sysResource)
     {
         //获取所有按钮和菜单
-        var buttonList = await _resourceService.GetListAsync(new List<string> { CateGoryConst.Resource_BUTTON, CateGoryConst.Resource_MENU });
+        var buttonList = await _resourceService.GetListAsync(new List<string>
+            { CateGoryConst.Resource_BUTTON, CateGoryConst.Resource_MENU });
         //判断code是否重复
         if (buttonList.Any(it => it.Code == sysResource.Code && it.Id != sysResource.Id))
             throw Oops.Bah($"存在重复的按钮编码:{sysResource.Code}");

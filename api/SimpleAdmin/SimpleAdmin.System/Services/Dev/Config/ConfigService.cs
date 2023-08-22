@@ -32,7 +32,8 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     public async Task<DevConfig> GetByConfigKey(string category, string configKey)
     {
         var configList = await GetListByCategory(category);//获取系统配置列表
-        var configValue = configList.Where(it => it.ConfigKey == configKey).FirstOrDefault();//根据configkey获取对应值
+        var configValue =
+            configList.Where(it => it.ConfigKey == configKey).FirstOrDefault();//根据configkey获取对应值
         return configValue;
     }
 
@@ -41,10 +42,13 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     {
         var query = Context.Queryable<DevConfig>()
             .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.ConfigKey.Contains(input.SearchKey)
+                    || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.SortCode);
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -96,7 +100,8 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
                 configList.ForEach(it =>
                 {
                     //赋值ConfigValue
-                    it.ConfigValue = configs.Where(c => c.ConfigKey == it.ConfigKey).First().ConfigValue;
+                    it.ConfigValue = configs.Where(c => c.ConfigKey == it.ConfigKey).First()
+                        .ConfigValue;
                 });
                 //更新数据
                 if (await UpdateRangeAsync(configList))
@@ -126,7 +131,8 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     {
         var configs = await GetListByCategory(CateGoryConst.Config_BIZ_DEFINE);//获取全部字典
         //判断是否从存在重复字典名
-        var hasSameKey = configs.Any(it => it.ConfigKey == devConfig.ConfigKey && it.Id != devConfig.Id);
+        var hasSameKey =
+            configs.Any(it => it.ConfigKey == devConfig.ConfigKey && it.Id != devConfig.Id);
         if (hasSameKey)
         {
             throw Oops.Bah($"存在重复的配置键:{devConfig.ConfigKey}");

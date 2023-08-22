@@ -33,14 +33,16 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<SqlSugarPagedList<GenBasic>> Page(BasePageInput input)
     {
         var query = Context.Queryable<GenBasic>()
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.SortCode, OrderByType.Desc)//默认排序
             .OrderBy(it => it.CreateTime, OrderByType.Desc)//默认排序
             .Mapper(it =>
             {
-                it.FuncList = it.Functions.Split(",", StringSplitOptions.RemoveEmptyEntries).ToList();//功能集合转为列表
+                it.FuncList = it.Functions.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                    .ToList();//功能集合转为列表
             });
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -60,7 +62,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var names = new List<string>();//结果集
         var excludeList = new List<string>
         {
-            "Web.Entry", "Core", "Cache", "SqlSugar", "Plugin.Core", "Plugin.Gen", "Plugin.Mqtt", "Plugin.SignalR", "Plugin.Aop"
+            "Web.Entry", "Core", "Cache", "SqlSugar", "Plugin.Core", "Plugin.Gen", "Plugin.Mqtt",
+            "Plugin.SignalR", "Plugin.Aop"
         };//排除的程序集
         //获取所有程序集名称
         var assemblies = App.Assemblies
@@ -199,7 +202,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         var genBasic = await GetGenBasic(input.Id);//获取代码生成基础
         if (genBasic.GenerateType != GenConst.Pro) throw Oops.Bah("当前配置生成方式为：项目中");
         var backendPath =
-            Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName);//获取主工程目录
+            Path.Combine(new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent
+                .FullName);//获取主工程目录
         var srcDir = "src";//默认都是代码放在src文件夹
         var frontedPath = genBasic.FrontedPath;//获取前端代码路径,
         if (!frontedPath.Contains(srcDir))//如果不包含src
@@ -239,19 +243,24 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         {
             if (input.ExecType == GenConst.ExecBackend)
             {
-                ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
+                ExecBackend(previewCode.CodeBackendResults, genBasic,
+                    temDir.CombinePath(_backendDir), true);//执行后端代码生成
                 ExecSql(previewCode.SqlResults, temDir);//执行sql生成
             }
             else if (input.ExecType == GenConst.ExecFrontend)
-                ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
+                ExecFronted(previewCode.CodeFrontendResults, genBasic,
+                    temDir.CombinePath(_frontDir));//执行前端生成
         }
         else
         {
-            ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir), true);//执行后端代码生成
-            ExecFronted(previewCode.CodeFrontendResults, genBasic, temDir.CombinePath(_frontDir));//执行前端生成
+            ExecBackend(previewCode.CodeBackendResults, genBasic, temDir.CombinePath(_backendDir),
+                true);//执行后端代码生成
+            ExecFronted(previewCode.CodeFrontendResults, genBasic,
+                temDir.CombinePath(_frontDir));//执行前端生成
         }
         var zipPath = ZipUtils.CompressDirectory(temDir, true);//压缩文件夹
-        var result = new FileStreamResult(new FileStream(zipPath, FileMode.Open), "application/octet-stream")
+        var result = new FileStreamResult(new FileStream(zipPath, FileMode.Open),
+            "application/octet-stream")
             { FileDownloadName = $"{genBasic.ClassName}.zip" };
         return result;
     }
@@ -265,7 +274,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <param name="genBasic">代码基础</param>
     /// <param name="backendPath">后端生成路径</param>
     /// <param name="isZip">是否是zip方式</param>
-    public void ExecBackend(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults, GenBasic genBasic,
+    public void ExecBackend(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults,
+        GenBasic genBasic,
         string backendPath, bool isZip = false)
     {
         var serviceDir = "Services";//服务代码文件夹
@@ -319,7 +329,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
             //if (it.CodeFileName.StartsWith("IService"))
             //    fileName = $"I{genBasic.ClassName}Service.cs";//对IService接口要特殊处理
             //path = path.CombinePath(fileName);//最终生成文件地址
-            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
+            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent,
+                Encoding.UTF8);//写入文件
         });
     }
 
@@ -329,7 +340,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <param name="baseCodeResults">前端代码模板</param>
     /// <param name="genBasic">代码基础</param>
     /// <param name="frontedPath">前端生成路径</param>
-    public void ExecFronted(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults, GenBasic genBasic,
+    public void ExecFronted(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults,
+        GenBasic genBasic,
         string frontedPath)
     {
         var apiDir = "api";
@@ -345,12 +357,14 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 .CombinePath(genBasic.RouteName);//生成路径为前端路径+代码文件所在文件夹+路由地址
             if (dirName == apiDir)//如果是api文件夹
                 it.CodeFileName =
-                    StringHelper.FirstCharToLower(genBasic.ClassName) + it.CodeFileName;//文件名等于路由名加类名加代码文件名
+                    StringHelper.FirstCharToLower(genBasic.ClassName)
+                    + it.CodeFileName;//文件名等于路由名加类名加代码文件名
             else if (dirName == viewDir)
                 path = path.CombinePath(genBasic.BusName);
             if (!Directory.Exists(path))//如果文件夹不存在就创建文件夹
                 Directory.CreateDirectory(path);
-            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
+            File.WriteAllText(path.CombinePath(it.CodeFileName), it.CodeFileContent,
+                Encoding.UTF8);//写入文件
         });
     }
 
@@ -359,14 +373,16 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// </summary>
     /// <param name="baseCodeResults">后端代码模板</param>
     /// <param name="execPath">生成路径</param>
-    public void ExecSql(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults, string execPath)
+    public void ExecSql(List<GenBasePreviewOutput.GenBaseCodeResult> baseCodeResults,
+        string execPath)
     {
         execPath = execPath.CombinePath(_sqlDir);//写在sql目录里面
         if (!Directory.Exists(execPath))//如果文件夹不存在就创建文件夹
             Directory.CreateDirectory(execPath);
         baseCodeResults.ForEach(it =>
         {
-            File.WriteAllText(execPath.CombinePath(it.CodeFileName), it.CodeFileContent, Encoding.UTF8);//写入文件
+            File.WriteAllText(execPath.CombinePath(it.CodeFileName), it.CodeFileContent,
+                Encoding.UTF8);//写入文件
         });
     }
 
@@ -376,7 +392,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <param name="genViewModel">视图</param>
     /// <param name="templatePath">模板路径</param>
     /// <returns></returns>
-    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetSqlCodeResult(GenViewModel genViewModel,
+    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetSqlCodeResult(
+        GenViewModel genViewModel,
         string templatePath)
     {
         var sqlCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
@@ -407,7 +424,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <param name="genViewModel">视图</param>
     /// <param name="templatePath">模板路径</param>
     /// <returns></returns>
-    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetBackendCodeResult(GenViewModel genViewModel,
+    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetBackendCodeResult(
+        GenViewModel genViewModel,
         string templatePath)
     {
         // templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";//测试用
@@ -442,7 +460,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     /// <param name="genViewModel">视图</param>
     /// <param name="templatePath">模板路径</param>
     /// <returns></returns>
-    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetForntCodeResult(GenViewModel genViewModel,
+    public async Task<List<GenBasePreviewOutput.GenBaseCodeResult>> GetForntCodeResult(
+        GenViewModel genViewModel,
         string templatePath)
     {
         // templatePath = "D:\\SimpleAdmin\\api\\SimpleAdmin\\SimpleAdmin.Plugin\\SimpleAdmin.Plugin.Gen\\CodeGen";//测试用
@@ -498,12 +517,13 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     public async Task<string> GetViewEngine(string tContent, GenViewModel genViewModel)
     {
         //视图引擎渲染
-        var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel, builderAction: builder =>
-        {
-            builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
-            builder.AddAssemblyReferenceByName("System.Collections");//添加程序集
-            builder.AddAssemblyReferenceByName("SimpleTool");//添加程序集
-        });
+        var tResult = await _viewEngine.RunCompileFromCachedAsync(tContent, genViewModel,
+            builderAction: builder =>
+            {
+                builder.AddAssemblyReference(typeof(GenBasic));//添加程序集
+                builder.AddAssemblyReferenceByName("System.Collections");//添加程序集
+                builder.AddAssemblyReferenceByName("SimpleTool");//添加程序集
+            });
         return tResult;
     }
 
@@ -573,7 +593,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
                 && it.MenuType == ResourceConst.MENU &&
                 it.Code != ResourceConst.System);
             if (oldMenu != null)//如果存在就直接和删除（同时删除其下面的菜单、按钮，清除对应的角色与资源信息)
-                await _menuService.Delete(new List<BaseIdInput> { new BaseIdInput { Id = oldMenu.Id } });
+                await _menuService.Delete(new List<BaseIdInput>
+                    { new BaseIdInput { Id = oldMenu.Id } });
             //添加菜单参数
             var menu = new MenuAddInput
             {
@@ -610,7 +631,8 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
 
             var roleRep = ChangeRepository<DbRepository<SysRole>>();//切换仓储
             var superAdmin = await roleRep.GetFirstAsync(it =>
-                it.Code == RoleConst.SuperAdmin && it.Category == CateGoryConst.Role_GLOBAL);//获取超级管理员
+                it.Code == RoleConst.SuperAdmin
+                && it.Category == CateGoryConst.Role_GLOBAL);//获取超级管理员
             //授权菜单参数
             var grantResource = new GrantResourceInput
             {

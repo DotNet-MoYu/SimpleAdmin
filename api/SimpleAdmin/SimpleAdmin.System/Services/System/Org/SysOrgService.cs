@@ -6,7 +6,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly IImportExportService _importExportService;
 
-    public SysOrgService(ISimpleCacheService simpleCacheService, IImportExportService importExportService)
+    public SysOrgService(ISimpleCacheService simpleCacheService,
+        IImportExportService importExportService)
     {
         _simpleCacheService = simpleCacheService;
         _importExportService = importExportService;
@@ -75,10 +76,12 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         var query = Context.Queryable<SysOrg>()
             .WhereIF(input.ParentId > 0, it => it.ParentId == input.ParentId)//父级
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.Id))//机构ID查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
+                $"{input.SortField} {input.SortOrder}")
             .OrderBy(it => it.SortCode);//排序
-        var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
@@ -132,7 +135,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         out long orgId)
     {
         orgId = 0;
-        var sysOrg = sysOrgs.Where(it => it.ParentId == parentId && it.Name == orgName).FirstOrDefault();
+        var sysOrg = sysOrgs.Where(it => it.ParentId == parentId && it.Name == orgName)
+            .FirstOrDefault();
         if (sysOrg != null)
         {
             orgId = sysOrg.Id;
@@ -182,7 +186,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             //需要复制的组织名称列表
             var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
             //目标组织的一级子组织名称列表
-            var targetChildNames = orgList.Where(it => it.ParentId == input.TargetId).Select(it => it.Name).ToList();
+            var targetChildNames = orgList.Where(it => it.ParentId == input.TargetId)
+                .Select(it => it.Name).ToList();
             orgNames.ForEach(it =>
             {
                 if (targetChildNames.Contains(it)) throw Oops.Bah($"已存在{it}");
@@ -211,7 +216,9 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             //遍历机构重新赋值全称
             addOrgList.ForEach(it =>
             {
-                it.Names = it.ParentId == SimpleAdminConst.Zero ? it.Name : GetNames(orgList, it.ParentId, it.Name);
+                it.Names = it.ParentId == SimpleAdminConst.Zero
+                    ? it.Name
+                    : GetNames(orgList, it.ParentId, it.Name);
             });
 
             if (await InsertRangeAsync(addOrgList))//插入数据
@@ -252,12 +259,15 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 sysDeleteOrgList.Add(it);
             });
             //如果组织下有用户则不能删除
-            if (await Context.Queryable<SysUser>().AnyAsync(it => sysDeleteOrgList.Contains(it.OrgId)))
+            if (await Context.Queryable<SysUser>()
+                    .AnyAsync(it => sysDeleteOrgList.Contains(it.OrgId)))
             {
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
             //获取用户表有兼任组织的信息，oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
-            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
+            var positionJsons = await Context.Queryable<SysUser>()
+                .Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson)
+                .ToListAsync();
             if (positionJsons.Count > 0)
             {
                 //去一次空
@@ -274,10 +284,12 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 });
             }
             //判断组织下是否有角色
-            var hasRole = await Context.Queryable<SysRole>().Where(it => sysDeleteOrgList.Contains(it.OrgId.Value)).CountAsync() > 0;
+            var hasRole = await Context.Queryable<SysRole>()
+                .Where(it => sysDeleteOrgList.Contains(it.OrgId.Value)).CountAsync() > 0;
             if (hasRole) throw Oops.Bah($"请先删除{name}下的角色");
             // 判断组织下是否有职位
-            var hasPosition = await Context.Queryable<SysPosition>().Where(it => sysDeleteOrgList.Contains(it.OrgId)).CountAsync() > 0;
+            var hasPosition = await Context.Queryable<SysPosition>()
+                .Where(it => sysDeleteOrgList.Contains(it.OrgId)).CountAsync() > 0;
             if (hasPosition) throw Oops.Bah($"请先删除{name}下的职位");
             //删除组织
             if (await DeleteByIdsAsync(sysDeleteOrgList.Cast<object>().ToArray()))
@@ -327,11 +339,14 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     private async Task CheckInput(SysOrg sysOrg, string name)
     {
         //判断分类是否正确
-        if (sysOrg.Category != CateGoryConst.Org_COMPANY && sysOrg.Category != CateGoryConst.Org_DEPT)
+        if (sysOrg.Category != CateGoryConst.Org_COMPANY
+            && sysOrg.Category != CateGoryConst.Org_DEPT)
             throw Oops.Bah($"{name}所属分类错误:{sysOrg.Category}");
 
         var sysOrgs = await GetListAsync();//获取全部
-        if (sysOrgs.Any(it => it.ParentId == sysOrg.ParentId && it.Name == sysOrg.Name && it.Id != sysOrg.Id))//判断同级是否有名称重复的
+        if (sysOrgs.Any(it =>
+                it.ParentId == sysOrg.ParentId && it.Name == sysOrg.Name
+                && it.Id != sysOrg.Id))//判断同级是否有名称重复的
             throw Oops.Bah($"存在重复的同级{name}:{sysOrg.Name}");
         sysOrg.Names = sysOrg.Name;//全称默认自己
         if (sysOrg.ParentId != 0)
@@ -413,7 +428,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 //遍历子节点
                 childen.ForEach(it =>
                 {
-                    if (!orgList.Any(org => org.ParentId == it.Id)) it.IsLeaf = true;//如果没有下级,则设置为叶子节点
+                    if (!orgList.Any(org => org.ParentId == it.Id))
+                        it.IsLeaf = true;//如果没有下级,则设置为叶子节点
                 });
                 data.AddRange(childen);//添加子节点);
                 data.Add(item);//添加到列表

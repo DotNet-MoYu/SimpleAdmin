@@ -1154,7 +1154,7 @@
             用户个人信息控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginMenu">
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginMenu(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取个人菜单
             </summary>
