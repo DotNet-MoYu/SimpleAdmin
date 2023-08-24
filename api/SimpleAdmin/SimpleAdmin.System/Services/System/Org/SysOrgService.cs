@@ -244,10 +244,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 删除
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg)
+    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysOrg)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         if (ids.Count > 0)
         {
             var sysOrgs = await GetListAsync();//获取所有组织

@@ -55,7 +55,7 @@ public class MessageController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除站内信")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _messageService.Delete(input);
     }

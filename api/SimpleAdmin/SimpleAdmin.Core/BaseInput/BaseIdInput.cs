@@ -13,6 +13,15 @@ public class BaseIdInput
     public virtual long Id { get; set; }
 }
 
+public class BaseIdListInput
+{
+    /// <summary>
+    /// 主键Id列表
+    /// </summary>
+    [IdsNotNull(ErrorMessage = "IdList不能为空")]
+    public List<long> Ids { get; set; } = new List<long>();
+}
+
 /// <summary>
 /// Id列表输入
 /// </summary>

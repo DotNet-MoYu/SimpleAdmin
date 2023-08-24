@@ -214,7 +214,7 @@
         <member name="M:SimpleAdmin.Application.GenTestService.Edit(SimpleAdmin.Application.GenTestEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.GenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.GenTestService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.GenTestService.Template">
@@ -285,7 +285,7 @@
             <param name="input">编辑参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IGenTestService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.IGenTestService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除测试
             </summary>
@@ -338,7 +338,7 @@
             <param name="input">机构复制参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IOrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.IOrgService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除机构
             </summary>
@@ -391,7 +391,7 @@
         <member name="M:SimpleAdmin.Application.OrgService.Copy(SimpleAdmin.System.SysOrgCopyInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.OrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.OrgService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.OrgService.Detail(SimpleAdmin.Core.BaseIdInput)">
@@ -416,7 +416,7 @@
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IPositionService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.IPositionService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除岗位
             </summary>
@@ -462,7 +462,7 @@
         <member name="M:SimpleAdmin.Application.PositionService.Add(SimpleAdmin.System.PositionAddInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.PositionService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.PositionService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.PositionService.Edit(SimpleAdmin.System.PositionEditInput)">
@@ -573,7 +573,7 @@
             <param name="input">授权参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.IUserService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除用户
             </summary>
@@ -655,7 +655,7 @@
         <member name="M:SimpleAdmin.Application.UserService.ResetPassword(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Application.UserService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.Template">

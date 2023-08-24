@@ -104,10 +104,10 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysPos)
+    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysPos)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         if (ids.Count > 0)
         {
             //如果组织下有用户则不能删除

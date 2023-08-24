@@ -53,10 +53,9 @@ public class ModuleController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除模块")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _moduleService.Delete(input);
     }

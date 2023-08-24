@@ -58,7 +58,7 @@ public class BizPositionController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除岗位")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _positionService.Delete(input);
     }

@@ -11,7 +11,8 @@ public class UserController : BaseController
     private readonly ISysPositionService _sysPositionService;
     private readonly IRoleService _roleService;
 
-    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService,
+    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService,
+        ISysPositionService sysPositionService,
         IRoleService roleService)
     {
         _sysUserService = sysUserService;
@@ -201,7 +202,7 @@ public class UserController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除用户")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _sysUserService.Delete(input);
     }
@@ -285,7 +286,8 @@ public class UserController : BaseController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("用户导入")]
-    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
+    public async Task<dynamic> Import(
+        [SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
     {
         return await _sysUserService.Import(input);
     }

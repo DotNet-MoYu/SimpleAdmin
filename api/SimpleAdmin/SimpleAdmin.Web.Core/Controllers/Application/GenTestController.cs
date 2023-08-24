@@ -10,19 +10,21 @@ namespace SimpleAdmin.Web.Core;
 /// </summary>
 [ApiDescriptionSettings("Application", Tag = "测试")]
 [Route("/biz/test")]
-public class GenTestController: IDynamicApiController
+public class GenTestController : IDynamicApiController
 {
     private readonly IGenTestService _genTestService;
     private readonly ISysOrgService _sysOrgService;
+
     public GenTestController(IGenTestService genTestService
-    ,ISysOrgService sysOrgService
+        , ISysOrgService sysOrgService
     )
     {
-        this._genTestService = genTestService;
+        _genTestService = genTestService;
         _sysOrgService = sysOrgService;
     }
+
     #region Get请求
-	
+
     /// <summary>
     /// 测试分页查询
     /// </summary>
@@ -58,8 +60,8 @@ public class GenTestController: IDynamicApiController
     {
         return await _genTestService.Detail(input);
     }
-    
-   
+
+
     /// <summary>
     /// 获取组织树选择器
     /// </summary>
@@ -68,9 +70,9 @@ public class GenTestController: IDynamicApiController
     [DisplayName("组织树查询")]
     public async Task<dynamic> OrgTreeSelector()
     {
-          return await _sysOrgService.Tree();
+        return await _sysOrgService.Tree();
     }
-    
+
     /// <summary>
     /// 测试导入预览
     /// </summary>
@@ -84,7 +86,7 @@ public class GenTestController: IDynamicApiController
     {
         return await _genTestService.Preview(input);
     }
-    
+
     /// <summary>
     /// 测试导入模板下载
     /// </summary>
@@ -95,13 +97,12 @@ public class GenTestController: IDynamicApiController
     {
         return await _genTestService.Template();
     }
-    
 
     #endregion
-	
+
 
     #region Post请求
-	
+
     /// <summary>
     /// 添加测试
     /// </summary>
@@ -133,7 +134,7 @@ public class GenTestController: IDynamicApiController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除测试")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _genTestService.Delete(input);
     }
@@ -145,11 +146,12 @@ public class GenTestController: IDynamicApiController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("测试导入")]
-    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<GenTestImportInput> input)
+    public async Task<dynamic> Import(
+        [SuppressMonitor][FromBody] ImportResultInput<GenTestImportInput> input)
     {
         return await _genTestService.Import(input);
     }
-    
+
     /// <summary>
     /// 测试导出
     /// </summary>
@@ -161,7 +163,6 @@ public class GenTestController: IDynamicApiController
     {
         return await _genTestService.Export(input);
     }
-    
-	#endregion
-}
 
+    #endregion
+}

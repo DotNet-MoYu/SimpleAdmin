@@ -55,7 +55,7 @@ public class ButtonController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除按钮")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _buttonService.Delete(input);
     }

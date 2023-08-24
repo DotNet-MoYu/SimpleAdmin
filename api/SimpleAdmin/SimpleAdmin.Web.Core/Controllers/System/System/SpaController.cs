@@ -53,10 +53,9 @@ public class SpaController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除单页")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _spaService.Delete(input);
     }

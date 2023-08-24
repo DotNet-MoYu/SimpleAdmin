@@ -54,6 +54,11 @@
             验证Id不能为 空
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Core.IdsNotNull">
+            <summary>
+            验证Id列表不能为空
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.BaseFileInput">
             <summary>
             文件上传输入参数
@@ -72,6 +77,11 @@
         <member name="P:SimpleAdmin.Core.BaseIdInput.Id">
             <summary>
             主键Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.BaseIdListInput.Ids">
+            <summary>
+            主键Id列表
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdListInput">

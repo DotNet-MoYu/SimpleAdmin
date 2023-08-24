@@ -84,10 +84,10 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     #region 删除
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         if (ids.Count > 0)
         {
             await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据

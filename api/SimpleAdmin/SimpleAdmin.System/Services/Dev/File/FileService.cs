@@ -37,9 +37,9 @@ public class FileService : DbRepository<DevFile>, IFileService
     }
 
     /// <inheritdoc/>
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
-        var ids = input.Select(it => it.Id).ToList();//获取ID
+        var ids = input.Ids;//获取ID
         await DeleteByIdsAsync(ids.Cast<object>().ToArray());//根据ID删除数据库
     }
 

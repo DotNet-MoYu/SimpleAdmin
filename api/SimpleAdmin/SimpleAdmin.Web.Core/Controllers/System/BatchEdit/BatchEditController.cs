@@ -93,7 +93,7 @@ public class BatchEditController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除批量更新")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _batchEditService.Delete(input);
     }

@@ -79,10 +79,10 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         if (ids.Count > 0)
         {
             //事务

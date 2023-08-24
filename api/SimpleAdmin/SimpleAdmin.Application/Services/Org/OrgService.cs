@@ -7,7 +7,8 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public OrgService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService, ISysUserService sysUserService)
+    public OrgService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService,
+        ISysUserService sysUserService)
     {
         _simpleCacheService = simpleCacheService;
         _sysOrgService = sysOrgService;
@@ -56,17 +57,18 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null || dataScope.Count > 0)//如果有机构
         {
-            if (dataScope is { Count: > 0 } && (!dataScope.ContainsAll(input.Ids) || !dataScope.Contains(input.TargetId)))//判断目标机构和需要复制的机构是否都在数据范围里面
+            if (dataScope is { Count: > 0 } && (!dataScope.ContainsAll(input.Ids)
+                || !dataScope.Contains(input.TargetId)))//判断目标机构和需要复制的机构是否都在数据范围里面
                 throw Oops.Bah($"您没有权限复制这些机构");
             await _sysOrgService.Copy(input);//复制操作
         }
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope is { Count: > 0 })//如果有机构
@@ -77,7 +79,8 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         else if (dataScope is { Count: 0 })//表示仅自己
         {
             //获取要删除的机构列表
-            var orgs = (await _sysOrgService.GetListAsync()).Where(it => ids.Contains(it.Id)).ToList();
+            var orgs = (await _sysOrgService.GetListAsync()).Where(it => ids.Contains(it.Id))
+                .ToList();
             //如果机构列表里有任何不是自己创建的机构
             if (orgs.Any(it => it.CreateUserId != UserManager.UserId))
                 throw Oops.Bah($"只能删除自己创建的机构");
@@ -117,7 +120,8 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
             if (sysOrg.Id > 0)
             {
                 var org = await _sysOrgService.GetSysOrgById(sysOrg.Id);//获取机构
-                if (org.CreateUserId != UserManager.UserId) throw Oops.Bah(errorMessage);//机构的创建人不是自己则报错
+                if (org.CreateUserId != UserManager.UserId)
+                    throw Oops.Bah(errorMessage);//机构的创建人不是自己则报错
             }
             else
             {

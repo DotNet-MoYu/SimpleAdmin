@@ -107,10 +107,10 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         //获取所有按钮集合
         var buttonList = await _resourceService.GetListByCategory(CateGoryConst.Resource_BUTTON);
 

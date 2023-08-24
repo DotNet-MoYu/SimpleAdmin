@@ -9,14 +9,16 @@ public class IndexService : DbRepository<SysRelation>, IIndexService
 
     public IndexService(IRelationService relationService)
     {
-        this._relationService = relationService;
+        _relationService = relationService;
     }
 
     /// <inheritdoc/>
     public async Task<List<ScheduleListOutput>> ScheduleList(ScheduleListInput input)
     {
-        var relations = await GetListAsync(it => it.Category == CateGoryConst.Relation_SYS_USER_SCHEDULE_DATA
-        && it.ObjectId == UserManager.UserId && it.TargetId == input.ScheduleDate, it => new SysRelation { ExtJson = it.ExtJson, Id = it.Id });//获取当前用户的日程列表
+        var relations = await GetListAsync(it =>
+                it.Category == CateGoryConst.Relation_SYS_USER_SCHEDULE_DATA
+                && it.ObjectId == UserManager.UserId && it.TargetId == input.ScheduleDate,
+            it => new SysRelation { ExtJson = it.ExtJson, Id = it.Id });//获取当前用户的日程列表
         List<ScheduleListOutput> userSchedules = new List<ScheduleListOutput>();//结果集
         relations.ForEach(it =>
         {
@@ -34,14 +36,16 @@ public class IndexService : DbRepository<SysRelation>, IIndexService
         input.ScheduleUserId = UserManager.UserId;
         input.ScheduleUserName = UserManager.Name;
         //添加日程
-        await _relationService.SaveRelation(CateGoryConst.Relation_SYS_USER_SCHEDULE_DATA, UserManager.UserId, input.ScheduleDate, input.ToJson(), false, false);
+        await _relationService.SaveRelation(CateGoryConst.Relation_SYS_USER_SCHEDULE_DATA,
+            UserManager.UserId, input.ScheduleDate, input.ToJson(),
+            false, false);
     }
 
     /// <inheritdoc/>
-    public async Task DeleteSchedule(List<BaseIdInput> input)
+    public async Task DeleteSchedule(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         await DeleteAsync(it => ids.Contains(it.Id) && it.ObjectId == UserManager.UserId);
     }
 }

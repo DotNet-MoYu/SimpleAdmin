@@ -101,7 +101,7 @@ public interface IUserService : ITransient
     /// </summary>
     /// <param name="input">Id列表</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     #endregion 删除
 
@@ -132,7 +132,8 @@ public interface IUserService : ITransient
     /// </summary>
     /// <param name="input">数据</param>
     /// <returns>导入结果</returns>
-    Task<ImportResultOutPut<BizUserImportInput>> Import(ImportResultInput<BizUserImportInput> input);
+    Task<ImportResultOutPut<BizUserImportInput>>
+        Import(ImportResultInput<BizUserImportInput> input);
 
     /// <summary>
     /// 批量编辑

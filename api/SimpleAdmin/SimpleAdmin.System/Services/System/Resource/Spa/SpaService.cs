@@ -34,7 +34,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     /// <inheritdoc />
     public async Task Add(SpaAddInput input)
     {
-        CheckInput(input);//检查参数
+        await CheckInput(input);//检查参数
         input.Code = RandomHelper.CreateRandomString(10);//code取随机值
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await InsertAsync(sysResource))//插入数据
@@ -44,17 +44,17 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     /// <inheritdoc />
     public async Task Edit(SpaEditInput input)
     {
-        CheckInput(input);//检查参数
+        await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await UpdateAsync(sysResource))//更新数据
             await _resourceService.RefreshCache(CateGoryConst.Resource_SPA);//刷新缓存
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         if (ids.Count > 0)
         {
             //获取所有
@@ -77,7 +77,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     /// 检查输入参数
     /// </summary>
     /// <param name="sysResource"></param>
-    private void CheckInput(SysResource sysResource)
+    private async Task CheckInput(SysResource sysResource)
     {
         //判断菜单类型
         if (sysResource.MenuType == ResourceConst.MENU)//如果是菜单
@@ -100,6 +100,16 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         else
         {
             throw Oops.Bah($"单页类型错误:{sysResource.MenuType}");//都不是
+        }
+        if (sysResource.IsHome)
+        {
+            var spas = await _resourceService.GetListByCategory(ResourceConst.SPA);//获取所有单页
+            if (spas.Any(it => it.IsHome && it.Id != sysResource.Id))//如果有多个主页
+            {
+                throw Oops.Bah($"已存在首页,请取消其他主页后再试");
+            }
+            sysResource.IsHide = false;//如果是主页,则不隐藏
+            sysResource.IsAffix = true;//如果是主页,则固定
         }
         //设置为单页
         sysResource.Category = CateGoryConst.Resource_SPA;

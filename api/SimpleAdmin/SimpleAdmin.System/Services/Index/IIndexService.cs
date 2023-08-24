@@ -17,7 +17,7 @@ public interface IIndexService : ITransient
     /// </summary>
     /// <param name="input">id列表</param>
     /// <returns></returns>
-    Task DeleteSchedule(List<BaseIdInput> input);
+    Task DeleteSchedule(BaseIdListInput input);
 
     /// <summary>
     /// 获取日程列表

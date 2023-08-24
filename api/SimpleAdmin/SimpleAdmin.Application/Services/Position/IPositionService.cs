@@ -17,7 +17,7 @@ public interface IPositionService : ITransient
     /// </summary>
     /// <param name="input">id列表</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 编辑岗位

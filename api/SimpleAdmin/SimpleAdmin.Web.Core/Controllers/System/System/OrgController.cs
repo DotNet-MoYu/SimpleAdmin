@@ -12,7 +12,7 @@ public class OrgController : BaseController
     public OrgController(ISysOrgService sysOrgService, ISysUserService sysUserService)
     {
         _sysOrgService = sysOrgService;
-        this._sysUserService = sysUserService;
+        _sysUserService = sysUserService;
     }
 
     #region Get
@@ -66,7 +66,8 @@ public class OrgController : BaseController
     [HttpGet("detail")]
     public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
     {
-        return await _sysOrgService.Detail(input); ;
+        return await _sysOrgService.Detail(input);
+        ;
     }
 
     #endregion Get
@@ -114,10 +115,9 @@ public class OrgController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除组织")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _sysOrgService.Delete(input);
     }

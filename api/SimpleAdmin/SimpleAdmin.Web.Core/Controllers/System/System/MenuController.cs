@@ -32,7 +32,8 @@ public class MenuController : BaseController
     [HttpGet("tree")]
     public async Task<dynamic> Tree([FromQuery] MenuTreeInput input)
     {
-        return await _menuService.Tree(input); ;
+        return await _menuService.Tree(input);
+        ;
     }
 
     /// <summary>
@@ -42,7 +43,8 @@ public class MenuController : BaseController
     [HttpGet("menuTreeSelector")]
     public async Task<dynamic> MenuTreeSelector([FromQuery] MenuTreeInput input)
     {
-        return await _menuService.Tree(input); ;
+        return await _menuService.Tree(input);
+        ;
     }
 
     /// <summary>
@@ -76,7 +78,8 @@ public class MenuController : BaseController
     [HttpGet("detail")]
     public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
     {
-        return await _menuService.Detail(input); ;
+        return await _menuService.Detail(input);
+        ;
     }
 
     /// <summary>
@@ -86,7 +89,7 @@ public class MenuController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除菜单")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _menuService.Delete(input);
     }

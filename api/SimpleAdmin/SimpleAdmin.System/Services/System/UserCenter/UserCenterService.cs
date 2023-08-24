@@ -328,47 +328,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return parentList;
     }
 
-    /// <summary>
-    /// 获取我的模块集合
-    /// </summary>
-    /// <param name="allModuleList"></param>
-    /// <param name="moduleIds"></param>
-    /// <param name="spaCount"></param>
-    /// <returns></returns>
-    private List<SysResource> GetMyModules(List<SysResource> allModuleList, List<long> moduleIds,
-        int spaCount)
-    {
-        //获取我的模块信息
-        var myModules = allModuleList.Where(it => moduleIds.Contains(it.Id)).ToList();
-        // 如果一个模块都没拥有
-        if (myModules.Count == 0)
-        {
-            // 如果系统中无模块（极端情况）
-            if (allModuleList.Count == 0)
-            {
-                if (spaCount == 0)// 如果系统中无单页面，则返回空列表
-                {
-                    return new List<SysResource>();
-                }
-                else
-                {
-                    // 否则构造一个模块，并添加到拥有模块
-                    var sysResource = new SysResource();
-                    sysResource.Id = CommonUtils.GetSingleId();
-                    sysResource.Path = "/" + RandomHelper.CreateRandomString(10);
-                    sysResource.Category = CateGoryConst.Resource_MODULE;
-                    allModuleList.Add(sysResource);
-                    myModules.Add(sysResource);
-                }
-            }
-            else
-            {
-                // 否则将系统中第一个模块作为拥有的模块
-                myModules.Add(allModuleList[0]);
-            }
-        }
-        return myModules;
-    }
 
     /// <summary>
     /// 构建Meta
@@ -386,20 +345,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 ActiveMenu = it.ActiveMenu,
                 IsLink = it.Category == ResourceConst.LINK ? it.Path : ""
             };
-            // 如果是单页面
-            if (it.Category == CateGoryConst.Resource_SPA)
-            {
-                if (it.IsHome)
-                {
-                    // 如果是首页则设置affix
-                    meta.IsAffix = true;
-                }
-                else
-                {
-                    // 否则隐藏该单页面
-                    meta.IsHide = true;
-                }
-            }
             it.Meta = meta;
         });
     }

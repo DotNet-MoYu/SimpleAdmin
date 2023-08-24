@@ -118,7 +118,7 @@ public interface ISysOrgService : ITransient
     /// <param name="input">删除参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysOrg);
+    Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysOrg);
 
     #endregion 删除
 

@@ -10,7 +10,7 @@ public class PositionController : BaseController
 
     public PositionController(ISysPositionService sysPositionService)
     {
-        this._sysPositionService = sysPositionService;
+        _sysPositionService = sysPositionService;
     }
 
     /// <summary>
@@ -54,10 +54,9 @@ public class PositionController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-
     [HttpPost("delete")]
     [DisplayName("删除职位")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _sysPositionService.Delete(input);
     }

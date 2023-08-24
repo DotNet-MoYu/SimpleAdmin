@@ -33,23 +33,25 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
     }
 
     /// <inheritdoc />
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope is { Count: > 0 })//如果有机构
         {
             //获取职位下所有机构ID
-            var orgIds = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id)).Select(it => it.OrgId).ToList();
+            var orgIds = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id))
+                .Select(it => it.OrgId).ToList();
             if (!dataScope.ContainsAll(orgIds))
                 throw Oops.Bah($"您没有权限删除这些岗位");
         }
         else if (dataScope is { Count: 0 })//表示仅自己
         {
             //获取要删除的岗位列表
-            var positions = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id)).ToList();
+            var positions = (await _sysPositionService.GetListAsync())
+                .Where(it => ids.Contains(it.Id)).ToList();
             //如果岗位列表里有任何不是自己创建的岗位
             if (positions.Any(it => it.CreateUserId != UserManager.UserId))
                 throw Oops.Bah($"只能删除自己创建的岗位");
@@ -104,7 +106,8 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
             if (sysPosition.Id > 0)
             {
                 var position = await _sysPositionService.GetSysPositionById(sysPosition.Id);//获取机构
-                if (position.CreateUserId != UserManager.UserId) throw Oops.Bah(errorMessage);//岗位的创建人不是自己则报错
+                if (position.CreateUserId != UserManager.UserId)
+                    throw Oops.Bah(errorMessage);//岗位的创建人不是自己则报错
             }
             else
             {

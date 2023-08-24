@@ -12,3 +12,16 @@ public class IdNotNull : ValidationAttribute
         else return false;
     }
 }
+
+/// <summary>
+/// 验证Id列表不能为空
+/// </summary>
+public class IdsNotNull : ValidationAttribute
+{
+    public override bool IsValid(object value)
+    {
+        if (value is List<string> { Count: 0 })
+            return false;
+        return true;
+    }
+}

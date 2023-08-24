@@ -24,7 +24,7 @@ public interface IBatchEditService : ITransient
     /// </summary>
     /// <param name="input">删除参数</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 获取需要批量修改的表
@@ -59,7 +59,8 @@ public interface IBatchEditService : ITransient
     /// <param name="code">唯一编码</param>
     /// <param name="columns">字段信息</param>
     /// <returns>sqlsugar对应字典</returns>
-    Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code, List<BatchEditColumn> columns);
+    Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code,
+        List<BatchEditColumn> columns);
 
     /// <summary>
     /// 同步字段

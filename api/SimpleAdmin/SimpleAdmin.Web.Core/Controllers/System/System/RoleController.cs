@@ -11,7 +11,8 @@ public class RoleController : BaseController
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService,
+    public RoleController(IRoleService roleService, IResourceService resourceService,
+        ISysOrgService sysOrgService,
         ISysUserService sysUserService)
     {
         _roleService = roleService;
@@ -62,7 +63,7 @@ public class RoleController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除角色")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _roleService.Delete(input);
     }

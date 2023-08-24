@@ -25,6 +25,12 @@ public class ResourceConst
     /// </summary>
     public const string LINK = "LINK";
 
+
+    /// <summary>
+    /// 单页
+    /// </summary>
+    public const string SPA = "SPA";
+
     /// <summary>
     /// 系统内置单页面编码
     /// </summary>

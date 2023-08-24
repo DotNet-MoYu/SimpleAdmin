@@ -19,7 +19,7 @@ public interface ISysPositionService : ITransient
     /// <param name="input">id列表</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input, string name = SimpleAdminConst.SysPos);
+    Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysPos);
 
     /// <summary>
     /// 编辑职位

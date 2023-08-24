@@ -13,7 +13,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\SimpleAdmin.Application\SimpleAdmin.Application.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Gen\SimpleAdmin.Plugin.Gen.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mqtt\SimpleAdmin.Plugin.Mqtt.csproj" />
 		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
 	</ItemGroup>

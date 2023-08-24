@@ -46,7 +46,7 @@ public interface IMenuService : ITransient
     /// </summary>
     /// <param name="input">删除菜单参数</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 改变菜单模块

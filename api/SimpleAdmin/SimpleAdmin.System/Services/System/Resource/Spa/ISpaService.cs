@@ -17,7 +17,7 @@ public interface ISpaService : ITransient
     /// </summary>
     /// <param name="input">删除参数</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 编辑单页

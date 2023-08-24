@@ -58,7 +58,7 @@ public class FileController : BaseController
     /// <returns></returns>
     [HttpPost("delete")]
     [DisplayName("删除文件")]
-    public async Task Delete([FromBody] List<BaseIdInput> input)
+    public async Task Delete([FromBody] BaseIdListInput input)
     {
         await _fileService.Delete(input);
     }

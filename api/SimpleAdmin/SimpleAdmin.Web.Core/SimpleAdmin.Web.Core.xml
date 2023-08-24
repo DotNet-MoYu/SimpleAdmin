@@ -77,7 +77,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除机构
             </summary>
@@ -129,7 +129,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除岗位
             </summary>
@@ -228,7 +228,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除人员
             </summary>
@@ -336,7 +336,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除测试
             </summary>
@@ -499,7 +499,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.BatchEditController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除批量
             </summary>
@@ -630,7 +630,7 @@
             <param name="File"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.FileController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.FileController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除文件
             </summary>
@@ -739,7 +739,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.MessageController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除站内信
             </summary>
@@ -782,7 +782,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.IndexController.DeleteSchedule(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.IndexController.DeleteSchedule(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除日程
             </summary>
@@ -815,7 +815,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.ButtonController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.ButtonController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除按钮
             </summary>
@@ -872,7 +872,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.MenuController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.MenuController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除菜单
             </summary>
@@ -912,7 +912,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.ModuleController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.ModuleController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除模块
             </summary>
@@ -977,7 +977,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除组织
             </summary>
@@ -1010,7 +1010,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.PositionController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除职位
             </summary>
@@ -1043,7 +1043,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.RoleController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除角色
             </summary>
@@ -1142,7 +1142,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.SpaController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.SpaController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除单页
             </summary>
@@ -1370,7 +1370,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserController.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.Web.Core.UserController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除用户
             </summary>

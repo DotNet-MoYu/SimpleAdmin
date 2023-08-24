@@ -489,6 +489,11 @@
             外链
             </summary>
         </member>
+        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.SPA">
+            <summary>
+            单页
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.SqlSugar.ResourceConst.System">
             <summary>
             系统内置单页面编码

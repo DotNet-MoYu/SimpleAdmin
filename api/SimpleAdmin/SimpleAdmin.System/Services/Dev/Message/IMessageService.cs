@@ -10,7 +10,7 @@ public interface IMessageService : ITransient
     /// </summary>
     /// <param name="input">id列表</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 删除我的消息

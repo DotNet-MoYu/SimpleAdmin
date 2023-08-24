@@ -127,7 +127,8 @@ public class UserService : DbRepository<SysUser>, IUserService
     {
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
-        var ids = input.Ids;//获取用户id
+        var ids = input.Ids;
+        ;//获取用户id
         var sysUsers = await GetListAsync(it => ids.Contains(it.Id),
             it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
         sysUsers.ForEach(it =>
@@ -172,10 +173,10 @@ public class UserService : DbRepository<SysUser>, IUserService
     #region 删除
 
     /// <inheritdoc/>
-    public async Task Delete(List<BaseIdInput> input)
+    public async Task Delete(BaseIdListInput input)
     {
         //获取所有ID
-        var ids = input.Select(it => it.Id).ToList();
+        var ids = input.Ids;
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //获取用户下信息

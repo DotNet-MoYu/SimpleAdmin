@@ -10,7 +10,7 @@ public interface IFileService : ITransient
     /// </summary>
     /// <param name="input">ID列表</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     /// <summary>
     /// 文件下载

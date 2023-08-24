@@ -15,14 +15,14 @@ public interface IGenTestService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>测试分页</returns>
-    Task<SqlSugarPagedList<GenTest>> Page(GenTestPageInput input);	
-  
+    Task<SqlSugarPagedList<GenTest>> Page(GenTestPageInput input);
+
     /// <summary>
     /// 测试列表查询
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns>测试列表</returns>
-    Task<List<GenTest>> List(GenTestPageInput input);	
+    Task<List<GenTest>> List(GenTestPageInput input);
 
     /// <summary>
     /// 测试详情
@@ -31,9 +31,8 @@ public interface IGenTestService : ITransient
     /// <returns>详细信息</returns>
     Task<GenTest> Detail(BaseIdInput input);
 
-
     #endregion
-    
+
     #region 新增
 
     /// <summary>
@@ -44,15 +43,16 @@ public interface IGenTestService : ITransient
     Task Add(GenTestAddInput input);
 
     #endregion
-    
+
     #region 编辑
+
     /// <summary>
     /// 修改测试
     /// </summary>
     /// <param name="input">编辑参数</param>
     /// <returns></returns>
     Task Edit(GenTestEditInput input);
-    
+
     #endregion
 
     #region 删除
@@ -62,7 +62,7 @@ public interface IGenTestService : ITransient
     /// </summary>
     /// <param name="input">删除参数</param>
     /// <returns></returns>
-    Task Delete(List<BaseIdInput> input);
+    Task Delete(BaseIdListInput input);
 
     #endregion
 
@@ -73,21 +73,22 @@ public interface IGenTestService : ITransient
     /// </summary>
     /// <returns>模板</returns>
     Task<FileStreamResult> Template();
-    
+
     /// <summary>
     /// 测试导入预览
     /// </summary>
     /// <param name="input">预览参数</param>
     /// <returns>预览结果</returns>
     Task<ImportPreviewOutput<GenTestImportInput>> Preview(ImportPreviewInput input);
-    
+
     /// <summary>
     /// 测试导入
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<ImportResultOutPut<GenTestImportInput>> Import(ImportResultInput<GenTestImportInput> input);
-    
+    Task<ImportResultOutPut<GenTestImportInput>>
+        Import(ImportResultInput<GenTestImportInput> input);
+
     /// <summary>
     /// 测试导出
     /// </summary>
@@ -97,4 +98,3 @@ public interface IGenTestService : ITransient
 
     #endregion
 }
-

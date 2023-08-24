@@ -2271,7 +2271,7 @@
         <member name="M:SimpleAdmin.System.BatchEditService.Config(System.Collections.Generic.List{SimpleAdmin.System.BatchEditConfigInput})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.BatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.BatchEditService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.BatchEditService.SyncColumns(SimpleAdmin.Core.BaseIdInput)">
@@ -2410,7 +2410,7 @@
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IBatchEditService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IBatchEditService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除批量
             </summary>
@@ -2812,7 +2812,7 @@
         <member name="M:SimpleAdmin.System.FileService.UploadFile(System.String,Microsoft.AspNetCore.Http.IFormFile)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.FileService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.FileService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.FileService.GetFileStreamResult(System.String,System.String,System.Boolean)">
@@ -2865,7 +2865,7 @@
             文件管理服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.IFileService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IFileService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除文件
             </summary>
@@ -2966,7 +2966,7 @@
             站内信服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.IMessageService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IMessageService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除消息
             </summary>
@@ -3035,7 +3035,7 @@
         <member name="M:SimpleAdmin.System.MessageService.Detail(SimpleAdmin.Core.BaseIdInput,System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.MessageService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.MessageService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput,System.Int64)">
@@ -3531,7 +3531,7 @@
             <param name="input">日程参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IIndexService.DeleteSchedule(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IIndexService.DeleteSchedule(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除日程
             </summary>
@@ -3556,7 +3556,7 @@
         <member name="M:SimpleAdmin.System.IndexService.AddSchedule(SimpleAdmin.System.ScheduleAddInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.IndexService.DeleteSchedule(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IndexService.DeleteSchedule(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.System.SysOrgPageInput">
@@ -3747,7 +3747,7 @@
             <param name="name">名称</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysOrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput},System.String)">
+        <member name="M:SimpleAdmin.System.ISysOrgService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
             <summary>
             删除组织
             </summary>
@@ -3819,7 +3819,7 @@
         <member name="M:SimpleAdmin.System.SysOrgService.Edit(SimpleAdmin.System.SysOrgEditInput,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput},System.String)">
+        <member name="M:SimpleAdmin.System.SysOrgService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.RefreshCache">
@@ -3950,7 +3950,7 @@
             <param name="name">名称</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput},System.String)">
+        <member name="M:SimpleAdmin.System.ISysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
             <summary>
             删除职位
             </summary>
@@ -4032,7 +4032,7 @@
         <member name="M:SimpleAdmin.System.SysPositionService.Edit(SimpleAdmin.System.PositionEditInput,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput},System.String)">
+        <member name="M:SimpleAdmin.System.SysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.RefreshCache">
@@ -4183,7 +4183,7 @@
         <member name="M:SimpleAdmin.System.ButtonService.Edit(SimpleAdmin.System.ButtonEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ButtonService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.ButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.System.SysResource)">
@@ -4241,7 +4241,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IButtonService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除按钮
             </summary>
@@ -4381,7 +4381,7 @@
             <param name="input">菜单编辑参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IMenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除菜单
             </summary>
@@ -4412,7 +4412,7 @@
         <member name="M:SimpleAdmin.System.MenuService.Edit(SimpleAdmin.System.MenuEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.MenuService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.MenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
@@ -4459,7 +4459,7 @@
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IModuleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除模块
             </summary>
@@ -4494,7 +4494,7 @@
         <member name="M:SimpleAdmin.System.ModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ModuleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.ModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.System.SysResource)">
@@ -4805,7 +4805,7 @@
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISpaService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.ISpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除单页
             </summary>
@@ -4840,7 +4840,7 @@
         <member name="M:SimpleAdmin.System.SpaService.Edit(SimpleAdmin.System.SpaEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SpaService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.SpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.System.SysResource)">
@@ -5002,7 +5002,7 @@
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.IRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除角色
             </summary>
@@ -5118,7 +5118,7 @@
         <member name="M:SimpleAdmin.System.RoleService.Edit(SimpleAdmin.System.RoleEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.RoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
@@ -5398,15 +5398,6 @@
             </summary>
             <param name="allMenuList">所有菜单列表</param>
             <param name="myMenus">我的菜单列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetMyModules(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{System.Int64},System.Int32)">
-            <summary>
-            获取我的模块集合
-            </summary>
-            <param name="allModuleList"></param>
-            <param name="moduleIds"></param>
-            <param name="spaCount"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
@@ -6081,7 +6072,7 @@
             <param name="input">批量编辑信息</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.ISysUserService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除用户
             </summary>
@@ -6221,7 +6212,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.Delete(System.Collections.Generic.List{SimpleAdmin.Core.BaseIdInput})">
+        <member name="M:SimpleAdmin.System.SysUserService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.DeleteUserFromRedis(System.Int64)">
