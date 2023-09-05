@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 字典
 ///</summary>
 [SugarTable("sys_dict", TableDescription = "字典表")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysDict : BaseEntity
 {
     /// <summary>

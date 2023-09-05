@@ -41,8 +41,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             ? categoryList
             : new List<string>
             {
-                CateGoryConst.Resource_MENU, CateGoryConst.Resource_BUTTON,
-                CateGoryConst.Resource_SPA, CateGoryConst.Resource_MODULE
+                CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_BUTTON,
+                CateGoryConst.RESOURCE_SPA, CateGoryConst.RESOURCE_MODULE
             };
         //遍历列表
         foreach (var category in categoryList)
@@ -61,7 +61,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         //获取所有的菜单和模块以及单页面列表，
         var sysResources = await GetListAsync(new List<string>
         {
-            CateGoryConst.Resource_MODULE, CateGoryConst.Resource_MENU, CateGoryConst.Resource_SPA
+            CateGoryConst.RESOURCE_MODULE, CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_SPA
         });
         if (sysResources != null)
         {
@@ -77,13 +77,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     {
         //获取所有的菜单和模块以及单页面列表，
         var sysResources = await GetListAsync(new List<string>
-            { CateGoryConst.Resource_MENU, CateGoryConst.Resource_SPA });
+            { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_SPA });
         if (sysResources != null)
         {
             //并按分类和排序码排序
             sysResources = sysResources
                 .Where(it =>
-                    it.Category == CateGoryConst.Resource_SPA || it.Module == id)//根据模块ID获取菜单
+                    it.Category == CateGoryConst.RESOURCE_SPA || it.Module == id)//根据模块ID获取菜单
                 .OrderBy(it => it.Category).ThenBy(it => it.SortCode).ToList();//排序
         }
         return sysResources;
@@ -96,13 +96,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (category == null)
         {
             //删除全部key
-            _simpleCacheService.DelByPattern(SystemConst.Cache_SysResource);
+            _simpleCacheService.DelByPattern(SystemConst.CACHE_SYS_RESOURCE);
             await GetListAsync();
         }
         else
         {
             //否则只删除一个Key
-            _simpleCacheService.Remove(SystemConst.Cache_SysResource + category);
+            _simpleCacheService.Remove(SystemConst.CACHE_SYS_RESOURCE + category);
             await GetListByCategory(category);
         }
     }
@@ -143,7 +143,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     {
         //先从Redis拿
         var sysResources =
-            _simpleCacheService.Get<List<SysResource>>(SystemConst.Cache_SysResource + category);
+            _simpleCacheService.Get<List<SysResource>>(SystemConst.CACHE_SYS_RESOURCE + category);
         if (sysResources == null)
         {
             //redis没有就去数据库拿
@@ -151,7 +151,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             if (sysResources.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(SystemConst.Cache_SysResource + category, sysResources);
+                _simpleCacheService.Set(SystemConst.CACHE_SYS_RESOURCE + category, sysResources);
             }
         }
         return sysResources;
@@ -162,7 +162,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     {
         var resourceTreeSelectors = new List<ResTreeSelector>();//定义结果
         //获取模块列表
-        var moduleList = await GetListByCategory(CateGoryConst.Resource_MODULE);
+        var moduleList = await GetListByCategory(CateGoryConst.RESOURCE_MODULE);
         //遍历模块
         foreach (var module in moduleList)
         {
@@ -326,17 +326,17 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         long moduleId)
     {
         var roleGrantResourceMenus = new List<ResTreeSelector.RoleGrantResourceMenu>();//定义结果
-        var allMenuList = (await GetListByCategory(CateGoryConst.Resource_MENU))
+        var allMenuList = (await GetListByCategory(CateGoryConst.RESOURCE_MENU))
             .Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
-        var allButtonList = await GetListByCategory(CateGoryConst.Resource_BUTTON);//获取所有按钮列表
+        var allButtonList = await GetListByCategory(CateGoryConst.RESOURCE_BUTTON);//获取所有按钮列表
         var parentMenuList =
-            allMenuList.Where(it => it.ParentId == SimpleAdminConst.Zero).ToList();//获取一级目录
+            allMenuList.Where(it => it.ParentId == SimpleAdminConst.ZERO).ToList();//获取一级目录
 
         //遍历一级目录
         foreach (var parent in parentMenuList)
         {
             //如果是目录则去遍历下级
-            if (parent.MenuType == ResourceConst.CATALOG)
+            if (parent.MenuType == SysResourceConst.CATALOG)
             {
                 //获取所有下级菜单
                 var menuList = GetChildListById(allMenuList, parent.Id, false);
@@ -346,7 +346,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                     foreach (var menu in menuList)
                     {
                         //如果菜单类型是菜单
-                        if (menu.MenuType is ResourceConst.MENU or ResourceConst.SUBSET)
+                        if (menu.MenuType is SysResourceConst.MENU or SysResourceConst.SUBSET)
                         {
                             //获取菜单下按钮集合并转换成对应实体
                             var buttonList = allButtonList.Where(it => it.ParentId == menu.Id)
@@ -364,8 +364,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                                 Button = buttons
                             });
                         }
-                        else if (menu.MenuType == ResourceConst.LINK
-                                 || menu.MenuType == ResourceConst.IFRAME)//如果是内链或者外链
+                        else if (menu.MenuType == SysResourceConst.LINK
+                                 || menu.MenuType == SysResourceConst.IFRAME)//如果是内链或者外链
                         {
                             //直接加到资源列表
                             roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
@@ -403,7 +403,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                     Title = parent.Title
                 };
                 //如果菜单类型是菜单
-                if (parent.MenuType == ResourceConst.MENU)
+                if (parent.MenuType == SysResourceConst.MENU)
                 {
                     //获取菜单下按钮集合并转换成对应实体
                     var buttonList = allButtonList.Where(it => it.ParentId == parent.Id).ToList();

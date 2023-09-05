@@ -30,9 +30,9 @@ public class ConfigController : BaseController
     [AllowAnonymous]
     public async Task<List<SysConfig>> SysBaseList()
     {
-        var sysBase = await _configService.GetListByCategory(CateGoryConst.Config_SYS_BASE);//系统基础
+        var sysBase = await _configService.GetListByCategory(CateGoryConst.CONFIG_SYS_BASE);//系统基础
         var loginPolicy =
-            await _configService.GetListByCategory(CateGoryConst.Config_LOGIN_POLICY);//登录策略
+            await _configService.GetListByCategory(CateGoryConst.CONFIG_LOGIN_POLICY);//登录策略
         sysBase.AddRange(loginPolicy);//合并登录策略
         return sysBase;
     }

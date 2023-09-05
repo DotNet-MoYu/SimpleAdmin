@@ -16,25 +16,55 @@ public class UserManager
     /// <summary>
     /// 当前用户Id
     /// </summary>
-    public static long UserId => (App.User?.FindFirst(ClaimConst.UserId)?.Value).ToLong();
+    public static long UserId
+    {
+        get
+        {
+            return (App.User?.FindFirst(ClaimConst.USER_ID)?.Value).ToLong();
+        }
+    }
 
     /// <summary>
     /// 当前用户账号
     /// </summary>
-    public static string UserAccount => App.User?.FindFirst(ClaimConst.Account)?.Value;
+    public static string UserAccount
+    {
+        get
+        {
+            return App.User?.FindFirst(ClaimConst.ACCOUNT)?.Value;
+        }
+    }
 
     /// <summary>
     /// 当前用户昵称
     /// </summary>
-    public static string Name => App.User?.FindFirst(ClaimConst.Name)?.Value;
+    public static string Name
+    {
+        get
+        {
+            return App.User?.FindFirst(ClaimConst.NAME)?.Value;
+        }
+    }
 
     /// <summary>
     /// 是否超级管理员
     /// </summary>
-    public static bool SuperAdmin => (App.User?.FindFirst(ClaimConst.IsSuperAdmin)?.Value).ToBoolean();
+    public static bool SuperAdmin
+    {
+        get
+        {
+            return (App.User?.FindFirst(ClaimConst.IS_SUPER_ADMIN)?.Value).ToBoolean();
+        }
+    }
 
     /// <summary>
     /// 机构ID
     /// </summary>
-    public static long OrgId => (App.User?.FindFirst(ClaimConst.OrgId)?.Value).ToLong();
+    public static long OrgId
+    {
+        get
+        {
+            return (App.User?.FindFirst(ClaimConst.ORG_ID)?.Value).ToLong();
+        }
+    }
 }

@@ -18,15 +18,15 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
-    public IServiceProvider _services { get; }
+    public IServiceProvider Services { get; }
     private readonly SqlSugarScope _db;
 
     public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services, INamedServiceProvider<INoticeService> namedServiceProvider)
     {
-        _db = DbContext.Db;
+        _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
         _namedServiceProvider = namedServiceProvider;
-        _services = services;
+        Services = services;
     }
 
     /// <summary>
@@ -34,27 +34,27 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    [EventSubscribe(EventSubscriberConst.LoginB)]
+    [EventSubscribe(EventSubscriberConst.LOGIN_B)]
     public async Task Login(EventHandlerExecutingContext context)
     {
         var loginEvent = (LoginEvent)context.Source.Payload;//获取参数
-        var LoginAddress = GetLoginAddress(loginEvent.Ip);
+        var loginAddress = GetLoginAddress(loginEvent.Ip);
         var sysUser = loginEvent.SysUser;
 
         #region 登录/密码策略
 
-        var key = SystemConst.Cache_LoginErrorCount + sysUser.Account;//获取登录错误次数Key值
+        var key = SystemConst.CACHE_LOGIN_ERROR_COUNT + sysUser.Account;//获取登录错误次数Key值
         _simpleCacheService.Remove(key);//移除登录错误次数
 
         // 创建新的作用域
-        using var scope = _services.CreateScope();
+        using var scope = Services.CreateScope();
         // 解析服务
         var configService = scope.ServiceProvider.GetRequiredService<IConfigService>();
         var messageService = scope.ServiceProvider.GetRequiredService<IMessageService>();
         var pwdRemindUpdateTime = sysUser.PwdRemindUpdateTime;//获取上次提醒修改密码时间
-        var loginPolicy = await configService.GetListByCategory(CateGoryConst.Config_PWD_POLICY);//获取密码策略
+        var loginPolicy = await configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
         //获取用户token列表
-        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, sysUser.Id.ToString());
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, sysUser.Id.ToString());
         var userToken = tokenInfos.Where(it => it.Token == loginEvent.Token).FirstOrDefault();
         if (userToken != null)
         {
@@ -70,7 +70,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                     {
                         Subject = subject,
                         Content = $"请及时修改初始密码",
-                        Category = CateGoryConst.Message_INFORM,
+                        Category = CateGoryConst.MESSAGE_INFORM,
                         ReceiverIdList = new List<long>() { sysUser.Id }
                     });
                 }
@@ -88,7 +88,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                         {
                             Subject = subject,
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
-                            Category = CateGoryConst.Message_INFORM,
+                            Category = CateGoryConst.MESSAGE_INFORM,
                             ReceiverIdList = new List<long>() { sysUser.Id }
                         });
                     }
@@ -105,7 +105,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         sysUser.LastLoginDevice = sysUser.LatestLoginDevice;
         sysUser.LastLoginIp = sysUser.LatestLoginIp;
         sysUser.LastLoginTime = sysUser.LatestLoginTime;
-        sysUser.LatestLoginAddress = LoginAddress;
+        sysUser.LatestLoginAddress = loginAddress;
         sysUser.LatestLoginDevice = loginEvent.Device.ToString();
         sysUser.LatestLoginIp = loginEvent.Ip;
         sysUser.LatestLoginTime = loginEvent.DateTime;
@@ -125,7 +125,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             it.LatestLoginTime,
             LastUpdatePwdTime = it.PwdRemindUpdateTime
         }).ExecuteCommandAsync() > 0)
-            _simpleCacheService.HashAdd(SystemConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);//更新Redis信息
+            _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER, sysUser.Id.ToString(), sysUser);//更新Redis信息
 
         await Task.CompletedTask;
     }
@@ -135,7 +135,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    [EventSubscribe(EventSubscriberConst.LoginOutB)]
+    [EventSubscribe(EventSubscriberConst.LOGIN_OUT_B)]
     public async Task LoginOut(EventHandlerExecutingContext context)
     {
         _ = (LoginEvent)context.Source.Payload;//获取参数
@@ -151,9 +151,9 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         try
         {
             var ipInfo = IpTool.Search(ip);
-            var LoginAddressList = new List<string>() { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
-            var LoginAddress = string.Join("|", LoginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
-            return LoginAddress;
+            var loginAddressList = new List<string>() { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
+            var loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
+            return loginAddress;
         }
         catch
         {

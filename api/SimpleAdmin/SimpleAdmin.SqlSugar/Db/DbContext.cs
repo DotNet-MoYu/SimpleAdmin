@@ -16,15 +16,15 @@ public static class DbContext
     /// <summary>
     /// 读取配置文件中的 ConnectionStrings:Sqlsugar 配置节点
     /// </summary>
-    public static readonly List<SqlSugarConfig> DbConfigs = App.GetConfig<List<SqlSugarConfig>>("SqlSugarSettings:ConnectionStrings");
+    public static readonly List<SqlSugarConfig> DB_CONFIGS = App.GetConfig<List<SqlSugarConfig>>("SqlSugarSettings:ConnectionStrings");
 
     /// <summary>
     /// SqlSugar 数据库实例
     /// </summary>
-    public static readonly SqlSugarScope Db = new SqlSugarScope(DbConfigs.Adapt<List<ConnectionConfig>>(), db =>
+    public static readonly SqlSugarScope DB = new SqlSugarScope(DB_CONFIGS.Adapt<List<ConnectionConfig>>(), db =>
     {
         //遍历配置的数据库
-        DbConfigs.ForEach(it =>
+        DB_CONFIGS.ForEach(it =>
         {
             var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
             MoreSetting(sqlsugarScope);//更多设置
@@ -142,11 +142,11 @@ public static class DbContext
                 {
                     //创建人和创建机构ID
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUserId))
-                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.UserId)?.Value);
+                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.USER_ID)?.Value);
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUser))
-                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.Account)?.Value);
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.ACCOUNT)?.Value);
                     if (entityInfo.PropertyName == nameof(DataEntityBase.CreateOrgId))
-                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.OrgId)?.Value);
+                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.ORG_ID)?.Value);
                 }
             }
             // 更新操作
@@ -159,9 +159,9 @@ public static class DbContext
                 if (App.User != null)
                 {
                     if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUserId))
-                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.UserId)?.Value);
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.USER_ID)?.Value);
                     if (entityInfo.PropertyName == nameof(BaseEntity.UpdateUser))
-                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.Account)?.Value);
+                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.ACCOUNT)?.Value);
                 }
             }
         };

@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 组织
 ///</summary>
 [SugarTable("sys_org", TableDescription = "组织")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 [CodeGen]
 public class SysOrg : BaseEntity
 {

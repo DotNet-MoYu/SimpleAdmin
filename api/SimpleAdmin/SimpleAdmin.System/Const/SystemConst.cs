@@ -16,57 +16,57 @@ public class SystemConst
     /// <summary>
     /// 系统配置表缓存Key
     /// </summary>
-    public const string Cache_DevConfig = CacheConst.Cache_Prefix_Web + "SysConfig:";
+    public const string CACHE_DEV_CONFIG = CacheConst.CACHE_PREFIX_WEB + "SysConfig:";
 
     /// <summary>
     /// 登录验证码缓存Key
     /// </summary>
-    public const string Cache_Captcha = CacheConst.Cache_Prefix_Web + "Captcha:";
+    public const string CACHE_CAPTCHA = CacheConst.CACHE_PREFIX_WEB + "Captcha:";
 
     /// <summary>
     /// 用户表缓存Key
     /// </summary>
-    public const string Cache_SysUser = CacheConst.Cache_Prefix_Web + "SysUser";
+    public const string CACHE_SYS_USER = CacheConst.CACHE_PREFIX_WEB + "SysUser";
 
     /// <summary>
     /// 用户手机号关系缓存Key
     /// </summary>
-    public const string Cache_SysUserPhone = CacheConst.Cache_Prefix_Web + "SysUserPhone";
+    public const string CACHE_SYS_USER_PHONE = CacheConst.CACHE_PREFIX_WEB + "SysUserPhone";
 
     /// <summary>
     /// 用户手机号关系缓存Key
     /// </summary>
-    public const string Cache_SysUserAccount = CacheConst.Cache_Prefix_Web + "SysUserAccount";
+    public const string CACHE_SYS_USER_ACCOUNT = CacheConst.CACHE_PREFIX_WEB + "SysUserAccount";
 
     /// <summary>
     /// 资源表缓存Key
     /// </summary>
-    public const string Cache_SysResource = CacheConst.Cache_Prefix_Web + "SysResource:";
+    public const string CACHE_SYS_RESOURCE = CacheConst.CACHE_PREFIX_WEB + "SysResource:";
 
     /// <summary>
     /// 字典表缓存Key
     /// </summary>
-    public const string Cache_DevDict = CacheConst.Cache_Prefix_Web + "SysDict";
+    public const string CACHE_DEV_DICT = CacheConst.CACHE_PREFIX_WEB + "SysDict";
 
     /// <summary>
     /// 关系表缓存Key
     /// </summary>
-    public const string Cache_SysRelation = CacheConst.Cache_Prefix_Web + "SysRelation:";
+    public const string CACHE_SYS_RELATION = CacheConst.CACHE_PREFIX_WEB + "SysRelation:";
 
     /// <summary>
     /// 机构表缓存Key
     /// </summary>
-    public const string Cache_SysOrg = CacheConst.Cache_Prefix_Web + "SysOrg";
+    public const string CACHE_SYS_ORG = CacheConst.CACHE_PREFIX_WEB + "SysOrg";
 
     /// <summary>
     /// 角色表缓存Key
     /// </summary>
-    public const string Cache_SysRole = CacheConst.Cache_Prefix_Web + "SysRole";
+    public const string CACHE_SYS_ROLE = CacheConst.CACHE_PREFIX_WEB + "SysRole";
 
     /// <summary>
     /// 职位表缓存Key
     /// </summary>
-    public const string Cache_SysPosition = CacheConst.Cache_Prefix_Web + "SysPosition";
+    public const string CACHE_SYS_POSITION = CacheConst.CACHE_PREFIX_WEB + "SysPosition";
 
 
     #region 登录错误次数
@@ -74,7 +74,7 @@ public class SystemConst
     /// <summary>
     ///  登录错误次数缓存Key
     /// </summary>
-    public const string Cache_LoginErrorCount = CacheConst.Cache_Prefix_Web + "LoginErrorCount:";
+    public const string CACHE_LOGIN_ERROR_COUNT = CacheConst.CACHE_PREFIX_WEB + "LoginErrorCount:";
 
     #endregion 登录错误次数
 }

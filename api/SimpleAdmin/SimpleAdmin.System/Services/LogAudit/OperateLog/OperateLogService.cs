@@ -16,12 +16,12 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     /// <summary>
     /// 操作日志中文名称
     /// </summary>
-    private readonly string NameOperate = "操作日志";
+    private readonly string _nameOperate = "操作日志";
 
     /// <summary>
     /// 异常日志中文名称
     /// </summary>
-    private readonly string NameExecption = "异常日志";
+    private readonly string _nameExecption = "异常日志";
 
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysLogOperate>> Page(OperateLogPageInput input)
@@ -60,15 +60,15 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
             .GroupBy((x1, x2) => x1.ColumnName)//根据时间分组
             .OrderBy((x1, x2) => x1.ColumnName)//根据时间升序排序
             .Select((x1, x2) => new
-            {
-                OperateCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.Log_OPERATE,
+                {
+                    OperateCount =
+                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_OPERATE,
                             1, 0)),//null的数据要为0所以不能用count
-                ExceptionCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.Log_EXCEPTION,
+                    ExceptionCount =
+                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_EXCEPTION,
                             1, 0)),//null的数据要为0所以不能用count
-                Date = x1.ColumnName.ToString("yyyy-MM-dd")
-            }
+                    Date = x1.ColumnName.ToString("yyyy-MM-dd")
+                }
                 ).ToListAsync();
         //定义返回结果
         List<OperateLogDayStatisticsOutput> result = new List<OperateLogDayStatisticsOutput>();
@@ -76,9 +76,9 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
         list.ForEach(it =>
         {
             result.Add(new OperateLogDayStatisticsOutput
-            { Date = it.Date, Name = NameOperate, Count = it.OperateCount });//添加访问日志
+                { Date = it.Date, Name = _nameOperate, Count = it.OperateCount });//添加访问日志
             result.Add(new OperateLogDayStatisticsOutput
-            { Date = it.Date, Name = NameExecption, Count = it.ExceptionCount });//添加异常日志
+                { Date = it.Date, Name = _nameExecption, Count = it.ExceptionCount });//添加异常日志
         });
         return result;
     }
@@ -99,15 +99,15 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
             //添加操作日志数据
             new OperateLogTotalCountOutpu
             {
-                Type = NameOperate,
-                Value = data.Where(it => it.Category == CateGoryConst.Log_OPERATE)
+                Type = _nameOperate,
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_OPERATE)
                     .Select(it => it.Count).FirstOrDefault()
             },
             //添加异常日志数据
             new OperateLogTotalCountOutpu
             {
-                Type = NameExecption,
-                Value = data.Where(it => it.Category == CateGoryConst.Log_EXCEPTION)
+                Type = _nameExecption,
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_EXCEPTION)
                     .Select(it => it.Count).FirstOrDefault()
             }
         };

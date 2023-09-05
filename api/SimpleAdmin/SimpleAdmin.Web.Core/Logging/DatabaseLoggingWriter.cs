@@ -26,7 +26,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
 
     public DatabaseLoggingWriter(ILogger<DatabaseLoggingWriter> logger)
     {
-        _db = DbContext.Db;
+        _db = DbContext.DB;
         _logger = logger;
     }
 
@@ -44,12 +44,12 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             //获取操作名称
             var operation = loggingMonitor.DisplayTitle;
-            var client = (ClientInfo)logMsg.Context.Get(LoggingConst.Client);//获取客户端信息
-            var path = logMsg.Context.Get(LoggingConst.Path).ToString();//获取操作名称
-            var method = logMsg.Context.Get(LoggingConst.Method).ToString();//获取方法
+            var client = (ClientInfo)logMsg.Context.Get(LoggingConst.CLIENT);//获取客户端信息
+            var path = logMsg.Context.Get(LoggingConst.PATH).ToString();//获取操作名称
+            var method = logMsg.Context.Get(LoggingConst.METHOD).ToString();//获取方法
             //表示访问日志
-            if (operation == EventSubscriberConst.LoginB
-                || operation == EventSubscriberConst.LoginOutB)
+            if (operation == EventSubscriberConst.LOGIN_B
+                || operation == EventSubscriberConst.LOGIN_OUT_B)
             {
                 //如果没有异常信息
                 if (loggingMonitor.Exception == null)
@@ -87,7 +87,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     {
         var name = "";//用户姓名
         var opAccount = "";//用户账号
-        if (operation == EventSubscriberConst.LoginB)
+        if (operation == EventSubscriberConst.LOGIN_B)
         {
             //如果是登录，用户信息就从返回值里拿
             var result = loggingMonitor.ReturnInformation.Value.ToJson();//返回值转json
@@ -98,18 +98,18 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         else
         {
             //如果是登录出，用户信息就从AuthorizationClaims里拿
-            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.Name)
+            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.NAME)
                 .Select(it => it.Value).FirstOrDefault();
             opAccount = loggingMonitor.AuthorizationClaims
-                .Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
+                .Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
         }
         //日志表实体
         var devLogVisit = new SysLogVisit
         {
             Name = operation,
-            Category = operation == EventSubscriberConst.LoginB
-                ? CateGoryConst.Log_LOGIN
-                : CateGoryConst.Log_LOGOUT,
+            Category = operation == EventSubscriberConst.LOGIN_B
+                ? CateGoryConst.LOG_LOGIN
+                : CateGoryConst.LOG_LOGOUT,
             ExeStatus = SysLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,
@@ -134,11 +134,11 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
     {
         //用户名称
-        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Name)
+        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.NAME)
             .Select(it => it.Value).FirstOrDefault();
         //账号
         var opAccount = loggingMonitor.AuthorizationClaims
-            ?.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
+            ?.Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
         var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0
@@ -164,7 +164,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var devLogOperate = new SysLogOperate
         {
             Name = operation,
-            Category = CateGoryConst.Log_OPERATE,
+            Category = CateGoryConst.LOG_OPERATE,
             ExeStatus = SysLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,
@@ -183,7 +183,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         //如果异常不为空
         if (loggingMonitor.Exception != null)
         {
-            devLogOperate.Category = CateGoryConst.Log_EXCEPTION;//操作类型为异常
+            devLogOperate.Category = CateGoryConst.LOG_EXCEPTION;//操作类型为异常
             devLogOperate.ExeStatus = SysLogConst.FAIL;//操作状态为失败
             devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":"
                 + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
@@ -198,25 +198,25 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <returns></returns>
     private string GetLoginAddress(string ip)
     {
-        var LoginAddress = "未知";
+        var loginAddress = "未知";
         try
         {
             var ipInfo = IpTool.Search(ip);//解析IP信息
-            var LoginAddressList = new List<string>()
+            var loginAddressList = new List<string>()
             {
                 ipInfo.Country,
                 ipInfo.Province,
                 ipInfo.City,
                 ipInfo.NetworkOperator
             };//定义登录地址列表
-            LoginAddress =
+            loginAddress =
                 string.Join("|",
-                    LoginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
+                    loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
         }
         catch (global::System.Exception ex)
         {
             _logger.LogError("IP解析错误" + ex, ex);
         }
-        return LoginAddress;
+        return loginAddress;
     }
 }

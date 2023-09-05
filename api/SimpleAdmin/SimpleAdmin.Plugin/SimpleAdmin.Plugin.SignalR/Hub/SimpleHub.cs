@@ -73,7 +73,7 @@ public class SimpleHub : Hub<ISimpleHub>
         if (!string.IsNullOrEmpty(userId))
         {
             //获取redis当前用户的token信息列表
-            var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
+            var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
             if (tokenInfos != null)
             {
                 if (ifConnect)
@@ -83,7 +83,7 @@ public class SimpleHub : Hub<ISimpleHub>
                     if (tokenInfo != null)
                     {
                         tokenInfo.ClientIds.Add(userIdentifier);//添加到客户端列表
-                        _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
+                        _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId, tokenInfos);//更新Redis
                     }
                 }
                 else
@@ -93,7 +93,7 @@ public class SimpleHub : Hub<ISimpleHub>
                     if (tokenInfo != null)
                     {
                         tokenInfo.ClientIds.RemoveWhere(it => it == userIdentifier);//从客户端列表删除
-                        _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId, tokenInfos);//更新Redis
+                        _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId, tokenInfos);//更新Redis
                     }
                 }
             }

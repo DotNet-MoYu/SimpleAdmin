@@ -41,7 +41,8 @@ public sealed class LoggingConsoleComponent : IServiceComponent
                     return logMsg.Message;
                 }
             };
-            options.WriteHandler = (logMsg, scopeProvider, writer, fmtMsg, opt) =>
+            options.WriteHandler = (logMsg, scopeProvider, writer,
+                fmtMsg, opt) =>
             {
                 if (logMsg.LogName == _monitorName && !_loggingSetting.Monitor.Console) return;
                 var consoleColor = ConsoleColor.White;
@@ -67,8 +68,8 @@ public sealed class LoggingConsoleComponent : IServiceComponent
 
 public static class TextWriterExtensions
 {
-    private const string DefaultForegroundColor = "\x1B[39m\x1B[22m";
-    private const string DefaultBackgroundColor = "\x1B[49m";
+    private const string DEFAULT_FOREGROUND_COLOR = "\x1B[39m\x1B[22m";
+    private const string DEFAULT_BACKGROUND_COLOR = "\x1B[49m";
 
     public static void WriteWithColor(
         this TextWriter textWriter,
@@ -99,11 +100,11 @@ public static class TextWriterExtensions
 
         if (foregroundColor != null)
         {
-            textWriter.Write(DefaultForegroundColor);
+            textWriter.Write(DEFAULT_FOREGROUND_COLOR);
         }
         if (backgroundColor != null)
         {
-            textWriter.Write(DefaultBackgroundColor);
+            textWriter.Write(DEFAULT_BACKGROUND_COLOR);
         }
     }
 
@@ -127,7 +128,7 @@ public static class TextWriterExtensions
             ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
             ConsoleColor.White => "\x1B[1m\x1B[37m",
 
-            _ => DefaultForegroundColor
+            _ => DEFAULT_FOREGROUND_COLOR
         };
     }
 
@@ -144,7 +145,7 @@ public static class TextWriterExtensions
             ConsoleColor.DarkCyan => "\x1B[46m",
             ConsoleColor.Gray => "\x1B[47m",
 
-            _ => DefaultBackgroundColor
+            _ => DEFAULT_BACKGROUND_COLOR
         };
     }
 }

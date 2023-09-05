@@ -47,15 +47,15 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
     /// <inheritdoc />
     public async Task Add(SysOrgAddInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Add);//检查参数
-        await _sysOrgService.Add(input, SimpleAdminConst.BizOrg);
+        await CheckInput(input, SimpleAdminConst.ADD);//检查参数
+        await _sysOrgService.Add(input, SimpleAdminConst.BIZ_ORG);
     }
 
     /// <inheritdoc />
     public async Task Edit(SysOrgEditInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Edit);//检查参数
-        await _sysOrgService.Edit(input, SimpleAdminConst.BizOrg);
+        await CheckInput(input, SimpleAdminConst.EDIT);//检查参数
+        await _sysOrgService.Edit(input, SimpleAdminConst.BIZ_ORG);
     }
 
     /// <inheritdoc />
@@ -93,7 +93,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
             if (orgs.Any(it => it.CreateUserId != UserManager.UserId))
                 throw Oops.Bah($"只能删除自己创建的机构");
         }
-        await _sysOrgService.Delete(input, SimpleAdminConst.BizOrg);//删除操作
+        await _sysOrgService.Delete(input, SimpleAdminConst.BIZ_ORG);//删除操作
     }
 
     /// <inheritdoc />

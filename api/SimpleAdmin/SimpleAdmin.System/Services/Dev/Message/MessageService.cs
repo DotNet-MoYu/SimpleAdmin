@@ -78,7 +78,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
         });
 
         //事务
-        var result = await itenant.UseTranAsync(async () =>
+        var result = await Itenant.UseTranAsync(async () =>
         {
             message = await InsertReturnEntityAsync(message);//添加消息
             messageUsers.ForEach(it => it.MessageId = message.Id);//添加关系
@@ -86,7 +86,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
         });
         if (result.IsSuccess)//如果成功了
         {
-            await _eventPublisher.PublishAsync(EventSubscriberConst.NewMessage, new NewMessageEvent
+            await _eventPublisher.PublishAsync(EventSubscriberConst.NEW_MESSAGE, new NewMessageEvent
             {
                 UserIds = input.ReceiverIdList.Select(it => it.ToString()).ToList(),
                 Message = input.Subject
@@ -168,7 +168,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
         if (ids.Count > 0)
         {
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await DeleteAsync(it => ids.Contains(it.Id));
                 await Context.Deleteable<SysMessageUser>().Where(it => ids.Contains(it.MessageId))

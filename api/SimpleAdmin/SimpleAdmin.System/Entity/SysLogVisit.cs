@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 访问日志表
 ///</summary>
 [SugarTable("sys_log_visit", TableDescription = "访问日志表")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysLogVisit : BaseEntity
 {
     /// <summary>
@@ -73,7 +73,6 @@ public class SysLogVisit : BaseEntity
     /// <summary>
     /// 操作人姓名
     ///</summary>
-    [SugarColumn(ColumnName = "OpAccount", ColumnDescription = "操作人账号", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "OpAccount", ColumnDescription = "操作人账号", Length = 200, IsNullable = true)]
     public string OpAccount { get; set; }
 }

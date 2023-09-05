@@ -9,22 +9,22 @@
             Redis常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_Prefix_Web">
+        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_PREFIX_WEB">
             <summary>
             Redis Key前缀(可删除)
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_Prefix">
+        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_PREFIX">
             <summary>
             Redis Key前缀(需要持久化，不随系统重启删除)
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_Hash">
+        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_HASH">
             <summary>
             Redis Hash类型
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.Cache_UserToken">
+        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_USER_TOKEN">
             <summary>
             用户Token缓存Key
             </summary>

@@ -161,7 +161,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
     private async Task CheckInput(GenTest genTest)
     {
         var errorMessage = $"您没有权限操作该数据";
-        if (genTest.Id == SimpleAdminConst.Zero)
+        if (genTest.Id == SimpleAdminConst.ZERO)
         {
             //表示新增
         }
@@ -183,7 +183,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             .WhereIF(!string.IsNullOrWhiteSpace(input.Name),
                 it => it.Name.Contains(input.Name.Trim()))
             .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.CreateOrgId))//根据机构ID查询
-                                                                            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField),
                 $"{input.SortField} {input.SortOrder}")
             .OrderBy(it => it.SortCode);//排序

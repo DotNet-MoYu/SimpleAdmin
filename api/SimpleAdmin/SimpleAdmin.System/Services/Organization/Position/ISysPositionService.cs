@@ -19,7 +19,7 @@ public interface ISysPositionService : ITransient
     /// <param name="input">添加参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Add(PositionAddInput input, string name = SimpleAdminConst.SysPos);
+    Task Add(PositionAddInput input, string name = SimpleAdminConst.SYS_POS);
 
     /// <summary>
     /// 删除职位
@@ -27,7 +27,7 @@ public interface ISysPositionService : ITransient
     /// <param name="input">id列表</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysPos);
+    Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_POS);
 
     /// <summary>
     /// 编辑职位
@@ -35,7 +35,7 @@ public interface ISysPositionService : ITransient
     /// <param name="input">编辑参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Edit(PositionEditInput input, string name = SimpleAdminConst.SysPos);
+    Task Edit(PositionEditInput input, string name = SimpleAdminConst.SYS_POS);
 
     /// <summary>
     /// 获取职位列表

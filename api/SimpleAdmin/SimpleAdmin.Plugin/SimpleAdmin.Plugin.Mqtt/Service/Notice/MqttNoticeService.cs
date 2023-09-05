@@ -21,27 +21,27 @@ public class MqttNoticeService : INoticeService
     /// <inheritdoc/>
     public async Task UpdatePassWord(string userId, List<string> clientIds, string message)
     {
-        var _mqttClientManager = GetMqttClientManager();
+        var mqttClientManager = GetMqttClientManager();
         //发送修改密码消息
-        await _mqttClientManager.GetClient().PublishAsync(MqttConst.Mqtt_TopicPrefix + userId, new MqttMessage
+        await mqttClientManager.GetClient().PublishAsync(MqttConst.MQTT_TOPIC_PREFIX + userId, new MqttMessage
         {
             Data = new { Message = message, ClientIds = clientIds },
-            MsgType = MqttConst.Mqtt_Message_UpdatePassword
+            MsgType = MqttConst.MQTT_MESSAGE_UPDATE_PASSWORD
         });
     }
 
     /// <inheritdoc/>
     public async Task NewMesage(List<string> userIds, List<string> clientIds, string message)
     {
-        var _mqttClientManager = GetMqttClientManager();
+        var mqttClientManager = GetMqttClientManager();
         //遍历用户Id
         foreach (var userId in userIds)
         {
             //发送消息
-            await _mqttClientManager.GetClient().PublishAsync(MqttConst.Mqtt_TopicPrefix + userId, new MqttMessage
+            await mqttClientManager.GetClient().PublishAsync(MqttConst.MQTT_TOPIC_PREFIX + userId, new MqttMessage
             {
                 Data = new { Message = message },
-                MsgType = MqttConst.Mqtt_Message_New
+                MsgType = MqttConst.MQTT_MESSAGE_NEW
             });
         }
     }
@@ -49,12 +49,12 @@ public class MqttNoticeService : INoticeService
     /// <inheritdoc/>
     public async Task UserLoginOut(string userId, List<string> clientIds, string message)
     {
-        var _mqttClientManager = GetMqttClientManager();
+        var mqttClientManager = GetMqttClientManager();
         //发送通知下线消息
-        await _mqttClientManager.GetClient().PublishAsync(MqttConst.Mqtt_TopicPrefix + userId, new MqttMessage
+        await mqttClientManager.GetClient().PublishAsync(MqttConst.MQTT_TOPIC_PREFIX + userId, new MqttMessage
         {
             Data = new { Message = message, ClientIds = clientIds },
-            MsgType = MqttConst.Mqtt_Message_LoginOut
+            MsgType = MqttConst.MQTT_MESSAGE_LOGIN_OUT
         });
     }
 

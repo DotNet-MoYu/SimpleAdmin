@@ -41,7 +41,7 @@ public class MessageSendInput : SysMessage, IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (Category != CateGoryConst.Message_INFORM && Category != CateGoryConst.Message_NOTICE)
+        if (Category != CateGoryConst.MESSAGE_INFORM && Category != CateGoryConst.MESSAGE_NOTICE)
         {
             yield return new ValidationResult("分类错误", new[] { nameof(Category) });
         }

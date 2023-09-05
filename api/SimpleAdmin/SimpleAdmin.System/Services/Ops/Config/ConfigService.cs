@@ -21,7 +21,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     /// <inheritdoc/>
     public async Task<List<SysConfig>> GetListByCategory(string category)
     {
-        var key = SystemConst.Cache_DevConfig + category;//系统配置key
+        var key = SystemConst.CACHE_DEV_CONFIG + category;//系统配置key
         //先从redis拿配置
         var configList = _simpleCacheService.Get<List<SysConfig>>(key);
         if (configList == null)
@@ -49,7 +49,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     public async Task<SqlSugarPagedList<SysConfig>> Page(ConfigPageInput input)
     {
         var query = Context.Queryable<SysConfig>()
-            .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
+            .Where(it => it.Category == CateGoryConst.CONFIG_BIZ_DEFINE)//自定义配置
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
                 it => it.ConfigKey.Contains(input.SearchKey)
                     || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
@@ -66,7 +66,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
         await CheckInput(input);
         var devConfig = input.Adapt<SysConfig>();//实体转换
         if (await InsertAsync(devConfig))//插入数据)
-            await RefreshCache(CateGoryConst.Config_BIZ_DEFINE);//刷新缓存
+            await RefreshCache(CateGoryConst.CONFIG_BIZ_DEFINE);//刷新缓存
     }
 
     /// <inheritdoc/>
@@ -75,18 +75,18 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
         await CheckInput(input);
         var devConfig = input.Adapt<SysConfig>();//实体转换
         if (await UpdateAsync(devConfig))//更新数据
-            await RefreshCache(CateGoryConst.Config_BIZ_DEFINE);//刷新缓存
+            await RefreshCache(CateGoryConst.CONFIG_BIZ_DEFINE);//刷新缓存
     }
 
     /// <inheritdoc/>
     public async Task Delete(ConfigDeleteInput input)
     {
         //获取所有业务配置
-        var configs = await GetListByCategory(CateGoryConst.Config_BIZ_DEFINE);
+        var configs = await GetListByCategory(CateGoryConst.CONFIG_BIZ_DEFINE);
         if (configs.Any(it => it.Id == input.Id))//如果有当前配置
         {
             if (await DeleteByIdAsync(input.Id))//删除配置
-                await RefreshCache(CateGoryConst.Config_BIZ_DEFINE);//刷新缓存
+                await RefreshCache(CateGoryConst.CONFIG_BIZ_DEFINE);//刷新缓存
         }
     }
 
@@ -127,7 +127,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     /// <returns></returns>
     private async Task RefreshCache(string category)
     {
-        _simpleCacheService.Remove(SystemConst.Cache_DevConfig + category);//redis删除
+        _simpleCacheService.Remove(SystemConst.CACHE_DEV_CONFIG + category);//redis删除
         await GetListByCategory(category);//重新获取
     }
 
@@ -137,7 +137,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     /// <param name="sysConfig"></param>
     private async Task CheckInput(SysConfig sysConfig)
     {
-        var configs = await GetListByCategory(CateGoryConst.Config_BIZ_DEFINE);//获取全部字典
+        var configs = await GetListByCategory(CateGoryConst.CONFIG_BIZ_DEFINE);//获取全部字典
         //判断是否从存在重复字典名
         var hasSameKey =
             configs.Any(it => it.ConfigKey == sysConfig.ConfigKey && it.Id != sysConfig.Id);
@@ -146,7 +146,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
             throw Oops.Bah($"存在重复的配置键:{sysConfig.ConfigKey}");
         }
         //设置分类为业务
-        sysConfig.Category = CateGoryConst.Config_BIZ_DEFINE;
+        sysConfig.Category = CateGoryConst.CONFIG_BIZ_DEFINE;
     }
 
     #endregion 方法

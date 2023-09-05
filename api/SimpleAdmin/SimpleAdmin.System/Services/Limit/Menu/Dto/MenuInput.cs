@@ -44,7 +44,7 @@ public class MenuAddInput : SysResource, IValidatableObject
     /// <summary>
     /// 菜单类型
     /// </summary>
-    public override string MenuType { get; set; } = ResourceConst.MENU;
+    public override string MenuType { get; set; } = SysResourceConst.MENU;
 
     /// <summary>
     /// 模块
@@ -73,13 +73,13 @@ public class MenuAddInput : SysResource, IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         //如果菜单类型是菜单
-        if (MenuType is ResourceConst.MENU or ResourceConst.SUBSET)
+        if (MenuType is SysResourceConst.MENU or SysResourceConst.SUBSET)
         {
             if (string.IsNullOrEmpty(Name))
                 yield return new ValidationResult("Name不能为空", new[] { nameof(Name) });
             if (string.IsNullOrEmpty(Component))
                 yield return new ValidationResult("Component不能为空", new[] { nameof(Name) });
-            if (MenuType is ResourceConst.SUBSET)//如果是子集
+            if (MenuType is SysResourceConst.SUBSET)//如果是子集
             {
                 if (string.IsNullOrEmpty(ActiveMenu))
                     yield return new ValidationResult("ActiveMenu不能为空", new[] { nameof(Name) });
@@ -96,7 +96,7 @@ public class MenuAddInput : SysResource, IValidatableObject
             Component = null;//设置组件为空
         }
         //设置分类为菜单
-        Category = CateGoryConst.Resource_MENU;
+        Category = CateGoryConst.RESOURCE_MENU;
     }
 }
 

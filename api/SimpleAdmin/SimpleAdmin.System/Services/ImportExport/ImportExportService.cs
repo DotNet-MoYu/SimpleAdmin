@@ -20,7 +20,7 @@ public class ImportExportService : IImportExportService
     {
         if (file == null) throw Oops.Bah("文件不能为空");
         if (file.Length > maxSzie * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSzie}M");
-        var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1]; // 文件后缀
+        var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1];// 文件后缀
         string[] allowTypeS = allowTypes == null ? new string[] { "xlsx" } : allowTypes;//允许上传的文件类型
         if (!allowTypeS.Contains(fileSuffix)) throw Oops.Bah(errorMessage: "文件格式错误");
     }
@@ -59,11 +59,11 @@ public class ImportExportService : IImportExportService
         //导入的数据转集合
         var data = importResult.Data.ToList();
         var systemError = new string[] { };//系统错误提示
-                                           //遍历错误列,将错误字典中的中文改成英文跟实体对应
+        //遍历错误列,将错误字典中的中文改成英文跟实体对应
         importResult.RowErrors.ForEach(row =>
         {
             IDictionary<string, string> fieldErrors = new Dictionary<string, string>();//定义字典
-                                                                                       //遍历错误列,赋值给新的字典
+            //遍历错误列,赋值给新的字典
             row.FieldErrors.ForEach(it =>
             {
                 var errrVaule = it.Value;
@@ -86,8 +86,8 @@ public class ImportExportService : IImportExportService
     /// <inheritdoc/>
     public async Task<FileStreamResult> GenerateTemplate<T>(string fileName) where T : class, new()
     {
-        IImporter Importer = new ExcelImporter();
-        var byteArray = await Importer.GenerateTemplateBytes<T>();
+        IImporter importer = new ExcelImporter();
+        var byteArray = await importer.GenerateTemplateBytes<T>();
         var result = GetFileStreamResult(byteArray, fileName);
         return result;
     }
@@ -103,11 +103,11 @@ public class ImportExportService : IImportExportService
     public async Task<ImportPreviewOutput<T>> GetImportPreview<T>(IFormFile file) where T : ImportTemplateInput, new()
     {
         ImportVerification(file);//验证文件
-        IImporter Importer = new ExcelImporter();
+        IImporter importer = new ExcelImporter();
         using var fileStream = file.OpenReadStream();//获取文件流
-        var import = await Importer.Import<T>(fileStream);//导入的文件转化为带入结果
-        var ImportPreview = TemplateDataVerification(import);//验证数据完整度
-        return ImportPreview;
+        var import = await importer.Import<T>(fileStream);//导入的文件转化为带入结果
+        var importPreview = TemplateDataVerification(import);//验证数据完整度
+        return importPreview;
     }
 
     /// <inheritdoc/>

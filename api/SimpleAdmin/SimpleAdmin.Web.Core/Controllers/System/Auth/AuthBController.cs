@@ -52,7 +52,7 @@ public class AuthBController : IDynamicApiController
     /// <returns></returns>
     [AllowAnonymous]
     [HttpPost("login")]
-    [DisplayName(EventSubscriberConst.LoginB)]
+    [DisplayName(EventSubscriberConst.LOGIN_B)]
     public async Task<dynamic> Login(LoginInput input)
     {
         return await _authService.Login(input, LoginClientTypeEnum.B);
@@ -75,7 +75,7 @@ public class AuthBController : IDynamicApiController
     /// </summary>
     /// <returns></returns>
     [HttpPost("logout")]
-    [DisplayName(EventSubscriberConst.LoginOutB)]
+    [DisplayName(EventSubscriberConst.LOGIN_OUT_B)]
     public async Task LoginOut([FromBody] LoginOutIput input)
     {
         await _authService.LoginOut(input.Token, LoginClientTypeEnum.B);

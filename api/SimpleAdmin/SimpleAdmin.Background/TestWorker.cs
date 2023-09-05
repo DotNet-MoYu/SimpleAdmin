@@ -15,7 +15,7 @@ public class TestWorker : BackgroundService
     private readonly ILogger<TestWorker> _logger;
     private readonly ISimpleCacheService _simpleCacheService;
 
-    public TestWorker(ILogger<TestWorker> logger, ISimpleCacheService simpleCacheService,  )
+    public TestWorker(ILogger<TestWorker> logger, ISimpleCacheService simpleCacheService )
     {
         _logger = logger;
         _simpleCacheService = simpleCacheService;

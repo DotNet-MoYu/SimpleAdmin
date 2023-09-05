@@ -18,12 +18,12 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
 
-    public IServiceScopeFactory _scopeFactory { get; }
+    private readonly IServiceScopeFactory _scopeFactory;
     private readonly SqlSugarScope _db;
 
     public NoticeEventSubsciber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
     {
-        _db = DbContext.Db;
+        _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
         _scopeFactory = scopeFactory;
         _namedServiceProvider = namedServiceProvider;
@@ -34,7 +34,7 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    [EventSubscribe(EventSubscriberConst.UserLoginOut)]
+    [EventSubscribe(EventSubscriberConst.USER_LOGIN_OUT)]
     public async Task UserLoginOut(EventHandlerExecutingContext context)
     {
         var loginEvent = (UserLoginOutEvent)context.Source.Payload;//获取参数
@@ -53,14 +53,14 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    [EventSubscribe(EventSubscriberConst.NewMessage)]
+    [EventSubscribe(EventSubscriberConst.NEW_MESSAGE)]
     public async Task NewMessage(EventHandlerExecutingContext context)
     {
         var newMessageEvent = (NewMessageEvent)context.Source.Payload;//获取参数
 
         var clientIds = new List<string>();
         //获取用户token列表
-        var tokenInfos = _simpleCacheService.HashGet<List<TokenInfo>>(CacheConst.Cache_UserToken, newMessageEvent.UserIds.ToArray());
+        var tokenInfos = _simpleCacheService.HashGet<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, newMessageEvent.UserIds.ToArray());
         tokenInfos.ForEach(it =>
         {
             if (it != null)

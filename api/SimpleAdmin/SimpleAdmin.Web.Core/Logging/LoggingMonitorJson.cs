@@ -166,7 +166,7 @@ public class ReturnInformation
         /// <summary>
         /// 额外信息
         /// </summary>
-        public object extras { get; set; }
+        public object Extras { get; set; }
 
         /// <summary>
         /// 内如

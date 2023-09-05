@@ -4,211 +4,6 @@
         <name>SimpleAdmin.SqlSugar</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.SqlSugar.CateGoryConst">
-            <summary>
-            分类常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_SYS_BASE">
-            <summary>
-            系统基础
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_LOGIN_POLICY">
-            <summary>
-            登录策略
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_PWD_POLICY">
-            <summary>
-            密码策略
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_BIZ_DEFINE">
-            <summary>
-            业务定义
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_FILE_LOCAL">
-            <summary>
-            文件-本地
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_FILE_MINIO">
-            <summary>
-            文件-MINIO
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Config_MQTT_BASE">
-            <summary>
-            MQTT配置
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_HAS_ROLE">
-            <summary>
-            用户有哪些角色
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE">
-            <summary>
-            角色有哪些资源
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_ROLE_HAS_MODULE">
-            <summary>
-            角色有哪些模块
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_HAS_RESOURCE">
-             <summary>
-            用户有哪些资源
-             </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION">
-            <summary>
-            角色有哪些权限
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_HAS_PERMISSION">
-            <summary>
-            角色有哪些权限
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA">
-            <summary>
-            用户工作台数据
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_SYS_USER_SCHEDULE_DATA">
-            <summary>
-            用户日程数据
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Relation_MSG_TO_USER">
-            <summary>
-            站内信与接收用户
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.SCOPE_SELF">
-            <summary>
-            本人
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.SCOPE_ALL">
-            <summary>
-            所有
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.SCOPE_ORG">
-            <summary>
-            仅所属组织
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.SCOPE_ORG_CHILD">
-            <summary>
-            所属组织及以下
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.SCOPE_ORG_DEFINE">
-            <summary>
-            自定义
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Resource_MODULE">
-            <summary>
-            模块
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Resource_MENU">
-            <summary>
-            菜单
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Resource_SPA">
-            <summary>
-            单页
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Resource_BUTTON">
-            <summary>
-            按钮
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Log_LOGIN">
-            <summary>
-            登录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Log_LOGOUT">
-            <summary>
-            登出
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Log_OPERATE">
-            <summary>
-            操作
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Log_EXCEPTION">
-            <summary>
-            异常
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Dict_FRM">
-            <summary>
-            框架
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Dict_BIZ">
-            <summary>
-            业务
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Org_DEPT">
-            <summary>
-            部门
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Org_COMPANY">
-            <summary>
-            公司
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Position_HIGH">
-            <summary>
-            高层
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Position_MIDDLE">
-            <summary>
-            中层
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Position_LOW">
-            <summary>
-            基层
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Role_GLOBAL">
-            <summary>
-            全局
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Role_ORG">
-            <summary>
-            机构
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Message_INFORM">
-            <summary>
-            通知
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.CateGoryConst.Message_NOTICE">
-            <summary>
-            公告
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.SqlSugar.EffTypeConst">
             <summary>
             前端控件作用类型常量
@@ -264,299 +59,34 @@
             下拉框
             </summary>
         </member>
-        <member name="T:SimpleAdmin.SqlSugar.ResourceConst">
-            <summary>
-            资源表常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.CATALOG">
-            <summary>
-            目录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.MENU">
-            <summary>
-            组件
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.IFRAME">
-            <summary>
-            内链
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.SUBSET">
-            <summary>
-            目录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.LINK">
-            <summary>
-            外链
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.SPA">
-            <summary>
-            单页
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.ResourceConst.System">
-            <summary>
-            系统内置单页面编码
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.SqlSugar.RoleConst">
-            <summary>
-            角色常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.RoleConst.SuperAdmin">
-            <summary>
-            超级管理员
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.RoleConst.BizAdmin">
-            <summary>
-            业务管理员
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.SqlSugar.SqlsugarConst">
             <summary>
             Sqlsugar系统常量类
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.DB_Default">
+        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.DB_DEFAULT">
             <summary>
             默认库ConfigId
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.DB_PrimaryKey">
+        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.DB_PRIMARY_KEY">
             <summary>
             默认表主键
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.NVarCharMax">
+        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.N_VAR_CHAR_MAX">
             <summary>
             varchar(max)
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.LongText">
+        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.LONG_TEXT">
             <summary>
             mysql的longtext
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.Text">
+        <member name="F:SimpleAdmin.SqlSugar.SqlsugarConst.TEXT">
             <summary>
             sqlite的text
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.SqlSugar.SysConfigConst">
-            <summary>
-            系统配置常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA">
-            <summary>
-            系统默认工作台
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_CAPTCHA_OPEN">
-            <summary>
-            登录验证码开关
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_CAPTCHA_TYPE">
-            <summary>
-            登录验证码开关
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_SINGLE_OPEN">
-            <summary>
-            单用户登录开关
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_ERROR_LOCK">
-            <summary>
-             登录错误锁定时长
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_ERROR_RESET_TIME">
-            <summary>
-             登录错误锁定时长
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.LOGIN_ERROR_COUNT">
-            <summary>
-            登录错误次数
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_DEFAULT_PASSWORD">
-            <summary>
-            默认用户密码
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_REMIND">
-            <summary>
-            密码定期提醒更新
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_REMIND_DAY">
-            <summary>
-            密码定期提醒更新时间
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_UPDATE_DEFAULT">
-            <summary>
-            修改初始密码提醒
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_MIN_LENGTH">
-            <summary>
-            密码最小长度
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_CONTAIN_NUM">
-            <summary>
-            包含数字
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_CONTAIN_LOWER">
-            <summary>
-            包含小写字母
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_CONTAIN_UPPER">
-            <summary>
-            包含大写字母
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.PWD_CONTAIN_CHARACTER">
-            <summary>
-            包含特殊字符
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.MQTT_PARAM_URL">
-            <summary>
-            mqtt连接地址
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.MQTT_PARAM_USERNAME">
-            <summary>
-            mqtt连接用户名
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.MQTT_PARAM_PASSWORD">
-            <summary>
-            mqtt连接密码
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS">
-            <summary>
-            windows系统本地目录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX">
-            <summary>
-            Unix系统本地目录
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_MINIO_ACCESS_KEY">
-            <summary>
-            MINIO文件AccessKey
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_MINIO_SECRET_KEY">
-            <summary>
-            MINIO文件SecetKey
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_MINIO_END_POINT">
-            <summary>
-            MINIO文件EndPoint
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME">
-            <summary>
-            MINIO文件默认存储桶
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.SqlSugar.SysDictConst">
-            <summary>
-            字典常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.GENDER">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.NATION">
-            <summary>
-            名族
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.IDCARD_TYPE">
-            <summary>
-            用户证件类型
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.CULTURE_LEVEL">
-            <summary>
-            通用文化程度
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.COMMON_STATUS_ENABLE">
-            <summary>
-            启用
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.COMMON_STATUS_DISABLED">
-            <summary>
-            停用
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.ONLINE_STATUS_ONLINE">
-            <summary>
-            在线
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.ONLINE_STATUS_OFFLINE">
-            <summary>
-            离线
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.FILE_ENGINE_LOCAL">
-            <summary>
-            本地
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.FILE_ENGINE_MINIO">
-            <summary>
-            MINIO
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.DICT_CATEGORY_FRM">
-            <summary>
-            系统
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysDictConst.DICT_CATEGORY_BIZ">
-            <summary>
-            业务
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.SqlSugar.SysLogConst">
-            <summary>
-            日志常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysLogConst.SUCCESS">
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.SqlSugar.SysLogConst.FAIL">
-            <summary>
-            成功
             </summary>
         </member>
         <member name="T:SimpleAdmin.SqlSugar.DbContext">
@@ -564,12 +94,12 @@
             数据库上下文对象
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DbContext.DbConfigs">
+        <member name="F:SimpleAdmin.SqlSugar.DbContext.DB_CONFIGS">
             <summary>
             读取配置文件中的 ConnectionStrings:Sqlsugar 配置节点
             </summary>
         </member>
-        <member name="F:SimpleAdmin.SqlSugar.DbContext.Db">
+        <member name="F:SimpleAdmin.SqlSugar.DbContext.DB">
             <summary>
             SqlSugar 数据库实例
             </summary>

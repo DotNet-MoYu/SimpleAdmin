@@ -30,7 +30,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     {
         //先从Redis拿
         var sysPositions =
-            _simpleCacheService.Get<List<SysPosition>>(SystemConst.Cache_SysPosition);
+            _simpleCacheService.Get<List<SysPosition>>(SystemConst.CACHE_SYS_POSITION);
         if (sysPositions == null)
         {
             //redis没有就去数据库拿
@@ -38,7 +38,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             if (sysPositions.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(SystemConst.Cache_SysPosition, sysPositions);
+                _simpleCacheService.Set(SystemConst.CACHE_SYS_POSITION, sysPositions);
             }
         }
         return sysPositions;
@@ -93,7 +93,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Add(PositionAddInput input, string name = SimpleAdminConst.SysPos)
+    public async Task Add(PositionAddInput input, string name = SimpleAdminConst.SYS_POS)
     {
         await CheckInput(input, name);//检查参数
         var sysPosition = input.Adapt<SysPosition>();//实体转换
@@ -103,7 +103,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Edit(PositionEditInput input, string name = SimpleAdminConst.SysPos)
+    public async Task Edit(PositionEditInput input, string name = SimpleAdminConst.SYS_POS)
     {
         await CheckInput(input, name);//检查参数
         var sysPosition = input.Adapt<SysPosition>();//实体转换
@@ -112,7 +112,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysPos)
+    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_POS)
     {
         //获取所有ID
         var ids = input.Ids;
@@ -150,7 +150,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(SystemConst.Cache_SysPosition);//删除Key
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_POSITION);//删除Key
         await GetListAsync();//重新写入缓存
     }
 
@@ -166,7 +166,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         //所有分类放一个列表
         var positionCategorys = new List<string>()
         {
-            CateGoryConst.Position_HIGH, CateGoryConst.Position_LOW, CateGoryConst.Position_MIDDLE
+            CateGoryConst.POSITION_HIGH, CateGoryConst.POSITION_LOW, CateGoryConst.POSITION_MIDDLE
         };
         if (!positionCategorys.Contains(sysPosition.Category))
             throw Oops.Bah($"{name}所属分类错误:{sysPosition.Category}");

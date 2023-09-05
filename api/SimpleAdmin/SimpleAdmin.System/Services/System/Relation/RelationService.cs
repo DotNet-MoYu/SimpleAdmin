@@ -25,7 +25,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task<List<SysRelation>> GetRelationByCategory(string category)
     {
-        var key = SystemConst.Cache_SysRelation + category;
+        var key = SystemConst.CACHE_SYS_RELATION + category;
         //先从Redis拿
         var sysRelations = _simpleCacheService.Get<List<SysRelation>>(key);
         if (sysRelations == null)
@@ -52,7 +52,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task<SysRelation> GetWorkbench(long userId)
     {
-        var sysRelations = await GetRelationByCategory(CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA);
+        var sysRelations = await GetRelationByCategory(CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA);
         var result = sysRelations.Where(it => it.ObjectId == userId).FirstOrDefault();//获取个人工作台
         return result;
     }
@@ -84,7 +84,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     /// <inheritdoc/>
     public async Task RefreshCache(string category)
     {
-        var key = SystemConst.Cache_SysRelation + category;//key
+        var key = SystemConst.CACHE_SYS_RELATION + category;//key
         _simpleCacheService.Remove(key);//删除redis
         await GetRelationByCategory(category);//更新缓存
     }
@@ -105,7 +105,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             });
         }
         //事务
-        var result = await itenant.UseTranAsync(async () =>
+        var result = await Itenant.UseTranAsync(async () =>
         {
             if (clear)
                 await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
@@ -135,7 +135,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             ExtJson = extJson
         };
         //事务
-        var result = await itenant.UseTranAsync(async () =>
+        var result = await Itenant.UseTranAsync(async () =>
         {
             if (clear)
                 await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
@@ -158,7 +158,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
     public async Task<List<long>> GetModuleByRoleId(List<long> roleIdList)
     {
         var moduleIds = new List<long>();
-        var relation = await GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_MODULE);//获取关系集合
+        var relation = await GetRelationByCategory(CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE);//获取关系集合
         if (relation != null && relation.Count > 0)
         {
             moduleIds = relation.Where(it => roleIdList.Contains(it.ObjectId)).Select(it => it.TargetId.ToLong()).ToList();

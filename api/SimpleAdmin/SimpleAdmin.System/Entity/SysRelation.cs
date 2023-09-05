@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 系统关系表
 ///</summary>
 [SugarTable("sys_relation", TableDescription = "系统关系表")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysRelation : PrimaryKeyEntity
 {
     /// <summary>
@@ -30,6 +30,7 @@ public class SysRelation : PrimaryKeyEntity
     /// <summary>
     /// 分类
     ///</summary>
-    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = false)]
+    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200,
+        IsNullable = false)]
     public string Category { get; set; }
 }

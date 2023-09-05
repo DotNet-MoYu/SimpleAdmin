@@ -115,7 +115,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task Add(UserAddInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Add);//检查参数
+        await CheckInput(input, SimpleAdminConst.ADD);//检查参数
         await _sysUserService.Add(input);//添加
     }
 
@@ -126,7 +126,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task Edit(UserEditInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Edit);//检查参数
+        await CheckInput(input, SimpleAdminConst.EDIT);//检查参数
         await _sysUserService.Edit(input);//编辑
     }
 
@@ -151,28 +151,28 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task DisableUser(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.Disable);//检查权限
+        await CheckPermission(input.Id, SimpleAdminConst.DISABLE);//检查权限
         await _sysUserService.DisableUser(input);//禁用
     }
 
     /// <inheritdoc/>
     public async Task EnableUser(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.Enable);//检查权限
+        await CheckPermission(input.Id, SimpleAdminConst.ENABLE);//检查权限
         await _sysUserService.EnableUser(input);//启用
     }
 
     /// <inheritdoc/>
     public async Task GrantRole(UserGrantRoleInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.Disable);//检查权限
+        await CheckPermission(input.Id, SimpleAdminConst.DISABLE);//检查权限
         await _sysUserService.GrantRole(input);//授权
     }
 
     /// <inheritdoc/>
     public async Task ResetPassword(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.ResestPwd);//检查权限
+        await CheckPermission(input.Id, SimpleAdminConst.RESEST_PWD);//检查权限
         await _sysUserService.ResetPassword(input);//重置密码
     }
 
@@ -369,7 +369,7 @@ public class UserService : DbRepository<SysUser>, IUserService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         //动态查询条件
         var exp = Expressionable.Create<SysUser>();
-        exp.And(u => u.Account != RoleConst.SuperAdmin);
+        exp.And(u => u.Account != SysRoleConst.SUPER_ADMIN);
         exp.AndIF(dataScope is { Count: > 0 }, u => dataScope.Contains(u.OrgId));//用户机构在数据范围内
         exp.AndIF(dataScope is { Count: 0 }, u => u.Id == UserManager.UserId);//用户ID等于自己
         input.Expression = exp;

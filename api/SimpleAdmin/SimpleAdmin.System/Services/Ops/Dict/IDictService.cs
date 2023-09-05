@@ -45,9 +45,9 @@ public interface IDictService : ITransient
     /// <summary>
     /// 获取字典
     /// </summary>
-    /// <param name="DictValue">字典</param>
+    /// <param name="dictValue">字典</param>
     /// <returns></returns>
-    Task<SysDict> GetDict(string DictValue);
+    Task<SysDict> GetDict(string dictValue);
 
     /// <summary>
     /// 获取所有
@@ -58,17 +58,17 @@ public interface IDictService : ITransient
     /// <summary>
     /// 根据字典DictValue获取字典值列表
     /// </summary>
-    /// <param name="DictValue">字典值</param>
+    /// <param name="dictValue">字典值</param>
     /// <param name="devDictList">字典列表</param>
     /// <returns>字典值列表</returns>
-    Task<List<string>> GetValuesByDictValue(string DictValue, List<SysDict> devDictList = null);
+    Task<List<string>> GetValuesByDictValue(string dictValue, List<SysDict> devDictList = null);
 
     /// <summary>
     /// 根据字典DictValue列表获取对应字典值列表
     /// </summary>
-    /// <param name="DictValues">字典值列表</param>
+    /// <param name="dictValues">字典值列表</param>
     /// <returns></returns>
-    Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] DictValues);
+    Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] dictValues);
 
     /// <summary>
     /// 字典分页查询

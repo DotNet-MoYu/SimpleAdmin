@@ -34,7 +34,7 @@ public class MqttService : IMqttService
         var user = await _sysUserService.GetUserById(UserManager.UserId);//获取用户信息
         var token = JWTEncryption.GetJwtBearerToken((DefaultHttpContext)App.HttpContext);// 获取当前token
         //获取mqtt配置
-        var mqttconfig = await _configService.GetListByCategory(CateGoryConst.Config_MQTT_BASE);
+        var mqttconfig = await _configService.GetListByCategory(CateGoryConst.CONFIG_MQTT_BASE);
         //地址
         var url = mqttconfig.Where(it => it.ConfigKey == SysConfigConst.MQTT_PARAM_URL).Select(it => it.ConfigValue).FirstOrDefault();
         //用户名
@@ -59,14 +59,14 @@ public class MqttService : IMqttService
         #endregion 密码特殊处理
 
         var clientId = $"{user.Id}_{RandomHelper.CreateLetterAndNumber(5)}";//客户端ID
-        _simpleCacheService.Set(MqttConst.Cache_MqttClientUser + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
+        _simpleCacheService.Set(MqttConst.CACHE_MQTT_CLIENT_USER + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
         return new MqttParameterOutput
         {
             ClientId = clientId,
             Password = password,
             Url = url,
             UserName = userName,
-            Topics = new List<string> { MqttConst.Mqtt_TopicPrefix + user.Id }//默认监听自己
+            Topics = new List<string> { MqttConst.MQTT_TOPIC_PREFIX + user.Id }//默认监听自己
         };
     }
 
@@ -74,10 +74,10 @@ public class MqttService : IMqttService
     public async Task<MqttAuthOutput> Auth(MqttAuthInput input)
     {
         var user = await _sysUserService.GetUserByAccount(input.Username);
-        var mqttAuthOutput = new MqttAuthOutput { Is_superuser = false, Result = "deny" };
+        var mqttAuthOutput = new MqttAuthOutput { IsSuperuser = false, Result = "deny" };
 
         //获取用户token
-        var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, user.Id.ToString());
+        var tokens = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, user.Id.ToString());
         if (tokens != null)
         {
             if (tokens.Any(it => it.Token == input.Password))//判断是否有token

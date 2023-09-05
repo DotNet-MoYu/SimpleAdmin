@@ -62,7 +62,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     public async Task<SqlSugarPagedList<SessionOutput>> PageC(SessionPageInput input)
     {
         return new SqlSugarPagedList<SessionOutput>()
-        { PageNum = 1, PageSize = 20, Total = 0, Pages = 1, HasNextPages = false };
+            { PageNum = 1, PageSize = 20, Total = 0, Pages = 1, HasNextPages = false };
     }
 
     /// <inheritdoc/>
@@ -109,9 +109,9 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var userId = input.Id.ToString();
         //token列表
         var tokenInfos =
-            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
+            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         //从列表中删除
-        _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken,
+        _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
             new string[] { userId });
         await NoticeUserLoginOut(userId, tokenInfos);
     }
@@ -122,16 +122,16 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var userId = input.Id.ToString();
         //获取该用户的token信息
         var tokenInfos =
-            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.Cache_UserToken, userId);
+            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         //当前需要踢掉用户的token
         var deleteTokens = tokenInfos.Where(it => input.Tokens.Contains(it.Token)).ToList();
         //踢掉包含token列表的token信息
         tokenInfos = tokenInfos.Where(it => !input.Tokens.Contains(it.Token)).ToList();
         if (tokenInfos.Count > 0)
-            _simpleCacheService.HashAdd(CacheConst.Cache_UserToken, userId,
+            _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId,
                 tokenInfos);//如果还有token则更新token
         else
-            _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken,
+            _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
                 new string[] { userId });//否则直接删除key
         await NoticeUserLoginOut(userId, deleteTokens);
     }
@@ -146,7 +146,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
         var clockSkew = App.GetConfig<int>("JWTSettings:ClockSkew");//获取过期时间容错值(秒)
         //redis获取token信息hash集合,并转成字典
-        var bTokenDic = _simpleCacheService.HashGetAll<List<TokenInfo>>(CacheConst.Cache_UserToken)
+        var bTokenDic = _simpleCacheService.HashGetAll<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN)
             .ToDictionary(u => u.Key, u => u.Value);
         if (bTokenDic != null)
         {
@@ -167,12 +167,12 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             });
             if (bTokenDic.Count > 0)
             {
-                _simpleCacheService.HashSet(CacheConst.Cache_UserToken,
+                _simpleCacheService.HashSet(CacheConst.CACHE_USER_TOKEN,
                     bTokenDic);//如果还有token则更新token
             }
             else
             {
-                _simpleCacheService.Remove(CacheConst.Cache_UserToken);//否则直接删除key
+                _simpleCacheService.Remove(CacheConst.CACHE_USER_TOKEN);//否则直接删除key
             }
             return bTokenDic;
         }
@@ -209,7 +209,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <returns></returns>
     private async Task NoticeUserLoginOut(string userId, List<TokenInfo> tokenInfos)
     {
-        await _eventPublisher.PublishAsync(EventSubscriberConst.UserLoginOut, new UserLoginOutEvent
+        await _eventPublisher.PublishAsync(EventSubscriberConst.USER_LOGIN_OUT, new UserLoginOutEvent
         {
             Message = "您已被强制下线!",
             TokenInfos = tokenInfos,

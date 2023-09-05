@@ -86,7 +86,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<long> GetIdByPhone(string phone)
     {
         //先从Redis拿
-        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.Cache_SysUserPhone, phone);
+        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.CACHE_SYS_USER_PHONE, phone);
         if (userId == 0)
         {
             phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
@@ -95,7 +95,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId > 0)
             {
                 //插入Redis
-                _simpleCacheService.HashAdd(SystemConst.Cache_SysUserPhone, phone, userId);
+                _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_PHONE, phone, userId);
             }
         }
         return userId;
@@ -106,7 +106,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         //先从Redis拿
         var sysUser =
-            _simpleCacheService.HashGetOne<SysUser>(SystemConst.Cache_SysUser, userId.ToString());
+            _simpleCacheService.HashGetOne<SysUser>(SystemConst.CACHE_SYS_USER, userId.ToString());
         if (sysUser == null)
         {
             sysUser = await GetUserFromDb(userId);//从数据库拿用户信息
@@ -119,7 +119,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         //先从Redis拿
         var sysUser =
-            _simpleCacheService.HashGetOne<T>(SystemConst.Cache_SysUser, userId.ToString());
+            _simpleCacheService.HashGetOne<T>(SystemConst.CACHE_SYS_USER, userId.ToString());
         if (sysUser == null)
         {
             var user = await GetUserFromDb(userId);//从数据库拿用户信息
@@ -136,7 +136,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         //先从Redis拿
         var userId =
-            _simpleCacheService.HashGetOne<long>(SystemConst.Cache_SysUserAccount, account);
+            _simpleCacheService.HashGetOne<long>(SystemConst.CACHE_SYS_USER_ACCOUNT, account);
         if (userId == 0)
         {
             //单查获取用户账号对应ID
@@ -144,7 +144,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (userId != 0)
             {
                 //插入Redis
-                _simpleCacheService.HashAdd(SystemConst.Cache_SysUserAccount, account, userId);
+                _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_ACCOUNT, account, userId);
             }
         }
         return userId;
@@ -157,20 +157,20 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //获取用户资源集合
         var resourceList =
             await _relationService.GetRelationListByObjectIdAndCategory(userId,
-                CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+                CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
         var buttonIdList = new List<long>();//按钮ID集合
         if (resourceList.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
             //获取用户角色关系集合
             var roleList =
                 await _relationService.GetRelationListByObjectIdAndCategory(userId,
-                    CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+                    CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
             var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
             if (roleIdList.Count > 0)//如果该用户有角色
             {
                 resourceList =
                     await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList,
-                        CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//获取资源集合
+                        CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);//获取资源集合
             }
         }
         resourceList.ForEach(it =>
@@ -182,7 +182,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (buttonIdList.Count > 0)
         {
             buttonCodeList =
-                await _resourceService.GetCodeByIds(buttonIdList, CateGoryConst.Resource_BUTTON);
+                await _resourceService.GetCodeByIds(buttonIdList, CateGoryConst.RESOURCE_BUTTON);
         }
         return buttonCodeList;
     }
@@ -193,18 +193,18 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var permissions = new List<DataScope>();//权限集合
         var sysRelations =
             await _relationService.GetRelationListByObjectIdAndCategory(userId,
-                CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//根据用户ID获取用户权限
+                CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION);//根据用户ID获取用户权限
         if (sysRelations.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
             var roleIdList =
                 await _relationService.GetRelationListByObjectIdAndCategory(userId,
-                    CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
+                    CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
             if (roleIdList.Count > 0)//如果角色ID不为空
             {
                 //获取角色权限信息
                 sysRelations = await _relationService.GetRelationListByObjectIdListAndCategory(
                     roleIdList.Select(it => it.TargetId.ToLong()).ToList(),
-                    CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
+                    CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);
             }
         }
         var relationGroup =
@@ -323,14 +323,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var relations =
             await _relationService.GetRelationListByObjectIdAndCategory(input.Id,
-                CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+                CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
         return relations.Select(it => it.TargetId.ToLong()).ToList();
     }
 
     /// <inheritdoc />
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input)
     {
-        return await _roleService.OwnResource(input, CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+        return await _roleService.OwnResource(input, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
     }
 
     /// <inheritdoc />
@@ -343,7 +343,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var grantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id,
-            CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);
+            CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION);
         //遍历关系表
         relations.ForEach(it =>
         {
@@ -362,14 +362,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //获取用户资源关系
         var relationsRes =
             await _relationService.GetRelationByCategory(CateGoryConst
-                .Relation_SYS_USER_HAS_RESOURCE);
+                .RELATION_SYS_USER_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id)
             .Select(it => it.TargetId.ToLong()).ToList();
         if (menuIds.Any())
         {
             //获取菜单信息
             var menus =
-                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
+                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.RESOURCE_MENU);
             //获取权限授权树
             var permissions =
                 _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
@@ -429,7 +429,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var exist = await GetUserById(input.Id);//获取用户信息
         if (exist != null)
         {
-            var isSuperAdmin = exist.Account == RoleConst.SuperAdmin;//判断是否有超管
+            var isSuperAdmin = exist.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin && !UserManager.SuperAdmin)
                 throw Oops.Bah($"不可修改系统内置超管用户账号");
             var name = exist.Name;//姓名
@@ -454,7 +454,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 DeleteUserFromRedis(sysUser.Id);//删除用户缓存
                 //删除用户token缓存
-                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken,
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
                     new string[] { sysUser.Id.ToString() });
             }
         }
@@ -478,10 +478,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var sysUser = await GetUserById(input.Id);//获取用户信息
         if (sysUser != null)
         {
-            var isSuperAdmin = sysUser.Account == RoleConst.SuperAdmin;//判断是否有超管
+            var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
                 throw Oops.Bah($"不可禁用系统内置超管用户账号");
-            CheckSelf(input.Id, SimpleAdminConst.Disable);//判断是不是自己
+            CheckSelf(input.Id, SimpleAdminConst.DISABLE);//判断是不是自己
             //设置状态为禁用
             if (await UpdateAsync(it => new SysUser
             {
@@ -494,7 +494,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task EnableUser(BaseIdInput input)
     {
-        CheckSelf(input.Id, SimpleAdminConst.Enable);//判断是不是自己
+        CheckSelf(input.Id, SimpleAdminConst.ENABLE);//判断是不是自己
         //设置状态为启用
         if (await UpdateAsync(it => new SysUser
         {
@@ -521,12 +521,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var sysUser = await GetUserById(input.Id);//获取用户信息
         if (sysUser != null)
         {
-            var isSuperAdmin = sysUser.Account == RoleConst.SuperAdmin;//判断是否有超管
+            var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
                 throw Oops.Bah($"不能给超管分配角色");
-            CheckSelf(input.Id, SimpleAdminConst.GrantRole);//判断是不是自己
+            CheckSelf(input.Id, SimpleAdminConst.GRANT_ROLE);//判断是不是自己
             //给用户赋角色
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_ROLE,
+            await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_USER_HAS_ROLE,
                 input.Id, input.RoleIdList.Select(it => it.ToString()).ToList(), null,
                 true);
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
@@ -552,7 +552,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 {
                     ObjectId = sysUser.Id,
                     TargetId = menuIds[i].ToString(),
-                    Category = CateGoryConst.Relation_SYS_USER_HAS_RESOURCE,
+                    Category = CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE,
                     ExtJson = extJsons == null ? null : extJsons[i]
                 });
             }
@@ -566,7 +566,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
             //获取菜单信息
             var menus =
-                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
+                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.RESOURCE_MENU);
             if (menus.Count > 0)
             {
                 //获取权限授权树
@@ -579,7 +579,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     {
                         ObjectId = sysUser.Id,
                         TargetId = it.ApiRoute,
-                        Category = CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
+                        Category = CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION,
                         ExtJson = new RelationRolePermission
                         {
                             ApiUrl = it.ApiRoute,
@@ -596,21 +596,21 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             #region 保存数据库
 
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
                 await relatioRep.DeleteAsync(it =>
                     it.ObjectId == sysUser.Id
-                    && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION
-                    || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
+                    && (it.Category == CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION
+                    || it.Category == CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
             {
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_PERMISSION);//刷新关系缓存
+                    .RELATION_SYS_USER_HAS_PERMISSION);//刷新关系缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_RESOURCE);//刷新关系缓存
+                    .RELATION_SYS_USER_HAS_RESOURCE);//刷新关系缓存
                 DeleteUserFromRedis(input.Id);//删除该用户缓存
             }
             else
@@ -632,7 +632,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
             var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
+            await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION,
                 input.Id, apiUrls, extJsons,
                 true);//添加到数据库
             DeleteUserFromRedis(input.Id);
@@ -651,7 +651,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (ids.Count > 0)
         {
             var containsSuperAdmin = await IsAnyAsync(it =>
-                it.Account == RoleConst.SuperAdmin && ids.Contains(it.Id));//判断是否有超管
+                it.Account == SysRoleConst.SUPER_ADMIN && ids.Contains(it.Id));//判断是否有超管
             if (containsSuperAdmin)
                 throw Oops.Bah($"不可删除系统内置超管用户");
             if (ids.Contains(UserManager.UserId))
@@ -691,12 +691,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             //定义删除的关系
             var delRelations = new List<string>
             {
-                CateGoryConst.Relation_SYS_USER_HAS_RESOURCE,
-                CateGoryConst.Relation_SYS_USER_HAS_PERMISSION,
-                CateGoryConst.Relation_SYS_USER_HAS_ROLE
+                CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE,
+                CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION,
+                CateGoryConst.RELATION_SYS_USER_HAS_ROLE
             };
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 //清除该用户作为主管信息
                 await UpdateAsync(it => new SysUser
@@ -719,15 +719,15 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 DeleteUserFromRedis(ids);//redis删除用户
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
+                    .RELATION_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_RESOURCE);//关系表刷新SYS_USER_HAS_ROLE缓存
+                    .RELATION_SYS_USER_HAS_RESOURCE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_PERMISSION);//关系表刷新SYS_USER_HAS_ROLE缓存
+                    .RELATION_SYS_USER_HAS_PERMISSION);//关系表刷新SYS_USER_HAS_ROLE缓存
                 // TODO 此处需要将这些用户踢下线，并永久注销这些用户
                 var idArray = ids.Select(it => it.ToString()).ToArray();
                 //从列表中删除
-                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.Cache_UserToken, idArray);
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, idArray);
             }
             else
             {
@@ -752,19 +752,19 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var userIds = ids.Select(it => it.ToString()).ToArray();//id转string列表
         var sysUsers =
-            _simpleCacheService.HashGet<SysUser>(SystemConst.Cache_SysUser, userIds);//获取用户列表
+            _simpleCacheService.HashGet<SysUser>(SystemConst.CACHE_SYS_USER, userIds);//获取用户列表
         sysUsers = sysUsers.Where(it => it != null).ToList();//过滤掉不存在的
         if (sysUsers.Count > 0)
         {
             var accounts = sysUsers.Select(it => it.Account).ToArray();//账号集合
             var phones = sysUsers.Select(it => it.Phone).ToArray();//手机号集合
             //删除用户信息
-            _simpleCacheService.HashDel<SysUser>(SystemConst.Cache_SysUser, userIds);
+            _simpleCacheService.HashDel<SysUser>(SystemConst.CACHE_SYS_USER, userIds);
             //删除账号
-            _simpleCacheService.HashDel<long>(SystemConst.Cache_SysUserAccount, accounts);
+            _simpleCacheService.HashDel<long>(SystemConst.CACHE_SYS_USER_ACCOUNT, accounts);
             //删除手机
             if (phones != null)
-                _simpleCacheService.HashDel<long>(SystemConst.Cache_SysUserPhone, phones);
+                _simpleCacheService.HashDel<long>(SystemConst.CACHE_SYS_USER_PHONE, phones);
         }
     }
 
@@ -965,7 +965,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     private async Task<string> GetDefaultPassWord(bool isSm4 = false)
     {
         //获取默认密码
-        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.Config_PWD_POLICY,
+        var defaultPassword = (await _configService.GetByConfigKey(CateGoryConst.CONFIG_PWD_POLICY,
             SysConfigConst.PWD_DEFAULT_PASSWORD)).ConfigValue;
         return isSm4 ? CryptogramUtil.Sm4Encrypt(defaultPassword) : defaultPassword;//判断是否需要加密
     }
@@ -1107,10 +1107,10 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var moduleIds = await _relationService.GetModuleByRoleId(sysUser.RoleIdList);//获取模块列表
             var modules =
                 await _resourceService.GetResourcesByIds(moduleIds,
-                    CateGoryConst.Resource_MODULE);//获取模块列表
+                    CateGoryConst.RESOURCE_MODULE);//获取模块列表
             sysUser.ModuleList = modules;//模块列表赋值给用户
             //插入Redis
-            _simpleCacheService.HashAdd(SystemConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);
+            _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER, sysUser.Id.ToString(), sysUser);
             return sysUser;
         }
         return null;

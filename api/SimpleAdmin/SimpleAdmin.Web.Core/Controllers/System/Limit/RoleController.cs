@@ -95,7 +95,7 @@ public class RoleController : BaseController
     [HttpGet("ownResource")]
     public async Task<dynamic> OwnResource([FromQuery] BaseIdInput input)
     {
-        return await _roleService.OwnResource(input, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
+        return await _roleService.OwnResource(input, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
     }
 
     /// <summary>

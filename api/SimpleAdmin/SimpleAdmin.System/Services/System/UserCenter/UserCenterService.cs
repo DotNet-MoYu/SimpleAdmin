@@ -51,12 +51,12 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             //获取用户所拥有的资源集合
             var resourceList =
                 await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id,
-                    CateGoryConst.Relation_SYS_USER_HAS_RESOURCE);
+                    CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
             if (resourceList.Count == 0)//如果没有就获取角色的
                 //获取角色所拥有的资源集合
                 resourceList =
                     await _relationService.GetRelationListByObjectIdListAndCategory(
-                        userInfo.RoleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
+                        userInfo.RoleIdList, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
             var menuIdList = new HashSet<long>();
             //获取菜单Id集合
@@ -71,11 +71,11 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             {
                 switch (it.Category)
                 {
-                    case CateGoryConst.Resource_MENU://菜单
+                    case CateGoryConst.RESOURCE_MENU://菜单
                         allMenuList.Add(it);//添加到菜单列表
                         break;
 
-                    case CateGoryConst.Resource_SPA://单页
+                    case CateGoryConst.RESOURCE_SPA://单页
                         allSpaList.Add(it);//添加到单页列表
                         break;
                 }
@@ -88,7 +88,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             // 遍历单页列表
             allSpaList.ForEach(it =>
             {
-                it.ParentId = SimpleAdminConst.Zero;
+                it.ParentId = SimpleAdminConst.ZERO;
             });
             myMenus.AddRange(allSpaList);//单页添加到菜单
             //构建meta
@@ -112,7 +112,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         else
         {
             //如果没数据去系统配置里取默认的工作台
-            var devConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE,
+            var devConfig = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE,
                 SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
             if (devConfig != null)
             {
@@ -130,7 +130,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     {
         var orgList = await _sysOrgService.GetListAsync();//获取全部机构
         var parentOrgs = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
-        var topOrg = parentOrgs.Where(it => it.ParentId == SimpleAdminConst.Zero)
+        var topOrg = parentOrgs.Where(it => it.ParentId == SimpleAdminConst.ZERO)
             .FirstOrDefault();//获取顶级节点
         if (topOrg != null)
         {
@@ -223,7 +223,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     public async Task UpdateWorkbench(UpdateWorkbenchInput input)
     {
         //关系表保存个人工作台
-        await _relationService.SaveRelation(CateGoryConst.Relation_SYS_USER_WORKBENCH_DATA,
+        await _relationService.SaveRelation(CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA,
             UserManager.UserId, null, input.WorkbenchData,
             true);
     }
@@ -243,7 +243,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         if (userInfo.Password != password) throw Oops.Bah("原密码错误");
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
         var loginPolicy =
-            await _configService.GetListByCategory(CateGoryConst.Config_PWD_POLICY);//获取密码策略
+            await _configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
         var containNumber = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_NUM)
             .ConfigValue.ToBoolean();//是否包含数字
         var containLower = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_LOWER)
@@ -354,7 +354,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 IsKeepAlive = it.IsKeepAlive,
                 IsFull = it.IsFull,
                 ActiveMenu = it.ActiveMenu,
-                IsLink = it.Category == ResourceConst.LINK ? it.Path : ""
+                IsLink = it.Category == SysResourceConst.LINK ? it.Path : ""
             };
             it.Meta = meta;
         });

@@ -36,8 +36,8 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
     /// <inheritdoc />
     public async Task Add(PositionAddInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Add);//检查参数
-        await _sysPositionService.Add(input, SimpleAdminConst.BizPos);//添加岗位
+        await CheckInput(input, SimpleAdminConst.ADD);//检查参数
+        await _sysPositionService.Add(input, SimpleAdminConst.BIZ_POS);//添加岗位
     }
 
     /// <inheritdoc />
@@ -64,14 +64,14 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
             if (positions.Any(it => it.CreateUserId != UserManager.UserId))
                 throw Oops.Bah($"只能删除自己创建的岗位");
         }
-        await _sysPositionService.Delete(input, SimpleAdminConst.BizOrg);//删除岗位
+        await _sysPositionService.Delete(input, SimpleAdminConst.BIZ_ORG);//删除岗位
     }
 
     /// <inheritdoc />
     public async Task Edit(PositionEditInput input)
     {
-        await CheckInput(input, SimpleAdminConst.Edit);//检查参数
-        await _sysPositionService.Edit(input, SimpleAdminConst.BizPos);//编辑
+        await CheckInput(input, SimpleAdminConst.EDIT);//检查参数
+        await _sysPositionService.Edit(input, SimpleAdminConst.BIZ_POS);//编辑
     }
 
     /// <inheritdoc/>

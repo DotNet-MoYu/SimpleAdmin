@@ -15,32 +15,32 @@ public class SimpleAdminConst
     /// <summary>
     /// 添加操作
     /// </summary>
-    public const string Add = "添加";
+    public const string ADD = "添加";
 
     /// <summary>
     /// 编辑操作
     /// </summary>
-    public const string Edit = "编辑";
+    public const string EDIT = "编辑";
 
     /// <summary>
     /// 启用操作
     /// </summary>
-    public const string Enable = "启用";
+    public const string ENABLE = "启用";
 
     /// <summary>
     /// 禁用操作
     /// </summary>
-    public const string Disable = "禁用";
+    public const string DISABLE = "禁用";
 
     /// <summary>
     /// 重置密码操作
     /// </summary>
-    public const string ResestPwd = "重置密码";
+    public const string RESEST_PWD = "重置密码";
 
     /// <summary>
     /// 用户授权操作
     /// </summary>
-    public const string GrantRole = "授权";
+    public const string GRANT_ROLE = "授权";
 
     #endregion 操作
 
@@ -49,27 +49,27 @@ public class SimpleAdminConst
     /// <summary>
     /// 组织
     /// </summary>
-    public const string SysOrg = "组织";
+    public const string SYS_ORG = "组织";
 
     /// <summary>
     /// 机构
     /// </summary>
-    public const string BizOrg = "机构";
+    public const string BIZ_ORG = "机构";
 
     /// <summary>
     /// 职位
     /// </summary>
-    public const string SysPos = "职位";
+    public const string SYS_POS = "职位";
 
     /// <summary>
     /// 岗位
     /// </summary>
-    public const string BizPos = "岗位";
+    public const string BIZ_POS = "岗位";
 
     #endregion 别称
 
     /// <summary>
     /// 0
     /// </summary>
-    public const int Zero = 0;
+    public const int ZERO = 0;
 }

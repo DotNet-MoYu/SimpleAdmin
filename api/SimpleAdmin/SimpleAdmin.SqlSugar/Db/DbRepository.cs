@@ -14,12 +14,12 @@ namespace SimpleAdmin.SqlSugar;
 [SuppressSniffer]
 public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
 {
-    protected ITenant itenant = null;//多租户事务、GetConnection、IsAnyConnection等功能
+    protected ITenant Itenant = null;//多租户事务、GetConnection、IsAnyConnection等功能
 
     public DbRepository(ISqlSugarClient context = null) : base(context)//注意这里要有默认值等于null
     {
-        Context = DbContext.Db.GetConnectionScopeWithAttr<T>();//ioc注入的对象
-        itenant = DbContext.Db;
+        Context = DbContext.DB.GetConnectionScopeWithAttr<T>();//ioc注入的对象
+        Itenant = DbContext.DB;
     }
 
     #region 仓储方法拓展

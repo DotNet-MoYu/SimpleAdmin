@@ -58,7 +58,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             }
         });
         //事务
-        var result = await itenant.UseTranAsync(async () =>
+        var result = await Itenant.UseTranAsync(async () =>
         {
             entity = await InsertReturnEntityAsync(entity);//输入参数转实体并插入
             batchEdiConfig.ForEach(it => { it.UId = entity.Id; });//遍历字段赋值基础Id
@@ -94,7 +94,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         if (ids.Count > 0)
         {
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
                 await Context.Deleteable<BatchEditConfig>().Where(it => ids.Contains(it.UId))

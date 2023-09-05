@@ -117,16 +117,16 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         //判断需不需要读取缓存
         if (cacheAttribute != null)
         {
-            var _redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
+            var redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
             var cacheValue = string.Empty;
-            if (cacheAttribute.StoreType == CacheConst.Cache_Hash)//如果存的是Hash值
+            if (cacheAttribute.StoreType == CacheConst.CACHE_HASH)//如果存的是Hash值
             {
-                cacheValue = _redisManager.HashGet<string>(cacheKey, new string[] { args[0].ToString() })[0];//从redis获取Hash数据取第一个,注意是 string 类型
+                cacheValue = redisManager.HashGet<string>(cacheKey, new string[] { args[0].ToString() })[0];//从redis获取Hash数据取第一个,注意是 string 类型
             }
             else
             {
-                cacheValue = _redisManager.Get<string>(cacheKey);//注意是 string 类型，方法GetValue
+                cacheValue = redisManager.Get<string>(cacheKey);//注意是 string 类型，方法GetValue
             }
             if (!string.IsNullOrEmpty(cacheValue))//如果返回值不是空
             {
@@ -182,29 +182,29 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
             var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);
             if (!string.IsNullOrWhiteSpace(cacheKey))//如果有key
             {
-                var _redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
+                var redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
                 if (cacheAttribute.IsDelete)//判断是否是删除操作
                 {
                     //删除Redis整个KEY
-                    _redisManager.Remove(cacheKey);
+                    redisManager.Remove(cacheKey);
                 }
                 else
                 {
                     if (returnValue == null) { return; }
-                    if (cacheAttribute.StoreType == CacheConst.Cache_Hash)//如果是hash类型的
+                    if (cacheAttribute.StoreType == CacheConst.CACHE_HASH)//如果是hash类型的
                     {
                         //插入到hash，这里规定是方法的第一个参数
-                        _redisManager.HashAdd(cacheKey, args[0].ToString(), returnValue);
+                        redisManager.HashAdd(cacheKey, args[0].ToString(), returnValue);
                     }
                     else
                     {
                         if (cacheAttribute.AbsoluteExpiration != null)//如果有超时时间
                         {
-                            _redisManager.Set(cacheKey, returnValue, cacheAttribute.AbsoluteExpiration.Value);//插入redis
+                            redisManager.Set(cacheKey, returnValue, cacheAttribute.AbsoluteExpiration.Value);//插入redis
                         }
                         else
                         {
-                            _redisManager.Set(cacheKey, returnValue);//插入redis
+                            redisManager.Set(cacheKey, returnValue);//插入redis
                         }
                     }
                 }
@@ -234,7 +234,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         {
             var typeName = Target.GetType().Name;//获取实例名
             var methodName = method.Name;//获取方法名
-            key = $"{CacheConst.Cache_Prefix_Web}{typeName}:{methodName}:";//生成Key
+            key = $"{CacheConst.CACHE_PREFIX_WEB}{typeName}:{methodName}:";//生成Key
             foreach (var param in methodArguments)//遍历参数列表
             {
                 key = $"{key}{param}:";//生成加上参数的KEY
@@ -330,40 +330,41 @@ internal static class GetCacheKey
         //已经修改过代码body应该不会是null值了
         if (!(expression is BinaryExpression body))
             return string.Empty;
-        var Operator = GetOperator(body.NodeType);
-        var Left = Resolve(body.Left);
-        var Right = Resolve(body.Right);
-        var Result = string.Format("({0} {1} {2})", Left, Operator, Right);
-        return Result;
+        var @operator = GetOperator(body.NodeType);
+        var left = Resolve(body.Left);
+        var right = Resolve(body.Right);
+        var result = string.Format("({0} {1} {2})", left, @operator,
+            right);
+        return result;
     }
 
     private static string ResolveFunc(Expression left, Expression right, ExpressionType expressiontype)
     {
-        var Name = (left as MemberExpression).Member.Name;
-        var Value = (right as ConstantExpression).Value;
-        var Operator = GetOperator(expressiontype);
-        return Name + Operator + Value ?? "null";
+        var name = (left as MemberExpression).Member.Name;
+        var value = (right as ConstantExpression).Value;
+        var @operator = GetOperator(expressiontype);
+        return name + @operator + value ?? "null";
     }
 
     private static string ResolveLinqToObject(Expression expression, object value, ExpressionType? expressiontype = null)
     {
-        var MethodCall = expression as MethodCallExpression;
-        var MethodName = MethodCall.Method.Name;
-        switch (MethodName)
+        var methodCall = expression as MethodCallExpression;
+        var methodName = methodCall.Method.Name;
+        switch (methodName)
         {
             case "Contains":
-                if (MethodCall.Object != null)
-                    return Like(MethodCall);
-                return In(MethodCall, value);
+                if (methodCall.Object != null)
+                    return Like(methodCall);
+                return In(methodCall, value);
 
             case "Count":
-                return Len(MethodCall, value, expressiontype.Value);
+                return Len(methodCall, value, expressiontype.Value);
 
             case "LongCount":
-                return Len(MethodCall, value, expressiontype.Value);
+                return Len(methodCall, value, expressiontype.Value);
 
             default:
-                throw new Exception(string.Format("不支持{0}方法的查找！", MethodName));
+                throw new Exception(string.Format("不支持{0}方法的查找！", methodName));
         }
     }
 
@@ -387,40 +388,42 @@ internal static class GetCacheKey
 
     private static string In(MethodCallExpression expression, object isTrue)
     {
-        var Argument1 = (expression.Arguments[0] as MemberExpression).Expression as ConstantExpression;
-        var Argument2 = expression.Arguments[1] as MemberExpression;
-        var Field_Array = Argument1.Value.GetType().GetFields().First();
-        object[] Array = Field_Array.GetValue(Argument1.Value) as object[];
-        List<string> SetInPara = new List<string>();
-        for (var i = 0; i < Array.Length; i++)
+        var argument1 = (expression.Arguments[0] as MemberExpression).Expression as ConstantExpression;
+        var argument2 = expression.Arguments[1] as MemberExpression;
+        var fieldArray = argument1.Value.GetType().GetFields().First();
+        object[] array = fieldArray.GetValue(argument1.Value) as object[];
+        List<string> setInPara = new List<string>();
+        for (var i = 0; i < array.Length; i++)
         {
-            var Value = Array[i].ToString();
-            SetInPara.Add(Value);
+            var value = array[i].ToString();
+            setInPara.Add(value);
         }
-        var Name = Argument2.Member.Name;
-        var Operator = Convert.ToBoolean(isTrue) ? "in" : " not in";
-        var CompName = string.Join(",", SetInPara);
-        var Result = string.Format("{0} {1} ({2})", Name, Operator, CompName);
-        return Result;
+        var name = argument2.Member.Name;
+        var @operator = Convert.ToBoolean(isTrue) ? "in" : " not in";
+        var compName = string.Join(",", setInPara);
+        var result = string.Format("{0} {1} ({2})", name, @operator,
+            compName);
+        return result;
     }
 
     private static string Like(MethodCallExpression expression)
     {
-        var Temp = expression.Arguments[0];
-        var lambda = Expression.Lambda(Temp);
+        var temp = expression.Arguments[0];
+        var lambda = Expression.Lambda(temp);
         var fn = lambda.Compile();
-        var tempValue = Expression.Constant(fn.DynamicInvoke(null), Temp.Type);
-        var Value = string.Format("%{0}%", tempValue);
-        var Name = (expression.Object as MemberExpression).Member.Name;
-        var Result = string.Format("{0} like {1}", Name, Value);
-        return Result;
+        var tempValue = Expression.Constant(fn.DynamicInvoke(null), temp.Type);
+        var value = string.Format("%{0}%", tempValue);
+        var name = (expression.Object as MemberExpression).Member.Name;
+        var result = string.Format("{0} like {1}", name, value);
+        return result;
     }
 
     private static string Len(MethodCallExpression expression, object value, ExpressionType expressiontype)
     {
-        object Name = (expression.Arguments[0] as MemberExpression).Member.Name;
-        var Operator = GetOperator(expressiontype);
-        var Result = string.Format("len({0}){1}{2}", Name, Operator, value.ToString());
-        return Result;
+        object name = (expression.Arguments[0] as MemberExpression).Member.Name;
+        var @operator = GetOperator(expressiontype);
+        var result = string.Format("len({0}){1}{2}", name, @operator,
+            value.ToString());
+        return result;
     }
 }

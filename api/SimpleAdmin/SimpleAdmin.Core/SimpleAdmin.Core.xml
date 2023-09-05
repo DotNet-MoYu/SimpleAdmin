@@ -161,82 +161,82 @@
             授权用户常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ClaimConst.UserId">
+        <member name="F:SimpleAdmin.Core.ClaimConst.USER_ID">
             <summary>
             用户Id
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ClaimConst.Account">
+        <member name="F:SimpleAdmin.Core.ClaimConst.ACCOUNT">
             <summary>
             账号
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ClaimConst.Name">
+        <member name="F:SimpleAdmin.Core.ClaimConst.NAME">
             <summary>
             名称
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ClaimConst.IsSuperAdmin">
+        <member name="F:SimpleAdmin.Core.ClaimConst.IS_SUPER_ADMIN">
             <summary>
             账号类型
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.ClaimConst.OrgId">
+        <member name="F:SimpleAdmin.Core.ClaimConst.ORG_ID">
             <summary>
             组织机构Id
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Add">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.ADD">
             <summary>
             添加操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Edit">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.EDIT">
             <summary>
             编辑操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Enable">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.ENABLE">
             <summary>
             启用操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Disable">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.DISABLE">
             <summary>
             禁用操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.ResestPwd">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.RESEST_PWD">
             <summary>
             重置密码操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.GrantRole">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.GRANT_ROLE">
             <summary>
             用户授权操作
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.SysOrg">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.SYS_ORG">
             <summary>
             组织
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.BizOrg">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.BIZ_ORG">
             <summary>
             机构
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.SysPos">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.SYS_POS">
             <summary>
             职位
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.BizPos">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.BIZ_POS">
             <summary>
             岗位
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Core.SimpleAdminConst.Zero">
+        <member name="F:SimpleAdmin.Core.SimpleAdminConst.ZERO">
             <summary>
             0
             </summary>

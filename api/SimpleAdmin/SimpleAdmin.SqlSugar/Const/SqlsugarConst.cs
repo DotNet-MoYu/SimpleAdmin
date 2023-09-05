@@ -16,29 +16,29 @@ public class SqlsugarConst
     /// <summary>
     /// 默认库ConfigId
     /// </summary>
-    public const string DB_Default = "SimpleAdmin";
+    public const string DB_DEFAULT = "SimpleAdmin";
 
     /// <summary>
     /// 默认表主键
     /// </summary>
-    public const string DB_PrimaryKey = "Id";
+    public const string DB_PRIMARY_KEY = "Id";
 
     #region 数据库字段类型
 
     /// <summary>
     /// varchar(max)
     /// </summary>
-    public const string NVarCharMax = "nvarchar(max)";
+    public const string N_VAR_CHAR_MAX = "nvarchar(max)";
 
     /// <summary>
     /// mysql的longtext
     /// </summary>
-    public const string LongText = "longtext";
+    public const string LONG_TEXT = "longtext";
 
     /// <summary>
     /// sqlite的text
     /// </summary>
-    public const string Text = "text";
+    public const string TEXT = "text";
 
     #endregion 数据库字段类型
 }

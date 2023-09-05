@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 资源
 ///</summary>
 [SugarTable("sys_resource", TableDescription = "资源")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysResource : BaseEntity
 {
     /// <summary>
@@ -66,7 +66,8 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 菜单类型
     ///</summary>
-    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200,
+        IsNullable = true)]
     public virtual string MenuType { get; set; }
 
     /// <summary>
@@ -78,7 +79,8 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 组件
     ///</summary>
-    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200,
+        IsNullable = true)]
     public string Component { get; set; }
 
     /// <summary>

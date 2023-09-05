@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 代码生成基础
 ///</summary>
 [SugarTable("gen_test", TableDescription = "代码生成测试")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 [CodeGen]
 [BatchEdit]
 public class GenTest : DataEntityBase

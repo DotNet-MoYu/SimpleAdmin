@@ -9,27 +9,27 @@
             mqtt常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Cache_MqttClientUser">
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.CACHE_MQTT_CLIENT_USER">
             <summary>
             mqtt认证登录信息key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_TopicPrefix">
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_TOPIC_PREFIX">
             <summary>
             mqtt主题前缀
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_LoginOut">
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_MESSAGE_LOGIN_OUT">
             <summary>
             登出
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_New">
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_MESSAGE_NEW">
             <summary>
             新消息
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.Mqtt_Message_UpdatePassword">
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_MESSAGE_UPDATE_PASSWORD">
             <summary>
             修改密码
             </summary>
@@ -137,7 +137,7 @@
             结果 "allow" | "deny" | "ignore", // Default `"ignore"`
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthOutput.Is_superuser">
+        <member name="P:SimpleAdmin.Plugin.Mqtt.MqttAuthOutput.IsSuperuser">
             <summary>
             是否超级管理员
             </summary>

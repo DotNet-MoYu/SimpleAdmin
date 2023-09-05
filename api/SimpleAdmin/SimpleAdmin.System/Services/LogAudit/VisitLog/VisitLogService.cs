@@ -53,15 +53,15 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
             .GroupBy((x1, x2) => x1.ColumnName)//根据时间分组
             .OrderBy((x1, x2) => x1.ColumnName)//根据时间升序排序
             .Select((x1, x2) => new VisitLogDayStatisticsOutput
-            {
-                LoginCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.Log_LOGIN, 1,
+                {
+                    LoginCount =
+                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGIN, 1,
                             0)),//null的数据要为0所以不能用count
-                LogoutCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.Log_LOGOUT, 1,
+                    LogoutCount =
+                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGOUT, 1,
                             0)),//null的数据要为0所以不能用count
-                Date = x1.ColumnName.ToString("yyyy-MM-dd")
-            }
+                    Date = x1.ColumnName.ToString("yyyy-MM-dd")
+                }
                 )
             .ToListAsync();
         return list;
@@ -83,15 +83,15 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
             //添加登录数据
             new VisitLogTotalCountOutput
             {
-                Type = EventSubscriberConst.LoginB,
-                Value = data.Where(it => it.Category == CateGoryConst.Log_LOGIN)
+                Type = EventSubscriberConst.LOGIN_B,
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGIN)
                     .Select(it => it.Count).FirstOrDefault()
             },
             //添加登出数据
             new VisitLogTotalCountOutput
             {
-                Type = EventSubscriberConst.LoginOutB,
-                Value = data.Where(it => it.Category == CateGoryConst.Log_LOGOUT)
+                Type = EventSubscriberConst.LOGIN_OUT_B,
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGOUT)
                     .Select(it => it.Count).FirstOrDefault()
             }
         };

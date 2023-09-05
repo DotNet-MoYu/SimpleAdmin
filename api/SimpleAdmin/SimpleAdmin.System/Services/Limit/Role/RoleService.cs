@@ -23,8 +23,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         ISimpleCacheService simpleCacheService,
         IRelationService relationService,
         ISysOrgService sysOrgService,
-        IResourceService resourceService,
-        IEventPublisher eventPublisher)
+        IResourceService resourceService, IEventPublisher eventPublisher)
     {
         _logger = logger;
         _simpleCacheService = simpleCacheService;
@@ -34,11 +33,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         _eventPublisher = eventPublisher;
     }
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// 获取所有
+    /// </summary>
+    /// <returns></returns>
     public override async Task<List<SysRole>> GetListAsync()
     {
         //先从Redis拿
-        var sysRoles = _simpleCacheService.Get<List<SysRole>>(SystemConst.Cache_SysRole);
+        var sysRoles = _simpleCacheService.Get<List<SysRole>>(SystemConst.CACHE_SYS_ROLE);
         if (sysRoles == null)
         {
             //redis没有就去数据库拿
@@ -46,7 +48,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             if (sysRoles.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(SystemConst.Cache_SysRole, sysRoles);
+                _simpleCacheService.Set(SystemConst.CACHE_SYS_ROLE, sysRoles);
             }
         }
         return sysRoles;
@@ -58,7 +60,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         var cods = new List<SysRole>();//角色代码集合
         var roleList =
             await _relationService.GetRelationListByObjectIdAndCategory(userId,
-                CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
+                CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
         var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
         if (roleIdList.Count > 0)
         {
@@ -98,7 +100,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task Edit(RoleEditInput input)
     {
         //判断是否超管
-        if (input.Code == RoleConst.SuperAdmin)
+        if (input.Code == SysRoleConst.SUPER_ADMIN)
             throw Oops.Bah($"不可编辑超管角色");
         await CheckInput(input);//检查参数
         var role = await GetFirstAsync(it => it.Id == input.Id);//获取角色
@@ -111,7 +113,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 //获取角色授权列表
                 var relations =
                     await _relationService.GetRelationByCategory(CateGoryConst
-                        .Relation_SYS_ROLE_HAS_PERMISSION);
+                        .RELATION_SYS_ROLE_HAS_PERMISSION);
                 //找到当前角色的
                 permissions = relations.Where(it => it.ObjectId == input.Id).ToList();
                 permissions.ForEach(it =>
@@ -132,7 +134,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             }
             var sysRole = input.Adapt<SysRole>();//实体转换
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await UpdateAsync(sysRole);//更新角色
                 if (permissions.Any())//如果有授权权限就更新
@@ -143,8 +145,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 await RefreshCache();//刷新缓存
                 if (permissions.Any())//如果有授权权
                     await _relationService.RefreshCache(CateGoryConst
-                        .Relation_SYS_ROLE_HAS_PERMISSION);//关系表刷新SYS_ROLE_HAS_PERMISSION缓存
-                await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache,
+                        .RELATION_SYS_ROLE_HAS_PERMISSION);//关系表刷新SYS_ROLE_HAS_PERMISSION缓存
+                await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE,
                     new List<long> { input.Id });//清除角色下用户缓存
             }
             else
@@ -166,7 +168,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var sysRoles = await GetListAsync();//获取所有角色
             var hasSuperAdmin =
                 sysRoles.Any(it =>
-                    it.Code == RoleConst.SuperAdmin && ids.Contains(it.Id));//判断是否有超级管理员
+                    it.Code == SysRoleConst.SUPER_ADMIN && ids.Contains(it.Id));//判断是否有超级管理员
             if (hasSuperAdmin) throw Oops.Bah($"不可删除系统内置超管角色");
 
             //数据库是string所以这里转下
@@ -174,11 +176,11 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             //定义删除的关系
             var delRelations = new List<string>
             {
-                CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE,
-                CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION
+                CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE,
+                CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION
             };
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除按钮
                 var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
@@ -188,18 +190,18 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 //删除关系表角色与用户关系
                 await relationRep.DeleteAsync(it =>
                     targetIds.Contains(it.TargetId)
-                    && it.Category == CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+                    && it.Category == CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
             });
             if (result.IsSuccess)//如果成功了
             {
                 await RefreshCache();//刷新缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
+                    .RELATION_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新Relation_SYS_ROLE_HAS_RESOURCE缓存
+                    .RELATION_SYS_ROLE_HAS_RESOURCE);//关系表刷新Relation_SYS_ROLE_HAS_RESOURCE缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_PERMISSION);//关系表刷新Relation_SYS_ROLE_HAS_PERMISSION缓存
-                await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache,
+                    .RELATION_SYS_ROLE_HAS_PERMISSION);//关系表刷新Relation_SYS_ROLE_HAS_PERMISSION缓存
+                await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE,
                     ids);//清除角色下用户缓存
             }
             else
@@ -215,7 +217,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input, string category)
     {
         var roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
-        var GrantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        var grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
         //获取关系列表
         var relations =
             await _relationService.GetRelationListByObjectIdAndCategory(input.Id, category);
@@ -224,16 +226,16 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             //将扩展信息转为实体
             var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();
-            GrantInfoList.Add(relationRole);//添加到已授权信息
+            grantInfoList.Add(relationRole);//添加到已授权信息
         });
-        roleOwnResource.GrantInfoList = GrantInfoList;//赋值已授权信息
+        roleOwnResource.GrantInfoList = grantInfoList;//赋值已授权信息
         return roleOwnResource;
     }
 
     /// <inheritdoc />
     public async Task GrantResource(GrantResourceInput input)
     {
-        var allMenus = await _resourceService.GetListByCategory(ResourceConst.MENU);//获取所有菜单
+        var allMenus = await _resourceService.GetListByCategory(SysResourceConst.MENU);//获取所有菜单
         var menuIds = input.GrantInfoList.Select(it => it.MenuId).ToList();//菜单ID
         var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
         var relationRoles = new List<SysRelation>();//要添加的角色资源和授权关系表
@@ -252,7 +254,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 {
                     ObjectId = sysRole.Id,
                     TargetId = it.ToString(),
-                    Category = CateGoryConst.Relation_SYS_ROLE_HAS_MODULE
+                    Category = CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE
                 });
             });
 
@@ -268,7 +270,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 {
                     ObjectId = sysRole.Id,
                     TargetId = menuIds[i].ToString(),
-                    Category = CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE,
+                    Category = CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE,
                     ExtJson = extJsons?[i]
                 });
             }
@@ -294,13 +296,13 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                     {
                         ObjectId = sysRole.Id,
                         TargetId = it.ApiRoute,
-                        Category = CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION,
+                        Category = CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION,
                         ExtJson = new RelationRolePermission
-                        {
-                            ApiUrl = it.ApiRoute,
-                            ScopeCategory = defaultDataScope.ScopeCategory,
-                            ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList
-                        }
+                            {
+                                ApiUrl = it.ApiRoute,
+                                ScopeCategory = defaultDataScope.ScopeCategory,
+                                ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList
+                            }
                             .ToJson()
                     });
                 });
@@ -312,25 +314,25 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             #region 保存数据库
 
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
                 //如果不是代码生成,就删除老的
                 if (!input.IsCodeGen)
                     await relatioRep.DeleteAsync(it =>
                         it.ObjectId == sysRole.Id
-                        && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION
-                        || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE
-                        || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_MODULE));
+                        && (it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION
+                        || it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE
+                        || it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
             {
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_RESOURCE);//刷新关系缓存
+                    .RELATION_SYS_ROLE_HAS_RESOURCE);//刷新关系缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_PERMISSION);//刷新关系缓存
-                await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache,
+                    .RELATION_SYS_ROLE_HAS_PERMISSION);//刷新关系缓存
+                await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE,
                     new List<long> { input.Id });//发送事件清除角色下用户缓存
             }
             else
@@ -348,18 +350,18 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<RoleOwnPermissionOutput> OwnPermission(BaseIdInput input)
     {
         var roleOwnPermission = new RoleOwnPermissionOutput { Id = input.Id };//定义结果集
-        var GrantInfoList = new List<RelationRolePermission>();//已授权信息集合
+        var grantInfoList = new List<RelationRolePermission>();//已授权信息集合
         //获取关系列表
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id,
-            CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
+            CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);
         //遍历关系表
         relations.ForEach(it =>
         {
             //将扩展信息转为实体
             var relationPermission = it.ExtJson.ToJsonEntity<RelationRolePermission>();
-            GrantInfoList.Add(relationPermission);//添加到已授权信息
+            grantInfoList.Add(relationPermission);//添加到已授权信息
         });
-        roleOwnPermission.GrantInfoList = GrantInfoList;//赋值已授权信息
+        roleOwnPermission.GrantInfoList = grantInfoList;//赋值已授权信息
         return roleOwnPermission;
     }
 
@@ -371,10 +373,10 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
             var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION,
+            await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION,
                 input.Id, apiUrls, extJsons,
                 true);//添加到数据库
-            await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache,
+            await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE,
                 new List<long> { input.Id });//清除角色下用户缓存
         }
     }
@@ -385,7 +387,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         //获取关系列表
         var relations =
             await _relationService.GetRelationListByTargetIdAndCategory(input.Id.ToString(),
-                CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+                CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
         return relations.Select(it => it.ObjectId).ToList();
     }
 
@@ -400,25 +402,25 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             {
                 ObjectId = it,
                 TargetId = input.Id.ToString(),
-                Category = CateGoryConst.Relation_SYS_USER_HAS_ROLE
+                Category = CateGoryConst.RELATION_SYS_USER_HAS_ROLE
             });
         });
 
         //事务
-        var result = await itenant.UseTranAsync(async () =>
+        var result = await Itenant.UseTranAsync(async () =>
         {
             var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
             var targetId = input.Id.ToString();//目标ID转string
             await relationRep.DeleteAsync(it =>
                 it.TargetId == targetId
-                && it.Category == CateGoryConst.Relation_SYS_USER_HAS_ROLE);//删除老的
+                && it.Category == CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//删除老的
             await relationRep.InsertRangeAsync(sysRelations);//添加新的
         });
         if (result.IsSuccess)//如果成功了
         {
             await _relationService.RefreshCache(CateGoryConst
-                .Relation_SYS_USER_HAS_ROLE);//刷新关系表SYS_USER_HAS_ROLE缓存
-            await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache,
+                .RELATION_SYS_USER_HAS_ROLE);//刷新关系表SYS_USER_HAS_ROLE缓存
+            await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE,
                 new List<long> { input.Id });//清除角色下用户缓存
         }
         else
@@ -454,14 +456,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         //获取角色资源关系
         var relationsRes =
             await _relationService.GetRelationByCategory(CateGoryConst
-                .Relation_SYS_ROLE_HAS_RESOURCE);
+                .RELATION_SYS_ROLE_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id)
             .Select(it => it.TargetId.ToLong()).ToList();
         if (menuIds.Any())
         {
             //获取菜单信息
             var menus =
-                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.Resource_MENU);
+                await _resourceService.GetResourcesByIds(menuIds, CateGoryConst.RESOURCE_MENU);
             //获取权限授权树
             var permissions =
                 _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
@@ -477,7 +479,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(SystemConst.Cache_SysRole);//删除KEY
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_ROLE);//删除KEY
         await GetListAsync();//重新缓存
     }
 
@@ -498,13 +500,13 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     private async Task CheckInput(SysRole sysRole)
     {
         //判断分类
-        if (sysRole.Category != CateGoryConst.Role_GLOBAL
-            && sysRole.Category != CateGoryConst.Role_ORG)
+        if (sysRole.Category != CateGoryConst.ROLE_GLOBAL
+            && sysRole.Category != CateGoryConst.ROLE_ORG)
             throw Oops.Bah($"角色所属分类错误:{sysRole.Category}");
         //如果是机构角色orgId不能为空
-        if (sysRole.Category == CateGoryConst.Role_ORG && sysRole.OrgId == null)
+        if (sysRole.Category == CateGoryConst.ROLE_ORG && sysRole.OrgId == null)
             throw Oops.Bah($"orgId不能为空");
-        else if (sysRole.Category == CateGoryConst.Role_GLOBAL)//如果是全局
+        else if (sysRole.Category == CateGoryConst.ROLE_GLOBAL)//如果是全局
             sysRole.OrgId = null;//机构id设null
 
         var sysRoles = await GetListAsync();//获取所有

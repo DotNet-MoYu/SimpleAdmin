@@ -6,7 +6,7 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.SqlSugar;
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 分类常量
@@ -18,32 +18,32 @@ public class CateGoryConst
     /// <summary>
     /// 系统基础
     /// </summary>
-    public const string Config_SYS_BASE = "SYS_BASE";
+    public const string CONFIG_SYS_BASE = "SYS_BASE";
 
     /// <summary>
     /// 登录策略
     /// </summary>
-    public const string Config_LOGIN_POLICY = "LOGIN_POLICY";
+    public const string CONFIG_LOGIN_POLICY = "LOGIN_POLICY";
 
     /// <summary>
     /// 密码策略
     /// </summary>
-    public const string Config_PWD_POLICY = "PWD_POLICY";
+    public const string CONFIG_PWD_POLICY = "PWD_POLICY";
 
     /// <summary>
     /// 业务定义
     /// </summary>
-    public const string Config_BIZ_DEFINE = "BIZ_DEFINE";
+    public const string CONFIG_BIZ_DEFINE = "BIZ_DEFINE";
 
     /// <summary>
     /// 文件-本地
     /// </summary>
-    public const string Config_FILE_LOCAL = "FILE_LOCAL";
+    public const string CONFIG_FILE_LOCAL = "FILE_LOCAL";
 
     /// <summary>
     /// 文件-MINIO
     /// </summary>
-    public const string Config_FILE_MINIO = "FILE_MINIO";
+    public const string CONFIG_FILE_MINIO = "FILE_MINIO";
 
     #endregion 系统配置
 
@@ -52,7 +52,7 @@ public class CateGoryConst
     /// <summary>
     /// MQTT配置
     /// </summary>
-    public const string Config_MQTT_BASE = "MQTT_BASE";
+    public const string CONFIG_MQTT_BASE = "MQTT_BASE";
 
     #endregion Mqtt配置
 
@@ -61,47 +61,47 @@ public class CateGoryConst
     /// <summary>
     /// 用户有哪些角色
     /// </summary>
-    public const string Relation_SYS_USER_HAS_ROLE = "SYS_USER_HAS_ROLE";
+    public const string RELATION_SYS_USER_HAS_ROLE = "SYS_USER_HAS_ROLE";
 
     /// <summary>
     /// 角色有哪些资源
     /// </summary>
-    public const string Relation_SYS_ROLE_HAS_RESOURCE = "SYS_ROLE_HAS_RESOURCE";
+    public const string RELATION_SYS_ROLE_HAS_RESOURCE = "SYS_ROLE_HAS_RESOURCE";
 
     /// <summary>
     /// 角色有哪些模块
     /// </summary>
-    public const string Relation_SYS_ROLE_HAS_MODULE = "SYS_ROLE_HAS_MODULE";
+    public const string RELATION_SYS_ROLE_HAS_MODULE = "SYS_ROLE_HAS_MODULE";
 
     /// <summary>
     ///用户有哪些资源
     /// </summary>
-    public const string Relation_SYS_USER_HAS_RESOURCE = "SYS_USER_HAS_RESOURCE";
+    public const string RELATION_SYS_USER_HAS_RESOURCE = "SYS_USER_HAS_RESOURCE";
 
     /// <summary>
     /// 角色有哪些权限
     /// </summary>
-    public const string Relation_SYS_ROLE_HAS_PERMISSION = "SYS_ROLE_HAS_PERMISSION";
+    public const string RELATION_SYS_ROLE_HAS_PERMISSION = "SYS_ROLE_HAS_PERMISSION";
 
     /// <summary>
     /// 角色有哪些权限
     /// </summary>
-    public const string Relation_SYS_USER_HAS_PERMISSION = "SYS_USER_HAS_PERMISSION";
+    public const string RELATION_SYS_USER_HAS_PERMISSION = "SYS_USER_HAS_PERMISSION";
 
     /// <summary>
     /// 用户工作台数据
     /// </summary>
-    public const string Relation_SYS_USER_WORKBENCH_DATA = "SYS_USER_WORKBENCH_DATA";
+    public const string RELATION_SYS_USER_WORKBENCH_DATA = "SYS_USER_WORKBENCH_DATA";
 
     /// <summary>
     /// 用户日程数据
     /// </summary>
-    public const string Relation_SYS_USER_SCHEDULE_DATA = "SYS_USER_SCHEDULE_DATA";
+    public const string RELATION_SYS_USER_SCHEDULE_DATA = "SYS_USER_SCHEDULE_DATA";
 
     /// <summary>
     /// 站内信与接收用户
     /// </summary>
-    public const string Relation_MSG_TO_USER = "MSG_TO_USER";
+    public const string RELATION_MSG_TO_USER = "MSG_TO_USER";
 
     #endregion 关系表
 
@@ -139,22 +139,22 @@ public class CateGoryConst
     /// <summary>
     /// 模块
     /// </summary>
-    public const string Resource_MODULE = "MODULE";
+    public const string RESOURCE_MODULE = "MODULE";
 
     /// <summary>
     /// 菜单
     /// </summary>
-    public const string Resource_MENU = "MENU";
+    public const string RESOURCE_MENU = "MENU";
 
     /// <summary>
     /// 单页
     /// </summary>
-    public const string Resource_SPA = "SPA";
+    public const string RESOURCE_SPA = "SPA";
 
     /// <summary>
     /// 按钮
     /// </summary>
-    public const string Resource_BUTTON = "BUTTON";
+    public const string RESOURCE_BUTTON = "BUTTON";
 
     #endregion 资源表
 
@@ -163,22 +163,22 @@ public class CateGoryConst
     /// <summary>
     /// 登录
     /// </summary>
-    public const string Log_LOGIN = "LOGIN";
+    public const string LOG_LOGIN = "LOGIN";
 
     /// <summary>
     /// 登出
     /// </summary>
-    public const string Log_LOGOUT = "LOGOUT";
+    public const string LOG_LOGOUT = "LOGOUT";
 
     /// <summary>
     /// 操作
     /// </summary>
-    public const string Log_OPERATE = "OPERATE";
+    public const string LOG_OPERATE = "OPERATE";
 
     /// <summary>
     /// 异常
     /// </summary>
-    public const string Log_EXCEPTION = "EXCEPTION";
+    public const string LOG_EXCEPTION = "EXCEPTION";
 
     #endregion 日志表
 
@@ -187,12 +187,12 @@ public class CateGoryConst
     /// <summary>
     /// 框架
     /// </summary>
-    public const string Dict_FRM = "FRM";
+    public const string DICT_FRM = "FRM";
 
     /// <summary>
     /// 业务
     /// </summary>
-    public const string Dict_BIZ = "BIZ";
+    public const string DICT_BIZ = "BIZ";
 
     #endregion 字典表
 
@@ -201,12 +201,12 @@ public class CateGoryConst
     /// <summary>
     /// 部门
     /// </summary>
-    public const string Org_DEPT = "DEPT";
+    public const string ORG_DEPT = "DEPT";
 
     /// <summary>
     /// 公司
     /// </summary>
-    public const string Org_COMPANY = "COMPANY";
+    public const string ORG_COMPANY = "COMPANY";
 
     #endregion 组织表
 
@@ -215,17 +215,17 @@ public class CateGoryConst
     /// <summary>
     /// 高层
     /// </summary>
-    public const string Position_HIGH = "HIGH";
+    public const string POSITION_HIGH = "HIGH";
 
     /// <summary>
     /// 中层
     /// </summary>
-    public const string Position_MIDDLE = "MIDDLE";
+    public const string POSITION_MIDDLE = "MIDDLE";
 
     /// <summary>
     /// 基层
     /// </summary>
-    public const string Position_LOW = "LOW";
+    public const string POSITION_LOW = "LOW";
 
     #endregion 职位表
 
@@ -234,12 +234,12 @@ public class CateGoryConst
     /// <summary>
     /// 全局
     /// </summary>
-    public const string Role_GLOBAL = "GLOBAL";
+    public const string ROLE_GLOBAL = "GLOBAL";
 
     /// <summary>
     /// 机构
     /// </summary>
-    public const string Role_ORG = "ORG";
+    public const string ROLE_ORG = "ORG";
 
     #endregion 角色表
 
@@ -248,12 +248,12 @@ public class CateGoryConst
     /// <summary>
     /// 通知
     /// </summary>
-    public const string Message_INFORM = "INFORM";
+    public const string MESSAGE_INFORM = "INFORM";
 
     /// <summary>
     /// 公告
     /// </summary>
-    public const string Message_NOTICE = "NOTICE";
+    public const string MESSAGE_NOTICE = "NOTICE";
 
     #endregion 站内信表
 }

@@ -29,9 +29,9 @@ public class Startup : AppStartup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //遍历配置
-        DbContext.DbConfigs.ForEach(it =>
+        DbContext.DB_CONFIGS.ForEach(it =>
         {
-            var connection = DbContext.Db.GetConnection(it.ConfigId);//获取数据库连接对象
+            var connection = DbContext.DB.GetConnection(it.ConfigId);//获取数据库连接对象
             connection.DbMaintenance.CreateDatabase();//创建数据库,如果存在则不创建
         });
     }
@@ -42,7 +42,7 @@ public class Startup : AppStartup
     /// <returns></returns>
     private static void CheckSameConfigId()
     {
-        var configIdGroup = DbContext.DbConfigs.GroupBy(it => it.ConfigId).ToList();
+        var configIdGroup = DbContext.DB_CONFIGS.GroupBy(it => it.ConfigId).ToList();
         foreach (var configId in configIdGroup)
         {
             if (configId.ToList().Count > 1) throw Oops.Oh($"Sqlsugar连接配置ConfigId:{configId.Key}重复了");

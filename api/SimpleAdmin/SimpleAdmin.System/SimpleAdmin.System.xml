@@ -41,67 +41,537 @@
             <param name="value">值</param>
             <returns></returns>
         </member>
+        <member name="T:SimpleAdmin.System.CateGoryConst">
+            <summary>
+            分类常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_SYS_BASE">
+            <summary>
+            系统基础
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_LOGIN_POLICY">
+            <summary>
+            登录策略
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_PWD_POLICY">
+            <summary>
+            密码策略
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_BIZ_DEFINE">
+            <summary>
+            业务定义
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_FILE_LOCAL">
+            <summary>
+            文件-本地
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_FILE_MINIO">
+            <summary>
+            文件-MINIO
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.CONFIG_MQTT_BASE">
+            <summary>
+            MQTT配置
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_ROLE">
+            <summary>
+            用户有哪些角色
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE">
+            <summary>
+            角色有哪些资源
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE">
+            <summary>
+            角色有哪些模块
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE">
+             <summary>
+            用户有哪些资源
+             </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION">
+            <summary>
+            角色有哪些权限
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION">
+            <summary>
+            角色有哪些权限
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA">
+            <summary>
+            用户工作台数据
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA">
+            <summary>
+            用户日程数据
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_MSG_TO_USER">
+            <summary>
+            站内信与接收用户
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.SCOPE_SELF">
+            <summary>
+            本人
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.SCOPE_ALL">
+            <summary>
+            所有
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.SCOPE_ORG">
+            <summary>
+            仅所属组织
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.SCOPE_ORG_CHILD">
+            <summary>
+            所属组织及以下
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.SCOPE_ORG_DEFINE">
+            <summary>
+            自定义
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RESOURCE_MODULE">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RESOURCE_MENU">
+            <summary>
+            菜单
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RESOURCE_SPA">
+            <summary>
+            单页
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RESOURCE_BUTTON">
+            <summary>
+            按钮
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.LOG_LOGIN">
+            <summary>
+            登录
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.LOG_LOGOUT">
+            <summary>
+            登出
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.LOG_OPERATE">
+            <summary>
+            操作
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.LOG_EXCEPTION">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.DICT_FRM">
+            <summary>
+            框架
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.DICT_BIZ">
+            <summary>
+            业务
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.ORG_DEPT">
+            <summary>
+            部门
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.ORG_COMPANY">
+            <summary>
+            公司
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.POSITION_HIGH">
+            <summary>
+            高层
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.POSITION_MIDDLE">
+            <summary>
+            中层
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.POSITION_LOW">
+            <summary>
+            基层
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.ROLE_GLOBAL">
+            <summary>
+            全局
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.ROLE_ORG">
+            <summary>
+            机构
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.MESSAGE_INFORM">
+            <summary>
+            通知
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.MESSAGE_NOTICE">
+            <summary>
+            公告
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysConfigConst">
+            <summary>
+            系统配置常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA">
+            <summary>
+            系统默认工作台
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_CAPTCHA_OPEN">
+            <summary>
+            登录验证码开关
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_CAPTCHA_TYPE">
+            <summary>
+            登录验证码开关
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_SINGLE_OPEN">
+            <summary>
+            单用户登录开关
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_ERROR_LOCK">
+            <summary>
+             登录错误锁定时长
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_ERROR_RESET_TIME">
+            <summary>
+             登录错误锁定时长
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.LOGIN_ERROR_COUNT">
+            <summary>
+            登录错误次数
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_DEFAULT_PASSWORD">
+            <summary>
+            默认用户密码
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_REMIND">
+            <summary>
+            密码定期提醒更新
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_REMIND_DAY">
+            <summary>
+            密码定期提醒更新时间
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_UPDATE_DEFAULT">
+            <summary>
+            修改初始密码提醒
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_MIN_LENGTH">
+            <summary>
+            密码最小长度
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_CONTAIN_NUM">
+            <summary>
+            包含数字
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_CONTAIN_LOWER">
+            <summary>
+            包含小写字母
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_CONTAIN_UPPER">
+            <summary>
+            包含大写字母
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.PWD_CONTAIN_CHARACTER">
+            <summary>
+            包含特殊字符
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_URL">
+            <summary>
+            mqtt连接地址
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_USERNAME">
+            <summary>
+            mqtt连接用户名
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_PASSWORD">
+            <summary>
+            mqtt连接密码
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS">
+            <summary>
+            windows系统本地目录
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX">
+            <summary>
+            Unix系统本地目录
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_MINIO_ACCESS_KEY">
+            <summary>
+            MINIO文件AccessKey
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_MINIO_SECRET_KEY">
+            <summary>
+            MINIO文件SecetKey
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_MINIO_END_POINT">
+            <summary>
+            MINIO文件EndPoint
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME">
+            <summary>
+            MINIO文件默认存储桶
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysDictConst">
+            <summary>
+            字典常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.GENDER">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.NATION">
+            <summary>
+            名族
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.IDCARD_TYPE">
+            <summary>
+            用户证件类型
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.CULTURE_LEVEL">
+            <summary>
+            通用文化程度
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.COMMON_STATUS_ENABLE">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.COMMON_STATUS_DISABLED">
+            <summary>
+            停用
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.ONLINE_STATUS_ONLINE">
+            <summary>
+            在线
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.ONLINE_STATUS_OFFLINE">
+            <summary>
+            离线
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.FILE_ENGINE_LOCAL">
+            <summary>
+            本地
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.FILE_ENGINE_MINIO">
+            <summary>
+            MINIO
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.DICT_CATEGORY_FRM">
+            <summary>
+            系统
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.DICT_CATEGORY_BIZ">
+            <summary>
+            业务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysLogConst">
+            <summary>
+            日志常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysLogConst.SUCCESS">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysLogConst.FAIL">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysResourceConst">
+            <summary>
+            资源表常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.CATALOG">
+            <summary>
+            目录
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.MENU">
+            <summary>
+            组件
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.IFRAME">
+            <summary>
+            内链
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.SUBSET">
+            <summary>
+            目录
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.LINK">
+            <summary>
+            外链
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.SPA">
+            <summary>
+            单页
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysResourceConst.SYSTEM">
+            <summary>
+            系统内置单页面编码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SysRoleConst">
+            <summary>
+            角色常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysRoleConst.SUPER_ADMIN">
+            <summary>
+            超级管理员
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysRoleConst.BIZ_ADMIN">
+            <summary>
+            业务管理员
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.SystemConst">
             <summary>
             系统层常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_DevConfig">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_DEV_CONFIG">
             <summary>
             系统配置表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_Captcha">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_CAPTCHA">
             <summary>
             登录验证码缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUser">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_USER">
             <summary>
             用户表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUserPhone">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_USER_PHONE">
             <summary>
             用户手机号关系缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysUserAccount">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_USER_ACCOUNT">
             <summary>
             用户手机号关系缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysResource">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_RESOURCE">
             <summary>
             资源表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_DevDict">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_DEV_DICT">
             <summary>
             字典表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysRelation">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_RELATION">
             <summary>
             关系表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysOrg">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_ORG">
             <summary>
             机构表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysRole">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_ROLE">
             <summary>
             角色表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_SysPosition">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_POSITION">
             <summary>
             职位表缓存Key
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.SystemConst.Cache_LoginErrorCount">
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_LOGIN_ERROR_COUNT">
             <summary>
              登录错误次数缓存Key
             </summary>
@@ -1364,27 +1834,27 @@
             事件总线常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.EventSubscriberConst.LoginB">
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.LOGIN_B">
             <summary>
             B端登录
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.EventSubscriberConst.LoginOutB">
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.LOGIN_OUT_B">
             <summary>
             B端登录
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.EventSubscriberConst.ClearUserCache">
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.CLEAR_USER_CACHE">
             <summary>
             清除用户缓存
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.EventSubscriberConst.UserLoginOut">
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.USER_LOGIN_OUT">
             <summary>
             通知用户下线
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.EventSubscriberConst.NewMessage">
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.NEW_MESSAGE">
             <summary>
             新消息
             </summary>
@@ -3601,7 +4071,10 @@
             <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
         </member>
         <member name="M:SimpleAdmin.System.RoleService.GetListAsync">
-            <inheritdoc/>
+            <summary>
+            获取所有
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.RoleService.GetRoleListByUserId(System.Int64)">
             <inheritdoc/>
@@ -3834,12 +4307,12 @@
             <inheritdoc cref="T:SimpleAdmin.System.IOperateLogService"/>
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.OperateLogService.NameOperate">
+        <member name="F:SimpleAdmin.System.OperateLogService._nameOperate">
             <summary>
             操作日志中文名称
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.OperateLogService.NameExecption">
+        <member name="F:SimpleAdmin.System.OperateLogService._nameExecption">
             <summary>
             异常日志中文名称
             </summary>
@@ -4270,7 +4743,7 @@
             <summary>
             获取字典
             </summary>
-            <param name="DictValue">字典</param>
+            <param name="dictValue">字典</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IDictService.GetListAsync">
@@ -4283,7 +4756,7 @@
             <summary>
             根据字典DictValue获取字典值列表
             </summary>
-            <param name="DictValue">字典值</param>
+            <param name="dictValue">字典值</param>
             <param name="devDictList">字典列表</param>
             <returns>字典值列表</returns>
         </member>
@@ -4291,7 +4764,7 @@
             <summary>
             根据字典DictValue列表获取对应字典值列表
             </summary>
-            <param name="DictValues">字典值列表</param>
+            <param name="dictValues">字典值列表</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.IDictService.Page(SimpleAdmin.System.DictPageInput)">

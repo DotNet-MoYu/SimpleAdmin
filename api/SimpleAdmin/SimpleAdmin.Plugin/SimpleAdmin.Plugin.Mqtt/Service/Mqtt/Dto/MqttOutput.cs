@@ -53,5 +53,5 @@ public class MqttAuthOutput
     /// <summary>
     /// 是否超级管理员
     /// </summary>
-    public bool Is_superuser { get; set; } = false;
+    public bool IsSuperuser { get; set; } = false;
 }

@@ -135,7 +135,7 @@ public class FileService : DbRepository<SysFile>, IFileService
                 break;
             //存储本地
             case SysDictConst.FILE_ENGINE_MINIO:
-                var config = await _configService.GetByConfigKey(CateGoryConst.Config_FILE_MINIO,
+                var config = await _configService.GetByConfigKey(CateGoryConst.CONFIG_FILE_MINIO,
                     SysConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME);
                 if (config != null)
                 {
@@ -162,7 +162,7 @@ public class FileService : DbRepository<SysFile>, IFileService
             SizeInfo = GetSizeInfo(fileSizeKb),
             StoragePath = storageUrl
         };
-        if (engine != CateGoryConst.Config_FILE_LOCAL)//如果不是本地，设置下载地址
+        if (engine != CateGoryConst.CONFIG_FILE_LOCAL)//如果不是本地，设置下载地址
         {
             devFile.DownloadPath = storageUrl;
         }
@@ -201,7 +201,7 @@ public class FileService : DbRepository<SysFile>, IFileService
         }
         //获取路径配置
         var config =
-            await _configService.GetByConfigKey(CateGoryConst.Config_FILE_LOCAL, configKey);
+            await _configService.GetByConfigKey(CateGoryConst.CONFIG_FILE_LOCAL, configKey);
         if (config != null)
         {
             uploadFileFolder = config.ConfigValue;//赋值路径
@@ -251,16 +251,16 @@ public class FileService : DbRepository<SysFile>, IFileService
     private string GetSizeInfo(long fileSizeKb)
     {
         var b = fileSizeKb * 1024;
-        const int MB = 1024 * 1024;
-        const int KB = 1024;
-        if (b / MB >= 1)
+        const int mb = 1024 * 1024;
+        const int kb = 1024;
+        if (b / mb >= 1)
         {
-            return Math.Round(b / (float)MB, 2) + "MB";
+            return Math.Round(b / (float)mb, 2) + "MB";
         }
 
-        if (b / KB >= 1)
+        if (b / kb >= 1)
         {
-            return Math.Round(b / (float)KB, 2) + "KB";
+            return Math.Round(b / (float)kb, 2) + "KB";
         }
         if (b == 0)
         {

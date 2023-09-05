@@ -16,20 +16,20 @@ public class CacheConst
     /// <summary>
     /// Redis Key前缀(可删除)
     /// </summary>
-    public const string Cache_Prefix_Web = "SimpleAdminWeb:";
+    public const string CACHE_PREFIX_WEB = "SimpleAdminWeb:";
 
     /// <summary>
     /// Redis Key前缀(需要持久化，不随系统重启删除)
     /// </summary>
-    public const string Cache_Prefix = "SimpleAdmin:";
+    public const string CACHE_PREFIX = "SimpleAdmin:";
 
     /// <summary>
     /// Redis Hash类型
     /// </summary>
-    public const string Cache_Hash = "Hash";
+    public const string CACHE_HASH = "Hash";
 
     /// <summary>
     /// 用户Token缓存Key
     /// </summary>
-    public const string Cache_UserToken = Cache_Prefix + "UserToken";
+    public const string CACHE_USER_TOKEN = CACHE_PREFIX + "UserToken";
 }

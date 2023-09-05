@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 文件表
 ///</summary>
 [SugarTable("sys_file", TableDescription = "文件表")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysFile : DataEntityBase
 {
     /// <summary>

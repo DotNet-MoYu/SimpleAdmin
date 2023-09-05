@@ -48,7 +48,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     public async Task<List<SysResource>> Tree(MenuTreeInput input)
     {
         //获取所有菜单
-        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
+        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
         sysResources = sysResources
             .WhereIF(input.Module != null, it => it.Module.Value == input.Module.Value)//根据模块查找
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
@@ -66,7 +66,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         var sysResource = input.Adapt<SysResource>();//实体转换
 
         if (await InsertAsync(sysResource))//插入数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_MENU);//刷新菜单缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MENU);//刷新菜单缓存
     }
 
     /// <inheritdoc />
@@ -75,7 +75,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await UpdateAsync(sysResource))//更新数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_MENU);//刷新菜单缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MENU);//刷新菜单缓存
     }
 
     /// <inheritdoc />
@@ -87,11 +87,11 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         {
             //获取所有菜单和按钮
             var resourceList = await _resourceService.GetListAsync(new List<string>
-                { CateGoryConst.Resource_MENU, CateGoryConst.Resource_BUTTON });
+                { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_BUTTON });
             //找到要删除的菜单
             var sysResources = resourceList.Where(it => ids.Contains(it.Id)).ToList();
             //查找内置菜单
-            var system = sysResources.Where(it => it.Code == ResourceConst.System).FirstOrDefault();
+            var system = sysResources.Where(it => it.Code == SysResourceConst.SYSTEM).FirstOrDefault();
             if (system != null)
                 throw Oops.Bah($"不可删除系统菜单:{system.Title}");
             //需要删除的资源ID列表
@@ -107,21 +107,21 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             });
             ids.AddRange(resourceIds);//添加到删除ID列表
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
                     .Where(it =>
-                        it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE
+                        it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE
                         && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId)))
                     .ExecuteCommandAsync();
             });
             if (result.IsSuccess)//如果成功了
             {
-                await _resourceService.RefreshCache(CateGoryConst.Resource_MENU);//资源表菜单刷新缓存
-                await _resourceService.RefreshCache(CateGoryConst.Resource_BUTTON);//资源表按钮刷新缓存
+                await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MENU);//资源表菜单刷新缓存
+                await _resourceService.RefreshCache(CateGoryConst.RESOURCE_BUTTON);//资源表按钮刷新缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
+                    .RELATION_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
             }
             else
             {
@@ -135,7 +135,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     /// <inheritdoc />
     public async Task<SysResource> Detail(BaseIdInput input)
     {
-        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
+        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
         var resource = sysResources.Where(it => it.Id == input.Id).FirstOrDefault();
         return resource;
     }
@@ -152,12 +152,12 @@ public class MenuService : DbRepository<SysResource>, IMenuService
                 throw Oops.Bah($"非顶级菜单不可修改所属模块");
             //获取所有菜单和模块
             var resourceList = await _resourceService.GetListAsync(new List<string>
-                { CateGoryConst.Resource_MENU, CateGoryConst.Resource_MODULE });
+                { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_MODULE });
             if (!resourceList.Any(it =>
-                    it.Category == CateGoryConst.Resource_MODULE && it.Id == input.Module.Value))
+                    it.Category == CateGoryConst.RESOURCE_MODULE && it.Id == input.Module.Value))
                 throw Oops.Bah($"不存在的模块");
             //获取所有菜单
-            var menuList = resourceList.Where(it => it.Category == CateGoryConst.Resource_MENU)
+            var menuList = resourceList.Where(it => it.Category == CateGoryConst.RESOURCE_MENU)
                 .ToList();
             //获取需要改变模块菜单的所有子菜单
             var childList = _resourceService.GetChildListById(menuList, input.Id);
@@ -165,7 +165,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             //更新数据
             await UpdateRangeAsync(childList);
             //刷新菜单缓存
-            await _resourceService.RefreshCache(CateGoryConst.Resource_MENU);
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MENU);
         }
     }
 
@@ -178,7 +178,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     private async Task CheckInput(SysResource sysResource)
     {
         //获取所有菜单列表
-        var menList = await _resourceService.GetListByCategory(CateGoryConst.Resource_MENU);
+        var menList = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
         //判断是否有同级且同名的菜单
         if (menList.Any(it =>
                 it.ParentId == sysResource.ParentId && it.Title == sysResource.Title

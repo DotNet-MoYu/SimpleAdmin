@@ -12,7 +12,7 @@ namespace SimpleAdmin.Core.Entity.System;
 ///  C端用户关系
 /// </summary>
 [SugarTable("client_relation", TableDescription = "关系")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class ClientRelation : PrimaryKeyEntity
 {
     /// <summary>
@@ -30,6 +30,7 @@ public class ClientRelation : PrimaryKeyEntity
     /// <summary>
     /// 分类
     ///</summary>
-    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200,
+        IsNullable = true)]
     public string Category { get; set; }
 }

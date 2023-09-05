@@ -17,7 +17,7 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
 
     public UserEventSubscriber(IServiceProvider services)
     {
-        this._services = services;
+        _services = services;
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
     /// </summary>
     /// <param name="context"></param>
     /// <returns></returns>
-    [EventSubscribe(EventSubscriberConst.ClearUserCache)]
+    [EventSubscribe(EventSubscriberConst.CLEAR_USER_CACHE)]
     public async Task DeleteUserCacheByRoleIds(EventHandlerExecutingContext context)
     {
         var roleIds = (List<long>)context.Source.Payload;//获取角色ID
@@ -35,7 +35,7 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
         // 解析角色服务
         var relationService = scope.ServiceProvider.GetRequiredService<IRelationService>();
         //获取用户和角色关系
-        var relations = await relationService.GetRelationListByTargetIdListAndCategory(roleIds.Select(it => it.ToString()).ToList(), CateGoryConst.Relation_SYS_USER_HAS_ROLE);
+        var relations = await relationService.GetRelationListByTargetIdListAndCategory(roleIds.Select(it => it.ToString()).ToList(), CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
         if (relations.Count > 0)
         {
             var userIds = relations.Select(it => it.ObjectId).ToList();//用户ID列表

@@ -31,7 +31,7 @@ public class MenuController : BaseController
     [HttpGet("moduleSelector")]
     public async Task<dynamic> ModuleSelector()
     {
-        return await _resourceService.GetListByCategory(CateGoryConst.Resource_MODULE);
+        return await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MODULE);
     }
 
     /// <summary>

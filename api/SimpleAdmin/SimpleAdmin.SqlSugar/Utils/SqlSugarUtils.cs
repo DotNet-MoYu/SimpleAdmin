@@ -33,7 +33,7 @@ public static class SqlSugarUtils
             var configId = teanant.configId.ToString();//获取租户Id
             if (teanant != null)
             {
-                var connection = DbContext.Db.GetConnection(teanant.configId.ToString());//根据租户ID获取连接信息
+                var connection = DbContext.DB.GetConnection(teanant.configId.ToString());//根据租户ID获取连接信息
                 var entityInfo = connection.EntityMaintenance.GetEntityInfo(entityType);//获取实体信息
                 if (entityInfo != null)
                 {
@@ -61,7 +61,7 @@ public static class SqlSugarUtils
     public static List<SqlsugarColumnInfo> GetTableColumns(string configId, string tableName)
     {
         var columns = new List<SqlsugarColumnInfo>();//结果集
-        var connection = DbContext.Db.GetConnection(configId);
+        var connection = DbContext.DB.GetConnection(configId);
         var dbColumnInfos = connection.DbMaintenance.GetColumnInfosByTableName(tableName);//根据表名获取表信息
         if (dbColumnInfos != null)
         {

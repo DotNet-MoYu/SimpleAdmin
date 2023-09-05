@@ -65,7 +65,7 @@ public class DictService : DbRepository<SysDict>, IDictService
             var dicts = await GetListAsync();
             //判断是否有系统字典
             var frm = dicts.Any(it =>
-                ids.Contains(it.Id) && it.Category == CateGoryConst.Dict_FRM);
+                ids.Contains(it.Id) && it.Category == CateGoryConst.DICT_FRM);
 
             //如果是系统字典提示不可删除
             if (frm) throw Oops.Bah("不可删除系统内置字典");
@@ -92,13 +92,13 @@ public class DictService : DbRepository<SysDict>, IDictService
     public override async Task<List<SysDict>> GetListAsync()
     {
         //先从redis拿
-        var devDicts = _simpleCacheService.Get<List<SysDict>>(SystemConst.Cache_DevDict);
+        var devDicts = _simpleCacheService.Get<List<SysDict>>(SystemConst.CACHE_DEV_DICT);
         if (devDicts == null)
         {
             devDicts = await base.GetListAsync();//去数据库拿
             if (devDicts.Count > 0)
             {
-                _simpleCacheService.Set(SystemConst.Cache_DevDict, devDicts);//如果数据库有数,更新redis
+                _simpleCacheService.Set(SystemConst.CACHE_DEV_DICT, devDicts);//如果数据库有数,更新redis
                 return devDicts;
             }
         }
@@ -106,19 +106,19 @@ public class DictService : DbRepository<SysDict>, IDictService
     }
 
     /// <inheritdoc />
-    public async Task<SysDict> GetDict(string DictValue)
+    public async Task<SysDict> GetDict(string dictValue)
     {
         var devDicts = await GetListAsync();
-        var devDict = devDicts.Where(it => it.DictValue == DictValue).FirstOrDefault();
+        var devDict = devDicts.Where(it => it.DictValue == dictValue).FirstOrDefault();
         return devDict;
     }
 
     /// <inheritdoc />
-    public async Task<List<string>> GetValuesByDictValue(string DictValue,
+    public async Task<List<string>> GetValuesByDictValue(string dictValue,
         List<SysDict> devDictList = null)
     {
         var devDicts = devDictList == null ? await GetListAsync() : devDictList;//获取全部
-        var id = devDicts.Where(it => it.DictValue == DictValue).Select(it => it.Id)
+        var id = devDicts.Where(it => it.DictValue == dictValue).Select(it => it.Id)
             .FirstOrDefault();//根据value找到父节点
         if (id > 0)
             return devDicts.Where(it => it.ParentId == id).Select(it => it.DictValue)
@@ -128,13 +128,13 @@ public class DictService : DbRepository<SysDict>, IDictService
     }
 
     /// <inheritdoc />
-    public async Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] DictValues)
+    public async Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] dictValues)
     {
         var result = new Dictionary<string, List<string>>();
         var devDicts = await GetListAsync();//获取全部
-        var ids = devDicts.Where(it => DictValues.Contains(it.DictValue)).Select(it => it.Id)
+        var ids = devDicts.Where(it => dictValues.Contains(it.DictValue)).Select(it => it.Id)
             .ToList();//根据value找到父节点
-        foreach (var dictValue in DictValues)
+        foreach (var dictValue in dictValues)
         {
             var data = await GetValuesByDictValue(dictValue, devDicts);
             result.Add(dictValue, data);
@@ -178,7 +178,7 @@ public class DictService : DbRepository<SysDict>, IDictService
     /// </summary>
     private async Task RefreshCache()
     {
-        _simpleCacheService.Remove(SystemConst.Cache_DevDict);
+        _simpleCacheService.Remove(SystemConst.CACHE_DEV_DICT);
         await GetListAsync();
     }
 

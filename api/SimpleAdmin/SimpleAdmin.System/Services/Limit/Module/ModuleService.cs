@@ -34,7 +34,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     public async Task<SqlSugarPagedList<SysResource>> Page(ModulePageInput input)
     {
         var query = Context.Queryable<SysResource>()
-            .Where(it => it.Category == CateGoryConst.Resource_MODULE)//模块
+            .Where(it => it.Category == CateGoryConst.RESOURCE_MODULE)//模块
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
                 it => it.Title.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField),
@@ -50,7 +50,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await InsertAsync(sysResource))//插入数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_MODULE);//刷新缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MODULE);//刷新缓存
     }
 
     /// <inheritdoc />
@@ -59,7 +59,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await UpdateAsync(sysResource))//更新数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_MODULE);//刷新缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MODULE);//刷新缓存
     }
 
     /// <inheritdoc />
@@ -74,14 +74,14 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             //找到要删除的模块
             var sysresources = resourceList.Where(it => ids.Contains(it.Id)).ToList();
             //查找内置模块
-            var system = sysresources.Where(it => it.Code == ResourceConst.System).FirstOrDefault();
+            var system = sysresources.Where(it => it.Code == SysResourceConst.SYSTEM).FirstOrDefault();
             if (system != null)
                 throw Oops.Bah($"不可删除系统内置模块:{system.Title}");
             //获取模块下的所有菜单Id列表
             var menuIds = resourceList
                 .Where(it =>
                     ids.Contains(it.Module.ToLong())
-                    && it.ParentId.ToLong() == SimpleAdminConst.Zero).Select(it => it.Id).ToList();
+                    && it.ParentId.ToLong() == SimpleAdminConst.ZERO).Select(it => it.Id).ToList();
             //需要删除的资源ID列表
             var resourceIds = new List<long>();
             //遍历列表
@@ -95,12 +95,12 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             });
             ids.AddRange(resourceIds);
             //事务
-            var result = await itenant.UseTranAsync(async () =>
+            var result = await Itenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
                     .Where(it =>
-                        it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE
+                        it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE
                         && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId)))
                     .ExecuteCommandAsync();
             });
@@ -108,7 +108,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             {
                 await _resourceService.RefreshCache();//资源表刷新缓存
                 await _relationService.RefreshCache(CateGoryConst
-                    .Relation_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
+                    .RELATION_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
             }
             else
             {
@@ -128,7 +128,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     private async Task CheckInput(SysResource sysResource)
     {
         var sysResourceList =
-            await _resourceService.GetListByCategory(CateGoryConst.Resource_MODULE);
+            await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MODULE);
         //判断是否从存在重复模块
         var hasSameName =
             sysResourceList.Any(it => it.Title == sysResource.Title && it.Id != sysResource.Id);
@@ -137,7 +137,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             throw Oops.Bah($"存在重复的模块:{sysResource.Title}");
         }
         //设置为模块
-        sysResource.Category = CateGoryConst.Resource_MODULE;
+        sysResource.Category = CateGoryConst.RESOURCE_MODULE;
     }
 
     #endregion 方法

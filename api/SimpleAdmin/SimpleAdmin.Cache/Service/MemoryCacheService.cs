@@ -14,7 +14,7 @@ namespace SimpleAdmin.Cache;
 /// </summary>
 public partial class MemoryCacheService : ISimpleCacheService
 {
-    public readonly MemoryCache _memoryCache;
+    private readonly MemoryCache _memoryCache;
 
     public MemoryCacheService()
     {
@@ -218,9 +218,11 @@ public partial class MemoryCacheService : ISimpleCacheService
     }
 
     /// <inheritdoc/>
-    public IDisposable AcquireLock(string key, int msTimeout, int msExpire, bool throwOnFailure)
+    public IDisposable AcquireLock(string key, int msTimeout, int msExpire,
+        bool throwOnFailure)
     {
-        return _memoryCache.AcquireLock(key, msTimeout, msExpire, throwOnFailure);
+        return _memoryCache.AcquireLock(key, msTimeout, msExpire,
+            throwOnFailure);
     }
 
     #endregion 事务

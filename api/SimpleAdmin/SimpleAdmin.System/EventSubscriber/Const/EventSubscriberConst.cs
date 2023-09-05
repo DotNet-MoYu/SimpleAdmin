@@ -18,12 +18,12 @@ public class EventSubscriberConst
     /// <summary>
     /// B端登录
     /// </summary>
-    public const string LoginB = "B端登录";
+    public const string LOGIN_B = "B端登录";
 
     /// <summary>
     /// B端登录
     /// </summary>
-    public const string LoginOutB = "B端登出";
+    public const string LOGIN_OUT_B = "B端登出";
 
     #endregion AuthEventSubscriber
 
@@ -32,7 +32,7 @@ public class EventSubscriberConst
     /// <summary>
     /// 清除用户缓存
     /// </summary>
-    public const string ClearUserCache = "清除用户缓存";
+    public const string CLEAR_USER_CACHE = "清除用户缓存";
 
     #endregion UserEventSubscriber
 
@@ -41,12 +41,12 @@ public class EventSubscriberConst
     /// <summary>
     /// 通知用户下线
     /// </summary>
-    public const string UserLoginOut = "通知用户下线";
+    public const string USER_LOGIN_OUT = "通知用户下线";
 
     /// <summary>
     /// 新消息
     /// </summary>
-    public const string NewMessage = "新消息";
+    public const string NEW_MESSAGE = "新消息";
 
     #endregion NoticeEventSubscriber
 }

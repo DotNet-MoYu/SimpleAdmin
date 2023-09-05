@@ -26,7 +26,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     public async Task<SqlSugarPagedList<SysResource>> Page(SpaPageInput input)
     {
         var query = Context.Queryable<SysResource>()
-            .Where(it => it.Category == CateGoryConst.Resource_SPA)//单页
+            .Where(it => it.Category == CateGoryConst.RESOURCE_SPA)//单页
             .WhereIF(!string.IsNullOrEmpty(input.MenuType),
                 it => it.MenuType == input.MenuType)//根据菜单类型查询
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
@@ -46,7 +46,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         input.Code = RandomHelper.CreateRandomString(10);//code取随机值
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await InsertAsync(sysResource))//插入数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_SPA);//刷新缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_SPA);//刷新缓存
     }
 
     /// <inheritdoc />
@@ -55,7 +55,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await UpdateAsync(sysResource))//更新数据
-            await _resourceService.RefreshCache(CateGoryConst.Resource_SPA);//刷新缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_SPA);//刷新缓存
     }
 
     /// <inheritdoc />
@@ -66,16 +66,16 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         if (ids.Count > 0)
         {
             //获取所有
-            var resourceList = await _resourceService.GetListByCategory(CateGoryConst.Resource_SPA);
+            var resourceList = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_SPA);
             //找到要删除的
             var sysresources = resourceList.Where(it => ids.Contains(it.Id)).ToList();
             //查找内置单页面
-            var system = sysresources.Where(it => it.Code == ResourceConst.System).FirstOrDefault();
+            var system = sysresources.Where(it => it.Code == SysResourceConst.SYSTEM).FirstOrDefault();
             if (system != null)
                 throw Oops.Bah($"不可删除系统内置单页面:{system.Title}");
             //删除菜单
             await DeleteAsync(sysresources);
-            await _resourceService.RefreshCache(CateGoryConst.Resource_SPA);//刷新缓存
+            await _resourceService.RefreshCache(CateGoryConst.RESOURCE_SPA);//刷新缓存
         }
     }
 
@@ -88,7 +88,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     private async Task CheckInput(SysResource sysResource)
     {
         //判断菜单类型
-        if (sysResource.MenuType == ResourceConst.MENU)//如果是菜单
+        if (sysResource.MenuType == SysResourceConst.MENU)//如果是菜单
         {
             if (string.IsNullOrEmpty(sysResource.Name))
             {
@@ -99,8 +99,8 @@ public class SpaService : DbRepository<SysResource>, ISpaService
                 throw Oops.Bah($"组件地址不能为空");
             }
         }
-        else if (sysResource.MenuType == ResourceConst.IFRAME
-                 || sysResource.MenuType == ResourceConst.LINK)//如果是内链或者外链
+        else if (sysResource.MenuType == SysResourceConst.IFRAME
+                 || sysResource.MenuType == SysResourceConst.LINK)//如果是内链或者外链
         {
             // sysResource.Name = RandomHelper.CreateNum(10);//设置name为随机数
             sysResource.Name = null;//设置name为标题
@@ -112,7 +112,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         }
         if (sysResource.IsHome)
         {
-            var spas = await _resourceService.GetListByCategory(ResourceConst.SPA);//获取所有单页
+            var spas = await _resourceService.GetListByCategory(SysResourceConst.SPA);//获取所有单页
             if (spas.Any(it => it.IsHome && it.Id != sysResource.Id))//如果有多个主页
             {
                 throw Oops.Bah($"已存在首页,请取消其他主页后再试");
@@ -121,7 +121,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
             sysResource.IsAffix = true;//如果是主页,则固定
         }
         //设置为单页
-        sysResource.Category = CateGoryConst.Resource_SPA;
+        sysResource.Category = CateGoryConst.RESOURCE_SPA;
     }
 
     #endregion 方法

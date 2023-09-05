@@ -16,15 +16,15 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class MinioUtils : ITransient
 {
-    public MinioClient minioClient;
-    private string defaultBucketName;
-    private string defaultEndPoint;
-    private string defaultPrefix = "http://";
+    public MinioClient MinioClient;
+    private string _defaultBucketName;
+    private string _defaultEndPoint;
+    private string _defaultPrefix = "http://";
     private readonly IConfigService _configService;
 
     public MinioUtils(IConfigService configService)
     {
-        this._configService = configService;
+        _configService = configService;
         InitClient();
     }
 
@@ -34,7 +34,7 @@ public class MinioUtils : ITransient
     /// <returns></returns>
     private async void InitClient()
     {
-        var configs = await _configService.GetListByCategory(CateGoryConst.Config_FILE_MINIO);//获取minio配置
+        var configs = await _configService.GetListByCategory(CateGoryConst.CONFIG_FILE_MINIO);//获取minio配置
         var accessKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_ACCESS_KEY).FirstOrDefault();//MINIO文件AccessKey
         var secretKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_SECRET_KEY).FirstOrDefault();//MINIO文件SecetKey
         var endPoint = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_END_POINT).FirstOrDefault();//MINIO文件EndPoint
@@ -46,16 +46,16 @@ public class MinioUtils : ITransient
         try
         {
             //默认值赋值
-            defaultBucketName = bucketName.ConfigValue;
-            defaultEndPoint = endPoint.ConfigValue;
-            if (defaultEndPoint.ToLower().StartsWith("http"))
+            _defaultBucketName = bucketName.ConfigValue;
+            _defaultEndPoint = endPoint.ConfigValue;
+            if (_defaultEndPoint.ToLower().StartsWith("http"))
             {
-                var point = defaultEndPoint.Split("//").ToList();//分割、
-                defaultPrefix = $"{point[0]}//";
-                defaultEndPoint = point[1];
+                var point = _defaultEndPoint.Split("//").ToList();//分割、
+                _defaultPrefix = $"{point[0]}//";
+                _defaultEndPoint = point[1];
             }
-            this.minioClient = new MinioClient().WithEndpoint(defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue).Build();//初始化monio对象
-            this.minioClient.WithTimeout(5000);//超时时间
+            MinioClient = new MinioClient().WithEndpoint(_defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue).Build();//初始化monio对象
+            MinioClient.WithTimeout(5000);//超时时间
         }
         catch (Exception ex)
         {
@@ -75,9 +75,9 @@ public class MinioUtils : ITransient
         try
         {
             using var fileStream = file.OpenReadStream();//获取文件流
-            PutObjectArgs putObjectArgs = new PutObjectArgs().WithBucket(defaultBucketName).WithObject(objectName).WithStreamData(fileStream).WithObjectSize(file.Length).WithContentType(contentType);
-            await minioClient.PutObjectAsync(putObjectArgs);
-            return $"{defaultPrefix}{defaultEndPoint}/{defaultBucketName}/{objectName}";//默认http
+            var putObjectArgs = new PutObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithStreamData(fileStream).WithObjectSize(file.Length).WithContentType(contentType);
+            await MinioClient.PutObjectAsync(putObjectArgs);
+            return $"{_defaultPrefix}{_defaultEndPoint}/{_defaultBucketName}/{objectName}";//默认http
         }
         catch (MinioException e)
         {
@@ -99,13 +99,13 @@ public class MinioUtils : ITransient
         var stream = new MemoryStream();
         try
         {
-            var getObjectArgs = new GetObjectArgs().WithBucket(defaultBucketName)
-                                                   .WithObject(objectName)
-                                                   .WithCallbackStream(cb =>
-                                                   {
-                                                       cb.CopyTo(stream);
-                                                   });
-            await minioClient.GetObjectAsync(getObjectArgs);
+            var getObjectArgs = new GetObjectArgs().WithBucket(_defaultBucketName)
+                .WithObject(objectName)
+                .WithCallbackStream(cb =>
+                {
+                    cb.CopyTo(stream);
+                });
+            await MinioClient.GetObjectAsync(getObjectArgs);
 
             //System.InvalidOperationException: Response Content-Length mismatch: too few bytes written (0 of 30788)
             if (stream.CanSeek)

@@ -50,7 +50,7 @@ public class Startup : AppStartup
         {
             var redis = App.GetService<ISimpleCacheService>();//获取redis服务
             //删除redis的key
-            redis.DelByPattern(CacheConst.Cache_Prefix_Web);
+            redis.DelByPattern(CacheConst.CACHE_PREFIX_WEB);
         }
     }
 }

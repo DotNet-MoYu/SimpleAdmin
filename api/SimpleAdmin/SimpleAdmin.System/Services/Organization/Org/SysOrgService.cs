@@ -27,7 +27,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public override async Task<List<SysOrg>> GetListAsync()
     {
         //先从Redis拿
-        var sysOrgs = _simpleCacheService.Get<List<SysOrg>>(SystemConst.Cache_SysOrg);
+        var sysOrgs = _simpleCacheService.Get<List<SysOrg>>(SystemConst.CACHE_SYS_ORG);
         if (sysOrgs == null)
         {
             //redis没有就去数据库拿
@@ -35,7 +35,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             if (sysOrgs.Count > 0)
             {
                 //插入Redis
-                _simpleCacheService.Set(SystemConst.Cache_SysOrg, sysOrgs);
+                _simpleCacheService.Set(SystemConst.CACHE_SYS_ORG, sysOrgs);
             }
         }
         return sysOrgs;
@@ -96,7 +96,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task<List<SysOrg>> Tree(List<long> orgIds = null, SysOrgTreeInput treeInput = null)
     {
-        long parentId = SimpleAdminConst.Zero;//父级ID
+        long parentId = SimpleAdminConst.ZERO;//父级ID
         //获取所有组织
         var sysOrgs = await GetListAsync();
         if (orgIds != null)
@@ -167,7 +167,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 新增
 
     /// <inheritdoc />
-    public async Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SysOrg)
+    public async Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SYS_ORG)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -188,7 +188,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             throw Oops.Bah($"不能包含自己");
         //获取目标组织
         var target = orgList.Where(it => it.Id == input.TargetId).FirstOrDefault();
-        if (target != null || input.TargetId == SimpleAdminConst.Zero)
+        if (target != null || input.TargetId == SimpleAdminConst.ZERO)
         {
             //需要复制的组织名称列表
             var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
@@ -223,7 +223,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             //遍历机构重新赋值全称
             addOrgList.ForEach(it =>
             {
-                it.Names = it.ParentId == SimpleAdminConst.Zero
+                it.Names = it.ParentId == SimpleAdminConst.ZERO
                     ? it.Name
                     : GetNames(orgList, it.ParentId, it.Name);
             });
@@ -238,7 +238,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 编辑
 
     /// <inheritdoc />
-    public async Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SysOrg)
+    public async Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SYS_ORG)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -251,7 +251,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 删除
 
     /// <inheritdoc />
-    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SysOrg)
+    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_ORG)
     {
         //获取所有ID
         var ids = input.Ids;
@@ -311,8 +311,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task RefreshCache()
     {
-        _simpleCacheService.Remove(SystemConst.Cache_SysOrg);//从redis删除
-        _simpleCacheService.Remove(SystemConst.Cache_SysUser);//清空redis所有的用户信息
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_ORG);//从redis删除
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_USER);//清空redis所有的用户信息
         await GetListAsync();//刷新缓存
     }
 
@@ -346,8 +346,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     private async Task CheckInput(SysOrg sysOrg, string name)
     {
         //判断分类是否正确
-        if (sysOrg.Category != CateGoryConst.Org_COMPANY
-            && sysOrg.Category != CateGoryConst.Org_DEPT)
+        if (sysOrg.Category != CateGoryConst.ORG_COMPANY
+            && sysOrg.Category != CateGoryConst.ORG_DEPT)
             throw Oops.Bah($"{name}所属分类错误:{sysOrg.Category}");
 
         var sysOrgs = await GetListAsync();//获取全部

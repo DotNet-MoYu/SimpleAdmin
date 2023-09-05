@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 职位表
 ///</summary>
 [SugarTable("sys_position", TableDescription = "职位表")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 [CodeGen]
 public class SysPosition : DataEntityBase
 {

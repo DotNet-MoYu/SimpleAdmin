@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 站内信
 ///</summary>
 [SugarTable("sys_message", TableDescription = "站内信")]
-[Tenant(SqlsugarConst.DB_Default)]
+[Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysMessage : BaseEntity
 {
     /// <summary>
@@ -30,7 +30,8 @@ public class SysMessage : BaseEntity
     /// <summary>
     /// 正文
     ///</summary>
-    [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
+    [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = StaticConfig.CodeFirst_BigString,
+        IsNullable = true)]
     public virtual string Content { get; set; }
 
     /// <summary>

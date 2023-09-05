@@ -529,14 +529,14 @@
             <summary>
             上传本地文件
             </summary>
-            <param name="File"></param>
+            <param name="file"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.FileController.UploadMinio(Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             上传MINIO文件
             </summary>
-            <param name="File"></param>
+            <param name="file"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.FileController.Delete(SimpleAdmin.Core.BaseIdListInput)">
@@ -1513,22 +1513,22 @@
             日志常量
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Operation">
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.OPERATION">
             <summary>
             操作名称
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Client">
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.CLIENT">
             <summary>
             客户端信息
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Path">
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.PATH">
             <summary>
             请求地址
             </summary>
         </member>
-        <member name="F:SimpleAdmin.Web.Core.LoggingConst.Method">
+        <member name="F:SimpleAdmin.Web.Core.LoggingConst.METHOD">
             <summary>
             请求方法：POST/GET
             </summary>
@@ -1683,7 +1683,7 @@
             消息
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.extras">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Extras">
             <summary>
             额外信息
             </summary>
