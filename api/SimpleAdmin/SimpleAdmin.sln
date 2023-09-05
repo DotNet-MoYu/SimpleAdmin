@@ -39,9 +39,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "系统模块", "系统模�
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Plugin.Aop", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj", "{8D130807-5AD8-4894-A694-6EBECBF89A5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.SqlSugar", "SimpleAdmin.SqlSugar\SimpleAdmin.SqlSugar.csproj", "{AA783B66-6F91-4164-86D4-6D053E5A549C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.SqlSugar", "SimpleAdmin.SqlSugar\SimpleAdmin.SqlSugar.csproj", "{AA783B66-6F91-4164-86D4-6D053E5A549C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.Cache", "SimpleAdmin.Cache\SimpleAdmin.Cache.csproj", "{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Cache", "SimpleAdmin.Cache\SimpleAdmin.Cache.csproj", "{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

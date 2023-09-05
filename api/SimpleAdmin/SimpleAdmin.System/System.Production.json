@@ -1,26 +1,26 @@
 {
-  //swagger·Ö×éÉèÖÃ
-  "[openapi:System]": {
-    "Order": 99, //·Ö×éÅÅĞò£¬int ÀàĞÍ£¬Êı×ÖÔ½´óÅÅÇ°Ãæ£¬Ä¬ÈÏ 0
-    "Title": "RBACÈ¨ÏŞÄ£¿é", //ÅäÖÃ·Ö×é±êÌâ£¬string ÀàĞÍ
-    "Description": "ÈÃ .NET ¿ª·¢¸ü¼òµ¥£¬¸üÍ¨ÓÃ£¬¸üÁ÷ĞĞ¡£",
-    "Version": "1.0.0", //ÅäÖÃ·Ö×é°æ±¾£¬Ä¬ÈÏ 1.0
-    "TermsOfService": "https://www.cnblogs.com/huguodong/", //ÅäÖÃÏà¹ØÁ´½ÓµØÖ·£¬Uri ÀàĞÍ
+  //swaggeråˆ†ç»„è®¾ç½®
+  "[openapi:Default]": {
+    "Order": 99, //åˆ†ç»„æ’åºï¼Œint ç±»å‹ï¼Œæ•°å­—è¶Šå¤§æ’å‰é¢ï¼Œé»˜è®¤ 0
+    "Title": "RBACæƒé™æ¨¡å—", //é…ç½®åˆ†ç»„æ ‡é¢˜ï¼Œstring ç±»å‹
+    "Description": "è®© .NET å¼€å‘æ›´ç®€å•ï¼Œæ›´é€šç”¨ï¼Œæ›´æµè¡Œã€‚",
+    "Version": "1.0.0", //é…ç½®åˆ†ç»„ç‰ˆæœ¬ï¼Œé»˜è®¤ 1.0
+    "TermsOfService": "https://www.cnblogs.com/huguodong/", //é…ç½®ç›¸å…³é“¾æ¥åœ°å€ï¼ŒUri ç±»å‹
     "Contact": {
-      //ÅäÖÃÁªÏµ·½Ê½
-      "Name": "ÉÙÁÖËÂ×¤±±¹ÌÉ½°ìÊÂ´¦´óÉñ¸¸ÍõÀ®Âï",
+      //é…ç½®è”ç³»æ–¹å¼
+      "Name": "å°‘æ—å¯ºé©»åŒ—å›ºå±±åŠäº‹å¤„å¤§ç¥çˆ¶ç‹å–‡å˜›",
       "Url": "https://gitee.com/huguodong520",
       "Email": "531035580@qq.com"
     },
     "License": {
-      //ÅäÖÃĞ­Òé£¬OpenApiLicense ÀàĞÍ
+      //é…ç½®åè®®ï¼ŒOpenApiLicense ç±»å‹
       "Name": "Apache-2.0",
       "Url": "https://gitee.com/huguodong520/SimpleAdmin/blob/master/LICENSE"
     }
   },
-  //ÏµÍ³²ãÉèÖÃ
+  //ç³»ç»Ÿå±‚è®¾ç½®
   "SystemSettings": {
-    "InitTable": false, //ÊÇ·ñ³õÊ¼»¯±í½á¹¹
-    "InitSeedData": false, //ÊÇ·ñ³õÊ¼»¯ÖÖ×ÓÊı¾İ
+    "InitTable": false, //æ˜¯å¦åˆå§‹åŒ–è¡¨ç»“æ„
+    "InitSeedData": false, //æ˜¯å¦åˆå§‹åŒ–ç§å­æ•°æ®
   }
 }

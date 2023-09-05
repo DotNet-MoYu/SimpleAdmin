@@ -1,4 +1,12 @@
-﻿using IPTools.Core;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using IPTools.Core;
 using Masuit.Tools;
 using Microsoft.Extensions.Logging;
 using NewLife.Serialization;
@@ -40,7 +48,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             var path = logMsg.Context.Get(LoggingConst.Path).ToString();//获取操作名称
             var method = logMsg.Context.Get(LoggingConst.Method).ToString();//获取方法
             //表示访问日志
-            if (operation == EventSubscriberConst.LoginB || operation == EventSubscriberConst.LoginOutB)
+            if (operation == EventSubscriberConst.LoginB
+                || operation == EventSubscriberConst.LoginOutB)
             {
                 //如果没有异常信息
                 if (loggingMonitor.Exception == null)
@@ -50,7 +59,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 else
                 {
                     //添加到异常日志
-                    await CreateOperationLog(operation, path, loggingMonitor, client);
+                    await CreateOperationLog(operation, path, loggingMonitor,
+                        client);
                 }
             }
             else
@@ -59,7 +69,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 if (!operation.Contains("/") && method == "POST")
                 {
                     //添加到操作日志
-                    await CreateOperationLog(operation, path, loggingMonitor, client);
+                    await CreateOperationLog(operation, path, loggingMonitor,
+                        client);
                 }
             }
         }
@@ -71,7 +82,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <param name="operation">访问类型</param>
     /// <param name="loggingMonitor">loggingMonitor</param>
     /// <param name="clientInfo">客户端信息</param>
-    private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
+    private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor,
+        ClientInfo clientInfo)
     {
         var name = "";//用户姓名
         var opAccount = "";//用户账号
@@ -86,15 +98,19 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         else
         {
             //如果是登录出，用户信息就从AuthorizationClaims里拿
-            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.Name).Select(it => it.Value).FirstOrDefault();
-            opAccount = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
+            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.Name)
+                .Select(it => it.Value).FirstOrDefault();
+            opAccount = loggingMonitor.AuthorizationClaims
+                .Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
         }
         //日志表实体
-        var devLogVisit = new DevLogVisit
+        var devLogVisit = new SysLogVisit
         {
             Name = operation,
-            Category = operation == EventSubscriberConst.LoginB ? CateGoryConst.Log_LOGIN : CateGoryConst.Log_LOGOUT,
-            ExeStatus = DevLogConst.SUCCESS,
+            Category = operation == EventSubscriberConst.LoginB
+                ? CateGoryConst.Log_LOGIN
+                : CateGoryConst.Log_LOGOUT,
+            ExeStatus = SysLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,
             OpBrowser = clientInfo.UA.Family + clientInfo.UA.Major,
@@ -114,15 +130,20 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <param name="loggingMonitor">loggingMonitor</param>
     /// <param name="clientInfo">客户端信息</param>
     /// <returns></returns>
-    private async Task CreateOperationLog(string operation, string path, LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
+    private async Task CreateOperationLog(string operation, string path,
+        LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
     {
         //用户名称
-        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Name).Select(it => it.Value).FirstOrDefault();
+        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Name)
+            .Select(it => it.Value).FirstOrDefault();
         //账号
-        var opAccount = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
+        var opAccount = loggingMonitor.AuthorizationClaims
+            ?.Where(it => it.Type == ClaimConst.Account).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
-        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0 ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
+        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0
+            ? null
+            : loggingMonitor.Parameters[0].Value.ToJsonString();
 
         //获取结果json字符串
         var resultJson = string.Empty;
@@ -130,18 +151,21 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             if (loggingMonitor.ReturnInformation.Value != null)//如果返回值不为空
             {
-                var time = loggingMonitor.ReturnInformation.Value.Time != null ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time) : DateTime.Now;//转成时间
-                loggingMonitor.ReturnInformation.Value.Time = time.ToString(CultureInfo.CurrentCulture);//转成字符串
+                var time = loggingMonitor.ReturnInformation.Value.Time != null
+                    ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time)
+                    : DateTime.Now;//转成时间
+                loggingMonitor.ReturnInformation.Value.Time =
+                    time.ToString(CultureInfo.CurrentCulture);//转成字符串
                 resultJson = loggingMonitor.ReturnInformation.Value.ToJsonString();
             }
         }
 
         //操作日志表实体
-        var devLogOperate = new DevLogOperate
+        var devLogOperate = new SysLogOperate
         {
             Name = operation,
             Category = CateGoryConst.Log_OPERATE,
-            ExeStatus = DevLogConst.SUCCESS,
+            ExeStatus = SysLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,
             OpBrowser = clientInfo.UA.Family + clientInfo.UA.Major,
@@ -160,8 +184,9 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         if (loggingMonitor.Exception != null)
         {
             devLogOperate.Category = CateGoryConst.Log_EXCEPTION;//操作类型为异常
-            devLogOperate.ExeStatus = DevLogConst.FAIL;//操作状态为失败
-            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":" + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
+            devLogOperate.ExeStatus = SysLogConst.FAIL;//操作状态为失败
+            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":"
+                + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
         }
         await _db.InsertableWithAttr(devLogOperate).IgnoreColumns(true).ExecuteCommandAsync();//入库
     }
@@ -184,7 +209,9 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 ipInfo.City,
                 ipInfo.NetworkOperator
             };//定义登录地址列表
-            LoginAddress = string.Join("|", LoginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
+            LoginAddress =
+                string.Join("|",
+                    LoginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
         }
         catch (global::System.Exception ex)
         {

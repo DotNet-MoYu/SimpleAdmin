@@ -1,9 +1,12 @@
-﻿using Furion.FriendlyException;
-using Mapster;
-using SimpleAdmin.Core;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
-using SqlSugar;
 
 namespace SimpleAdmin.Application;
 
@@ -55,7 +58,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
 
     //外键查询
 
-    #endregion
+    #endregion 查询
 
     #region 新增
 
@@ -67,7 +70,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         await InsertAsync(genTest);//插入数据
     }
 
-    #endregion
+    #endregion 新增
 
     #region 编辑
 
@@ -79,7 +82,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         await UpdateAsync(genTest);//更新数据
     }
 
-    #endregion
+    #endregion 编辑
 
     #region 删除
 
@@ -101,11 +104,11 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             ////写日志
             //_logger.LogError(result.ErrorMessage, result.ErrorException);
             //throw Oops.Oh(ErrorCodeEnum.A0002);
-            //} 
+            //}
         }
     }
 
-    #endregion
+    #endregion 删除
 
     #region 导入导出
 
@@ -147,7 +150,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         return result;
     }
 
-    #endregion
+    #endregion 导入导出
 
     #region 方法
 
@@ -180,7 +183,7 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
             .WhereIF(!string.IsNullOrWhiteSpace(input.Name),
                 it => it.Name.Contains(input.Name.Trim()))
             .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.CreateOrgId))//根据机构ID查询
-            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+                                                                            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField),
                 $"{input.SortField} {input.SortOrder}")
             .OrderBy(it => it.SortCode);//排序
@@ -194,5 +197,5 @@ public class GenTestService : DbRepository<GenTest>, IGenTestService
         return data;
     }
 
-    #endregion
+    #endregion 方法
 }

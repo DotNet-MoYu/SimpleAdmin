@@ -1,4 +1,12 @@
-﻿namespace SimpleAdmin.System;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 批量分页查询参数
@@ -74,17 +82,21 @@ public class BatchEditConfigInput : BatchEditConfig, IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (Status == DevDictConst.COMMON_STATUS_ENABLE)
+        if (Status == SysDictConst.COMMON_STATUS_ENABLE)
         {
             //如果是api请求并且必填参数有空的
-            if (DataType.Contains("api") && (string.IsNullOrEmpty(RequestUrl) || string.IsNullOrEmpty(RequestType) || string.IsNullOrEmpty(RequestLabel) || string.IsNullOrEmpty(RequestValue)))
+            if (DataType.Contains("api") && (string.IsNullOrEmpty(RequestUrl)
+                || string.IsNullOrEmpty(RequestType) || string.IsNullOrEmpty(RequestLabel)
+                || string.IsNullOrEmpty(RequestValue)))
             {
-                yield return new ValidationResult($"字段{ColumnName}接口信息必填", new[] { nameof(DataType) });
+                yield return new ValidationResult($"字段{ColumnName}接口信息必填",
+                    new[] { nameof(DataType) });
             }
             //如果是字典数据并且字典值为空
             if (DataType.Contains("dict") && string.IsNullOrEmpty(DictTypeCode))
             {
-                yield return new ValidationResult($"字段{ColumnName}字典值必填", new[] { nameof(DictTypeCode) });
+                yield return new ValidationResult($"字段{ColumnName}字典值必填",
+                    new[] { nameof(DictTypeCode) });
             }
         }
     }

@@ -13,12 +13,12 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj"/>
-        <PackageReference Include="Colorful.Console" Version="1.2.15"/>
+        <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj" />
+        <PackageReference Include="Colorful.Console" Version="1.2.15" />
     </ItemGroup>
     <ProjectExtensions>
         <VisualStudio>
-            <UserProperties properties_4launchsettings_1json__JsonSchema=""/>
+            <UserProperties properties_4launchsettings_1json__JsonSchema="" />
         </VisualStudio>
     </ProjectExtensions>
 

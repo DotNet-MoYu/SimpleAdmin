@@ -1,4 +1,12 @@
-﻿using IPTools.Core;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using IPTools.Core;
 using SimpleAdmin.Plugin.Core;
 
 namespace SimpleAdmin.System;
@@ -54,7 +62,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             //如果上次修改密码时间为空
             if (pwdRemindUpdateTime == null)
             {
-                var pwdUpdateDefault = loginPolicy.First(x => x.ConfigKey == DevConfigConst.PWD_UPDATE_DEFAULT).ConfigValue.ToBoolean();//获取初始化提醒
+                var pwdUpdateDefault = loginPolicy.First(x => x.ConfigKey == SysConfigConst.PWD_UPDATE_DEFAULT).ConfigValue.ToBoolean();//获取初始化提醒
                 //如果密码初始化提醒为true
                 if (pwdUpdateDefault)
                 {
@@ -70,10 +78,10 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             }
             else
             {
-                var pwdRemind = loginPolicy.First(x => x.ConfigKey == DevConfigConst.PWD_REMIND).ConfigValue.ToBoolean();//获取密码提醒天数
+                var pwdRemind = loginPolicy.First(x => x.ConfigKey == SysConfigConst.PWD_REMIND).ConfigValue.ToBoolean();//获取密码提醒天数
                 if (pwdRemind)
                 {
-                    var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == DevConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
+                    var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == SysConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
                     if (DateTime.Now - pwdRemindUpdateTime > TimeSpan.FromDays(pwdRemindDay))
                     {
                         await messageService.Send(new MessageSendInput()
@@ -89,7 +97,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             }
         }
 
-        #endregion
+        #endregion 登录/密码策略
 
         #region 重新赋值属性,设置本次登录信息为最新的信息
 
@@ -118,7 +126,6 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
             LastUpdatePwdTime = it.PwdRemindUpdateTime
         }).ExecuteCommandAsync() > 0)
             _simpleCacheService.HashAdd(SystemConst.Cache_SysUser, sysUser.Id.ToString(), sysUser);//更新Redis信息
-
 
         await Task.CompletedTask;
     }

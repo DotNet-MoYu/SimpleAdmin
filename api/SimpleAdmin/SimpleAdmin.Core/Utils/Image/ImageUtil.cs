@@ -1,6 +1,10 @@
-﻿using SkiaSharp;
-using System.Drawing;
-using System.Drawing.Drawing2D;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.Core.Utils;
 
@@ -45,7 +49,6 @@ public static class ImageUtil
         }
     }
 
-
     /// <summary>
     /// base64转bitmap
     /// </summary>
@@ -59,7 +62,6 @@ public static class ImageUtil
         ms.Close();
         return bitmap;
     }
-
 
     /// <summary>
     /// base64转bitmap
@@ -82,7 +84,6 @@ public static class ImageUtil
     {
         return "data:image/png;base64," + base64string;
     }
-
 
     /// <summary>
     /// 重新修改尺寸
@@ -118,7 +119,8 @@ public static class ImageUtil
         var g = Graphics.FromImage(b);
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         //绘制图像
-        g.DrawImage(imgToResize, 0, 0, destWidth, destHeight);
+        g.DrawImage(imgToResize, 0, 0,
+            destWidth, destHeight);
         g.Dispose();
         return b;
     }
@@ -138,7 +140,9 @@ public static class ImageUtil
             var g = Graphics.FromImage(b);
             // 插值算法的质量
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
+            g.DrawImage(bmp, new Rectangle(0, 0, newW,
+                newH), new Rectangle(0, 0, bmp.Width,
+                bmp.Height), GraphicsUnit.Pixel);
             g.Dispose();
             return b;
         }
@@ -185,7 +189,8 @@ public static class ImageUtil
     {
         try
         {
-            var thumbnail = bmp.GetThumbnailImage(w, h, () => false, IntPtr.Zero);
+            var thumbnail = bmp.GetThumbnailImage(w, h, () => false,
+                IntPtr.Zero);
             return thumbnail;
         }
         catch (Exception ex)

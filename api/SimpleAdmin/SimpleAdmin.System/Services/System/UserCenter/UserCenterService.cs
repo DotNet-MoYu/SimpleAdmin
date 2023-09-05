@@ -1,4 +1,12 @@
-﻿using System.Text.RegularExpressions;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using System.Text.RegularExpressions;
 
 namespace SimpleAdmin.System;
 
@@ -105,7 +113,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         {
             //如果没数据去系统配置里取默认的工作台
             var devConfig = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE,
-                DevConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
+                SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
             if (devConfig != null)
             {
                 return devConfig.ConfigValue.ToLower();//返回工作台信息
@@ -134,7 +142,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<DevMessage>> LoginMessagePage(MessagePageInput input)
+    public async Task<SqlSugarPagedList<SysMessage>> LoginMessagePage(MessagePageInput input)
     {
         var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
         return messages;
@@ -236,16 +244,16 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
         var loginPolicy =
             await _configService.GetListByCategory(CateGoryConst.Config_PWD_POLICY);//获取密码策略
-        var containNumber = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_NUM)
+        var containNumber = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_NUM)
             .ConfigValue.ToBoolean();//是否包含数字
-        var containLower = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_LOWER)
+        var containLower = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_LOWER)
             .ConfigValue.ToBoolean();//是否包含小写
-        var containUpper = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_UPPER)
+        var containUpper = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_UPPER)
             .ConfigValue.ToBoolean();//是否包含大写
         var containChar = loginPolicy
-            .First(it => it.ConfigKey == DevConfigConst.PWD_CONTAIN_CHARACTER).ConfigValue
+            .First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_CHARACTER).ConfigValue
             .ToBoolean();//是否包含特殊字符
-        var minLength = loginPolicy.First(it => it.ConfigKey == DevConfigConst.PWD_MIN_LENGTH)
+        var minLength = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_MIN_LENGTH)
             .ConfigValue.ToInt();//最小长度
         if (minLength > newPassword.Length)
             throw Oops.Bah($"密码长度不能小于{minLength}");
@@ -328,7 +336,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return parentList;
     }
 
-
     /// <summary>
     /// 构建Meta
     /// </summary>
@@ -340,8 +347,12 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             //定义meta
             var meta = new Meta
             {
-                Icon = it.Icon, Title = it.Title, IsAffix = it.IsAffix, IsHide = it.IsHide,
-                IsKeepAlive = it.IsKeepAlive, IsFull = it.IsFull,
+                Icon = it.Icon,
+                Title = it.Title,
+                IsAffix = it.IsAffix,
+                IsHide = it.IsHide,
+                IsKeepAlive = it.IsKeepAlive,
+                IsFull = it.IsFull,
                 ActiveMenu = it.ActiveMenu,
                 IsLink = it.Category == ResourceConst.LINK ? it.Path : ""
             };

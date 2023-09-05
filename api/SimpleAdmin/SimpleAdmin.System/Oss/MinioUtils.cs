@@ -1,4 +1,12 @@
-﻿using Minio;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using Minio;
 using Minio.Exceptions;
 
 namespace SimpleAdmin.System;
@@ -27,10 +35,10 @@ public class MinioUtils : ITransient
     private async void InitClient()
     {
         var configs = await _configService.GetListByCategory(CateGoryConst.Config_FILE_MINIO);//获取minio配置
-        var accessKey = configs.Where(it => it.ConfigKey == DevConfigConst.FILE_MINIO_ACCESS_KEY).FirstOrDefault();//MINIO文件AccessKey
-        var secretKey = configs.Where(it => it.ConfigKey == DevConfigConst.FILE_MINIO_SECRET_KEY).FirstOrDefault();//MINIO文件SecetKey
-        var endPoint = configs.Where(it => it.ConfigKey == DevConfigConst.FILE_MINIO_END_POINT).FirstOrDefault();//MINIO文件EndPoint
-        var bucketName = configs.Where(it => it.ConfigKey == DevConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME).FirstOrDefault();//MINIO文件默认存储桶
+        var accessKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_ACCESS_KEY).FirstOrDefault();//MINIO文件AccessKey
+        var secretKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_SECRET_KEY).FirstOrDefault();//MINIO文件SecetKey
+        var endPoint = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_END_POINT).FirstOrDefault();//MINIO文件EndPoint
+        var bucketName = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME).FirstOrDefault();//MINIO文件默认存储桶
         if (accessKey == null || secretKey == null || endPoint == null || bucketName == null)
         {
             throw Oops.Oh($"MINIO客户端未正确配置");

@@ -1,79 +1,79 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
-		<DocumentationFile>SimpleAdmin.System.xml</DocumentationFile>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+        <NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+        <DocumentationFile>SimpleAdmin.System.xml</DocumentationFile>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="IPTools.China" Version="1.6.0" />
+        <PackageReference Include="UAParser" Version="3.1.47" />
+        <PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj" />
+        <ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
+        <ProjectReference Include="..\SimpleAdmin.SqlSugar\SimpleAdmin.SqlSugar.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="System.Development.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="System.Production.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="SeedData\Json\seed_batch_edit.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_batch_edit_config.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_config.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_dict.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_org.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_position.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_relation.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_resource.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_role.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="SeedData\Json\seed_sys_user.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
 
 
-	<ItemGroup>
-		<None Include="..\.editorconfig" Link=".editorconfig" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<PackageReference Include="IPTools.China" Version="1.6.0" />
-		<PackageReference Include="UAParser" Version="3.1.47" />
-		<PackageReference Include="Magicodes.IE.Excel" Version="2.7.4.5" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Aop\SimpleAdmin.Plugin.Aop.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.SignalR\SimpleAdmin.Plugin.SignalR.csproj" />
-		<ProjectReference Include="..\SimpleAdmin.SqlSugar\SimpleAdmin.SqlSugar.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="System.Development.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="System.Production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="SeedData\Json\seed_batch_edit.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_batch_edit_config.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_dev_config.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_dev_dict.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_org.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_position.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_relation.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_resource.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_role.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="SeedData\Json\seed_sys_user.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-	</ItemGroup>
+    <ItemGroup>
+        <Folder Include="Services\LogAudit\" />
+    </ItemGroup>
 
 </Project>

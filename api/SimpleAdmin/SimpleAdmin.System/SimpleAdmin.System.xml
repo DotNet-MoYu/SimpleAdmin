@@ -426,269 +426,269 @@
              排序码
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevConfig">
+        <member name="T:SimpleAdmin.System.SysConfig">
              <summary>
              配置
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevConfig.ConfigKey">
+        <member name="P:SimpleAdmin.System.SysConfig.ConfigKey">
              <summary>
              配置键
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevConfig.ConfigValue">
+        <member name="P:SimpleAdmin.System.SysConfig.ConfigValue">
              <summary>
              配置值
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevConfig.Category">
+        <member name="P:SimpleAdmin.System.SysConfig.Category">
              <summary>
              分类
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevConfig.Remark">
+        <member name="P:SimpleAdmin.System.SysConfig.Remark">
              <summary>
              备注
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevConfig.SortCode">
+        <member name="P:SimpleAdmin.System.SysConfig.SortCode">
              <summary>
              排序码
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevDict">
+        <member name="T:SimpleAdmin.System.SysDict">
              <summary>
              字典
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.ParentId">
+        <member name="P:SimpleAdmin.System.SysDict.ParentId">
              <summary>
              父id
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.DictLabel">
+        <member name="P:SimpleAdmin.System.SysDict.DictLabel">
              <summary>
              字典文字
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.DictValue">
+        <member name="P:SimpleAdmin.System.SysDict.DictValue">
              <summary>
              字典值
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.Category">
+        <member name="P:SimpleAdmin.System.SysDict.Category">
              <summary>
              分类
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.SortCode">
+        <member name="P:SimpleAdmin.System.SysDict.SortCode">
              <summary>
              排序码
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevDict.Children">
+        <member name="P:SimpleAdmin.System.SysDict.Status">
+             <summary>
+             状态
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysDict.Children">
             <summary>
             子节点
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevFile">
+        <member name="T:SimpleAdmin.System.SysFile">
              <summary>
              文件表
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.Engine">
+        <member name="P:SimpleAdmin.System.SysFile.Engine">
              <summary>
              存储引擎
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.Bucket">
+        <member name="P:SimpleAdmin.System.SysFile.Bucket">
              <summary>
              存储桶
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.Name">
+        <member name="P:SimpleAdmin.System.SysFile.Name">
              <summary>
              文件名称
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.Suffix">
+        <member name="P:SimpleAdmin.System.SysFile.Suffix">
              <summary>
              文件后缀
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.SizeKb">
+        <member name="P:SimpleAdmin.System.SysFile.SizeKb">
              <summary>
              文件大小kb
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.SizeInfo">
+        <member name="P:SimpleAdmin.System.SysFile.SizeInfo">
              <summary>
              文件大小（格式化后）
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.ObjName">
+        <member name="P:SimpleAdmin.System.SysFile.ObjName">
              <summary>
              文件的对象名（唯一名称）
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.StoragePath">
+        <member name="P:SimpleAdmin.System.SysFile.StoragePath">
              <summary>
              文件存储路径
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.DownloadPath">
+        <member name="P:SimpleAdmin.System.SysFile.DownloadPath">
              <summary>
              文件下载路径
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevFile.Thumbnail">
+        <member name="P:SimpleAdmin.System.SysFile.Thumbnail">
              <summary>
              图片缩略图
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevLogOperate">
+        <member name="T:SimpleAdmin.System.SysLogOperate">
              <summary>
              操作日志表
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ExeMessage">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ExeMessage">
              <summary>
              具体消息
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ClassName">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ClassName">
              <summary>
              类名称
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.MethodName">
+        <member name="P:SimpleAdmin.System.SysLogOperate.MethodName">
              <summary>
              方法名称
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ReqMethod">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ReqMethod">
              <summary>
              请求方式
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ReqUrl">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ReqUrl">
              <summary>
              请求地址
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ParamJson">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ParamJson">
              <summary>
              请求参数
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogOperate.ResultJson">
+        <member name="P:SimpleAdmin.System.SysLogOperate.ResultJson">
              <summary>
              返回结果
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevLogVisit">
+        <member name="T:SimpleAdmin.System.SysLogVisit">
              <summary>
              访问日志表
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.Category">
+        <member name="P:SimpleAdmin.System.SysLogVisit.Category">
              <summary>
              日志分类
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.Name">
+        <member name="P:SimpleAdmin.System.SysLogVisit.Name">
              <summary>
              日志名称
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.ExeStatus">
+        <member name="P:SimpleAdmin.System.SysLogVisit.ExeStatus">
              <summary>
              执行状态
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpIp">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpIp">
              <summary>
              操作ip
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpAddress">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpAddress">
              <summary>
              操作地址
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpBrowser">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpBrowser">
              <summary>
              操作浏览器
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpOs">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpOs">
              <summary>
              操作系统
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpTime">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpTime">
              <summary>
              操作时间
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpUser">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpUser">
              <summary>
              操作人姓名
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevLogVisit.OpAccount">
+        <member name="P:SimpleAdmin.System.SysLogVisit.OpAccount">
              <summary>
              操作人姓名
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevMessage">
+        <member name="T:SimpleAdmin.System.SysMessage">
              <summary>
              站内信
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessage.Category">
+        <member name="P:SimpleAdmin.System.SysMessage.Category">
              <summary>
              分类
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessage.Subject">
+        <member name="P:SimpleAdmin.System.SysMessage.Subject">
              <summary>
              主题
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessage.Content">
+        <member name="P:SimpleAdmin.System.SysMessage.Content">
              <summary>
              正文
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessage.Read">
+        <member name="P:SimpleAdmin.System.SysMessage.Read">
             <summary>
             是否已读
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.DevMessageUser">
+        <member name="T:SimpleAdmin.System.SysMessageUser">
              <summary>
              用户消息表
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessageUser.MessageId">
+        <member name="P:SimpleAdmin.System.SysMessageUser.MessageId">
              <summary>
              消息Id
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessageUser.UserId">
+        <member name="P:SimpleAdmin.System.SysMessageUser.UserId">
              <summary>
              用户Id
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.DevMessageUser.Read">
+        <member name="P:SimpleAdmin.System.SysMessageUser.Read">
              <summary>
              已读未读
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DevRelation">
-             <summary>
-             开发关系表
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.SysOrg">
@@ -813,12 +813,7 @@
         </member>
         <member name="P:SimpleAdmin.System.SysResource.Description">
              <summary>
-             别名
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SysResource.Avatar">
-             <summary>
-             别名
+             描述
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysResource.Code">
@@ -863,12 +858,12 @@
         </member>
         <member name="P:SimpleAdmin.System.SysResource.IsHide">
              <summary>
-             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+             是否在菜单中隐藏 (通常列表详情页需要隐藏)
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysResource.IsFull">
              <summary>
-             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+             是否在菜单中隐藏 (通常列表详情页需要隐藏)
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysResource.IsAffix">
@@ -923,7 +918,7 @@
         </member>
         <member name="P:SimpleAdmin.System.Meta.IsHide">
              <summary>
-             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+             是否在菜单中隐藏 (通常列表详情页需要隐藏)
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.Meta.IsLink">
@@ -933,7 +928,7 @@
         </member>
         <member name="P:SimpleAdmin.System.Meta.IsFull">
              <summary>
-             是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+             是否在菜单中隐藏 (通常列表详情页需要隐藏)
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.Meta.IsAffix">
@@ -1736,14 +1731,14 @@
         <member name="M:SimpleAdmin.System.Services.Auth.AuthService.GetLoginUser">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.BeforeLogin(System.Collections.Generic.List{SimpleAdmin.System.DevConfig},System.String)">
+        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.BeforeLogin(System.Collections.Generic.List{SimpleAdmin.System.SysConfig},System.String)">
             <summary>
             登录之前执行的方法
             </summary>
             <param name="loginPolicy"></param>
             <param name="userName"></param>
         </member>
-        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.LoginError(System.Collections.Generic.List{SimpleAdmin.System.DevConfig},System.String)">
+        <member name="M:SimpleAdmin.System.Services.Auth.AuthService.LoginError(System.Collections.Generic.List{SimpleAdmin.System.SysConfig},System.String)">
             <summary>
             登录错误操作
             </summary>
@@ -2459,338 +2454,6 @@
             <param name="input">id</param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.System.ConfigService">
-            <inheritdoc cref="T:SimpleAdmin.System.IConfigService"/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.GetListByCategory(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.GetByConfigKey(System.String,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.Page(SimpleAdmin.System.ConfigPageInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.Add(SimpleAdmin.System.ConfigAddInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.Edit(SimpleAdmin.System.ConfigEditInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.Delete(SimpleAdmin.System.ConfigDeleteInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.DevConfig})">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.RefreshCache(System.String)">
-            <summary>
-            刷新缓存
-            </summary>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ConfigService.CheckInput(SimpleAdmin.System.DevConfig)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="devConfig"></param>
-        </member>
-        <member name="T:SimpleAdmin.System.ConfigPageInput">
-            <summary>
-            配置分页参数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ConfigAddInput">
-            <summary>
-            添加配置参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ConfigAddInput.ConfigKey">
-            <summary>
-            配置键
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ConfigAddInput.ConfigValue">
-            <summary>
-            配置值
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ConfigEditInput">
-            <summary>
-            编辑配置参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ConfigEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ConfigDeleteInput">
-            <summary>
-            删除配置参数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ConfigEditBatchInput">
-            <summary>
-            批量修改输入参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ConfigEditBatchInput.CateGory">
-            <summary>
-            分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IConfigService">
-            <summary>
-            系统配置服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.Add(SimpleAdmin.System.ConfigAddInput)">
-            <summary>
-            新增配置
-            </summary>
-            <param name="input">新增参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.Delete(SimpleAdmin.System.ConfigDeleteInput)">
-            <summary>
-            删除配置
-            </summary>
-            <param name="input">删除</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.Edit(SimpleAdmin.System.ConfigEditInput)">
-            <summary>
-            修改配置
-            </summary>
-            <param name="input">修改参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.DevConfig})">
-            <summary>
-            批量编辑
-            </summary>
-            <param name="devConfigs">配置列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.GetByConfigKey(System.String,System.String)">
-            <summary>
-            根据分类和配置键获配置
-            </summary>
-            <param name="category">分类</param>
-            <param name="configKey">配置键</param>
-            <returns>配置信息</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.GetListByCategory(System.String)">
-            <summary>
-            根据分类获取配置列表
-            </summary>
-            <param name="category">分类名称</param>
-            <returns>配置列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IConfigService.Page(SimpleAdmin.System.ConfigPageInput)">
-            <summary>
-            分页查询其他配置
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>其他配置列表</returns>
-        </member>
-        <member name="T:SimpleAdmin.System.DictService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IDictService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.Page(SimpleAdmin.System.DictPageInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.Add(SimpleAdmin.System.DictAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.Edit(SimpleAdmin.System.DictAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.Delete(SimpleAdmin.System.DictDeleteInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.GetListAsync">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.GetDict(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.DevDict})">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String[])">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.Tree(SimpleAdmin.System.DictTreeInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.RefreshCache">
-            <summary>
-            刷新缓存
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.CheckInput(SimpleAdmin.System.DevDict)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="devDict"></param>
-        </member>
-        <member name="M:SimpleAdmin.System.DictService.GetDevDictChilden(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
-            <summary>
-            获取字典所有下级
-            </summary>
-            <param name="dictList">字典列表</param>
-            <param name="parentId">父ID</param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.DictInput">
-            <summary>
-            字典查询参数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DictTreeInput">
-            <summary>
-            字典树参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictTreeInput.Category">
-            <summary>
-            字典分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DictPageInput">
-            <summary>
-            字典查询参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictPageInput.ParentId">
-             <summary>
-             父id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictPageInput.Category">
-             <summary>
-             分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DictAddInput">
-            <summary>
-            添加字典参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictAddInput.ParentId">
-            <summary>
-            父ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictAddInput.DictLabel">
-            <summary>
-            字典名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictAddInput.DictValue">
-            <summary>
-            字典值
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DictEditInput">
-            <summary>
-            编辑字典参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.DictEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.DictDeleteInput">
-            <summary>
-            删除字典参数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IDictService">
-            <summary>
-            字典服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.Add(SimpleAdmin.System.DictAddInput)">
-            <summary>
-            添加字典
-            </summary>
-            <param name="input">输入参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.DevDict},System.Int64)">
-            <summary>
-            构建字典树形结构
-            </summary>
-            <param name="dictList">字典列表</param>
-            <param name="parentId">父ID</param>
-            <returns>字典树形结构</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.Delete(SimpleAdmin.System.DictDeleteInput)">
-            <summary>
-            删除字典
-            </summary>
-            <param name="input">删除参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.Edit(SimpleAdmin.System.DictAddInput)">
-            <summary>
-            编辑字典
-            </summary>
-            <param name="input">输入参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.GetDict(System.String)">
-            <summary>
-            获取字典
-            </summary>
-            <param name="DictValue">字典</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.GetListAsync">
-            <summary>
-            获取所有
-            </summary>
-            <returns>字典列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.DevDict})">
-            <summary>
-            根据字典DictValue获取字典值列表
-            </summary>
-            <param name="DictValue">字典值</param>
-            <param name="devDictList">字典列表</param>
-            <returns>字典值列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String[])">
-            <summary>
-            根据字典DictValue列表获取对应字典值列表
-            </summary>
-            <param name="DictValues">字典值列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.Page(SimpleAdmin.System.DictPageInput)">
-            <summary>
-            字典分页查询
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>字典分页列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IDictService.Tree(SimpleAdmin.System.DictTreeInput)">
-            <summary>
-            获取字典树形结构
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>字典树形结构</returns>
-        </member>
         <member name="T:SimpleAdmin.System.FilePageInput">
             <summary>
             文件分页输出
@@ -3042,219 +2705,6 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.UnReadCount(System.Int64)">
-            <inheritdoc />
-        </member>
-        <member name="T:SimpleAdmin.System.OperateLogPageInput">
-            <summary>
-            操作日志分页输入
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.OperateLogDeleteInput">
-            <summary>
-            操作日志日志删除输入
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.OperateLogDayStatisticsOutput">
-            <summary>
-            操作日志周统计输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Date">
-            <summary>
-            日期
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Count">
-            <summary>
-            数量
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.OperateLogTotalCountOutpu">
-            <summary>
-            操作日志统计
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IOperateLogService">
-            <summary>
-            操作日志服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IOperateLogService.Delete(System.String)">
-            <summary>
-            根据分类删除操作日志
-            </summary>
-            <param name="category">分类名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IOperateLogService.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            日志详情
-            </summary>
-            <param name="input">id</param>
-            <returns>日志详情</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IOperateLogService.Page(SimpleAdmin.System.OperateLogPageInput)">
-            <summary>
-            操作日志分页查询
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>分页列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IOperateLogService.StatisticsByDay(System.Int32)">
-            <summary>
-            操作日志周统计
-            </summary>
-            <param name="day">天数</param>
-            <returns>统计结果</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IOperateLogService.TotalCount">
-            <summary>
-            操作日志总览
-            </summary>
-            <returns>异常日志和操作日志的数量</returns>
-        </member>
-        <member name="T:SimpleAdmin.System.OperateLogService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IOperateLogService"/>
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.System.OperateLogService.NameOperate">
-            <summary>
-            操作日志中文名称
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.System.OperateLogService.NameExecption">
-            <summary>
-            异常日志中文名称
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.OperateLogService.Page(SimpleAdmin.System.OperateLogPageInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.OperateLogService.StatisticsByDay(System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.OperateLogService.TotalCount">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.OperateLogService.Delete(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.OperateLogService.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="T:SimpleAdmin.System.VisitLogPageInput">
-            <summary>
-            访问日志分页输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogPageInput.Category">
-            <summary>
-            分类
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogPageInput.Account">
-            <summary>
-            账号
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.VisitLogDeleteInput">
-            <summary>
-            访问日志删除输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogDeleteInput.Category">
-            <summary>
-            分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.VisitLogDayStatisticsOutput">
-            <summary>
-            周统计输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.Date">
-            <summary>
-            日期
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.LoginCount">
-            <summary>
-            登录次数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.LogoutCount">
-            <summary>
-            登出次数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.VisitLogTotalCountOutput">
-            <summary>
-            访问日志总数输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogTotalCountOutput.Type">
-            <summary>
-            类型
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.VisitLogTotalCountOutput.Value">
-            <summary>
-            数量
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IVisitLogService">
-            <summary>
-            访问日志服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IVisitLogService.Delete(System.String)">
-            <summary>
-            根据分类删除
-            </summary>
-            <param name="category">分类名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IVisitLogService.Page(SimpleAdmin.System.VisitLogPageInput)">
-            <summary>
-            访问日志分页查询
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>日志列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IVisitLogService.StatisticsByDay(System.Int32)">
-            <summary>
-            根统计N天来登录和登出数量
-            </summary>
-            <param name="day">天使</param>
-            <returns>统计信息</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IVisitLogService.TotalCount">
-            <summary>
-            统计登录登出总览
-            </summary>
-            <returns>登录和登出的数量</returns>
-        </member>
-        <member name="T:SimpleAdmin.System.VisitLogService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IVisitLogService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.VisitLogService.Page(SimpleAdmin.System.VisitLogPageInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.VisitLogService.StatisticsByDay(System.Int32)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.VisitLogService.TotalCount">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.VisitLogService.Delete(System.String)">
             <inheritdoc />
         </member>
         <member name="T:SimpleAdmin.System.ImportPreviewInput">
@@ -3558,6 +3008,1305 @@
         </member>
         <member name="M:SimpleAdmin.System.IndexService.DeleteSchedule(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc/>
+        </member>
+        <member name="T:SimpleAdmin.System.ButtonService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IButtonService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.Add(SimpleAdmin.System.ButtonAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.AddBatch(SimpleAdmin.System.ButtonAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.Edit(SimpleAdmin.System.ButtonEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.System.SysResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysResource"></param>
+        </member>
+        <member name="P:SimpleAdmin.System.ButtonPageInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ButtonAddInput">
+            <summary>
+            添加按钮参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ButtonAddInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ButtonAddInput.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ButtonAddInput.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ButtonEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IButtonService">
+            <summary>
+            权限按钮服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.Add(SimpleAdmin.System.ButtonAddInput)">
+            <summary>
+            添加按钮
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.AddBatch(SimpleAdmin.System.ButtonAddInput)">
+            <summary>
+            批量添加
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除按钮
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.Edit(SimpleAdmin.System.ButtonEditInput)">
+            <summary>
+            编辑按钮
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
+            <summary>
+            按钮分页查询
+            </summary>
+            <param name="input">查询条件</param>
+            <returns>按钮分页列表</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.MenuTreeInput">
+            <summary>
+            菜单树查询参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuTreeInput.Module">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuTreeInput.SearchKey">
+            <summary>
+            关键字
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MenuAddInput">
+            <summary>
+            添加菜单参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.Module">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.Path">
+            <summary>
+            路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuAddInput.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.MenuAddInput.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            特殊验证
+            </summary>
+            <param name="validationContext"></param>
+            <returns></returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:SimpleAdmin.System.MenuEditInput">
+            <summary>
+            编辑菜单输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MenuChangeModuleInput">
+            <summary>
+            改变模块输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MenuChangeModuleInput.Module">
+            <summary>
+            模块ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IMenuService">
+            <summary>
+            菜单服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.Add(SimpleAdmin.System.MenuAddInput)">
+            <summary>
+            添加菜单
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            详情
+            </summary>
+            <param name="input">id</param>
+            <returns>详细信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <summary>
+            构建菜单树形结构
+            </summary>
+            <param name="resourceList">菜单列表</param>
+            <param name="parentId">父ID</param>
+            <returns>菜单形结构</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+            <summary>
+            获取菜单树
+            </summary>
+            <param name="input">菜单树查询参数</param>
+            <returns>菜单树列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.Edit(SimpleAdmin.System.MenuEditInput)">
+            <summary>
+            编辑菜单
+            </summary>
+            <param name="input">菜单编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="input">删除菜单参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
+            <summary>
+            改变菜单模块
+            </summary>
+            <param name="input">改变菜单模块参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.MenuService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IMenuService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.Add(SimpleAdmin.System.MenuAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.Edit(SimpleAdmin.System.MenuEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MenuService.CheckInput(SimpleAdmin.System.SysResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.ModulePageInput">
+            <summary>
+            模块分页输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ModuleAddInput">
+            <summary>
+            添加模块输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ModuleEditInput">
+            <summary>
+            编辑模块输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ModuleEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IModuleService">
+            <summary>
+            模块管理服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IModuleService.Add(SimpleAdmin.System.ModuleAddInput)">
+            <summary>
+            添加模块
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除模块
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
+            <summary>
+            编辑模块
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IModuleService.Page(SimpleAdmin.System.ModulePageInput)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="input">分页参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.ModuleService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IModuleService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.Page(SimpleAdmin.System.ModulePageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.Add(SimpleAdmin.System.ModuleAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.System.SysResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.RolePageInput">
+            <summary>
+            角色查询参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleAddInput">
+            <summary>
+            角色添加参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleAddInput.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleAddInput.Category">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleEditInput">
+            <summary>
+            角色编辑参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleEditInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.GrantResourceInput">
+            <summary>
+            角色授权资源参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantResourceInput.Id">
+            <summary>
+            角色Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantResourceInput.GrantInfoList">
+            <summary>
+            授权资源信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantResourceInput.IsCodeGen">
+            <summary>
+            是否代码生成
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.GrantPermissionInput">
+            <summary>
+            角色授权资源参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantPermissionInput.Id">
+            <summary>
+            角色Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantPermissionInput.GrantInfoList">
+            <summary>
+            授权权限信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.GrantUserInput">
+            <summary>
+            角色授权用户参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantUserInput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GrantUserInput.GrantInfoList">
+            <summary>
+            授权权限信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleSelectorInput">
+            <summary>
+            角色选择器参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleSelectorInput.OrgId">
+            <summary>
+            组织ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleSelectorInput.OrgIds">
+            <summary>
+            机构ID列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleSelectorInput.SearchKey">
+            <summary>
+            关键字
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleSelectorInput.Category">
+            <summary>
+            角色分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleOwnResourceOutput">
+            <summary>
+            角色拥有的资源输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleOwnResourceOutput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleOwnResourceOutput.GrantInfoList">
+            <summary>
+            已授权资源信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleOwnPermissionOutput">
+            <summary>
+            角色拥有权限输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleOwnPermissionOutput.Id">
+            <summary>
+            角色Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.RoleOwnPermissionOutput.GrantInfoList">
+            <summary>
+            已授权资源信息
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IRoleService">
+            <summary>
+            角色服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GetListAsync">
+            <summary>
+            获取所有角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.Add(SimpleAdmin.System.RoleAddInput)">
+            <summary>
+            添加角色
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+            <summary>
+            编辑角色
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByUserId(System.Int64)">
+            <summary>
+            根据用户ID获取用户角色集合
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+            <summary>
+            给角色授权权限
+            </summary>
+            <param name="input">授权信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            给角色授权
+            </summary>
+            <param name="input">授权参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <summary>
+            给角色授权用户
+            </summary>
+            <param name="input">授权信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色拥有权限
+            </summary>
+            <param name="input">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+            <summary>
+            角色拥有资源
+            </summary>
+            <param name="input">角色id</param>
+            <param name="category">资源类型</param>
+            <returns>角色拥有资源信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色下的用户
+            </summary>
+            <param name="input">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.Page(SimpleAdmin.System.RolePageInput)">
+            <summary>
+            分页查询角色
+            </summary>
+            <param name="input">查询参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.RefreshCache">
+            <summary>
+            刷新缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色授权权限选择器
+            </summary>
+            <param name="input">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            角色选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+            根据id集合获取角色集合
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.RoleService">
+            <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GetListAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByUserId(System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.Page(SimpleAdmin.System.RolePageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.Add(SimpleAdmin.System.RoleAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.RefreshCache">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.System.SysRole)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysRole"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.SpaPageInput">
+            <summary>
+            单页输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaPageInput.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SpaAddInput">
+            <summary>
+            单页输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaAddInput.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaAddInput.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaAddInput.Path">
+            <summary>
+            路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaAddInput.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SpaEditInput">
+            <summary>
+            单页修改参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SpaEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ISpaService">
+            <summary>
+            单页服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.ISpaService.Add(SimpleAdmin.System.SpaAddInput)">
+            <summary>
+            添加单页
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除单页
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISpaService.Edit(SimpleAdmin.System.SpaEditInput)">
+            <summary>
+            编辑单页
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISpaService.Page(SimpleAdmin.System.SpaPageInput)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.SpaService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.ISpaService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.Page(SimpleAdmin.System.SpaPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.Add(SimpleAdmin.System.SpaAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.Edit(SimpleAdmin.System.SpaEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.System.SysResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.OperateLogPageInput">
+            <summary>
+            操作日志分页输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.OperateLogDeleteInput">
+            <summary>
+            操作日志日志删除输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.OperateLogDayStatisticsOutput">
+            <summary>
+            操作日志周统计输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Date">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.OperateLogDayStatisticsOutput.Count">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.OperateLogTotalCountOutpu">
+            <summary>
+            操作日志统计
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IOperateLogService">
+            <summary>
+            操作日志服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IOperateLogService.Delete(System.String)">
+            <summary>
+            根据分类删除操作日志
+            </summary>
+            <param name="category">分类名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IOperateLogService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            日志详情
+            </summary>
+            <param name="input">id</param>
+            <returns>日志详情</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IOperateLogService.Page(SimpleAdmin.System.OperateLogPageInput)">
+            <summary>
+            操作日志分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>分页列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IOperateLogService.StatisticsByDay(System.Int32)">
+            <summary>
+            操作日志周统计
+            </summary>
+            <param name="day">天数</param>
+            <returns>统计结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IOperateLogService.TotalCount">
+            <summary>
+            操作日志总览
+            </summary>
+            <returns>异常日志和操作日志的数量</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.OperateLogService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IOperateLogService"/>
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.OperateLogService.NameOperate">
+            <summary>
+            操作日志中文名称
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.OperateLogService.NameExecption">
+            <summary>
+            异常日志中文名称
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.OperateLogService.Page(SimpleAdmin.System.OperateLogPageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.OperateLogService.StatisticsByDay(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.OperateLogService.TotalCount">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.OperateLogService.Delete(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.OperateLogService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="T:SimpleAdmin.System.VisitLogPageInput">
+            <summary>
+            访问日志分页输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogPageInput.Category">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogPageInput.Account">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.VisitLogDeleteInput">
+            <summary>
+            访问日志删除输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogDeleteInput.Category">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.VisitLogDayStatisticsOutput">
+            <summary>
+            周统计输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.Date">
+            <summary>
+            日期
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.LoginCount">
+            <summary>
+            登录次数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogDayStatisticsOutput.LogoutCount">
+            <summary>
+            登出次数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.VisitLogTotalCountOutput">
+            <summary>
+            访问日志总数输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogTotalCountOutput.Type">
+            <summary>
+            类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.VisitLogTotalCountOutput.Value">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IVisitLogService">
+            <summary>
+            访问日志服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IVisitLogService.Delete(System.String)">
+            <summary>
+            根据分类删除
+            </summary>
+            <param name="category">分类名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IVisitLogService.Page(SimpleAdmin.System.VisitLogPageInput)">
+            <summary>
+            访问日志分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>日志列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IVisitLogService.StatisticsByDay(System.Int32)">
+            <summary>
+            根统计N天来登录和登出数量
+            </summary>
+            <param name="day">天使</param>
+            <returns>统计信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IVisitLogService.TotalCount">
+            <summary>
+            统计登录登出总览
+            </summary>
+            <returns>登录和登出的数量</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.VisitLogService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IVisitLogService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.VisitLogService.Page(SimpleAdmin.System.VisitLogPageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.VisitLogService.StatisticsByDay(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.VisitLogService.TotalCount">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.VisitLogService.Delete(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigService">
+            <inheritdoc cref="T:SimpleAdmin.System.IConfigService"/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.GetListByCategory(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.GetByConfigKey(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.Page(SimpleAdmin.System.ConfigPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.Add(SimpleAdmin.System.ConfigAddInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.Edit(SimpleAdmin.System.ConfigEditInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.Delete(SimpleAdmin.System.ConfigDeleteInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.SysConfig})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.RefreshCache(System.String)">
+            <summary>
+            刷新缓存
+            </summary>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ConfigService.CheckInput(SimpleAdmin.System.SysConfig)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysConfig"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigPageInput">
+            <summary>
+            配置分页参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigAddInput">
+            <summary>
+            添加配置参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ConfigAddInput.ConfigKey">
+            <summary>
+            配置键
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ConfigAddInput.ConfigValue">
+            <summary>
+            配置值
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigEditInput">
+            <summary>
+            编辑配置参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ConfigEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigDeleteInput">
+            <summary>
+            删除配置参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ConfigEditBatchInput">
+            <summary>
+            批量修改输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ConfigEditBatchInput.CateGory">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IConfigService">
+            <summary>
+            系统配置服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.Add(SimpleAdmin.System.ConfigAddInput)">
+            <summary>
+            新增配置
+            </summary>
+            <param name="input">新增参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.Delete(SimpleAdmin.System.ConfigDeleteInput)">
+            <summary>
+            删除配置
+            </summary>
+            <param name="input">删除</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.Edit(SimpleAdmin.System.ConfigEditInput)">
+            <summary>
+            修改配置
+            </summary>
+            <param name="input">修改参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.SysConfig})">
+            <summary>
+            批量编辑
+            </summary>
+            <param name="devConfigs">配置列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.GetByConfigKey(System.String,System.String)">
+            <summary>
+            根据分类和配置键获配置
+            </summary>
+            <param name="category">分类</param>
+            <param name="configKey">配置键</param>
+            <returns>配置信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.GetListByCategory(System.String)">
+            <summary>
+            根据分类获取配置列表
+            </summary>
+            <param name="category">分类名称</param>
+            <returns>配置列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IConfigService.Page(SimpleAdmin.System.ConfigPageInput)">
+            <summary>
+            分页查询其他配置
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>其他配置列表</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.DictService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IDictService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.Page(SimpleAdmin.System.DictPageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.Add(SimpleAdmin.System.DictAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.Edit(SimpleAdmin.System.DictAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.Delete(SimpleAdmin.System.DictDeleteInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.GetListAsync">
+            <summary>
+            获取全部
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.GetDict(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.SysDict})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.GetValuesByDictValue(System.String[])">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.Tree(SimpleAdmin.System.DictTreeInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.SysDict},System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.RefreshCache">
+            <summary>
+            刷新缓存
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.CheckInput(SimpleAdmin.System.SysDict)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysDict"></param>
+        </member>
+        <member name="M:SimpleAdmin.System.DictService.GetDevDictChilden(System.Collections.Generic.List{SimpleAdmin.System.SysDict},System.Int64)">
+            <summary>
+            获取字典所有下级
+            </summary>
+            <param name="dictList">字典列表</param>
+            <param name="parentId">父ID</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.DictInput">
+            <summary>
+            字典查询参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DictTreeInput">
+            <summary>
+            字典树参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictTreeInput.Category">
+            <summary>
+            字典分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DictPageInput">
+            <summary>
+            字典查询参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictPageInput.ParentId">
+             <summary>
+             父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictPageInput.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DictAddInput">
+            <summary>
+            添加字典参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictAddInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictAddInput.DictLabel">
+            <summary>
+            字典名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictAddInput.DictValue">
+            <summary>
+            字典值
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictAddInput.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DictEditInput">
+            <summary>
+            编辑字典参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.DictEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.DictDeleteInput">
+            <summary>
+            删除字典参数
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IDictService">
+            <summary>
+            字典服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.Add(SimpleAdmin.System.DictAddInput)">
+            <summary>
+            添加字典
+            </summary>
+            <param name="input">输入参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.ConstructResourceTrees(System.Collections.Generic.List{SimpleAdmin.System.SysDict},System.Int64)">
+            <summary>
+            构建字典树形结构
+            </summary>
+            <param name="dictList">字典列表</param>
+            <param name="parentId">父ID</param>
+            <returns>字典树形结构</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.Delete(SimpleAdmin.System.DictDeleteInput)">
+            <summary>
+            删除字典
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.Edit(SimpleAdmin.System.DictAddInput)">
+            <summary>
+            编辑字典
+            </summary>
+            <param name="input">输入参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.GetDict(System.String)">
+            <summary>
+            获取字典
+            </summary>
+            <param name="DictValue">字典</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.GetListAsync">
+            <summary>
+            获取所有
+            </summary>
+            <returns>字典列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String,System.Collections.Generic.List{SimpleAdmin.System.SysDict})">
+            <summary>
+            根据字典DictValue获取字典值列表
+            </summary>
+            <param name="DictValue">字典值</param>
+            <param name="devDictList">字典列表</param>
+            <returns>字典值列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.GetValuesByDictValue(System.String[])">
+            <summary>
+            根据字典DictValue列表获取对应字典值列表
+            </summary>
+            <param name="DictValues">字典值列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.Page(SimpleAdmin.System.DictPageInput)">
+            <summary>
+            字典分页查询
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>字典分页列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IDictService.Tree(SimpleAdmin.System.DictTreeInput)">
+            <summary>
+            获取字典树形结构
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>字典树形结构</returns>
         </member>
         <member name="T:SimpleAdmin.System.SysOrgPageInput">
             <summary>
@@ -4012,7 +4761,10 @@
             </summary>
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.GetListAsync">
-            <inheritdoc />
+            <summary>
+            获取全部
+            </summary>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
@@ -4044,1376 +4796,6 @@
             </summary>
             <param name="sysPosition"></param>
             <param name="name">名称</param>
-        </member>
-        <member name="T:SimpleAdmin.System.IRelationService">
-            <summary>
-            关系服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetRelationByCategory(System.String)">
-            <summary>
-            根据分类获取关系表信息
-            </summary>
-            <param name="category">分类名称</param>
-            <returns>关系表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByObjectIdAndCategory(System.Int64,System.String)">
-            <summary>
-            通过对象ID和分类获取关系列表
-            </summary>
-            <param name="objectId">对象ID</param>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByObjectIdListAndCategory(System.Collections.Generic.List{System.Int64},System.String)">
-            <summary>
-            通过对象ID列表和分类获取关系列表
-            </summary>
-            <param name="objectIds">对象ID</param>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByTargetIdAndCategory(System.String,System.String)">
-            <summary>
-            通过目标ID和分类获取关系列表
-            </summary>
-            <param name="targetId">目标ID</param>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByTargetIdListAndCategory(System.Collections.Generic.List{System.String},System.String)">
-            <summary>
-            通过目标ID列表和分类获取关系列表
-            </summary>
-            <param name="targetIds"></param>
-            <param name="category"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetWorkbench(System.Int64)">
-            <summary>
-            获取关系表用户工作台
-            </summary>
-            <param name="userId">用户ID</param>
-            <returns>关系表数据</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.RefreshCache(System.String)">
-            <summary>
-            更新缓存
-            </summary>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
-            <summary>
-            保存关系
-            </summary>
-            <param name="category">分类</param>
-            <param name="objectId">对象ID</param>
-            <param name="targetId">目标ID</param>
-            <param name="extJson">拓展信息</param>
-            <param name="clear">是否清除老的数据</param>
-            <param name="refreshCache">是否刷新缓存</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.SaveRelationBatch(System.String,System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean)">
-            <summary>
-            批量保存关系
-            </summary>
-            <param name="category">分类</param>
-            <param name="objectId">对象ID</param>
-            <param name="targetIds">目标ID列表</param>
-            <param name="extJsons">拓展信息列表</param>
-            <param name="clear">是否清除老的数据</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
-            <summary>
-            根据角色ID获取模块ID列表
-            </summary>
-            <param name="roleIdList">角色ID列表</param>
-            <returns>模块ID列表</returns>
-        </member>
-        <member name="T:SimpleAdmin.System.Relationservice">
-            <inheritdoc cref="T:SimpleAdmin.System.IRelationService"/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetRelationByCategory(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByObjectIdAndCategory(System.Int64,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetWorkbench(System.Int64)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByObjectIdListAndCategory(System.Collections.Generic.List{System.Int64},System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByTargetIdAndCategory(System.String,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByTargetIdListAndCategory(System.Collections.Generic.List{System.String},System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.RefreshCache(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.SaveRelationBatch(System.String,System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.Relationservice.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
-            <inheritdoc/>
-        </member>
-        <member name="T:SimpleAdmin.System.ButtonService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IButtonService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.Add(SimpleAdmin.System.ButtonAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.AddBatch(SimpleAdmin.System.ButtonAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.Edit(SimpleAdmin.System.ButtonEditInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.System.SysResource)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="sysResource"></param>
-        </member>
-        <member name="P:SimpleAdmin.System.ButtonPageInput.ParentId">
-            <summary>
-            父ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ButtonAddInput">
-            <summary>
-            添加按钮参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ButtonAddInput.ParentId">
-            <summary>
-            父ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ButtonAddInput.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ButtonAddInput.Code">
-            <summary>
-            编码
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ButtonEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IButtonService">
-            <summary>
-            权限按钮服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IButtonService.Add(SimpleAdmin.System.ButtonAddInput)">
-            <summary>
-            添加按钮
-            </summary>
-            <param name="input">添加参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IButtonService.AddBatch(SimpleAdmin.System.ButtonAddInput)">
-            <summary>
-            批量添加
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除按钮
-            </summary>
-            <param name="input">删除参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IButtonService.Edit(SimpleAdmin.System.ButtonEditInput)">
-            <summary>
-            编辑按钮
-            </summary>
-            <param name="input">编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
-            <summary>
-            按钮分页查询
-            </summary>
-            <param name="input">查询条件</param>
-            <returns>按钮分页列表</returns>
-        </member>
-        <member name="T:SimpleAdmin.System.MenuTreeInput">
-            <summary>
-            菜单树查询参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuTreeInput.Module">
-            <summary>
-            模块
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuTreeInput.SearchKey">
-            <summary>
-            关键字
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.MenuAddInput">
-            <summary>
-            添加菜单参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.ParentId">
-            <summary>
-            父ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.MenuType">
-            <summary>
-            菜单类型
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.Module">
-            <summary>
-            模块
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.Path">
-            <summary>
-            路径
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuAddInput.Icon">
-            <summary>
-            图标
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.MenuAddInput.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
-            <summary>
-            特殊验证
-            </summary>
-            <param name="validationContext"></param>
-            <returns></returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="T:SimpleAdmin.System.MenuEditInput">
-            <summary>
-            编辑菜单输入参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.MenuChangeModuleInput">
-            <summary>
-            改变模块输入参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MenuChangeModuleInput.Module">
-            <summary>
-            模块ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IMenuService">
-            <summary>
-            菜单服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Add(SimpleAdmin.System.MenuAddInput)">
-            <summary>
-            添加菜单
-            </summary>
-            <param name="input">添加参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            详情
-            </summary>
-            <param name="input">id</param>
-            <returns>详细信息</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <summary>
-            构建菜单树形结构
-            </summary>
-            <param name="resourceList">菜单列表</param>
-            <param name="parentId">父ID</param>
-            <returns>菜单形结构</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
-            <summary>
-            获取菜单树
-            </summary>
-            <param name="input">菜单树查询参数</param>
-            <returns>菜单树列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Edit(SimpleAdmin.System.MenuEditInput)">
-            <summary>
-            编辑菜单
-            </summary>
-            <param name="input">菜单编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除菜单
-            </summary>
-            <param name="input">删除菜单参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IMenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
-            <summary>
-            改变菜单模块
-            </summary>
-            <param name="input">改变菜单模块参数</param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.MenuService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IMenuService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.Add(SimpleAdmin.System.MenuAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.Edit(SimpleAdmin.System.MenuEditInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MenuService.CheckInput(SimpleAdmin.System.SysResource)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="sysResource"></param>
-        </member>
-        <member name="T:SimpleAdmin.System.ModulePageInput">
-            <summary>
-            模块分页输入
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ModuleAddInput">
-            <summary>
-            添加模块输入
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ModuleEditInput">
-            <summary>
-            编辑模块输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ModuleEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IModuleService">
-            <summary>
-            模块管理服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IModuleService.Add(SimpleAdmin.System.ModuleAddInput)">
-            <summary>
-            添加模块
-            </summary>
-            <param name="input">添加参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除模块
-            </summary>
-            <param name="input">删除参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
-            <summary>
-            编辑模块
-            </summary>
-            <param name="input">编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IModuleService.Page(SimpleAdmin.System.ModulePageInput)">
-            <summary>
-            分页查询
-            </summary>
-            <param name="input">分页参数</param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.ModuleService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.IModuleService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.ModuleService.Page(SimpleAdmin.System.ModulePageInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ModuleService.Add(SimpleAdmin.System.ModuleAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.System.SysResource)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="sysResource"></param>
-        </member>
-        <member name="T:SimpleAdmin.System.ResTreeSelector">
-            <summary>
-            角色授权资源树输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.Id">
-            <summary>
-            模块id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.Title">
-            <summary>
-            模块名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.Icon">
-            <summary>
-            模块图标
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.Menu">
-            <summary>
-            模块下菜单集合
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu">
-            <summary>
-            授权菜单类
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Id">
-            <summary>
-            菜单id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.ParentId">
-            <summary>
-            父id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.ParentName">
-            <summary>
-            父名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Title">
-            <summary>
-            模块名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Module">
-            <summary>
-            模块id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Button">
-            <summary>
-            菜单下按钮集合
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Id">
-            <summary>
-            按钮id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PermissionTreeSelector.ApiName">
-            <summary>
-            接口描述
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PermissionTreeSelector.ApiRoute">
-            <summary>
-            路由名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PermissionTreeSelector.PermissionName">
-            <summary>
-            权限名称
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IResourceService">
-            <summary>
-            资源服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetaModuleAndMenuAndSpaList">
-            <summary>
-            获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
-            </summary>
-            <returns>所有的菜单和模块以及单页面列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
-            <summary>
-             根据模块ID获取菜单和单页面列表
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Int64,System.Boolean)">
-            <summary>
-            根据资源ID获取所有下级资源
-            </summary>
-            <param name="resId">资源ID</param>
-            <param name="isContainOneself">是否包含自己</param>
-            <returns>资源列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
-            <summary>
-            根据资源ID获取所有下级资源
-            </summary>
-            <param name="sysResources">资源列表</param>
-            <param name="resId">资源ID</param>
-            <param name="isContainOneself">是否包含自己</param>
-            <returns>资源列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
-            <summary>
-            获取ID获取Code列表
-            </summary>
-            <param name="ids">id列表</param>
-            <param name="category">分类</param>
-            <returns>Code列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
-            <summary>
-            获取资源列表
-            </summary>
-            <param name="categorys">资源分类列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetListByCategory(System.String)">
-            <summary>
-            根据分类获取资源列表
-            </summary>
-            <param name="category">分类名称</param>
-            <returns>资源列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
-            <summary>
-            根据菜单ID获取菜单
-            </summary>
-            <param name="ids">id列表</param>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
-            <summary>
-            获取权限授权树
-            </summary>
-            <param name="routes">路由列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.RefreshCache(System.String)">
-            <summary>
-            刷新缓存
-            </summary>
-            <param name="category">分类名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IResourceService.ResourceTreeSelector">
-            <summary>
-            角色授权资源树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.ResourceService">
-            <inheritdoc cref="T:SimpleAdmin.System.IResourceService"/>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetaModuleAndMenuAndSpaList">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.RefreshCache(System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Int64,System.Boolean)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetListByCategory(System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.ResourceTreeSelector">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetRouteName(System.String,System.String)">
-            <summary>
-            获取路由地址名称
-            </summary>
-            <param name="controllerName">控制器地址</param>
-            <param name="template">路由名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceChilden(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <summary>
-            获取资源所有下级
-            </summary>
-            <param name="resourceList">资源列表</param>
-            <param name="parentId">父ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <summary>
-            获取上级
-            </summary>
-            <param name="resourceList"></param>
-            <param name="parentId"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenus(System.Int64)">
-            <summary>
-            获取授权菜单
-            </summary>
-            <param name="moduleId">模块ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenuTitle(System.Collections.Generic.List{SimpleAdmin.System.SysResource},SimpleAdmin.System.SysResource)">
-            <summary>
-            获取授权菜单类菜单名称
-            </summary>
-            <param name="menuList">菜单列表</param>
-            <param name="menu">当前菜单</param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.SpaPageInput">
-            <summary>
-            单页输入参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaPageInput.MenuType">
-            <summary>
-            菜单类型
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.SpaAddInput">
-            <summary>
-            单页输入参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaAddInput.Title">
-            <summary>
-            标题
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaAddInput.MenuType">
-            <summary>
-            菜单类型
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaAddInput.Path">
-            <summary>
-            路径
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaAddInput.Icon">
-            <summary>
-            图标
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.SpaEditInput">
-            <summary>
-            单页修改参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SpaEditInput.Id">
-            <summary>
-            ID
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.ISpaService">
-            <summary>
-            单页服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.ISpaService.Add(SimpleAdmin.System.SpaAddInput)">
-            <summary>
-            添加单页
-            </summary>
-            <param name="input">添加参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除单页
-            </summary>
-            <param name="input">删除参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISpaService.Edit(SimpleAdmin.System.SpaEditInput)">
-            <summary>
-            编辑单页
-            </summary>
-            <param name="input">编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISpaService.Page(SimpleAdmin.System.SpaPageInput)">
-            <summary>
-            分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.SpaService">
-            <summary>
-            <inheritdoc cref="T:SimpleAdmin.System.ISpaService"/>
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.SpaService.Page(SimpleAdmin.System.SpaPageInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.SpaService.Add(SimpleAdmin.System.SpaAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.SpaService.Edit(SimpleAdmin.System.SpaEditInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.SpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.System.SysResource)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="sysResource"></param>
-        </member>
-        <member name="T:SimpleAdmin.System.RolePageInput">
-            <summary>
-            角色查询参数
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleAddInput">
-            <summary>
-            角色添加参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleAddInput.Name">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleAddInput.Category">
-            <summary>
-            分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleEditInput">
-            <summary>
-            角色编辑参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleEditInput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.GrantResourceInput">
-            <summary>
-            角色授权资源参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantResourceInput.Id">
-            <summary>
-            角色Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantResourceInput.GrantInfoList">
-            <summary>
-            授权资源信息
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantResourceInput.IsCodeGen">
-            <summary>
-            是否代码生成
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.GrantPermissionInput">
-            <summary>
-            角色授权资源参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantPermissionInput.Id">
-            <summary>
-            角色Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantPermissionInput.GrantInfoList">
-            <summary>
-            授权权限信息
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.GrantUserInput">
-            <summary>
-            角色授权用户参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantUserInput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GrantUserInput.GrantInfoList">
-            <summary>
-            授权权限信息
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleSelectorInput">
-            <summary>
-            角色选择器参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleSelectorInput.OrgId">
-            <summary>
-            组织ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleSelectorInput.OrgIds">
-            <summary>
-            机构ID列表
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleSelectorInput.SearchKey">
-            <summary>
-            关键字
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleSelectorInput.Category">
-            <summary>
-            角色分类
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleOwnResourceOutput">
-            <summary>
-            角色拥有的资源输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleOwnResourceOutput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleOwnResourceOutput.GrantInfoList">
-            <summary>
-            已授权资源信息
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleOwnPermissionOutput">
-            <summary>
-            角色拥有权限输出
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleOwnPermissionOutput.Id">
-            <summary>
-            角色Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.RoleOwnPermissionOutput.GrantInfoList">
-            <summary>
-            已授权资源信息
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IRoleService">
-            <summary>
-            角色服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetListAsync">
-            <summary>
-            获取所有角色
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Add(SimpleAdmin.System.RoleAddInput)">
-            <summary>
-            添加角色
-            </summary>
-            <param name="input">添加参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除角色
-            </summary>
-            <param name="input">删除参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
-            <summary>
-            编辑角色
-            </summary>
-            <param name="input">编辑参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByUserId(System.Int64)">
-            <summary>
-            根据用户ID获取用户角色集合
-            </summary>
-            <param name="userId">用户ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
-            <summary>
-            给角色授权权限
-            </summary>
-            <param name="input">授权信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
-            <summary>
-            给角色授权
-            </summary>
-            <param name="input">授权参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
-            <summary>
-            给角色授权用户
-            </summary>
-            <param name="input">授权信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色拥有权限
-            </summary>
-            <param name="input">角色ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
-            <summary>
-            角色拥有资源
-            </summary>
-            <param name="input">角色id</param>
-            <param name="category">资源类型</param>
-            <returns>角色拥有资源信息</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色下的用户
-            </summary>
-            <param name="input">角色ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Page(SimpleAdmin.System.RolePageInput)">
-            <summary>
-            分页查询角色
-            </summary>
-            <param name="input">查询参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RefreshCache">
-            <summary>
-            刷新缓存
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取角色授权权限选择器
-            </summary>
-            <param name="input">角色ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <summary>
-            角色选择器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
-            <summary>
-            根据id集合获取角色集合
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.RoleService">
-            <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetListAsync">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByUserId(System.Int64)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.Page(SimpleAdmin.System.RolePageInput)">
-            <inheritdoc/>
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.Add(SimpleAdmin.System.RoleAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.Edit(SimpleAdmin.System.RoleEditInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.RefreshCache">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.System.SysRole)">
-            <summary>
-            检查输入参数
-            </summary>
-            <param name="sysRole"></param>
-        </member>
-        <member name="T:SimpleAdmin.System.UpdateInfoInput">
-            <summary>
-            编辑个人信息参数
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.UpdateInfoInput.Name">
-            <summary>
-            姓名
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.UpdateSignatureInput.Signature">
-            <summary>
-            签名图片
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.UpdateWorkbenchInput">
-            <summary>
-            更新个人工作台
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.UpdateWorkbenchInput.WorkbenchData">
-            <summary>
-            工作台数据
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.UpdatePasswordInput">
-            <summary>
-            更新个人密码
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.UpdatePasswordInput.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.UpdatePasswordInput.NewPassword">
-            <summary>
-            新密码
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.SetDeafultModuleInput">
-            <summary>
-            设置默认模块输入
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.Id">
-            <summary>
-            模块Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.IfDefault">
-            <summary>
-            是否默认
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.LoginOrgTreeOutput">
-            <summary>
-            我的机构数样式
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Id">
-            <summary>
-            Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Label">
-            <summary>
-            名称
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Pid">
-            <summary>
-            父ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Children">
-            <summary>
-            子节点
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Style">
-            <summary>
-            样式
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle">
-            <summary>
-            我的机构样式
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle.Background">
-            <summary>
-            背景色
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle.Color">
-            <summary>
-             字体颜色
-            </summary>
-        </member>
-        <member name="T:SimpleAdmin.System.IUserCenterService">
-            <summary>
-            个人信息中心服务
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取登录用户菜单
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginWorkbench">
-            <summary>
-            获取个人工作台
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.LoginOrgTree">
-            <summary>
-            获取组织架构
-            </summary>
-            <returns>组织架构</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
-            <summary>
-            获取登录用户的站内信分页
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>站内信列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            读取登录用户站内信详情
-            </summary>
-            <param name="input">消息ID</param>
-            <returns>消息详情</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UnReadCount">
-            <summary>
-            获取未读消息数量
-            </summary>
-            <returns>未读消息数量</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <summary>
-            更新个人信息
-            </summary>
-            <param name="input">信息参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
-            <summary>
-            更新签名
-            </summary>
-            <param name="input">签名图片</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
-            <summary>
-            编辑个人工作台
-            </summary>
-            <param name="input">工作台字符串</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            删除我的消息
-            </summary>
-            <param name="input">消息Id</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
-            <summary>
-            修改个人密码
-            </summary>
-            <param name="input">密码信息</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
-            <summary>
-            修改头像
-            </summary>
-            <param name="input">头像文件</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
-            <summary>
-            修改默认模块
-            </summary>
-            <param name="input">默认模块输入参数</param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.System.UserCenterService">
-            <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetLoginWorkbench">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.LoginOrgTree">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
-            <summary>
-            获取父菜单集合
-            </summary>
-            <param name="allMenuList">所有菜单列表</param>
-            <param name="myMenus">我的菜单列表</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
-            <summary>
-            构建Meta
-            </summary>
-            <param name="myMenus">我的菜单集合</param>
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Int64)">
-            <summary>
-            构建机构树
-            </summary>
-            <param name="orgList">机构列表</param>
-            <param name="parentId">父ID</param>
-            <param name="orgId">用户ID</param>
-            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.UserSelectorInput">
             <summary>
@@ -6268,7 +5650,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.GetQuery(SimpleAdmin.System.UserPageInput)">
             <summary>
             获取Sqlsugar的ISugarQueryable
-            </summary>  
+            </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
@@ -6277,6 +5659,630 @@
             数据库获取用户信息
             </summary>
             <param name="userId">用户ID</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.IRelationService">
+            <summary>
+            关系服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetRelationByCategory(System.String)">
+            <summary>
+            根据分类获取关系表信息
+            </summary>
+            <param name="category">分类名称</param>
+            <returns>关系表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByObjectIdAndCategory(System.Int64,System.String)">
+            <summary>
+            通过对象ID和分类获取关系列表
+            </summary>
+            <param name="objectId">对象ID</param>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByObjectIdListAndCategory(System.Collections.Generic.List{System.Int64},System.String)">
+            <summary>
+            通过对象ID列表和分类获取关系列表
+            </summary>
+            <param name="objectIds">对象ID</param>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByTargetIdAndCategory(System.String,System.String)">
+            <summary>
+            通过目标ID和分类获取关系列表
+            </summary>
+            <param name="targetId">目标ID</param>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetRelationListByTargetIdListAndCategory(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            通过目标ID列表和分类获取关系列表
+            </summary>
+            <param name="targetIds"></param>
+            <param name="category"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetWorkbench(System.Int64)">
+            <summary>
+            获取关系表用户工作台
+            </summary>
+            <param name="userId">用户ID</param>
+            <returns>关系表数据</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.RefreshCache(System.String)">
+            <summary>
+            更新缓存
+            </summary>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            保存关系
+            </summary>
+            <param name="category">分类</param>
+            <param name="objectId">对象ID</param>
+            <param name="targetId">目标ID</param>
+            <param name="extJson">拓展信息</param>
+            <param name="clear">是否清除老的数据</param>
+            <param name="refreshCache">是否刷新缓存</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.SaveRelationBatch(System.String,System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean)">
+            <summary>
+            批量保存关系
+            </summary>
+            <param name="category">分类</param>
+            <param name="objectId">对象ID</param>
+            <param name="targetIds">目标ID列表</param>
+            <param name="extJsons">拓展信息列表</param>
+            <param name="clear">是否清除老的数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IRelationService.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            根据角色ID获取模块ID列表
+            </summary>
+            <param name="roleIdList">角色ID列表</param>
+            <returns>模块ID列表</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.Relationservice">
+            <inheritdoc cref="T:SimpleAdmin.System.IRelationService"/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetRelationByCategory(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByObjectIdAndCategory(System.Int64,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetWorkbench(System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByObjectIdListAndCategory(System.Collections.Generic.List{System.Int64},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByTargetIdAndCategory(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetRelationListByTargetIdListAndCategory(System.Collections.Generic.List{System.String},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.RefreshCache(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.SaveRelationBatch(System.String,System.Int64,System.Collections.Generic.List{System.String},System.Collections.Generic.List{System.String},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.Relationservice.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
+            <inheritdoc/>
+        </member>
+        <member name="T:SimpleAdmin.System.ResTreeSelector">
+            <summary>
+            角色授权资源树输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.Id">
+            <summary>
+            模块id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.Title">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.Icon">
+            <summary>
+            模块图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.Menu">
+            <summary>
+            模块下菜单集合
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu">
+            <summary>
+            授权菜单类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Id">
+            <summary>
+            菜单id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.ParentId">
+            <summary>
+            父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.ParentName">
+            <summary>
+            父名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Title">
+            <summary>
+            模块名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Module">
+            <summary>
+            模块id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceMenu.Button">
+            <summary>
+            菜单下按钮集合
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Id">
+            <summary>
+            按钮id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PermissionTreeSelector.ApiName">
+            <summary>
+            接口描述
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PermissionTreeSelector.ApiRoute">
+            <summary>
+            路由名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PermissionTreeSelector.PermissionName">
+            <summary>
+            权限名称
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IResourceService">
+            <summary>
+            资源服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetaModuleAndMenuAndSpaList">
+            <summary>
+            获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
+            </summary>
+            <returns>所有的菜单和模块以及单页面列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
+            <summary>
+             根据模块ID获取菜单和单页面列表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Int64,System.Boolean)">
+            <summary>
+            根据资源ID获取所有下级资源
+            </summary>
+            <param name="resId">资源ID</param>
+            <param name="isContainOneself">是否包含自己</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
+            <summary>
+            根据资源ID获取所有下级资源
+            </summary>
+            <param name="sysResources">资源列表</param>
+            <param name="resId">资源ID</param>
+            <param name="isContainOneself">是否包含自己</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <summary>
+            获取ID获取Code列表
+            </summary>
+            <param name="ids">id列表</param>
+            <param name="category">分类</param>
+            <returns>Code列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取资源列表
+            </summary>
+            <param name="categorys">资源分类列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetListByCategory(System.String)">
+            <summary>
+            根据分类获取资源列表
+            </summary>
+            <param name="category">分类名称</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <summary>
+            根据菜单ID获取菜单
+            </summary>
+            <param name="ids">id列表</param>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取权限授权树
+            </summary>
+            <param name="routes">路由列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.RefreshCache(System.String)">
+            <summary>
+            刷新缓存
+            </summary>
+            <param name="category">分类名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IResourceService.ResourceTreeSelector">
+            <summary>
+            角色授权资源树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.ResourceService">
+            <inheritdoc cref="T:SimpleAdmin.System.IResourceService"/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetaModuleAndMenuAndSpaList">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetMenuAndSpaListByModuleId(System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.RefreshCache(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Int64,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetListByCategory(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.ResourceTreeSelector">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetRouteName(System.String,System.String)">
+            <summary>
+            获取路由地址名称
+            </summary>
+            <param name="controllerName">控制器地址</param>
+            <param name="template">路由名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceChilden(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <summary>
+            获取资源所有下级
+            </summary>
+            <param name="resourceList">资源列表</param>
+            <param name="parentId">父ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <summary>
+            获取上级
+            </summary>
+            <param name="resourceList"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenus(System.Int64)">
+            <summary>
+            获取授权菜单
+            </summary>
+            <param name="moduleId">模块ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenuTitle(System.Collections.Generic.List{SimpleAdmin.System.SysResource},SimpleAdmin.System.SysResource)">
+            <summary>
+            获取授权菜单类菜单名称
+            </summary>
+            <param name="menuList">菜单列表</param>
+            <param name="menu">当前菜单</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.UpdateInfoInput">
+            <summary>
+            编辑个人信息参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdateInfoInput.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdateSignatureInput.Signature">
+            <summary>
+            签名图片
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.UpdateWorkbenchInput">
+            <summary>
+            更新个人工作台
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdateWorkbenchInput.WorkbenchData">
+            <summary>
+            工作台数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.UpdatePasswordInput">
+            <summary>
+            更新个人密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdatePasswordInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.UpdatePasswordInput.NewPassword">
+            <summary>
+            新密码
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.SetDeafultModuleInput">
+            <summary>
+            设置默认模块输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.Id">
+            <summary>
+            模块Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SetDeafultModuleInput.IfDefault">
+            <summary>
+            是否默认
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.LoginOrgTreeOutput">
+            <summary>
+            我的机构数样式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Id">
+            <summary>
+            Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Label">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Pid">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.Style">
+            <summary>
+            样式
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle">
+            <summary>
+            我的机构样式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle.Background">
+            <summary>
+            背景色
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.LoginOrgTreeOutput.MyStyle.Color">
+            <summary>
+             字体颜色
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IUserCenterService">
+            <summary>
+            个人信息中心服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取登录用户菜单
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.GetLoginWorkbench">
+            <summary>
+            获取个人工作台
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.LoginOrgTree">
+            <summary>
+            获取组织架构
+            </summary>
+            <returns>组织架构</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>站内信列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input">消息ID</param>
+            <returns>消息详情</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UnReadCount">
+            <summary>
+            获取未读消息数量
+            </summary>
+            <returns>未读消息数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <summary>
+            更新个人信息
+            </summary>
+            <param name="input">信息参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <summary>
+            更新签名
+            </summary>
+            <param name="input">签名图片</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <summary>
+            编辑个人工作台
+            </summary>
+            <param name="input">工作台字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input">消息Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <summary>
+            修改个人密码
+            </summary>
+            <param name="input">密码信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <summary>
+            修改头像
+            </summary>
+            <param name="input">头像文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+            <summary>
+            修改默认模块
+            </summary>
+            <param name="input">默认模块输入参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.System.UserCenterService">
+            <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.GetLoginMenu(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.GetLoginWorkbench">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.LoginOrgTree">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.DeleteMyMessage(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
+            <summary>
+            获取父菜单集合
+            </summary>
+            <param name="allMenuList">所有菜单列表</param>
+            <param name="myMenus">我的菜单列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
+            <summary>
+            构建Meta
+            </summary>
+            <param name="myMenus">我的菜单集合</param>
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.ConstrucOrgTrees(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.Int64)">
+            <summary>
+            构建机构树
+            </summary>
+            <param name="orgList">机构列表</param>
+            <param name="parentId">父ID</param>
+            <param name="orgId">用户ID</param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.Startup">

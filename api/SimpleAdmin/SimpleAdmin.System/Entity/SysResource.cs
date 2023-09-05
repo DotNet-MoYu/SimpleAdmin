@@ -1,4 +1,12 @@
-﻿namespace SimpleAdmin.System;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 资源
@@ -22,31 +30,24 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 别名
     ///</summary>
-    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200,
+    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200
+        ,
         IsNullable = true)]
     public string Name { get; set; }
 
     /// <summary>
-    /// 别名
+    /// 描述
     ///</summary>
-    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200,
+    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200
+        ,
         IsNullable = true)]
     public string Description { get; set; }
-
-
-    /// <summary>
-    /// 别名
-    ///</summary>
-    [SugarColumn(ColumnName = "Avatar", ColumnDescription = "头像",
-        ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
-    public string Avatar { get; set; }
-
-
 
     /// <summary>
     /// 编码
     ///</summary>
-    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200,
+    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200
+        ,
         IsNullable = true)]
     public virtual string Code { get; set; }
 
@@ -65,8 +66,7 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 菜单类型
     ///</summary>
-    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200, IsNullable = true)]
     public virtual string MenuType { get; set; }
 
     /// <summary>
@@ -78,8 +78,7 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 组件
     ///</summary>
-    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200, IsNullable = true)]
     public string Component { get; set; }
 
     /// <summary>
@@ -96,17 +95,15 @@ public class SysResource : BaseEntity
         Length = 200, IsNullable = true)]
     public string ActiveMenu { get; set; }
 
-
     /// <summary>
-    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
     [SugarColumn(ColumnName = "IsHide", ColumnDescription = "是否在菜单中隐藏 (通常列表详情页需要隐藏) ",
         IsNullable = true)]
     public bool IsHide { get; set; }
 
-
     /// <summary>
-    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
     [SugarColumn(ColumnName = "IsFull", ColumnDescription = "菜单是否全屏 (示例：数据大屏页面)",
         IsNullable = true)]
@@ -165,16 +162,13 @@ public class Meta
     /// </summary>
     public string Title { get; set; }
 
-
-
     /// <summary>
     /// 是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
     ///</summary>
     public string ActiveMenu { get; set; }
 
-
     /// <summary>
-    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
     public bool IsHide { get; set; } = false;
 
@@ -184,7 +178,7 @@ public class Meta
     public string IsLink { get; set; } = "";
 
     /// <summary>
-    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏) 
+    /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
     public bool IsFull { get; set; }
 

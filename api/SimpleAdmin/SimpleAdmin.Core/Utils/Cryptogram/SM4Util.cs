@@ -1,4 +1,10 @@
-﻿using Org.BouncyCastle.Utilities.Encoders;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.Core.Utils;
 
@@ -57,14 +63,14 @@ public class SM4Util
     /// <returns></returns>
     public static string EncryptECB(SM4Util entity)
     {
-        Sm4Context ctx = new Sm4Context
+        var ctx = new Sm4Context
         {
             IsPadding = true
         };
-        byte[] keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
-        SM4CryptoUtil sm4 = new SM4CryptoUtil();
+        var keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
+        var sm4 = new SM4CryptoUtil();
         sm4.SetKeyEnc(ctx, keyBytes);
-        byte[] encrypted = sm4.Sm4CryptEcb(ctx, Encoding.Default.GetBytes(entity.Data));
+        var encrypted = sm4.Sm4CryptEcb(ctx, Encoding.Default.GetBytes(entity.Data));
         return Encoding.Default.GetString(Hex.Encode(encrypted));
     }
 
@@ -75,15 +81,15 @@ public class SM4Util
     /// <returns></returns>
     public static string EncryptCBC(SM4Util entity)
     {
-        Sm4Context ctx = new Sm4Context
+        var ctx = new Sm4Context
         {
             IsPadding = true
         };
-        byte[] keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
-        byte[] ivBytes = entity.HexString ? Hex.Decode(entity.Iv) : Encoding.Default.GetBytes(entity.Iv);
-        SM4CryptoUtil sm4 = new SM4CryptoUtil();
+        var keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
+        var ivBytes = entity.HexString ? Hex.Decode(entity.Iv) : Encoding.Default.GetBytes(entity.Iv);
+        var sm4 = new SM4CryptoUtil();
         sm4.SetKeyEnc(ctx, keyBytes);
-        byte[] encrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Encoding.Default.GetBytes(entity.Data));
+        var encrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Encoding.Default.GetBytes(entity.Data));
         return Convert.ToBase64String(encrypted);
     }
 
@@ -108,15 +114,15 @@ public class SM4Util
     /// <returns></returns>
     public static string DecryptECB(SM4Util entity)
     {
-        Sm4Context ctx = new Sm4Context
+        var ctx = new Sm4Context
         {
             IsPadding = true,
             Mode = 0
         };
-        byte[] keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
-        SM4CryptoUtil sm4 = new SM4CryptoUtil();
+        var keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
+        var sm4 = new SM4CryptoUtil();
         sm4.Sm4SetKeyDec(ctx, keyBytes);
-        byte[] decrypted = sm4.Sm4CryptEcb(ctx, Hex.Decode(entity.Data));
+        var decrypted = sm4.Sm4CryptEcb(ctx, Hex.Decode(entity.Data));
         return Encoding.Default.GetString(decrypted);
     }
 
@@ -127,16 +133,16 @@ public class SM4Util
     /// <returns></returns>
     public static string DecryptCBC(SM4Util entity)
     {
-        Sm4Context ctx = new Sm4Context
+        var ctx = new Sm4Context
         {
             IsPadding = true,
             Mode = 0
         };
-        byte[] keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
-        byte[] ivBytes = entity.HexString ? Hex.Decode(entity.Iv) : Encoding.Default.GetBytes(entity.Iv);
-        SM4CryptoUtil sm4 = new SM4CryptoUtil();
+        var keyBytes = entity.HexString ? Hex.Decode(entity.Key) : Encoding.Default.GetBytes(entity.Key);
+        var ivBytes = entity.HexString ? Hex.Decode(entity.Iv) : Encoding.Default.GetBytes(entity.Iv);
+        var sm4 = new SM4CryptoUtil();
         sm4.Sm4SetKeyDec(ctx, keyBytes);
-        byte[] decrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Convert.FromBase64String(entity.Data));
+        var decrypted = sm4.Sm4CryptCbc(ctx, ivBytes, Convert.FromBase64String(entity.Data));
         return Encoding.Default.GetString(decrypted);
     }
 

@@ -513,97 +513,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.ConfigController">
-            <summary>
-            系统配置控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.SysBaseList">
-            <summary>
-            获取系统基础配置
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.List(System.String)">
-            <summary>
-            获取配置列表
-            </summary>
-            <param name="category">分类</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.Page(SimpleAdmin.System.ConfigPageInput)">
-            <summary>
-            配置分页
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.Add(SimpleAdmin.System.ConfigAddInput)">
-            <summary>
-            添加配置
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.Edit(SimpleAdmin.System.ConfigEditInput)">
-            <summary>
-            修改配置
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.Delete(SimpleAdmin.System.ConfigDeleteInput)">
-            <summary>
-            删除配置
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.DevConfig})">
-            <summary>
-            配置批量更新
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.DictController">
-            <summary>
-            系统字典控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.DictController.Tree(SimpleAdmin.System.DictTreeInput)">
-            <summary>
-            获取字典树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.DictController.Page(SimpleAdmin.System.DictPageInput)">
-            <summary>
-            字典分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.DictController.Add(SimpleAdmin.System.DictAddInput)">
-            <summary>
-            添加字典
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.DictController.Edit(SimpleAdmin.System.DictEditInput)">
-            <summary>
-            修改字典
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.DictController.Delete(SimpleAdmin.System.DictDeleteInput)">
-            <summary>
-            删除字典
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.FileController">
             <summary>
             文件管理控制器
@@ -640,75 +549,6 @@
         <member name="M:SimpleAdmin.Web.Core.FileController.DownLoad(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             下载文件
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.LogOperateController">
-            <summary>
-            操作日志控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Page(SimpleAdmin.System.OperateLogPageInput)">
-            <summary>
-            字典分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogOperateController.BarChartData">
-            <summary>
-            操作日志周统计柱状图图
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogOperateController.PieChartData">
-            <summary>
-            操作日志数量总览饼图
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Delete(SimpleAdmin.System.OperateLogDeleteInput)">
-            <summary>
-            清空日志
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            日志详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.LogVisitController">
-            <summary>
-            访问日志控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogVisitController.Page(SimpleAdmin.System.VisitLogPageInput)">
-            <summary>
-            字典分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogVisitController.LineChartData">
-            <summary>
-            访问日志周统计折线图
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogVisitController.PieChartData">
-            <summary>
-            访问日志总览饼图
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.LogVisitController.Delete(SimpleAdmin.System.VisitLogDeleteInput)">
-            <summary>
-            清空日志
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -919,104 +759,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.OrgController">
-            <summary>
-            组织管理控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Tree">
-            <summary>
-            获取组织树
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Page(SimpleAdmin.System.SysOrgPageInput)">
-            <summary>
-            组织分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
-            <summary>
-            获取用户选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            获取组织详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Copy(SimpleAdmin.System.SysOrgCopyInput)">
-            <summary>
-            复制组织
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Add(SimpleAdmin.System.SysOrgAddInput)">
-            <summary>
-            添加组织
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Edit(SimpleAdmin.System.SysOrgEditInput)">
-            <summary>
-            修改组织
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除组织
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="T:SimpleAdmin.Web.Core.PositionController">
-            <summary>
-            职位管理控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.PositionController.Page(SimpleAdmin.System.PositionPageInput)">
-            <summary>
-            职位分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.PositionController.Add(SimpleAdmin.System.PositionAddInput)">
-            <summary>
-            添加职位
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.PositionController.Edit(SimpleAdmin.System.PositionEditInput)">
-            <summary>
-            修改职位
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.PositionController.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除职位
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.RoleController">
             <summary>
             角色管理控制器
@@ -1149,120 +891,263 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.UserCenterController">
+        <member name="T:SimpleAdmin.Web.Core.LogOperateController">
             <summary>
-            用户个人信息控制器
+            操作日志控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginMenu(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Page(SimpleAdmin.System.OperateLogPageInput)">
             <summary>
-            获取个人菜单
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginWorkbench">
-            <summary>
-            获取个人工作台
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <summary>
-            编辑个人信息
+            字典分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.BarChartData">
             <summary>
-            更新签名
+            操作日志周统计柱状图图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.PieChartData">
+            <summary>
+            操作日志数量总览饼图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Delete(SimpleAdmin.System.OperateLogDeleteInput)">
+            <summary>
+            清空日志
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginOrgTree">
+        <member name="M:SimpleAdmin.Web.Core.LogOperateController.Detail(SimpleAdmin.Core.BaseIdInput)">
             <summary>
-            获取组织架构
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
-            <summary>
-            编辑工作台
+            日志详情
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
+        <member name="T:SimpleAdmin.Web.Core.LogVisitController">
             <summary>
-            获取登录用户的站内信分页
+            访问日志控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.LogVisitController.Page(SimpleAdmin.System.VisitLogPageInput)">
+            <summary>
+            字典分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.LogVisitController.LineChartData">
             <summary>
-            读取登录用户站内信详情
+            访问日志周统计折线图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.LogVisitController.PieChartData">
+            <summary>
+            访问日志总览饼图
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.LogVisitController.Delete(SimpleAdmin.System.VisitLogDeleteInput)">
+            <summary>
+            清空日志
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UnReadCount">
+        <member name="T:SimpleAdmin.Web.Core.ConfigController">
             <summary>
-            未读消息数
+            系统配置控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.SysBaseList">
+            <summary>
+            获取系统基础配置
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.DeleteMessage(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.List(System.String)">
             <summary>
-            删除我的消息
+            获取配置列表
+            </summary>
+            <param name="category">分类</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.Page(SimpleAdmin.System.ConfigPageInput)">
+            <summary>
+            配置分页
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.Add(SimpleAdmin.System.ConfigAddInput)">
             <summary>
-            修改密码
+            添加配置
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.Edit(SimpleAdmin.System.ConfigEditInput)">
             <summary>
-            修改头像
+            修改配置
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetUserListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.Delete(SimpleAdmin.System.ConfigDeleteInput)">
             <summary>
-             根据id集合获取用户集合
+            删除配置
             </summary>
             <param name="input"></param>
+            <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.SysConfig})">
             <summary>
-             根据id集合获取职位集合
+            配置批量更新
             </summary>
-            <param name="input"></param>
+            <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetOrgListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="T:SimpleAdmin.Web.Core.DictController">
             <summary>
-             根据id集合获取组织集合
+            系统字典控制器
             </summary>
-            <param name="input"></param>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="M:SimpleAdmin.Web.Core.DictController.Tree(SimpleAdmin.System.DictTreeInput)">
             <summary>
-             根据id集合获取角色集合
+            获取字典树
             </summary>
-            <param name="input"></param>
+            <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+        <member name="M:SimpleAdmin.Web.Core.DictController.Page(SimpleAdmin.System.DictPageInput)">
             <summary>
-            修改默认模块
+            字典分页查询
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.DictController.Add(SimpleAdmin.System.DictAddInput)">
+            <summary>
+            添加字典
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.DictController.Edit(SimpleAdmin.System.DictEditInput)">
+            <summary>
+            修改字典
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.DictController.Delete(SimpleAdmin.System.DictDeleteInput)">
+            <summary>
+            删除字典
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.OrgController">
+            <summary>
+            组织管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Tree">
+            <summary>
+            获取组织树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.OrgTreeSelector">
+            <summary>
+            获取组织树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Page(SimpleAdmin.System.SysOrgPageInput)">
+            <summary>
+            组织分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+            <summary>
+            获取用户选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取组织详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Copy(SimpleAdmin.System.SysOrgCopyInput)">
+            <summary>
+            复制组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Add(SimpleAdmin.System.SysOrgAddInput)">
+            <summary>
+            添加组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Edit(SimpleAdmin.System.SysOrgEditInput)">
+            <summary>
+            修改组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.OrgController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除组织
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.PositionController">
+            <summary>
+            职位管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Page(SimpleAdmin.System.PositionPageInput)">
+            <summary>
+            职位分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Add(SimpleAdmin.System.PositionAddInput)">
+            <summary>
+            添加职位
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Edit(SimpleAdmin.System.PositionEditInput)">
+            <summary>
+            修改职位
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除职位
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.UserController">
             <summary>
@@ -1432,6 +1317,121 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.UserCenterController">
+            <summary>
+            用户个人信息控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginMenu(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取个人菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginWorkbench">
+            <summary>
+            获取个人工作台
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <summary>
+            编辑个人信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <summary>
+            更新签名
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginOrgTree">
+            <summary>
+            获取组织架构
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <summary>
+            编辑工作台
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UnReadCount">
+            <summary>
+            未读消息数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.DeleteMessage(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateAvatar(SimpleAdmin.Core.BaseFileInput)">
+            <summary>
+            修改头像
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetUserListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+             根据id集合获取用户集合
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+             根据id集合获取职位集合
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetOrgListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+             根据id集合获取组织集合
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+            <summary>
+             根据id集合获取角色集合
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+            <summary>
+            修改默认模块
+            </summary>
+            <param name="input"></param>
         </member>
         <member name="T:SimpleAdmin.Web.Core.MyActionFilter">
             <summary>

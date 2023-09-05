@@ -1,9 +1,17 @@
-﻿namespace SimpleAdmin.System;
+﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="IMessageService"/>
 /// </summary>
-public class MessageService : DbRepository<DevMessage>, IMessageService
+public class MessageService : DbRepository<SysMessage>, IMessageService
 {
     private readonly ILogger<MessageService> _logger;
     private readonly ISimpleCacheService _simpleCacheService;
@@ -20,9 +28,9 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<DevMessage>> Page(MessagePageInput input)
+    public async Task<SqlSugarPagedList<SysMessage>> Page(MessagePageInput input)
     {
-        var query = Context.Queryable<DevMessage>()
+        var query = Context.Queryable<SysMessage>()
                 .WhereIF(!string.IsNullOrEmpty(input.Category),
                     it => it.Category == input.Category)//根据分类查询
                 .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
@@ -38,17 +46,17 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<DevMessage>> MyMessagePage(MessagePageInput input,
+    public async Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input,
         long userId)
     {
-        var query = Context.Queryable<DevMessageUser>()
-                .LeftJoin<DevMessage>((u, m) => u.MessageId == m.Id)
+        var query = Context.Queryable<SysMessageUser>()
+                .LeftJoin<SysMessage>((u, m) => u.MessageId == m.Id)
                 .Where((u, m) => u.IsDelete == false && u.UserId == userId)
                 .WhereIF(!string.IsNullOrEmpty(input.Category),
                     (u, m) => m.Category == input.Category)//根据分类查询
                 .OrderBy((u, m) => u.Read, OrderByType.Asc)
                 .OrderBy((u, m) => m.CreateTime, OrderByType.Desc)
-                .Select((u, m) => new DevMessage
+                .Select((u, m) => new SysMessage
                 {
                     Id = m.Id.SelectAll(),
                     Read = u.Read
@@ -61,12 +69,12 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     /// <inheritdoc />
     public async Task Send(MessageSendInput input)
     {
-        var message = input.Adapt<DevMessage>();//实体转换
-        var messageUsers = new List<DevMessageUser>();
+        var message = input.Adapt<SysMessage>();//实体转换
+        var messageUsers = new List<SysMessageUser>();
         input.ReceiverIdList.ForEach(it =>
         {
             //遍历用户ID列表，生成拓展列表
-            messageUsers.Add(new DevMessageUser { UserId = it, Read = false, IsDelete = false });
+            messageUsers.Add(new SysMessageUser { UserId = it, Read = false, IsDelete = false });
         });
 
         //事务
@@ -100,7 +108,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
         if (message != null)
         {
             var messageDetail = message.Adapt<MessageDetailOutPut>();//实体转换
-            var messageUserRep = ChangeRepository<DbRepository<DevMessageUser>>();//切换仓储
+            var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
             var messageUsers = await messageUserRep.GetListAsync(it => it.MessageId == message.Id);
             var myMessage = messageUsers
                 .Where(it => it.UserId == UserManager.UserId && it.MessageId == input.Id)
@@ -163,7 +171,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
             var result = await itenant.UseTranAsync(async () =>
             {
                 await DeleteAsync(it => ids.Contains(it.Id));
-                await Context.Deleteable<DevMessageUser>().Where(it => ids.Contains(it.MessageId))
+                await Context.Deleteable<SysMessageUser>().Where(it => ids.Contains(it.MessageId))
                     .ExecuteCommandAsync();
             });
             if (!result.IsSuccess)//如果失败了
@@ -178,8 +186,8 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     /// <inheritdoc />
     public async Task DeleteMyMessage(BaseIdInput input, long userId)
     {
-        var messageUserRep = ChangeRepository<DbRepository<DevMessageUser>>();//切换仓储
-        await Context.Deleteable<DevMessageUser>()
+        var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
+        await Context.Deleteable<SysMessageUser>()
             .Where(it => it.UserId == userId && it.MessageId == input.Id).IsLogic()
             .ExecuteCommandAsync();//逻辑删除
     }
@@ -187,7 +195,7 @@ public class MessageService : DbRepository<DevMessage>, IMessageService
     /// <inheritdoc />
     public async Task<int> UnReadCount(long userId)
     {
-        var messageUserRep = ChangeRepository<DbRepository<DevMessageUser>>();//切换仓储
+        var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
         //获取未读数量
         var unRead = await messageUserRep.CountAsync(it =>
             it.UserId == userId && it.Read == false && it.IsDelete == false);
