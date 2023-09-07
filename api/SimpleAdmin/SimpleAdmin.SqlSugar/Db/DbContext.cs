@@ -6,6 +6,8 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+using DbType = SqlSugar.DbType;
+
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
@@ -26,11 +28,11 @@ public static class DbContext
         //遍历配置的数据库
         DB_CONFIGS.ForEach(it =>
         {
-            var sqlsugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
-            MoreSetting(sqlsugarScope);//更多设置
-            ExternalServicesSetting(sqlsugarScope, it);//实体拓展配置
-            AopSetting(sqlsugarScope);//aop配置
-            FilterSetting(sqlsugarScope);//过滤器配置
+            var sqlSugarScope = db.GetConnectionScope(it.ConfigId);//获取当前库
+            MoreSetting(sqlSugarScope, it.DbType);//更多设置
+            ExternalServicesSetting(sqlSugarScope, it);//实体拓展配置
+            AopSetting(sqlSugarScope);//aop配置
+            FilterSetting(sqlSugarScope);//过滤器配置
         });
     });
 
@@ -175,12 +177,13 @@ public static class DbContext
     /// <summary>
     /// 实体更多配置
     /// </summary>
-    /// <param name="db"></param>
-    private static void MoreSetting(SqlSugarScopeProvider db)
+    /// <param name="db">db</param>
+    /// <param name="dbType">数据库类型</param>
+    private static void MoreSetting(SqlSugarScopeProvider db, DbType dbType)
     {
         db.CurrentConnectionConfig.MoreSettings = new ConnMoreSettings
         {
-            SqlServerCodeFirstNvarchar = true//设置默认nvarchar
+            SqlServerCodeFirstNvarchar = dbType == DbType.SqlServer//设置默认nvarchar
         };
     }
 
