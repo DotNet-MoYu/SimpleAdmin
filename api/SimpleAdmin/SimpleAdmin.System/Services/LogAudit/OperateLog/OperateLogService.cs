@@ -21,7 +21,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     /// <summary>
     /// 异常日志中文名称
     /// </summary>
-    private readonly string _nameExecption = "异常日志";
+    private readonly string _nameException = "异常日志";
 
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysLogOperate>> Page(OperateLogPageInput input)
@@ -78,7 +78,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
             result.Add(new OperateLogDayStatisticsOutput
                 { Date = it.Date, Name = _nameOperate, Count = it.OperateCount });//添加访问日志
             result.Add(new OperateLogDayStatisticsOutput
-                { Date = it.Date, Name = _nameExecption, Count = it.ExceptionCount });//添加异常日志
+                { Date = it.Date, Name = _nameException, Count = it.ExceptionCount });//添加异常日志
         });
         return result;
     }
@@ -106,7 +106,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
             //添加异常日志数据
             new OperateLogTotalCountOutpu
             {
-                Type = _nameExecption,
+                Type = _nameException,
                 Value = data.Where(it => it.Category == CateGoryConst.LOG_EXCEPTION)
                     .Select(it => it.Count).FirstOrDefault()
             }

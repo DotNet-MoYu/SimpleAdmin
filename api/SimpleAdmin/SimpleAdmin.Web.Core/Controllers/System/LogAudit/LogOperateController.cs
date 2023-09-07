@@ -37,7 +37,7 @@ public class LogOperateController : BaseController
     /// 操作日志周统计柱状图图
     /// </summary>
     /// <returns></returns>
-    [HttpGet("barChartData")]
+    [HttpGet("columnChartData")]
     public async Task<dynamic> BarChartData()
     {
         return await _operateLogService.StatisticsByDay(7);

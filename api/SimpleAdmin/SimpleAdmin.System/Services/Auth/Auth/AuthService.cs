@@ -172,10 +172,8 @@ public class AuthService : IAuthService
     /// <param name="userName"></param>
     public void BeforeLogin(List<SysConfig> loginPolicy, string userName)
     {
-        var lockTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_LOCK)
-            .ConfigValue.ToInt();//获取锁定时间
-        var errorCount = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_COUNT)
-            .ConfigValue.ToInt();//获取错误次数
+        var lockTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_LOCK).ConfigValue.ToInt();//获取锁定时间
+        var errorCount = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_COUNT).ConfigValue.ToInt();//获取错误次数
         var key = SystemConst.CACHE_LOGIN_ERROR_COUNT + userName;//获取登录错误次数Key值
         var errorCountCache = _simpleCacheService.Get<int>(key);//获取登录错误次数
         if (errorCountCache >= errorCount)

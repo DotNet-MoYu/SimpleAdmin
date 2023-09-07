@@ -4312,7 +4312,7 @@
             操作日志中文名称
             </summary>
         </member>
-        <member name="F:SimpleAdmin.System.OperateLogService._nameExecption">
+        <member name="F:SimpleAdmin.System.OperateLogService._nameException">
             <summary>
             异常日志中文名称
             </summary>

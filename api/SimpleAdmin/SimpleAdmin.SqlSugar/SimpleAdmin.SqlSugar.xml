@@ -117,11 +117,12 @@
             </summary>
             <param name="db"></param>
         </member>
-        <member name="M:SimpleAdmin.SqlSugar.DbContext.MoreSetting(SqlSugar.SqlSugarScopeProvider)">
+        <member name="M:SimpleAdmin.SqlSugar.DbContext.MoreSetting(SqlSugar.SqlSugarScopeProvider,SqlSugar.DbType)">
             <summary>
             实体更多配置
             </summary>
-            <param name="db"></param>
+            <param name="db">db</param>
+            <param name="dbType">数据库类型</param>
         </member>
         <member name="M:SimpleAdmin.SqlSugar.DbContext.FilterSetting(SqlSugar.SqlSugarScopeProvider)">
             <summary>
