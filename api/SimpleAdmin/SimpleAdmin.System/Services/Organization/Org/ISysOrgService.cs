@@ -95,7 +95,7 @@ public interface ISysOrgService : ITransient
     /// <param name="input">添加参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SYS_ORG);
+    Task Add(SysOrgAddInput input, string name = SystemConst.SYS_ORG);
 
     /// <summary>
     /// 复制组织
@@ -114,7 +114,7 @@ public interface ISysOrgService : ITransient
     /// <param name="input">编辑参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SYS_ORG);
+    Task Edit(SysOrgEditInput input, string name = SystemConst.SYS_ORG);
 
     #endregion 编辑
 
@@ -126,7 +126,7 @@ public interface ISysOrgService : ITransient
     /// <param name="input">删除参数</param>
     /// <param name="name">名称</param>
     /// <returns></returns>
-    Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_ORG);
+    Task Delete(BaseIdListInput input, string name = SystemConst.SYS_ORG);
 
     #endregion 删除
 

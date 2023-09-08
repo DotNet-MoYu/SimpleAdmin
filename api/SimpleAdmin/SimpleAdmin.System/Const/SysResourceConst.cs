@@ -19,7 +19,7 @@ public class SysResourceConst
     public const string CATALOG = "CATALOG";
 
     /// <summary>
-    /// 组件
+    /// 菜单
     /// </summary>
     public const string MENU = "MENU";
 
@@ -29,7 +29,7 @@ public class SysResourceConst
     public const string IFRAME = "IFRAME";
 
     /// <summary>
-    /// 目录
+    /// 子页
     /// </summary>
     public const string SUBSET = "SUBSET";
 

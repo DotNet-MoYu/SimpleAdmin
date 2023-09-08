@@ -481,7 +481,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
                 throw Oops.Bah($"不可禁用系统内置超管用户账号");
-            CheckSelf(input.Id, SimpleAdminConst.DISABLE);//判断是不是自己
+            CheckSelf(input.Id, SystemConst.DISABLE);//判断是不是自己
             //设置状态为禁用
             if (await UpdateAsync(it => new SysUser
             {
@@ -494,7 +494,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task EnableUser(BaseIdInput input)
     {
-        CheckSelf(input.Id, SimpleAdminConst.ENABLE);//判断是不是自己
+        CheckSelf(input.Id, SystemConst.ENABLE);//判断是不是自己
         //设置状态为启用
         if (await UpdateAsync(it => new SysUser
         {
@@ -524,7 +524,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
                 throw Oops.Bah($"不能给超管分配角色");
-            CheckSelf(input.Id, SimpleAdminConst.GRANT_ROLE);//判断是不是自己
+            CheckSelf(input.Id, SystemConst.GRANT_ROLE);//判断是不是自己
             //给用户赋角色
             await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_USER_HAS_ROLE,
                 input.Id, input.RoleIdList.Select(it => it.ToString()).ToList(), null,
@@ -919,7 +919,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (!string.IsNullOrEmpty(item.IdCardType))
             {
                 var idCarTypes =
-                    await _dictService.GetValuesByDictValue(SysDictConst.IDCARD_TYPE, dicts);
+                    await _dictService.GetValuesByDictValue(SysDictConst.ID_CARD_TYPE, dicts);
                 if (!idCarTypes.Contains(item.IdCardType))
                     item.ErrorInfo.Add(nameof(item.IdCardType), $"证件类型错误");
             }

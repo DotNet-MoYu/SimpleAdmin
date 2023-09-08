@@ -36,11 +36,11 @@ public class MqttService : IMqttService
         //获取mqtt配置
         var mqttconfig = await _configService.GetListByCategory(CateGoryConst.CONFIG_MQTT_BASE);
         //地址
-        var url = mqttconfig.Where(it => it.ConfigKey == SysConfigConst.MQTT_PARAM_URL).Select(it => it.ConfigValue).FirstOrDefault();
+        var url = mqttconfig.Where(it => it.ConfigKey == MqttConst.MQTT_PARAM_URL).Select(it => it.ConfigValue).FirstOrDefault();
         //用户名
-        var userName = mqttconfig.Where(it => it.ConfigKey == SysConfigConst.MQTT_PARAM_USERNAME).Select(it => it.ConfigValue).FirstOrDefault();
+        var userName = mqttconfig.Where(it => it.ConfigKey == MqttConst.MQTT_PARAM_USERNAME).Select(it => it.ConfigValue).FirstOrDefault();
         //密码
-        var password = mqttconfig.Where(it => it.ConfigKey == SysConfigConst.MQTT_PARAM_PASSWORD).Select(it => it.ConfigValue).FirstOrDefault();
+        var password = mqttconfig.Where(it => it.ConfigKey == MqttConst.MQTT_PARAM_PASSWORD).Select(it => it.ConfigValue).FirstOrDefault();
 
         #region 用户名特殊处理
 
@@ -59,7 +59,8 @@ public class MqttService : IMqttService
         #endregion 密码特殊处理
 
         var clientId = $"{user.Id}_{RandomHelper.CreateLetterAndNumber(5)}";//客户端ID
-        _simpleCacheService.Set(MqttConst.CACHE_MQTT_CLIENT_USER + clientId, token, TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
+        _simpleCacheService.Set(MqttConst.CACHE_MQTT_CLIENT_USER + clientId, token,
+            TimeSpan.FromMinutes(1));//将该客户端ID对应的token插入redis后面可以根据这个判断是哪个token登录的
         return new MqttParameterOutput
         {
             ClientId = clientId,

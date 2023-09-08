@@ -93,7 +93,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Add(PositionAddInput input, string name = SimpleAdminConst.SYS_POS)
+    public async Task Add(PositionAddInput input, string name = SystemConst.SYS_POS)
     {
         await CheckInput(input, name);//检查参数
         var sysPosition = input.Adapt<SysPosition>();//实体转换
@@ -103,7 +103,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Edit(PositionEditInput input, string name = SimpleAdminConst.SYS_POS)
+    public async Task Edit(PositionEditInput input, string name = SystemConst.SYS_POS)
     {
         await CheckInput(input, name);//检查参数
         var sysPosition = input.Adapt<SysPosition>();//实体转换
@@ -112,7 +112,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc />
-    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_POS)
+    public async Task Delete(BaseIdListInput input, string name = SystemConst.SYS_POS)
     {
         //获取所有ID
         var ids = input.Ids;

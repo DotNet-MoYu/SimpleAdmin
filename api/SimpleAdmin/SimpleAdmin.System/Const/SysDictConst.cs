@@ -28,7 +28,7 @@ public class SysDictConst
     /// <summary>
     /// 用户证件类型
     /// </summary>
-    public const string IDCARD_TYPE = "IDCARD_TYPE";
+    public const string ID_CARD_TYPE = "ID_CARD_TYPE";
 
     /// <summary>
     /// 通用文化程度
@@ -87,7 +87,7 @@ public class SysDictConst
     /// <summary>
     /// 业务
     /// </summary>
-    public const string DICT_CATEGORY_BIZ = "FRM";
+    public const string DICT_CATEGORY_BIZ = "BIZ";
 
     #endregion 系统字典分类
 

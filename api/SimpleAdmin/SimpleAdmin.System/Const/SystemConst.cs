@@ -68,7 +68,6 @@ public class SystemConst
     /// </summary>
     public const string CACHE_SYS_POSITION = CacheConst.CACHE_PREFIX_WEB + "SysPosition";
 
-
     #region 登录错误次数
 
     /// <summary>
@@ -77,4 +76,53 @@ public class SystemConst
     public const string CACHE_LOGIN_ERROR_COUNT = CacheConst.CACHE_PREFIX_WEB + "LoginErrorCount:";
 
     #endregion 登录错误次数
+
+    #region 操作
+
+    /// <summary>
+    /// 添加操作
+    /// </summary>
+    public const string ADD = "添加";
+
+    /// <summary>
+    /// 编辑操作
+    /// </summary>
+    public const string EDIT = "编辑";
+
+    /// <summary>
+    /// 启用操作
+    /// </summary>
+    public const string ENABLE = "启用";
+
+    /// <summary>
+    /// 禁用操作
+    /// </summary>
+    public const string DISABLE = "禁用";
+
+    /// <summary>
+    /// 重置密码操作
+    /// </summary>
+    public const string RESET_PWD = "重置密码";
+
+    /// <summary>
+    /// 用户授权操作
+    /// </summary>
+    public const string GRANT_ROLE = "授权";
+
+    #endregion 操作
+
+    #region 别称
+
+    /// <summary>
+    /// 组织
+    /// </summary>
+    public const string SYS_ORG = "组织";
+
+
+    /// <summary>
+    /// 职位
+    /// </summary>
+    public const string SYS_POS = "职位";
+
+    #endregion 别称
 }

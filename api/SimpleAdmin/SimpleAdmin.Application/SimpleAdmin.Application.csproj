@@ -1,29 +1,30 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
-		<DocumentationFile>SimpleAdmin.Application.xml</DocumentationFile>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+        <NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+        <DocumentationFile>SimpleAdmin.Application.xml</DocumentationFile>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<None Remove="applicationsettings.Development.json" />
-		<None Remove="applicationsettings.Production.json" />
-		<None Remove="SimpleAdmin.Application.xml" />
-	</ItemGroup>
+    <ItemGroup>
+        <None Remove="applicationsettings.Development.json"/>
+        <None Remove="applicationsettings.Production.json"/>
+        <None Remove="SimpleAdmin.Application.xml"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\SimpleAdmin.System\SimpleAdmin.System.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\SimpleAdmin.System\SimpleAdmin.System.csproj"/>
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Update="Application.Development.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Application.Production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Update="Application.Development.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Application.Production.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 
 </Project>

@@ -167,7 +167,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 新增
 
     /// <inheritdoc />
-    public async Task Add(SysOrgAddInput input, string name = SimpleAdminConst.SYS_ORG)
+    public async Task Add(SysOrgAddInput input, string name = SystemConst.SYS_ORG)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -238,7 +238,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 编辑
 
     /// <inheritdoc />
-    public async Task Edit(SysOrgEditInput input, string name = SimpleAdminConst.SYS_ORG)
+    public async Task Edit(SysOrgEditInput input, string name = SystemConst.SYS_ORG)
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
@@ -251,7 +251,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     #region 删除
 
     /// <inheritdoc />
-    public async Task Delete(BaseIdListInput input, string name = SimpleAdminConst.SYS_ORG)
+    public async Task Delete(BaseIdListInput input, string name = SystemConst.SYS_ORG)
     {
         //获取所有ID
         var ids = input.Ids;

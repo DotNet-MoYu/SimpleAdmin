@@ -13,7 +13,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// 通知事件总线
 /// </summary>
-public class NoticeEventSubsciber : IEventSubscriber, ISingleton
+public class NoticeEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
@@ -21,7 +21,8 @@ public class NoticeEventSubsciber : IEventSubscriber, ISingleton
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly SqlSugarScope _db;
 
-    public NoticeEventSubsciber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory, INamedServiceProvider<INoticeService> namedServiceProvider)
+    public NoticeEventSubscriber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory,
+        INamedServiceProvider<INoticeService> namedServiceProvider)
     {
         _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;

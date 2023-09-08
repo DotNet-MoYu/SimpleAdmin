@@ -6,11 +6,22 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.Core;
+namespace SimpleAdmin.Application;
 
-/// <summary>
-/// 批量更新
-/// </summary>
-public class BatchEditAttribute : Attribute
+public class ApplicationConst
 {
+    #region 别称
+
+    /// <summary>
+    /// 机构
+    /// </summary>
+    public const string BIZ_ORG = "机构";
+
+
+    /// <summary>
+    /// 岗位
+    /// </summary>
+    public const string BIZ_POS = "岗位";
+
+    #endregion 别称
 }

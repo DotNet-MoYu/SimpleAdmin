@@ -37,4 +37,24 @@ public class MqttConst
     /// 修改密码
     /// </summary>
     public const string MQTT_MESSAGE_UPDATE_PASSWORD = "UpdatePassword";
+
+
+    #region MQTT
+
+    /// <summary>
+    /// mqtt连接地址
+    /// </summary>
+    public const string MQTT_PARAM_URL = "MQTT_PARAM_URL";
+
+    /// <summary>
+    /// mqtt连接用户名
+    /// </summary>
+    public const string MQTT_PARAM_USERNAME = "MQTT_PARAM_USERNAME";
+
+    /// <summary>
+    /// mqtt连接密码
+    /// </summary>
+    public const string MQTT_PARAM_PASSWORD = "MQTT_PARAM_PASSWORD";
+
+    #endregion MQTT
 }

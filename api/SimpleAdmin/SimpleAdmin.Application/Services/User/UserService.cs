@@ -115,7 +115,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task Add(UserAddInput input)
     {
-        await CheckInput(input, SimpleAdminConst.ADD);//检查参数
+        await CheckInput(input, SystemConst.ADD);//检查参数
         await _sysUserService.Add(input);//添加
     }
 
@@ -126,7 +126,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task Edit(UserEditInput input)
     {
-        await CheckInput(input, SimpleAdminConst.EDIT);//检查参数
+        await CheckInput(input, SystemConst.EDIT);//检查参数
         await _sysUserService.Edit(input);//编辑
     }
 
@@ -151,28 +151,28 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task DisableUser(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.DISABLE);//检查权限
+        await CheckPermission(input.Id, SystemConst.DISABLE);//检查权限
         await _sysUserService.DisableUser(input);//禁用
     }
 
     /// <inheritdoc/>
     public async Task EnableUser(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.ENABLE);//检查权限
+        await CheckPermission(input.Id, SystemConst.ENABLE);//检查权限
         await _sysUserService.EnableUser(input);//启用
     }
 
     /// <inheritdoc/>
     public async Task GrantRole(UserGrantRoleInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.DISABLE);//检查权限
+        await CheckPermission(input.Id, SystemConst.DISABLE);//检查权限
         await _sysUserService.GrantRole(input);//授权
     }
 
     /// <inheritdoc/>
     public async Task ResetPassword(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.RESET_PWD);//检查权限
+        await CheckPermission(input.Id, SystemConst.RESET_PWD);//检查权限
         await _sysUserService.ResetPassword(input);//重置密码
     }
 
