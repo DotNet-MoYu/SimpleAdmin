@@ -11,7 +11,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// 操作日志表
 ///</summary>
-[SugarTable("sys_log_operate", TableDescription = "操作日志表")]
+[SugarTable("sys_log_operate_{year}{month}{day}", TableDescription = "操作日志表")]
 [Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysLogOperate : SysLogVisit
 {

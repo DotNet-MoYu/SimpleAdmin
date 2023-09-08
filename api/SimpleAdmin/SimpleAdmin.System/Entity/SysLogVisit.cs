@@ -11,7 +11,8 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// 访问日志表
 ///</summary>
-[SugarTable("sys_log_visit", TableDescription = "访问日志表")]
+[SugarTable("sys_log_visit_{year}{month}{day}", TableDescription = "访问日志表")]
+[SplitTable(SplitType.Year)]//按年分表 （自带分表支持 年、季、月、周、日）
 [Tenant(SqlsugarConst.DB_DEFAULT)]
 public class SysLogVisit : BaseEntity
 {
@@ -61,13 +62,13 @@ public class SysLogVisit : BaseEntity
     /// 操作时间
     ///</summary>
     [SugarColumn(ColumnName = "OpTime", ColumnDescription = "操作时间")]
+    [SplitField]//分表字段 在插入的时候会根据这个字段插入哪个表，在更新删除的时候用这个字段找出相关表
     public DateTime OpTime { get; set; }
 
     /// <summary>
     /// 操作人姓名
     ///</summary>
-    [SugarColumn(ColumnName = "OpUser", ColumnDescription = "操作人姓名", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "OpUser", ColumnDescription = "操作人姓名", Length = 200, IsNullable = true)]
     public string OpUser { get; set; }
 
     /// <summary>

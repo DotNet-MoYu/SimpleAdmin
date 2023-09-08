@@ -23,7 +23,7 @@ public class LogVisitController : BaseController
     }
 
     /// <summary>
-    /// 字典分页查询
+    /// 访问日志分页查询
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

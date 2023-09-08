@@ -898,7 +898,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.LogOperateController.Page(SimpleAdmin.System.OperateLogPageInput)">
             <summary>
-            字典分页查询
+            操作日志分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -936,7 +936,7 @@
         </member>
         <member name="M:SimpleAdmin.Web.Core.LogVisitController.Page(SimpleAdmin.System.VisitLogPageInput)">
             <summary>
-            字典分页查询
+            访问日志分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>

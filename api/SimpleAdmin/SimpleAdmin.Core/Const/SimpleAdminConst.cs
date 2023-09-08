@@ -35,7 +35,7 @@ public class SimpleAdminConst
     /// <summary>
     /// 重置密码操作
     /// </summary>
-    public const string RESEST_PWD = "重置密码";
+    public const string RESET_PWD = "重置密码";
 
     /// <summary>
     /// 用户授权操作

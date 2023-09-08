@@ -4317,6 +4317,11 @@
             异常日志中文名称
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.OperateLogService._maxTabs">
+            <summary>
+            分表最多查近多少年的数据
+            </summary>
+        </member>
         <member name="M:SimpleAdmin.System.OperateLogService.Page(SimpleAdmin.System.OperateLogPageInput)">
             <inheritdoc />
         </member>
@@ -4427,6 +4432,11 @@
         <member name="T:SimpleAdmin.System.VisitLogService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.IVisitLogService"/>
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.VisitLogService._maxTabs">
+            <summary>
+            分表最多查近多少年的数据
             </summary>
         </member>
         <member name="M:SimpleAdmin.System.VisitLogService.Page(SimpleAdmin.System.VisitLogPageInput)">

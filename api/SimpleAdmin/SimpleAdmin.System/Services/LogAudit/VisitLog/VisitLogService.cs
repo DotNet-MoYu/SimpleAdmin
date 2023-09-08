@@ -13,9 +13,10 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
 {
-    public VisitLogService()
-    {
-    }
+    /// <summary>
+    /// 分表最多查近多少年的数据
+    /// </summary>
+    private readonly int _maxTabs = 100;
 
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysLogVisit>> Page(VisitLogPageInput input)
@@ -28,6 +29,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
                 it => it.Name.Contains(input.SearchKey)
                     || it.OpIp.Contains(input.SearchKey))//根据关键字查询
+            .SplitTable(tabs => tabs.Take(_maxTabs))
             .OrderByIF(!string.IsNullOrEmpty(input.SortField),
                 $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.CreateTime, OrderByType.Desc);
@@ -44,7 +46,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
         //生成时间表
         var queryableLeft = Context.Reportable(dayArray).ToQueryable<DateTime>();
         //ReportableDateType.MonthsInLast1yea 表式近一年月份 并且queryable之后还能在where过滤
-        var queryableRight = Context.Queryable<SysLogVisit>();//声名表
+        var queryableRight = Context.Queryable<SysLogVisit>().SplitTable(tabs => tabs.Take(_maxTabs));//声名表
         //报表查询
         var list = await Context.Queryable(queryableLeft, queryableRight, JoinType.Left,
                 (x1, x2)
@@ -62,8 +64,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
                             0)),//null的数据要为0所以不能用count
                     Date = x1.ColumnName.ToString("yyyy-MM-dd")
                 }
-                )
-            .ToListAsync();
+                ).ToListAsync();
         return list;
     }
 
@@ -71,6 +72,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
     public async Task<List<VisitLogTotalCountOutput>> TotalCount()
     {
         var data = await Context.Queryable<SysLogVisit>()
+            .SplitTable(tabs => tabs.Take(_maxTabs))
             .GroupBy(it => it.Category)//根据分类分组
             .Select(it => new
             {
@@ -78,7 +80,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
                 Count = SqlFunc.AggregateCount(it.Category)//数量
             }).ToListAsync();
         //定义结果数组
-        List<VisitLogTotalCountOutput> visitLogTotalCounts = new List<VisitLogTotalCountOutput>
+        var visitLogTotalCounts = new List<VisitLogTotalCountOutput>
         {
             //添加登录数据
             new VisitLogTotalCountOutput

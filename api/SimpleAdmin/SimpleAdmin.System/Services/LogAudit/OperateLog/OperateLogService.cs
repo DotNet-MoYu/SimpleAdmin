@@ -23,6 +23,11 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     /// </summary>
     private readonly string _nameException = "异常日志";
 
+    /// <summary>
+    /// 分表最多查近多少年的数据
+    /// </summary>
+    private readonly int _maxTabs = 100;
+
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysLogOperate>> Page(OperateLogPageInput input)
     {
@@ -35,6 +40,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
                 it => it.Name.Contains(input.SearchKey)
                     || it.OpIp.Contains(input.SearchKey))//根据关键字查询
             .IgnoreColumns(it => new { it.ParamJson, it.ResultJson })
+            .SplitTable(tabs => tabs.Take(_maxTabs))
             .OrderByIF(!string.IsNullOrEmpty(input.SortField),
                 $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.CreateTime, OrderByType.Desc);
@@ -51,7 +57,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
         //生成时间表
         var queryableLeft = Context.Reportable(dayArray).ToQueryable<DateTime>();
         //ReportableDateType.MonthsInLast1yea 表式近一年月份 并且queryable之后还能在where过滤
-        var queryableRight = Context.Queryable<SysLogOperate>();//声名表
+        var queryableRight = Context.Queryable<SysLogOperate>().SplitTable(tabs => tabs.Take(_maxTabs));//声名表
         //报表查询
         var list = await Context.Queryable(queryableLeft, queryableRight, JoinType.Left,
                 (x1, x2)
@@ -71,7 +77,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
                 }
                 ).ToListAsync();
         //定义返回结果
-        List<OperateLogDayStatisticsOutput> result = new List<OperateLogDayStatisticsOutput>();
+        var result = new List<OperateLogDayStatisticsOutput>();
         //遍历结果
         list.ForEach(it =>
         {
@@ -87,6 +93,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     public async Task<List<OperateLogTotalCountOutpu>> TotalCount()
     {
         var data = await Context.Queryable<SysLogOperate>()
+            .SplitTable(tabs => tabs.Take(_maxTabs))
             .GroupBy(it => it.Category)//根据分类分组
             .Select(it => new
             {
@@ -94,7 +101,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
                 Count = SqlFunc.AggregateCount(it.Category)//数量
             }).ToListAsync();
         //定义结果数组
-        List<OperateLogTotalCountOutpu> operageLogTotalCounts = new List<OperateLogTotalCountOutpu>
+        var operateLogTotalCounts = new List<OperateLogTotalCountOutpu>
         {
             //添加操作日志数据
             new OperateLogTotalCountOutpu
@@ -111,7 +118,7 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
                     .Select(it => it.Count).FirstOrDefault()
             }
         };
-        return operageLogTotalCounts;
+        return operateLogTotalCounts;
     }
 
     /// <inheritdoc />
@@ -123,6 +130,6 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     /// <inheritdoc />
     public async Task<SysLogOperate> Detail(BaseIdInput input)
     {
-        return await GetFirstAsync(it => it.Id == input.Id);//删除对应分类日志
+        return await GetFirstSplitTableAsync(it => it.Id == input.Id, tabs => tabs.Take(_maxTabs));
     }
 }

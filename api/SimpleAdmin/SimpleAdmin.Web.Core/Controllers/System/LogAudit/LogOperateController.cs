@@ -23,7 +23,7 @@ public class LogOperateController : BaseController
     }
 
     /// <summary>
-    /// 字典分页查询
+    /// 操作日志分页查询
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

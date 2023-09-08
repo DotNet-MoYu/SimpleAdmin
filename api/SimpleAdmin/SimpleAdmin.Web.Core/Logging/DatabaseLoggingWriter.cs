@@ -119,7 +119,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             OpUser = name,
             OpAccount = opAccount
         };
-        await _db.InsertableWithAttr(devLogVisit).IgnoreColumns(true).ExecuteCommandAsync();//入库
+        await _db.InsertableWithAttr(devLogVisit).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
     }
 
     /// <summary>
@@ -188,7 +188,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":"
                 + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
         }
-        await _db.InsertableWithAttr(devLogOperate).IgnoreColumns(true).ExecuteCommandAsync();//入库
+        await _db.InsertableWithAttr(devLogOperate).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
     }
 
     /// <summary>

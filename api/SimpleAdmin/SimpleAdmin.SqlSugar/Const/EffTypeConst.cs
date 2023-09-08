@@ -51,7 +51,7 @@ public class EffTypeConst
     /// <summary>
     /// 数字输入框
     /// </summary>
-    public const string INPUTNUMBER = "inputNumber";
+    public const string INPUT_NUMBER = "inputNumber";
 
     /// <summary>
     /// 滑动数字条

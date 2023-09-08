@@ -98,9 +98,33 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
     /// <param name="whereExpression">查询条件</param>
     /// <param name="selectExpression">查询字段</param>
     /// <returns></returns>
-    public virtual Task<long> GetFirstAsync(Expression<Func<T, bool>> whereExpression, Expression<Func<T, long>> selectExpression)
+    protected virtual Task<long> GetFirstAsync(Expression<Func<T, bool>> whereExpression, Expression<Func<T, long>> selectExpression)
     {
         return Context.Queryable<T>().Where(whereExpression).Select(selectExpression).FirstAsync();
+    }
+
+    /// <summary>
+    /// 根据条件查询获取自动分表的单个数据
+    /// </summary>
+    /// <param name="whereExpression">条件表达式</param>
+    /// <param name="startTime">开始时间</param>
+    /// <param name="endTime">结束时间</param>
+    /// <returns>实体</returns>
+    public virtual Task<T> GetFirstSplitTableAsync(Expression<Func<T, bool>> whereExpression, DateTime startTime, DateTime endTime)
+    {
+        return Context.Queryable<T>().Where(whereExpression).SplitTable(startTime, endTime).FirstAsync();
+    }
+
+    /// <summary>
+    /// 根据条件查询获取自动分表的单个数据
+    /// </summary>
+    /// <param name="whereExpression">条件表达式</param>
+    /// <param name="getTableNamesFunc">分表查询表达式</param>
+    /// <returns>实体</returns>
+    public virtual Task<T> GetFirstSplitTableAsync(Expression<Func<T, bool>> whereExpression,
+        Func<List<SplitTableInfo>, IEnumerable<SplitTableInfo>> getTableNamesFunc)
+    {
+        return Context.Queryable<T>().Where(whereExpression).SplitTable(getTableNamesFunc).FirstAsync();
     }
 
     #endregion 单查

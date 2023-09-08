@@ -172,7 +172,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc/>
     public async Task ResetPassword(BaseIdInput input)
     {
-        await CheckPermission(input.Id, SimpleAdminConst.RESEST_PWD);//检查权限
+        await CheckPermission(input.Id, SimpleAdminConst.RESET_PWD);//检查权限
         await _sysUserService.ResetPassword(input);//重置密码
     }
 

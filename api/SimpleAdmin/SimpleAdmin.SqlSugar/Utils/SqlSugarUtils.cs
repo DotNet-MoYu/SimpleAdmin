@@ -175,7 +175,7 @@ public static class SqlSugarUtils
         return dataType switch
         {
             "string" => EffTypeConst.INPUT,
-            "int" => EffTypeConst.INPUTNUMBER,
+            "int" => EffTypeConst.INPUT_NUMBER,
             "long" => EffTypeConst.INPUT,
             "float" => EffTypeConst.INPUT,
             "double" => EffTypeConst.INPUT,
