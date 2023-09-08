@@ -1,0 +1,17 @@
+@font-face {
+  font-family: iconfont;
+
+  /* Project id 4211568 */
+  src: url("iconfont.ttf?t=1692085050888") format("truetype");
+}
+.iconfontPlus {
+  font-family: iconfont !important;
+  font-size: 20px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  cursor: pointer;
+}
+.icon-change::before {
+  content: "\e60c";
+}
