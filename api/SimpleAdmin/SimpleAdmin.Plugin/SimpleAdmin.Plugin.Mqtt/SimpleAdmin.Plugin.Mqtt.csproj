@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="SimpleMQTT" Version="1.0.4" />
+		<PackageReference Include="SimpleMQTT" Version="1.0.5" />
 	</ItemGroup>
 
 	<ItemGroup>
