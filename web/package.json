@@ -1,7 +1,7 @@
 {
   "name": "simple-admin",
   "private": true,
-  "version": "3.1.0",
+  "version": "3.1.1",
   "type": "module",
   "description": "小而美的通用后台管理系统",
   "author": {
