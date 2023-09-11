@@ -105,7 +105,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="opsDict">
+<script setup lang="ts" name="sysDict">
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { Search } from "@element-plus/icons-vue";
 import { Dict, dictPageApi, dictDeleteApi } from "@/api";
