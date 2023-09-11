@@ -4,44 +4,14 @@
         <name>SimpleAdmin.Application</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.System.GenTest">
-             <summary>
-             代码生成基础
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Name">
+        <member name="F:SimpleAdmin.Application.ApplicationConst.BIZ_ORG">
             <summary>
-            姓名
+            机构
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.GenTest.Sex">
+        <member name="F:SimpleAdmin.Application.ApplicationConst.BIZ_POS">
             <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Nation">
-            <summary>
-            民族
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Age">
-            <summary>
-            年龄
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Bir">
-            <summary>
-            生日
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Money">
-            <summary>
-            存款
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.SortCode">
-             <summary>
-             排序码
+            岗位
             </summary>
         </member>
         <member name="T:SimpleAdmin.Application.ApplicationSettingsOptions">
@@ -714,6 +684,46 @@
             正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
             </summary>
             <param name="services"></param>
+        </member>
+        <member name="T:SimpleAdmin.System.GenTest">
+             <summary>
+             代码生成基础
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Nation">
+            <summary>
+            民族
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Age">
+            <summary>
+            年龄
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Bir">
+            <summary>
+            生日
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.Money">
+            <summary>
+            存款
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.GenTest.SortCode">
+             <summary>
+             排序码
+            </summary>
         </member>
     </members>
 </doc>

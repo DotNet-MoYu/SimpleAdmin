@@ -34,6 +34,21 @@
             修改密码
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_PARAM_URL">
+            <summary>
+            mqtt连接地址
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_PARAM_USERNAME">
+            <summary>
+            mqtt连接用户名
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mqtt.MqttConst.MQTT_PARAM_PASSWORD">
+            <summary>
+            mqtt连接密码
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Plugin.Mqtt.MqttController">
             <summary>
             mqtt服务控制器

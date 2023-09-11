@@ -174,8 +174,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     }
 
     /// <inheritdoc/>
-    public async Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code,
-        List<BatchEditColumn> columns)
+    public async Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code, List<BatchEditColumn> columns)
     {
         var dic = new Dictionary<string, object>();
         var configs = await Columns(code);

@@ -124,7 +124,9 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     /// <inheritdoc />
     public async Task Delete(string category)
     {
-        await DeleteAsync(it => it.Category == category);//删除对应分类日志
+        await Context.Deleteable<SysLogOperate>().Where(it => it.Category == category)
+            .SplitTable(tabs => tabs.Take(_maxTabs))
+            .ExecuteCommandAsync();//删除对应分类日志
     }
 
     /// <inheritdoc />
