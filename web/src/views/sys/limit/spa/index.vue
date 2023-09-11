@@ -4,16 +4,15 @@
     <ProTable ref="proTable" title="单页列表" :columns="columns" :request-api="spaPageApi">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="onOpen(FormOptEnum.ADD)"> 新增单页 </el-button>
-        <el-button
+        <s-button suffix="单页" @click="onOpen(FormOptEnum.ADD)" />
+        <s-button
           type="danger"
-          :icon="Delete"
           plain
+          suffix="单页"
+          :opt="FormOptEnum.DELETE"
           :disabled="!scope.isSelected"
           @click="onDelete(scope.selectedListIds, '删除所选页面')"
-        >
-          删除单页
-        </el-button>
+        />
       </template>
       <!-- 表格 菜单类型 按钮 -->
       <template #menuType="scope">
@@ -30,10 +29,8 @@
       </template>
       <!-- 菜单操作 -->
       <template #operation="scope">
-        <el-button type="primary" link :icon="EditPen" @click="onOpen(FormOptEnum.EDIT, scope.row)"> 编辑 </el-button>
-        <el-button type="primary" link :icon="Delete" @click="onDelete([scope.row.id], `删除【${scope.row.title}】页面`)">
-          删除
-        </el-button>
+        <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
+        <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】页面`)" />
       </template>
     </ProTable>
     <!-- 新增/编辑表单 -->
@@ -46,7 +43,6 @@ import { spaPageApi, spaDeleteApi } from "@/api";
 import { Spa } from "@/api/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { Delete, EditPen, CirclePlus } from "@element-plus/icons-vue";
 import { useDictStore } from "@/stores/modules";
 import { FormOptEnum, SysDictEnum, MenuTypeDictEnum } from "@/enums";
 import Form from "./components/form.vue";

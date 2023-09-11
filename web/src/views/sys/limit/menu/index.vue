@@ -4,8 +4,8 @@
     <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuTreeApi" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
-        <el-button type="primary" :icon="CirclePlus" @click="onOpen(FormOptEnum.ADD)">新增菜单 </el-button>
-        <el-button type="danger" :icon="Delete" plain :disabled="!scope.isSelected"> 删除菜单 </el-button>
+        <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)">新增菜单 </s-button>
+        <s-button suffix="菜单" :opt="FormOptEnum.DELETE" plain :disabled="!scope.isSelected" />
       </template>
       <!-- 表格 菜单类型 按钮 -->
       <template #menuType="scope">
@@ -17,10 +17,8 @@
       <!-- 菜单操作 -->
       <template #operation="scope">
         <el-space>
-          <el-button type="primary" link :icon="EditPen" @click="onOpen(FormOptEnum.EDIT, scope.row)"> 编辑 </el-button>
-          <el-button type="primary" link :icon="Delete" @click="onDelete([scope.row.id], `删除【${scope.row.title}】菜单`)">
-            删除
-          </el-button>
+          <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
+          <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】菜单`)" />
           <el-dropdown @command="handleCommand">
             <el-link type="primary" :underline="false" :icon="ArrowDown"> 更多 </el-link>
             <template #dropdown>
@@ -49,7 +47,7 @@
 <script setup lang="tsx" name="sysMenu">
 import { menuTreeApi, Menu, menuDeleteApi } from "@/api";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { Delete, EditPen, CirclePlus, ArrowDown } from "@element-plus/icons-vue";
+import { ArrowDown } from "@element-plus/icons-vue";
 import { useUserStore, useDictStore } from "@/stores/modules";
 import { SysDictEnum, FormOptEnum, MenuTypeDictEnum } from "@/enums";
 import Form from "./components/form.vue";

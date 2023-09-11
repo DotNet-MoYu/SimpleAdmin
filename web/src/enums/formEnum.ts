@@ -19,5 +19,7 @@ export enum FormOptEnum {
   /** 编辑 */
   EDIT = "编辑",
   /** 查看 */
-  View = "查看"
+  VIEW = "查看",
+  /** 删除 */
+  DELETE = "删除"
 }

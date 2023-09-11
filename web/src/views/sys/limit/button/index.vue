@@ -1,46 +1,44 @@
 <!-- 权限按钮管理 -->
 <template>
-  <form-container v-model="visible" title="权限按钮" form-size="60%">
-    <div class="table-box min-h-300px">
-      <ProTable ref="proTable" title="按钮列表" class="table" :columns="columns" :request-api="getButtonPage">
-        <!-- 表格 header 按钮 -->
-        <template #tableHeader="scope">
-          <el-button type="primary" :icon="CirclePlus" @click="onOpen(FormOptEnum.ADD)"> 新增按钮 </el-button>
-          <el-button type="primary" :icon="CirclePlus" @click="onOpenBatch()"> 批量新增 </el-button>
-          <el-button
-            type="danger"
-            :icon="Delete"
-            plain
-            :disabled="!scope.isSelected"
-            @click="onDelete(scope.selectedListIds, '删除所选按钮')"
-          >
-            删除按钮
-          </el-button>
-        </template>
-        <!-- 菜单操作 -->
-        <template #operation="scope">
-          <el-button type="primary" link :icon="EditPen" @click="onOpen(FormOptEnum.EDIT, scope.row)"> 编辑 </el-button>
-          <el-button type="primary" link :icon="Delete" @click="onDelete([scope.row.id], `删除【${scope.row.title}】按钮`)">
-            删除
-          </el-button>
-        </template>
-      </ProTable>
-    </div>
-    <template #footer>
-      <el-button type="primary" @click="onClose"> 确定 </el-button>
-    </template>
-  </form-container>
-  <!-- 新增/编辑表单 -->
-  <Form ref="formRef" />
-  <!-- 批量新增 -->
-  <Batch ref="batchRef" />
+  <div>
+    <form-container v-model="visible" title="权限按钮" form-size="60%">
+      <div class="table-box min-h-300px">
+        <ProTable ref="proTable" title="按钮列表" class="table" :columns="columns" :request-api="getButtonPage">
+          <!-- 表格 header 按钮 -->
+          <template #tableHeader="scope">
+            <s-button suffix="按钮" @click="onOpen(FormOptEnum.ADD)" />
+            <s-button @click="onOpenBatch()"> 批量新增 </s-button>
+            <s-button
+              type="danger"
+              plain
+              suffix="按钮"
+              :opt="FormOptEnum.DELETE"
+              :disabled="!scope.isSelected"
+              @click="onDelete(scope.selectedListIds, '删除所选按钮')"
+            />
+          </template>
+          <!-- 菜单操作 -->
+          <template #operation="scope">
+            <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
+            <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】按钮`)" />
+          </template>
+        </ProTable>
+      </div>
+      <template #footer>
+        <el-button type="primary" @click="onClose"> 确定 </el-button>
+      </template>
+    </form-container>
+    <!-- 新增/编辑表单 -->
+    <Form ref="formRef" />
+    <!-- 批量新增 -->
+    <Batch ref="batchRef" />
+  </div>
 </template>
 
-<script setup lang="tsx" name="sysButton">
+<script setup lang="ts">
 import { buttonPageApi, buttonDeleteApi, Button } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { Delete, EditPen, CirclePlus } from "@element-plus/icons-vue";
 import { FormOptEnum } from "@/enums";
 import Form from "./components/form.vue";
 import Batch from "./components/batch.vue";

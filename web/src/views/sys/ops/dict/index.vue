@@ -4,7 +4,6 @@
     <div class="w-7/12">
       <ProTable
         ref="proTable"
-        title="系统字典"
         :columns="columns"
         :tool-button="false"
         :request-api="getDictPage"
@@ -24,18 +23,15 @@
                 <el-button :icon="Search" class="el-input-button" @click="RefreshTable" />
               </template>
             </el-input>
-            <el-button type="primary" :icon="CirclePlus" @click="onOpen(FormOptEnum.ADD, initParam.category as DictCategoryEnum)">
-              新增字典
-            </el-button>
-            <el-button
+            <s-button :suffix="title" @click="onOpen(FormOptEnum.ADD, initParam.category as DictCategoryEnum)" />
+            <s-button
               type="danger"
-              :icon="Delete"
               plain
+              :suffix="title"
               :disabled="!scope.isSelected"
+              :opt="FormOptEnum.DELETE"
               @click="onDelete(scope.selectedListIds, '删除所选字典')"
-            >
-              删除字典
-            </el-button>
+            />
           </el-space>
         </template>
         <!-- 状态 -->
@@ -48,23 +44,17 @@
 
         <!-- 菜单操作 -->
         <template #operation="scope">
-          <el-button
-            type="primary"
+          <s-button
             link
-            :icon="EditPen"
+            :opt="FormOptEnum.EDIT"
             @click="onOpen(FormOptEnum.EDIT, initParam.category as DictCategoryEnum, scope.row.parentId, scope.row)"
-          >
-            编辑
-          </el-button>
-          <el-button type="primary" link :icon="Delete" @click="onDelete([scope.row.id], `删除【${scope.row.dictLabel}】字典`)">
-            删除
-          </el-button>
+          />
+          <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.dictLabel}】字典`)" />
         </template>
       </ProTable>
     </div>
     <ProTable
       ref="proTableChild"
-      title="系统字典"
       :columns="columns"
       :tool-button="false"
       :request-api="dictPageApi"
@@ -79,22 +69,18 @@
               <el-button :icon="Search" class="el-input-button" />
             </template>
           </el-input>
-          <el-button
-            type="primary"
-            :icon="CirclePlus"
+          <s-button
+            :suffix="title"
             @click="onOpen(FormOptEnum.ADD, childInitParam.category as DictCategoryEnum, childInitParam.parentId)"
-          >
-            新增字典
-          </el-button>
-          <el-button
+          />
+          <s-button
             type="danger"
-            :icon="Delete"
+            :suffix="title"
             plain
             :disabled="!scope.isSelected"
+            :opt="FormOptEnum.DELETE"
             @click="onDelete(scope.selectedListIds, '删除所选字典')"
-          >
-            删除字典
-          </el-button>
+          />
         </el-space>
       </template>
       <!-- 状态 -->
@@ -106,17 +92,12 @@
       </template>
       <!-- 菜单操作 -->
       <template #operation="scope">
-        <el-button
-          type="primary"
+        <s-button
           link
-          :icon="EditPen"
+          :opt="FormOptEnum.EDIT"
           @click="onOpen(FormOptEnum.EDIT, childInitParam.category as DictCategoryEnum, scope.row.parentId, scope.row)"
-        >
-          编辑
-        </el-button>
-        <el-button type="primary" link :icon="Delete" @click="onDelete([scope.row.id], `删除【${scope.row.dictLabel}字典`)">
-          删除
-        </el-button>
+        />
+        <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.dictLabel}字典`)" />
       </template>
     </ProTable>
     <!-- 新增/编辑表单 -->
@@ -126,7 +107,7 @@
 
 <script setup lang="ts" name="opsDict">
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { CirclePlus, Search, EditPen, Delete } from "@element-plus/icons-vue";
+import { Search } from "@element-plus/icons-vue";
 import { Dict, dictPageApi, dictDeleteApi } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { SysDictEnum, FormOptEnum, CommonStatusEnum, DictCategoryEnum } from "@/enums";
@@ -134,6 +115,7 @@ import { useDictStore } from "@/stores/modules";
 import Form from "./components/form.vue";
 import { ElMessage } from "element-plus";
 
+const title = "字典"; //功能名称
 const dictStore = useDictStore(); //字典仓库
 // 左侧表格初始化条件
 interface InitParam {

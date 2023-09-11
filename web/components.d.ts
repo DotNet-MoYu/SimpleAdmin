@@ -72,6 +72,7 @@ declare module "vue" {
     ProTable: typeof import("./src/components/ProTable/index.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
     RouterView: typeof import("vue-router")["RouterView"];
+    SButton: typeof import("./src/components/SButton/index.vue")["default"];
     SearchForm: typeof import("./src/components/SearchForm/index.vue")["default"];
     SearchFormItem: typeof import("./src/components/SearchForm/components/SearchFormItem.vue")["default"];
     SelectIcon: typeof import("./src/components/SelectIcon/index.vue")["default"];
