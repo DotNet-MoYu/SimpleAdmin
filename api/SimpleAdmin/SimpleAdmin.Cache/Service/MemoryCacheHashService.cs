@@ -12,7 +12,7 @@ namespace SimpleAdmin.Cache;
 /// <inheritdoc cref="ISimpleCacheService"/>
 /// 内存缓存
 /// </summary>
-public partial class MemoryCacheService : ISimpleCacheService
+public partial class MemoryCacheService
 {
     /// <inheritdoc/>
     public void HashAdd<T>(string key, string hashKey, T value)
@@ -62,14 +62,14 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public List<T> HashGet<T>(string key, params string[] fields)
     {
-        List<T> list = new List<T>();
+        var list = new List<T>();
         //获取字典
         var exist = _memoryCache.GetDictionary<T>(key);
         foreach (var field in fields)
         {
-            if (exist.ContainsKey(field))//如果包含Key
+            if (exist.TryGetValue(field, out var value))//如果包含Key
             {
-                list.Add(exist[field]);
+                list.Add(value);
             }
             else { list.Add(default); }
         }

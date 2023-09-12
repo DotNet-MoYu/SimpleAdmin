@@ -31,7 +31,7 @@ public sealed class LoggingMonitorComponent : IServiceComponent
                 //获取客户端信息
                 var client = Parser.GetDefault().Parse(userAgent);
                 // 获取控制器/操作描述器
-                var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+                // var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
                 //操作名称默认是控制器名加方法名,自定义操作名称要在action上加Description特性
                 //var option = $"{controllerActionDescriptor.ControllerName}/{controllerActionDescriptor.ActionName}";
                 ////获取特性
@@ -47,7 +47,7 @@ public sealed class LoggingMonitorComponent : IServiceComponent
         //日志写入数据库配置
         services.AddDatabaseLogging<DatabaseLoggingWriter>(options =>
         {
-            options.WriteFilter = (logMsg) =>
+            options.WriteFilter = logMsg =>
             {
                 return logMsg.LogName == "System.Logging.LoggingMonitor";//只写入LoggingMonitor日志
             };

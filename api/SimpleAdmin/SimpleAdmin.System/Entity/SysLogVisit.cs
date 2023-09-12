@@ -13,7 +13,7 @@ namespace SimpleAdmin.System;
 ///</summary>
 [SugarTable("sys_log_visit_{year}{month}{day}", TableDescription = "访问日志表")]
 [SplitTable(SplitType.Year)]//按年分表 （自带分表支持 年、季、月、周、日）
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysLogVisit : BaseEntity
 {
     /// <summary>

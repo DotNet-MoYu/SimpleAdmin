@@ -164,11 +164,11 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     private async Task CheckInput(SysPosition sysPosition, string name)
     {
         //所有分类放一个列表
-        var positionCategorys = new List<string>()
+        var posCategoryList = new List<string>
         {
             CateGoryConst.POSITION_HIGH, CateGoryConst.POSITION_LOW, CateGoryConst.POSITION_MIDDLE
         };
-        if (!positionCategorys.Contains(sysPosition.Category))
+        if (!posCategoryList.Contains(sysPosition.Category))
             throw Oops.Bah($"{name}所属分类错误:{sysPosition.Category}");
         var sysPositions = await GetListAsync();//获取全部
         if (sysPositions.Any(it =>
@@ -177,11 +177,11 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             throw Oops.Bah($"存在重复的{name}:{sysPosition.Name}");
         if (sysPosition.Id > 0)//如果ID大于0表示编辑
         {
-            var postion =
+            var position =
                 sysPositions.Where(it => it.Id == sysPosition.Id).FirstOrDefault();//获取当前职位
-            if (postion != null)
+            if (position != null)
             {
-                if (postion.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
+                if (position.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
                 {
                     if (await Context.Queryable<SysUser>().Where(it =>
                             it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson,

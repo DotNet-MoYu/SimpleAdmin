@@ -18,12 +18,12 @@ public static class CaptchaUtil
     /// </summary>
     /// <param name="length">验证码数</param>
     /// <param name="width">长度</param>
-    /// <param name="heigh">高度</param>
+    /// <param name="height">高度</param>
     /// <param name="fontSize">字体大小</param>
     /// <param name="type">类型 0：数字 1：字符 2：计算</param>
     /// <returns></returns>
     public static CaptchaInfo CreateCaptcha(CaptchaType type = CaptchaType.CHAR, int length = 4, int width = 170,
-        int heigh = 50, int fontSize = 20)
+        int height = 50, int fontSize = 20)
     {
         //初始化验证码
         string charCode;
@@ -43,12 +43,12 @@ public static class CaptchaUtil
                 break;
         }
         var imageGenerator = new DefaultCaptchaImageGenerator();
-        var imageGeneratorOption = new CaptchaImageGeneratorOption()
+        var imageGeneratorOption = new CaptchaImageGeneratorOption
         {
             // 必须设置
             ForegroundColors = DefaultColors.Instance.Colors,
             Width = width,
-            Height = heigh,
+            Height = height,
             FontSize = fontSize,
             TextBold = true,
             BubbleCount = 1,
@@ -57,7 +57,7 @@ public static class CaptchaUtil
 
         var bytes = imageGenerator.Generate(charCode, imageGeneratorOption);
 
-        var captchaInfo = new CaptchaInfo()
+        var captchaInfo = new CaptchaInfo
         {
             Code = type.ToString() == "ARITH" ? resultCode : charCode,
             Image = bytes
@@ -112,11 +112,11 @@ public static class CaptchaUtil
     /// <returns></returns>
     public static string CreateArithCode(out string resultCode)
     {
-        var checkCode = "";
+        string checkCode;
         var random = new Random();
         var intFirst = random.Next(1, 10);//生成第一个数字
         var intSec = random.Next(1, 10);//生成第二个数字
-        var intTemp = 0;
+        int intTemp;
         switch (random.Next(1, 3).ToString())
         {
             case "2":

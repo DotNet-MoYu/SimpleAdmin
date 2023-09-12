@@ -59,13 +59,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var sysUser = await GetUserById(userId);//获取用户信息
             if (sysUser.Account == account)//这里做了比较用来限制大小写
                 return sysUser;
-            else
-                return null;
-        }
-        else
-        {
             return null;
         }
+        return null;
     }
 
     /// <inheritdoc/>
@@ -76,10 +72,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             return await GetUserById(userId);//获取用户信息
         }
-        else
-        {
-            return null;
-        }
+        return null;
     }
 
     /// <inheritdoc/>
@@ -176,7 +169,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         resourceList.ForEach(it =>
         {
             if (!string.IsNullOrEmpty(it.ExtJson))
-                buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResuorce>()
+                buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResource>()
                     .ButtonInfo);//如果有按钮权限，将按钮ID放到buttonIdList
         });
         if (buttonIdList.Count > 0)
@@ -431,7 +424,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             var isSuperAdmin = exist.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin && !UserManager.SuperAdmin)
-                throw Oops.Bah($"不可修改系统内置超管用户账号");
+                throw Oops.Bah("不可修改系统内置超管用户账号");
             var name = exist.Name;//姓名
             var sysUser = input.Adapt<SysUser>();//实体转换
             if (name != input.Name)
@@ -454,8 +447,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 DeleteUserFromRedis(sysUser.Id);//删除用户缓存
                 //删除用户token缓存
-                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
-                    new string[] { sysUser.Id.ToString() });
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, sysUser.Id.ToString());
             }
         }
     }
@@ -480,7 +472,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
-                throw Oops.Bah($"不可禁用系统内置超管用户账号");
+                throw Oops.Bah("不可禁用系统内置超管用户账号");
             CheckSelf(input.Id, SystemConst.DISABLE);//判断是不是自己
             //设置状态为禁用
             if (await UpdateAsync(it => new SysUser
@@ -523,7 +515,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             var isSuperAdmin = sysUser.Account == SysRoleConst.SUPER_ADMIN;//判断是否有超管
             if (isSuperAdmin)
-                throw Oops.Bah($"不能给超管分配角色");
+                throw Oops.Bah("不能给超管分配角色");
             CheckSelf(input.Id, SystemConst.GRANT_ROLE);//判断是不是自己
             //给用户赋角色
             await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_USER_HAS_ROLE,
@@ -596,14 +588,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             #region 保存数据库
 
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
-                var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
-                await relatioRep.DeleteAsync(it =>
+                var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
+                await relationRep.DeleteAsync(it =>
                     it.ObjectId == sysUser.Id
                     && (it.Category == CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION
                     || it.Category == CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE));
-                await relatioRep.InsertRangeAsync(relationRoles);//添加新的
+                await relationRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
             {
@@ -653,9 +645,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var containsSuperAdmin = await IsAnyAsync(it =>
                 it.Account == SysRoleConst.SUPER_ADMIN && ids.Contains(it.Id));//判断是否有超管
             if (containsSuperAdmin)
-                throw Oops.Bah($"不可删除系统内置超管用户");
+                throw Oops.Bah("不可删除系统内置超管用户");
             if (ids.Contains(UserManager.UserId))
-                throw Oops.Bah($"不可删除自己");
+                throw Oops.Bah("不可删除自己");
 
             //需要更新兼任信息的用户列表
             var updatePositionJsonUser = new List<SysUser>();
@@ -696,7 +688,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 CateGoryConst.RELATION_SYS_USER_HAS_ROLE
             };
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 //清除该用户作为主管信息
                 await UpdateAsync(it => new SysUser
@@ -833,9 +825,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             .ToList();//数据库手机号列表
         var dbEmails = sysUsers.Where(it => !string.IsNullOrEmpty(it.Email)).Select(it => it.Email)
             .ToList();//邮箱账号列表
-        var sysOrgs = await _sysOrgService.GetListAsync();
+        var sysOrgList = await _sysOrgService.GetListAsync();
         var sysPositions = await _sysPositionService.GetListAsync();
-        var dicts = await _dictService.GetListAsync();
+        var dictList = await _dictService.GetListAsync();
 
         #endregion 校验要用到的数据
 
@@ -852,7 +844,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (dbAccounts.Contains(item.Account))
                 item.ErrorInfo.Add(nameof(item.Account), $"系统已存在账号{item.Account}");
             if (accounts.Where(u => u == item.Account).Count() > 1)
-                item.ErrorInfo.Add(nameof(item.Account), $"账号重复");
+                item.ErrorInfo.Add(nameof(item.Account), "账号重复");
 
             #endregion 校验账号
 
@@ -863,7 +855,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 if (dbPhones.Contains(item.Phone))
                     item.ErrorInfo.Add(nameof(item.Phone), $"系统已存在手机号{item.Phone}的用户");
                 if (phones.Where(u => u == item.Phone).Count() > 1)
-                    item.ErrorInfo.Add(nameof(item.Phone), $"手机号重复");
+                    item.ErrorInfo.Add(nameof(item.Phone), "手机号重复");
             }
 
             #endregion 校验手机号
@@ -875,7 +867,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 if (dbEmails.Contains(item.Email))
                     item.ErrorInfo.Add(nameof(item.Email), $"系统已存在邮箱{item.Email}");
                 if (emails.Where(u => u == item.Email).Count() > 1)
-                    item.ErrorInfo.Add(nameof(item.Email), $"邮箱重复");
+                    item.ErrorInfo.Add(nameof(item.Email), "邮箱重复");
             }
 
             #endregion 校验邮箱
@@ -884,7 +876,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
             if (!string.IsNullOrEmpty(item.OrgName))
             {
-                var org = sysOrgs.Where(u => u.Names == item.OrgName).FirstOrDefault();
+                var org = sysOrgList.Where(u => u.Names == item.OrgName).FirstOrDefault();
                 if (org != null) item.OrgId = org.Id;//赋值组织Id
                 else item.ErrorInfo.Add(nameof(item.OrgName), $"部门{org}不存在");
             }
@@ -892,7 +884,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             if (!string.IsNullOrEmpty(item.PositionName))
             {
                 if (string.IsNullOrEmpty(item.OrgName))
-                    item.ErrorInfo.Add(nameof(item.PositionName), $"请填写部门");
+                    item.ErrorInfo.Add(nameof(item.PositionName), "请填写部门");
                 else
                 {
                     //根据部门ID和职位名判断是否有职位
@@ -907,28 +899,28 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
 
             #region 校验性别等字典
 
-            var genders = await _dictService.GetValuesByDictValue(SysDictConst.GENDER, dicts);
+            var genders = await _dictService.GetValuesByDictValue(SysDictConst.GENDER, dictList);
             if (!genders.Contains(item.Gender))
-                item.ErrorInfo.Add(nameof(item.Gender), $"性别只能是男和女");
+                item.ErrorInfo.Add(nameof(item.Gender), "性别只能是男和女");
             if (!string.IsNullOrEmpty(item.Nation))
             {
-                var nations = await _dictService.GetValuesByDictValue(SysDictConst.NATION, dicts);
+                var nations = await _dictService.GetValuesByDictValue(SysDictConst.NATION, dictList);
                 if (!nations.Contains(item.Nation))
-                    item.ErrorInfo.Add(nameof(item.Nation), $"不存在的民族");
+                    item.ErrorInfo.Add(nameof(item.Nation), "不存在的民族");
             }
             if (!string.IsNullOrEmpty(item.IdCardType))
             {
                 var idCarTypes =
-                    await _dictService.GetValuesByDictValue(SysDictConst.ID_CARD_TYPE, dicts);
+                    await _dictService.GetValuesByDictValue(SysDictConst.ID_CARD_TYPE, dictList);
                 if (!idCarTypes.Contains(item.IdCardType))
-                    item.ErrorInfo.Add(nameof(item.IdCardType), $"证件类型错误");
+                    item.ErrorInfo.Add(nameof(item.IdCardType), "证件类型错误");
             }
             if (!string.IsNullOrEmpty(item.CultureLevel))
             {
-                var cultrueLevels =
-                    await _dictService.GetValuesByDictValue(SysDictConst.CULTURE_LEVEL, dicts);
-                if (!cultrueLevels.Contains(item.CultureLevel))
-                    item.ErrorInfo.Add(nameof(item.CultureLevel), $"文化程度有误");
+                var cultureLevels =
+                    await _dictService.GetValuesByDictValue(SysDictConst.CULTURE_LEVEL, dictList);
+                if (!cultureLevels.Contains(item.CultureLevel))
+                    item.ErrorInfo.Add(nameof(item.CultureLevel), "文化程度有误");
             }
 
             #endregion 校验性别等字典
@@ -993,8 +985,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         //如果邮箱不是空
         if (!string.IsNullOrEmpty(sysUser.Email))
         {
-            var (ismatch, match) = sysUser.Email.MatchEmail();//验证邮箱格式
-            if (!ismatch)
+            var (isMatch, match) = sysUser.Email.MatchEmail();//验证邮箱格式
+            if (!isMatch)
                 throw Oops.Bah($"邮箱：{sysUser.Email} 格式错误");
             if (await IsAnyAsync(it => it.Email == sysUser.Email && it.Id != sysUser.Id))
                 throw Oops.Bah($"存在重复的邮箱:{sysUser.Email}");
@@ -1031,7 +1023,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <summary>
-    /// 获取Sqlsugar的ISugarQueryable
+    /// 获取SqlSugar的ISugarQueryable
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>

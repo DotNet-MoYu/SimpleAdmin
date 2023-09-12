@@ -75,12 +75,12 @@ module.exports = {
     customScopesAlign: "bottom",
     emptyScopesAlias: "empty",
     customScopesAlias: "custom",
-    allowBreakingChanges: ["feat", "fix"]
-    // issuePrefixs: [
-    //   //如果使用 gitee 作为开发管理,注意邮箱要和gitee中设置一致才行
-    //   //@see: https://gitee.com/help/articles/4141#article-header2
-    //   { value: "link", name: "link:     链接 ISSUES 进行中" },
-    //   { value: "closed", name: "closed:   标记 ISSUES 已完成" }
-    // ]
+    allowBreakingChanges: ["feat", "fix"],
+    issuePrefixs: [
+      //如果使用 gitee 作为开发管理,注意邮箱要和gitee中设置一致才行
+      //@see: https://gitee.com/help/articles/4141#article-header2
+      { value: "link", name: "link:     链接 ISSUES 进行中" },
+      { value: "closed", name: "closed:   标记 ISSUES 已完成" }
+    ]
   }
 };

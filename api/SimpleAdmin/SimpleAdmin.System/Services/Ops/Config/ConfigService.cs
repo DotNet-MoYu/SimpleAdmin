@@ -41,7 +41,7 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     {
         var configList = await GetListByCategory(category);//获取系统配置列表
         var configValue =
-            configList.Where(it => it.ConfigKey == configKey).FirstOrDefault();//根据configkey获取对应值
+            configList.Where(it => it.ConfigKey == configKey).FirstOrDefault();//根据configKey获取对应值
         return configValue;
     }
 

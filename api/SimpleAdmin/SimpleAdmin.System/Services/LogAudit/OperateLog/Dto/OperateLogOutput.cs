@@ -32,6 +32,6 @@ public class OperateLogDayStatisticsOutput
 /// <summary>
 /// 操作日志统计
 /// </summary>
-public class OperateLogTotalCountOutpu : VisitLogTotalCountOutput
+public class OperateLogTotalCountOutput : VisitLogTotalCountOutput
 {
 }

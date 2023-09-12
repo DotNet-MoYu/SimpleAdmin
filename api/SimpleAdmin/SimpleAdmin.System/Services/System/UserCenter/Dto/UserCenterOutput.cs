@@ -36,7 +36,7 @@ public class LoginOrgTreeOutput
     /// <summary>
     /// 样式
     /// </summary>
-    public MyStyle Style { get; set; }
+    public MyStyle? Style { get; set; }
 
     /// <summary>
     /// 我的机构样式

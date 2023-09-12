@@ -9,7 +9,7 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// sqlsugar数据库配置
+/// SqlSugar数据库配置
 /// </summary>
 public sealed class SqlSugarConfig : ConnectionConfig
 {

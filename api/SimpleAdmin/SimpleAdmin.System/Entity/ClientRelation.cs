@@ -12,7 +12,7 @@ namespace SimpleAdmin.Core.Entity.System;
 ///  C端用户关系
 /// </summary>
 [SugarTable("client_relation", TableDescription = "关系")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class ClientRelation : PrimaryKeyEntity
 {
     /// <summary>

@@ -105,7 +105,7 @@ public interface IUserCenterService : ITransient
     /// </summary>
     /// <param name="input">默认模块输入参数</param>
     /// <returns></returns>
-    Task SetDeafultModule(SetDeafultModuleInput input);
+    Task SetDefaultModule(SetDefaultModuleInput input);
 
     #endregion 编辑
 }

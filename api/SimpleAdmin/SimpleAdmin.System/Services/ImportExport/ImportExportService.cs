@@ -16,12 +16,12 @@ public class ImportExportService : IImportExportService
     #region 导入
 
     /// <inheritdoc/>
-    public void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null)
+    public void ImportVerification(IFormFile file, int maxSize = 30, string[] allowTypes = null)
     {
         if (file == null) throw Oops.Bah("文件不能为空");
-        if (file.Length > maxSzie * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSzie}M");
+        if (file.Length > maxSize * 1024 * 1024) throw Oops.Bah($"文件大小不允许超过{maxSize}M");
         var fileSuffix = Path.GetExtension(file.FileName).ToLower().Split(".")[1];// 文件后缀
-        string[] allowTypeS = allowTypes == null ? new string[] { "xlsx" } : allowTypes;//允许上传的文件类型
+        var allowTypeS = allowTypes == null ? new[] { "xlsx" } : allowTypes;//允许上传的文件类型
         if (!allowTypeS.Contains(fileSuffix)) throw Oops.Bah(errorMessage: "文件格式错误");
     }
 
@@ -33,19 +33,21 @@ public class ImportExportService : IImportExportService
         importResult.TemplateErrors.ForEach(error =>
         {
             if (error.Message.Contains("not found")) throw Oops.Bah($"列[{error.RequireColumnName}]未找到");
-            else throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
+            throw Oops.Bah($"列[{error.RequireColumnName}]:{error.Message}");
         });
         if (importResult.Data == null)
             throw Oops.Bah("文件数据格式有误,请重新导入!");
 
         //导入结果输出
-        var importPreview = new ImportPreviewOutput<T>() { HasError = importResult.HasError };
-        Dictionary<string, string> headerMap = new Dictionary<string, string>();
+        var importPreview = new ImportPreviewOutput<T>
+            { HasError = importResult.HasError };
+        var headerMap = new Dictionary<string, string>();
         //遍历导入的表头列表信息
         importResult.ImporterHeaderInfos.ForEach(it =>
         {
             headerMap.Add(it.Header.Name, it.PropertyName);
-            var tableColumns = new TableColumns { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
+            var tableColumns = new TableColumns
+                { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
             var antTableAttribute = it.PropertyInfo.GetCustomAttribute<AntTableAttribute>();//获取表格特性
             if (antTableAttribute != null)
             {
@@ -121,7 +123,7 @@ public class ImportExportService : IImportExportService
         if (importData.Count != data.Count)
         {
             result.Success = false;
-            result.Data = data.Where(it => it.HasError == true).ToList();
+            result.Data = data.Where(it => it.HasError).ToList();
             result.FailCount = data.Count - importData.Count;
         }
         result.ImportCount = importData.Count;

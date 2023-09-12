@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 站内信
 ///</summary>
 [SugarTable("sys_message", TableDescription = "站内信")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysMessage : BaseEntity
 {
     /// <summary>

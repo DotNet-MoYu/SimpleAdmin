@@ -85,8 +85,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor,
         ClientInfo clientInfo)
     {
-        var name = "";//用户姓名
-        var opAccount = "";//用户账号
+        string name;//用户姓名
+        string opAccount;//用户账号
         if (operation == EventSubscriberConst.LOGIN_B)
         {
             //如果是登录，用户信息就从返回值里拿
@@ -202,7 +202,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         try
         {
             var ipInfo = IpTool.Search(ip);//解析IP信息
-            var loginAddressList = new List<string>()
+            var loginAddressList = new List<string>
             {
                 ipInfo.Country,
                 ipInfo.Province,

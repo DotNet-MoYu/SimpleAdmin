@@ -19,10 +19,10 @@ public static class LinqExtension
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="first">第一个列表</param>
-    /// <param name="secend">第二个列表</param>
+    /// <param name="second">第二个列表</param>
     /// <returns></returns>
-    public static bool ContainsAll<T>(this List<T> first, List<T> secend)
+    public static bool ContainsAll<T>(this List<T> first, List<T> second)
     {
-        return secend.All(s => first.Any(f => f.Equals(s)));
+        return second.All(s => first.Any(f => f.Equals(s)));
     }
 }

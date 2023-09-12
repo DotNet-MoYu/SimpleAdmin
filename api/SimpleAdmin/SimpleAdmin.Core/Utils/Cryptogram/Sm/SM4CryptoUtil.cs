@@ -21,9 +21,9 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private static long GetULongByBe(byte[] b, int i)
     {
-        long n = (long)(b[i] & 0xff) << 24 |
-            (long)((b[i + 1] & 0xff) << 16) |
-            (long)((b[i + 2] & 0xff) << 8) |
+        var n = (long)(b[i] & 0xff) << 24 |
+            (uint)((b[i + 1] & 0xff) << 16) |
+            (uint)((b[i + 2] & 0xff) << 8) |
             b[i + 3] & 0xff & 0xffffffffL;
         return n;
     }
@@ -50,7 +50,7 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private static long Rotl(long x, int n)
     {
-        return ((x & 0xFFFFFFFF) << n) | x >> (32 - n);
+        return (x & 0xFFFFFFFF) << n | x >> 32 - n;
     }
 
     /// <summary>
@@ -60,16 +60,17 @@ public class SM4CryptoUtil
     /// <param name="i"></param>
     private static void Swap(long[] sk, int i)
     {
-        long t = sk[i];
-        sk[i] = sk[(31 - i)];
-        sk[(31 - i)] = t;
+        var t = sk[i];
+        sk[i] = sk[31 - i];
+        sk[31 - i] = t;
     }
 
     /// <summary>
     /// S盒
     /// </summary>
-    public byte[] SboxTable = new byte[] {
-     //   0     1     2     3     4     5     6     7     8     9     a     b     c     d     e     f
+    public byte[] SboxTable = new byte[]
+    {
+        //   0     1     2     3     4     5     6     7     8     9     a     b     c     d     e     f
         0xd6, 0x90, 0xe9, 0xfe, 0xcc, 0xe1, 0x3d, 0xb7, 0x16, 0xb6, 0x14, 0xc2, 0x28, 0xfb, 0x2c, 0x05,
         0x2b, 0x67, 0x9a, 0x76, 0x2a, 0xbe, 0x04, 0xc3, 0xaa, 0x44, 0x13, 0x26, 0x49, 0x86, 0x06, 0x99,
         0x9c, 0x42, 0x50, 0xf4, 0x91, 0xef, 0x98, 0x7a, 0x33, 0x54, 0x0b, 0x43, 0xed, 0xcf, 0xac, 0x62,
@@ -96,15 +97,16 @@ public class SM4CryptoUtil
     /// <summary>
     /// 固定参数CK
     /// </summary>
-    public uint[] CK = {
-        0x00070e15,0x1c232a31,0x383f464d,0x545b6269,
-        0x70777e85,0x8c939aa1,0xa8afb6bd,0xc4cbd2d9,
-        0xe0e7eef5,0xfc030a11,0x181f262d,0x343b4249,
-        0x50575e65,0x6c737a81,0x888f969d,0xa4abb2b9,
-        0xc0c7ced5,0xdce3eaf1,0xf8ff060d,0x141b2229,
-        0x30373e45,0x4c535a61,0x686f767d,0x848b9299,
-        0xa0a7aeb5,0xbcc3cad1,0xd8dfe6ed,0xf4fb0209,
-        0x10171e25,0x2c333a41,0x484f565d,0x646b7279
+    public uint[] CK =
+    {
+        0x00070e15, 0x1c232a31, 0x383f464d, 0x545b6269,
+        0x70777e85, 0x8c939aa1, 0xa8afb6bd, 0xc4cbd2d9,
+        0xe0e7eef5, 0xfc030a11, 0x181f262d, 0x343b4249,
+        0x50575e65, 0x6c737a81, 0x888f969d, 0xa4abb2b9,
+        0xc0c7ced5, 0xdce3eaf1, 0xf8ff060d, 0x141b2229,
+        0x30373e45, 0x4c535a61, 0x686f767d, 0x848b9299,
+        0xa0a7aeb5, 0xbcc3cad1, 0xd8dfe6ed, 0xf4fb0209,
+        0x10171e25, 0x2c333a41, 0x484f565d, 0x646b7279
     };
 
     /// <summary>
@@ -114,8 +116,8 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private byte Sm4Sbox(byte inch)
     {
-        int i = inch & 0xFF;
-        byte retVal = SboxTable[i];
+        var i = inch & 0xFF;
+        var retVal = SboxTable[i];
         return retVal;
     }
 
@@ -126,15 +128,15 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private long Sm4Lt(long ka)
     {
-        byte[] a = new byte[4];
-        byte[] b = new byte[4];
+        var a = new byte[4];
+        var b = new byte[4];
         PutULongToBe(ka, a, 0);
         b[0] = Sm4Sbox(a[0]);
         b[1] = Sm4Sbox(a[1]);
         b[2] = Sm4Sbox(a[2]);
         b[3] = Sm4Sbox(a[3]);
-        long bb = GetULongByBe(b, 0);
-        long c = bb ^ Rotl(bb, 2) ^ Rotl(bb, 10) ^ Rotl(bb, 18) ^ Rotl(bb, 24);
+        var bb = GetULongByBe(b, 0);
+        var c = bb ^ Rotl(bb, 2) ^ Rotl(bb, 10) ^ Rotl(bb, 18) ^ Rotl(bb, 24);
         return c;
     }
 
@@ -147,7 +149,8 @@ public class SM4CryptoUtil
     /// <param name="x3"></param>
     /// <param name="rk"></param>
     /// <returns></returns>
-    private long Sm4F(long x0, long x1, long x2, long x3, long rk)
+    private long Sm4F(long x0, long x1, long x2,
+        long x3, long rk)
     {
         return x0 ^ Sm4Lt(x1 ^ x2 ^ x3 ^ rk);
     }
@@ -159,15 +162,15 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private long Sm4CalciRk(long ka)
     {
-        byte[] a = new byte[4];
-        byte[] b = new byte[4];
+        var a = new byte[4];
+        var b = new byte[4];
         PutULongToBe(ka, a, 0);
         b[0] = Sm4Sbox(a[0]);
         b[1] = Sm4Sbox(a[1]);
         b[2] = Sm4Sbox(a[2]);
         b[3] = Sm4Sbox(a[3]);
-        long bb = GetULongByBe(b, 0);
-        long rk = bb ^ Rotl(bb, 13) ^ Rotl(bb, 23);
+        var bb = GetULongByBe(b, 0);
+        var rk = bb ^ Rotl(bb, 13) ^ Rotl(bb, 23);
         return rk;
     }
 
@@ -179,13 +182,13 @@ public class SM4CryptoUtil
     private void SetKey(long[] SK, byte[] key)
     {
         //加密密钥长度为 128 比特
-        long[] MK = new long[4];
-        int i = 0;
+        var MK = new long[4];
+        var i = 0;
         MK[0] = GetULongByBe(key, 0);
         MK[1] = GetULongByBe(key, 4);
         MK[2] = GetULongByBe(key, 8);
         MK[3] = GetULongByBe(key, 12);
-        long[] k = new long[36];
+        var k = new long[36];
         //轮密钥生成方法
         k[0] = MK[0] ^ FK[0];
         k[1] = MK[1] ^ FK[1];
@@ -193,8 +196,8 @@ public class SM4CryptoUtil
         k[3] = MK[3] ^ FK[3];
         for (; i < 32; i++)
         {
-            k[(i + 4)] = (k[i] ^ Sm4CalciRk(k[(i + 1)] ^ k[(i + 2)] ^ k[(i + 3)] ^ CK[i]));
-            SK[i] = k[(i + 4)];
+            k[i + 4] = k[i] ^ Sm4CalciRk(k[i + 1] ^ k[i + 2] ^ k[i + 3] ^ CK[i]);
+            SK[i] = k[i + 4];
         }
     }
 
@@ -206,15 +209,16 @@ public class SM4CryptoUtil
     /// <param name="output">输出的对应的分组明文</param>
     private void Sm4OneRound(long[] sk, byte[] input, byte[] output)
     {
-        int i = 0;
-        long[] ulbuf = new long[36];
+        var i = 0;
+        var ulbuf = new long[36];
         ulbuf[0] = GetULongByBe(input, 0);
         ulbuf[1] = GetULongByBe(input, 4);
         ulbuf[2] = GetULongByBe(input, 8);
         ulbuf[3] = GetULongByBe(input, 12);
-        while (i < 32) //开始32轮解密 ，一次进行4轮，共计八次
+        while (i < 32)//开始32轮解密 ，一次进行4轮，共计八次
         {
-            ulbuf[(i + 4)] = Sm4F(ulbuf[i], ulbuf[(i + 1)], ulbuf[(i + 2)], ulbuf[(i + 3)], sk[i]);
+            ulbuf[i + 4] = Sm4F(ulbuf[i], ulbuf[i + 1], ulbuf[i + 2], ulbuf[i + 3],
+                sk[i]);
             i++;
         }
         PutULongToBe(ulbuf[35], output, 0);
@@ -235,13 +239,14 @@ public class SM4CryptoUtil
         {
             return null;
         }
-        byte[] ret = null;
+        byte[] ret;
         if (mode == 1)
         {
-            int p = 16 - input.Length % 16;
+            var p = 16 - input.Length % 16;
             ret = new byte[input.Length + p];
-            Array.Copy(input, 0, ret, 0, input.Length);
-            for (int i = 0; i < p; i++)
+            Array.Copy(input, 0, ret, 0,
+                input.Length);
+            for (var i = 0; i < p; i++)
             {
                 ret[input.Length + i] = (byte)p;
             }
@@ -250,7 +255,8 @@ public class SM4CryptoUtil
         {
             int p = input[input.Length - 1];
             ret = new byte[input.Length - p];
-            Array.Copy(input, 0, ret, 0, input.Length - p);
+            Array.Copy(input, 0, ret, 0,
+                input.Length - p);
         }
         return ret;
     }
@@ -290,21 +296,24 @@ public class SM4CryptoUtil
     /// <returns></returns>
     public byte[] Sm4CryptEcb(Sm4Context ctx, byte[] input)
     {
-        if (ctx.IsPadding && (ctx.Mode == 1))
+        if (ctx.IsPadding && ctx.Mode == 1)
         {
             input = Padding(input, 1);
         }
-        int length = input.Length;
-        byte[] bins = new byte[length];
-        Array.Copy(input, 0, bins, 0, length);
-        byte[] bous = new byte[length];
-        for (int i = 0; length > 0; length -= 16, i++)
+        var length = input.Length;
+        var bins = new byte[length];
+        Array.Copy(input, 0, bins, 0,
+            length);
+        var bous = new byte[length];
+        for (var i = 0; length > 0; length -= 16, i++)
         {
-            byte[] inBytes = new byte[16];
-            byte[] outBytes = new byte[16];
-            Array.Copy(bins, i * 16, inBytes, 0, length > 16 ? 16 : length);
+            var inBytes = new byte[16];
+            var outBytes = new byte[16];
+            Array.Copy(bins, i * 16, inBytes, 0,
+                length > 16 ? 16 : length);
             Sm4OneRound(ctx.Key, inBytes, outBytes);
-            Array.Copy(outBytes, 0, bous, i * 16, length > 16 ? 16 : length);
+            Array.Copy(outBytes, 0, bous, i * 16,
+                length > 16 ? 16 : length);
         }
         if (ctx.IsPadding && ctx.Mode == 0)
         {
@@ -326,26 +335,29 @@ public class SM4CryptoUtil
         {
             input = Padding(input, 1);
         }
-        int length = input.Length;
-        byte[] bins = new byte[length];
-        Array.Copy(input, 0, bins, 0, length);
-        List<byte> bousList = new List<byte>();
+        var length = input.Length;
+        var bins = new byte[length];
+        Array.Copy(input, 0, bins, 0,
+            length);
+        var bousList = new List<byte>();
         int i;
         if (ctx.Mode == 1)
         {
-            for (int j = 0; length > 0; length -= 16, j++)
+            for (var j = 0; length > 0; length -= 16, j++)
             {
-                byte[] inBytes = new byte[16];
-                byte[] outBytes = new byte[16];
-                byte[] out1 = new byte[16];
-                Array.Copy(bins, j * 16, inBytes, 0, length > 16 ? 16 : length);
+                var inBytes = new byte[16];
+                var outBytes = new byte[16];
+                var out1 = new byte[16];
+                Array.Copy(bins, j * 16, inBytes, 0,
+                    length > 16 ? 16 : length);
                 for (i = 0; i < 16; i++)
                 {
-                    outBytes[i] = ((byte)(inBytes[i] ^ iv[i]));
+                    outBytes[i] = (byte)(inBytes[i] ^ iv[i]);
                 }
                 Sm4OneRound(ctx.Key, outBytes, out1);
-                Array.Copy(out1, 0, iv, 0, 16);
-                for (int k = 0; k < 16; k++)
+                Array.Copy(out1, 0, iv, 0,
+                    16);
+                for (var k = 0; k < 16; k++)
                 {
                     bousList.Add(out1[k]);
                 }
@@ -353,21 +365,24 @@ public class SM4CryptoUtil
         }
         else
         {
-            byte[] temp = new byte[16];
-            for (int j = 0; length > 0; length -= 16, j++)
+            var temp = new byte[16];
+            for (var j = 0; length > 0; length -= 16, j++)
             {
-                byte[] inBytes = new byte[16];
-                byte[] outBytes = new byte[16];
-                byte[] out1 = new byte[16];
-                Array.Copy(bins, j * 16, inBytes, 0, length > 16 ? 16 : length);
-                Array.Copy(inBytes, 0, temp, 0, 16);
+                var inBytes = new byte[16];
+                var outBytes = new byte[16];
+                var out1 = new byte[16];
+                Array.Copy(bins, j * 16, inBytes, 0,
+                    length > 16 ? 16 : length);
+                Array.Copy(inBytes, 0, temp, 0,
+                    16);
                 Sm4OneRound(ctx.Key, inBytes, outBytes);
                 for (i = 0; i < 16; i++)
                 {
-                    out1[i] = ((byte)(outBytes[i] ^ iv[i]));
+                    out1[i] = (byte)(outBytes[i] ^ iv[i]);
                 }
-                Array.Copy(temp, 0, iv, 0, 16);
-                for (int k = 0; k < 16; k++)
+                Array.Copy(temp, 0, iv, 0,
+                    16);
+                for (var k = 0; k < 16; k++)
                 {
                     bousList.Add(out1[k]);
                 }
@@ -375,13 +390,10 @@ public class SM4CryptoUtil
         }
         if (ctx.IsPadding && ctx.Mode == 0)
         {
-            byte[] bous = Padding(bousList.ToArray(), 0);
+            var bous = Padding(bousList.ToArray(), 0);
             return bous;
         }
-        else
-        {
-            return bousList.ToArray();
-        }
+        return bousList.ToArray();
     }
 }
 

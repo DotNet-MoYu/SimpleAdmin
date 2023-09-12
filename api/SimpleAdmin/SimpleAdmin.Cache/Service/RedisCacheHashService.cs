@@ -12,8 +12,7 @@ namespace SimpleAdmin.Cache;
 /// <inheritdoc cref="ISimpleCacheService"/>
 /// Redis缓存
 /// </summary>
-
-public partial class RedisCacheService : ISimpleCacheService
+public partial class RedisCacheService
 {
     /// <inheritdoc/>
     public void HashAdd<T>(string key, string hashKey, T value)

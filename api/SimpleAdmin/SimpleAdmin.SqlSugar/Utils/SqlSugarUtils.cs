@@ -9,7 +9,7 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// Sqlusgar通用功能
+/// SqlSugar通用功能
 /// </summary>
 public static class SqlSugarUtils
 {
@@ -20,7 +20,7 @@ public static class SqlSugarUtils
     /// <returns></returns>
     public static List<SqlSugarTableInfo> GetTablesByAttribute<T>()
     {
-        List<SqlSugarTableInfo> tables = new List<SqlSugarTableInfo>();//结果集
+        var tables = new List<SqlSugarTableInfo>();//结果集
 
         // 获取实体表
         var entityTypes = App.EffectiveTypes
@@ -29,24 +29,21 @@ public static class SqlSugarUtils
 
         foreach (var entityType in entityTypes)
         {
-            var teanant = entityType.GetCustomAttribute<TenantAttribute>();//获取多租户特性
-            var configId = teanant.configId.ToString();//获取租户Id
-            if (teanant != null)
+            var tenantAttr = entityType.GetCustomAttribute<TenantAttribute>();//获取多租户特性
+            var configId = tenantAttr.configId.ToString();//获取租户Id
+            var connection = DbContext.DB.GetConnection(tenantAttr.configId.ToString());//根据租户ID获取连接信息
+            var entityInfo = connection.EntityMaintenance.GetEntityInfo(entityType);//获取实体信息
+            if (entityInfo != null)
             {
-                var connection = DbContext.DB.GetConnection(teanant.configId.ToString());//根据租户ID获取连接信息
-                var entityInfo = connection.EntityMaintenance.GetEntityInfo(entityType);//获取实体信息
-                if (entityInfo != null)
+                var columns = GetTableColumns(configId, entityInfo.DbTableName);//获取字段信息
+                tables.Add(new SqlSugarTableInfo
                 {
-                    var columns = GetTableColumns(configId, entityInfo.DbTableName);//获取字段信息
-                    tables.Add(new SqlSugarTableInfo
-                    {
-                        TableName = entityInfo.DbTableName,
-                        EntityName = entityInfo.EntityName,
-                        TableDescription = entityInfo.TableDescription,
-                        ConfigId = configId,
-                        Columns = columns
-                    });
-                }
+                    TableName = entityInfo.DbTableName,
+                    EntityName = entityInfo.EntityName,
+                    TableDescription = entityInfo.TableDescription,
+                    ConfigId = configId,
+                    Columns = columns
+                });
             }
         }
         return tables;
@@ -58,9 +55,9 @@ public static class SqlSugarUtils
     /// <param name="configId"></param>
     /// <param name="tableName"></param>
     /// <returns></returns>
-    public static List<SqlsugarColumnInfo> GetTableColumns(string configId, string tableName)
+    public static List<SqlSugarColumnInfo> GetTableColumns(string configId, string tableName)
     {
-        var columns = new List<SqlsugarColumnInfo>();//结果集
+        var columns = new List<SqlSugarColumnInfo>();//结果集
         var connection = DbContext.DB.GetConnection(configId);
         var dbColumnInfos = connection.DbMaintenance.GetColumnInfosByTableName(tableName);//根据表名获取表信息
         if (dbColumnInfos != null)
@@ -82,10 +79,10 @@ public static class SqlSugarUtils
                 {
                     it.DbColumnName = StringHelper.FirstCharToUpper(it.DbColumnName);//首字母大写
                 }
-                columns.Add(new SqlsugarColumnInfo
+                columns.Add(new SqlSugarColumnInfo
                 {
                     ColumnName = it.DbColumnName,
-                    IsPrimarykey = it.IsPrimarykey,
+                    IsPrimaryKey = it.IsPrimarykey,
                     ColumnDescription = it.ColumnDescription,
                     DataType = it.DataType
                 });
@@ -194,7 +191,7 @@ public static class SqlSugarUtils
     /// <returns></returns>
     public static bool IsCommonColumn(string columnName)
     {
-        var columnList = new List<string>()
+        var columnList = new List<string>
         {
             nameof(BaseEntity.CreateTime), nameof(BaseEntity.UpdateTime),
             nameof(BaseEntity.CreateUserId), nameof(BaseEntity.CreateUser),

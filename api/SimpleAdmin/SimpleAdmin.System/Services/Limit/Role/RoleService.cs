@@ -101,7 +101,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     {
         //判断是否超管
         if (input.Code == SysRoleConst.SUPER_ADMIN)
-            throw Oops.Bah($"不可编辑超管角色");
+            throw Oops.Bah("不可编辑超管角色");
         await CheckInput(input);//检查参数
         var role = await GetFirstAsync(it => it.Id == input.Id);//获取角色
         if (role != null)
@@ -134,7 +134,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             }
             var sysRole = input.Adapt<SysRole>();//实体转换
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 await UpdateAsync(sysRole);//更新角色
                 if (permissions.Any())//如果有授权权限就更新
@@ -169,7 +169,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var hasSuperAdmin =
                 sysRoles.Any(it =>
                     it.Code == SysRoleConst.SUPER_ADMIN && ids.Contains(it.Id));//判断是否有超级管理员
-            if (hasSuperAdmin) throw Oops.Bah($"不可删除系统内置超管角色");
+            if (hasSuperAdmin) throw Oops.Bah("不可删除系统内置超管角色");
 
             //数据库是string所以这里转下
             var targetIds = ids.Select(it => it.ToString()).ToList();
@@ -180,7 +180,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION
             };
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除按钮
                 var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
@@ -216,8 +216,9 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     /// <inheritdoc />
     public async Task<RoleOwnResourceOutput> OwnResource(BaseIdInput input, string category)
     {
-        var roleOwnResource = new RoleOwnResourceOutput() { Id = input.Id };//定义结果集
-        var grantInfoList = new List<RelationRoleResuorce>();//已授权信息集合
+        var roleOwnResource = new RoleOwnResourceOutput
+            { Id = input.Id };//定义结果集
+        var grantInfoList = new List<RelationRoleResource>();//已授权信息集合
         //获取关系列表
         var relations =
             await _relationService.GetRelationListByObjectIdAndCategory(input.Id, category);
@@ -225,7 +226,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         relations.ForEach(it =>
         {
             //将扩展信息转为实体
-            var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();
+            var relationRole = it.ExtJson.ToJsonEntity<RelationRoleResource>();
             grantInfoList.Add(relationRole);//添加到已授权信息
         });
         roleOwnResource.GrantInfoList = grantInfoList;//赋值已授权信息
@@ -314,17 +315,17 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             #region 保存数据库
 
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
-                var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
+                var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
                 //如果不是代码生成,就删除老的
                 if (!input.IsCodeGen)
-                    await relatioRep.DeleteAsync(it =>
+                    await relationRep.DeleteAsync(it =>
                         it.ObjectId == sysRole.Id
                         && (it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION
                         || it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE
                         || it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE));
-                await relatioRep.InsertRangeAsync(relationRoles);//添加新的
+                await relationRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
             {
@@ -371,7 +372,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         var sysRole = (await GetListAsync()).Where(it => it.Id == input.Id).FirstOrDefault();//获取角色
         if (sysRole != null)
         {
-            var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
+            var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiUrl列表
             var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
             await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION,
                 input.Id, apiUrls, extJsons,
@@ -407,7 +408,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         });
 
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             var relationRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
             var targetId = input.Id.ToString();//目标ID转string
@@ -505,8 +506,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             throw Oops.Bah($"角色所属分类错误:{sysRole.Category}");
         //如果是机构角色orgId不能为空
         if (sysRole.Category == CateGoryConst.ROLE_ORG && sysRole.OrgId == null)
-            throw Oops.Bah($"orgId不能为空");
-        else if (sysRole.Category == CateGoryConst.ROLE_GLOBAL)//如果是全局
+            throw Oops.Bah("orgId不能为空");
+        if (sysRole.Category == CateGoryConst.ROLE_GLOBAL)//如果是全局
             sysRole.OrgId = null;//机构id设null
 
         var sysRoles = await GetListAsync();//获取所有
@@ -516,8 +517,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             if (sysRole.OrgId == null)
                 throw Oops.Bah($"存在重复的全局角色:{sysRole.Name}");
-            else
-                throw Oops.Bah($"同组织下存在重复的角色:{sysRole.Name}");
+            throw Oops.Bah($"同组织下存在重复的角色:{sysRole.Name}");
         }
     }
 

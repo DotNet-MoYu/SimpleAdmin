@@ -16,16 +16,13 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     private readonly ILogger<ButtonService> _logger;
     private readonly IResourceService _resourceService;
     private readonly IRelationService _relationService;
-    private readonly IEventPublisher _eventPublisher;
 
     public ButtonService(ILogger<ButtonService> logger, IResourceService resourceService,
-        IRelationService relationService,
-        IEventPublisher eventPublisher)
+        IRelationService relationService)
     {
         _logger = logger;
         _resourceService = resourceService;
         _relationService = relationService;
-        _eventPublisher = eventPublisher;
     }
 
     /// <inheritdoc/>
@@ -57,9 +54,9 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
     public async Task<List<long>> AddBatch(ButtonAddInput input)
     {
         var sysResources = new List<SysResource>();//按钮列表
-        var codeList = new List<string>()
+        var codeList = new List<string>
             { "Add", "Edit", "Delete", "BatchDelete", "Import", "Export", "BatchEdit" };//code后缀
-        var titleList = new List<string>()
+        var titleList = new List<string>
             { "新增", "编辑", "删除", "批量删除", "导入", "导出", "批量编辑" };//title前缀
         var idList = new List<long>();//Id列表
         for (var i = 0; i < codeList.Count; i++)
@@ -86,10 +83,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
             await _resourceService.RefreshCache(CateGoryConst.RESOURCE_BUTTON);//刷新缓存
             return sysResources.Select(it => it.Id).ToList();
         }
-        else
-        {
-            return new List<long>();
-        }
+        return new List<long>();
     }
 
     /// <inheritdoc />
@@ -98,7 +92,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             await UpdateAsync(sysResource);//更新按钮
         });
@@ -140,7 +134,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         //遍历关系表
         relationList.ForEach(it =>
         {
-            var relationRoleResuorce = it.ExtJson.ToJsonEntity<RelationRoleResuorce>();//拓展信息转实体
+            var relationRoleResuorce = it.ExtJson.ToJsonEntity<RelationRoleResource>();//拓展信息转实体
             var buttonInfo = relationRoleResuorce.ButtonInfo;//获取按钮信息
             if (buttonInfo.Count > 0)
             {
@@ -154,7 +148,7 @@ public class ButtonService : DbRepository<SysResource>, IButtonService
         #endregion 处理关系表角色资源信息
 
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除按钮
             if (relationList.Count > 0)

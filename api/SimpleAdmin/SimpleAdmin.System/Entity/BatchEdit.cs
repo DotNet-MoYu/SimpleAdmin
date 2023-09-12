@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 批量修改
 ///</summary>
 [SugarTable("batch_edit", TableDescription = "批量修改")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 [CodeGen]
 public class BatchEdit : PrimaryKeyEntity
 {

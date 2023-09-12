@@ -7,7 +7,6 @@
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 using Masuit.Tools.DateTimeExt;
-using Masuit.Tools.Models;
 
 namespace SimpleAdmin.System;
 
@@ -61,14 +60,14 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SessionOutput>> PageC(SessionPageInput input)
     {
-        return new SqlSugarPagedList<SessionOutput>()
+        return new SqlSugarPagedList<SessionOutput>
             { PageNum = 1, PageSize = 20, Total = 0, Pages = 1, HasNextPages = false };
     }
 
     /// <inheritdoc/>
     public SessionAnalysisOutPut Analysis()
     {
-        var tokenDic = GetTokenDicFromRedis();//redistoken会话字典信息
+        var tokenDic = GetTokenDicFromRedis();//redisToken会话字典信息
         var tokenInfosList = tokenDic.Values.ToList();//端token列表
         var dicB = new Dictionary<string, List<TokenInfo>>();
         var dicC = new Dictionary<string, List<TokenInfo>>();
@@ -90,11 +89,11 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var tokenC = dicC.Values.ToList();//c端token列表
         int maxCountB = 0, maxCountC = 0;
         if (tokenB.Count > 0)
-            maxCountB = tokenB.OrderByDescending(it => it.Count).Take(1).First().Count();//b端最大会话数
+            maxCountB = tokenB.OrderByDescending(it => it.Count).Take(1).First().Count;//b端最大会话数
 
         if (tokenC.Count > 0)
-            maxCountC = tokenC.OrderByDescending(it => it.Count).Take(1).First().Count();//C端最大会话数
-        return new SessionAnalysisOutPut()
+            maxCountC = tokenC.OrderByDescending(it => it.Count).Take(1).First().Count;//C端最大会话数
+        return new SessionAnalysisOutPut
         {
             OnLineCount = onLineCount,
             CurrentSessionTotalCount = tokenB.Count + tokenC.Count,
@@ -111,8 +110,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var tokenInfos =
             _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         //从列表中删除
-        _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
-            new string[] { userId });
+        _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         await NoticeUserLoginOut(userId, tokenInfos);
     }
 
@@ -131,8 +129,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId,
                 tokenInfos);//如果还有token则更新token
         else
-            _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
-                new string[] { userId });//否则直接删除key
+            _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);//否则直接删除key
         await NoticeUserLoginOut(userId, deleteTokens);
     }
 
@@ -176,10 +173,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             }
             return bTokenDic;
         }
-        else
-        {
-            return new Dictionary<string, List<TokenInfo>>();
-        }
+        return new Dictionary<string, List<TokenInfo>>();
     }
 
     /// <summary>

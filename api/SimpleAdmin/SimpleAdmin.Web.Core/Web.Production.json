@@ -3,12 +3,6 @@
   "WebSettings": {
     "EnvPoc": false, //是否演示环境
   },
-  //插件设置
-  "PluginSettings": {
-    "UseSignalR": true, // 是否开启Signalr
-    "UseMqtt": false, // 是否开启mqtt
-    "NoticeComponent": "SignalR" //默认通知类型SignalR/Mqtt
-  },
   //jwt设置
   "JWTSettings": {
     "ValidateIssuerSigningKey": true, // 是否验证密钥，bool 类型，默认true

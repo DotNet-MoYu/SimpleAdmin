@@ -1,7 +1,7 @@
 {
   //sqlsugar设置
   "SqlSugarSettings": {
-    //Sqlsugar连接字符串配置
+    //SqlSugar连接字符串配置
     "ConnectionStrings": [
       {
         "ConfigId": "SimpleAdmin", //租户ID

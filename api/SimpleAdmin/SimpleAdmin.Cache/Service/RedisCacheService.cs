@@ -18,7 +18,7 @@ public partial class RedisCacheService : ISimpleCacheService
 
     public RedisCacheService(ISimpleRedis simpleRedis)
     {
-        this._simpleRedis = simpleRedis;
+        _simpleRedis = simpleRedis;
     }
 
     #region 普通操作

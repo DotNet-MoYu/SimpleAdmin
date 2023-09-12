@@ -62,7 +62,7 @@ public class UpdatePasswordInput
 /// <summary>
 /// 设置默认模块输入
 /// </summary>
-public class SetDeafultModuleInput
+public class SetDefaultModuleInput
 {
     /// <summary>
     /// 模块Id

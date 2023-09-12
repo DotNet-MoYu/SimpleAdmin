@@ -9,7 +9,7 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// Sqlsugar表信息
+/// SqlSugar表信息
 /// </summary>
 public class SqlSugarTableInfo
 {
@@ -36,5 +36,5 @@ public class SqlSugarTableInfo
     /// <summary>
     /// 表字段
     /// </summary>
-    public List<SqlsugarColumnInfo> Columns { get; set; }
+    public List<SqlSugarColumnInfo> Columns { get; set; }
 }

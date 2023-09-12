@@ -12,14 +12,14 @@ namespace SimpleAdmin.SqlSugar;
 /// 仓储模式对象
 /// </summary>
 [SuppressSniffer]
-public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
+public class DbRepository<T> : SimpleClient<T> where T : class, new()
 {
-    protected ITenant Itenant = null;//多租户事务、GetConnection、IsAnyConnection等功能
+    protected ITenant Tenant;//多租户事务、GetConnection、IsAnyConnection等功能
 
     public DbRepository(ISqlSugarClient context = null) : base(context)//注意这里要有默认值等于null
     {
         Context = DbContext.DB.GetConnectionScopeWithAttr<T>();//ioc注入的对象
-        Itenant = DbContext.DB;
+        Tenant = DbContext.DB;
     }
 
     #region 仓储方法拓展
@@ -36,8 +36,7 @@ public partial class DbRepository<T> : SimpleClient<T> where T : class, new()
     {
         if (data.Count > threshold)
             return await Context.Fastest<T>().BulkCopyAsync(data);//大数据导入
-        else
-            return await Context.Insertable(data).ExecuteCommandAsync();//普通导入
+        return await Context.Insertable(data).ExecuteCommandAsync();//普通导入
     }
 
     #endregion 插入

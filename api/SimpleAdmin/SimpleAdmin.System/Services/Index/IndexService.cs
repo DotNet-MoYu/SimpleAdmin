@@ -27,11 +27,11 @@ public class IndexService : DbRepository<SysRelation>, IIndexService
                 it.Category == CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA
                 && it.ObjectId == UserManager.UserId && it.TargetId == input.ScheduleDate,
             it => new SysRelation { ExtJson = it.ExtJson, Id = it.Id });//获取当前用户的日程列表
-        List<ScheduleListOutput> userSchedules = new List<ScheduleListOutput>();//结果集
+        var userSchedules = new List<ScheduleListOutput>();//结果集
         relations.ForEach(it =>
         {
-            var extjson = it.ExtJson.ToJsonEntity<RelationUserSchedule>();//转成实体
-            var userSchedule = extjson.Adapt<ScheduleListOutput>();//格式化
+            var extJson = it.ExtJson.ToJsonEntity<RelationUserSchedule>();//转成实体
+            var userSchedule = extJson.Adapt<ScheduleListOutput>();//格式化
             userSchedule.Id = it.Id;//赋值ID
             userSchedules.Add(userSchedule);//添加到结果集
         });

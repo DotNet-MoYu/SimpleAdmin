@@ -75,7 +75,7 @@ public class JwtHandler : AppAuthorizeHandler
                 "返回新的刷新token".LogDebug<JwtHandler>();
                 tokenInfo.Token = accessToken;//新的token
                 tokenInfo.TokenTimeout = DateTime.Now.AddMinutes(expire);//新的过期时间
-                simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId, tokenInfos);//更新tokne信息到redis
+                simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId, tokenInfos);//更新token信息到redis
             }
         }
         else
@@ -110,12 +110,12 @@ public class JwtHandler : AppAuthorizeHandler
         //超级管理员都能访问
         if (UserManager.SuperAdmin) return true;
         // 获取超级管理员特性
-        var isSpuerAdmin = httpContext.GetMetadata<SuperAdminAttribute>();
-        if (isSpuerAdmin != null)//如果是超级管理员才能访问的接口
+        var isSuperAdmin = httpContext.GetMetadata<SuperAdminAttribute>();
+        if (isSuperAdmin != null)//如果是超级管理员才能访问的接口
         {
             //获取忽略超级管理员特性
-            var ignoreSpuerAdmin = httpContext.GetMetadata<IgnoreSuperAdminAttribute>();
-            if (ignoreSpuerAdmin == null && !UserManager.SuperAdmin)//如果只能超级管理员访问并且用户不是超级管理员
+            var ignoreSuperAdmin = httpContext.GetMetadata<IgnoreSuperAdminAttribute>();
+            if (ignoreSuperAdmin == null && !UserManager.SuperAdmin)//如果只能超级管理员访问并且用户不是超级管理员
                 return false;//直接没权限
         }
 
@@ -131,15 +131,8 @@ public class JwtHandler : AppAuthorizeHandler
                 var routeName = httpContext.Request.Path.Value;
                 //获取用户信息
                 var userInfo = await App.GetService<ISysUserService>().GetUserById(UserManager.UserId);
-                if (userInfo != null)
-                {
-                    if (!userInfo.PermissionCodeList.Contains(routeName))//如果当前路由信息不包含在角色授权路由列表中则认证失败
-                        return false;
-                }
-                else
-                {
-                    return false;//没有用户信息则返回认证失败
-                }
+                if (!userInfo.PermissionCodeList.Contains(routeName))//如果当前路由信息不包含在角色授权路由列表中则认证失败
+                    return false;
             }
         }
 

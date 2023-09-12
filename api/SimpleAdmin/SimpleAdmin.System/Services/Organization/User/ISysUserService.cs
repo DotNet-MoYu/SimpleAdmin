@@ -11,7 +11,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// 用户服务
 /// </summary>
-public partial interface ISysUserService : ITransient
+public interface ISysUserService : ITransient
 {
     #region 查询
 

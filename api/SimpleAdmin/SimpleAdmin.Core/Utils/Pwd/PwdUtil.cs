@@ -22,7 +22,7 @@ public class PwdUtil
     public static double Similarity(string oldPassword, string newPassword)
     {
         var editDistance = LevenshteinDistance(oldPassword, newPassword);
-        var similarity = 1.0 - (double)editDistance / (double)Math.Max(oldPassword.Length, newPassword.Length);
+        var similarity = 1.0 - editDistance / (double)Math.Max(oldPassword.Length, newPassword.Length);
         return similarity * 100;
     }
 

@@ -76,7 +76,7 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
             .GroupBy(it => it.Category)//根据分类分组
             .Select(it => new
             {
-                Category = it.Category,//分类
+                it.Category,//分类
                 Count = SqlFunc.AggregateCount(it.Category)//数量
             }).ToListAsync();
         //定义结果数组

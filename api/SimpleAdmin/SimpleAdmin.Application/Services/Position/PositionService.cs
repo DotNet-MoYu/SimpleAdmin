@@ -53,7 +53,7 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
             var orgIds = (await _sysPositionService.GetListAsync()).Where(it => ids.Contains(it.Id))
                 .Select(it => it.OrgId).ToList();
             if (!dataScope.ContainsAll(orgIds))
-                throw Oops.Bah($"您没有权限删除这些岗位");
+                throw Oops.Bah("您没有权限删除这些岗位");
         }
         else if (dataScope is { Count: 0 })//表示仅自己
         {
@@ -62,7 +62,7 @@ public class PositionService : DbRepository<SysPosition>, IPositionService
                 .Where(it => ids.Contains(it.Id)).ToList();
             //如果岗位列表里有任何不是自己创建的岗位
             if (positions.Any(it => it.CreateUserId != UserManager.UserId))
-                throw Oops.Bah($"只能删除自己创建的岗位");
+                throw Oops.Bah("只能删除自己创建的岗位");
         }
         await _sysPositionService.Delete(input, ApplicationConst.BIZ_ORG);//删除岗位
     }

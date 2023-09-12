@@ -58,12 +58,11 @@ public class BasePageInput : IValidatableObject
             var fields = SortField.Split(" ");
             if (fields.Length > 1)
             {
-                yield return new ValidationResult($"排序字段错误", new[]
+                yield return new ValidationResult("排序字段错误", new[]
                 {
                     nameof(SortField)
                 });
             }
         }
-        yield break;
     }
 }

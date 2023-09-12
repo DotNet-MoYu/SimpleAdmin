@@ -162,7 +162,7 @@ public class SM2CryptoUtil
 
         public static byte[] byteConvert32Bytes(BigInteger n)
         {
-            byte[] tmpd = null;
+            byte[] tmpd;
             if (n == null)
             {
                 return null;

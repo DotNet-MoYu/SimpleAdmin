@@ -42,5 +42,5 @@ public enum ErrorCodeEnum
     /// 没有权限
     /// </summary>
     [ErrorCodeItemMetadata("没有权限")]
-    A0004,
+    A0004
 }

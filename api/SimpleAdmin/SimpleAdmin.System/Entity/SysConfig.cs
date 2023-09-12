@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 配置
 ///</summary>
 [SugarTable("sys_config", TableDescription = "配置")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysConfig : BaseEntity
 {
     /// <summary>

@@ -20,7 +20,7 @@ public sealed class LoggingConsoleComponent : IServiceComponent
     {
         services.AddConsoleFormatter(options =>
         {
-            options.MessageFormat = (logMsg) =>
+            options.MessageFormat = logMsg =>
             {
                 //如果不是LoggingMonitor日志或者开启了格式化才格式化
                 if (logMsg.LogName != _monitorName && _loggingSetting.MessageFormat)
@@ -36,10 +36,7 @@ public sealed class LoggingConsoleComponent : IServiceComponent
                     }
                     return stringBuilder.ToString();
                 }
-                else
-                {
-                    return logMsg.Message;
-                }
+                return logMsg.Message;
             };
             options.WriteHandler = (logMsg, scopeProvider, writer,
                 fmtMsg, opt) =>

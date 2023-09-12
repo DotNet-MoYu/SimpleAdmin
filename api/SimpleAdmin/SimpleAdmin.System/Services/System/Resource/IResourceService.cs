@@ -54,9 +54,9 @@ public interface IResourceService : ITransient
     /// <summary>
     /// 获取资源列表
     /// </summary>
-    /// <param name="categorys">资源分类列表</param>
+    /// <param name="categoryList">资源分类列表</param>
     /// <returns></returns>
-    Task<List<SysResource>> GetListAsync(List<string>? categorys = null);
+    Task<List<SysResource>> GetListAsync(List<string>? categoryList = null);
 
     /// <summary>
     /// 根据分类获取资源列表

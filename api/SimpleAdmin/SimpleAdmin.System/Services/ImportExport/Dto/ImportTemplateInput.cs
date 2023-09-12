@@ -24,7 +24,7 @@ public class ImportTemplateInput
     /// 是否有错误
     /// </summary>
     [ImporterHeader(IsIgnore = true)]
-    public bool HasError { get; set; } = false;
+    public bool HasError { get; set; }
 
     /// <summary>
     /// 错误详情

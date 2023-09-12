@@ -30,15 +30,15 @@ public class MyActionFilter : IAsyncActionFilter
         var httpContext = context.HttpContext;
         var httpRequest = httpContext.Request;
         //拦截白名单
-        var whiteAction = new string[] { "loginOut", "auth", "preview" };
+        var whiteAction = new[] { "loginOut", "auth", "preview" };
         //只拦截post方法并且不是
         if (httpRequest.Method == "POST" && !whiteAction.Contains(actionDescriptor.ActionName))
         {
             // 是否匿名访问
-            var allowAnonymouse = context.Filters.Any(u => u is IAllowAnonymousFilter)
-                            || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true)
-                            || method.IsDefined(typeof(AllowAnonymousAttribute), true);
-            if (!allowAnonymouse)
+            var allowAnonymous = context.Filters.Any(u => u is IAllowAnonymousFilter)
+                || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true)
+                || method.IsDefined(typeof(AllowAnonymousAttribute), true);
+            if (!allowAnonymous)
             {
                 //如果不是匿名访问,抛出
                 throw Oops.Bah("演示环境,禁止操作");

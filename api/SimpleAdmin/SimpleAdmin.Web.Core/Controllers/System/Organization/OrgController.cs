@@ -76,7 +76,6 @@ public class OrgController : BaseController
     public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
     {
         return await _sysOrgService.Detail(input);
-        ;
     }
 
     #endregion Get

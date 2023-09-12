@@ -18,12 +18,12 @@ public interface ISysOrgService : ITransient
     /// <summary>
     /// 检查组织是否存在
     /// </summary>
-    /// <param name="sysOrgs">组织列表</param>
+    /// <param name="sysOrgList">组织列表</param>
     /// <param name="orgName">组织名称</param>
     /// <param name="parentId">父Id</param>
     /// <param name="orgId">组织Id</param>
     /// <returns>是否存在,存在返回组织ID</returns>
-    bool IsExistOrgByName(List<SysOrg> sysOrgs, string orgName, long parentId,
+    bool IsExistOrgByName(List<SysOrg> sysOrgList, string orgName, long parentId,
         out long orgId);
 
     /// <summary>
@@ -138,7 +138,7 @@ public interface ISysOrgService : ITransient
     /// <param name="orgList">组织列表</param>
     /// <param name="parentId">父ID</param>
     /// <returns>树型结构</returns>
-    List<SysOrg> ConstrucOrgTrees(List<SysOrg> orgList, long parentId = 0);
+    List<SysOrg> ConstructOrgTrees(List<SysOrg> orgList, long parentId = 0);
 
     /// <summary>
     /// 刷新缓存

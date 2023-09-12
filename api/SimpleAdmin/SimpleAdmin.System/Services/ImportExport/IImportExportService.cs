@@ -59,9 +59,9 @@ public interface IImportExportService : ITransient
     /// 导入文件验证
     /// </summary>
     /// <param name="file">文件</param>
-    /// <param name="maxSzie">文件最大体积(M)</param>
+    /// <param name="maxSize">文件最大体积(M)</param>
     /// <param name="allowTypes">允许的格式</param>
-    void ImportVerification(IFormFile file, int maxSzie = 30, string[] allowTypes = null);
+    void ImportVerification(IFormFile file, int maxSize = 30, string[] allowTypes = null);
 
     /// <summary>
     /// 模板数据验证

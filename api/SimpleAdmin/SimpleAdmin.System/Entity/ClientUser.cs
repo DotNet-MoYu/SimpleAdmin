@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// C端用户
 ///</summary>
 [SugarTable("client_user", TableDescription = "C端用户")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class ClientUser : DataEntityBase
 {
     /// <summary>

@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 用户消息表
 ///</summary>
 [SugarTable("sys_message_user", TableDescription = "用户消息表")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysMessageUser : BaseEntity
 {
     /// <summary>

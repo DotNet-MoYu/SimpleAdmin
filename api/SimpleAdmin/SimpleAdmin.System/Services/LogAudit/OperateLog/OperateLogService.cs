@@ -90,28 +90,28 @@ public class OperateLogService : DbRepository<SysLogOperate>, IOperateLogService
     }
 
     /// <inheritdoc />
-    public async Task<List<OperateLogTotalCountOutpu>> TotalCount()
+    public async Task<List<OperateLogTotalCountOutput>> TotalCount()
     {
         var data = await Context.Queryable<SysLogOperate>()
             .SplitTable(tabs => tabs.Take(_maxTabs))
             .GroupBy(it => it.Category)//根据分类分组
             .Select(it => new
             {
-                Category = it.Category,//分类
+                it.Category,//分类
                 Count = SqlFunc.AggregateCount(it.Category)//数量
             }).ToListAsync();
         //定义结果数组
-        var operateLogTotalCounts = new List<OperateLogTotalCountOutpu>
+        var operateLogTotalCounts = new List<OperateLogTotalCountOutput>
         {
             //添加操作日志数据
-            new OperateLogTotalCountOutpu
+            new OperateLogTotalCountOutput
             {
                 Type = _nameOperate,
                 Value = data.Where(it => it.Category == CateGoryConst.LOG_OPERATE)
                     .Select(it => it.Count).FirstOrDefault()
             },
             //添加异常日志数据
-            new OperateLogTotalCountOutpu
+            new OperateLogTotalCountOutput
             {
                 Type = _nameException,
                 Value = data.Where(it => it.Category == CateGoryConst.LOG_EXCEPTION)

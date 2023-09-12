@@ -1,7 +1,7 @@
 {
-  //sqlsugar设置
+  //sqlSugar设置
   "SqlSugarSettings": {
-    //Sqlsugar连接字符串配置
+    //SqlSugar连接字符串配置
     "ConnectionStrings": [
       {
         "ConfigId": "SimpleAdmin", //租户ID
@@ -20,7 +20,7 @@
       //      {
       //        "ConfigId": "SimpleAdmin", //租户ID
       //        "ConnectionString": "Server=192.168.1.16;Database=SimpleAdmin;User=sa;Password=123456;MultipleActiveResultSets=True;", //连接字符串
-      //        "DbType": "SqlServer", //数据库类型
+      //        "DbType": "SqlServer", //数据库类型 
       //        "IsAutoCloseConnection": true, //是否自动释放
       //        "IsUnderLine": false //是否驼峰转下划线
       //      }

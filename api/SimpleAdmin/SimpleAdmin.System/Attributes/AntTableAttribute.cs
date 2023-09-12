@@ -16,7 +16,7 @@ public class AntTableAttribute : Attribute
     /// <summary>
     /// 是否是日期格式
     /// </summary>
-    public bool IsDate { get; set; } = false;
+    public bool IsDate { get; set; }
 
     /// <summary>
     /// 是否自动省略

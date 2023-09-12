@@ -26,10 +26,10 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         var query = Context.Queryable<BatchEdit>()
                 .WhereIF(!string.IsNullOrWhiteSpace(input.ConfigId),
                     it => it.ConfigId.Contains(input.ConfigId.Trim()))
-                .WhereIF(!string.IsNullOrWhiteSpace(input.Entityname),
-                    it => it.EntityName.Contains(input.Entityname.Trim()))
-                .WhereIF(!string.IsNullOrWhiteSpace(input.Tablename),
-                    it => it.TableName.Contains(input.Tablename.Trim()))
+                .WhereIF(!string.IsNullOrWhiteSpace(input.EntityName),
+                    it => it.EntityName.Contains(input.EntityName.Trim()))
+                .WhereIF(!string.IsNullOrWhiteSpace(input.TableName),
+                    it => it.TableName.Contains(input.TableName.Trim()))
                 //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
                 .OrderByIF(!string.IsNullOrEmpty(input.SortField),
                     $"{input.SortField} {input.SortOrder}")
@@ -50,7 +50,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         tableColumns.ForEach(it =>
         {
             //判断是否是主键或者通用字段
-            var isPkOrCommon = it.IsPrimarykey || SqlSugarUtils.IsCommonColumn(it.ColumnName);
+            var isPkOrCommon = it.IsPrimaryKey || SqlSugarUtils.IsCommonColumn(it.ColumnName);
             if (!isPkOrCommon)
             {
                 //添加到字段集合
@@ -58,7 +58,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             }
         });
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             entity = await InsertReturnEntityAsync(entity);//输入参数转实体并插入
             batchEdiConfig.ForEach(it => { it.UId = entity.Id; });//遍历字段赋值基础Id
@@ -94,7 +94,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         if (ids.Count > 0)
         {
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
                 await Context.Deleteable<BatchEditConfig>().Where(it => ids.Contains(it.UId))
@@ -124,7 +124,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             foreach (var tableColumn in tableColumns)
             {
                 //判断是否是主键或者通用字段
-                var isPkOrCommon = tableColumn.IsPrimarykey
+                var isPkOrCommon = tableColumn.IsPrimaryKey
                     || SqlSugarUtils.IsCommonColumn(tableColumn.ColumnName);
                 if (!isPkOrCommon)
                 {
@@ -193,7 +193,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     /// 获取配置
     /// </summary>
     /// <param name="columnInfo"></param>
-    private BatchEditConfig GetUpdateBatchConfig(SqlsugarColumnInfo columnInfo)
+    private BatchEditConfig GetUpdateBatchConfig(SqlSugarColumnInfo columnInfo)
     {
         var netType = SqlSugarUtils.ConvertDataType(columnInfo.DataType);
         return new BatchEditConfig

@@ -39,13 +39,10 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
             After(method, null, args);
             return method.Invoke(Target, args);//直接返回
         }
-        else
-        {
-            var result = Before(method, args);//方法执行之前判断是否有缓存的数据
-            if (result == null) result = method.Invoke(Target, args);//如果没有缓存就执行方法返回数据
-            After(method, result, args);//方法执行之后干的事
-            return result;//返回结果
-        }
+        var result = Before(method, args);//方法执行之前判断是否有缓存的数据
+        if (result == null) result = method.Invoke(Target, args);//如果没有缓存就执行方法返回数据
+        After(method, result, args);//方法执行之后干的事
+        return result;//返回结果
     }
 
     /// <summary>
@@ -118,11 +115,12 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         if (cacheAttribute != null)
         {
             var redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
-            var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
-            var cacheValue = string.Empty;
+            var cacheKey = cacheAttribute.CustomKeyValue
+                ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
+            string cacheValue;
             if (cacheAttribute.StoreType == CacheConst.CACHE_HASH)//如果存的是Hash值
             {
-                cacheValue = redisManager.HashGet<string>(cacheKey, new string[] { args[0].ToString() })[0];//从redis获取Hash数据取第一个,注意是 string 类型
+                cacheValue = redisManager.HashGet<string>(cacheKey, args[0].ToString())[0];//从redis获取Hash数据取第一个,注意是 string 类型
             }
             else
             {
@@ -158,10 +156,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
                     dynamic result = JsonConvert.DeserializeObject(cacheValue, returnType);//序列化数据
                     return result;
                 }
-                else
-                {
-                    return cacheValue;
-                }
+                return cacheValue;
             }
         }
         return null;
@@ -256,7 +251,7 @@ internal static class GetCacheKey
     /// <returns></returns>
     public static string GetArgumentValue(object arg)
     {
-        if (arg is DateTime || arg is DateTime?)
+        if (arg is DateTime || arg is DateTime)
             return ((DateTime)arg).ToString("yyyyMMddHHmmss");
 
         if (arg is string || arg is ValueType || arg is Nullable)
@@ -270,7 +265,7 @@ internal static class GetCacheKey
                 var result = Resolve(obj);
                 return MD5Encryption.Encrypt(result);
             }
-            else if (arg.GetType().IsClass)
+            if (arg.GetType().IsClass)
             {
                 return MD5Encryption.Encrypt(JsonConvert.SerializeObject(arg));
             }
@@ -343,7 +338,7 @@ internal static class GetCacheKey
         var name = (left as MemberExpression).Member.Name;
         var value = (right as ConstantExpression).Value;
         var @operator = GetOperator(expressiontype);
-        return name + @operator + value ?? "null";
+        return name + @operator + value;
     }
 
     private static string ResolveLinqToObject(Expression expression, object value, ExpressionType? expressiontype = null)
@@ -353,9 +348,7 @@ internal static class GetCacheKey
         switch (methodName)
         {
             case "Contains":
-                if (methodCall.Object != null)
-                    return Like(methodCall);
-                return In(methodCall, value);
+                return methodCall.Object != null ? Like(methodCall) : In(methodCall, value);
 
             case "Count":
                 return Len(methodCall, value, expressiontype.Value);
@@ -391,8 +384,8 @@ internal static class GetCacheKey
         var argument1 = (expression.Arguments[0] as MemberExpression).Expression as ConstantExpression;
         var argument2 = expression.Arguments[1] as MemberExpression;
         var fieldArray = argument1.Value.GetType().GetFields().First();
-        object[] array = fieldArray.GetValue(argument1.Value) as object[];
-        List<string> setInPara = new List<string>();
+        var array = fieldArray.GetValue(argument1.Value) as object[];
+        var setInPara = new List<string>();
         for (var i = 0; i < array.Length; i++)
         {
             var value = array[i].ToString();
@@ -423,7 +416,7 @@ internal static class GetCacheKey
         object name = (expression.Arguments[0] as MemberExpression).Member.Name;
         var @operator = GetOperator(expressiontype);
         var result = string.Format("len({0}){1}{2}", name, @operator,
-            value.ToString());
+            value);
         return result;
     }
 }

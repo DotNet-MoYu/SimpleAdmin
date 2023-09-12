@@ -71,7 +71,7 @@ public class BaseEntity : PrimaryKeyEntity
     /// 软删除
     /// </summary>
     [SugarColumn(ColumnDescription = "软删除", IsNullable = true)]
-    public virtual bool IsDelete { get; set; } = false;
+    public virtual bool IsDelete { get; set; }
 }
 
 /// <summary>

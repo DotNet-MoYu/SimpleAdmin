@@ -119,7 +119,7 @@ public class SysConfigConst
     public const string FILE_MINIO_ACCESS_KEY = "FILE_MINIO_ACCESS_KEY";
 
     /// <summary>
-    /// MINIO文件SecetKey
+    /// MINIO文件SecretKey
     /// </summary>
     public const string FILE_MINIO_SECRET_KEY = "FILE_MINIO_SECRET_KEY";
 

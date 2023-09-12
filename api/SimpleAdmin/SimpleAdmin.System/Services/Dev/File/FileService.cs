@@ -100,15 +100,11 @@ public class FileService : DbRepository<SysFile>, IFileService
         {
             if (devFile.Engine == SysDictConst.FILE_ENGINE_LOCAL)
                 return GetFileStreamResult(devFile.StoragePath, devFile.Name);
-            else if (devFile.Engine == SysDictConst.FILE_ENGINE_MINIO)
+            if (devFile.Engine == SysDictConst.FILE_ENGINE_MINIO)
                 return await GetFileStreamResultFromMinio(devFile.ObjName, devFile.Name);
-            else
-                return null;
-        }
-        else
-        {
             return null;
         }
+        return null;
     }
 
     #region 方法
@@ -146,7 +142,7 @@ public class FileService : DbRepository<SysFile>, IFileService
 
             default:
 
-                throw Oops.Bah($"不支持的文件引擎");
+                throw Oops.Bah("不支持的文件引擎");
         }
         var fileSizeKb = (long)(file.Length / 1024.0);// 文件大小KB
         var fileSuffix = Path.GetExtension(file.FileName).ToLower();// 文件后缀
@@ -175,7 +171,7 @@ public class FileService : DbRepository<SysFile>, IFileService
             var bmp = SKBitmap.FromImage(image);
             var thubnail = bmp.GetPicThumbnail(100, 100);//压缩图片
             var thubnailBase64 = ImageUtil.ImgToBase64String(thubnail);//转base64
-            devFile.Thumbnail = $"data:image/png;base64," + thubnailBase64;
+            devFile.Thumbnail = "data:image/png;base64," + thubnailBase64;
         }
         await InsertAsync(devFile);
         return objectId;
@@ -190,7 +186,7 @@ public class FileService : DbRepository<SysFile>, IFileService
     {
         string uploadFileFolder;
         var configKey = string.Empty;
-        //判断是windos还是linux
+        //判断是windows还是linux
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
         {
             configKey = SysConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX;//Linux
@@ -220,10 +216,7 @@ public class FileService : DbRepository<SysFile>, IFileService
             }
             return fileName;
         }
-        else
-        {
-            throw Oops.Oh($"文件存储路径未配置");
-        }
+        throw Oops.Oh("文件存储路径未配置");
     }
 
     /// <summary>
@@ -277,14 +270,13 @@ public class FileService : DbRepository<SysFile>, IFileService
     private bool IsPic(string suffix)
     {
         //图片后缀名列表
-        var pics = new string[]
+        var pics = new[]
         {
             ".png", ".bmp", ".gif", ".jpg", ".jpeg", ".psd"
         };
         if (pics.Contains(suffix))
             return true;
-        else
-            return false;
+        return false;
     }
 
     #endregion 方法

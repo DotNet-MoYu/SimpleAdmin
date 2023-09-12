@@ -62,9 +62,9 @@ public class DictService : DbRepository<SysDict>, IDictService
         if (ids.Count > 0)
         {
             //获取所有字典
-            var dicts = await GetListAsync();
+            var dictList = await GetListAsync();
             //判断是否有系统字典
-            var frm = dicts.Any(it =>
+            var frm = dictList.Any(it =>
                 ids.Contains(it.Id) && it.Category == CateGoryConst.DICT_FRM);
 
             //如果是系统字典提示不可删除
@@ -74,10 +74,10 @@ public class DictService : DbRepository<SysDict>, IDictService
             ids.ForEach(it =>
             {
                 //获取子节点
-                var childens = GetDevDictChilden(dicts, it);
+                var children = GetDevDictChildren(dictList, it);
                 //提取ID
-                var childenIds = childens.Select(c => c.Id).ToList();
-                deleteIds.AddRange(childenIds);
+                var childrenIds = children.Select(c => c.Id).ToList();
+                deleteIds.AddRange(childrenIds);
             });
             //删除数据
             if (await DeleteByIdsAsync(deleteIds.Cast<object>().ToArray()))
@@ -92,24 +92,24 @@ public class DictService : DbRepository<SysDict>, IDictService
     public override async Task<List<SysDict>> GetListAsync()
     {
         //先从redis拿
-        var devDicts = _simpleCacheService.Get<List<SysDict>>(SystemConst.CACHE_DEV_DICT);
-        if (devDicts == null)
+        var sysDictList = _simpleCacheService.Get<List<SysDict>>(SystemConst.CACHE_DEV_DICT);
+        if (sysDictList == null)
         {
-            devDicts = await base.GetListAsync();//去数据库拿
-            if (devDicts.Count > 0)
+            sysDictList = await base.GetListAsync();//去数据库拿
+            if (sysDictList.Count > 0)
             {
-                _simpleCacheService.Set(SystemConst.CACHE_DEV_DICT, devDicts);//如果数据库有数,更新redis
-                return devDicts;
+                _simpleCacheService.Set(SystemConst.CACHE_DEV_DICT, sysDictList);//如果数据库有数,更新redis
+                return sysDictList;
             }
         }
-        return devDicts;
+        return sysDictList;
     }
 
     /// <inheritdoc />
     public async Task<SysDict> GetDict(string dictValue)
     {
-        var devDicts = await GetListAsync();
-        var devDict = devDicts.Where(it => it.DictValue == dictValue).FirstOrDefault();
+        var sysDictList = await GetListAsync();
+        var devDict = sysDictList.Where(it => it.DictValue == dictValue).FirstOrDefault();
         return devDict;
     }
 
@@ -117,26 +117,25 @@ public class DictService : DbRepository<SysDict>, IDictService
     public async Task<List<string>> GetValuesByDictValue(string dictValue,
         List<SysDict> devDictList = null)
     {
-        var devDicts = devDictList == null ? await GetListAsync() : devDictList;//获取全部
-        var id = devDicts.Where(it => it.DictValue == dictValue).Select(it => it.Id)
+        var sysDictList = devDictList == null ? await GetListAsync() : devDictList;//获取全部
+        var id = sysDictList.Where(it => it.DictValue == dictValue).Select(it => it.Id)
             .FirstOrDefault();//根据value找到父节点
         if (id > 0)
-            return devDicts.Where(it => it.ParentId == id).Select(it => it.DictValue)
+            return sysDictList.Where(it => it.ParentId == id).Select(it => it.DictValue)
                 .ToList();//拿到字典值
-        else
-            return new List<string>();
+        return new List<string>();
     }
 
     /// <inheritdoc />
     public async Task<Dictionary<string, List<string>>> GetValuesByDictValue(string[] dictValues)
     {
         var result = new Dictionary<string, List<string>>();
-        var devDicts = await GetListAsync();//获取全部
-        var ids = devDicts.Where(it => dictValues.Contains(it.DictValue)).Select(it => it.Id)
+        var sysDictList = await GetListAsync();//获取全部
+        var ids = sysDictList.Where(it => dictValues.Contains(it.DictValue)).Select(it => it.Id)
             .ToList();//根据value找到父节点
         foreach (var dictValue in dictValues)
         {
-            var data = await GetValuesByDictValue(dictValue, devDicts);
+            var data = await GetValuesByDictValue(dictValue, sysDictList);
             result.Add(dictValue, data);
         }
         return result;
@@ -145,8 +144,8 @@ public class DictService : DbRepository<SysDict>, IDictService
     /// <inheritdoc />
     public async Task<List<SysDict>> Tree(DictTreeInput input)
     {
-        var devDicts = await GetListAsync();//获取字典列表
-        var devList = devDicts
+        var sysDictList = await GetListAsync();//获取字典列表
+        var devList = sysDictList
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)
             .OrderBy(it => it.SortCode).ToList();
         return ConstructResourceTrees(devList);
@@ -188,17 +187,17 @@ public class DictService : DbRepository<SysDict>, IDictService
     /// <param name="sysDict"></param>
     private async Task CheckInput(SysDict sysDict)
     {
-        var dicts = await GetListAsync();//获取全部字典
+        var dictList = await GetListAsync();//获取全部字典
         //判断是否从存在重复字典名
-        var hasSameLable = dicts.Any(it =>
+        var hasSameLabel = dictList.Any(it =>
             it.ParentId == sysDict.ParentId && it.Category == sysDict.Category
             && it.DictLabel == sysDict.DictLabel && it.Id != sysDict.Id);
-        if (hasSameLable)
+        if (hasSameLabel)
         {
             throw Oops.Bah($"存在重复的字典名称:{sysDict.DictLabel}");
         }
         //判断是否存在重复字典值
-        var hasSameValue = dicts.Any(it =>
+        var hasSameValue = dictList.Any(it =>
             it.ParentId == sysDict.ParentId && it.DictValue == sysDict.DictValue
             && it.Id != sysDict.Id);
         if (hasSameValue)
@@ -213,7 +212,7 @@ public class DictService : DbRepository<SysDict>, IDictService
     /// <param name="dictList">字典列表</param>
     /// <param name="parentId">父ID</param>
     /// <returns></returns>
-    public List<SysDict> GetDevDictChilden(List<SysDict> dictList, long parentId)
+    public List<SysDict> GetDevDictChildren(List<SysDict> dictList, long parentId)
     {
         //找下级ID列表
         var resources = dictList.Where(it => it.ParentId == parentId).ToList();
@@ -222,8 +221,8 @@ public class DictService : DbRepository<SysDict>, IDictService
             var data = new List<SysDict>();
             foreach (var item in resources)//遍历机构
             {
-                var orgs = GetDevDictChilden(dictList, item.Id);
-                data.AddRange(orgs);//添加子节点);
+                var devDictChildren = GetDevDictChildren(dictList, item.Id);
+                data.AddRange(devDictChildren);//添加子节点);
                 data.Add(item);////添加到列表
             }
             return data;//返回结果

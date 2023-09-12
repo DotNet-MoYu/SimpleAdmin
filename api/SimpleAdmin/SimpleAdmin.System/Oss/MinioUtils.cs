@@ -36,12 +36,12 @@ public class MinioUtils : ITransient
     {
         var configs = await _configService.GetListByCategory(CateGoryConst.CONFIG_FILE_MINIO);//获取minio配置
         var accessKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_ACCESS_KEY).FirstOrDefault();//MINIO文件AccessKey
-        var secretKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_SECRET_KEY).FirstOrDefault();//MINIO文件SecetKey
+        var secretKey = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_SECRET_KEY).FirstOrDefault();//MINIO文件SecretKey
         var endPoint = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_END_POINT).FirstOrDefault();//MINIO文件EndPoint
         var bucketName = configs.Where(it => it.ConfigKey == SysConfigConst.FILE_MINIO_DEFAULT_BUCKET_NAME).FirstOrDefault();//MINIO文件默认存储桶
         if (accessKey == null || secretKey == null || endPoint == null || bucketName == null)
         {
-            throw Oops.Oh($"MINIO客户端未正确配置");
+            throw Oops.Oh("MINIO客户端未正确配置");
         }
         try
         {
@@ -54,7 +54,8 @@ public class MinioUtils : ITransient
                 _defaultPrefix = $"{point[0]}//";
                 _defaultEndPoint = point[1];
             }
-            MinioClient = new MinioClient().WithEndpoint(_defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue).Build();//初始化monio对象
+            MinioClient = new MinioClient().WithEndpoint(_defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue)
+                .Build();//初始化minio对象
             MinioClient.WithTimeout(5000);//超时时间
         }
         catch (Exception ex)
@@ -75,17 +76,18 @@ public class MinioUtils : ITransient
         try
         {
             using var fileStream = file.OpenReadStream();//获取文件流
-            var putObjectArgs = new PutObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithStreamData(fileStream).WithObjectSize(file.Length).WithContentType(contentType);
+            var putObjectArgs = new PutObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithStreamData(fileStream)
+                .WithObjectSize(file.Length).WithContentType(contentType);
             await MinioClient.PutObjectAsync(putObjectArgs);
             return $"{_defaultPrefix}{_defaultEndPoint}/{_defaultBucketName}/{objectName}";//默认http
         }
         catch (MinioException e)
         {
-            throw Oops.Oh($"上传文件失败!", e);
+            throw Oops.Oh("上传文件失败!", e);
         }
         catch (Exception e)
         {
-            throw Oops.Oh($"上传文件失败!", e);
+            throw Oops.Oh("上传文件失败!", e);
         }
     }
 
@@ -116,11 +118,11 @@ public class MinioUtils : ITransient
         }
         catch (MinioException e)
         {
-            throw Oops.Oh($"下载文件失败!", e);
+            throw Oops.Oh("下载文件失败!", e);
         }
         catch (Exception e)
         {
-            throw Oops.Oh($"下载文件失败!", e);
+            throw Oops.Oh("下载文件失败!", e);
         }
     }
 }

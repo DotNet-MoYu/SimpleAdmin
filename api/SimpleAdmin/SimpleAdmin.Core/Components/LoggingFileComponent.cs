@@ -23,7 +23,7 @@ public sealed class LoggingFileComponent : IServiceComponent
         //获取最大日志等级，默认Error
         var maxLevel = (LogLevel)Enum.Parse(typeof(LogLevel), _loggingSetting.LogLevel.MaxLevel);
         //获取程序根目录
-        var rootPath = App.HostEnvironment.ContentRootPath;
+        // var rootPath = App.HostEnvironment.ContentRootPath;
         //遍历日志等级
         foreach (LogLevel level in Enum.GetValues(typeof(LogLevel)))
         {
@@ -33,7 +33,7 @@ public sealed class LoggingFileComponent : IServiceComponent
                 //每天创建一个日志文件
                 services.AddLogging(builder =>
                 {
-                    var fileName = "logs/" + level.ToString() + "/{0:yyyy}-{0:MM}-{0:dd}.log";
+                    var fileName = "logs/" + level + "/{0:yyyy}-{0:MM}-{0:dd}.log";
                     builder.AddFile(fileName, options =>
                     {
                         SetLogOptions(options, level);//日志格式化
@@ -55,9 +55,9 @@ public sealed class LoggingFileComponent : IServiceComponent
         if (logLevel != null)//如果日志等级不为空
         {
             //过滤日志等级
-            options.WriteFilter = (logMsg) =>
+            options.WriteFilter = logMsg =>
             {
-                //如果配置不写入mongitor日志和日志名称为System.Logging.LoggingMonitor
+                //如果配置不写入monitor日志和日志名称为System.Logging.LoggingMonitor
                 if (!_loggingSetting.Monitor.Write && logMsg.LogName == _monitorName)
                     return false;
                 return logMsg.LogLevel == logLevel;
@@ -72,7 +72,7 @@ public sealed class LoggingFileComponent : IServiceComponent
         if (_loggingSetting.MessageFormat)
         {
             //日志内容格式化
-            options.MessageFormat = (logMsg) =>
+            options.MessageFormat = logMsg =>
             {
                 var stringBuilder = new StringBuilder();
                 stringBuilder.AppendLine("【日志级别】：" + logMsg.LogLevel);

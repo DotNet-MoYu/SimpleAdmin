@@ -6,15 +6,21 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-global using Furion;
-global using Furion.DependencyInjection;
-global using Microsoft.AspNetCore.SignalR;
-global using Microsoft.Extensions.DependencyInjection;
-global using SimpleAdmin.Cache;
-global using SimpleAdmin.Core;
-global using SimpleAdmin.Plugin.Core;
-global using Furion.InstantMessaging;
-global using Masuit.Tools;
-global using Microsoft.AspNetCore.Authorization;
-global using Furion.DataEncryption;
-global using SimpleTool;
+namespace SimpleAdmin.System;
+
+/// <summary>
+/// SYS_ROLE_HAS_RESOURCE
+/// 角色有哪些资源扩展
+/// </summary>
+public class RelationRoleResource
+{
+    /// <summary>
+    /// 菜单ID
+    /// </summary>
+    public long MenuId { get; set; }
+
+    /// <summary>
+    /// 按钮信息
+    /// </summary>
+    public List<long> ButtonInfo { get; set; } = new List<long>();
+}

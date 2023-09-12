@@ -149,9 +149,9 @@ public class ReturnInformation
     /// <summary>
     /// 返回值
     /// </summary>
-    public RetrunValue Value { get; set; }
+    public ReturnValue Value { get; set; }
 
-    public class RetrunValue
+    public class ReturnValue
     {
         /// <summary>
         /// 返回码

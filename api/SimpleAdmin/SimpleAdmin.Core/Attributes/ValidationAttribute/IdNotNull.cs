@@ -17,7 +17,7 @@ public class IdNotNull : ValidationAttribute
     {
         if (value.ToLong() > 0 || !string.IsNullOrEmpty(value.ToString()))
             return true;
-        else return false;
+        return false;
     }
 }
 

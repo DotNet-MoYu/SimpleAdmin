@@ -52,11 +52,11 @@ public static class ImageUtil
     /// <summary>
     /// base64转bitmap
     /// </summary>
-    /// <param name="base64string"></param>
+    /// <param name="base64String"></param>
     /// <returns></returns>
-    public static Bitmap GetBitmapFromBase64(this string base64string)
+    public static Bitmap GetBitmapFromBase64(this string base64String)
     {
-        var b = Convert.FromBase64String(base64string);
+        var b = Convert.FromBase64String(base64String);
         var ms = new MemoryStream(b);
         var bitmap = new Bitmap(ms);
         ms.Close();
@@ -66,11 +66,11 @@ public static class ImageUtil
     /// <summary>
     /// base64转bitmap
     /// </summary>
-    /// <param name="base64string"></param>
+    /// <param name="base64String"></param>
     /// <returns></returns>
-    public static SKBitmap GetSKBitmapFromBase64(this string base64string)
+    public static SKBitmap GetSkBitmapFromBase64(this string base64String)
     {
-        var b = Convert.FromBase64String(base64string);
+        var b = Convert.FromBase64String(base64String);
         var bitmap = SKBitmap.Decode(b);
         return bitmap;
     }
@@ -78,11 +78,11 @@ public static class ImageUtil
     /// <summary>
     /// base64转image格式
     /// </summary>
-    /// <param name="base64string"></param>
+    /// <param name="base64String"></param>
     /// <returns></returns>
-    public static string ToImageBase64(this string base64string)
+    public static string ToImageBase64(this string base64String)
     {
-        return "data:image/png;base64," + base64string;
+        return "data:image/png;base64," + base64String;
     }
 
     /// <summary>
@@ -98,13 +98,11 @@ public static class ImageUtil
         //获取图片高度
         var sourceHeight = imgToResize.Height;
 
-        float nPercent = 0;
-        float nPercentW = 0;
-        float nPercentH = 0;
+        float nPercent;
         //计算宽度的缩放比例
-        nPercentW = size.Width / (float)sourceWidth;
+        var nPercentW = size.Width / (float)sourceWidth;
         //计算高度的缩放比例
-        nPercentH = size.Height / (float)sourceHeight;
+        var nPercentH = size.Height / (float)sourceHeight;
 
         if (nPercentH < nPercentW)
             nPercent = nPercentH;

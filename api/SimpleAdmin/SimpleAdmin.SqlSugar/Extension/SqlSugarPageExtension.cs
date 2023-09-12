@@ -9,7 +9,7 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// Sqlsugar分页拓展类
+/// SqlSugar分页拓展类
 /// </summary>
 public static class SqlSugarPageExtension
 {

@@ -6,47 +6,46 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.Core
+namespace SimpleAdmin.Core;
+
+/// <summary>
+/// object拓展
+/// </summary>
+public static class ObjectExtension
 {
     /// <summary>
-    /// object拓展
+    /// json字符串序列化
     /// </summary>
-    public static class ObjectExtension
+    /// <param name="json"></param>
+    /// <returns></returns>
+    public static object ToObject(this string json)
     {
-        /// <summary>
-        /// json字符串序列化
-        /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        public static object ToObject(this string json)
-        {
-            return string.IsNullOrEmpty(json) ? null : JsonConvert.DeserializeObject(json);
-        }
+        return string.IsNullOrEmpty(json) ? null : JsonConvert.DeserializeObject(json);
+    }
 
-        /// <summary>
-        /// json字符串序列化
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        public static T ToObject<T>(this string json)
+    /// <summary>
+    /// json字符串序列化
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="json"></param>
+    /// <returns></returns>
+    public static T ToObject<T>(this string json)
+    {
+        if (json != null)
         {
-            if (json != null)
-            {
-                json = json.Replace("&nbsp;", "");
-                return JsonConvert.DeserializeObject<T>(json);
-            }
-            else return default;
+            json = json.Replace("&nbsp;", "");
+            return JsonConvert.DeserializeObject<T>(json);
         }
+        return default;
+    }
 
-        /// <summary>
-        /// json字符串序列化
-        /// </summary>
-        /// <param name="json"></param>
-        /// <returns></returns>
-        public static JObject ToJObject(this string json)
-        {
-            return json == null ? JObject.Parse("{}") : JObject.Parse(json.Replace("&nbsp;", ""));
-        }
+    /// <summary>
+    /// json字符串序列化
+    /// </summary>
+    /// <param name="json"></param>
+    /// <returns></returns>
+    public static JObject ToJObject(this string json)
+    {
+        return json == null ? JObject.Parse("{}") : JObject.Parse(json.Replace("&nbsp;", ""));
     }
 }

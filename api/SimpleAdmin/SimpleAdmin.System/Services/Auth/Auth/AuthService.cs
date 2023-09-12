@@ -15,19 +15,16 @@ public class AuthService : IAuthService
     private readonly IEventPublisher _eventPublisher;
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
-    private readonly IRoleService _roleService;
 
     public AuthService(ISimpleCacheService simpleCacheService,
         IEventPublisher eventPublisher,
         IConfigService configService,
-        ISysUserService userService,
-        IRoleService roleService)
+        ISysUserService userService)
     {
         _simpleCacheService = simpleCacheService;
         _eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
-        _roleService = roleService;
     }
 
     /// <inheritdoc/>
@@ -37,14 +34,14 @@ public class AuthService : IAuthService
             SysConfigConst.LOGIN_CAPTCHA_TYPE);
         var captchaType = (CaptchaType)Enum.Parse(typeof(CaptchaType), config.ConfigValue);
         //生成验证码
-        var captchInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100,
+        var captchaInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100,
             38);
         //生成请求号，并将验证码放入redis
-        var reqNo = AddValidCodeToRedis(captchInfo.Code);
+        var reqNo = AddValidCodeToRedis(captchaInfo.Code);
         //返回验证码和请求号
         return new PicValidCodeOutPut
         {
-            ValidCodeBase64 = captchInfo.Base64Str,
+            ValidCodeBase64 = captchaInfo.Base64Str,
             ValidCodeReqNo = reqNo
         };
     }
@@ -54,8 +51,8 @@ public class AuthService : IAuthService
         LoginClientTypeEnum loginClientType)
     {
         await ValidPhoneValidCode(input, loginClientType);//校验手机号验证码
-        string? phoneValidCode;
-        _ = RandomHelper.CreateNum(6);//生产随机数字
+        var phoneValidCode = RandomHelper.CreateNum(6);//生产随机数字;
+
 
         #region 发送短信和记录数据库等操作
 
@@ -104,11 +101,8 @@ public class AuthService : IAuthService
             var result = await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
             return result;
         }
-        else
-        {
-            //执行c端登录
-            return null;
-        }
+        //执行c端登录
+        return null;
     }
 
     /// <inheritdoc/>
@@ -126,11 +120,8 @@ public class AuthService : IAuthService
             RemoveValidCodeFromRedis(input.ValidCodeReqNo);//删除验证码
             return result;
         }
-        else
-        {
-            //执行c端登录
-            return null;
-        }
+        //执行c端登录
+        return null;
     }
 
     /// <inheritdoc/>
@@ -277,7 +268,7 @@ public class AuthService : IAuthService
     /// <param name="device">登录设备</param>
     /// <param name="loginClientType">登录类型</param>
     /// <returns></returns>
-    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEumu device,
+    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device,
         LoginClientTypeEnum loginClientType)
     {
         if (sysUser.UserStatus == SysDictConst.COMMON_STATUS_DISABLED)
@@ -310,7 +301,7 @@ public class AuthService : IAuthService
         // 设置响应报文头
         App.HttpContext.SetTokensOfResponseHeaders(accessToken, refreshToken);
         //登录事件参数
-        var logingEvent = new LoginEvent
+        var loginEvent = new LoginEvent
         {
             Ip = App.HttpContext.GetRemoteIpAddressToIPv4(),
             Device = device,
@@ -318,8 +309,8 @@ public class AuthService : IAuthService
             SysUser = sysUser,
             Token = accessToken
         };
-        await WriteTokenToRedis(logingEvent, loginClientType);//写入token到redis
-        await _eventPublisher.PublishAsync(EventSubscriberConst.LOGIN_B, logingEvent);//发布登录事件总线
+        await WriteTokenToRedis(loginEvent, loginClientType);//写入token到redis
+        await _eventPublisher.PublishAsync(EventSubscriberConst.LOGIN_B, loginEvent);//发布登录事件总线
         //返回结果
         return new LoginOutPut
         {
@@ -413,11 +404,7 @@ public class AuthService : IAuthService
             else
             {
                 //从列表中删除
-                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
-                    new string[]
-                    {
-                        loginEvent.SysUser.Id.ToString()
-                    });
+                _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, loginEvent.SysUser.Id.ToString());
             }
         }
     }

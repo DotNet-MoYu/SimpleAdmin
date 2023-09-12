@@ -6,50 +6,28 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Core;
 
 /// <summary>
-/// 代码生成基础
-///</summary>
-[SugarTable("gen_test", TableDescription = "代码生成测试")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
-[CodeGen]
-[BatchEdit]
-public class GenTest : DataEntityBase
+/// 登录设备类型枚举
+/// </summary>
+public enum AuthDeviceTypeEnum
 {
     /// <summary>
-    /// 姓名
+    /// PC端
     /// </summary>
-    public string Name { get; set; }
+    [Description("PC端")]
+    PC,
 
     /// <summary>
-    /// 性别
+    /// 移动端
     /// </summary>
-    public string Sex { get; set; }
+    [Description("移动端")]
+    APP,
 
     /// <summary>
-    /// 民族
+    /// 小程序
     /// </summary>
-    public string Nation { get; set; }
-
-    /// <summary>
-    /// 年龄
-    /// </summary>
-
-    public int Age { get; set; }
-
-    /// <summary>
-    /// 生日
-    /// </summary>
-    public DateTime Bir { get; set; }
-
-    /// <summary>
-    /// 存款
-    /// </summary>
-    public decimal Money { get; set; }
-
-    /// <summary>
-    /// 排序码
-    ///</summary>
-    public int SortCode { get; set; }
+    [Description("小程序")]
+    MINI
 }

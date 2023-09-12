@@ -15,19 +15,16 @@ public class UserService : DbRepository<SysUser>, IUserService
 {
     private readonly ISysUserService _sysUserService;
     private readonly IRoleService _roleService;
-    private readonly ISysOrgService _sysOrgService;
     private readonly IImportExportService _importExportService;
 
     public UserService(
         ISysUserService sysUserService,
         IRoleService roleService,
-        ISysOrgService sysOrgService,
         IImportExportService importExportService
     )
     {
         _sysUserService = sysUserService;
         _roleService = roleService;
-        _sysOrgService = sysOrgService;
         _importExportService = importExportService;
     }
 
@@ -81,7 +78,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input)
     {
-        var sysRoles = new SqlSugarPagedList<SysRole>()
+        var sysRoles = new SqlSugarPagedList<SysRole>
         {
             Total = 1,
             Pages = 1,
@@ -136,7 +133,6 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         var ids = input.Ids;
-        ;//获取用户id
         var sysUsers = await GetListAsync(it => ids.Contains(it.Id),
             it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
         sysUsers.ForEach(it =>
@@ -199,12 +195,12 @@ public class UserService : DbRepository<SysUser>, IUserService
         {
             var orgIds = users.Select(it => it.OrgId).ToList();//获取所有用户机构列表
             if (!dataScope.ContainsAll(orgIds))
-                throw Oops.Bah($"您没有权限删除这些人员");
+                throw Oops.Bah("您没有权限删除这些人员");
             await _sysUserService.Delete(input);//删除
         }
         else
         {
-            throw Oops.Bah($"您没有权限删除这些人员");
+            throw Oops.Bah("您没有权限删除这些人员");
         }
     }
 
@@ -233,8 +229,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             importPreview.Data = await CheckImport(importPreview.Data, dataScope);//检查导入数据
             return importPreview;
         }
-        else
-            throw Oops.Bah("您无权导入用户");
+        throw Oops.Bah("您无权导入用户");
     }
 
     /// <inheritdoc/>
@@ -262,7 +257,7 @@ public class UserService : DbRepository<SysUser>, IUserService
             await InsertOrBulkCopy(sysUsers);// 数据导入
             return result;
         }
-        else throw Oops.Bah("您无权导入用户");
+        throw Oops.Bah("您无权导入用户");
     }
 
     #endregion 导入导出
@@ -336,7 +331,7 @@ public class UserService : DbRepository<SysUser>, IUserService
     public async Task<List<BizUserImportInput>> CheckImport(List<BizUserImportInput> data,
         List<long> dataScope, bool clearError = false)
     {
-        var errorMessage = $"没有权限";
+        var errorMessage = "没有权限";
         //先经过系统用户检查
         var bizUsers = await _sysUserService.CheckImport(data, clearError);
         bizUsers.ForEach(it =>

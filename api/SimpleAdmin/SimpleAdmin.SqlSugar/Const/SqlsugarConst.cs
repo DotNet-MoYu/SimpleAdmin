@@ -9,9 +9,9 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// Sqlsugar系统常量类
+/// SqlSugar系统常量类
 /// </summary>
-public class SqlsugarConst
+public class SqlSugarConst
 {
     /// <summary>
     /// 默认库ConfigId

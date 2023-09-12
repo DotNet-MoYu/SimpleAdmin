@@ -51,13 +51,13 @@ public class LoginInput : ValidCodeInput
     /// 设备类型，默认PC
     /// </summary>
     /// <example>0</example>
-    public AuthDeviceTypeEumu Device { get; set; } = AuthDeviceTypeEumu.PC;
+    public AuthDeviceTypeEnum Device { get; set; } = AuthDeviceTypeEnum.PC;
 }
 
 /// <summary>
 /// 登出输入参数
 /// </summary>
-public class LoginOutIput
+public class LoginOutInput
 {
     /// <summary>
     /// token
@@ -87,5 +87,5 @@ public class LoginByPhoneInput : GetPhoneValidCodeInput
     /// 设备类型，默认PC
     /// </summary>
     /// <example>0</example>
-    public AuthDeviceTypeEumu Device { get; set; } = AuthDeviceTypeEumu.PC;
+    public AuthDeviceTypeEnum Device { get; set; } = AuthDeviceTypeEnum.PC;
 }

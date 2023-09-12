@@ -211,8 +211,8 @@ public class UserCenterController : IDynamicApiController
     /// </summary>
     /// <param name="input"></param>
     [HttpPost("setDefaultModule")]
-    public async Task SetDeafultModule([FromBody] SetDeafultModuleInput input)
+    public async Task SetDefaultModule([FromBody] SetDefaultModuleInput input)
     {
-        await _userCenterService.SetDeafultModule(input);
+        await _userCenterService.SetDefaultModule(input);
     }
 }

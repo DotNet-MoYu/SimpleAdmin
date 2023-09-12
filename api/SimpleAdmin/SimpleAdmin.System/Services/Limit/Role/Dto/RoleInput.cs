@@ -60,7 +60,7 @@ public class GrantResourceInput : RoleOwnResourceOutput
     /// 授权资源信息
     /// </summary>
     [Required(ErrorMessage = "GrantInfoList不能为空")]
-    public override List<RelationRoleResuorce> GrantInfoList { get; set; }
+    public override List<RelationRoleResource> GrantInfoList { get; set; }
 
     /// <summary>
     /// 是否代码生成

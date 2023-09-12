@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 系统关系表
 ///</summary>
 [SugarTable("sys_relation", TableDescription = "系统关系表")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysRelation : PrimaryKeyEntity
 {
     /// <summary>

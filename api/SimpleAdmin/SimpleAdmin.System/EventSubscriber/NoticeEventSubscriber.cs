@@ -6,8 +6,6 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-using SimpleAdmin.Plugin.Core;
-
 namespace SimpleAdmin.System;
 
 /// <summary>
@@ -16,18 +14,15 @@ namespace SimpleAdmin.System;
 public class NoticeEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly ISimpleCacheService _simpleCacheService;
-    private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
 
     private readonly IServiceScopeFactory _scopeFactory;
     private readonly SqlSugarScope _db;
 
-    public NoticeEventSubscriber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory,
-        INamedServiceProvider<INoticeService> namedServiceProvider)
+    public NoticeEventSubscriber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory)
     {
         _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
         _scopeFactory = scopeFactory;
-        _namedServiceProvider = namedServiceProvider;
     }
 
     /// <summary>
@@ -46,7 +41,6 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
         {
             clientIds.AddRange(it.ClientIds);
         });
-        await GetNoticeService().UserLoginOut(loginEvent.UserId, clientIds, loginEvent.Message);//发送消息
     }
 
     /// <summary>
@@ -74,8 +68,6 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
                 });
             }
         });
-
-        await GetNoticeService().NewMesage(newMessageEvent.UserIds, clientIds, newMessageEvent.Message);//发送消息
     }
 
     /// <summary>
@@ -88,19 +80,5 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
         // 创建新的作用域
         using var scope = _scopeFactory.CreateScope();
         return scope.ServiceProvider.GetRequiredService<T>();
-    }
-
-    /// <summary>
-    /// 获取通知服务
-    /// </summary>
-    /// <returns></returns>
-    private INoticeService GetNoticeService()
-    {
-        // 获取插件选项
-        var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
-        //根据通知类型获取对应的服务
-        var noticeComponent = pluginsOptions.NoticeComponent.ToString().ToLower();
-        var noticeService = _namedServiceProvider.GetService<ISingleton>(noticeComponent);//获取服务
-        return noticeService;
     }
 }

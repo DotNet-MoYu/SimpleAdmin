@@ -21,7 +21,7 @@ public class RoleOwnResourceOutput
     /// <summary>
     /// 已授权资源信息
     /// </summary>
-    public virtual List<RelationRoleResuorce> GrantInfoList { get; set; }
+    public virtual List<RelationRoleResource> GrantInfoList { get; set; }
 }
 
 /// <summary>

@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 角色
 ///</summary>
 [SugarTable("sys_role", TableDescription = "角色")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysRole : DataEntityBase
 {
     /// <summary>

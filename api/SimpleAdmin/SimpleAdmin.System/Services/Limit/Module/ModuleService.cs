@@ -6,8 +6,6 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-using DnsClient.Internal;
-
 namespace SimpleAdmin.System;
 
 /// <summary>
@@ -16,16 +14,14 @@ namespace SimpleAdmin.System;
 public class ModuleService : DbRepository<SysResource>, IModuleService
 {
     private readonly ILogger<ModuleService> _logger;
-    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IResourceService _resourceService;
     private readonly IRelationService _relationService;
 
-    public ModuleService(ILogger<ModuleService> logger, ISimpleCacheService simpleCacheService,
+    public ModuleService(ILogger<ModuleService> logger,
         IResourceService resourceService,
         IRelationService relationService)
     {
         _logger = logger;
-        _simpleCacheService = simpleCacheService;
         _resourceService = resourceService;
         _relationService = relationService;
     }
@@ -95,7 +91,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             });
             ids.AddRange(resourceIds);
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE

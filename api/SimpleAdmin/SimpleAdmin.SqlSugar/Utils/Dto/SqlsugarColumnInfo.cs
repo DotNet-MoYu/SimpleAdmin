@@ -9,9 +9,9 @@
 namespace SimpleAdmin.SqlSugar;
 
 /// <summary>
-/// Sqlsugar字段信息
+/// SqlSugar字段信息
 /// </summary>
-public class SqlsugarColumnInfo
+public class SqlSugarColumnInfo
 {
     /// <summary>
     /// 字段名称
@@ -21,7 +21,7 @@ public class SqlsugarColumnInfo
     /// <summary>
     /// 是否主键
     /// </summary>
-    public bool IsPrimarykey { get; set; }
+    public bool IsPrimaryKey { get; set; }
 
     /// <summary>
     /// 字段类型

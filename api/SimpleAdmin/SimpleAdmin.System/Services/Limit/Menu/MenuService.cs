@@ -107,7 +107,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             });
             ids.AddRange(resourceIds);//添加到删除ID列表
             //事务
-            var result = await Itenant.UseTranAsync(async () =>
+            var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
@@ -149,13 +149,13 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             if (sysResource.Module == input.Module)//如果模块ID没变直接返回
                 return;
             if (sysResource.ParentId != 0)
-                throw Oops.Bah($"非顶级菜单不可修改所属模块");
+                throw Oops.Bah("非顶级菜单不可修改所属模块");
             //获取所有菜单和模块
             var resourceList = await _resourceService.GetListAsync(new List<string>
                 { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_MODULE });
             if (!resourceList.Any(it =>
                     it.Category == CateGoryConst.RESOURCE_MODULE && it.Id == input.Module.Value))
-                throw Oops.Bah($"不存在的模块");
+                throw Oops.Bah("不存在的模块");
             //获取所有菜单
             var menuList = resourceList.Where(it => it.Category == CateGoryConst.RESOURCE_MENU)
                 .ToList();
@@ -191,9 +191,9 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             if (parent != null)
             {
                 if (parent.Module != sysResource.Module)//如果父级的模块和当前模块不一样
-                    throw Oops.Bah($"模块与上级菜单不一致");
+                    throw Oops.Bah("模块与上级菜单不一致");
                 if (parent.Id == sysResource.Id)
-                    throw Oops.Bah($"上级菜单不能选择自己");
+                    throw Oops.Bah("上级菜单不能选择自己");
             }
             else
             {

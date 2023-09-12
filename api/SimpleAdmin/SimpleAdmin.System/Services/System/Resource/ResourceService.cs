@@ -113,14 +113,14 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         //获取所有机构
         var sysResources = await GetListAsync();
         //查找下级
-        var childLsit = GetResourceChilden(sysResources, resId);
+        var childList = GetResourceChildren(sysResources, resId);
         if (isContainOneself)//如果包含自己
         {
             //获取自己的机构信息
             var self = sysResources.Where(it => it.Id == resId).FirstOrDefault();
-            if (self != null) childLsit.Insert(0, self);//如果机构不为空就插到第一个
+            if (self != null) childList.Insert(0, self);//如果机构不为空就插到第一个
         }
-        return childLsit;
+        return childList;
     }
 
     /// <inheritdoc />
@@ -128,14 +128,14 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         bool isContainOneself = true)
     {
         //查找下级
-        var childLsit = GetResourceChilden(sysResources, resId);
+        var childList = GetResourceChildren(sysResources, resId);
         if (isContainOneself)//如果包含自己
         {
             //获取自己的机构信息
             var self = sysResources.Where(it => it.Id == resId).FirstOrDefault();
-            if (self != null) childLsit.Insert(0, self);//如果机构不为空就插到第一个
+            if (self != null) childList.Insert(0, self);//如果机构不为空就插到第一个
         }
-        return childLsit;
+        return childList;
     }
 
     /// <inheritdoc />
@@ -195,29 +195,29 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             if (routes.Contains(routeName))
             {
                 //获取所有方法
-                var menthods = controller.GetMethods();
+                var methods = controller.GetMethods();
                 //遍历方法
-                foreach (var menthod in menthods)
+                foreach (var method in methods)
                 {
                     //获取忽略数据权限特性
                     var ignoreRolePermission =
-                        menthod.GetCustomAttribute<IgnoreRolePermissionAttribute>();
+                        method.GetCustomAttribute<IgnoreRolePermissionAttribute>();
                     if (ignoreRolePermission == null)//如果是空的代表需要数据权限
                     {
                         //获取接口描述
-                        var displayName = menthod.GetCustomAttribute<DisplayNameAttribute>();
+                        var displayName = method.GetCustomAttribute<DisplayNameAttribute>();
                         if (displayName != null)
                         {
                             //默认路由名称
-                            var apiRoute = StringHelper.FirstCharToLower(menthod.Name);
+                            var apiRoute = StringHelper.FirstCharToLower(method.Name);
                             //获取get特性
-                            var requestGet = menthod.GetCustomAttribute<HttpGetAttribute>();
+                            var requestGet = method.GetCustomAttribute<HttpGetAttribute>();
                             if (requestGet != null)//如果是get方法
                                 apiRoute = requestGet.Template;
                             else
                             {
                                 //获取post特性
-                                var requestPost = menthod.GetCustomAttribute<HttpPostAttribute>();
+                                var requestPost = method.GetCustomAttribute<HttpPostAttribute>();
                                 if (requestPost != null)//如果是post方法
                                     apiRoute = requestPost.Template;
                             }
@@ -278,7 +278,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     /// <param name="resourceList">资源列表</param>
     /// <param name="parentId">父ID</param>
     /// <returns></returns>
-    public List<SysResource> GetResourceChilden(List<SysResource> resourceList, long parentId)
+    public List<SysResource> GetResourceChildren(List<SysResource> resourceList, long parentId)
     {
         //找下级资源ID列表
         var resources = resourceList.Where(it => it.ParentId == parentId).ToList();
@@ -287,7 +287,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             var data = new List<SysResource>();
             foreach (var item in resources)//遍历资源
             {
-                var res = GetResourceChilden(resourceList, item.Id);
+                var res = GetResourceChildren(resourceList, item.Id);
                 data.AddRange(res);//添加子节点;
                 data.Add(item);//添加到列表
             }
@@ -433,10 +433,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             var title = string.Join("- ", titles) + $"-{menu.Title}";//根据-分割,转换成字符串并在最后加上菜单的title
             return title;
         }
-        else
-        {
-            return menu.Title;//原路返回
-        }
+        return menu.Title;//原路返回
     }
 
     #endregion 方法

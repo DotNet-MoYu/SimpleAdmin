@@ -24,12 +24,12 @@ public class MyAuthorizationFilter : IAsyncAuthorizationFilter
         // 获取 Action 类型
         var methodType = actionDescriptor.MethodInfo;
         // 是否匿名访问
-        var allowAnonymouse = context.Filters.Any(u => u is IAllowAnonymousFilter)
-                        || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true)
-                        || methodType.IsDefined(typeof(AllowAnonymousAttribute), true);
+        var allowAnonymous = context.Filters.Any(u => u is IAllowAnonymousFilter)
+            || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true)
+            || methodType.IsDefined(typeof(AllowAnonymousAttribute), true);
 
         // 不是匿名才处理权限检查
-        if (!allowAnonymouse)
+        if (!allowAnonymous)
         {
             // 获取 HttpContext 和 HttpRequest 对象
             var httpContext = context.HttpContext;
@@ -39,6 +39,6 @@ public class MyAuthorizationFilter : IAsyncAuthorizationFilter
                 context.Result = new UnauthorizedResult();
             }
         }
-        else await Task.CompletedTask; // 否则直接跳过处理
+        else await Task.CompletedTask;// 否则直接跳过处理
     }
 }

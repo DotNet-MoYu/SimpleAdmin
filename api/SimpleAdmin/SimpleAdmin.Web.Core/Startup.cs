@@ -23,8 +23,6 @@ public class Startup : AppStartup
         services.AddComponent<AuthComponent>();
         //启动Web设置ConfigureServices组件
         services.AddComponent<WebSettingsComponent>();
-        //启动插件设置ConfigureServices组件
-        services.AddComponent<PluginSettingComponent>();
         //gip压缩
         services.AddComponent<GzipCompressionComponent>();
         //定时任务
@@ -52,9 +50,7 @@ public class Startup : AppStartup
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         //启动Web设置Configure组件
-        //app.UseComponent<WebSettingsApplicationComponent>(env);
-        //启动插件设置Configure组件
-        app.UseComponent<PluginSettingsApplicationComponent>(env);
+        app.UseComponent<WebSettingsApplicationComponent>(env);
 
         if (env.IsDevelopment())
         {
@@ -71,25 +67,22 @@ public class Startup : AppStartup
         // 添加状态码拦截中间件
         app.UseUnifyResultStatusCodes();
 
-        app.UseStaticFiles(new StaticFileOptions()
+        //静态文件访问配置
+        app.UseStaticFiles(new StaticFileOptions
         {
             ServeUnknownFileTypes = true,
             FileProvider = new PhysicalFileProvider(
                 Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
-            OnPrepareResponse = (c) =>
+            OnPrepareResponse = c =>
             {
                 c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                c.Context.Response.Headers.Append("Cache-Control", $"public, max-age=604800");
+                c.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
             },
             RequestPath = new PathString("/images")//src相当于别名，为了安全
         });
         app.UseRouting();
 
-        //跨域设置
-        //  app.UseCorsAccessor(builder =>
-        //  builder.SetIsOriginAllowed(_ => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials()
 
-        //);
         app.UseCorsAccessor();
 
         app.UseAuthentication();
@@ -97,23 +90,9 @@ public class Startup : AppStartup
 
         app.UseInject(string.Empty);
 
-        ////定时任务Dashboard
-        //app.UseScheduleUI(options =>
-        //{
-        //    options.DisableOnProduction = true;//配置生产环境关闭
-        //});
         app.UseForwardedHeaders();//Nginx代理的话获取真实IP
         app.UseEndpoints(endpoints =>
         {
-            // 获取插件选项
-            var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
-            //如果通知类型是Signalr
-            if (pluginsOptions.UseSignalR)
-            {
-                // 注册集线器
-                endpoints.MapHubs();
-            }
-
             endpoints.MapControllers();
         });
     }

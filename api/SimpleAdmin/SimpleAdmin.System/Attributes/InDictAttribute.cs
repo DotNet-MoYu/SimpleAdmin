@@ -44,18 +44,18 @@ public class InDictAttribute : ValidationAttribute
                     return $"字典中不存在{value}";
             }
         }
-        else return ErrorMessage;
+        return ErrorMessage;
     }
 
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
         if (value != null)
         {
-            var dictSerivce = App.GetService<IDictService>();
-            var values = dictSerivce.GetValuesByDictValue(DictValue).Result;
+            var dictService = App.GetService<IDictService>();
+            var values = dictService.GetValuesByDictValue(DictValue).Result;
             if (!values.Contains(value))
             {
-                return new ValidationResult(GetErrorMessage(value.ToString()), new string[] { validationContext.MemberName });
+                return new ValidationResult(GetErrorMessage(value.ToString()), new[] { validationContext.MemberName });
             }
         }
         return ValidationResult.Success;

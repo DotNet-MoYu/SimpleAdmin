@@ -21,7 +21,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using SimpleAdmin.Application;
 global using SimpleAdmin.Cache;
 global using SimpleAdmin.Core;
-global using SimpleAdmin.Plugin.Core;
 global using SimpleAdmin.SqlSugar;
 global using SimpleAdmin.System;
 global using System;

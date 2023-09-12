@@ -33,7 +33,7 @@ public class LoginEvent
     /// <summary>
     /// 登录设备
     /// </summary>
-    public AuthDeviceTypeEumu Device { get; set; }
+    public AuthDeviceTypeEnum Device { get; set; }
 
     /// <summary>
     /// Tokens

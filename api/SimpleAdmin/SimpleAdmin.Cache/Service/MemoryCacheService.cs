@@ -91,7 +91,7 @@ public partial class MemoryCacheService : ISimpleCacheService
     public IDictionary<string, T> GetAll<T>(IEnumerable<string> keys)
     {
         IDictionary<string, T>? result = default;//定义集合
-        IDictionary<string, string>? data = _memoryCache.GetAll<string>(keys);//获取数据
+        var data = _memoryCache.GetAll<string>(keys);//获取数据
         data.ForEach(it =>
         {
             result.Add(it.Key, it.Value.ToObject<T>());//遍历数据,格式化并加到新的数据集合
@@ -171,8 +171,7 @@ public partial class MemoryCacheService : ISimpleCacheService
     /// <inheritdoc/>
     public bool TryGetValue<T>(string key, out T value)
     {
-        var result = string.Empty;
-        _ = _memoryCache.TryGetValue<string>(key, out result);
+        _ = _memoryCache.TryGetValue<string>(key, out var result);
         value = result.ToObject<T>();
         return value == null;
     }

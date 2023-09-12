@@ -11,7 +11,8 @@ namespace SimpleAdmin.Core;
 /// <summary>
 /// 规范化RESTful风格返回值
 /// </summary>
-[SuppressSniffer][UnifyModel(typeof(SimpleAdminResult<>))]
+[SuppressSniffer]
+[UnifyModel(typeof(SimpleAdminResult<>))]
 public class SimpleAdminResultProvider : IUnifyResultProvider
 {
     /// <summary>
@@ -22,7 +23,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public IActionResult OnException(ExceptionContext context, ExceptionMetadata metadata)
     {
-        return new JsonResult(RESTfulResult(metadata.StatusCode, data: metadata.Data, errors: metadata.Errors));
+        return new JsonResult(ResTfulResult(metadata.StatusCode, data: metadata.Data, errors: metadata.Errors));
     }
 
     /// <summary>
@@ -33,7 +34,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public IActionResult OnSucceeded(ActionExecutedContext context, object data)
     {
-        return new JsonResult(RESTfulResult(StatusCodes.Status200OK, true, data));
+        return new JsonResult(ResTfulResult(StatusCodes.Status200OK, true, data));
     }
 
     /// <summary>
@@ -44,7 +45,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public IActionResult OnValidateFailed(ActionExecutingContext context, ValidationMetadata metadata)
     {
-        return new JsonResult(RESTfulResult(metadata.StatusCode ?? StatusCodes.Status400BadRequest, data: metadata.Data,
+        return new JsonResult(ResTfulResult(metadata.StatusCode ?? StatusCodes.Status400BadRequest, data: metadata.Data,
             errors: metadata.FirstErrorMessage ?? metadata.Message));
     }
 
@@ -65,17 +66,15 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
         {
             // 处理 401 状态码
             case StatusCodes.Status401Unauthorized:
-                await context.Response.WriteAsJsonAsync(RESTfulResult(statusCode, errors: "登录已过期，请重新登录"),
+                await context.Response.WriteAsJsonAsync(ResTfulResult(statusCode, errors: "登录已过期，请重新登录"),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
             // 处理 403 状态码
             case StatusCodes.Status403Forbidden:
                 await context.Response.WriteAsJsonAsync(
-                    RESTfulResult(statusCode, errors: "禁止访问，没有权限", data: context.Request.Path),
+                    ResTfulResult(statusCode, errors: "禁止访问，没有权限", data: context.Request.Path),
                     App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
-
-            default: break;
         }
     }
 
@@ -87,7 +86,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <param name="data">数据</param>
     /// <param name="errors">错误信息</param>
     /// <returns></returns>
-    private static SimpleAdminResult<object> RESTfulResult(int statusCode, bool succeeded = default,
+    private static SimpleAdminResult<object> ResTfulResult(int statusCode, bool succeeded = default,
         object data = default, object errors = default)
     {
         return new SimpleAdminResult<object>

@@ -12,7 +12,7 @@ namespace SimpleAdmin.System;
 /// 资源
 ///</summary>
 [SugarTable("sys_resource", TableDescription = "资源")]
-[Tenant(SqlsugarConst.DB_DEFAULT)]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
 public class SysResource : BaseEntity
 {
     /// <summary>
@@ -128,7 +128,7 @@ public class SysResource : BaseEntity
     /// 是否为首页
     ///</summary>
     [SugarColumn(ColumnName = "IsHome", ColumnDescription = " 是否为首页", IsNullable = true)]
-    public bool IsHome { get; set; } = false;
+    public bool IsHome { get; set; }
 
     /// <summary>
     /// 排序码
@@ -172,7 +172,7 @@ public class Meta
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
-    public bool IsHide { get; set; } = false;
+    public bool IsHide { get; set; }
 
     /// <summary>
     /// 路由外链时填写的访问地址

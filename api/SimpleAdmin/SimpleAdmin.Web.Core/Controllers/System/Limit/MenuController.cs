@@ -42,7 +42,6 @@ public class MenuController : BaseController
     public async Task<dynamic> Tree([FromQuery] MenuTreeInput input)
     {
         return await _menuService.Tree(input);
-        ;
     }
 
     /// <summary>

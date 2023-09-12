@@ -1,7 +1,7 @@
 {
   //缓存设置
   "CacheSettings": {
-    "UseRedis": false, //启用redis
+    "UseRedis": true, //启用redis
     "RedisSettings": {
       "Address": "127.0.0.1:6379", //地址
       "Password": "123456", //Redis服务密码

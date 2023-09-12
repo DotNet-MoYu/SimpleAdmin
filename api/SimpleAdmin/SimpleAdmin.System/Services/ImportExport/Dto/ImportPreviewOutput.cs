@@ -52,10 +52,10 @@ public class TableColumns
     /// <summary>
     /// 超过宽度将自动省略
     /// </summary>
-    public bool Ellipsis { get; set; } = false;
+    public bool Ellipsis { get; set; }
 
     /// <summary>
     /// 是否是日期格式
     /// </summary>
-    public bool Date { get; set; } = false;
+    public bool Date { get; set; }
 }

@@ -16,7 +16,7 @@ namespace SimpleAdmin.SqlSugar;
 public static class DbContext
 {
     /// <summary>
-    /// 读取配置文件中的 ConnectionStrings:Sqlsugar 配置节点
+    /// 读取配置文件中的 ConnectionStrings:SqlSugar 配置节点
     /// </summary>
     public static readonly List<SqlSugarConfig> DB_CONFIGS = App.GetConfig<List<SqlSugarConfig>>("SqlSugarSettings:ConnectionStrings");
 
@@ -55,13 +55,13 @@ public static class DbContext
             EntityService = (c, p) =>
             {
                 //如果是mysql并且是varchar(max) 已弃用
-                //if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlsugarConst.NVarCharMax))
+                //if (config.DbType == SqlSugar.DbType.MySql && (p.DataType == SqlSugarConst.NVarCharMax))
                 //{
-                //    p.DataType = SqlsugarConst.LongText;//转成mysql的longtext
+                //    p.DataType = SqlSugarConst.LongText;//转成mysql的longtext
                 //}
-                //else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlsugarConst.NVarCharMax))
+                //else if (config.DbType == SqlSugar.DbType.Sqlite && (p.DataType == SqlSugarConst.NVarCharMax))
                 //{
-                //    p.DataType = SqlsugarConst.Text;//转成sqlite的text
+                //    p.DataType = SqlSugarConst.Text;//转成sqlite的text
                 //}
                 //默认不写IsNullable为非必填
                 //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
@@ -111,7 +111,7 @@ public static class DbContext
             }
         };
         //异常
-        db.Aop.OnError = (ex) =>
+        db.Aop.OnError = ex =>
         {
             //如果不是开发环境就打印日志
             if (App.WebHostEnvironment.IsDevelopment())
@@ -146,7 +146,7 @@ public static class DbContext
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUserId))
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.USER_ID)?.Value);
                     if (entityInfo.PropertyName == nameof(BaseEntity.CreateUser))
-                        entityInfo.SetValue(App.User?.FindFirst(ClaimConst.ACCOUNT)?.Value);
+                        entityInfo.SetValue(App.User.FindFirst(ClaimConst.ACCOUNT)?.Value);
                     if (entityInfo.PropertyName == nameof(DataEntityBase.CreateOrgId))
                         entityInfo.SetValue(App.User.FindFirst(ClaimConst.ORG_ID)?.Value);
                 }

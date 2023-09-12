@@ -45,5 +45,5 @@ public interface IOperateLogService : ITransient
     /// 操作日志总览
     /// </summary>
     /// <returns>异常日志和操作日志的数量</returns>
-    Task<List<OperateLogTotalCountOutpu>> TotalCount();
+    Task<List<OperateLogTotalCountOutput>> TotalCount();
 }

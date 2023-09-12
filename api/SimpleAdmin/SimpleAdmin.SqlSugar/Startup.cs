@@ -45,7 +45,7 @@ public class Startup : AppStartup
         var configIdGroup = DbContext.DB_CONFIGS.GroupBy(it => it.ConfigId).ToList();
         foreach (var configId in configIdGroup)
         {
-            if (configId.ToList().Count > 1) throw Oops.Oh($"Sqlsugar连接配置ConfigId:{configId.Key}重复了");
+            if (configId.ToList().Count > 1) throw Oops.Oh($"SqlSugar连接配置ConfigId:{configId.Key}重复了");
         }
     }
 }

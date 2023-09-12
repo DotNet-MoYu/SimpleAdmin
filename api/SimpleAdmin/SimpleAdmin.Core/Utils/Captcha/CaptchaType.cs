@@ -29,5 +29,5 @@ public enum CaptchaType
     /// 数字运算验证码
     /// </summary>
     [Description("数字运算验证码")]
-    ARITH = 2,
+    ARITH = 2
 }

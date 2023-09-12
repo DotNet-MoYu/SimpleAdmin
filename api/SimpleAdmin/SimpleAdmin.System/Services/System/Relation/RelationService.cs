@@ -9,17 +9,15 @@
 namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="IRelationService"/>
-public class Relationservice : DbRepository<SysRelation>, IRelationService
+public class RelationService : DbRepository<SysRelation>, IRelationService
 {
-    private readonly ILogger<Relationservice> _logger;
+    private readonly ILogger<RelationService> _logger;
     private readonly ISimpleCacheService _simpleCacheService;
-    private readonly IResourceService _resourceService;
 
-    public Relationservice(ILogger<Relationservice> logger, ISimpleCacheService simpleCacheService, IResourceService resourceService)
+    public RelationService(ILogger<RelationService> logger, ISimpleCacheService simpleCacheService)
     {
         _logger = logger;
         _simpleCacheService = simpleCacheService;
-        _resourceService = resourceService;
     }
 
     /// <inheritdoc/>
@@ -105,7 +103,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             });
         }
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             if (clear)
                 await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的
@@ -135,7 +133,7 @@ public class Relationservice : DbRepository<SysRelation>, IRelationService
             ExtJson = extJson
         };
         //事务
-        var result = await Itenant.UseTranAsync(async () =>
+        var result = await Tenant.UseTranAsync(async () =>
         {
             if (clear)
                 await DeleteAsync(it => it.ObjectId == objectId && it.Category == category);//删除老的

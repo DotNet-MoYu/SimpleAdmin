@@ -13,12 +13,10 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class SpaService : DbRepository<SysResource>, ISpaService
 {
-    private readonly ISimpleCacheService _simpleCacheService;
     private readonly IResourceService _resourceService;
 
-    public SpaService(ISimpleCacheService simpleCacheService, IResourceService resourceService)
+    public SpaService(IResourceService resourceService)
     {
-        _simpleCacheService = simpleCacheService;
         _resourceService = resourceService;
     }
 
@@ -92,11 +90,11 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         {
             if (string.IsNullOrEmpty(sysResource.Name))
             {
-                throw Oops.Bah($"单页名称不能为空");
+                throw Oops.Bah("单页名称不能为空");
             }
             if (string.IsNullOrEmpty(sysResource.Component))
             {
-                throw Oops.Bah($"组件地址不能为空");
+                throw Oops.Bah("组件地址不能为空");
             }
         }
         else if (sysResource.MenuType == SysResourceConst.IFRAME
@@ -115,7 +113,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
             var spas = await _resourceService.GetListByCategory(SysResourceConst.SPA);//获取所有单页
             if (spas.Any(it => it.IsHome && it.Id != sysResource.Id))//如果有多个主页
             {
-                throw Oops.Bah($"已存在首页,请取消其他主页后再试");
+                throw Oops.Bah("已存在首页,请取消其他主页后再试");
             }
             sysResource.IsHide = false;//如果是主页,则不隐藏
             sysResource.IsAffix = true;//如果是主页,则固定

@@ -26,12 +26,12 @@ public class BatchEditPageInput : BasePageInput
     /// <summary>
     /// 实体名
     /// </summary>
-    public string Entityname { get; set; }
+    public string EntityName { get; set; }
 
     /// <summary>
     /// 表名
     /// </summary>
-    public string Tablename { get; set; }
+    public string TableName { get; set; }
 }
 
 /// <summary>
@@ -66,7 +66,7 @@ public class BatchEditAddInput
     /// <summary>
     /// 表描述
     /// </summary>
-    public string Tabledescription { get; set; }
+    public string TableDescription { get; set; }
 }
 
 /// <summary>

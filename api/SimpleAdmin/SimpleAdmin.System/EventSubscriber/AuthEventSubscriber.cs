@@ -7,7 +7,6 @@
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 using IPTools.Core;
-using SimpleAdmin.Plugin.Core;
 
 namespace SimpleAdmin.System;
 
@@ -17,15 +16,14 @@ namespace SimpleAdmin.System;
 public class AuthEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly ISimpleCacheService _simpleCacheService;
-    private readonly INamedServiceProvider<INoticeService> _namedServiceProvider;
+
     public IServiceProvider Services { get; }
     private readonly SqlSugarScope _db;
 
-    public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services, INamedServiceProvider<INoticeService> namedServiceProvider)
+    public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services)
     {
         _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
-        _namedServiceProvider = namedServiceProvider;
         Services = services;
     }
 
@@ -66,12 +64,13 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                 //如果密码初始化提醒为true
                 if (pwdUpdateDefault)
                 {
-                    await messageService.Send(new MessageSendInput()
+                    await messageService.Send(new MessageSendInput
                     {
                         Subject = subject,
-                        Content = $"请及时修改初始密码",
+                        Content = "请及时修改初始密码",
                         Category = CateGoryConst.MESSAGE_INFORM,
-                        ReceiverIdList = new List<long>() { sysUser.Id }
+                        ReceiverIdList = new List<long>
+                            { sysUser.Id }
                     });
                 }
                 sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间
@@ -84,12 +83,13 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                     var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == SysConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
                     if (DateTime.Now - pwdRemindUpdateTime > TimeSpan.FromDays(pwdRemindDay))
                     {
-                        await messageService.Send(new MessageSendInput()
+                        await messageService.Send(new MessageSendInput
                         {
                             Subject = subject,
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
                             Category = CateGoryConst.MESSAGE_INFORM,
-                            ReceiverIdList = new List<long>() { sysUser.Id }
+                            ReceiverIdList = new List<long>
+                                { sysUser.Id }
                         });
                     }
                     sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间,避免重复提醒
@@ -151,7 +151,8 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         try
         {
             var ipInfo = IpTool.Search(ip);
-            var loginAddressList = new List<string>() { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
+            var loginAddressList = new List<string>
+                { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
             var loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
             return loginAddress;
         }
@@ -159,19 +160,5 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         {
             return "未知";
         }
-    }
-
-    /// <summary>
-    /// 获取通知服务
-    /// </summary>
-    /// <returns></returns>
-    private INoticeService GetNoticeService()
-    {
-        // 获取插件选项
-        var pluginsOptions = App.GetOptions<PluginSettingsOptions>();
-        //根据通知类型获取对应的服务
-        var noticeComponent = pluginsOptions.NoticeComponent.ToString().ToLower();
-        var noticeService = _namedServiceProvider.GetService<ISingleton>(noticeComponent);//获取服务
-        return noticeService;
     }
 }

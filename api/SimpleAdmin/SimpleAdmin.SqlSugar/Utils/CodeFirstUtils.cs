@@ -40,11 +40,12 @@ public static class CodeFirstUtils
     private static void InitTable(string assemblyName)
     {
         // 获取所有实体表-初始化表结构
-        var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) && u.Assembly.FullName == assemblyName);
+        var entityTypes = App.EffectiveTypes.Where(u =>
+            !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) && u.Assembly.FullName == assemblyName);
         if (!entityTypes.Any()) return;//没有就退出
         foreach (var entityType in entityTypes)
         {
-            var tenantAtt = entityType.GetCustomAttribute<TenantAttribute>();//获取Sqlsugar多租户特性
+            var tenantAtt = entityType.GetCustomAttribute<TenantAttribute>();//获取SqlSugar多租户特性
             var ignoreInit = entityType.GetCustomAttribute<IgnoreInitTableAttribute>();//获取忽略初始化特性
             if (ignoreInit != null) continue;//如果有忽略初始化特性
             if (tenantAtt == null) continue;//如果没有租户特性就下一个
@@ -77,7 +78,7 @@ public static class CodeFirstUtils
             var seedData = ((IEnumerable)hasDataMethod?.Invoke(instance, null))?.Cast<object>();
             if (seedData == null) continue;//没有种子数据就下一个
             var entityType = seedType.GetInterfaces().First().GetGenericArguments().First();//获取实体类型
-            var tenantAtt = entityType.GetCustomAttribute<TenantAttribute>();//获取sqlsugar租户特性
+            var tenantAtt = entityType.GetCustomAttribute<TenantAttribute>();//获取SqlSugar租户特性
             if (tenantAtt == null) continue;//如果没有租户特性就下一个
             var db = DbContext.DB.GetConnectionScope(tenantAtt.configId.ToString());//获取数据库对象
             var config = DbContext.DB_CONFIGS.FirstOrDefault(u => u.ConfigId == tenantAtt.configId.ToString());//获取数据库配置
@@ -167,7 +168,7 @@ public static class CodeFirstUtils
                         obj = obj?.ToJson();//如果json字符串是空就传null
                     tempList.Add(obj);
                 }
-                object[] array = tempList.ToArray();
+                var array = tempList.ToArray();
                 result.LoadDataRow(array, true);
             }
         }
@@ -181,13 +182,13 @@ public static class CodeFirstUtils
     /// <returns></returns>
     private static bool IsIgnoreColumn(PropertyInfo pi)
     {
-        var sc = pi.GetCustomAttributes<SugarColumn>(false).FirstOrDefault(u => u.IsIgnore == true);
+        var sc = pi.GetCustomAttributes<SugarColumn>(false).FirstOrDefault(u => u.IsIgnore);
         return sc != null;
     }
 
     private static bool IsJsonColumn(PropertyInfo pi)
     {
-        var sc = pi.GetCustomAttributes<SugarColumn>(false).FirstOrDefault(u => u.IsJson == true);
+        var sc = pi.GetCustomAttributes<SugarColumn>(false).FirstOrDefault(u => u.IsJson);
         return sc != null;
     }
 }

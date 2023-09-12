@@ -98,7 +98,7 @@ public static class AvatarUtil
     {
         var img = GetNameImage(name, width, height);
         var imgByte = img.ImgToBase64String();
-        return $"data:image/png;base64," + imgByte;
+        return "data:image/png;base64," + imgByte;
     }
 
     /// <summary>
