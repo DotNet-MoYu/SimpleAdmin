@@ -21,17 +21,10 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysLogVisit>> Page(VisitLogPageInput input)
     {
-        var query = Context.Queryable<SysLogVisit>()
-            .WhereIF(!string.IsNullOrEmpty(input.Account),
-                it => it.OpAccount == input.Account)//根据账号查询
-            .WhereIF(!string.IsNullOrEmpty(input.Category),
-                it => it.Category == input.Category)//根据分类查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
-                it => it.Name.Contains(input.SearchKey)
-                    || it.OpIp.Contains(input.SearchKey))//根据关键字查询
-            .SplitTable(tabs => tabs.Take(_maxTabs))
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
-                $"{input.SortField} {input.SortOrder}")//排序
+        var query = Context.Queryable<SysLogVisit>().WhereIF(!string.IsNullOrEmpty(input.Account), it => it.OpAccount == input.Account)//根据账号查询
+            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey) || it.OpIp.Contains(input.SearchKey))//根据关键字查询
+            .SplitTable(tabs => tabs.Take(_maxTabs)).OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.CreateTime, OrderByType.Desc);
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
@@ -41,39 +34,27 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
     public async Task<List<VisitLogDayStatisticsOutput>> StatisticsByDay(int day)
     {
         //取最近七天
-        var dayArray = Enumerable.Range(0, day).Select(it => DateTime.Now.Date.AddDays(it * -1))
-            .ToList();
+        var dayArray = Enumerable.Range(0, day).Select(it => DateTime.Now.Date.AddDays(it * -1)).ToList();
         //生成时间表
         var queryableLeft = Context.Reportable(dayArray).ToQueryable<DateTime>();
         //ReportableDateType.MonthsInLast1yea 表式近一年月份 并且queryable之后还能在where过滤
         var queryableRight = Context.Queryable<SysLogVisit>().SplitTable(tabs => tabs.Take(_maxTabs));//声名表
         //报表查询
-        var list = await Context.Queryable(queryableLeft, queryableRight, JoinType.Left,
-                (x1, x2)
-                    => x2.CreateTime.Value.ToString("yyyy-MM-dd")
-                    == x1.ColumnName.ToString("yyyy-MM-dd"))
-            .GroupBy((x1, x2) => x1.ColumnName)//根据时间分组
+        var list = await Context.Queryable(queryableLeft, queryableRight, JoinType.Left, (x1, x2) => x2.CreateTime.Value.ToString("yyyy-MM-dd") == x1.ColumnName.ToString("yyyy-MM-dd")).GroupBy((x1, x2) => x1.ColumnName)//根据时间分组
             .OrderBy((x1, x2) => x1.ColumnName)//根据时间升序排序
             .Select((x1, x2) => new VisitLogDayStatisticsOutput
-                {
-                    LoginCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGIN, 1,
-                            0)),//null的数据要为0所以不能用count
-                    LogoutCount =
-                        SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGOUT, 1,
-                            0)),//null的数据要为0所以不能用count
-                    Date = x1.ColumnName.ToString("yyyy-MM-dd")
-                }
-                ).ToListAsync();
+            {
+                LoginCount = SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGIN, 1, 0)),//null的数据要为0所以不能用count
+                LogoutCount = SqlFunc.AggregateSum(SqlFunc.IIF(x2.Category == CateGoryConst.LOG_LOGOUT, 1, 0)),//null的数据要为0所以不能用count
+                Date = x1.ColumnName.ToString("yyyy-MM-dd")
+            }).ToListAsync();
         return list;
     }
 
     /// <inheritdoc />
     public async Task<List<VisitLogTotalCountOutput>> TotalCount()
     {
-        var data = await Context.Queryable<SysLogVisit>()
-            .SplitTable(tabs => tabs.Take(_maxTabs))
-            .GroupBy(it => it.Category)//根据分类分组
+        var data = await Context.Queryable<SysLogVisit>().SplitTable(tabs => tabs.Take(_maxTabs)).GroupBy(it => it.Category)//根据分类分组
             .Select(it => new
             {
                 it.Category,//分类
@@ -86,15 +67,13 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
             new VisitLogTotalCountOutput
             {
                 Type = EventSubscriberConst.LOGIN_B,
-                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGIN)
-                    .Select(it => it.Count).FirstOrDefault()
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGIN).Select(it => it.Count).FirstOrDefault()
             },
             //添加登出数据
             new VisitLogTotalCountOutput
             {
                 Type = EventSubscriberConst.LOGIN_OUT_B,
-                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGOUT)
-                    .Select(it => it.Count).FirstOrDefault()
+                Value = data.Where(it => it.Category == CateGoryConst.LOG_LOGOUT).Select(it => it.Count).FirstOrDefault()
             }
         };
         return visitLogTotalCounts;
@@ -103,8 +82,6 @@ public class VisitLogService : DbRepository<SysLogVisit>, IVisitLogService
     /// <inheritdoc />
     public async Task Delete(string category)
     {
-        await Context.Deleteable<SysLogVisit>().Where(it => it.Category == category)
-            .SplitTable(tabs => tabs.Take(_maxTabs))
-            .ExecuteCommandAsync();//删除对应分类日志
+        await Context.Deleteable<SysLogVisit>().Where(it => it.Category == category).SplitTable(tabs => tabs.Take(_maxTabs)).ExecuteCommandAsync();//删除对应分类日志
     }
 }

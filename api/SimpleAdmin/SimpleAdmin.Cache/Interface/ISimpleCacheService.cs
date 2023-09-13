@@ -182,7 +182,8 @@ public partial interface ISimpleCacheService
     /// <param name="msExpire">锁过期时间，超过该时间如果没有主动释放则自动释放锁，必须整数秒，单位毫秒</param>
     /// <param name="throwOnFailure">失败时是否抛出异常，如果不抛出异常，可通过返回null得知申请锁失败</param>
     /// <returns></returns>
-    IDisposable AcquireLock(string key, int msTimeout, int msExpire, bool throwOnFailure);
+    IDisposable AcquireLock(string key, int msTimeout, int msExpire,
+        bool throwOnFailure);
 
     #endregion 事务
 }

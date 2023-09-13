@@ -30,8 +30,7 @@ public class SysMessage : BaseEntity
     /// <summary>
     /// 正文
     ///</summary>
-    [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = StaticConfig.CodeFirst_BigString,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public virtual string Content { get; set; }
 
     /// <summary>

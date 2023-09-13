@@ -140,8 +140,7 @@ public interface IUserService : ITransient
     /// </summary>
     /// <param name="input">数据</param>
     /// <returns>导入结果</returns>
-    Task<ImportResultOutPut<BizUserImportInput>>
-        Import(ImportResultInput<BizUserImportInput> input);
+    Task<ImportResultOutPut<BizUserImportInput>> Import(ImportResultInput<BizUserImportInput> input);
 
     /// <summary>
     /// 批量编辑

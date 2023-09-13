@@ -21,10 +21,7 @@ public class SM4CryptoUtil
     /// <returns></returns>
     private static long GetULongByBe(byte[] b, int i)
     {
-        var n = (long)(b[i] & 0xff) << 24 |
-            (uint)((b[i + 1] & 0xff) << 16) |
-            (uint)((b[i + 2] & 0xff) << 8) |
-            b[i + 3] & 0xff & 0xffffffffL;
+        var n = (long)(b[i] & 0xff) << 24 | (uint)((b[i + 1] & 0xff) << 16) | (uint)((b[i + 2] & 0xff) << 8) | b[i + 3] & 0xff & 0xffffffffL;
         return n;
     }
 

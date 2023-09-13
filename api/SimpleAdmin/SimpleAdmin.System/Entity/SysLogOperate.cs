@@ -18,8 +18,7 @@ public class SysLogOperate : SysLogVisit
     /// <summary>
     /// 具体消息
     ///</summary>
-    [SugarColumn(ColumnName = "ExeMessage", ColumnDescription = "具体消息",
-        ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
+    [SugarColumn(ColumnName = "ExeMessage", ColumnDescription = "具体消息", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ExeMessage { get; set; }
 
     /// <summary>
@@ -37,28 +36,24 @@ public class SysLogOperate : SysLogVisit
     /// <summary>
     /// 请求方式
     ///</summary>
-    [SugarColumn(ColumnName = "ReqMethod", ColumnDescription = "请求方式", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "ReqMethod", ColumnDescription = "请求方式", Length = 200, IsNullable = true)]
     public string ReqMethod { get; set; }
 
     /// <summary>
     /// 请求地址
     ///</summary>
-    [SugarColumn(ColumnName = "ReqUrl", ColumnDescription = "请求地址",
-        ColumnDataType = StaticConfig.CodeFirst_BigString)]
+    [SugarColumn(ColumnName = "ReqUrl", ColumnDescription = "请求地址", ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public string ReqUrl { get; set; }
 
     /// <summary>
     /// 请求参数
     ///</summary>
-    [SugarColumn(ColumnName = "ParamJson", ColumnDescription = "请求参数",
-        ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
+    [SugarColumn(ColumnName = "ParamJson", ColumnDescription = "请求参数", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ParamJson { get; set; }
 
     /// <summary>
     /// 返回结果
     ///</summary>
-    [SugarColumn(ColumnName = "ResultJson", ColumnDescription = "返回结果",
-        ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
+    [SugarColumn(ColumnName = "ResultJson", ColumnDescription = "返回结果", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public string ResultJson { get; set; }
 }

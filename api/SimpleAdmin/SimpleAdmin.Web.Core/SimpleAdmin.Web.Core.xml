@@ -297,7 +297,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginOut(SimpleAdmin.System.LoginOutIput)">
+        <member name="M:SimpleAdmin.Web.Core.AuthBController.LoginOut(SimpleAdmin.System.LoginOutInput)">
             <summary>
             登出
             </summary>
@@ -1335,7 +1335,7 @@
             </summary>
             <param name="input"></param>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDeafultModule(SimpleAdmin.System.SetDeafultModuleInput)">
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDefaultModule(SimpleAdmin.System.SetDefaultModuleInput)">
             <summary>
             修改默认模块
             </summary>
@@ -1581,27 +1581,27 @@
             返回值
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Code">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.ReturnValue.Code">
             <summary>
             返回码
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Msg">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.ReturnValue.Msg">
             <summary>
             消息
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Extras">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.ReturnValue.Extras">
             <summary>
             额外信息
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Data">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.ReturnValue.Data">
             <summary>
             内如
             </summary>
         </member>
-        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.RetrunValue.Time">
+        <member name="P:SimpleAdmin.Web.Core.ReturnInformation.ReturnValue.Time">
             <summary>
             时间
             </summary>

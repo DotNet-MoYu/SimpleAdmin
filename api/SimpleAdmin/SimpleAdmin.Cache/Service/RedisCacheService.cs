@@ -186,7 +186,8 @@ public partial class RedisCacheService : ISimpleCacheService
     }
 
     /// <inheritdoc/>
-    public IDisposable AcquireLock(string key, int msTimeout, int msExpire, bool throwOnFailure)
+    public IDisposable AcquireLock(string key, int msTimeout, int msExpire,
+        bool throwOnFailure)
     {
         return _simpleRedis.GetFullRedis().AcquireLock(key, msTimeout, msExpire, throwOnFailure);
     }

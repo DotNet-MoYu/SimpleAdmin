@@ -20,8 +20,7 @@ public class RoleController : BaseController
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public RoleController(IRoleService roleService, IResourceService resourceService,
-        ISysOrgService sysOrgService,
+    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService,
         ISysUserService sysUserService)
     {
         _roleService = roleService;

@@ -40,8 +40,7 @@ public static class CodeFirstUtils
     private static void InitTable(string assemblyName)
     {
         // 获取所有实体表-初始化表结构
-        var entityTypes = App.EffectiveTypes.Where(u =>
-            !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) && u.Assembly.FullName == assemblyName);
+        var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false) && u.Assembly.FullName == assemblyName);
         if (!entityTypes.Any()) return;//没有就退出
         foreach (var entityType in entityTypes)
         {

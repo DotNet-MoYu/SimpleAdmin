@@ -20,8 +20,7 @@ public class UserController : BaseController
     private readonly ISysPositionService _sysPositionService;
     private readonly IRoleService _roleService;
 
-    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService,
-        ISysPositionService sysPositionService,
+    public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService,
         IRoleService roleService)
     {
         _sysUserService = sysUserService;
@@ -295,8 +294,7 @@ public class UserController : BaseController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("用户导入")]
-    public async Task<dynamic> Import(
-        [SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<SysUserImportInput> input)
     {
         return await _sysUserService.Import(input);
     }

@@ -16,9 +16,7 @@ public class AuthService : IAuthService
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
 
-    public AuthService(ISimpleCacheService simpleCacheService,
-        IEventPublisher eventPublisher,
-        IConfigService configService,
+    public AuthService(ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher, IConfigService configService,
         ISysUserService userService)
     {
         _simpleCacheService = simpleCacheService;
@@ -30,12 +28,10 @@ public class AuthService : IAuthService
     /// <inheritdoc/>
     public async Task<PicValidCodeOutPut> GetCaptchaInfo()
     {
-        var config = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY,
-            SysConfigConst.LOGIN_CAPTCHA_TYPE);
+        var config = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY, SysConfigConst.LOGIN_CAPTCHA_TYPE);
         var captchaType = (CaptchaType)Enum.Parse(typeof(CaptchaType), config.ConfigValue);
         //生成验证码
-        var captchaInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100,
-            38);
+        var captchaInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100, 38);
         //生成请求号，并将验证码放入redis
         var reqNo = AddValidCodeToRedis(captchaInfo.Code);
         //返回验证码和请求号
@@ -47,8 +43,7 @@ public class AuthService : IAuthService
     }
 
     /// <inheritdoc/>
-    public async Task<string> GetPhoneValidCode(GetPhoneValidCodeInput input,
-        LoginClientTypeEnum loginClientType)
+    public async Task<string> GetPhoneValidCode(GetPhoneValidCodeInput input, LoginClientTypeEnum loginClientType)
     {
         await ValidPhoneValidCode(input, loginClientType);//校验手机号验证码
         var phoneValidCode = RandomHelper.CreateNum(6);//生产随机数字;
@@ -72,15 +67,13 @@ public class AuthService : IAuthService
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
     {
         //判断是否有验证码
-        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE,
-            SysConfigConst.LOGIN_CAPTCHA_OPEN);
+        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE, SysConfigConst.LOGIN_CAPTCHA_OPEN);
         if (sysBase != null)//如果有这个配置项
         {
             if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
             {
                 //如果没填验证码，提示验证码不能为空
-                if (string.IsNullOrEmpty(input.ValidCode)
-                    || string.IsNullOrEmpty(input.ValidCodeReqNo))
+                if (string.IsNullOrEmpty(input.ValidCode) || string.IsNullOrEmpty(input.ValidCodeReqNo))
                     throw Oops.Bah("验证码不能为空").StatusCode(410);
                 ValidValidCode(input.ValidCode, input.ValidCodeReqNo);//校验验证码
             }
@@ -106,11 +99,9 @@ public class AuthService : IAuthService
     }
 
     /// <inheritdoc/>
-    public async Task<LoginOutPut> LoginByPhone(LoginByPhoneInput input,
-        LoginClientTypeEnum loginClientType)
+    public async Task<LoginOutPut> LoginByPhone(LoginByPhoneInput input, LoginClientTypeEnum loginClientType)
     {
-        await ValidPhoneValidCode(input, loginClientType,
-            false);//校验手机号和验证码，这里不删除Redis，防止输入错误又要重新输入验证码
+        await ValidPhoneValidCode(input, loginClientType, false);//校验手机号和验证码，这里不删除Redis，防止输入错误又要重新输入验证码
         // 根据手机号获取用户信息，根据B端或C端判断
         if (loginClientType == LoginClientTypeEnum.B)//如果是B端
         {
@@ -180,8 +171,7 @@ public class AuthService : IAuthService
     /// <param name="userName"></param>
     public void LoginError(List<SysConfig> loginPolicy, string userName)
     {
-        var resetTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_RESET_TIME)
-            .ConfigValue.ToInt();//获取重置时间
+        var resetTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_RESET_TIME).ConfigValue.ToInt();//获取重置时间
         var key = SystemConst.CACHE_LOGIN_ERROR_COUNT + userName;//获取登录错误次数Key值
         _simpleCacheService.Increment(key, 1);// 登录错误次数+1
         _simpleCacheService.SetExpire(key, TimeSpan.FromMinutes(resetTime));//设置过期时间
@@ -226,8 +216,7 @@ public class AuthService : IAuthService
     /// <param name="loginClientType">登录端类型</param>
     /// <param name="isDelete">是否删除</param>
     /// <returns></returns>
-    public async Task ValidPhoneValidCode(GetPhoneValidCodeInput input,
-        LoginClientTypeEnum loginClientType, bool isDelete = true)
+    public async Task ValidPhoneValidCode(GetPhoneValidCodeInput input, LoginClientTypeEnum loginClientType, bool isDelete = true)
     {
         ValidValidCode(input.ValidCode, input.ValidCodeReqNo, isDelete);//校验验证码
         if (loginClientType == LoginClientTypeEnum.B)//B端登录
@@ -256,8 +245,7 @@ public class AuthService : IAuthService
         //生成请求号
         var reqNo = CommonUtils.GetSingleId().ToString();
         //插入redis
-        _simpleCacheService.Set(SystemConst.CACHE_CAPTCHA + reqNo, code,
-            TimeSpan.FromMinutes(expire));
+        _simpleCacheService.Set(SystemConst.CACHE_CAPTCHA + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
     }
 
@@ -268,8 +256,7 @@ public class AuthService : IAuthService
     /// <param name="device">登录设备</param>
     /// <param name="loginClientType">登录类型</param>
     /// <returns></returns>
-    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device,
-        LoginClientTypeEnum loginClientType)
+    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device, LoginClientTypeEnum loginClientType)
     {
         if (sysUser.UserStatus == SysDictConst.COMMON_STATUS_DISABLED)
             throw Oops.Bah("账号已停用");//账号冻结
@@ -345,19 +332,14 @@ public class AuthService : IAuthService
         if (tokenInfos != null)
         {
             var isSingle = false;//默认不开启单用户登录
-            var singleConfig =
-                await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY,
-                    SysConfigConst.LOGIN_SINGLE_OPEN);//获取系统单用户登录选项
+            var singleConfig = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY, SysConfigConst.LOGIN_SINGLE_OPEN);//获取系统单用户登录选项
             if (singleConfig != null)
                 isSingle = singleConfig.ConfigValue.ToBoolean();//如果配置不为空则设置单用户登录选项为系统配置的值
             //判断是否单用户登录
             if (isSingle)
             {
-                await SingleLogin(loginEvent.SysUser.Id.ToString(),
-                    tokenInfos.Where(it => it.LoginClientType == loginClientType)
-                        .ToList());//单用户登录方法
-                tokenInfos = tokenInfos.Where(it => it.LoginClientType != loginClientType)
-                    .ToList();//去掉当前登录类型的token
+                await SingleLogin(loginEvent.SysUser.Id.ToString(), tokenInfos.Where(it => it.LoginClientType == loginClientType).ToList());//单用户登录方法
+                tokenInfos = tokenInfos.Where(it => it.LoginClientType != loginClientType).ToList();//去掉当前登录类型的token
                 tokenInfos.Add(tokenInfo);//添加到列表
             }
             else
@@ -374,8 +356,7 @@ public class AuthService : IAuthService
         }
 
         //添加到token列表
-        _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, loginEvent.SysUser.Id.ToString(),
-            tokenInfos);
+        _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, loginEvent.SysUser.Id.ToString(), tokenInfos);
     }
 
     /// <summary>
@@ -390,16 +371,13 @@ public class AuthService : IAuthService
         if (tokenInfos != null)
         {
             //获取当前用户的token
-            var token = tokenInfos
-                .Where(it => it.Token == loginEvent.Token && it.LoginClientType == loginClientType)
-                .FirstOrDefault();
+            var token = tokenInfos.Where(it => it.Token == loginEvent.Token && it.LoginClientType == loginClientType).FirstOrDefault();
             if (token != null)
                 tokenInfos.Remove(token);
             if (tokenInfos.Count > 0)
             {
                 //更新token列表
-                _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN,
-                    loginEvent.SysUser.Id.ToString(), tokenInfos);
+                _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, loginEvent.SysUser.Id.ToString(), tokenInfos);
             }
             else
             {
@@ -417,9 +395,7 @@ public class AuthService : IAuthService
     private List<TokenInfo> GetTokenInfos(long userId)
     {
         //redis获取用户token列表
-        var tokenInfos =
-            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN,
-                userId.ToString());
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId.ToString());
         if (tokenInfos != null)
         {
             tokenInfos = tokenInfos.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的

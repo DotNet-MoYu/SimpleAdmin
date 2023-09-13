@@ -30,25 +30,19 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 别名
     ///</summary>
-    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200
-        ,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Name", ColumnDescription = "别名", Length = 200, IsNullable = true)]
     public string Name { get; set; }
 
     /// <summary>
     /// 描述
     ///</summary>
-    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200
-        ,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Description", ColumnDescription = "描述", Length = 200, IsNullable = true)]
     public string Description { get; set; }
 
     /// <summary>
     /// 编码
     ///</summary>
-    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200
-        ,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Code", ColumnDescription = "编码", Length = 200, IsNullable = true)]
     public virtual string Code { get; set; }
 
     /// <summary>
@@ -66,8 +60,7 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 菜单类型
     ///</summary>
-    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "MenuType", ColumnDescription = "菜单类型", Length = 200, IsNullable = true)]
     public virtual string MenuType { get; set; }
 
     /// <summary>
@@ -79,43 +72,37 @@ public class SysResource : BaseEntity
     /// <summary>
     /// 组件
     ///</summary>
-    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Component", ColumnDescription = "组件", Length = 200, IsNullable = true)]
     public string Component { get; set; }
 
     /// <summary>
     /// 图标
     ///</summary>
-    [SugarColumn(ColumnName = "Icon", ColumnDescription = "图标", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Icon", ColumnDescription = "图标", Length = 200, IsNullable = true)]
     public virtual string Icon { get; set; }
 
     /// <summary>
     /// 是否在菜单中隐藏, 需要高亮的 path (通常用作详情页高亮父级菜单)
     ///</summary>
-    [SugarColumn(ColumnName = "ActiveMenu", ColumnDescription = "需要高亮的 path (通常用作详情页高亮父级菜单)",
-        Length = 200, IsNullable = true)]
+    [SugarColumn(ColumnName = "ActiveMenu", ColumnDescription = "需要高亮的 path (通常用作详情页高亮父级菜单)", Length = 200, IsNullable = true)]
     public string ActiveMenu { get; set; }
 
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
-    [SugarColumn(ColumnName = "IsHide", ColumnDescription = "是否在菜单中隐藏 (通常列表详情页需要隐藏) ",
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "IsHide", ColumnDescription = "是否在菜单中隐藏 (通常列表详情页需要隐藏) ", IsNullable = true)]
     public bool IsHide { get; set; }
 
     /// <summary>
     /// 是否在菜单中隐藏 (通常列表详情页需要隐藏)
     ///</summary>
-    [SugarColumn(ColumnName = "IsFull", ColumnDescription = "菜单是否全屏 (示例：数据大屏页面)",
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "IsFull", ColumnDescription = "菜单是否全屏 (示例：数据大屏页面)", IsNullable = true)]
     public bool IsFull { get; set; }
 
     /// <summary>
     /// 菜单是否固定在标签页中 (首页通常是固定项)
     ///</summary>
-    [SugarColumn(ColumnName = "IsAffix", ColumnDescription = "菜单是否固定在标签页中 (首页通常是固定项)",
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "IsAffix", ColumnDescription = "菜单是否固定在标签页中 (首页通常是固定项)", IsNullable = true)]
     public bool IsAffix { get; set; }
 
     /// <summary>

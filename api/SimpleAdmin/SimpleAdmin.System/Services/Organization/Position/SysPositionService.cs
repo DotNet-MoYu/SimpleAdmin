@@ -29,8 +29,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public override async Task<List<SysPosition>> GetListAsync()
     {
         //先从Redis拿
-        var sysPositions =
-            _simpleCacheService.Get<List<SysPosition>>(SystemConst.CACHE_SYS_POSITION);
+        var sysPositions = _simpleCacheService.Get<List<SysPosition>>(SystemConst.CACHE_SYS_POSITION);
         if (sysPositions == null)
         {
             //redis没有就去数据库拿
@@ -48,8 +47,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public async Task<List<SysPosition>> GetPositionListByIdList(IdListInput input)
     {
         var positions = await GetListAsync();
-        var positionList =
-            positions.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
+        var positionList = positions.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
         return positionList;
     }
 
@@ -60,8 +58,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         var positions = await GetListAsync();
         var result = positions.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//父级
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
-                it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .ToList().LinqPagedList(input.PageNum, input.PageSize);
         return result;
     }
@@ -78,16 +75,11 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     public async Task<SqlSugarPagedList<SysPosition>> Page(PositionPageInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
-        var query = Context.Queryable<SysPosition>()
-            .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//根据组织ID查询
+        var query = Context.Queryable<SysPosition>().WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//根据组织ID查询
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-            .WhereIF(!string.IsNullOrEmpty(input.Category),
-                it => it.Category == input.Category)//根据分类
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
-                it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
-                $"{input.SortField} {input.SortOrder}")
-            .OrderBy(it => it.SortCode);//排序
+            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
@@ -124,9 +116,7 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
             //获取用户表有兼任组织的信息 oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
-            var positionJsons = await Context.Queryable<SysUser>()
-                .Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson)
-                .ToListAsync();
+            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
             if (positionJsons.Count > 0)
             {
                 positionJsons.ForEach(it =>
@@ -171,21 +161,16 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         if (!posCategoryList.Contains(sysPosition.Category))
             throw Oops.Bah($"{name}所属分类错误:{sysPosition.Category}");
         var sysPositions = await GetListAsync();//获取全部
-        if (sysPositions.Any(it =>
-                it.OrgId == sysPosition.OrgId && it.Name == sysPosition.Name
-                && it.Id != sysPosition.Id))//判断同级是否有名称重复的
+        if (sysPositions.Any(it => it.OrgId == sysPosition.OrgId && it.Name == sysPosition.Name && it.Id != sysPosition.Id))//判断同级是否有名称重复的
             throw Oops.Bah($"存在重复的{name}:{sysPosition.Name}");
         if (sysPosition.Id > 0)//如果ID大于0表示编辑
         {
-            var position =
-                sysPositions.Where(it => it.Id == sysPosition.Id).FirstOrDefault();//获取当前职位
+            var position = sysPositions.Where(it => it.Id == sysPosition.Id).FirstOrDefault();//获取当前职位
             if (position != null)
             {
                 if (position.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
                 {
-                    if (await Context.Queryable<SysUser>().Where(it =>
-                            it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson,
-                                sysPosition.Id.ToString())).AnyAsync())//如果职位下有用户
+                    if (await Context.Queryable<SysUser>().Where(it => it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson, sysPosition.Id.ToString())).AnyAsync())//如果职位下有用户
                         throw Oops.Bah($"该{name}下已存在用户,请先删除{name}下的用户");
                 }
             }

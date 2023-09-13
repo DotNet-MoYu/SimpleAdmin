@@ -220,8 +220,7 @@ public partial class MemoryCacheService : ISimpleCacheService
     public IDisposable AcquireLock(string key, int msTimeout, int msExpire,
         bool throwOnFailure)
     {
-        return _memoryCache.AcquireLock(key, msTimeout, msExpire,
-            throwOnFailure);
+        return _memoryCache.AcquireLock(key, msTimeout, msExpire, throwOnFailure);
     }
 
     #endregion 事务

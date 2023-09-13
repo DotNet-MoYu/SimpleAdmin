@@ -36,8 +36,7 @@ public class SysConfig : BaseEntity
     /// <summary>
     /// 备注
     ///</summary>
-    [SugarColumn(ColumnName = "Remark", ColumnDescription = "备注", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Remark", ColumnDescription = "备注", Length = 200, IsNullable = true)]
     public string Remark { get; set; }
 
     /// <summary>

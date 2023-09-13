@@ -67,8 +67,7 @@ public interface IBatchEditService : ITransient
     /// <param name="code">唯一编码</param>
     /// <param name="columns">字段信息</param>
     /// <returns>SqlSugar对应字典</returns>
-    Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code,
-        List<BatchEditColumn> columns);
+    Task<Dictionary<string, object>> GetUpdateBatchConfigDict(string code, List<BatchEditColumn> columns);
 
     /// <summary>
     /// 同步字段

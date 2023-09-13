@@ -23,8 +23,7 @@ public static class SqlSugarUtils
         var tables = new List<SqlSugarTableInfo>();//结果集
 
         // 获取实体表
-        var entityTypes = App.EffectiveTypes
-            .Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))//有SugarTable特性
+        var entityTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(SugarTable), false))//有SugarTable特性
             .Where(u => u.IsDefined(typeof(T), false));//具有指定特性
 
         foreach (var entityType in entityTypes)

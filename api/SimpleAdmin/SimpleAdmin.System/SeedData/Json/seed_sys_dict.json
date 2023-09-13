@@ -11,8 +11,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003702",
@@ -25,8 +28,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003703",
@@ -39,8 +45,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003704",
@@ -53,8 +62,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003705",
@@ -67,8 +79,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003706",
@@ -81,22 +96,28 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003707",
       "ParentId": "252875263003704",
-      "DictLabel": "内链",
-      "DictValue": "IFRAME",
+      "DictLabel": "子页",
+      "DictValue": "SUBSET",
       "Category": "FRM",
       "SortCode": "30",
       "CreateTime": "",
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003708",
@@ -109,8 +130,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003711",
@@ -123,8 +147,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003712",
@@ -137,8 +164,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003713",
@@ -151,8 +181,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003714",
@@ -165,8 +198,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003715",
@@ -179,8 +215,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003716",
@@ -193,8 +232,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003717",
@@ -207,8 +249,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003718",
@@ -221,8 +266,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003719",
@@ -235,8 +283,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003720",
@@ -249,8 +300,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003721",
@@ -263,8 +317,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003722",
@@ -277,8 +334,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003723",
@@ -291,8 +351,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003724",
@@ -305,8 +368,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003725",
@@ -319,8 +385,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003726",
@@ -333,8 +402,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003727",
@@ -347,8 +419,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003728",
@@ -361,8 +436,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003730",
@@ -375,8 +453,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003731",
@@ -389,8 +470,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003732",
@@ -403,8 +487,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003733",
@@ -417,8 +504,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003734",
@@ -431,36 +521,45 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003735",
       "ParentId": "252875263003734",
-      "DictLabel": "部门",
+      "DictLabel": "系统",
       "DictValue": "FRM",
       "Category": "FRM",
       "SortCode": "10",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2023-9-4 20:21:35.61",
       "CreateUserId": "",
-      "UpdateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003736",
       "ParentId": "252875263003734",
-      "DictLabel": "公司",
+      "DictLabel": "业务",
       "DictValue": "BIZ",
       "Category": "FRM",
       "SortCode": "20",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2023-9-4 20:21:44.59",
       "CreateUserId": "",
-      "UpdateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003737",
@@ -473,8 +572,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003738",
@@ -487,8 +589,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003739",
@@ -501,8 +606,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003741",
@@ -515,8 +623,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003742",
@@ -529,8 +640,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003743",
@@ -543,8 +657,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003744",
@@ -557,8 +674,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003745",
@@ -571,8 +691,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003746",
@@ -585,8 +708,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003747",
@@ -599,8 +725,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003748",
@@ -613,8 +742,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003749",
@@ -627,8 +759,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003750",
@@ -641,8 +776,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003751",
@@ -655,8 +793,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003752",
@@ -669,8 +810,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003753",
@@ -683,8 +827,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003754",
@@ -697,8 +844,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003755",
@@ -711,8 +861,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003756",
@@ -725,8 +878,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003757",
@@ -739,8 +895,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003758",
@@ -753,8 +912,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003759",
@@ -767,8 +929,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003760",
@@ -781,50 +946,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "252875263003761",
-      "ParentId": "0",
-      "DictLabel": "定时任务状态",
-      "DictValue": "JOB_STATUS",
-      "Category": "FRM",
-      "SortCode": "15",
-      "CreateTime": "",
-      "UpdateTime": "",
-      "CreateUserId": "",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "252875263003762",
-      "ParentId": "252875263003761",
-      "DictLabel": "运行",
-      "DictValue": "RUNNING",
-      "Category": "FRM",
-      "SortCode": "10",
-      "CreateTime": "",
-      "UpdateTime": "",
-      "CreateUserId": "",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
-    },
-    {
-      "Id": "252875263003763",
-      "ParentId": "252875263003761",
-      "DictLabel": "停止",
-      "DictValue": "STOPPED",
-      "Category": "FRM",
-      "SortCode": "20",
-      "CreateTime": "",
-      "UpdateTime": "",
-      "CreateUserId": "",
-      "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003764",
@@ -837,8 +963,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003765",
@@ -851,8 +980,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252875263003766",
@@ -865,8 +997,11 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "367777942233157",
@@ -879,8 +1014,11 @@
       "UpdateTime": "",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "367778072543301",
@@ -893,8 +1031,11 @@
       "UpdateTime": "",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "367778141515845",
@@ -907,8 +1048,11 @@
       "UpdateTime": "",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
+      "CreateUser": "",
+      "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "382969159073861",
@@ -921,10 +1065,11 @@
       "UpdateTime": "",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
       "IsDelete": "0",
       "ExtJson": "",
-      "CreateUser": "superAdmin",
-      "UpdateUser": ""
+      "Status": "ENABLE"
     },
     {
       "Id": "382969320693829",
@@ -937,10 +1082,11 @@
       "UpdateTime": "2023-2-6 14:06:40.78",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
       "IsDelete": "0",
       "ExtJson": "",
-      "CreateUser": "superAdmin",
-      "UpdateUser": ""
+      "Status": "ENABLE"
     },
     {
       "Id": "382969486618693",
@@ -953,10 +1099,11 @@
       "UpdateTime": "",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
       "IsDelete": "0",
       "ExtJson": "",
-      "CreateUser": "superAdmin",
-      "UpdateUser": ""
+      "Status": "ENABLE"
     }
   ]
 }

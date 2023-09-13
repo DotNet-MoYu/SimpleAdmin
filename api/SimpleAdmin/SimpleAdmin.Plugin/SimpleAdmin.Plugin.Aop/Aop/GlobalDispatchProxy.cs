@@ -115,8 +115,7 @@ public class GlobalDispatchProxy : AspectDispatchProxy, IDispatchProxy
         if (cacheAttribute != null)
         {
             var redisManager = Services.GetService<ISimpleCacheService>();// 获取redis服务
-            var cacheKey = cacheAttribute.CustomKeyValue
-                ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
+            var cacheKey = cacheAttribute.CustomKeyValue ?? CustomCacheKey(cacheAttribute.KeyPrefix, method, args);//如果redisKey值，如果有自定义值就用自定义Key，否则以前缀+系统自动生成的Key
             string cacheValue;
             if (cacheAttribute.StoreType == CacheConst.CACHE_HASH)//如果存的是Hash值
             {
@@ -291,8 +290,7 @@ internal static class GetCacheKey
                 var value = (binary.Right as ConstantExpression).Value;
                 return ResolveLinqToObject(binary.Left, value, binary.NodeType);
             }
-            if (binary.Left is MemberExpression && binary.Right is MemberExpression
-                || binary.Left is MemberExpression && binary.Right is UnaryExpression)//解析x=>x.Date==DateTime.Now这种
+            if (binary.Left is MemberExpression && binary.Right is MemberExpression || binary.Left is MemberExpression && binary.Right is UnaryExpression)//解析x=>x.Date==DateTime.Now这种
             {
                 var lambda = Expression.Lambda(binary.Right);
                 var fn = lambda.Compile();
@@ -328,8 +326,7 @@ internal static class GetCacheKey
         var @operator = GetOperator(body.NodeType);
         var left = Resolve(body.Left);
         var right = Resolve(body.Right);
-        var result = string.Format("({0} {1} {2})", left, @operator,
-            right);
+        var result = string.Format("({0} {1} {2})", left, @operator, right);
         return result;
     }
 
@@ -394,8 +391,7 @@ internal static class GetCacheKey
         var name = argument2.Member.Name;
         var @operator = Convert.ToBoolean(isTrue) ? "in" : " not in";
         var compName = string.Join(",", setInPara);
-        var result = string.Format("{0} {1} ({2})", name, @operator,
-            compName);
+        var result = string.Format("{0} {1} ({2})", name, @operator, compName);
         return result;
     }
 
@@ -415,8 +411,7 @@ internal static class GetCacheKey
     {
         object name = (expression.Arguments[0] as MemberExpression).Member.Name;
         var @operator = GetOperator(expressiontype);
-        var result = string.Format("len({0}){1}{2}", name, @operator,
-            value);
+        var result = string.Format("len({0}){1}{2}", name, @operator, value);
         return result;
     }
 }

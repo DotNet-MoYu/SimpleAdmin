@@ -34,22 +34,16 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var userIds = bTokenInfoDic.Keys.Select(it => it.ToLong()).ToList();
         var query = Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id))//根据ID查询
             .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据姓名查询
-            .WhereIF(!string.IsNullOrEmpty(input.Account),
-                it => it.Account.Contains(input.Account))//根据账号查询
-            .WhereIF(!string.IsNullOrEmpty(input.LatestLoginIp),
-                it => it.LatestLoginIp.Contains(input.LatestLoginIp))//根据IP查询
-            .OrderBy(it => it.LatestLoginTime, OrderByType.Desc)
-            .Select<SessionOutput>()
-            .Mapper(it =>
+            .WhereIF(!string.IsNullOrEmpty(input.Account), it => it.Account.Contains(input.Account))//根据账号查询
+            .WhereIF(!string.IsNullOrEmpty(input.LatestLoginIp), it => it.LatestLoginIp.Contains(input.LatestLoginIp))//根据IP查询
+            .OrderBy(it => it.LatestLoginTime, OrderByType.Desc).Select<SessionOutput>().Mapper(it =>
             {
                 var tokenInfos = bTokenInfoDic[it.Id.ToString()];//获取用户token信息
                 GetTokenInfos(ref tokenInfos, LoginClientTypeEnum.B);//获取剩余时间
                 it.TokenCount = tokenInfos.Count;//令牌数量
                 it.TokenSignList = tokenInfos;//令牌列表
                 //如果有mqtt客户端ID就是在线
-                it.OnlineStatus = tokenInfos.Any(it => it.ClientIds.Count > 0)
-                    ? SysDictConst.ONLINE_STATUS_ONLINE
-                    : SysDictConst.ONLINE_STATUS_OFFLINE;
+                it.OnlineStatus = tokenInfos.Any(it => it.ClientIds.Count > 0) ? SysDictConst.ONLINE_STATUS_ONLINE : SysDictConst.ONLINE_STATUS_OFFLINE;
             });
 
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
@@ -60,8 +54,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SessionOutput>> PageC(SessionPageInput input)
     {
-        return new SqlSugarPagedList<SessionOutput>
-            { PageNum = 1, PageSize = 20, Total = 0, Pages = 1, HasNextPages = false };
+        return new SqlSugarPagedList<SessionOutput> { PageNum = 1, PageSize = 20, Total = 0, Pages = 1, HasNextPages = false };
     }
 
     /// <inheritdoc/>
@@ -74,10 +67,8 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         var onLineCount = 0;
         foreach (var token in tokenDic)
         {
-            var b = token.Value.Where(it => it.LoginClientType == LoginClientTypeEnum.B)
-                .ToList();//获取该用户B端token
-            var c = token.Value.Where(it => it.LoginClientType == LoginClientTypeEnum.C)
-                .ToList();//获取该用户C端token
+            var b = token.Value.Where(it => it.LoginClientType == LoginClientTypeEnum.B).ToList();//获取该用户B端token
+            var c = token.Value.Where(it => it.LoginClientType == LoginClientTypeEnum.C).ToList();//获取该用户C端token
             if (b.Count > 0)
                 dicB.Add(token.Key, b);
             if (c.Count > 0)
@@ -107,8 +98,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
         var userId = input.Id.ToString();
         //token列表
-        var tokenInfos =
-            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         //从列表中删除
         _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         await NoticeUserLoginOut(userId, tokenInfos);
@@ -119,15 +109,13 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
         var userId = input.Id.ToString();
         //获取该用户的token信息
-        var tokenInfos =
-            _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
+        var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);
         //当前需要踢掉用户的token
         var deleteTokens = tokenInfos.Where(it => input.Tokens.Contains(it.Token)).ToList();
         //踢掉包含token列表的token信息
         tokenInfos = tokenInfos.Where(it => !input.Tokens.Contains(it.Token)).ToList();
         if (tokenInfos.Count > 0)
-            _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId,
-                tokenInfos);//如果还有token则更新token
+            _simpleCacheService.HashAdd(CacheConst.CACHE_USER_TOKEN, userId, tokenInfos);//如果还有token则更新token
         else
             _simpleCacheService.HashDel<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);//否则直接删除key
         await NoticeUserLoginOut(userId, deleteTokens);
@@ -143,15 +131,12 @@ public class SessionService : DbRepository<SysUser>, ISessionService
     {
         var clockSkew = App.GetConfig<int>("JWTSettings:ClockSkew");//获取过期时间容错值(秒)
         //redis获取token信息hash集合,并转成字典
-        var bTokenDic = _simpleCacheService.HashGetAll<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN)
-            .ToDictionary(u => u.Key, u => u.Value);
+        var bTokenDic = _simpleCacheService.HashGetAll<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN).ToDictionary(u => u.Key, u => u.Value);
         if (bTokenDic != null)
         {
             bTokenDic.ForEach(it =>
             {
-                var tokens = it.Value
-                    .Where(it => it.TokenTimeout.AddSeconds(clockSkew) > DateTime.Now)
-                    .ToList();//去掉登录超时的
+                var tokens = it.Value.Where(it => it.TokenTimeout.AddSeconds(clockSkew) > DateTime.Now).ToList();//去掉登录超时的
                 if (tokens.Count == 0)
                 {
                     //表示都过期了
@@ -164,8 +149,7 @@ public class SessionService : DbRepository<SysUser>, ISessionService
             });
             if (bTokenDic.Count > 0)
             {
-                _simpleCacheService.HashSet(CacheConst.CACHE_USER_TOKEN,
-                    bTokenDic);//如果还有token则更新token
+                _simpleCacheService.HashSet(CacheConst.CACHE_USER_TOKEN, bTokenDic);//如果还有token则更新token
             }
             else
             {
@@ -188,11 +172,9 @@ public class SessionService : DbRepository<SysUser>, ISessionService
         {
             var now = DateTime.Now;
             it.TokenRemain = now.GetDiffTime(it.TokenTimeout);//获取时间差
-            var tokenSecond =
-                it.TokenTimeout.AddMinutes(-it.Expire).ConvertDateTimeToLong();//颁发时间转为时间戳
+            var tokenSecond = it.TokenTimeout.AddMinutes(-it.Expire).ConvertDateTimeToLong();//颁发时间转为时间戳
             var timeoutSecond = it.TokenTimeout.ConvertDateTimeToLong();//过期时间转为时间戳
-            var tokenRemainPercent = 1 - (now.ConvertDateTimeToLong() - tokenSecond) * 1.0
-                / (timeoutSecond - tokenSecond);//求百分比,用现在时间-token颁布时间除以超时时间-token颁布时间
+            var tokenRemainPercent = 1 - (now.ConvertDateTimeToLong() - tokenSecond) * 1.0 / (timeoutSecond - tokenSecond);//求百分比,用现在时间-token颁布时间除以超时时间-token颁布时间
             it.TokenRemainPercent = tokenRemainPercent;
         });
     }

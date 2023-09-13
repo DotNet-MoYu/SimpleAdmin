@@ -117,8 +117,8 @@ public static class ImageUtil
         var g = Graphics.FromImage(b);
         g.InterpolationMode = InterpolationMode.HighQualityBicubic;
         //绘制图像
-        g.DrawImage(imgToResize, 0, 0,
-            destWidth, destHeight);
+        g.DrawImage(imgToResize, 0, 0, destWidth,
+            destHeight);
         g.Dispose();
         return b;
     }
@@ -138,9 +138,7 @@ public static class ImageUtil
             var g = Graphics.FromImage(b);
             // 插值算法的质量
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(bmp, new Rectangle(0, 0, newW,
-                newH), new Rectangle(0, 0, bmp.Width,
-                bmp.Height), GraphicsUnit.Pixel);
+            g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
             g.Dispose();
             return b;
         }
@@ -187,8 +185,7 @@ public static class ImageUtil
     {
         try
         {
-            var thumbnail = bmp.GetThumbnailImage(w, h, () => false,
-                IntPtr.Zero);
+            var thumbnail = bmp.GetThumbnailImage(w, h, () => false, IntPtr.Zero);
             return thumbnail;
         }
         catch (Exception ex)

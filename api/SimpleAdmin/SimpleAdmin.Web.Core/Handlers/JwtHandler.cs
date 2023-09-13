@@ -25,8 +25,7 @@ public class JwtHandler : AppAuthorizeHandler
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
         var currentHttpContext = context.GetCurrentHttpContext();
         //自动刷新Token
-        if (JWTEncryption.AutoRefreshToken(context, currentHttpContext, expire,
-                expire * 2))
+        if (JWTEncryption.AutoRefreshToken(context, currentHttpContext, expire, expire * 2))
         {
             //判断token是否有效
             if (CheckTokenFromRedis(currentHttpContext, expire))
@@ -58,8 +57,7 @@ public class JwtHandler : AppAuthorizeHandler
         var token = JWTEncryption.GetJwtBearerToken(context);//获取当前token
         var userId = App.User?.FindFirstValue(ClaimConst.USER_ID);//获取用户ID
         var simpleCacheService = App.GetService<ISimpleCacheService>();//获取redis实例
-        var tokenInfos =
-            simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);//获取token信息
+        var tokenInfos = simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId);//获取token信息
         if (tokenInfos == null)//如果还是空
         {
             return false;

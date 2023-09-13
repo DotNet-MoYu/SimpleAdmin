@@ -27,5 +27,7 @@ public class CaptchaInfo
     /// base64
     /// </summary>
     public string Base64Str
-    { get { return "data:image/png;base64," + Convert.ToBase64String(Image); } }
+    {
+        get { return "data:image/png;base64," + Convert.ToBase64String(Image); }
+    }
 }

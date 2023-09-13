@@ -54,8 +54,7 @@ public class MinioUtils : ITransient
                 _defaultPrefix = $"{point[0]}//";
                 _defaultEndPoint = point[1];
             }
-            MinioClient = new MinioClient().WithEndpoint(_defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue)
-                .Build();//初始化minio对象
+            MinioClient = new MinioClient().WithEndpoint(_defaultEndPoint).WithCredentials(accessKey.ConfigValue, secretKey.ConfigValue).Build();//初始化minio对象
             MinioClient.WithTimeout(5000);//超时时间
         }
         catch (Exception ex)
@@ -76,8 +75,7 @@ public class MinioUtils : ITransient
         try
         {
             using var fileStream = file.OpenReadStream();//获取文件流
-            var putObjectArgs = new PutObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithStreamData(fileStream)
-                .WithObjectSize(file.Length).WithContentType(contentType);
+            var putObjectArgs = new PutObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithStreamData(fileStream).WithObjectSize(file.Length).WithContentType(contentType);
             await MinioClient.PutObjectAsync(putObjectArgs);
             return $"{_defaultPrefix}{_defaultEndPoint}/{_defaultBucketName}/{objectName}";//默认http
         }
@@ -101,12 +99,10 @@ public class MinioUtils : ITransient
         var stream = new MemoryStream();
         try
         {
-            var getObjectArgs = new GetObjectArgs().WithBucket(_defaultBucketName)
-                .WithObject(objectName)
-                .WithCallbackStream(cb =>
-                {
-                    cb.CopyTo(stream);
-                });
+            var getObjectArgs = new GetObjectArgs().WithBucket(_defaultBucketName).WithObject(objectName).WithCallbackStream(cb =>
+            {
+                cb.CopyTo(stream);
+            });
             await MinioClient.GetObjectAsync(getObjectArgs);
 
             //System.InvalidOperationException: Response Content-Length mismatch: too few bytes written (0 of 30788)

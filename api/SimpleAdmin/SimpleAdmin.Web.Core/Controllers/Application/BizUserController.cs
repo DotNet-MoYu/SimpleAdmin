@@ -20,8 +20,7 @@ public class BizUserController : IDynamicApiController
     private readonly IOrgService _orgService;
     private readonly IPositionService _positionService;
 
-    public BizUserController(IUserService userService, IOrgService orgService,
-        IPositionService positionService)
+    public BizUserController(IUserService userService, IOrgService orgService, IPositionService positionService)
     {
         _userService = userService;
         _orgService = orgService;
@@ -243,8 +242,7 @@ public class BizUserController : IDynamicApiController
     /// <returns></returns>
     [HttpPost("import")]
     [DisplayName("人员导入")]
-    public async Task<dynamic> Import(
-        [SuppressMonitor][FromBody] ImportResultInput<BizUserImportInput> input)
+    public async Task<dynamic> Import([SuppressMonitor][FromBody] ImportResultInput<BizUserImportInput> input)
     {
         return await _userService.Import(input);
     }

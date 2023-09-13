@@ -28,8 +28,7 @@ public class Startup : AppStartup
         //定时任务
         //services.AddSchedule();
         //添加控制器相关
-        services.AddControllers()
-            .AddNewtonsoftJson(options => //配置json
+        services.AddControllers().AddNewtonsoftJson(options => //配置json
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();// 首字母小写（驼峰样式）
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 时间格式化
@@ -71,8 +70,7 @@ public class Startup : AppStartup
         app.UseStaticFiles(new StaticFileOptions
         {
             ServeUnknownFileTypes = true,
-            FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
+            FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
             OnPrepareResponse = c =>
             {
                 c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");

@@ -79,8 +79,7 @@ public static class AvatarUtil
                 sKPaint.MeasureText(nameWritten, ref size);//计算文字宽度以及高度
                 var temp = (bmp.Width - size.Size.Width) / 2;
                 var temp1 = (bmp.Height - size.Size.Height) / 2;
-                canvas.DrawText(nameWritten, temp, temp1 - size.Top,
-                    sKPaint);//画文字
+                canvas.DrawText(nameWritten, temp, temp1 - size.Top, sKPaint);//画文字
             }
         }
 

@@ -18,8 +18,8 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     private readonly IRelationService _relationService;
     private readonly IEventPublisher _eventPublisher;
 
-    public MessageService(ILogger<MessageService> logger, ISimpleCacheService simpleCacheService,
-        IRelationService relationService, IEventPublisher eventPublisher)
+    public MessageService(ILogger<MessageService> logger, ISimpleCacheService simpleCacheService, IRelationService relationService,
+        IEventPublisher eventPublisher)
     {
         _logger = logger;
         _simpleCacheService = simpleCacheService;
@@ -30,38 +30,25 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     /// <inheritdoc />
     public async Task<SqlSugarPagedList<SysMessage>> Page(MessagePageInput input)
     {
-        var query = Context.Queryable<SysMessage>()
-                .WhereIF(!string.IsNullOrEmpty(input.Category),
-                    it => it.Category == input.Category)//根据分类查询
-                .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
-                    it => it.Subject.Contains(input.SearchKey)
-                        || it.Content.Contains(input.SearchKey))//根据关键字查询
-                .OrderByIF(!string.IsNullOrEmpty(input.SortField),
-                    $"{input.SortField} {input.SortOrder}")//排序
-                .OrderBy(it => it.CreateTime, OrderByType.Desc)
-            ;
+        var query = Context.Queryable<SysMessage>().WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Subject.Contains(input.SearchKey) || it.Content.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
+            .OrderBy(it => it.CreateTime, OrderByType.Desc);
 
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input,
-        long userId)
+    public async Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input, long userId)
     {
-        var query = Context.Queryable<SysMessageUser>()
-                .LeftJoin<SysMessage>((u, m) => u.MessageId == m.Id)
-                .Where((u, m) => u.IsDelete == false && u.UserId == userId)
-                .WhereIF(!string.IsNullOrEmpty(input.Category),
-                    (u, m) => m.Category == input.Category)//根据分类查询
-                .OrderBy((u, m) => u.Read, OrderByType.Asc)
-                .OrderBy((u, m) => m.CreateTime, OrderByType.Desc)
-                .Select((u, m) => new SysMessage
-                {
-                    Id = m.Id.SelectAll(),
-                    Read = u.Read
-                })
-            ;
+        var query = Context.Queryable<SysMessageUser>().LeftJoin<SysMessage>((u, m) => u.MessageId == m.Id).Where((u, m) => u.IsDelete == false && u.UserId == userId)
+            .WhereIF(!string.IsNullOrEmpty(input.Category), (u, m) => m.Category == input.Category)//根据分类查询
+            .OrderBy((u, m) => u.Read, OrderByType.Asc).OrderBy((u, m) => m.CreateTime, OrderByType.Desc).Select((u, m) => new SysMessage
+            {
+                Id = m.Id.SelectAll(),
+                Read = u.Read
+            });
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
@@ -110,9 +97,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
             var messageDetail = message.Adapt<MessageDetailOutPut>();//实体转换
             var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
             var messageUsers = await messageUserRep.GetListAsync(it => it.MessageId == message.Id);
-            var myMessage = messageUsers
-                .Where(it => it.UserId == UserManager.UserId && it.MessageId == input.Id)
-                .FirstOrDefault();//查询是否发给自己
+            var myMessage = messageUsers.Where(it => it.UserId == UserManager.UserId && it.MessageId == input.Id).FirstOrDefault();//查询是否发给自己
             if (myMessage != null)
             {
                 myMessage.Read = true;//设置已读
@@ -121,15 +106,12 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
             if (!isSelf)//如果不是自己则把所有的用户都列出来
             {
                 var userIds = messageUsers.Select(it => it.UserId).ToList();//获取用户ID列表
-                var userInfos = await Context.Queryable<SysUser>()
-                    .Where(it => userIds.Contains(it.Id)).Select(it => new { it.Id, it.Name })
-                    .ToListAsync();//获取用户姓名信息列表
+                var userInfos = await Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id)).Select(it => new { it.Id, it.Name }).ToListAsync();//获取用户姓名信息列表
 
                 //遍历关系
                 messageUsers.ForEach(messageUser =>
                 {
-                    var user = userInfos.Where(u => u.Id == messageUser.UserId)
-                        .FirstOrDefault();//获取用户信息
+                    var user = userInfos.Where(u => u.Id == messageUser.UserId).FirstOrDefault();//获取用户信息
                     if (user != null)
                     {
                         //添加到已读列表
@@ -168,8 +150,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
             var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteAsync(it => ids.Contains(it.Id));
-                await Context.Deleteable<SysMessageUser>().Where(it => ids.Contains(it.MessageId))
-                    .ExecuteCommandAsync();
+                await Context.Deleteable<SysMessageUser>().Where(it => ids.Contains(it.MessageId)).ExecuteCommandAsync();
             });
             if (!result.IsSuccess)//如果失败了
             {
@@ -184,9 +165,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     public async Task DeleteMyMessage(BaseIdInput input, long userId)
     {
         var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
-        await Context.Deleteable<SysMessageUser>()
-            .Where(it => it.UserId == userId && it.MessageId == input.Id).IsLogic()
-            .ExecuteCommandAsync();//逻辑删除
+        await Context.Deleteable<SysMessageUser>().Where(it => it.UserId == userId && it.MessageId == input.Id).IsLogic().ExecuteCommandAsync();//逻辑删除
     }
 
     /// <inheritdoc />
@@ -194,8 +173,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     {
         var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
         //获取未读数量
-        var unRead = await messageUserRep.CountAsync(it =>
-            it.UserId == userId && it.Read == false && it.IsDelete == false);
+        var unRead = await messageUserRep.CountAsync(it => it.UserId == userId && it.Read == false && it.IsDelete == false);
         return unRead;
     }
 }

@@ -68,10 +68,7 @@ public static class TextWriterExtensions
     private const string DEFAULT_FOREGROUND_COLOR = "\x1B[39m\x1B[22m";
     private const string DEFAULT_BACKGROUND_COLOR = "\x1B[49m";
 
-    public static void WriteWithColor(
-        this TextWriter textWriter,
-        string message,
-        ConsoleColor? background,
+    public static void WriteWithColor(this TextWriter textWriter, string message, ConsoleColor? background,
         ConsoleColor? foreground)
     {
         // Order:

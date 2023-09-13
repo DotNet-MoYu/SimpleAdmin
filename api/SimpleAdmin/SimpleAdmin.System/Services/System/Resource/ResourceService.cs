@@ -66,8 +66,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         if (sysResources != null)
         {
             //并按分类和排序码排序
-            sysResources = sysResources.OrderBy(it => it.Category).ThenBy(it => it.SortCode)
-                .ToList();
+            sysResources = sysResources.OrderBy(it => it.Category).ThenBy(it => it.SortCode).ToList();
         }
         return sysResources;
     }
@@ -76,14 +75,11 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetMenuAndSpaListByModuleId(long id)
     {
         //获取所有的菜单和模块以及单页面列表，
-        var sysResources = await GetListAsync(new List<string>
-            { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_SPA });
+        var sysResources = await GetListAsync(new List<string> { CateGoryConst.RESOURCE_MENU, CateGoryConst.RESOURCE_SPA });
         if (sysResources != null)
         {
             //并按分类和排序码排序
-            sysResources = sysResources
-                .Where(it =>
-                    it.Category == CateGoryConst.RESOURCE_SPA || it.Module == id)//根据模块ID获取菜单
+            sysResources = sysResources.Where(it => it.Category == CateGoryConst.RESOURCE_SPA || it.Module == id)//根据模块ID获取菜单
                 .OrderBy(it => it.Category).ThenBy(it => it.SortCode).ToList();//排序
         }
         return sysResources;
@@ -124,8 +120,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     /// <inheritdoc />
-    public List<SysResource> GetChildListById(List<SysResource> sysResources, long resId,
-        bool isContainOneself = true)
+    public List<SysResource> GetChildListById(List<SysResource> sysResources, long resId, bool isContainOneself = true)
     {
         //查找下级
         var childList = GetResourceChildren(sysResources, resId);
@@ -142,8 +137,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetListByCategory(string category)
     {
         //先从Redis拿
-        var sysResources =
-            _simpleCacheService.Get<List<SysResource>>(SystemConst.CACHE_SYS_RESOURCE + category);
+        var sysResources = _simpleCacheService.Get<List<SysResource>>(SystemConst.CACHE_SYS_RESOURCE + category);
         if (sysResources == null)
         {
             //redis没有就去数据库拿
@@ -180,9 +174,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         var permissions = new List<PermissionTreeSelector>();//权限列表
 
         // 获取所有需要数据权限的控制器
-        var controllerTypes = App.EffectiveTypes.Where(u =>
-            !u.IsInterface && !u.IsAbstract && u.IsClass
-            && u.IsDefined(typeof(RolePermissionAttribute), false));
+        var controllerTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
             //获取数据权限特性
@@ -200,8 +192,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                 foreach (var method in methods)
                 {
                     //获取忽略数据权限特性
-                    var ignoreRolePermission =
-                        method.GetCustomAttribute<IgnoreRolePermissionAttribute>();
+                    var ignoreRolePermission = method.GetCustomAttribute<IgnoreRolePermissionAttribute>();
                     if (ignoreRolePermission == null)//如果是空的代表需要数据权限
                     {
                         //获取接口描述
@@ -322,15 +313,12 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     /// </summary>
     /// <param name="moduleId">模块ID</param>
     /// <returns></returns>
-    public async Task<List<ResTreeSelector.RoleGrantResourceMenu>> GetRoleGrantResourceMenus(
-        long moduleId)
+    public async Task<List<ResTreeSelector.RoleGrantResourceMenu>> GetRoleGrantResourceMenus(long moduleId)
     {
         var roleGrantResourceMenus = new List<ResTreeSelector.RoleGrantResourceMenu>();//定义结果
-        var allMenuList = (await GetListByCategory(CateGoryConst.RESOURCE_MENU))
-            .Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
+        var allMenuList = (await GetListByCategory(CateGoryConst.RESOURCE_MENU)).Where(it => it.Module == moduleId).ToList();//获取所有菜单列表
         var allButtonList = await GetListByCategory(CateGoryConst.RESOURCE_BUTTON);//获取所有按钮列表
-        var parentMenuList =
-            allMenuList.Where(it => it.ParentId == SimpleAdminConst.ZERO).ToList();//获取一级目录
+        var parentMenuList = allMenuList.Where(it => it.ParentId == SimpleAdminConst.ZERO).ToList();//获取一级目录
 
         //遍历一级目录
         foreach (var parent in parentMenuList)
@@ -349,23 +337,19 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                         if (menu.MenuType is SysResourceConst.MENU or SysResourceConst.SUBSET)
                         {
                             //获取菜单下按钮集合并转换成对应实体
-                            var buttonList = allButtonList.Where(it => it.ParentId == menu.Id)
-                                .ToList();
-                            var buttons = buttonList
-                                .Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
+                            var buttonList = allButtonList.Where(it => it.ParentId == menu.Id).ToList();
+                            var buttons = buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
                             roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
                             {
                                 Id = menu.Id,
                                 ParentId = parent.Id,
                                 ParentName = parent.Title,
                                 Module = moduleId,
-                                Title = GetRoleGrantResourceMenuTitle(menuList,
-                                    menu),//菜单名称需要特殊处理因为有二级菜单
+                                Title = GetRoleGrantResourceMenuTitle(menuList, menu),//菜单名称需要特殊处理因为有二级菜单
                                 Button = buttons
                             });
                         }
-                        else if (menu.MenuType == SysResourceConst.LINK
-                                 || menu.MenuType == SysResourceConst.IFRAME)//如果是内链或者外链
+                        else if (menu.MenuType == SysResourceConst.LINK || menu.MenuType == SysResourceConst.IFRAME)//如果是内链或者外链
                         {
                             //直接加到资源列表
                             roleGrantResourceMenus.Add(new ResTreeSelector.RoleGrantResourceMenu
@@ -407,8 +391,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                 {
                     //获取菜单下按钮集合并转换成对应实体
                     var buttonList = allButtonList.Where(it => it.ParentId == parent.Id).ToList();
-                    roleGrantResourcesButtons.Button =
-                        buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
+                    roleGrantResourcesButtons.Button = buttonList.Adapt<List<ResTreeSelector.RoleGrantResourceButton>>();
                 }
                 roleGrantResourceMenus.Add(roleGrantResourcesButtons);
             }

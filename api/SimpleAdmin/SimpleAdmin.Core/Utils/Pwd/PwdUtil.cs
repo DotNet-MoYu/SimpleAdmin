@@ -52,9 +52,7 @@ public class PwdUtil
             {
                 var cost = s1[i - 1] == s2[j - 1] ? 0 : 1;
 
-                distance[i, j] = Math.Min(
-                    Math.Min(distance[i - 1, j] + 1, distance[i, j - 1] + 1),
-                    distance[i - 1, j - 1] + cost);
+                distance[i, j] = Math.Min(Math.Min(distance[i - 1, j] + 1, distance[i, j - 1] + 1), distance[i - 1, j - 1] + cost);
             }
         }
         return distance[s1.Length, s2.Length];
