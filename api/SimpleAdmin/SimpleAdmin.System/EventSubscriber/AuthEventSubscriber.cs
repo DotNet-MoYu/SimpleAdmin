@@ -74,7 +74,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                 if (pwdRemind)
                 {
                     var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == DevConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
-                    if (DateTime.Now - pwdRemindUpdateTime < TimeSpan.FromDays(pwdRemindDay))
+                    if (DateTime.Now - pwdRemindUpdateTime > TimeSpan.FromDays(pwdRemindDay))
                     {
                         // 调用异步方法，延迟执行 DoSomething 方法
                         await DelayedExecutionAsync(4000, () => messageService.Send(new MessageSendInput()
