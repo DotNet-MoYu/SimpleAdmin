@@ -17,7 +17,7 @@
       </el-form-item>
       <el-form-item label="单页类型" prop="menuType">
         <el-radio-group v-model="spaProps.record.menuType">
-          <el-radio-button v-for="(item, index) in menuTypeOptions" :key="index" :label="item.value">{{
+          <el-radio-button v-for="(item, index) in spaTypeOptions" :key="index" :label="item.value">{{
             item.label
           }}</el-radio-button>
         </el-radio-group>
@@ -119,7 +119,7 @@ const visible = ref(false); //是否显示表单
 const dictStore = useDictStore(); //字典仓库
 
 // 单页类型选项
-const menuTypeOptions = dictStore
+const spaTypeOptions = dictStore
   .getDictList(SysDictEnum.MENU_TYPE)
   .filter(item => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
 // 是否选项
