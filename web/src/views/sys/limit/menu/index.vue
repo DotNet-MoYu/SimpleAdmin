@@ -4,7 +4,7 @@
     <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuTreeApi" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
-        <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)">新增菜单 </s-button>
+        <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)" />
         <s-button suffix="菜单" :opt="FormOptEnum.DELETE" plain :disabled="!scope.isSelected" />
       </template>
       <!-- 表格 菜单类型 按钮 -->
