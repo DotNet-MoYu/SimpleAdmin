@@ -8,7 +8,7 @@ namespace SimpleAdmin.Plugin.SignalR;
 /// <summary>
 /// <inheritdoc cref="ISimpleHub"/>
 /// </summary>
-//[Authorize]
+[Authorize]
 [MapHub("/hubs/simple")]
 [Authorize]
 public class SimpleHub : Hub<ISimpleHub>

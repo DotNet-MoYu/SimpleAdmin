@@ -74,15 +74,16 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                 if (pwdRemind)
                 {
                     var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == DevConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
-                    if (DateTime.Now - pwdRemindUpdateTime > TimeSpan.FromDays(pwdRemindDay))
+                    if (DateTime.Now - pwdRemindUpdateTime < TimeSpan.FromDays(pwdRemindDay))
                     {
-                        await messageService.Send(new MessageSendInput()
+                        // 调用异步方法，延迟执行 DoSomething 方法
+                        await DelayedExecutionAsync(4000, () => messageService.Send(new MessageSendInput()
                         {
                             Subject = subject,
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
                             Category = CateGoryConst.Message_INFORM,
                             ReceiverIdList = new List<long>() { sysUser.Id }
-                        });
+                        }).Wait());
                     }
                     sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间,避免重复提醒
                 }
@@ -166,5 +167,19 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         var noticeComponent = pluginsOptions.NoticeComponent.ToString().ToLower();
         var noticeService = _namedServiceProvider.GetService<ISingleton>(noticeComponent);//获取服务
         return noticeService;
+    }
+
+    /// <summary>
+    ///   延迟执行
+    /// </summary>
+    /// <param name="millisecondsDelay">毫秒</param>
+    /// <param name="actionToExecute">方法</param>
+    private async Task DelayedExecutionAsync(int millisecondsDelay, Action actionToExecute)
+    {
+        // 延迟指定的时间
+        await Task.Delay(millisecondsDelay);
+
+        // 执行目标方法
+        actionToExecute.Invoke();
     }
 }
