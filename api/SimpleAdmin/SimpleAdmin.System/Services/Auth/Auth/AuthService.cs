@@ -160,6 +160,7 @@ public class AuthService : IAuthService
         var errorCountCache = _simpleCacheService.Get<int>(key);//获取登录错误次数
         if (errorCountCache >= errorCount)
         {
+            _simpleCacheService.SetExpire(key, TimeSpan.FromMinutes(lockTime));//设置缓存
             throw Oops.Bah($"密码错误次数过多，请{lockTime}分钟后再试");
         }
     }
