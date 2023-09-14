@@ -9,11 +9,8 @@ public class AuthService : IAuthService
     private readonly ISysUserService _userService;
     private readonly IRoleService _roleService;
 
-    public AuthService(ISimpleCacheService simpleCacheService,
-        IEventPublisher eventPublisher,
-        IConfigService configService,
-        ISysUserService userService,
-        IRoleService roleService)
+    public AuthService(ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher, IConfigService configService,
+        ISysUserService userService, IRoleService roleService)
     {
         _simpleCacheService = simpleCacheService;
         _eventPublisher = eventPublisher;
@@ -59,8 +56,6 @@ public class AuthService : IAuthService
         var reqNo = AddValidCodeToRedis(phoneValidCode);
         return reqNo;
     }
-
-
 
     /// <inheritdoc/>
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
@@ -164,6 +159,7 @@ public class AuthService : IAuthService
         var errorCountCache = _simpleCacheService.Get<int>(key);//获取登录错误次数
         if (errorCountCache >= errorCount)
         {
+            _simpleCacheService.SetExpire(key, TimeSpan.FromMinutes(lockTime));//设置缓存
             throw Oops.Bah($"密码错误次数过多，请{lockTime}分钟后再试");
         }
     }
