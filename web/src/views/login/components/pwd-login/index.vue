@@ -1,7 +1,7 @@
 <!-- 密码登录 -->
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
-    <el-form-item prop="username">
+    <s-form-item prop="username">
       <el-input v-model="loginForm.account" placeholder="用户名:admin / user">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -9,8 +9,8 @@
           </el-icon>
         </template>
       </el-input>
-    </el-form-item>
-    <el-form-item prop="password">
+    </s-form-item>
+    <s-form-item prop="password">
       <el-input v-model="loginForm.password" type="password" placeholder="密码:123456" show-password autocomplete="new-password">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -18,8 +18,8 @@
           </el-icon>
         </template>
       </el-input>
-    </el-form-item>
-    <el-form-item v-if="captchaOpen" prop="validCode">
+    </s-form-item>
+    <s-form-item v-if="captchaOpen" prop="validCode">
       <div class="flex-y-center w-full">
         <el-input v-model="loginForm.validCode" placeholder="请输入验证码">
           <template #prefix>
@@ -31,7 +31,7 @@
         <div class="w-18px"></div>
         <img :src="validCodeBase64" @click="loginCaptcha" />
       </div>
-    </el-form-item>
+    </s-form-item>
   </el-form>
   <div class="login-btn">
     <el-button :icon="CircleClose" round size="large" @click="resetForm(loginFormRef)"> 重置 </el-button>

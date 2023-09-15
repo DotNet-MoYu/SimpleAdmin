@@ -2,11 +2,11 @@
 <template>
   <form-container v-model="visible" :title="'更改模块->' + changeModuleProps.title" form-size="450px">
     <el-form ref="changeModuleFormRef" :rules="rules" :model="changeModuleProps">
-      <el-form-item label="所属模块" prop="module">
+      <s-form-item label="所属模块" prop="module">
         <el-select v-model="changeModuleProps.module" placeholder="请选择模块">
           <el-option v-for="item in changeModuleProps.moduleOptions" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
-      </el-form-item>
+      </s-form-item>
     </el-form>
     <template #footer>
       <el-button @click="onClose"> 取消 </el-button>

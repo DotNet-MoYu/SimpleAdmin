@@ -20,10 +20,13 @@ declare module "vue" {
     ElBreadcrumb: typeof import("element-plus/es")["ElBreadcrumb"];
     ElBreadcrumbItem: typeof import("element-plus/es")["ElBreadcrumbItem"];
     ElButton: typeof import("element-plus/es")["ElButton"];
+    ElCard: typeof import("element-plus/es")["ElCard"];
     ElCheckbox: typeof import("element-plus/es")["ElCheckbox"];
     ElCol: typeof import("element-plus/es")["ElCol"];
     ElColorPicker: typeof import("element-plus/es")["ElColorPicker"];
     ElContainer: typeof import("element-plus/es")["ElContainer"];
+    ElDescriptions: typeof import("element-plus/es")["ElDescriptions"];
+    ElDescriptionsItem: typeof import("element-plus/es")["ElDescriptionsItem"];
     ElDialog: typeof import("element-plus/es")["ElDialog"];
     ElDivider: typeof import("element-plus/es")["ElDivider"];
     ElDrawer: typeof import("element-plus/es")["ElDrawer"];
@@ -74,6 +77,7 @@ declare module "vue" {
     SearchFormItem: typeof import("./src/components/SearchForm/components/SearchFormItem.vue")["default"];
     SelectIcon: typeof import("./src/components/SelectIcon/index.vue")["default"];
     SelectIconPlus: typeof import("./src/components/SelectIconPlus/index.vue")["default"];
+    SFormItem: typeof import("./src/components/SFormItem/index.vue")["default"];
     SvgIcon: typeof import("./src/components/SvgIcon/index.vue")["default"];
     SwitchDark: typeof import("./src/components/SwitchDark/index.vue")["default"];
     TableColumn: typeof import("./src/components/ProTable/components/TableColumn.vue")["default"];

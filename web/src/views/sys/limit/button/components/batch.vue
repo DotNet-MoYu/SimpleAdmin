@@ -2,12 +2,12 @@
 <template>
   <el-dialog v-model="visible" title="批量新增按钮" width="500px">
     <el-form ref="buttonFormRef" :rules="rules" :model="buttonProps" label-width="auto">
-      <el-form-item label="权限简称" prop="title">
+      <s-form-item label="权限简称" prop="title">
         <el-input v-model="buttonProps.title" placeholder="请填写权限简称" clearable></el-input>
-      </el-form-item>
-      <el-form-item label="编码前缀" prop="code">
+      </s-form-item>
+      <s-form-item label="编码前缀" prop="code">
         <el-input v-model="buttonProps.code" placeholder="请填写编码前缀" clearable></el-input>
-      </el-form-item>
+      </s-form-item>
     </el-form>
     <template #footer>
       <el-button @click="onClose"> 取消 </el-button>

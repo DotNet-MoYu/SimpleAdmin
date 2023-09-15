@@ -12,93 +12,93 @@
     >
       <!-- 基本设置 -->
       <el-divider content-position="left">基本设置</el-divider>
-      <el-form-item label="单页名称" prop="title">
+      <s-form-item label="单页名称" prop="title">
         <el-input v-model="spaProps.record.title" placeholder="请填写单页名称" clearable></el-input>
-      </el-form-item>
-      <el-form-item label="单页类型" prop="menuType">
+      </s-form-item>
+      <s-form-item label="单页类型" prop="menuType">
         <el-radio-group v-model="spaProps.record.menuType">
           <el-radio-button v-for="(item, index) in spaTypeOptions" :key="index" :label="item.value">{{
             item.label
           }}</el-radio-button>
         </el-radio-group>
-      </el-form-item>
-      <el-form-item label="图标" prop="icon">
+      </s-form-item>
+      <s-form-item label="图标" prop="icon">
         <SelectIconPlus v-model:icon-value="spaProps.record.icon" />
-      </el-form-item>
+      </s-form-item>
 
       <div v-if="spaProps.record.menuType === MenuTypeDictEnum.MENU">
-        <el-form-item label="路由地址" prop="path">
+        <s-form-item label="路由地址" prop="path">
           <el-input v-model="spaProps.record.path" placeholder="请填写路由地址,例:/home/index" clearable></el-input>
-        </el-form-item>
-        <el-form-item label="组件名称" prop="name">
+        </s-form-item>
+        <s-form-item label="组件名称" prop="name">
           <el-input v-model="spaProps.record.name" placeholder="请填写组件名称" clearable>
             <template #prepend>setup name=</template>
           </el-input>
-        </el-form-item>
-        <el-form-item label="组件地址" prop="component">
+        </s-form-item>
+        <s-form-item label="组件地址" prop="component">
           <el-input v-model="spaProps.record.component" placeholder="请填写组件地址" clearable>
             <template #prepend>src/views/</template>
           </el-input>
-        </el-form-item>
+        </s-form-item>
       </div>
       <div v-else>
-        <el-form-item label="链接地址:" prop="path">
+        <s-form-item label="链接地址:" prop="path">
           <el-input v-model="spaProps.record.path" placeholder="请填写链接地址,例:http://www.baidu.com" clearable></el-input>
-        </el-form-item>
+        </s-form-item>
       </div>
-      <el-form-item label="排序" prop="sortCode">
+      <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="spaProps.record.sortCode" show-input :min="1" />
-      </el-form-item>
-      <el-form-item label="说明" prop="description">
+      </s-form-item>
+      <s-form-item label="说明" prop="description">
         <el-input v-model="spaProps.record.description" placeholder="请填写单页说明" clearable></el-input>
-      </el-form-item>
+      </s-form-item>
       <!-- 功能设置 -->
       <el-divider content-position="left">功能设置</el-divider>
       <el-row :gutter="24">
         <el-col :span="12">
-          <el-form-item label="设置主页" prop="isHome">
+          <s-form-item label="设置主页" prop="isHome">
             <el-radio-group v-model="spaProps.record.isHome">
               <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
                 item.label
               }}</el-radio-button>
             </el-radio-group>
-          </el-form-item>
+          </s-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="隐藏页面" prop="isHide">
+          <s-form-item label="隐藏页面" prop="isHide">
             <el-radio-group v-model="spaProps.record.isHide">
               <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
                 item.label
               }}</el-radio-button>
             </el-radio-group>
-          </el-form-item>
+          </s-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="页面全屏" prop="isFull">
+          <s-form-item label="页面全屏" prop="isFull">
             <el-radio-group v-model="spaProps.record.isFull">
               <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
                 item.label
               }}</el-radio-button>
             </el-radio-group>
-          </el-form-item>
+          </s-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="固定标签页" prop="isAffix">
+          <s-form-item label="固定标签页" prop="isAffix">
             <el-radio-group v-model="spaProps.record.isAffix">
               <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
                 item.label
               }}</el-radio-button>
             </el-radio-group>
-          </el-form-item>
+          </s-form-item>
         </el-col>
         <el-col :span="12">
-          <el-form-item label="路由缓存" prop="isKeepAlive">
+          <s-form-item label="路由缓存" prop="isKeepAlive">
             <el-radio-group v-model="spaProps.record.isKeepAlive">
               <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
                 item.label
               }}</el-radio-button>
             </el-radio-group>
-          </el-form-item>
+          </s-form-item>
         </el-col>
       </el-row>
     </el-form>
