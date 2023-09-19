@@ -74,6 +74,6 @@ public abstract class DataEntityBase : BaseEntity
     /// <summary>
     /// 创建者部门Id
     /// </summary>
-    [SugarColumn(ColumnDescription = "创建者部门Id")]
+    [SugarColumn(ColumnDescription = "创建者部门Id", IsOnlyIgnoreUpdate = true, IsNullable = true)]
     public virtual long CreateOrgId { get; set; }
 }
