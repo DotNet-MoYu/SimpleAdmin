@@ -1304,6 +1304,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.AuthEventSubscriber.DelayedExecutionAsync(System.Int32,System.Action)">
+            <summary>
+              延迟执行
+            </summary>
+            <param name="millisecondsDelay">毫秒</param>
+            <param name="actionToExecute">方法</param>
+        </member>
         <member name="T:SimpleAdmin.System.EventSubscriberConst">
             <summary>
             事件总线常量
