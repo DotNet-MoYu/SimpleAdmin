@@ -159,12 +159,14 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             var roleIdList = roleList.Select(x => x.TargetId.ToLong()).ToList();//角色ID列表
             if (roleIdList.Count > 0)//如果该用户有角色
             {
-                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList, CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//获取资源集合
+                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList,
+                    CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);//获取资源集合
             }
         }
         resourceList.ForEach(it =>
         {
-            if (!string.IsNullOrEmpty(it.ExtJson)) buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResuorce>().ButtonInfo);//如果有按钮权限，将按钮ID放到buttonIdList
+            if (!string.IsNullOrEmpty(it.ExtJson))
+                buttonIdList.AddRange(it.ExtJson.ToJsonEntity<RelationRoleResuorce>().ButtonInfo);//如果有按钮权限，将按钮ID放到buttonIdList
         });
         if (buttonIdList.Count > 0)
         {
@@ -177,14 +179,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     public async Task<List<DataScope>> GetPermissionListByUserId(long userId, long orgId)
     {
         var permissions = new List<DataScope>();//权限集合
-        var sysRelations = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//根据用户ID获取用户权限
+        var sysRelations =
+            await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION);//根据用户ID获取用户权限
         if (sysRelations.Count == 0)//如果有表示用户单独授权了不走用户角色
         {
-            var roleIdList = await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
+            var roleIdList =
+                await _relationService.GetRelationListByObjectIdAndCategory(userId, CateGoryConst.Relation_SYS_USER_HAS_ROLE);//根据用户ID获取角色ID
             if (roleIdList.Count > 0)//如果角色ID不为空
             {
                 //获取角色权限信息
-                sysRelations = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList.Select(it => it.TargetId.ToLong()).ToList(), CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
+                sysRelations = await _relationService.GetRelationListByObjectIdListAndCategory(roleIdList.Select(it => it.TargetId.ToLong()).ToList(),
+                    CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION);
             }
         }
         var relationGroup = sysRelations.GroupBy(it => it.TargetId).ToList();//根据目标ID,也就是接口名分组，因为存在一个用户多个角色
@@ -440,7 +445,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 throw Oops.Bah($"不可禁用系统内置超管用户账号");
             CheckSelf(input.Id, SimpleAdminConst.Disable);//判断是不是自己
             //设置状态为禁用
-            if (await UpdateAsync(it => new SysUser
+            if (await UpdateSetColumnsTrueAsync(it => new SysUser
             {
                 UserStatus = DevDictConst.COMMON_STATUS_DISABLED
             }, it => it.Id == input.Id))
@@ -453,7 +458,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         CheckSelf(input.Id, SimpleAdminConst.Enable);//判断是不是自己
         //设置状态为启用
-        if (await UpdateAsync(it => new SysUser
+        if (await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             UserStatus = DevDictConst.COMMON_STATUS_ENABLE
         }, it => it.Id == input.Id))
@@ -465,7 +470,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     {
         var password = await GetDefaultPassWord(true);//获取默认密码,这里不走Aop所以需要加密一下
         //重置密码
-        if (await UpdateAsync(it => new SysUser
+        if (await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             Password = password
         }, it => it.Id == input.Id))
@@ -483,7 +488,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                 throw Oops.Bah($"不能给超管分配角色");
             CheckSelf(input.Id, SimpleAdminConst.GrantRole);//判断是不是自己
             //给用户赋角色
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_ROLE, input.Id, input.RoleIdList.Select(it => it.ToString()).ToList(), null, true);
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_ROLE, input.Id,
+                input.RoleIdList.Select(it => it.ToString()).ToList(), null, true);
             DeleteUserFromRedis(input.Id);//从redis删除用户信息
         }
     }
@@ -553,7 +559,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 var relatioRep = ChangeRepository<DbRepository<SysRelation>>();//切换仓储
                 await relatioRep.DeleteAsync(it =>
-                    it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
+                    it.ObjectId == sysUser.Id && (it.Category == CateGoryConst.Relation_SYS_USER_HAS_PERMISSION
+                    || it.Category == CateGoryConst.Relation_SYS_USER_HAS_RESOURCE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
@@ -581,7 +588,8 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
             var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, input.Id, apiUrls, extJsons,
+                true);//添加到数据库
             DeleteUserFromRedis(input.Id);
         }
     }
@@ -633,12 +641,15 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
                     updatePositionJsonUser.Add(position);
             });
             //定义删除的关系
-            var delRelations = new List<string> { CateGoryConst.Relation_SYS_USER_HAS_RESOURCE, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, CateGoryConst.Relation_SYS_USER_HAS_ROLE };
+            var delRelations = new List<string>
+            {
+                CateGoryConst.Relation_SYS_USER_HAS_RESOURCE, CateGoryConst.Relation_SYS_USER_HAS_PERMISSION, CateGoryConst.Relation_SYS_USER_HAS_ROLE
+            };
             //事务
             var result = await itenant.UseTranAsync(async () =>
             {
                 //清除该用户作为主管信息
-                await UpdateAsync(it => new SysUser
+                await UpdateSetColumnsTrueAsync(it => new SysUser
                 {
                     DirectorId = null
                 }, it => ids.Contains(it.DirectorId.Value));
