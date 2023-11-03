@@ -1,9 +1,9 @@
 using System.Drawing;
 
-Console.WriteLine(@"Ô´ÂëµØÖ·: https://gitee.com/zxzyjs/SimpleAdmin");
-Console.WriteLine(@"ÑÝÊ¾µØÖ·: http://153.101.199.83:12802/login");
+Console.WriteLine(@"æºç åœ°å€: https://gitee.com/zxzyjs/SimpleAdmin");
+Console.WriteLine(@"æ¼”ç¤ºåœ°å€: http://153.101.199.83:12801/login");
 Console.WriteLine(@"QQ:531035580");
-Console.WriteLine("Ã»ÓÐ»¨ÀïºúÉÚ£¬Ö»ÓÐ¼òµ¥¡¢ÎÈ¶¨¡¢Áé»î¡¢¸ßÐ§");
+Console.WriteLine("æ²¡æœ‰èŠ±é‡Œèƒ¡å“¨ï¼Œåªæœ‰ç®€å•ã€ç¨³å®šã€çµæ´»ã€é«˜æ•ˆ");
 Colorful.Console.WriteAsciiAlternating("SimpleAdmin", new Colorful.FrequencyBasedColorAlternator(3, Color.Yellow, Color.GreenYellow));
 Serve.Run(RunOptions.Default.ConfigureBuilder(builder =>
 {
