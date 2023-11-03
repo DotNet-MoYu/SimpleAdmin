@@ -1,6 +1,6 @@
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
-    <s-form-item prop="phone">
+    <el-form-item prop="phone">
       <el-input v-model="loginForm.phone" placeholder="请输入手机号码">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -8,9 +8,9 @@
           </el-icon>
         </template>
       </el-input>
-    </s-form-item>
+    </el-form-item>
     <!-- 验证码 -->
-    <s-form-item path="code">
+    <el-form-item path="code">
       <div class="flex-y-center w-full">
         <el-input v-model:value="loginForm.code" placeholder="请输入短信验证码">
           <template #prefix>
@@ -22,7 +22,7 @@
         <div class="w-18px"></div>
         <el-button size="large"> 获取验证码 </el-button>
       </div>
-    </s-form-item>
+    </el-form-item>
   </el-form>
   <div class="login-btn">
     <el-button :icon="CircleClose" round size="large" @click="resetForm(loginFormRef)"> 重置 </el-button>
