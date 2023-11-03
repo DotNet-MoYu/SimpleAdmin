@@ -21,9 +21,7 @@ public static class SqlSugarPageExtension
     /// <param name="pageNum"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
-    public static SqlSugarPagedList<TEntity> ToPagedList<TEntity>(
-        this ISugarQueryable<TEntity> queryable, int pageNum,
-        int pageSize)
+    public static SqlSugarPagedList<TEntity> ToPagedList<TEntity>(this ISugarQueryable<TEntity> queryable, int pageNum, int pageSize)
     {
         var total = 0;
         var list = queryable.ToPageList(pageSize, pageNum, ref total);
@@ -48,9 +46,7 @@ public static class SqlSugarPageExtension
     /// <param name="pageNum"></param>
     /// <param name="pageSize"></param>
     /// <returns></returns>
-    public static async Task<SqlSugarPagedList<TEntity>> ToPagedListAsync<TEntity>(
-        this ISugarQueryable<TEntity> queryable,
-        int pageNum, int pageSize)
+    public static async Task<SqlSugarPagedList<TEntity>> ToPagedListAsync<TEntity>(this ISugarQueryable<TEntity> queryable, int pageNum, int pageSize)
     {
         RefAsync<int> totalCount = 0;
         var list = await queryable.ToPageListAsync(pageNum, pageSize, totalCount);
@@ -77,13 +73,11 @@ public static class SqlSugarPageExtension
     /// <param name="pageSize"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public static SqlSugarPagedList<TResult> ToPagedList<TEntity, TResult>(
-        this ISugarQueryable<TEntity> queryable, int pageNum,
-        int pageSize, Expression<Func<TEntity, TResult>> expression)
+    public static SqlSugarPagedList<TResult> ToPagedList<TEntity, TResult>(this ISugarQueryable<TEntity> queryable, int pageNum, int pageSize,
+        Expression<Func<TEntity, TResult>> expression)
     {
         var totalCount = 0;
-        var items = queryable.ToPageList(pageNum, pageSize, ref totalCount,
-            expression);
+        var items = queryable.ToPageList(pageNum, pageSize, ref totalCount, expression);
         var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         return new SqlSugarPagedList<TResult>
         {
@@ -107,13 +101,11 @@ public static class SqlSugarPageExtension
     /// <param name="pageSize"></param>
     /// <param name="expression"></param>
     /// <returns></returns>
-    public static async Task<SqlSugarPagedList<TResult>> ToPagedListAsync<TEntity, TResult>(
-        this ISugarQueryable<TEntity> queryable, int pageNum, int pageSize,
+    public static async Task<SqlSugarPagedList<TResult>> ToPagedListAsync<TEntity, TResult>(this ISugarQueryable<TEntity> queryable, int pageNum, int pageSize,
         Expression<Func<TEntity, TResult>> expression)
     {
         RefAsync<int> totalCount = 0;
-        var items = await queryable.ToPageListAsync(pageNum, pageSize, totalCount,
-            expression);
+        var items = await queryable.ToPageListAsync(pageNum, pageSize, totalCount, expression);
         var totalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
         return new SqlSugarPagedList<TResult>
         {

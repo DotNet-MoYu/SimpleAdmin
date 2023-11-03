@@ -1,7 +1,7 @@
 <!-- 密码登录 -->
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
-    <el-form-item prop="username">
+    <el-form-item prop="account">
       <el-input v-model="loginForm.account" placeholder="用户名:admin / user">
         <template #prefix>
           <el-icon class="el-input__icon">
@@ -35,14 +35,7 @@
   </el-form>
   <div class="login-btn">
     <el-button :icon="CircleClose" round size="large" @click="resetForm(loginFormRef)"> 重置 </el-button>
-    <el-button
-      :icon="UserFilled"
-      round
-      size="large"
-      type="primary"
-      :loading="auth.loginLoading"
-      @click="handleSubmit(loginFormRef)"
-    >
+    <el-button :icon="UserFilled" round size="large" type="primary" :loading="auth.loginLoading" @click="handleSubmit(loginFormRef)">
       登录
     </el-button>
   </div>

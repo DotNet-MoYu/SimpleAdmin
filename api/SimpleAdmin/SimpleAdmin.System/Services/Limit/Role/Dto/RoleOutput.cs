@@ -39,3 +39,29 @@ public class RoleOwnPermissionOutput
     /// </summary>
     public virtual List<RelationRolePermission> GrantInfoList { get; set; }
 }
+
+/// <summary>
+///  角色树输出参数
+/// </summary>
+public class RoleTreeOutput
+{
+    /// <summary>
+    /// 职位Id
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// 是否是职位
+    /// </summary>
+    public bool IsRole { get; set; }
+
+    /// <summary>
+    /// 子项
+    /// </summary>
+    public List<RoleTreeOutput> Children { get; set; } = new List<RoleTreeOutput>();
+}

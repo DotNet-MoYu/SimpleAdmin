@@ -19,5 +19,5 @@ const http = moduleRequest("/sys/ops/config/");
 
 /** 获取系统配置 */
 export const configSysBaseApi = () => {
-  return http.get<Config.ConfigSysBase[]>("sysBaseList", {}, { noLoading: true });
+  return http.get<Config.ConfigSysBase[]>("sysBaseList", {}, { loading: false });
 };

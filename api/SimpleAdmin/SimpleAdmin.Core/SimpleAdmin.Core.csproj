@@ -1,37 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net7.0;net6.0</TargetFrameworks>
-		<NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
-		<DocumentationFile>SimpleAdmin.Core.xml</DocumentationFile>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net7.0;net6.0</TargetFrameworks>
+        <NoWarn>1701;1702;8616;1591;8618;8619;8629;8602;8603;8604;8625;8765</NoWarn>
+        <DocumentationFile>SimpleAdmin.Core.xml</DocumentationFile>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
 
-	<ItemGroup>
-		<PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.8.42" />
-		<PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.8.42" />
-		<PackageReference Include="Furion.Pure" Version="4.8.8.42" />
-		<PackageReference Include="Lazy.Captcha.Core" Version="2.0.6" />
-		<PackageReference Include="Minio" Version="5.0.0" />
-		<PackageReference Include="Portable.BouncyCastle" Version="1.9.0" />
-		<PackageReference Include="SimpleRedis" Version="1.1.5" />
-		<PackageReference Include="SimpleTool" Version="1.0.6" />
+    <ItemGroup>
+        <PackageReference Include="Furion.Extras.Authentication.JwtBearer" Version="4.8.8.42"/>
+        <PackageReference Include="Furion.Extras.ObjectMapper.Mapster" Version="4.8.8.42"/>
+        <PackageReference Include="Furion.Pure" Version="4.8.8.42"/>
+        <PackageReference Include="Lazy.Captcha.Core" Version="2.0.6"/>
+        <PackageReference Include="Minio" Version="5.0.0"/>
+        <PackageReference Include="NewLife.Core" Version="10.6.2023.1101"/>
+        <PackageReference Include="Portable.BouncyCastle" Version="1.9.0"/>
+        <PackageReference Include="SimpleTool" Version="1.0.6"/>
+        <PackageReference Include="Yitter.IdGenerator" Version="1.0.14"/>
+        <PackageReference Include="Masuit.Tools.Core" Version="2.6.6.9"/>
+        <PackageReference Include="SharpZipLib" Version="1.4.2"/>
 
-		<PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
-		<PackageReference Include="Masuit.Tools.Core" Version="2.6.6.9" />
-		<PackageReference Include="SharpZipLib" Version="1.4.2" />
+    </ItemGroup>
 
-	</ItemGroup>
-
-	<ItemGroup>
-		<None Update="Core.Development.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Core.Production.json">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-	</ItemGroup>
+    <ItemGroup>
+        <None Update="Core.Development.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Core.Production.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
 
 </Project>

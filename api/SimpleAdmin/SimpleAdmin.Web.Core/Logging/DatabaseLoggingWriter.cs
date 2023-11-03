@@ -48,8 +48,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             var path = logMsg.Context.Get(LoggingConst.PATH).ToString();//获取操作名称
             var method = logMsg.Context.Get(LoggingConst.METHOD).ToString();//获取方法
             //表示访问日志
-            if (operation == EventSubscriberConst.LOGIN_B
-                || operation == EventSubscriberConst.LOGIN_OUT_B)
+            if (operation == EventSubscriberConst.LOGIN_B || operation == EventSubscriberConst.LOGIN_OUT_B)
             {
                 //如果没有异常信息
                 if (loggingMonitor.Exception == null)
@@ -59,8 +58,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 else
                 {
                     //添加到异常日志
-                    await CreateOperationLog(operation, path, loggingMonitor,
-                        client);
+                    await CreateOperationLog(operation, path, loggingMonitor, client);
                 }
             }
             else
@@ -69,8 +67,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 if (!operation.Contains("/") && method == "POST")
                 {
                     //添加到操作日志
-                    await CreateOperationLog(operation, path, loggingMonitor,
-                        client);
+                    await CreateOperationLog(operation, path, loggingMonitor, client);
                 }
             }
         }
@@ -82,8 +79,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <param name="operation">访问类型</param>
     /// <param name="loggingMonitor">loggingMonitor</param>
     /// <param name="clientInfo">客户端信息</param>
-    private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor,
-        ClientInfo clientInfo)
+    private async Task CreateVisitLog(string operation, LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
     {
         string name;//用户姓名
         string opAccount;//用户账号
@@ -98,18 +94,14 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         else
         {
             //如果是登录出，用户信息就从AuthorizationClaims里拿
-            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.NAME)
-                .Select(it => it.Value).FirstOrDefault();
-            opAccount = loggingMonitor.AuthorizationClaims
-                .Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
+            name = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.NAME).Select(it => it.Value).FirstOrDefault();
+            opAccount = loggingMonitor.AuthorizationClaims.Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
         }
         //日志表实体
         var devLogVisit = new SysLogVisit
         {
             Name = operation,
-            Category = operation == EventSubscriberConst.LOGIN_B
-                ? CateGoryConst.LOG_LOGIN
-                : CateGoryConst.LOG_LOGOUT,
+            Category = operation == EventSubscriberConst.LOGIN_B ? CateGoryConst.LOG_LOGIN : CateGoryConst.LOG_LOGOUT,
             ExeStatus = SysLogConst.SUCCESS,
             OpAddress = GetLoginAddress(loggingMonitor.RemoteIPv4),
             OpIp = loggingMonitor.RemoteIPv4,
@@ -130,20 +122,16 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
     /// <param name="loggingMonitor">loggingMonitor</param>
     /// <param name="clientInfo">客户端信息</param>
     /// <returns></returns>
-    private async Task CreateOperationLog(string operation, string path,
-        LoggingMonitorJson loggingMonitor, ClientInfo clientInfo)
+    private async Task CreateOperationLog(string operation, string path, LoggingMonitorJson loggingMonitor,
+        ClientInfo clientInfo)
     {
         //用户名称
-        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.NAME)
-            .Select(it => it.Value).FirstOrDefault();
+        var name = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.NAME).Select(it => it.Value).FirstOrDefault();
         //账号
-        var opAccount = loggingMonitor.AuthorizationClaims
-            ?.Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
+        var opAccount = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
-        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0
-            ? null
-            : loggingMonitor.Parameters[0].Value.ToJsonString();
+        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0 ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
 
         //获取结果json字符串
         var resultJson = string.Empty;
@@ -151,11 +139,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             if (loggingMonitor.ReturnInformation.Value != null)//如果返回值不为空
             {
-                var time = loggingMonitor.ReturnInformation.Value.Time != null
-                    ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time)
-                    : DateTime.Now;//转成时间
-                loggingMonitor.ReturnInformation.Value.Time =
-                    time.ToString(CultureInfo.CurrentCulture);//转成字符串
+                var time = loggingMonitor.ReturnInformation.Value.Time != null ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time) : DateTime.Now;//转成时间
+                loggingMonitor.ReturnInformation.Value.Time = time.ToString(CultureInfo.CurrentCulture);//转成字符串
                 resultJson = loggingMonitor.ReturnInformation.Value.ToJsonString();
             }
         }
@@ -185,8 +170,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             devLogOperate.Category = CateGoryConst.LOG_EXCEPTION;//操作类型为异常
             devLogOperate.ExeStatus = SysLogConst.FAIL;//操作状态为失败
-            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":"
-                + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
+            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":" + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
         }
         await _db.InsertableWithAttr(devLogOperate).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
     }
@@ -209,9 +193,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
                 ipInfo.City,
                 ipInfo.NetworkOperator
             };//定义登录地址列表
-            loginAddress =
-                string.Join("|",
-                    loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
+            loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
         }
         catch (global::System.Exception ex)
         {

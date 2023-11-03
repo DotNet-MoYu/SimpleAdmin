@@ -6,324 +6,324 @@
     <members>
         <member name="T:SimpleAdmin.Core.CodeGenAttribute">
             <summary>
-                代码生成
+            代码生成
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IgnoreInitTableAttribute">
             <summary>
-                忽略初始化表
+            忽略初始化表
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IgnoreSeedDataAddAttribute">
             <summary>
-                种子数据忽略新增
+            种子数据忽略新增
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IgnoreSeedDataUpdateAttribute">
             <summary>
-                种子数据忽略修改
+            种子数据忽略修改
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.RolePermissionAttribute">
             <summary>
-                需要角色授权权限
+            需要角色授权权限
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IgnoreRolePermissionAttribute">
             <summary>
-                忽略角色授权权限
+            忽略角色授权权限
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.SuperAdminAttribute">
             <summary>
-                管理员才能访问特性
+            管理员才能访问特性
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IgnoreSuperAdminAttribute">
             <summary>
-                忽略超级管理员才能访问特性
+            忽略超级管理员才能访问特性
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdNotNull">
             <summary>
-                验证Id不能为 空
+            验证Id不能为 空
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdsNotNull">
             <summary>
-                验证Id列表不能为空
+            验证Id列表不能为空
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.BaseFileInput">
             <summary>
-                文件上传输入参数
+            文件上传输入参数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseFileInput.File">
             <summary>
-                文件
+            文件
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.BaseIdInput">
             <summary>
-                主键Id输入参数
+            主键Id输入参数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseIdInput.Id">
             <summary>
-                主键Id
+            主键Id
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseIdListInput.Ids">
             <summary>
-                主键Id列表
+            主键Id列表
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.IdListInput">
             <summary>
-                Id列表输入
+            Id列表输入
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.BasePageInput">
             <summary>
-                全局分页查询输入参数
+            全局分页查询输入参数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BasePageInput.PageNum">
             <summary>
-                当前页码
+            当前页码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BasePageInput.PageSize">
             <summary>
-                每页条数
+            每页条数
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BasePageInput.SortField">
             <summary>
-                排序字段
+            排序字段
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BasePageInput.SortOrder">
             <summary>
-                排序方式，升序：ascend；降序：descend"
+            排序方式，升序：ascend；降序：descend"
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BasePageInput.SearchKey">
             <summary>
-                关键字
+            关键字
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.BaseSelectorOutput">
             <summary>
-                基础选择器输出
+            基础选择器输出
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseSelectorOutput.Value">
             <summary>
-                值
+             值
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseSelectorOutput.Label">
             <summary>
-                显示文本
+             显示文本
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.GzipCompressionComponent">
             <summary>
-                Gzip压缩组件
+            Gzip压缩组件
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingConsoleComponent">
             <summary>
-                日志写入文件的组件
+            日志写入文件的组件
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingFileComponent">
             <summary>
-                日志写入文件的组件
+            日志写入文件的组件
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.LoggingFileComponent.SetLogOptions(Furion.Logging.FileLoggerOptions,System.Nullable{Microsoft.Extensions.Logging.LogLevel})">
             <summary>
-                日志格式化
+            日志格式化
             </summary>
             <param name="options"></param>
             <param name="logLevel"></param>
         </member>
         <member name="T:SimpleAdmin.Core.ClaimConst">
             <summary>
-                授权用户常量
+            授权用户常量
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ClaimConst.USER_ID">
             <summary>
-                用户Id
+            用户Id
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ClaimConst.ACCOUNT">
             <summary>
-                账号
+            账号
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ClaimConst.NAME">
             <summary>
-                名称
+            名称
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ClaimConst.IS_SUPER_ADMIN">
             <summary>
-                账号类型
+            账号类型
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ClaimConst.ORG_ID">
             <summary>
-                组织机构Id
+            组织机构Id
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.SimpleAdminConst.ZERO">
             <summary>
-                0
+            0
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.MqttMessage">
             <summary>
-                mqtt消息
+            mqtt消息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.MqttMessage.MsgType">
             <summary>
-                消息分类
+            消息分类
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.MqttMessage.Data">
             <summary>
-                消息内容
+            消息内容
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.MqttMessage.DetTime">
             <summary>
-                时间
+            时间
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.TokenInfo">
             <summary>
-                Token信息
+            Token信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.ClientIds">
             <summary>
-                MQTT客户端ID列表
+            MQTT客户端ID列表
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.Device">
             <summary>
-                设备
+            设备
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.LoginClientType">
             <summary>
-                登录端
+            登录端
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.Expire">
             <summary>
-                过期时间
+            过期时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.Token">
             <summary>
-                Token
+            Token
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.TokenTimeout">
             <summary>
-                超时时间
+            超时时间
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.TokenRemain">
             <summary>
-                token剩余有效期
+            token剩余有效期
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.TokenInfo.TokenRemainPercent">
             <summary>
-                token剩余有效期百分比
+            token剩余有效期百分比
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.AuthDeviceTypeEnum">
             <summary>
-                登录设备类型枚举
+            登录设备类型枚举
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.AuthDeviceTypeEnum.PC">
             <summary>
-                PC端
+            PC端
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.AuthDeviceTypeEnum.APP">
             <summary>
-                移动端
+            移动端
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.AuthDeviceTypeEnum.MINI">
             <summary>
-                小程序
+            小程序
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoginClientTypeEnum">
             <summary>
-                登录端类型枚举
+            登录端类型枚举
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.LoginClientTypeEnum.B">
             <summary>
-                B端
+            B端
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.LoginClientTypeEnum.C">
             <summary>
-                C端
+            C端
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.ErrorCodeEnum">
             <summary>
-                通用错误码
+            通用错误码
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0000">
             <summary>
-                系统异常
+            系统异常
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0001">
             <summary>
-                数据不存在
+            数据不存在
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0002">
             <summary>
-                删除失败
+            删除失败
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0003">
             <summary>
-                操作失败
+            操作失败
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.ErrorCodeEnum.A0004">
             <summary>
-                没有权限
+            没有权限
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Extension.LinqExtension">
             <summary>
-                Linq扩展
+            Linq扩展
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Extension.LinqExtension.ContainsAll``1(System.Collections.Generic.List{``0},System.Collections.Generic.List{``0})">
             <summary>
-                是否都包含
+            是否都包含
             </summary>
             <typeparam name="T"></typeparam>
             <param name="first">第一个列表</param>
@@ -332,19 +332,19 @@
         </member>
         <member name="T:SimpleAdmin.Core.ObjectExtension">
             <summary>
-                object拓展
+            object拓展
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.ObjectExtension.ToObject(System.String)">
             <summary>
-                json字符串序列化
+            json字符串序列化
             </summary>
             <param name="json"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.ObjectExtension.ToObject``1(System.String)">
             <summary>
-                json字符串序列化
+            json字符串序列化
             </summary>
             <typeparam name="T"></typeparam>
             <param name="json"></param>
@@ -352,120 +352,120 @@
         </member>
         <member name="M:SimpleAdmin.Core.ObjectExtension.ToJObject(System.String)">
             <summary>
-                json字符串序列化
+            json字符串序列化
             </summary>
             <param name="json"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.BaseOptions">
             <summary>
-                默认业务配置
+            默认业务配置
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseOptions.InitTable">
             <summary>
-                初始化表
+            初始化表
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.BaseOptions.InitSeedData">
             <summary>
-                初始化数据
+            初始化数据
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingSetting">
             <summary>
-                日志配置
+            日志配置
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.Monitor">
             <summary>
-                LoggingMonitor配置
+            LoggingMonitor配置
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.MessageFormat">
             <summary>
-                是否日志消息格式化
+            是否日志消息格式化
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevel">
             <summary>
-                日志等级
+            日志等级
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingSetting.MonitorOptions">
             <summary>
-                LoggingMonitor配置
+            LoggingMonitor配置
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.MonitorOptions.Write">
             <summary>
-                写入文件
+            写入文件
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.MonitorOptions.Console">
             <summary>
-                写入控制台
+            写入控制台
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.LoggingSetting.LogLevelOptions">
             <summary>
-                日志等级
+            日志等级
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevelOptions.Default">
             <summary>
-                默认日志等级
+            默认日志等级
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.LoggingSetting.LogLevelOptions.MaxLevel">
             <summary>
-                最大日志等级
+            最大日志等级
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Startup">
             <summary>
-                AppStartup启动类
+            AppStartup启动类
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.SimpleAdminResult`1">
             <summary>
-                全局返回结果
+            全局返回结果
             </summary>
             <typeparam name="T"></typeparam>
         </member>
         <member name="P:SimpleAdmin.Core.SimpleAdminResult`1.Code">
             <summary>
-                状态码
+            状态码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SimpleAdminResult`1.Msg">
             <summary>
-                错误信息
+            错误信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SimpleAdminResult`1.Data">
             <summary>
-                数据
+            数据
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SimpleAdminResult`1.Extras">
             <summary>
-                附加数据
+            附加数据
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.SimpleAdminResult`1.Time">
             <summary>
-                时间
+            时间
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.SimpleAdminResultProvider">
             <summary>
-                规范化RESTful风格返回值
+            规范化RESTful风格返回值
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext,Furion.FriendlyException.ExceptionMetadata)">
             <summary>
-                异常返回
+            异常返回
             </summary>
             <param name="context"></param>
             <param name="metadata"></param>
@@ -473,7 +473,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.OnSucceeded(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext,System.Object)">
             <summary>
-                成功返回
+            成功返回
             </summary>
             <param name="context"></param>
             <param name="data"></param>
@@ -481,7 +481,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.OnValidateFailed(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext,Furion.DataValidation.ValidationMetadata)">
             <summary>
-                验证失败返回
+            验证失败返回
             </summary>
             <param name="context"></param>
             <param name="metadata"></param>
@@ -489,16 +489,16 @@
         </member>
         <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.OnResponseStatusCodes(Microsoft.AspNetCore.Http.HttpContext,System.Int32,Furion.UnifyResult.UnifyResultSettingsOptions)">
             <summary>
-                状态码响应拦截
+            状态码响应拦截
             </summary>
             <param name="context"></param>
             <param name="statusCode"></param>
             <param name="unifyResultSettings"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.RESTfulResult(System.Int32,System.Boolean,System.Object,System.Object)">
+        <member name="M:SimpleAdmin.Core.SimpleAdminResultProvider.ResTfulResult(System.Int32,System.Boolean,System.Object,System.Object)">
             <summary>
-                返回 RESTful 风格结果集
+            返回 RESTful 风格结果集
             </summary>
             <param name="statusCode">状态码</param>
             <param name="succeeded">是否成功</param>
@@ -508,52 +508,52 @@
         </member>
         <member name="T:SimpleAdmin.Core.Utils.CaptchaInfo">
             <summary>
-                验证码信息
+            验证码信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.CaptchaInfo.Code">
             <summary>
-                验证码
+            验证码
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.CaptchaInfo.Image">
             <summary>
-                验证码数据流
+            验证码数据流
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.CaptchaInfo.Base64Str">
             <summary>
-                base64
+            base64
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.CaptchaType">
             <summary>
-                验证码类型
+            验证码类型
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.CaptchaType.NUM">
             <summary>
-                纯数字验证码
+            纯数字验证码
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.CaptchaType.CHAR">
             <summary>
-                数字加字母验证码
+            数字加字母验证码
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.CaptchaType.ARITH">
             <summary>
-                数字运算验证码
+            数字运算验证码
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.CaptchaUtil">
             <summary>
-                生成验证码功能
+            生成验证码功能
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CaptchaUtil.CreateCaptcha(SimpleAdmin.Core.Utils.CaptchaType,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-                获取验证码
+            获取验证码
             </summary>
             <param name="length">验证码数</param>
             <param name="width">长度</param>
@@ -564,193 +564,193 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CaptchaUtil.CreateNumCode(System.Int32)">
             <summary>
-                获取数字验证码
+            获取数字验证码
             </summary>
             <param name="n">验证码数</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CaptchaUtil.CreateCharCode(System.Int32)">
             <summary>
-                获取字符验证码
+            获取字符验证码
             </summary>
             <param name="n">验证码数</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CaptchaUtil.CreateArithCode(System.String@)">
             <summary>
-                获取运算符验证码
+            获取运算符验证码
             </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.CommonUtils">
             <summary>
-                公共功能
+            公共功能
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CommonUtils.GetSingleId">
             <summary>
-                获取唯一Id
+            获取唯一Id
             </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.CryptogramUtil">
             <summary>
-                加解密功能
+            加解密功能
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CryptogramUtil.Sm2Decrypt(System.String)">
             <summary>
-                SM2解密
+            SM2解密
             </summary>
             <param name="str">密文</param>
             <returns>明文</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CryptogramUtil.Sm2Encrypt(System.String)">
             <summary>
-                SM2加密
+            SM2加密
             </summary>
             <param name="str">明文</param>
             <returns>密文</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CryptogramUtil.Sm4Decrypt(System.String)">
             <summary>
-                SM4解密
+            SM4解密
             </summary>
             <param name="str">密文</param>
             <returns>明文</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.CryptogramUtil.Sm4Encrypt(System.String)">
             <summary>
-                SM4加密
+            SM4加密
             </summary>
             <param name="str">明文</param>
             <returns>密文</returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM2Util">
             <summary>
-                SM2加密解密
+            SM2加密解密
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM2Util.PublicKey">
             <summary>
-                公钥
+            公钥
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM2Util.PrivateKey">
             <summary>
-                私钥
+            私钥
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2Util.Encrypt(System.String)">
             <summary>
-                公钥加密明文
+            公钥加密明文
             </summary>
             <param name="plainText">明文</param>
             <returns>密文</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2Util.Decrypt(System.String)">
             <summary>
-                私钥解密密文
+            私钥解密密文
             </summary>
             <param name="cipherText">密文</param>
             <returns>明文</returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM4Util">
             <summary>
-                Sm4算法
-                对标国际DES算法
+            Sm4算法
+            对标国际DES算法
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM4Util.Data">
             <summary>
-                数据
+            数据
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM4Util.Key">
             <summary>
-                秘钥
+            秘钥
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM4Util.Iv">
             <summary>
-                向量
+            向量
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM4Util.HexString">
             <summary>
-                明文是否是十六进制
+            明文是否是十六进制
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM4Util.CryptoMode">
             <summary>
-                加密模式(默认ECB)
-                统一改为ECB模式
+            加密模式(默认ECB)
+            统一改为ECB模式
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4Util.EncryptECB(SimpleAdmin.Core.Utils.SM4Util)">
             <summary>
-                ECB加密
+            ECB加密
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4Util.EncryptCBC(SimpleAdmin.Core.Utils.SM4Util)">
             <summary>
-                CBC加密
+            CBC加密
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4Util.Decrypt(SimpleAdmin.Core.Utils.SM4Util)">
             <summary>
-                解密
+            解密
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4Util.DecryptECB(SimpleAdmin.Core.Utils.SM4Util)">
             <summary>
-                ECB解密
+             ECB解密
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4Util.DecryptCBC(SimpleAdmin.Core.Utils.SM4Util)">
             <summary>
-                CBC解密
+            CBC解密
             </summary>
             <param name="entity"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM4Util.Sm4CryptoEnum">
             <summary>
-                加密类型
+            加密类型
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4Util.Sm4CryptoEnum.ECB">
             <summary>
-                ECB(电码本模式)
+            ECB(电码本模式)
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4Util.Sm4CryptoEnum.CBC">
             <summary>
-                CBC(密码分组链接模式)
+            CBC(密码分组链接模式)
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM2CryptoUtil">
             <summary>
-                SM2工具类
+            SM2工具类
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.GetKey">
             <summary>
-                获取公钥私钥
+            获取公钥私钥
             </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Encrypt(System.String,System.String)">
             <summary>
-                加密
+            加密
             </summary>
             <param name="publickey">公钥</param>
             <param name="sourceData">需要加密的值</param>
@@ -758,23 +758,23 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Encrypt(System.Byte[],System.Byte[])">
             <summary>
-                加密
+            加密
             </summary>
             <param name="publicKey">公钥</param>
             <param name="data">需要加密的值</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Decrypt(System.String,System.String)">
-            <summary>
-
-            </summary>
-            <param name="privateKey"></param>
-            <param name="encryptedData"></param>
-            <returns></returns>
+             <summary>
+            
+             </summary>
+             <param name="privateKey"></param>
+             <param name="encryptedData"></param>
+             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM2CryptoUtil.Decrypt(System.Byte[],System.Byte[])">
             <summary>
-                解密
+            解密
             </summary>
             <param name="privateKey"></param>
             <param name="encryptedData"></param>
@@ -782,22 +782,22 @@
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM2CryptoUtil.SM2Model.PublicKey">
             <summary>
-                公钥
+            公钥
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.SM2CryptoUtil.SM2Model.PrivateKey">
             <summary>
-                私钥
+            私钥
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.SM4CryptoUtil">
             <summary>
-                SM4工具类
+            SM4工具类
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.GetULongByBe(System.Byte[],System.Int32)">
             <summary>
-                加密 非线性τ函数B=τ(A)
+            加密 非线性τ函数B=τ(A)
             </summary>
             <param name="b"></param>
             <param name="i"></param>
@@ -805,7 +805,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.PutULongToBe(System.Int64,System.Byte[],System.Int32)">
             <summary>
-                解密 非线性τ函数B=τ(A)
+            解密 非线性τ函数B=τ(A)
             </summary>
             <param name="n"></param>
             <param name="b"></param>
@@ -813,7 +813,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Rotl(System.Int64,System.Int32)">
             <summary>
-                循环移位,为32位的x循环左移n位
+            循环移位,为32位的x循环左移n位
             </summary>
             <param name="x"></param>
             <param name="n"></param>
@@ -821,43 +821,43 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Swap(System.Int64[],System.Int32)">
             <summary>
-                将密钥逆序
+            将密钥逆序
             </summary>
             <param name="sk"></param>
             <param name="i"></param>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4CryptoUtil.SboxTable">
             <summary>
-                S盒
+            S盒
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4CryptoUtil.FK">
             <summary>
-                系统参数FK
+            系统参数FK
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.SM4CryptoUtil.CK">
             <summary>
-                固定参数CK
+            固定参数CK
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4Sbox(System.Byte)">
             <summary>
-                Sm4的S盒取值
+            Sm4的S盒取值
             </summary>
             <param name="inch"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4Lt(System.Int64)">
             <summary>
-                线性变换 L
+            线性变换 L
             </summary>
             <param name="ka"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4F(System.Int64,System.Int64,System.Int64,System.Int64,System.Int64)">
             <summary>
-                轮函数 F
+            轮函数 F
             </summary>
             <param name="x0"></param>
             <param name="x1"></param>
@@ -868,21 +868,21 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4CalciRk(System.Int64)">
             <summary>
-                轮密钥rk
+            轮密钥rk
             </summary>
             <param name="ka"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.SetKey(System.Int64[],System.Byte[])">
             <summary>
-                加密密钥
+            加密密钥
             </summary>
             <param name="SK"></param>
             <param name="key"></param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4OneRound(System.Int64[],System.Byte[],System.Byte[])">
             <summary>
-                解密函数
+            解密函数
             </summary>
             <param name="sk">轮密钥</param>
             <param name="input">输入分组的密文</param>
@@ -890,7 +890,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Padding(System.Byte[],System.Int32)">
             <summary>
-                补足 16 进制字符串的 0 字符，返回不带 0x 的16进制字符串
+            补足 16 进制字符串的 0 字符，返回不带 0x 的16进制字符串
             </summary>
             <param name="input"></param>
             <param name="mode">1表示加密，0表示解密</param>
@@ -898,21 +898,21 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.SetKeyEnc(SimpleAdmin.Core.Utils.Sm4Context,System.Byte[])">
             <summary>
-                设置加密的key
+            设置加密的key
             </summary>
             <param name="ctx"></param>
             <param name="key"></param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4SetKeyDec(SimpleAdmin.Core.Utils.Sm4Context,System.Byte[])">
             <summary>
-                设置解密的key
+            设置解密的key
             </summary>
             <param name="ctx"></param>
             <param name="key"></param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4CryptEcb(SimpleAdmin.Core.Utils.Sm4Context,System.Byte[])">
             <summary>
-                ECB
+            ECB
             </summary>
             <param name="ctx"></param>
             <param name="input"></param>
@@ -920,7 +920,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.SM4CryptoUtil.Sm4CryptCbc(SimpleAdmin.Core.Utils.Sm4Context,System.Byte[],System.Byte[])">
             <summary>
-                CBC
+            CBC
             </summary>
             <param name="ctx"></param>
             <param name="iv"></param>
@@ -929,39 +929,39 @@
         </member>
         <member name="T:SimpleAdmin.Core.Utils.Sm4Context">
             <summary>
-                SM4处理中心
+            SM4处理中心
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.Sm4Context.Mode">
             <summary>
-                1表示加密，0表示解密
+            1表示加密，0表示解密
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.Sm4Context.Key">
             <summary>
-                密钥
+            密钥
             </summary>
         </member>
         <member name="F:SimpleAdmin.Core.Utils.Sm4Context.IsPadding">
             <summary>
-                是否补足16进制字符串
+            是否补足16进制字符串
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.Utils.AvatarUtil">
             <summary>
-                头像功能
+            头像功能
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.AvatarUtil.GetNameColor(System.String)">
             <summary>
-                获取姓名对应的颜色值
+            获取姓名对应的颜色值
             </summary>
             <param name="name"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.AvatarUtil.GetNameImage(System.String,System.Int32,System.Int32)">
             <summary>
-                获取姓名对应的图片
+            获取姓名对应的图片
             </summary>
             <param name="name"></param>
             <param name="width"></param>
@@ -970,7 +970,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.AvatarUtil.GetNameImageBase64(System.String,System.Int32,System.Int32)">
             <summary>
-                获取图片base64格式
+            获取图片base64格式
             </summary>
             <param name="name">名称</param>
             <param name="width">宽</param>
@@ -979,49 +979,49 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.AvatarUtil.IsChinese(System.String)">
             <summary>
-                用 正则表达式 判断字符是不是汉字
+            用 正则表达式 判断字符是不是汉字
             </summary>
             <param name="text">待判断字符或字符串</param>
             <returns>真：是汉字；假：不是</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(SkiaSharp.SKImage)">
             <summary>
-                图片转换成base64
+            图片转换成base64
             </summary>
             <param name="img"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ImgToBase64String(SkiaSharp.SKBitmap)">
             <summary>
-                图片转换成base64
+            图片转换成base64
             </summary>
             <param name="bmp"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetBitmapFromBase64(System.String)">
             <summary>
-                base64转bitmap
+            base64转bitmap
             </summary>
-            <param name="base64string"></param>
+            <param name="base64String"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetSKBitmapFromBase64(System.String)">
+        <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetSkBitmapFromBase64(System.String)">
             <summary>
-                base64转bitmap
+            base64转bitmap
             </summary>
-            <param name="base64string"></param>
+            <param name="base64String"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ToImageBase64(System.String)">
             <summary>
-                base64转image格式
+            base64转image格式
             </summary>
-            <param name="base64string"></param>
+            <param name="base64String"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.Drawing.Image,System.Drawing.Size)">
             <summary>
-                重新修改尺寸
+            重新修改尺寸
             </summary>
             <param name="imgToResize">图片</param>
             <param name="size">尺寸</param>
@@ -1029,25 +1029,25 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(System.Drawing.Bitmap,System.Int32,System.Int32)">
             <summary>
-                Resize图片
+            Resize图片
             </summary>
-            <param name="bmp">原始Bitmap</param>
+            <param name="bmp">原始Bitmap </param>
             <param name="newW">新的宽度</param>
             <param name="newH">新的高度</param>
             <returns>处理以后的图片</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.ResizeImage(SkiaSharp.SKBitmap,System.Int32,System.Int32)">
             <summary>
-                Resize图片
+            Resize图片
             </summary>
-            <param name="bmp">原始Bitmap</param>
+            <param name="bmp">原始Bitmap </param>
             <param name="newW">新的宽度</param>
             <param name="newH">新的高度</param>
             <returns>处理以后的图片</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(System.Drawing.Bitmap,System.Int32,System.Int32)">
             <summary>
-                获取缩略图
+            获取缩略图
             </summary>
             <param name="bmp"></param>
             <param name="w">宽</param>
@@ -1056,7 +1056,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ImageUtil.GetPicThumbnail(SkiaSharp.SKBitmap,System.Int32,System.Int32)">
             <summary>
-                获取缩略图
+            获取缩略图
             </summary>
             <param name="bmp"></param>
             <param name="w">宽</param>
@@ -1065,12 +1065,12 @@
         </member>
         <member name="T:SimpleAdmin.Core.Utils.PwdUtil">
             <summary>
-                密码相关通用类
+            密码相关通用类
             </summary>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.PwdUtil.Similarity(System.String,System.String)">
             <summary>
-                密码相似度
+            密码相似度
             </summary>
             <param name="oldPassword"></param>
             <param name="newPassword"></param>
@@ -1078,7 +1078,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.PwdUtil.LevenshteinDistance(System.String,System.String)">
             <summary>
-                计算莱文斯坦距离算法
+            计算莱文斯坦距离算法
             </summary>
             <param name="s1"></param>
             <param name="s2"></param>
@@ -1086,7 +1086,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String,System.Int32,System.Int32)">
             <summary>
-                压缩单个文件
+            压缩单个文件
             </summary>
             <param name="fileToZip">要压缩的文件</param>
             <param name="zipedFile">压缩后的文件</param>
@@ -1095,28 +1095,28 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.String,System.String)">
             <summary>
-                压缩单个文件
+            压缩单个文件
             </summary>
             <param name="fileToZip">要进行压缩的文件名</param>
             <param name="zipedFile">压缩后生成的压缩文件名</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFile(System.Collections.Generic.List{System.String},System.String)">
             <summary>
-                压缩多个文件到指定路径
+            压缩多个文件到指定路径
             </summary>
             <param name="sourceFileNames">压缩到哪个路径</param>
             <param name="zipFileName">压缩文件名称</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFileDirectory(System.String,System.String)">
             <summary>
-                压缩多层目录
+            压缩多层目录
             </summary>
             <param name="strDirectory">待压缩目录</param>
             <param name="zipedFile">压缩后生成的压缩文件名，绝对路径</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFileDirectory(System.String,System.String,System.Collections.Generic.List{System.String})">
             <summary>
-                压缩多层目录
+            压缩多层目录
             </summary>
             <param name="strDirectory">待压缩目录</param>
             <param name="zipedFile">压缩后生成的压缩文件名，绝对路径</param>
@@ -1124,7 +1124,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipSetp(System.String,ICSharpCode.SharpZipLib.Zip.ZipOutputStream,System.String,System.Collections.Generic.List{System.String})">
             <summary>
-                递归遍历目录
+            递归遍历目录
             </summary>
             <param name="strDirectory">需遍历的目录</param>
             <param name="s">压缩输出流对象</param>
@@ -1133,7 +1133,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String,System.Boolean,System.String)">
             <summary>
-                解压缩一个 zip 文件。
+            解压缩一个 zip 文件。
             </summary>
             <param name="zipedFile">压缩文件</param>
             <param name="strDirectory">解压目录</param>
@@ -1142,7 +1142,7 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String,System.Boolean)">
             <summary>
-                解压缩一个 zip 文件。
+            解压缩一个 zip 文件。
             </summary>
             <param name="zipedFile">压缩文件</param>
             <param name="strDirectory">解压目录</param>
@@ -1150,15 +1150,15 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.UnZip(System.String,System.String)">
             <summary>
-                解压缩一个 zip 文件。
-                覆盖已存在的文件。
+            解压缩一个 zip 文件。
+            覆盖已存在的文件。
             </summary>
             <param name="zipedFile">压缩文件</param>
             <param name="strDirectory">解压目录</param>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetFiles(System.String,System.Collections.Generic.List{System.String})">
             <summary>
-                获取压缩文件中指定类型的文件
+            获取压缩文件中指定类型的文件
             </summary>
             <param name="zipedFile">压缩文件</param>
             <param name="fileExtension">文件类型(.txt|.exe)</param>
@@ -1166,14 +1166,14 @@
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetFiles(System.String)">
             <summary>
-                获取压缩文件中的所有文件
+            获取压缩文件中的所有文件
             </summary>
             <param name="zipedFile">压缩文件</param>
             <returns>文件名称列表(包含子目录)</returns>
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.ZipFiles(System.String,System.Collections.Generic.List{SimpleAdmin.Core.Utils.FileItem},System.String@,System.Boolean)">
             <summary>
-                打包线上线下文件
+            打包线上线下文件
             </summary>
             <param name="zipName">压缩文件名称</param>
             <param name="fileList">文件列表</param>
@@ -1186,37 +1186,38 @@
             是否删除原文件夹
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllFies(System.String)">
-
-            获取所有文件
-
-
+            
+             获取所有文件
+            
+            
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirsFiles(System.IO.DirectoryInfo[],System.Collections.Generic.Dictionary{System.String,System.DateTime})">
-
-            获取一个文件夹下的所有文件夹里的文件
-
-
+            
+             获取一个文件夹下的所有文件夹里的文件
+            
+            
+            
         </member>
         <member name="M:SimpleAdmin.Core.Utils.ZipUtils.GetAllDirFiles(System.IO.DirectoryInfo,System.Collections.Generic.Dictionary{System.String,System.DateTime})">
-
-            获取一个文件夹下的文件
-
-            目录名称
-            文件列表HastTable
+            
+             获取一个文件夹下的文件
+            
+             目录名称
+             文件列表HastTable
         </member>
         <member name="T:SimpleAdmin.Core.Utils.FileItem">
             <summary>
-                文件对象
+            文件对象
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.FileItem.FileName">
             <summary>
-                文件名称
+            文件名称
             </summary>
         </member>
         <member name="P:SimpleAdmin.Core.Utils.FileItem.FilePath">
             <summary>
-                文件路径
+            文件路径
             </summary>
         </member>
     </members>

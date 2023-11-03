@@ -13,7 +13,7 @@
  */
 import { defineStore } from "pinia";
 import { Login } from "@/api/interface";
-import piniaPersistConfig from "@/config/piniaPersist";
+import piniaPersistConfig from "@/stores/helper/persist";
 import { getLoginUserApi } from "@/api";
 import { ElNotification } from "element-plus";
 /* UserState */

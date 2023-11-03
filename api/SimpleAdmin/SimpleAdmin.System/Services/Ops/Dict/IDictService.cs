@@ -83,4 +83,11 @@ public interface IDictService : ITransient
     /// <param name="input">查询参数</param>
     /// <returns>字典树形结构</returns>
     Task<List<SysDict>> Tree(DictTreeInput input);
+
+    /// <summary>
+    /// 根据字典值获取子级字典
+    /// </summary>
+    /// <param name="dictValue">字典值</param>
+    /// <returns></returns>
+    Task<List<SysDict>> GetChildrenByDictValue(string dictValue);
 }

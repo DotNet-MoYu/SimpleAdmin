@@ -129,3 +129,7 @@ public class RoleSelectorInput : BasePageInput
     /// </summary>
     public string Category { get; set; }
 }
+
+public class RoleTreeInput
+{
+}

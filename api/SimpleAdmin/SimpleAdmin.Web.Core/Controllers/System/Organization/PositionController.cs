@@ -22,6 +22,8 @@ public class PositionController : BaseController
         _sysPositionService = sysPositionService;
     }
 
+    #region Get
+
     /// <summary>
     /// 职位分页查询
     /// </summary>
@@ -33,6 +35,21 @@ public class PositionController : BaseController
     {
         return await _sysPositionService.Page(input);
     }
+
+    /// <summary>
+    /// 获取职位树
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("tree")]
+    [DisplayName("获取职位树")]
+    public async Task<dynamic> Tree([FromQuery] PositionTreeInput input)
+    {
+        return await _sysPositionService.Tree(input);
+    }
+
+    #endregion
+
+    #region Post
 
     /// <summary>
     /// 添加职位
@@ -69,4 +86,6 @@ public class PositionController : BaseController
     {
         await _sysPositionService.Delete(input);
     }
+
+    #endregion
 }

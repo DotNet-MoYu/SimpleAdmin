@@ -69,8 +69,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                         Subject = subject,
                         Content = "请及时修改初始密码",
                         Category = CateGoryConst.MESSAGE_INFORM,
-                        ReceiverIdList = new List<long>
-                            { sysUser.Id }
+                        ReceiverIdList = new List<long> { sysUser.Id }
                     });
                 }
                 sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间
@@ -88,8 +87,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                             Subject = subject,
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
                             Category = CateGoryConst.MESSAGE_INFORM,
-                            ReceiverIdList = new List<long>
-                                { sysUser.Id }
+                            ReceiverIdList = new List<long> { sysUser.Id }
                         });
                     }
                     sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间,避免重复提醒
@@ -151,8 +149,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         try
         {
             var ipInfo = IpTool.Search(ip);
-            var loginAddressList = new List<string>
-                { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
+            var loginAddressList = new List<string> { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
             var loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
             return loginAddress;
         }

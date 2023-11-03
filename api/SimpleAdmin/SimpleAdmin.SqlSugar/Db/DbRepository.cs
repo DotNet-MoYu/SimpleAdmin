@@ -120,8 +120,7 @@ public class DbRepository<T> : SimpleClient<T> where T : class, new()
     /// <param name="whereExpression">条件表达式</param>
     /// <param name="getTableNamesFunc">分表查询表达式</param>
     /// <returns>实体</returns>
-    public virtual Task<T> GetFirstSplitTableAsync(Expression<Func<T, bool>> whereExpression,
-        Func<List<SplitTableInfo>, IEnumerable<SplitTableInfo>> getTableNamesFunc)
+    public virtual Task<T> GetFirstSplitTableAsync(Expression<Func<T, bool>> whereExpression, Func<List<SplitTableInfo>, IEnumerable<SplitTableInfo>> getTableNamesFunc)
     {
         return Context.Queryable<T>().Where(whereExpression).SplitTable(getTableNamesFunc).FirstAsync();
     }

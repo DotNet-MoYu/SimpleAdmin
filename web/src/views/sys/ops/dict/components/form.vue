@@ -9,22 +9,20 @@
       :hide-required-asterisk="dictProps.disabled"
       label-width="auto"
     >
-      <el-form-item label="字典名称" prop="dictLabel">
+      <s-form-item label="字典名称" prop="dictLabel">
         <el-input v-model="dictProps.record.dictLabel" placeholder="请填写单页名称" clearable></el-input>
-      </el-form-item>
-      <el-form-item label="字典值" prop="dictValue">
+      </s-form-item>
+      <s-form-item label="字典值" prop="dictValue">
         <el-input v-model="dictProps.record.dictValue" placeholder="请填写单页名称" clearable></el-input>
-      </el-form-item>
-      <el-form-item label="字典状态" prop="status">
+      </s-form-item>
+      <s-form-item label="字典状态" prop="status">
         <el-radio-group v-model="dictProps.record.status">
-          <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{
-            item.label
-          }}</el-radio-button>
+          <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
         </el-radio-group>
-      </el-form-item>
-      <el-form-item label="排序" prop="sortCode">
+      </s-form-item>
+      <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="dictProps.record.sortCode" show-input :min="1" />
-      </el-form-item>
+      </s-form-item>
     </el-form>
     <template #footer>
       <el-button @click="onClose"> 取消 </el-button>
@@ -84,9 +82,9 @@ function onOpen(props: DictProps) {
   console.log(dictProps.record);
 
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    dictDetailApi({ id: props.id }).then(res => {
+    dictDetailApi({ id: props.record.id }).then(res => {
       dictProps.record = res.data;
     });
   }

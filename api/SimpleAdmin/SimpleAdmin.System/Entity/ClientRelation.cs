@@ -30,7 +30,6 @@ public class ClientRelation : PrimaryKeyEntity
     /// <summary>
     /// 分类
     ///</summary>
-    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200,
-        IsNullable = true)]
+    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = true)]
     public string Category { get; set; }
 }

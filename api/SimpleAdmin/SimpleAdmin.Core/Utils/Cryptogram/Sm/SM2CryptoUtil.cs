@@ -67,8 +67,8 @@ public class SM2CryptoUtil
         }
 
         var source = new byte[data.Length];
-        Array.Copy(data, 0, source,
-            0, data.Length);
+        Array.Copy(data, 0, source, 0,
+            data.Length);
 
         var cipher = new Cipher();
         var sm2 = SM2.Instance;
@@ -171,8 +171,8 @@ public class SM2CryptoUtil
             if (n.ToByteArray().Length == 33)
             {
                 tmpd = new byte[32];
-                Array.Copy(n.ToByteArray(), 1, tmpd,
-                    0, 32);
+                Array.Copy(n.ToByteArray(), 1, tmpd, 0,
+                    32);
             }
             else if (n.ToByteArray().Length == 32)
             {
@@ -185,8 +185,8 @@ public class SM2CryptoUtil
                 {
                     tmpd[i] = 0;
                 }
-                Array.Copy(n.ToByteArray(), 0, tmpd,
-                    32 - n.ToByteArray().Length, n.ToByteArray().Length);
+                Array.Copy(n.ToByteArray(), 0, tmpd, 32 - n.ToByteArray().Length,
+                    n.ToByteArray().Length);
             }
             return tmpd;
         }

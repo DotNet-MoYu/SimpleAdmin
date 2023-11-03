@@ -29,11 +29,7 @@ const RenderTableColumn = (item: ColumnProps) => {
   return (
     <>
       {item.isShow && (
-        <el-table-column
-          {...item}
-          align={item.align ?? "center"}
-          showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "operation"}
-        >
+        <el-table-column {...item} align={item.align ?? "center"} showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "operation"}>
           {{
             default: (scope: RenderScope<any>) => {
               if (item._children) return item._children.map(child => RenderTableColumn(child));

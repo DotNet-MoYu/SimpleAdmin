@@ -39,15 +39,13 @@ public class ImportExportService : IImportExportService
             throw Oops.Bah("文件数据格式有误,请重新导入!");
 
         //导入结果输出
-        var importPreview = new ImportPreviewOutput<T>
-            { HasError = importResult.HasError };
+        var importPreview = new ImportPreviewOutput<T> { HasError = importResult.HasError };
         var headerMap = new Dictionary<string, string>();
         //遍历导入的表头列表信息
         importResult.ImporterHeaderInfos.ForEach(it =>
         {
             headerMap.Add(it.Header.Name, it.PropertyName);
-            var tableColumns = new TableColumns
-                { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
+            var tableColumns = new TableColumns { Title = it.Header.Name.Split("(")[0], DataIndex = it.PropertyName.FirstCharToLower() };//定义表头,部分表头有说明用(分组去掉说明
             var antTableAttribute = it.PropertyInfo.GetCustomAttribute<AntTableAttribute>();//获取表格特性
             if (antTableAttribute != null)
             {

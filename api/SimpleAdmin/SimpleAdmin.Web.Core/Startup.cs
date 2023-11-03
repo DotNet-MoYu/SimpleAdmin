@@ -28,8 +28,7 @@ public class Startup : AppStartup
         //定时任务
         //services.AddSchedule();
         //添加控制器相关
-        services.AddControllers()
-            .AddNewtonsoftJson(options => //配置json
+        services.AddControllers().AddNewtonsoftJson(options => //配置json
             {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();// 首字母小写（驼峰样式）
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";// 时间格式化
@@ -67,19 +66,18 @@ public class Startup : AppStartup
         // 添加状态码拦截中间件
         app.UseUnifyResultStatusCodes();
 
-        //静态文件访问配置
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            ServeUnknownFileTypes = true,
-            FileProvider = new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
-            OnPrepareResponse = c =>
-            {
-                c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
-                c.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
-            },
-            RequestPath = new PathString("/images")//src相当于别名，为了安全
-        });
+        //静态文件访问配置,暂时不开启
+        // app.UseStaticFiles(new StaticFileOptions
+        // {
+        //     ServeUnknownFileTypes = true,
+        //     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),//wwwroot相当于真实目录
+        //     OnPrepareResponse = c =>
+        //     {
+        //         c.Context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+        //         c.Context.Response.Headers.Append("Cache-Control", "public, max-age=604800");
+        //     },
+        //     RequestPath = new PathString("/files")//src相当于别名，为了安全
+        // });
         app.UseRouting();
 
 

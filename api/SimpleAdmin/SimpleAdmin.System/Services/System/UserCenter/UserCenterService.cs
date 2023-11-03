@@ -21,12 +21,8 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     private readonly ISysOrgService _sysOrgService;
     private readonly IMessageService _messageService;
 
-    public UserCenterService(ISysUserService userService,
-        IRelationService relationService,
-        IResourceService resourceService,
-        IMenuService menuService,
-        IConfigService configService,
-        ISysOrgService sysOrgService,
+    public UserCenterService(ISysUserService userService, IRelationService relationService, IResourceService resourceService,
+        IMenuService menuService, IConfigService configService, ISysOrgService sysOrgService,
         IMessageService messageService)
     {
         _userService = userService;
@@ -49,21 +45,17 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         if (userInfo != null)
         {
             //获取用户所拥有的资源集合
-            var resourceList =
-                await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id,
-                    CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
+            var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
             if (resourceList.Count == 0)//如果没有就获取角色的
                 //获取角色所拥有的资源集合
-                resourceList =
-                    await _relationService.GetRelationListByObjectIdListAndCategory(
-                        userInfo.RoleIdList, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
+                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList,
+                    CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
             var menuIdList = new HashSet<long>();
             //获取菜单Id集合
             menuIdList.AddRange(resourceList.Select(r => r.TargetId.ToLong()).ToList());
             //获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
-            var allModuleAndMenuAndSpaList =
-                await _resourceService.GetMenuAndSpaListByModuleId(input.Id);
+            var allModuleAndMenuAndSpaList = await _resourceService.GetMenuAndSpaListByModuleId(input.Id);
             var allMenuList = new List<SysResource>();//菜单列表
             var allSpaList = new List<SysResource>();//单页列表
             //遍历菜单集合
@@ -110,8 +102,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             return sysRelation.ExtJson.ToLower();
         }
         //如果没数据去系统配置里取默认的工作台
-        var devConfig = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE,
-            SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
+        var devConfig = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE, SysConfigConst.SYS_DEFAULT_WORKBENCH_DATA);
         if (devConfig != null)
         {
             return devConfig.ConfigValue.ToLower();//返回工作台信息
@@ -124,8 +115,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     {
         var orgList = await _sysOrgService.GetListAsync();//获取全部机构
         var parentOrgList = _sysOrgService.GetOrgParents(orgList, UserManager.OrgId);//获取父节点列表
-        var topOrg = parentOrgList.Where(it => it.ParentId == SimpleAdminConst.ZERO)
-            .FirstOrDefault();//获取顶级节点
+        var topOrg = parentOrgList.Where(it => it.ParentId == SimpleAdminConst.ZERO).FirstOrDefault();//获取顶级节点
         if (topOrg != null)
         {
             var orgChildList = await _sysOrgService.GetChildListById(topOrg.Id);//获取下级
@@ -167,8 +157,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             if (!input.Phone.MatchPhoneNumber())//判断是否是手机号格式
                 throw Oops.Bah("手机号码格式错误");
             input.Phone = CryptogramUtil.Sm4Encrypt(input.Phone);
-            var any = await IsAnyAsync(it =>
-                it.Phone == input.Phone && it.Id != UserManager.UserId);//判断是否有重复的
+            var any = await IsAnyAsync(it => it.Phone == input.Phone && it.Id != UserManager.UserId);//判断是否有重复的
             if (any)
                 throw Oops.Bah("系统已存在该手机号");
         }
@@ -180,7 +169,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         }
 
         //更新指定字段
-        var result = await UpdateAsync(it => new SysUser
+        var result = await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             Name = input.Name,
             Email = input.Email,
@@ -204,7 +193,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名
 
         //更新签名
-        var result = await UpdateAsync(it => new SysUser
+        var result = await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             Signature = newSignature
         }, it => it.Id == UserManager.UserId);
@@ -216,8 +205,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     public async Task UpdateWorkbench(UpdateWorkbenchInput input)
     {
         //关系表保存个人工作台
-        await _relationService.SaveRelation(CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA,
-            UserManager.UserId, null, input.WorkbenchData,
+        await _relationService.SaveRelation(CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA, UserManager.UserId, null, input.WorkbenchData,
             true);
     }
 
@@ -235,19 +223,12 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
         if (userInfo.Password != password) throw Oops.Bah("原密码错误");
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
-        var loginPolicy =
-            await _configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
-        var containNumber = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_NUM)
-            .ConfigValue.ToBoolean();//是否包含数字
-        var containLower = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_LOWER)
-            .ConfigValue.ToBoolean();//是否包含小写
-        var containUpper = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_UPPER)
-            .ConfigValue.ToBoolean();//是否包含大写
-        var containChar = loginPolicy
-            .First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_CHARACTER).ConfigValue
-            .ToBoolean();//是否包含特殊字符
-        var minLength = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_MIN_LENGTH)
-            .ConfigValue.ToInt();//最小长度
+        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
+        var containNumber = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_NUM).ConfigValue.ToBoolean();//是否包含数字
+        var containLower = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_LOWER).ConfigValue.ToBoolean();//是否包含小写
+        var containUpper = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_UPPER).ConfigValue.ToBoolean();//是否包含大写
+        var containChar = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_CHARACTER).ConfigValue.ToBoolean();//是否包含特殊字符
+        var minLength = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_MIN_LENGTH).ConfigValue.ToInt();//最小长度
         if (minLength > newPassword.Length)
             throw Oops.Bah($"密码长度不能小于{minLength}");
         if (containNumber && !Regex.IsMatch(newPassword, "[0-9]"))
@@ -263,8 +244,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         //     throw Oops.Bah($"新密码请勿与旧密码过于相似");
         newPassword = CryptogramUtil.Sm4Encrypt(newPassword);//SM4加密
         userInfo.Password = newPassword;
-        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Password })
-            .ExecuteCommandAsync();//修改密码
+        await UpdateSetColumnsTrueAsync(it => new SysUser() { Password = newPassword }, it => it.Id == userInfo.Id);//更新密码
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
 
@@ -280,9 +260,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         fileStream.Close();
         var base64String = Convert.ToBase64String(bytes);//转base64
         var avatar = base64String.ToImageBase64();//转图片
-        userInfo.Avatar = avatar;
-        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Avatar })
-            .ExecuteCommandAsync();//修改密码
+        await UpdateSetColumnsTrueAsync(it => new SysUser() { Avatar = avatar }, it => it.Id == userInfo.Id);// 更新头像
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
         return avatar;
     }
@@ -297,8 +275,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             userInfo.DefaultModule = input.Id;
         else
             userInfo.DefaultModule = null;
-        await Context.Updateable(userInfo).UpdateColumns(it => new { it.DefaultModule })
-            .ExecuteCommandAsync();//修改默认模块
+        await Context.Updateable(userInfo).UpdateColumns(it => new { it.DefaultModule }).ExecuteCommandAsync();//修改默认模块
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
 
@@ -312,16 +289,14 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     /// <param name="allMenuList">所有菜单列表</param>
     /// <param name="myMenus">我的菜单列表</param>
     /// <returns></returns>
-    private List<SysResource> GetMyParentMenus(List<SysResource> allMenuList,
-        List<SysResource> myMenus)
+    private List<SysResource> GetMyParentMenus(List<SysResource> allMenuList, List<SysResource> myMenus)
     {
         var parentList = new List<SysResource>();
         myMenus.ForEach(it =>
         {
             //找到父ID对应的菜单
             var parent = allMenuList.Where(r => r.Id == it.ParentId.Value).FirstOrDefault();
-            if (parent != null && !parentList.Contains(parent)
-                && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+            if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
             {
                 parentList.Add(parent);//添加到父列表
             }
@@ -360,8 +335,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     /// <param name="parentId">父ID</param>
     /// <param name="orgId">用户ID</param>
     /// <returns></returns>
-    public List<LoginOrgTreeOutput> ConstrucOrgTrees(List<SysOrg> orgList, long parentId,
-        long orgId)
+    public List<LoginOrgTreeOutput> ConstrucOrgTrees(List<SysOrg> orgList, long parentId, long orgId)
     {
         //找下级字典ID列表
         var orgParents = orgList.Where(it => it.ParentId == parentId).OrderBy(it => it.SortCode).ToList();

@@ -20,7 +20,7 @@ const http = moduleRequest("/sys/ops/dict/");
 
 /** 获取字典树 */
 export const getDictTreeApi = () => {
-  return http.get<Dict.DictTree[]>("tree", {}, { noLoading: true });
+  return http.get<Dict.DictTree[]>("tree", {}, { loading: false });
 };
 
 /** 获取字典分页 */

@@ -72,7 +72,6 @@ public class SysFile : DataEntityBase
     /// <summary>
     /// 图片缩略图
     ///</summary>
-    [SugarColumn(ColumnName = "Thumbnail", ColumnDescription = "图片缩略图", IsNullable = true,
-        ColumnDataType = StaticConfig.CodeFirst_BigString)]
+    [SugarColumn(ColumnName = "Thumbnail", ColumnDescription = "图片缩略图", IsNullable = true, ColumnDataType = StaticConfig.CodeFirst_BigString)]
     public string Thumbnail { get; set; }
 }

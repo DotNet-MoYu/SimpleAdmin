@@ -45,8 +45,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <returns></returns>
     public IActionResult OnValidateFailed(ActionExecutingContext context, ValidationMetadata metadata)
     {
-        return new JsonResult(ResTfulResult(metadata.StatusCode ?? StatusCodes.Status400BadRequest, data: metadata.Data,
-            errors: metadata.FirstErrorMessage ?? metadata.Message));
+        return new JsonResult(ResTfulResult(metadata.StatusCode ?? StatusCodes.Status400BadRequest, data: metadata.Data, errors: metadata.FirstErrorMessage ?? metadata.Message));
     }
 
     /// <summary>
@@ -56,8 +55,7 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <param name="statusCode"></param>
     /// <param name="unifyResultSettings"></param>
     /// <returns></returns>
-    public async Task OnResponseStatusCodes(HttpContext context, int statusCode,
-        UnifyResultSettingsOptions unifyResultSettings = null)
+    public async Task OnResponseStatusCodes(HttpContext context, int statusCode, UnifyResultSettingsOptions unifyResultSettings = null)
     {
         // 设置响应状态码
         UnifyContext.SetResponseStatusCodes(context, statusCode, unifyResultSettings);
@@ -66,14 +64,11 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
         {
             // 处理 401 状态码
             case StatusCodes.Status401Unauthorized:
-                await context.Response.WriteAsJsonAsync(ResTfulResult(statusCode, errors: "登录已过期，请重新登录"),
-                    App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
+                await context.Response.WriteAsJsonAsync(ResTfulResult(statusCode, errors: "登录已过期，请重新登录"), App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
             // 处理 403 状态码
             case StatusCodes.Status403Forbidden:
-                await context.Response.WriteAsJsonAsync(
-                    ResTfulResult(statusCode, errors: "禁止访问，没有权限", data: context.Request.Path),
-                    App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
+                await context.Response.WriteAsJsonAsync(ResTfulResult(statusCode, errors: "禁止访问，没有权限", data: context.Request.Path), App.GetOptions<JsonOptions>()?.JsonSerializerOptions);
                 break;
         }
     }
@@ -86,8 +81,8 @@ public class SimpleAdminResultProvider : IUnifyResultProvider
     /// <param name="data">数据</param>
     /// <param name="errors">错误信息</param>
     /// <returns></returns>
-    private static SimpleAdminResult<object> ResTfulResult(int statusCode, bool succeeded = default,
-        object data = default, object errors = default)
+    private static SimpleAdminResult<object> ResTfulResult(int statusCode, bool succeeded = default, object data = default,
+        object errors = default)
     {
         return new SimpleAdminResult<object>
         {

@@ -24,16 +24,11 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     public async Task<SqlSugarPagedList<BatchEdit>> Page(BatchEditPageInput input)
     {
         var query = Context.Queryable<BatchEdit>()
-                .WhereIF(!string.IsNullOrWhiteSpace(input.ConfigId),
-                    it => it.ConfigId.Contains(input.ConfigId.Trim()))
-                .WhereIF(!string.IsNullOrWhiteSpace(input.EntityName),
-                    it => it.EntityName.Contains(input.EntityName.Trim()))
-                .WhereIF(!string.IsNullOrWhiteSpace(input.TableName),
-                    it => it.TableName.Contains(input.TableName.Trim()))
-                //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-                .OrderByIF(!string.IsNullOrEmpty(input.SortField),
-                    $"{input.SortField} {input.SortOrder}")
-            ;
+            .WhereIF(!string.IsNullOrWhiteSpace(input.ConfigId), it => it.ConfigId.Contains(input.ConfigId.Trim()))
+            .WhereIF(!string.IsNullOrWhiteSpace(input.EntityName), it => it.EntityName.Contains(input.EntityName.Trim()))
+            .WhereIF(!string.IsNullOrWhiteSpace(input.TableName), it => it.TableName.Contains(input.TableName.Trim()))
+            //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}");
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
@@ -80,8 +75,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         var ids = input.Select(it => it.Id).ToList();//获取当前配置Id
         if (ids.Any())
         {
-            await configRep.DeleteAsync(it =>
-                !ids.Contains(it.Id) && it.UId == input.First().UId);//删除没有的
+            await configRep.DeleteAsync(it => !ids.Contains(it.Id) && it.UId == input.First().UId);//删除没有的
             await Context.Updateable(updateBatch).ExecuteCommandAsync();//更新数据
         }
     }
@@ -97,8 +91,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             var result = await Tenant.UseTranAsync(async () =>
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
-                await Context.Deleteable<BatchEditConfig>().Where(it => ids.Contains(it.UId))
-                    .ExecuteCommandAsync();
+                await Context.Deleteable<BatchEditConfig>().Where(it => ids.Contains(it.UId)).ExecuteCommandAsync();
             });
             if (!result.IsSuccess)//如果失败了
             {
@@ -119,13 +112,11 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             //获取表的字段信息
             var tableColumns = SqlSugarUtils.GetTableColumns(config.ConfigId, config.TableName);
             //找到当前配置字段列表
-            var batchEdiConfig = await Context.Queryable<BatchEditConfig>()
-                .Where(it => it.UId == config.Id).ToListAsync();
+            var batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it => it.UId == config.Id).ToListAsync();
             foreach (var tableColumn in tableColumns)
             {
                 //判断是否是主键或者通用字段
-                var isPkOrCommon = tableColumn.IsPrimaryKey
-                    || SqlSugarUtils.IsCommonColumn(tableColumn.ColumnName);
+                var isPkOrCommon = tableColumn.IsPrimaryKey || SqlSugarUtils.IsCommonColumn(tableColumn.ColumnName);
                 if (!isPkOrCommon)
                 {
                     //如果当前配置没有
@@ -153,8 +144,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         if (updateBatch != null)
         {
             //找到对应字段
-            batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it =>
-                    it.UId == updateBatch.Id && it.Status == SysDictConst.COMMON_STATUS_ENABLE)
+            batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it => it.UId == updateBatch.Id && it.Status == CommonStatusConst.ENABLE)
                 .ToListAsync();
         }
         return batchEdiConfig;
@@ -169,8 +159,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     /// <inheritdoc/>
     public async Task<List<BatchEditConfig>> ConfigList(BaseIdInput input)
     {
-        return await Context.Queryable<BatchEditConfig>().Where(u => u.UId == input.Id)
-            .OrderByDescending(it => it.Status).ToListAsync();
+        return await Context.Queryable<BatchEditConfig>().Where(u => u.UId == input.Id).OrderByDescending(it => it.Status).ToListAsync();
     }
 
     /// <inheritdoc/>
@@ -199,12 +188,10 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         return new BatchEditConfig
         {
             ColumnName = columnInfo.ColumnName,
-            ColumnComment = string.IsNullOrWhiteSpace(columnInfo.ColumnDescription)
-                ? columnInfo.ColumnName
-                : columnInfo.ColumnDescription,
+            ColumnComment = string.IsNullOrWhiteSpace(columnInfo.ColumnDescription) ? columnInfo.ColumnName : columnInfo.ColumnDescription,
             NetType = netType,
             DataType = SqlSugarUtils.DataTypeToEff(netType),
-            Status = SysDictConst.COMMON_STATUS_DISABLED
+            Status = CommonStatusConst.DISABLED
         };
     }
 

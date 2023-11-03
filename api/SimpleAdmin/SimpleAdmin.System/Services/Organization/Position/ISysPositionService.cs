@@ -76,4 +76,11 @@ public interface ISysPositionService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<SysPosition>> GetPositionListByIdList(IdListInput input);
+
+    /// <summary>
+    /// 职位树形结构
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<List<PositionTreeOutput>> Tree(PositionTreeInput input);
 }

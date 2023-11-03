@@ -71,3 +71,10 @@ public class PositionEditInput : PositionAddInput
 public class PositionSelectorInput : UserSelectorInput
 {
 }
+
+/// <summary>
+///  机构树形选择器参数
+/// </summary>
+public class PositionTreeInput
+{
+}

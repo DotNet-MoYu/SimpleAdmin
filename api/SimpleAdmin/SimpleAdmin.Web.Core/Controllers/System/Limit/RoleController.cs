@@ -20,8 +20,7 @@ public class RoleController : BaseController
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public RoleController(IRoleService roleService, IResourceService resourceService,
-        ISysOrgService sysOrgService,
+    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService,
         ISysUserService sysUserService)
     {
         _roleService = roleService;
@@ -184,5 +183,16 @@ public class RoleController : BaseController
     public async Task GrantUser([FromBody] GrantUserInput input)
     {
         await _roleService.GrantUser(input);
+    }
+
+    /// <summary>
+    /// 获取角色树
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("tree")]
+    [DisplayName("获取角色树")]
+    public async Task<dynamic> Tree([FromQuery] RoleTreeInput input)
+    {
+        return await _roleService.Tree(input);
     }
 }

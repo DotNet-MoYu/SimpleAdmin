@@ -21,8 +21,7 @@ public class UserCenterController : IDynamicApiController
     private readonly ISysPositionService _sysPositionService;
     private readonly ISysOrgService _sysOrgService;
 
-    public UserCenterController(IUserCenterService userCenterService,
-        ISysUserService sysUserService, ISysPositionService sysPositionService,
+    public UserCenterController(IUserCenterService userCenterService, ISysUserService sysUserService, ISysPositionService sysPositionService,
         ISysOrgService sysOrgService, IRoleService roleService)
     {
         _userCenterService = userCenterService;

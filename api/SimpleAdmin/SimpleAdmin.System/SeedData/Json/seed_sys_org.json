@@ -9,14 +9,14 @@
       "Code": "yfqtrbd5qz",
       "Category": "COMPANY",
       "SortCode": "1",
-      "CreateTime": "",
-      "UpdateTime": "2023-1-3 10:23:06.743",
+      "CreateTime": "2023-8-14 16:19:29.15",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "252885263003721",
@@ -27,14 +27,14 @@
       "Code": "yfqtrbc5qz",
       "Category": "DEPT",
       "SortCode": "2",
-      "CreateTime": "",
-      "UpdateTime": "2023-1-3 10:23:14.183",
+      "CreateTime": "2023-8-14 16:19:29.15",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "252885263003722",
@@ -45,14 +45,14 @@
       "Code": "yfqtrbc3qz",
       "Category": "DEPT",
       "SortCode": "3",
-      "CreateTime": "",
-      "UpdateTime": "2023-1-3 10:24:35.903",
+      "CreateTime": "2023-8-14 16:19:29.15",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "359569393872965",
@@ -63,14 +63,14 @@
       "Code": "l77v30V3yG",
       "Category": "COMPANY",
       "SortCode": "99",
-      "CreateTime": "2022-2-12 11:11:38.57",
-      "UpdateTime": "2023-1-3 10:23:23.05",
+      "CreateTime": "2023-8-14 16:19:29.153",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "360642028625989",
@@ -81,14 +81,14 @@
       "Code": "dihhtLuWG1",
       "Category": "DEPT",
       "SortCode": "4",
-      "CreateTime": "2022-5-12 11:56:12.29",
-      "UpdateTime": "2023-1-3 10:23:19.417",
+      "CreateTime": "2023-8-14 16:19:29.153",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "361404296994885",
@@ -99,14 +99,14 @@
       "Code": "fLOhh7s091",
       "Category": "DEPT",
       "SortCode": "99",
-      "CreateTime": "2022-7-12 15:37:52.967",
-      "UpdateTime": "2023-1-3 10:23:33.87",
+      "CreateTime": "2023-8-14 16:19:29.153",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     },
     {
       "Id": "361404346445893",
@@ -117,14 +117,14 @@
       "Code": "tmDWFRfXuQ",
       "Category": "DEPT",
       "SortCode": "99",
-      "CreateTime": "2022-7-12 15:38:05.04",
-      "UpdateTime": "2023-1-3 10:23:21.323",
+      "CreateTime": "2023-8-14 16:19:29.153",
+      "UpdateTime": "2023-8-14 20:27:03.847",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
     }
   ]
 }

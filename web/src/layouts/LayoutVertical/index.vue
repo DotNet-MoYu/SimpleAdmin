@@ -8,13 +8,7 @@
           <span v-show="!isCollapse" class="logo-text">{{ title }}</span>
         </div>
         <el-scrollbar>
-          <el-menu
-            :router="false"
-            :default-active="activeMenu"
-            :collapse="isCollapse"
-            :unique-opened="accordion"
-            :collapse-transition="false"
-          >
+          <el-menu :router="false" :default-active="activeMenu" :collapse="isCollapse" :unique-opened="accordion" :collapse-transition="false">
             <SubMenu :menu-list="menuList" />
           </el-menu>
         </el-scrollbar>

@@ -12,8 +12,7 @@ namespace SimpleAdmin.SqlSugar;
 /// 实体种子数据接口
 /// </summary>
 /// <typeparam name="TEntity"></typeparam>
-public interface ISqlSugarEntitySeedData<TEntity>
-    where TEntity : class, new()
+public interface ISqlSugarEntitySeedData<TEntity> where TEntity : class, new()
 {
     /// <summary>
     /// 种子数据

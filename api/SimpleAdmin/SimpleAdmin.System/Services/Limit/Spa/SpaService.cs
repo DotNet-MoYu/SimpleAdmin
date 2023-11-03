@@ -23,16 +23,10 @@ public class SpaService : DbRepository<SysResource>, ISpaService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysResource>> Page(SpaPageInput input)
     {
-        var query = Context.Queryable<SysResource>()
-            .Where(it => it.Category == CateGoryConst.RESOURCE_SPA)//单页
-            .WhereIF(!string.IsNullOrEmpty(input.MenuType),
-                it => it.MenuType == input.MenuType)//根据菜单类型查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
-                it => it.Title.Contains(input.SearchKey)
-                    || it.Path.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField),
-                $"{input.SortField} {input.SortOrder}")
-            .OrderBy(it => it.SortCode);//排序
+        var query = Context.Queryable<SysResource>().Where(it => it.Category == CateGoryConst.RESOURCE_SPA)//单页
+            .WhereIF(!string.IsNullOrEmpty(input.MenuType), it => it.MenuType == input.MenuType)//根据菜单类型查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title.Contains(input.SearchKey) || it.Path.Contains(input.SearchKey))//根据关键字查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
@@ -97,8 +91,7 @@ public class SpaService : DbRepository<SysResource>, ISpaService
                 throw Oops.Bah("组件地址不能为空");
             }
         }
-        else if (sysResource.MenuType == SysResourceConst.IFRAME
-                 || sysResource.MenuType == SysResourceConst.LINK)//如果是内链或者外链
+        else if (sysResource.MenuType == SysResourceConst.IFRAME || sysResource.MenuType == SysResourceConst.LINK)//如果是内链或者外链
         {
             // sysResource.Name = RandomHelper.CreateNum(10);//设置name为随机数
             sysResource.Name = null;//设置name为标题

@@ -29,8 +29,7 @@ public class Startup : AppStartup
         //如果有redis连接字符串
         if (cacheSettings.UseRedis)
         {
-            var connectionString =
-                $"server={cacheSettings.RedisSettings.Address};password={cacheSettings.RedisSettings.Password};db={cacheSettings.RedisSettings.Db}";
+            var connectionString = $"server={cacheSettings.RedisSettings.Address};password={cacheSettings.RedisSettings.Password};db={cacheSettings.RedisSettings.Db}";
             //注入redis
             services.AddSimpleRedis(connectionString);
             services.AddSingleton<ISimpleCacheService, RedisCacheService>();

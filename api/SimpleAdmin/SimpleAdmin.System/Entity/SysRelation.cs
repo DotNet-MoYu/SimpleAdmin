@@ -30,7 +30,6 @@ public class SysRelation : PrimaryKeyEntity
     /// <summary>
     /// 分类
     ///</summary>
-    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200,
-        IsNullable = false)]
+    [SugarColumn(ColumnName = "Category", ColumnDescription = "分类", Length = 200, IsNullable = false)]
     public string Category { get; set; }
 }

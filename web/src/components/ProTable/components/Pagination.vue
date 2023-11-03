@@ -4,6 +4,7 @@
     :background="true"
     :current-page="pageable.pageNum"
     :page-size="pageable.pageSize"
+    :pager-count="pagerCount"
     :page-sizes="[10, 25, 50, 100]"
     :total="pageable.total"
     layout="total, sizes, prev, pager, next, jumper"
@@ -21,6 +22,7 @@ interface Pageable {
 
 interface PaginationProps {
   pageable: Pageable;
+  pagerCount: number;
   handleSizeChange: (size: number) => void;
   handleCurrentChange: (currentPage: number) => void;
 }

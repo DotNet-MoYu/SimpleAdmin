@@ -27,7 +27,7 @@
           <el-tag v-if="scope.row.isHome === true" type="danger">首页</el-tag>
         </el-space>
       </template>
-      <!-- 菜单操作 -->
+      <!-- 操作 -->
       <template #operation="scope">
         <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
         <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】页面`)" />
@@ -51,6 +51,10 @@ import Form from "./components/form.vue";
 const proTable = ref<ProTableInstance>();
 const dictStore = useDictStore();
 
+// 单页类型选项
+const spaTypeOptions = dictStore
+  .getDictList(SysDictEnum.MENU_TYPE)
+  .filter(item => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
 // 表格配置项
 const columns: ColumnProps<Spa.SpaInfo>[] = [
   { type: "selection", fixed: "left", width: 80 },
@@ -66,6 +70,7 @@ const columns: ColumnProps<Spa.SpaInfo>[] = [
   {
     prop: "menuType",
     label: "单页类型",
+    enum: spaTypeOptions,
     search: { el: "tree-select" }
   },
   { prop: "path", label: "路由地址" },

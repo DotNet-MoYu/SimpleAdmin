@@ -14,7 +14,7 @@
 import { defineStore } from "pinia";
 import { GlobalState } from "@/stores/interface";
 import { DEFAULT_PRIMARY } from "@/config";
-import piniaPersistConfig from "@/config/piniaPersist";
+import piniaPersistConfig from "@/stores/helper/persist";
 
 export const useGlobalStore = defineStore({
   id: "simple-global",
@@ -41,7 +41,7 @@ export const useGlobalStore = defineStore({
     // 折叠菜单
     isCollapse: false,
     // 菜单手风琴
-    accordion: false,
+    accordion: true,
     // 面包屑导航
     breadcrumb: true,
     // 面包屑导航图标

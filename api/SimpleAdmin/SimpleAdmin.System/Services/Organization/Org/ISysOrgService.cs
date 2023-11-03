@@ -38,8 +38,9 @@ public interface ISysOrgService : ITransient
     /// </summary>
     /// <param name="orgId">组织ID</param>
     /// <param name="isContainOneself">是否包含自己</param>
+    /// <param name="sysOrgList">组织列表</param>
     /// <returns></returns>
-    Task<List<SysOrg>> GetChildListById(long orgId, bool isContainOneself = true);
+    Task<List<SysOrg>> GetChildListById(long orgId, bool isContainOneself = true, List<SysOrg> sysOrgList = null);
 
     /// <summary>
     /// 获取所有组织
@@ -52,8 +53,9 @@ public interface ISysOrgService : ITransient
     /// </summary>
     /// <param name="orgId"></param>
     /// <param name="isContainOneself"></param>
+    /// <param name="sysOrgList">组织列表</param>
     /// <returns></returns>
-    Task<List<long>> GetOrgChildIds(long orgId, bool isContainOneself = true);
+    Task<List<long>> GetOrgChildIds(long orgId, bool isContainOneself = true, List<SysOrg> sysOrgList = null);
 
     /// <summary>
     /// 根据组织Id递归获取上级

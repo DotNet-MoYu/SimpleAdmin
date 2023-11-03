@@ -7,7 +7,8 @@
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 Console.WriteLine("源码地址: https://gitee.com/zxzyjs/SimpleAdmin");
-Console.WriteLine("演示地址: http://153.101.199.83:12802/login");
+Console.WriteLine("ts演示地址: http://153.101.199.83:12802/login");
+Console.WriteLine("js演示地址: http://153.101.199.83:12801/login");
 Console.WriteLine("QQ:531035580");
 Console.WriteLine("拒绝屎山,只玩真实,让.NET 开发更简单!");
 Serve.Run(RunOptions.Default.ConfigureBuilder(builder =>

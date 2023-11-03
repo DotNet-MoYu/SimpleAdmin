@@ -10,19 +10,19 @@
       label-width="auto"
       class="-mt-25px"
     >
-      <el-form-item label="模块名称" prop="title">
+      <s-form-item label="模块名称" prop="title">
         <el-input v-model="moduleProps.record.title" placeholder="请填写模块名称" clearable></el-input>
-      </el-form-item>
+      </s-form-item>
 
-      <el-form-item label="图标" prop="icon">
+      <s-form-item label="图标" prop="icon">
         <SelectIconPlus v-model:icon-value="moduleProps.record.icon" />
-      </el-form-item>
-      <el-form-item label="排序" prop="sortCode">
+      </s-form-item>
+      <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="moduleProps.record.sortCode" show-input :min="1" />
-      </el-form-item>
-      <el-form-item label="说明" prop="description">
+      </s-form-item>
+      <s-form-item label="说明" prop="description">
         <el-input v-model="moduleProps.record.description" placeholder="请填写模块说明" clearable></el-input>
-      </el-form-item>
+      </s-form-item>
     </el-form>
     <template #footer>
       <el-button @click="onClose"> 取消 </el-button>
@@ -68,9 +68,9 @@ function onOpen(props: FormProps.Base<Module.ModuleInfo>) {
   }
 
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    moduleDetailApi({ id: props.id }).then(res => {
+    moduleDetailApi({ id: props.record.id }).then(res => {
       moduleProps.record = res.data;
     });
   }

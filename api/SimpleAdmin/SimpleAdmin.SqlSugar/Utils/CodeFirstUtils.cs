@@ -23,12 +23,15 @@ public static class CodeFirstUtils
     /// <param name="assemblyName">程序集名称</param>
     public static void CodeFirst(BaseOptions options, string assemblyName)
     {
+        var appName = assemblyName.Split(",")[0];
         if (options.InitTable)//如果需要初始化表结构
         {
+            Console.WriteLine($"开始初始化{appName}数据库表结构");
             InitTable(assemblyName);
         }
         if (options.InitSeedData)
         {
+            Console.WriteLine($"开始初始化{appName}数据库种子数据");
             InitSeedData(assemblyName);
         }
     }

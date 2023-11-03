@@ -1,27 +1,11 @@
 <!-- 表单容器组件 -->
 <template>
   <!-- 抽屉 -->
-  <el-drawer
-    v-if="globalStore.drawerForm"
-    v-model="visible"
-    :destroy-on-close="true"
-    :size="formProps.formSize"
-    v-bind="$attrs"
-    @close="close"
-  >
+  <el-drawer v-if="globalStore.drawerForm" v-model="visible" :destroy-on-close="true" :size="formProps.formSize" v-bind="$attrs" @close="close">
     <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
   </el-drawer>
   <!-- 对话框 -->
-  <el-dialog
-    v-else
-    top="50px"
-    :visible="visible"
-    :destroy-on-close="true"
-    draggable
-    v-bind="$attrs"
-    @close="close"
-    :width="formProps.formSize"
-  >
+  <el-dialog v-else top="50px" :visible="visible" :destroy-on-close="true" draggable v-bind="$attrs" @close="close" :width="formProps.formSize">
     <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
   </el-dialog>
 </template>

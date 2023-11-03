@@ -14,8 +14,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public OrgService(ISysOrgService sysOrgService,
-        ISysUserService sysUserService)
+    public OrgService(ISysOrgService sysOrgService, ISysUserService sysUserService)
     {
         _sysOrgService = sysOrgService;
         _sysUserService = sysUserService;
@@ -63,8 +62,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null || dataScope.Count > 0)//如果有机构
         {
-            if (dataScope is { Count: > 0 } && (!dataScope.ContainsAll(input.Ids)
-                || !dataScope.Contains(input.TargetId)))//判断目标机构和需要复制的机构是否都在数据范围里面
+            if (dataScope is { Count: > 0 } && (!dataScope.ContainsAll(input.Ids) || !dataScope.Contains(input.TargetId)))//判断目标机构和需要复制的机构是否都在数据范围里面
                 throw Oops.Bah("您没有权限复制这些机构");
             await _sysOrgService.Copy(input);//复制操作
         }
@@ -85,8 +83,7 @@ public class OrgService : DbRepository<SysOrg>, IOrgService
         else if (dataScope is { Count: 0 })//表示仅自己
         {
             //获取要删除的机构列表
-            var orgList = (await _sysOrgService.GetListAsync()).Where(it => ids.Contains(it.Id))
-                .ToList();
+            var orgList = (await _sysOrgService.GetListAsync()).Where(it => ids.Contains(it.Id)).ToList();
             //如果机构列表里有任何不是自己创建的机构
             if (orgList.Any(it => it.CreateUserId != UserManager.UserId))
                 throw Oops.Bah("只能删除自己创建的机构");

@@ -23,9 +23,7 @@ public class IndexService : DbRepository<SysRelation>, IIndexService
     /// <inheritdoc/>
     public async Task<List<ScheduleListOutput>> ScheduleList(ScheduleListInput input)
     {
-        var relations = await GetListAsync(it =>
-                it.Category == CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA
-                && it.ObjectId == UserManager.UserId && it.TargetId == input.ScheduleDate,
+        var relations = await GetListAsync(it => it.Category == CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA && it.ObjectId == UserManager.UserId && it.TargetId == input.ScheduleDate,
             it => new SysRelation { ExtJson = it.ExtJson, Id = it.Id });//获取当前用户的日程列表
         var userSchedules = new List<ScheduleListOutput>();//结果集
         relations.ForEach(it =>
@@ -44,8 +42,7 @@ public class IndexService : DbRepository<SysRelation>, IIndexService
         input.ScheduleUserId = UserManager.UserId;
         input.ScheduleUserName = UserManager.Name;
         //添加日程
-        await _relationService.SaveRelation(CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA,
-            UserManager.UserId, input.ScheduleDate, input.ToJson(),
+        await _relationService.SaveRelation(CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA, UserManager.UserId, input.ScheduleDate, input.ToJson(),
             false, false);
     }
 

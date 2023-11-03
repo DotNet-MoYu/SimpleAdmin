@@ -35,9 +35,7 @@ public class MyActionFilter : IAsyncActionFilter
         if (httpRequest.Method == "POST" && !whiteAction.Contains(actionDescriptor.ActionName))
         {
             // 是否匿名访问
-            var allowAnonymous = context.Filters.Any(u => u is IAllowAnonymousFilter)
-                || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true)
-                || method.IsDefined(typeof(AllowAnonymousAttribute), true);
+            var allowAnonymous = context.Filters.Any(u => u is IAllowAnonymousFilter) || controllerType.IsDefined(typeof(AllowAnonymousAttribute), true) || method.IsDefined(typeof(AllowAnonymousAttribute), true);
             if (!allowAnonymous)
             {
                 //如果不是匿名访问,抛出

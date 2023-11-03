@@ -415,45 +415,5 @@
             </summary>
             <param name="services"></param>
         </member>
-        <member name="T:SimpleAdmin.System.GenTest">
-             <summary>
-             代码生成基础
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Name">
-            <summary>
-            姓名
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Sex">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Nation">
-            <summary>
-            民族
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Age">
-            <summary>
-            年龄
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Bir">
-            <summary>
-            生日
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.Money">
-            <summary>
-            存款
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.GenTest.SortCode">
-             <summary>
-             排序码
-            </summary>
-        </member>
     </members>
 </doc>

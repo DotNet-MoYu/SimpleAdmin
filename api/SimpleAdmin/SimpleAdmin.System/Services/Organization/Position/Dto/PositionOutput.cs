@@ -6,4 +6,30 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+namespace SimpleAdmin.System;
 
+/// <summary>
+///  机构树输出参数
+/// </summary>
+public class PositionTreeOutput
+{
+    /// <summary>
+    /// 职位Id
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// 是否是职位
+    /// </summary>
+    public bool IsPosition { get; set; }
+
+    /// <summary>
+    /// 子项
+    /// </summary>
+    public List<PositionTreeOutput> Children { get; set; } = new List<PositionTreeOutput>();
+}

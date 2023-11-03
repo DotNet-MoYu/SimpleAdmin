@@ -3,7 +3,7 @@
     {
       "Id": "252875263003710",
       "ConfigKey": "SYS_DEFAULT_DESCRRIPTION",
-      "ConfigValue": "🪶SimpleAdmin是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用SqlSugar+单例模式,插件式开发。采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备超牛皮的代码生成器和超详细的手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。",
+      "ConfigValue": "🪶SimpleAdmin是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发。采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备超牛皮的代码生成器和超详细的手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。",
       "Category": "SYS_BASE",
       "Remark": "系统描述",
       "SortCode": "1",
@@ -11,10 +11,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003720",
@@ -27,10 +27,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003721",
@@ -43,10 +43,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003722",
@@ -59,10 +59,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003723",
@@ -75,10 +75,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003724",
@@ -91,10 +91,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003725",
@@ -107,10 +107,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003726",
@@ -120,13 +120,13 @@
       "Remark": "登录验证码开关",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003727",
@@ -139,10 +139,10 @@
       "UpdateTime": "2023-6-6 09:22:59.433",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "252875263003728",
@@ -152,13 +152,13 @@
       "Remark": "默认用户密码",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825413",
@@ -168,13 +168,13 @@
       "Remark": "单用户登录开关",
       "SortCode": "1",
       "CreateTime": "2022-12-16 13:58:23.783",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825414",
@@ -187,10 +187,10 @@
       "UpdateTime": "2022-12-26 11:03:32.013",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825415",
@@ -203,10 +203,10 @@
       "UpdateTime": "2022-12-26 11:03:32.013",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825416",
@@ -219,10 +219,10 @@
       "UpdateTime": "2022-12-26 11:03:32.013",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825417",
@@ -235,10 +235,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825418",
@@ -251,10 +251,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825419",
@@ -267,10 +267,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825420",
@@ -283,10 +283,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825421",
@@ -299,10 +299,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "364564896825422",
@@ -315,10 +315,10 @@
       "UpdateTime": "",
       "CreateUserId": "",
       "UpdateUserId": "",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "",
-      "UpdateUser": ""
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432079395405893",
@@ -328,13 +328,13 @@
       "Remark": "验证码类型",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:35:35.663",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432079540875333",
@@ -344,13 +344,13 @@
       "Remark": "登录错误次数",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:36:11.18",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432079718375493",
@@ -360,13 +360,13 @@
       "Remark": "错误重置时间",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:36:54.513",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432079850803269",
@@ -376,45 +376,45 @@
       "Remark": "登录错误锁定时长",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:37:26.847",
-      "UpdateTime": "2023-6-25 09:46:09.427",
+      "UpdateTime": "2023-8-10 10:37:15.207",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432110816800837",
       "ConfigKey": "PWD_REMIND",
-      "ConfigValue": "true",
+      "ConfigValue": "false",
       "Category": "PWD_POLICY",
       "Remark": "密码定期提醒更新",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:43:26.903",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432110956560453",
       "ConfigKey": "PWD_REMIND_DAY",
-      "ConfigValue": "30",
+      "ConfigValue": "1",
       "Category": "PWD_POLICY",
       "Remark": "密码定期提醒更新时间",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:44:01.023",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432111166894149",
@@ -424,13 +424,13 @@
       "Remark": "修改初始密码提醒",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:44:52.377",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432111701160005",
@@ -440,13 +440,13 @@
       "Remark": "密码最小长度",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:47:02.81",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432112135159877",
@@ -456,13 +456,13 @@
       "Remark": "包含数字",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:48:48.77",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432112321953861",
@@ -472,13 +472,13 @@
       "Remark": "包含小写字母",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:49:34.373",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432112380907589",
@@ -488,13 +488,13 @@
       "Remark": "包含大写字母",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:49:48.767",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     },
     {
       "Id": "432112495247429",
@@ -504,13 +504,13 @@
       "Remark": "包含特殊字符",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:50:16.68",
-      "UpdateTime": "2023-6-25 14:30:34.477",
+      "UpdateTime": "2023-7-24 10:52:36.343",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
-      "IsDelete": "0",
-      "ExtJson": "",
       "CreateUser": "superAdmin",
-      "UpdateUser": "superAdmin"
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": ""
     }
   ]
 }

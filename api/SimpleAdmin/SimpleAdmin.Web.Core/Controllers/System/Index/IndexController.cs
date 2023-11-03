@@ -19,8 +19,7 @@ public class IndexController : IDynamicApiController
     private readonly IOperateLogService _operateLogService;
     private readonly IIndexService _indexService;
 
-    public IndexController(IVisitLogService visitLogService, IOperateLogService operateLogService,
-        IIndexService indexService)
+    public IndexController(IVisitLogService visitLogService, IOperateLogService operateLogService, IIndexService indexService)
     {
         _visitLogService = visitLogService;
         _operateLogService = operateLogService;
@@ -34,8 +33,7 @@ public class IndexController : IDynamicApiController
     [HttpGet("visLog/list")]
     public async Task<dynamic> VisLogList()
     {
-        return await _visitLogService.Page(new VisitLogPageInput
-        { Account = UserManager.UserAccount });
+        return await _visitLogService.Page(new VisitLogPageInput { Account = UserManager.UserAccount });
     }
 
     /// <summary>
@@ -45,8 +43,7 @@ public class IndexController : IDynamicApiController
     [HttpGet("opLog/list")]
     public async Task<dynamic> OpLogList()
     {
-        return await _operateLogService.Page(new OperateLogPageInput
-        { Account = UserManager.UserAccount });
+        return await _operateLogService.Page(new OperateLogPageInput { Account = UserManager.UserAccount });
     }
 
     /// <summary>

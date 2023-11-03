@@ -15,3 +15,4 @@ export * from "./spa";
 export * from "./module";
 export * from "./menu";
 export * from "./button";
+export * from "./role";

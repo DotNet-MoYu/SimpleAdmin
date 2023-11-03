@@ -1,5 +1,5 @@
 /**
- * @description pinia 持久化参数配置
+ * @description
  * @license Apache License Version 2.0
  * @remarks
  * SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
@@ -11,23 +11,6 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-
-import { PersistedStateOptions } from "pinia-plugin-persistedstate";
-
-/**
- * @description pinia 持久化参数配置
- * @param {String} key 存储到持久化的 name
- * @param {Array} paths 需要持久化的 state name
- * @return persist
- * */
-const piniaPersistConfig = (key: string, paths?: string[]) => {
-  const persist: PersistedStateOptions = {
-    key,
-    storage: localStorage,
-    // storage: sessionStorage,
-    paths
-  };
-  return persist;
-};
-
-export default piniaPersistConfig;
+export * from "./org";
+export * from "./user";
+export * from "./position";
