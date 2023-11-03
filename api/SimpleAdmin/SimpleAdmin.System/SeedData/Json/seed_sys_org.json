@@ -3,20 +3,21 @@
     {
       "Id": "252885263003720",
       "ParentId": "0",
-      "DirectorId": "",
+      "DirectorId": "212725263002001",
       "Name": "果冻科技有限公司",
       "Names": "果冻科技有限公司",
-      "Code": "yfqtrbd5qz",
+      "Code": "4fuFapeKGy",
       "Category": "COMPANY",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.15",
-      "UpdateTime": "2023-8-14 20:27:03.847",
+      "UpdateTime": "2023-11-3 15:04:10.6",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252885263003721",
@@ -24,7 +25,7 @@
       "DirectorId": "",
       "Name": "科技部",
       "Names": "果冻科技有限公司/科技部",
-      "Code": "yfqtrbc5qz",
+      "Code": "5JOEG44G62",
       "Category": "DEPT",
       "SortCode": "2",
       "CreateTime": "2023-8-14 16:19:29.15",
@@ -34,25 +35,27 @@
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "252885263003722",
       "ParentId": "252885263003720",
-      "DirectorId": "",
+      "DirectorId": "359177888051269",
       "Name": "生产部",
       "Names": "果冻科技有限公司/生产部",
-      "Code": "yfqtrbc3qz",
+      "Code": "aln9y4tno6",
       "Category": "DEPT",
       "SortCode": "3",
       "CreateTime": "2023-8-14 16:19:29.15",
-      "UpdateTime": "2023-8-14 20:27:03.847",
+      "UpdateTime": "2023-11-3 15:04:18.59",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "359569393872965",
@@ -70,7 +73,8 @@
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "360642028625989",
@@ -88,7 +92,8 @@
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "361404296994885",
@@ -106,7 +111,8 @@
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "361404346445893",
@@ -124,7 +130,84 @@
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": "{\"__v_isShallow\":false,\"__v_isRef\":true,\"_rawValue\":[],\"_value\":[]}"
+      "ExtJson": "",
+      "Status": "ENABLE"
+    },
+    {
+      "Id": "463585763569733",
+      "ParentId": "0",
+      "DirectorId": "",
+      "Name": "322",
+      "Names": "322",
+      "Code": "246864HoeK",
+      "Category": "COMPANY",
+      "SortCode": "99",
+      "CreateTime": "2023-9-22 09:15:20.08",
+      "UpdateTime": "2023-9-22 09:15:30.267",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": "ENABLE"
+    },
+    {
+      "Id": "464837351616581",
+      "ParentId": "252885263003721",
+      "DirectorId": "",
+      "Name": "科技一部",
+      "Names": "果冻科技有限公司/科技部/科技一部",
+      "Code": "Mzv2sj1MEo",
+      "Category": "DEPT",
+      "SortCode": "99",
+      "CreateTime": "2023-9-25 22:08:03.567",
+      "UpdateTime": "2023-9-25 22:08:10.257",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": "ENABLE"
+    },
+    {
+      "Id": "464837557956677",
+      "ParentId": "464837351616581",
+      "DirectorId": "",
+      "Name": "科技一部1组",
+      "Names": "果冻科技有限公司/科技部/科技一部/科技一部1组",
+      "Code": "g6R7zuMMk4",
+      "Category": "DEPT",
+      "SortCode": "99",
+      "CreateTime": "2023-9-25 22:08:53.943",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": "ENABLE"
+    },
+    {
+      "Id": "465008350236741",
+      "ParentId": "0",
+      "DirectorId": "",
+      "Name": "333",
+      "Names": "333",
+      "Code": "222",
+      "Category": "COMPANY",
+      "SortCode": "99",
+      "CreateTime": "2023-9-26 09:43:51.277",
+      "UpdateTime": "",
+      "CreateUserId": "212725263002001",
+      "UpdateUserId": "",
+      "CreateUser": "superAdmin",
+      "UpdateUser": "",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": "ENABLE"
     }
   ]
 }
