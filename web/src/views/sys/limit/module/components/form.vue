@@ -68,9 +68,9 @@ function onOpen(props: FormProps.Base<Module.ModuleInfo>) {
   }
 
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    moduleDetailApi({ id: props.id }).then(res => {
+    moduleDetailApi({ id: props.record.id }).then(res => {
       moduleProps.record = res.data;
     });
   }

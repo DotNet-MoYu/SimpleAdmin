@@ -24,9 +24,19 @@ public class UserSelectorInput : BasePageInput
     public List<long> OrgIds { get; set; }
 
     /// <summary>
+    /// 机构ID
+    /// </summary>
+    public long PositionId { get; set; }
+
+    /// <summary>
+    /// 角色ID
+    /// </summary>
+    public long RoleId { get; set; }
+
+    /// <summary>
     /// 关键字
     /// </summary>
-    public virtual string SearchKey { get; set; }
+    public string Account { get; set; }
 }
 
 /// <summary>
@@ -37,7 +47,6 @@ public class UserPageInput : BasePageInput
     /// <summary>
     /// 所属组织
     /// </summary>
-
     public long OrgId { get; set; }
 
     /// <summary>

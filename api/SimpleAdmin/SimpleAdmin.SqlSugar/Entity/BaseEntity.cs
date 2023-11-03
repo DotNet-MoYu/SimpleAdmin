@@ -31,6 +31,10 @@ public abstract class PrimaryKeyEntity
 /// </summary>
 public class BaseEntity : PrimaryKeyEntity
 {
+    [SugarColumn(ColumnName = "Status", ColumnDescription = "状态", Length = 20, DefaultValue = CommonStatusConst.ENABLE,
+        IsNullable = true)]
+    public virtual string Status { get; set; }
+
     /// <summary>
     /// 创建时间
     /// </summary>
@@ -82,6 +86,6 @@ public abstract class DataEntityBase : BaseEntity
     /// <summary>
     /// 创建者部门Id
     /// </summary>
-    [SugarColumn(ColumnDescription = "创建者部门Id")]
+    [SugarColumn(ColumnDescription = "创建者部门Id", IsOnlyIgnoreUpdate = true, IsNullable = true)]
     public virtual long CreateOrgId { get; set; }
 }

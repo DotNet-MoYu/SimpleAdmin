@@ -60,9 +60,9 @@ function onOpen(props: FormProps.Base<Button.ButtonInfo>) {
     buttonProps.record.sortCode = 99;
   }
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.r.id) {
     //如果传了id，就去请求api获取record
-    buttonDetailApi({ id: props.id }).then(res => {
+    buttonDetailApi({ id: props.record.id }).then(res => {
       buttonProps.record = res.data;
     });
   }

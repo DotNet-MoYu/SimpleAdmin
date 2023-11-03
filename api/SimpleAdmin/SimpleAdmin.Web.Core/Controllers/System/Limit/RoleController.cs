@@ -184,4 +184,15 @@ public class RoleController : BaseController
     {
         await _roleService.GrantUser(input);
     }
+
+    /// <summary>
+    /// 获取角色树
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("tree")]
+    [DisplayName("获取角色树")]
+    public async Task<dynamic> Tree([FromQuery] RoleTreeInput input)
+    {
+        return await _roleService.Tree(input);
+    }
 }

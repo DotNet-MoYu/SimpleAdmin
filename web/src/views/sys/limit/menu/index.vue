@@ -14,7 +14,7 @@
           <el-tag v-if="scope.row.isHome === true" type="warning">首页</el-tag>
         </el-space>
       </template>
-      <!-- 菜单操作 -->
+      <!-- 操作 -->
       <template #operation="scope">
         <el-space>
           <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
@@ -26,9 +26,7 @@
                 <el-dropdown-item v-if="scope.row.parentId === 0" :command="command(scope.row, cmdEnum.changeModule)">{{
                   "更改模块"
                 }}</el-dropdown-item>
-                <el-dropdown-item v-if="isMenu(scope.row.menuType)" :command="command(scope.row, cmdEnum.button)">{{
-                  "权限按钮"
-                }}</el-dropdown-item>
+                <el-dropdown-item v-if="isMenu(scope.row.menuType)" :command="command(scope.row, cmdEnum.button)">{{ "权限按钮" }}</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>

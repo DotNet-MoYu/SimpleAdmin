@@ -17,9 +17,7 @@
       </s-form-item>
       <s-form-item label="字典状态" prop="status">
         <el-radio-group v-model="dictProps.record.status">
-          <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{
-            item.label
-          }}</el-radio-button>
+          <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
         </el-radio-group>
       </s-form-item>
       <s-form-item label="排序" prop="sortCode">
@@ -84,9 +82,9 @@ function onOpen(props: DictProps) {
   console.log(dictProps.record);
 
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    dictDetailApi({ id: props.id }).then(res => {
+    dictDetailApi({ id: props.record.id }).then(res => {
       dictProps.record = res.data;
     });
   }

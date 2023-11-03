@@ -259,7 +259,7 @@ public class AuthService : IAuthService
     /// <returns></returns>
     public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device, LoginClientTypeEnum loginClientType)
     {
-        if (sysUser.UserStatus == SysDictConst.COMMON_STATUS_DISABLED)
+        if (sysUser.UserStatus == CommonStatusConst.DISABLED)
             throw Oops.Bah("账号已停用");//账号冻结
         if (sysUser.ModuleList.Count == 0) throw Oops.Bah("该账号未分配模块,请联系管理员");//没有分配菜单权限
         //生成Token

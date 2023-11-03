@@ -27,11 +27,7 @@ export const initDynamicRouter = async () => {
   const authStore = useAuthStore();
   const dictStore = useDictStore();
   /** 路由初始化错误 */
-  const routerError = (
-    isNotice: boolean = true,
-    title: string = "无权限访问",
-    message: string = "当前账号无任何菜单权限，请联系系统管理员！"
-  ) => {
+  const routerError = (isNotice: boolean = true, title: string = "无权限访问", message: string = "当前账号无任何菜单权限，请联系系统管理员！") => {
     if (!isNotice) {
       ElNotification({
         title: title,

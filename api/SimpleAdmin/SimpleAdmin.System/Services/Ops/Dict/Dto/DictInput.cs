@@ -64,13 +64,6 @@ public class DictAddInput : SysDict
 
     [Required(ErrorMessage = "DictValue不能为空")]
     public override string DictValue { get; set; }
-
-    public override long Id { get; set; }
-
-    /// <summary>
-    /// 状态
-    /// </summary>
-    public override string Status { get; set; } = SysDictConst.COMMON_STATUS_ENABLE;
 }
 
 /// <summary>

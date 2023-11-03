@@ -41,9 +41,7 @@
           </div>
           <el-empty v-else description="请输入您想要的图标iconify代码,如mdi:home-variant">
             <span>iconify地址:</span>
-            <el-link type="primary" target="_blank" :underline="false" href="https://icones.js.org/">{{
-              "https://icones.js.org/"
-            }}</el-link>
+            <el-link type="primary" target="_blank" :underline="false" href="https://icones.js.org/">{{ "https://icones.js.org/" }}</el-link>
           </el-empty>
         </el-tab-pane>
       </el-tabs>

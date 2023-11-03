@@ -50,10 +50,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     }
 
     /// <inheritdoc />
-    public async Task<List<SysOrg>> GetChildListById(long orgId, bool isContainOneself = true)
+    public async Task<List<SysOrg>> GetChildListById(long orgId, bool isContainOneself = true, List<SysOrg> sysOrgList = null)
     {
         //获取所有组织
-        var sysOrgList = await GetListAsync();
+        sysOrgList ??= await GetListAsync();
         //查找下级
         var childList = GetSysOrgChildren(sysOrgList, orgId);
         if (isContainOneself)//如果包含自己
@@ -66,14 +66,14 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     }
 
     /// <inheritdoc />
-    public async Task<List<long>> GetOrgChildIds(long orgId, bool isContainOneself = true)
+    public async Task<List<long>> GetOrgChildIds(long orgId, bool isContainOneself = true, List<SysOrg> sysOrgList = null)
     {
         var orgIds = new List<long>();//组织列表
         if (orgId > 0)//如果orgId有值
         {
             //获取所有子集
-            var sysOrgList = await GetChildListById(orgId, isContainOneself);
-            orgIds = sysOrgList.Select(x => x.Id).ToList();//提取ID列表
+            var childList = await GetChildListById(orgId, isContainOneself, sysOrgList);
+            orgIds = childList.Select(x => x.Id).ToList();//提取ID列表
         }
         return orgIds;
     }
@@ -81,10 +81,14 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysOrg>> Page(SysOrgPageInput input)
     {
-        var query = Context.Queryable<SysOrg>().WhereIF(input.ParentId > 0, it => it.ParentId == input.ParentId)//父级
+        var query = Context.Queryable<SysOrg>()
+            .WhereIF(input.ParentId > 0, it => it.ParentId == input.ParentId || it.Id == input.ParentId)//父级
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.Id))//机构ID查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
+            .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据名称查询
+            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
+            .WhereIF(!string.IsNullOrEmpty(input.Code), it => it.Code.Contains(input.Code))//根据编码查询
+            .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode)
+            .OrderBy(it => it.CreateTime);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
@@ -114,6 +118,17 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     {
         var sysOrgList = await GetListAsync();
         var orgDetail = sysOrgList.Where(it => it.Id == input.Id).FirstOrDefault();
+        if (orgDetail.DirectorId != null)
+        {
+            //获取主管信息
+            orgDetail.DirectorInfo = await Tenant.QueryableWithAttr<SysUser>().Where(it => it.Id == orgDetail.DirectorId).Select(it =>
+                new UserSelectorOutPut
+                {
+                    Id = it.Id,
+                    Name = it.Name,
+                    Account = it.Account
+                }).FirstAsync();
+        }
         return orgDetail;
     }
 
@@ -152,7 +167,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public async Task<List<SysOrg>> GetOrgListByIdList(IdListInput input)
     {
         var sysOrgList = await GetListAsync();
-        var orgList = sysOrgList.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的岗位列表
+        var orgList = sysOrgList.Where(it => input.IdList.Contains(it.Id)).ToList();// 获取指定ID的组织列表
         return orgList;
     }
 
@@ -165,7 +180,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     {
         await CheckInput(input, name);//检查参数
         var sysOrg = input.Adapt<SysOrg>();//实体转换
-        sysOrg.Code = RandomHelper.CreateRandomString(10);//赋值Code
         if (await InsertAsync(sysOrg))//插入数据
             await RefreshCache();//刷新缓存
     }
@@ -262,7 +276,8 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
             //获取用户表有兼任组织的信息，oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
-            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
+            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson)
+                .ToListAsync();
             if (positionJsons.Count > 0)
             {
                 //去一次空
@@ -354,6 +369,11 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             }
             sysOrg.Names = GetNames(sysOrgList, sysOrg.ParentId, sysOrg.Name);
         }
+        //如果code没填
+        if (string.IsNullOrEmpty(sysOrg.Code))
+        {
+            sysOrg.Code = RandomHelper.CreateRandomString(10);//赋值Code
+        }
     }
 
     /// <summary>
@@ -419,7 +439,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 children.ForEach(it =>
                 {
                     if (!orgList.Any(org => org.ParentId == it.Id))
-                        it.IsLeaf = true;//如果没有下级,则设置为叶子节点
+                        it.Leaf = true;//如果没有下级,则设置为叶子节点
                 });
                 data.AddRange(children);//添加子节点);
                 data.Add(item);//添加到列表

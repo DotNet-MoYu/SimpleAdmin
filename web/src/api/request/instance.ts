@@ -12,7 +12,7 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from "axios";
-import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
+import { showFullScreenLoading, tryHideFullScreenLoading } from "@/components/Loading/fullScreen";
 import { LOGIN_URL } from "@/config";
 import { ElMessage } from "element-plus";
 import { ResultData } from "@/api/interface";
@@ -23,7 +23,7 @@ import router from "@/routers";
 
 // 自定义 AxiosRequestConfig 接口，增加 noLoading 属性
 export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
-  noLoading?: boolean;
+  loading?: boolean;
 }
 
 export default class RequestHttp {
@@ -54,9 +54,9 @@ export default class RequestHttp {
     this.service.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
         const userStore = useUserStore();
-        // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { noLoading: true } 来控制
-        config.noLoading || showFullScreenLoading();
-
+        // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { loading: false } 来控制
+        config.loading ?? (config.loading = true);
+        config.loading && showFullScreenLoading();
         //检查 config.headers 对象是否存在以及是否具有 set 方法
         if (config.headers && typeof config.headers.set === "function") {
           const { accessToken, refreshToken } = userStore;

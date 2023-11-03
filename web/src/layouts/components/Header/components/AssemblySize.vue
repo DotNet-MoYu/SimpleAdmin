@@ -4,12 +4,7 @@
       <i :class="'iconfont icon-contentright'" class="toolBar-icon"></i>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item
-            v-for="item in assemblySizeList"
-            :key="item.value"
-            :command="item.value"
-            :disabled="assemblySize === item.value"
-          >
+          <el-dropdown-item v-for="item in assemblySizeList" :key="item.value" :command="item.value" :disabled="assemblySize === item.value">
             {{ item.label }}
           </el-dropdown-item>
         </el-dropdown-menu>

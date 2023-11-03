@@ -23,8 +23,10 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<BatchEdit>> Page(BatchEditPageInput input)
     {
-        var query = Context.Queryable<BatchEdit>().WhereIF(!string.IsNullOrWhiteSpace(input.ConfigId), it => it.ConfigId.Contains(input.ConfigId.Trim()))
-            .WhereIF(!string.IsNullOrWhiteSpace(input.EntityName), it => it.EntityName.Contains(input.EntityName.Trim())).WhereIF(!string.IsNullOrWhiteSpace(input.TableName), it => it.TableName.Contains(input.TableName.Trim()))
+        var query = Context.Queryable<BatchEdit>()
+            .WhereIF(!string.IsNullOrWhiteSpace(input.ConfigId), it => it.ConfigId.Contains(input.ConfigId.Trim()))
+            .WhereIF(!string.IsNullOrWhiteSpace(input.EntityName), it => it.EntityName.Contains(input.EntityName.Trim()))
+            .WhereIF(!string.IsNullOrWhiteSpace(input.TableName), it => it.TableName.Contains(input.TableName.Trim()))
             //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}");
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
@@ -142,7 +144,8 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
         if (updateBatch != null)
         {
             //找到对应字段
-            batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it => it.UId == updateBatch.Id && it.Status == SysDictConst.COMMON_STATUS_ENABLE).ToListAsync();
+            batchEdiConfig = await Context.Queryable<BatchEditConfig>().Where(it => it.UId == updateBatch.Id && it.Status == CommonStatusConst.ENABLE)
+                .ToListAsync();
         }
         return batchEdiConfig;
     }
@@ -188,7 +191,7 @@ public class BatchEditService : DbRepository<BatchEdit>, IBatchEditService
             ColumnComment = string.IsNullOrWhiteSpace(columnInfo.ColumnDescription) ? columnInfo.ColumnName : columnInfo.ColumnDescription,
             NetType = netType,
             DataType = SqlSugarUtils.DataTypeToEff(netType),
-            Status = SysDictConst.COMMON_STATUS_DISABLED
+            Status = CommonStatusConst.DISABLED
         };
     }
 

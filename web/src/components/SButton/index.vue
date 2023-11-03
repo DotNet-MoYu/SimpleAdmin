@@ -13,9 +13,15 @@ import { FormOptEnum } from "@/enums";
 // const slotKeys = computed(() => Object.keys(instance?.slots || [])); // 插槽名称列表
 //接口
 interface Props {
-  opt?: FormOptEnum; //操作
-  prefix?: string; //前缀
-  suffix?: string; //标题
+  /** 操作 */
+  opt?: FormOptEnum;
+  /** 前缀 */
+  prefix?: string;
+  /** 标题 */
+  suffix?: string;
+  /** 图标 */
+  icon?: any;
+  /** 权限 */
   permission?: string[] | string;
 }
 //默认值
@@ -26,6 +32,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 //根据操作类型绑定按钮图标
 const icon = computed(() => {
+  if (props.icon) {
+    return props.icon;
+  }
   switch (props.opt) {
     case FormOptEnum.ADD:
       return CirclePlus;

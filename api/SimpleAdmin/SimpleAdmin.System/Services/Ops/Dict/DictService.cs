@@ -25,7 +25,8 @@ public class DictService : DbRepository<SysDict>, IDictService
     {
         var query = Context.Queryable<SysDict>().Where(it => it.Category == input.Category)//根据分类查询
             .Where(it => it.ParentId == input.ParentId)//根据父ID查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.DictLabel.Contains(input.SearchKey) || it.DictValue.Contains(input.SearchKey))//根据关键字查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.DictLabel.Contains(input.SearchKey) || it.DictValue.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
@@ -108,6 +109,19 @@ public class DictService : DbRepository<SysDict>, IDictService
     }
 
     /// <inheritdoc />
+    public async Task<List<SysDict>> GetChildrenByDictValue(string dictValue)
+    {
+        var sysDictList = await GetListAsync();
+        var devDict = sysDictList.Where(it => it.DictValue == dictValue).FirstOrDefault();
+        if (devDict != null)
+        {
+            var children = GetDevDictChildren(sysDictList, devDict.Id);
+            return children;
+        }
+        return new List<SysDict>();
+    }
+
+    /// <inheritdoc />
     public async Task<List<string>> GetValuesByDictValue(string dictValue, List<SysDict> devDictList = null)
     {
         var sysDictList = devDictList == null ? await GetListAsync() : devDictList;//获取全部
@@ -135,7 +149,8 @@ public class DictService : DbRepository<SysDict>, IDictService
     public async Task<List<SysDict>> Tree(DictTreeInput input)
     {
         var sysDictList = await GetListAsync();//获取字典列表
-        var devList = sysDictList.WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category).OrderBy(it => it.SortCode).ToList();
+        var devList = sysDictList.WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category).OrderBy(it => it.SortCode)
+            .ToList();
         return ConstructResourceTrees(devList);
     }
 
@@ -176,7 +191,8 @@ public class DictService : DbRepository<SysDict>, IDictService
     {
         var dictList = await GetListAsync();//获取全部字典
         //判断是否从存在重复字典名
-        var hasSameLabel = dictList.Any(it => it.ParentId == sysDict.ParentId && it.Category == sysDict.Category && it.DictLabel == sysDict.DictLabel && it.Id != sysDict.Id);
+        var hasSameLabel = dictList.Any(it =>
+            it.ParentId == sysDict.ParentId && it.Category == sysDict.Category && it.DictLabel == sysDict.DictLabel && it.Id != sysDict.Id);
         if (hasSameLabel)
         {
             throw Oops.Bah($"存在重复的字典名称:{sysDict.DictLabel}");
@@ -198,11 +214,11 @@ public class DictService : DbRepository<SysDict>, IDictService
     public List<SysDict> GetDevDictChildren(List<SysDict> dictList, long parentId)
     {
         //找下级ID列表
-        var resources = dictList.Where(it => it.ParentId == parentId).ToList();
-        if (resources.Count > 0)//如果数量大于0
+        var dicts = dictList.Where(it => it.ParentId == parentId).ToList();
+        if (dicts.Count > 0)//如果数量大于0
         {
             var data = new List<SysDict>();
-            foreach (var item in resources)//遍历机构
+            foreach (var item in dicts)//遍历机构
             {
                 var devDictChildren = GetDevDictChildren(dictList, item.Id);
                 data.AddRange(devDictChildren);//添加子节点);

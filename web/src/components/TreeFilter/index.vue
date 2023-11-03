@@ -7,7 +7,7 @@
     <el-scrollbar :style="{ height: title ? `calc(100% - 95px)` : `calc(100% - 56px)` }">
       <el-tree
         ref="treeRef"
-        default-expand-all
+        :default-expand-all="defaultExpandAll"
         :node-key="id"
         :data="multiple ? treeData : treeAllData"
         :show-checkbox="multiple"
@@ -19,6 +19,7 @@
         :props="defaultProps"
         :filter-node-method="filterNode"
         :default-checked-keys="multiple ? selected : []"
+        :default-expanded-keys="getDefaultExpandKeys"
         @node-click="handleNodeClick"
         @check="handleCheckChange"
       >
@@ -47,11 +48,15 @@ interface TreeFilterProps {
   label?: string; // 显示的label ==> 非必传，默认为 “label”
   multiple?: boolean; // 是否为多选 ==> 非必传，默认为 false
   defaultValue?: any; // 默认选中的值 ==> 非必传
+  defaultExpandAll?: boolean; // 是否默认展开所有节点 ==> 非必传，默认为 true
+  defaultExpandLevel?: number; // 默认展开的层级 ==> 非必传，默认为 1,如果 defaultExpandAll 为 true，则此参数无效
 }
 const props = withDefaults(defineProps<TreeFilterProps>(), {
   id: "id",
   label: "label",
-  multiple: false
+  multiple: false,
+  defaultExpandAll: true,
+  defaultExpandLevel: 1
 });
 
 const defaultProps = {
@@ -71,11 +76,7 @@ const setSelected = () => {
 
 onBeforeMount(async () => {
   setSelected();
-  if (props.requestApi) {
-    const { data } = await props.requestApi!();
-    treeData.value = data;
-    treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
-  }
+  await getRequestData();
 });
 
 // 使用 nextTick 防止打包后赋值不生效，开发环境是正常的
@@ -96,44 +97,34 @@ watch(
   { deep: true, immediate: true }
 );
 
-// 定义一个变量，用来存储过滤文本
 const filterText = ref("");
 watch(filterText, val => {
-  // 当过滤文本发生变化时，调用treeRef.value.filter方法
   treeRef.value!.filter(val);
 });
 
 // 过滤
 const filterNode = (value: string, data: { [key: string]: any }, node: any) => {
-  // 判断value是否为空
   if (!value) return true;
-  // 获取node的父节点
   let parentNode = node.parent,
-    // 获取node的标签
     labels = [node.label],
-    // 获取node的等级
     level = 1;
-  // 当level小于node.level时，循环遍历
   while (level < node.level) {
-    // 拼接标签
     labels = [...labels, parentNode.label];
-    // 获取父节点
     parentNode = parentNode.parent;
-    // 等级加1
     level++;
   }
-  // 判断标签是否包含value
   return labels.some(label => label.indexOf(value) !== -1);
 };
-interface FilterEmits {
-  (e: "change", value: any): void;
-}
-const emit = defineEmits<FilterEmits>();
+
+// emit
+const emit = defineEmits<{
+  change: [value: any, data?: any];
+}>();
 
 // 单选
 const handleNodeClick = (data: { [key: string]: any }) => {
   if (props.multiple) return;
-  emit("change", data[props.id]);
+  emit("change", data[props.id], data);
 };
 
 // 多选
@@ -141,8 +132,43 @@ const handleCheckChange = () => {
   emit("change", treeRef.value?.getCheckedKeys());
 };
 
+const refresh = async () => {
+  treeRef.value?.setCheckedKeys([]);
+  treeRef.value?.setCurrentKey("");
+  setSelected();
+  await getRequestData();
+};
+
+const getRequestData = async () => {
+  const { data } = await props.requestApi!();
+  treeData.value = data;
+  treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
+};
+
+/** 获取默认展开层级 */
+const getDefaultExpandKeys = computed(() => {
+  //判断是否为默认展开全部
+  if (!props.defaultExpandAll) {
+    //根据默认展开层级,将对应的id放入数组
+    let ids: any[] = [];
+    const getIds = (data: any[], level: number) => {
+      data.forEach((item: any) => {
+        if (item.children && item.children.length > 0 && level >= 1) {
+          //递归调用
+          getIds(item.children, level - 1);
+          ids.push(item.id);
+        }
+      });
+    };
+    //调用函数传入数据和默认展开层级
+    getIds(treeAllData.value, props.defaultExpandLevel);
+    return ids;
+  }
+  return [];
+});
+
 // 暴露给父组件使用
-defineExpose({ treeData, treeAllData, treeRef });
+defineExpose({ treeData, treeAllData, treeRef, refresh });
 </script>
 
 <style scoped lang="scss">

@@ -27,7 +27,7 @@
           <el-tag v-if="scope.row.isHome === true" type="danger">首页</el-tag>
         </el-space>
       </template>
-      <!-- 菜单操作 -->
+      <!-- 操作 -->
       <template #operation="scope">
         <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
         <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】页面`)" />

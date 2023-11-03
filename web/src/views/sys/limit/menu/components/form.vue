@@ -17,9 +17,7 @@
       </s-form-item>
       <s-form-item label="菜单类型" prop="menuType">
         <el-radio-group v-model="menuProps.record.menuType">
-          <el-radio-button v-for="(item, index) in menuTypeOptions" :key="index" :label="item.value">{{
-            item.label
-          }}</el-radio-button>
+          <el-radio-button v-for="(item, index) in menuTypeOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
         </el-radio-group>
       </s-form-item>
       <s-form-item label="图标" prop="icon">
@@ -62,45 +60,35 @@
           <el-col :span="12">
             <s-form-item label="设置主页" prop="isHome">
               <el-radio-group v-model="menuProps.record.isHome" :disabled="isLink || isSubSet">
-                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                  item.label
-                }}</el-radio-button>
+                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
               </el-radio-group>
             </s-form-item>
           </el-col>
           <el-col :span="12">
             <s-form-item label="隐藏菜单" prop="isHide">
               <el-radio-group v-model="menuProps.record.isHide">
-                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                  item.label
-                }}</el-radio-button>
+                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
               </el-radio-group>
             </s-form-item>
           </el-col>
           <el-col :span="12">
             <s-form-item label="页面全屏" prop="isFull">
               <el-radio-group v-model="menuProps.record.isFull" :disabled="isLink">
-                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                  item.label
-                }}</el-radio-button>
+                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
               </el-radio-group>
             </s-form-item>
           </el-col>
           <el-col :span="12">
             <s-form-item label="固定标签页" prop="isAffix">
               <el-radio-group v-model="menuProps.record.isAffix" :disabled="isLink">
-                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                  item.label
-                }}</el-radio-button>
+                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
               </el-radio-group>
             </s-form-item>
           </el-col>
           <el-col :span="12">
             <s-form-item label="路由缓存" prop="isKeepAlive">
               <el-radio-group v-model="menuProps.record.isKeepAlive" :disabled="isLink">
-                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                  item.label
-                }}</el-radio-button>
+                <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
               </el-radio-group>
             </s-form-item>
           </el-col>
@@ -173,9 +161,9 @@ function onOpen(props: FormProps.Base<Menu.MenuInfo>, moduleId: number | string)
   }
   module.value = moduleId; //设置模块id
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    menuDetailApi({ id: props.id }).then(res => {
+    menuDetailApi({ id: props.record.id }).then(res => {
       menuProps.record = res.data;
     });
   }
@@ -207,8 +195,6 @@ function onClose() {
  * @param path 路由地址
  */
 function changeMenu(path: string) {
-  console.log(isSubSet);
-
   if (isSubSet.value) {
     path = path + "/:id";
     menuProps.record.activeMenu = path;

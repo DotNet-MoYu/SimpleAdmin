@@ -82,10 +82,11 @@ public class BatchEditConfigInput : BatchEditConfig, IValidatableObject
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        if (Status == SysDictConst.COMMON_STATUS_ENABLE)
+        if (Status == CommonStatusConst.ENABLE)
         {
             //如果是api请求并且必填参数有空的
-            if (DataType.Contains("api") && (string.IsNullOrEmpty(RequestUrl) || string.IsNullOrEmpty(RequestType) || string.IsNullOrEmpty(RequestLabel) || string.IsNullOrEmpty(RequestValue)))
+            if (DataType.Contains("api") && (string.IsNullOrEmpty(RequestUrl) || string.IsNullOrEmpty(RequestType)
+                || string.IsNullOrEmpty(RequestLabel) || string.IsNullOrEmpty(RequestValue)))
             {
                 yield return new ValidationResult($"字段{ColumnName}接口信息必填", new[] { nameof(DataType) });
             }

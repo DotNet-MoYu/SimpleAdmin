@@ -766,6 +766,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Tree(SimpleAdmin.System.RoleTreeInput)">
+            <summary>
+            获取角色树
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.SpaController">
             <summary>
             单页管理控制器
@@ -1034,6 +1040,12 @@
             职位分页查询
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Tree(SimpleAdmin.System.PositionTreeInput)">
+            <summary>
+            获取职位树
+            </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.PositionController.Add(SimpleAdmin.System.PositionAddInput)">

@@ -48,7 +48,8 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
             if (resourceList.Count == 0)//如果没有就获取角色的
                 //获取角色所拥有的资源集合
-                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
+                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList,
+                    CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
             var menuIdList = new HashSet<long>();
             //获取菜单Id集合
@@ -168,7 +169,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         }
 
         //更新指定字段
-        var result = await UpdateAsync(it => new SysUser
+        var result = await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             Name = input.Name,
             Email = input.Email,
@@ -192,7 +193,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名
 
         //更新签名
-        var result = await UpdateAsync(it => new SysUser
+        var result = await UpdateSetColumnsTrueAsync(it => new SysUser
         {
             Signature = newSignature
         }, it => it.Id == UserManager.UserId);
@@ -243,7 +244,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         //     throw Oops.Bah($"新密码请勿与旧密码过于相似");
         newPassword = CryptogramUtil.Sm4Encrypt(newPassword);//SM4加密
         userInfo.Password = newPassword;
-        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Password }).ExecuteCommandAsync();//修改密码
+        await UpdateSetColumnsTrueAsync(it => new SysUser() { Password = newPassword }, it => it.Id == userInfo.Id);//更新密码
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
 
@@ -259,8 +260,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         fileStream.Close();
         var base64String = Convert.ToBase64String(bytes);//转base64
         var avatar = base64String.ToImageBase64();//转图片
-        userInfo.Avatar = avatar;
-        await Context.Updateable(userInfo).UpdateColumns(it => new { it.Avatar }).ExecuteCommandAsync();//修改密码
+        await UpdateSetColumnsTrueAsync(it => new SysUser() { Avatar = avatar }, it => it.Id == userInfo.Id);// 更新头像
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
         return avatar;
     }

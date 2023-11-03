@@ -14,9 +14,7 @@
         <template #tableHeader="scope">
           <el-space>
             <el-radio-group v-model="initParam.category" class="mb-15px">
-              <el-radio-button v-for="(item, index) in dctTypeOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in dctTypeOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
             <el-input v-model="initParam.searchKey" placeholder="请输入字典名称" class="mb-15px">
               <template #append>
@@ -42,7 +40,7 @@
           <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
         </template>
 
-        <!-- 菜单操作 -->
+        <!-- 操作 -->
         <template #operation="scope">
           <s-button
             link
@@ -69,10 +67,7 @@
               <el-button :icon="Search" class="el-input-button" />
             </template>
           </el-input>
-          <s-button
-            :suffix="title"
-            @click="onOpen(FormOptEnum.ADD, childInitParam.category as DictCategoryEnum, childInitParam.parentId)"
-          />
+          <s-button :suffix="title" @click="onOpen(FormOptEnum.ADD, childInitParam.category as DictCategoryEnum, childInitParam.parentId)" />
           <s-button
             type="danger"
             :suffix="title"
@@ -90,7 +85,7 @@
         }}</el-tag>
         <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
       </template>
-      <!-- 菜单操作 -->
+      <!-- 操作 -->
       <template #operation="scope">
         <s-button
           link
@@ -173,7 +168,7 @@ function onOpen(opt: FormOptEnum, category: DictCategoryEnum, parentId: number |
       record: record,
       category: category,
       parentId: parentId,
-      successful: RefreshTable
+      successful: () => proTableChild.value?.refresh() //刷新子表格
     });
   }
 }

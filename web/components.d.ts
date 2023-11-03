@@ -7,6 +7,7 @@ export {}
 
 declare module "vue" {
   export interface GlobalComponents {
+    2: typeof import("./src/components/Selectors/UserSelector/index copy 2.vue")["default"];
     403: typeof import("./src/components/ErrorMessage/403.vue")["default"];
     404: typeof import("./src/components/ErrorMessage/404.vue")["default"];
     500: typeof import("./src/components/ErrorMessage/500.vue")["default"];
@@ -14,6 +15,8 @@ declare module "vue" {
     ChooseModule: typeof import("./src/components/ChooseModule/index.vue")["default"];
     CodeHighLight: typeof import("./src/components/CodeHighLight/index.vue")["default"];
     ColSetting: typeof import("./src/components/ProTable/components/ColSetting.vue")["default"];
+    copy: typeof import("./src/components/Selectors/UserSelector/index copy.vue")["default"];
+    ECharts: typeof import("./src/components/ECharts/index.vue")["default"];
     ElAside: typeof import("element-plus/es")["ElAside"];
     ElAutocomplete: typeof import("element-plus/es")["ElAutocomplete"];
     ElBadge: typeof import("element-plus/es")["ElBadge"];
@@ -47,6 +50,7 @@ declare module "vue" {
     ElOption: typeof import("element-plus/es")["ElOption"];
     ElPagination: typeof import("element-plus/es")["ElPagination"];
     ElPopover: typeof import("element-plus/es")["ElPopover"];
+    ElRadio: typeof import("element-plus/es")["ElRadio"];
     ElRadioButton: typeof import("element-plus/es")["ElRadioButton"];
     ElRadioGroup: typeof import("element-plus/es")["ElRadioGroup"];
     ElRow: typeof import("element-plus/es")["ElRow"];
@@ -68,6 +72,7 @@ declare module "vue" {
     GridItem: typeof import("./src/components/Grid/components/GridItem.vue")["default"];
     Loading: typeof import("./src/components/Loading/index.vue")["default"];
     MenuSelector: typeof import("./src/components/Selectors/MenuSelector/index.vue")["default"];
+    OrgSelector: typeof import("./src/components/Selectors/OrgSelector/index.vue")["default"];
     Pagination: typeof import("./src/components/ProTable/components/Pagination.vue")["default"];
     ProTable: typeof import("./src/components/ProTable/index.vue")["default"];
     RouterLink: typeof import("vue-router")["RouterLink"];
@@ -75,6 +80,7 @@ declare module "vue" {
     SButton: typeof import("./src/components/SButton/index.vue")["default"];
     SearchForm: typeof import("./src/components/SearchForm/index.vue")["default"];
     SearchFormItem: typeof import("./src/components/SearchForm/components/SearchFormItem.vue")["default"];
+    SelectFilter: typeof import("./src/components/SelectFilter/index.vue")["default"];
     SelectIcon: typeof import("./src/components/SelectIcon/index.vue")["default"];
     SelectIconPlus: typeof import("./src/components/SelectIconPlus/index.vue")["default"];
     SFormItem: typeof import("./src/components/SFormItem/index.vue")["default"];
@@ -82,5 +88,6 @@ declare module "vue" {
     SwitchDark: typeof import("./src/components/SwitchDark/index.vue")["default"];
     TableColumn: typeof import("./src/components/ProTable/components/TableColumn.vue")["default"];
     TreeFilter: typeof import("./src/components/TreeFilter/index.vue")["default"];
+    UserSelector: typeof import("./src/components/Selectors/UserSelector/index.vue")["default"];
   }
 }

@@ -17,7 +17,7 @@
               @click="onDelete(scope.selectedListIds, '删除所选按钮')"
             />
           </template>
-          <!-- 菜单操作 -->
+          <!-- 操作 -->
           <template #operation="scope">
             <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
             <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】按钮`)" />

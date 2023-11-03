@@ -17,16 +17,16 @@ const http = moduleRequest("/sys/userCenter/");
 
 /** 获取用户菜单 */
 export const getAuthMenuListApi = (params: ReqId) => {
-  return http.get<Menu.MenuOptions[]>("loginMenu", params, { noLoading: true });
+  return http.get<Menu.MenuOptions[]>("loginMenu", params, { loading: false });
   // return authMenuList;
 };
 
 /** 设置默认模块 */
 export const setDefaultModuleApi = (params: UserCenter.ResModuleDefault) => {
-  http.post("setDefaultModule", params, { noLoading: true });
+  http.post("setDefaultModule", params, { loading: false });
 };
 
 /** 修改用户密码 */
 export const updatePasswordApi = () => {
-  return http.get<Menu.MenuOptions[]>("loginMenu", {}, { noLoading: true });
+  return http.get<Menu.MenuOptions[]>("loginMenu", {}, { loading: false });
 };

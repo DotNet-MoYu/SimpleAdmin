@@ -27,13 +27,7 @@
         <span v-show="subMenuList.length" class="logo-text">{{ isCollapse ? "G" : title }}</span>
       </div>
       <el-scrollbar>
-        <el-menu
-          :router="false"
-          :default-active="activeMenu"
-          :collapse="isCollapse"
-          :unique-opened="accordion"
-          :collapse-transition="false"
-        >
+        <el-menu :router="false" :default-active="activeMenu" :collapse="isCollapse" :unique-opened="accordion" :collapse-transition="false">
           <SubMenu :menu-list="subMenuList" />
         </el-menu>
       </el-scrollbar>

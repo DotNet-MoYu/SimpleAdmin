@@ -17,9 +17,7 @@
       </s-form-item>
       <s-form-item label="单页类型" prop="menuType">
         <el-radio-group v-model="spaProps.record.menuType">
-          <el-radio-button v-for="(item, index) in spaTypeOptions" :key="index" :label="item.value">{{
-            item.label
-          }}</el-radio-button>
+          <el-radio-button v-for="(item, index) in spaTypeOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
         </el-radio-group>
       </s-form-item>
       <s-form-item label="图标" prop="icon">
@@ -58,45 +56,35 @@
         <el-col :span="12">
           <s-form-item label="设置主页" prop="isHome">
             <el-radio-group v-model="spaProps.record.isHome">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="隐藏页面" prop="isHide">
             <el-radio-group v-model="spaProps.record.isHide">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="页面全屏" prop="isFull">
             <el-radio-group v-model="spaProps.record.isFull">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="固定标签页" prop="isAffix">
             <el-radio-group v-model="spaProps.record.isAffix">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="路由缓存" prop="isKeepAlive">
             <el-radio-group v-model="spaProps.record.isKeepAlive">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{
-                item.label
-              }}</el-radio-button>
+              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
             </el-radio-group>
           </s-form-item>
         </el-col>
@@ -161,9 +149,9 @@ function onOpen(props: FormProps.Base<Spa.SpaInfo>) {
   }
 
   visible.value = true; //显示表单
-  if (props.id) {
+  if (props.record.id) {
     //如果传了id，就去请求api获取record
-    spaDetailApi({ id: props.id }).then(res => {
+    spaDetailApi({ id: props.record.id }).then(res => {
       spaProps.record = res.data;
     });
   }

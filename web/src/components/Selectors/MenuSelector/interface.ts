@@ -12,7 +12,7 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 
-/** 图标选择器属性 */
+/** 菜单选择器属性 */
 export interface MenuSelectProps {
   /** 所属模块 */
   module: number | string;

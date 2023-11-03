@@ -19,6 +19,21 @@ public class SysOrgPageInput : BasePageInput
     public long ParentId { get; set; }
 
     /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// 编码
+    /// </summary>
+    public string Code { get; set; }
+
+    /// <summary>
+    /// 分类
+    /// </summary>
+    public string Category { get; set; }
+
+    /// <summary>
     /// 机构列表
     /// </summary>
     public List<long> OrgIds { get; set; }

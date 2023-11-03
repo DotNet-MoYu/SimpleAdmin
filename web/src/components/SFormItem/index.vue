@@ -3,12 +3,13 @@
   <el-form-item ref="formItemRef" v-bind="$attrs">
     <slot></slot>
     <template #label>
-      <el-space :size="3">
-        <el-tooltip v-if="tooltip" effect="dark" :content="props.tooltip" placement="top">
+      <el-space :size="3" v-if="tooltip">
+        <el-tooltip effect="dark" :content="props.tooltip" placement="top">
           <svg-icon icon="uiw:question-circle-o"></svg-icon>
         </el-tooltip>
         {{ $attrs.label }}
       </el-space>
+      <span v-else-if="$attrs.label">{{ $attrs.label }}</span>
     </template>
   </el-form-item>
 </template>
@@ -26,8 +27,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   tooltip: undefined
 });
-
-console.log("[ props ] >", props);
 </script>
 
 <style lang="scss" scoped></style>

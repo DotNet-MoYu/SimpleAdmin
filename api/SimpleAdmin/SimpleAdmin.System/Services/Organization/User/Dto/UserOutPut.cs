@@ -37,21 +37,6 @@ public class UserSelectorOutPut
     /// 性别
     ///</summary>
     public string Gender { get; set; }
-
-    /// <summary>
-    /// 组织名称
-    /// </summary>
-    public string OrgName { get; set; }
-
-    /// <summary>
-    /// 职位名称
-    /// </summary>
-    public string PositionName { get; set; }
-
-    /// <summary>
-    ///  头像
-    /// </summary>
-    public string Avatar { get; set; }
 }
 
 /// <summary>

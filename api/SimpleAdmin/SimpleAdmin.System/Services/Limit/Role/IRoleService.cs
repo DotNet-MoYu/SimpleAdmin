@@ -13,32 +13,13 @@ namespace SimpleAdmin.System;
 /// </summary>
 public interface IRoleService : ITransient
 {
+    #region 查询
+
     /// <summary>
     /// 获取所有角色
     /// </summary>
     /// <returns></returns>
     Task<List<SysRole>> GetListAsync();
-
-    /// <summary>
-    /// 添加角色
-    /// </summary>
-    /// <param name="input">添加参数</param>
-    /// <returns></returns>
-    Task Add(RoleAddInput input);
-
-    /// <summary>
-    /// 删除角色
-    /// </summary>
-    /// <param name="input">删除参数</param>
-    /// <returns></returns>
-    Task Delete(BaseIdListInput input);
-
-    /// <summary>
-    /// 编辑角色
-    /// </summary>
-    /// <param name="input">编辑参数</param>
-    /// <returns></returns>
-    Task Edit(RoleEditInput input);
 
     /// <summary>
     /// 根据用户ID获取用户角色集合
@@ -47,26 +28,6 @@ public interface IRoleService : ITransient
     /// <returns></returns>
     Task<List<SysRole>> GetRoleListByUserId(long userId);
 
-    /// <summary>
-    /// 给角色授权权限
-    /// </summary>
-    /// <param name="input">授权信息</param>
-    /// <returns></returns>
-    Task GrantPermission(GrantPermissionInput input);
-
-    /// <summary>
-    /// 给角色授权
-    /// </summary>
-    /// <param name="input">授权参数</param>
-    /// <returns></returns>
-    Task GrantResource(GrantResourceInput input);
-
-    /// <summary>
-    /// 给角色授权用户
-    /// </summary>
-    /// <param name="input">授权信息</param>
-    /// <returns></returns>
-    Task GrantUser(GrantUserInput input);
 
     /// <summary>
     /// 获取角色拥有权限
@@ -97,11 +58,7 @@ public interface IRoleService : ITransient
     /// <returns></returns>
     Task<SqlSugarPagedList<SysRole>> Page(RolePageInput input);
 
-    /// <summary>
-    /// 刷新缓存
-    /// </summary>
-    /// <returns></returns>
-    Task RefreshCache();
+
 
     /// <summary>
     /// 获取角色授权权限选择器
@@ -123,4 +80,73 @@ public interface IRoleService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<SysRole>> GetRoleListByIdList(IdListInput input);
+
+    /// <summary>
+    /// 获取角色树
+    /// </summary>
+    /// <param name="input">角色树</param>
+    /// <returns></returns>
+    Task<List<RoleTreeOutput>> Tree(RoleTreeInput input);
+
+    #endregion
+
+    #region 新增
+
+    /// <summary>
+    /// 添加角色
+    /// </summary>
+    /// <param name="input">添加参数</param>
+    /// <returns></returns>
+    Task Add(RoleAddInput input);
+
+    #endregion
+
+    #region 编辑
+
+    /// <summary>
+    /// 编辑角色
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <returns></returns>
+    Task Edit(RoleEditInput input);
+
+    /// <summary>
+    /// 给角色授权权限
+    /// </summary>
+    /// <param name="input">授权信息</param>
+    /// <returns></returns>
+    Task GrantPermission(GrantPermissionInput input);
+
+    /// <summary>
+    /// 给角色授权
+    /// </summary>
+    /// <param name="input">授权参数</param>
+    /// <returns></returns>
+    Task GrantResource(GrantResourceInput input);
+
+    /// <summary>
+    /// 给角色授权用户
+    /// </summary>
+    /// <param name="input">授权信息</param>
+    /// <returns></returns>
+    Task GrantUser(GrantUserInput input);
+
+    #endregion
+
+    #region 删除
+
+    /// <summary>
+    /// 刷新缓存
+    /// </summary>
+    /// <returns></returns>
+    Task RefreshCache();
+
+    /// <summary>
+    /// 删除角色
+    /// </summary>
+    /// <param name="input">删除参数</param>
+    /// <returns></returns>
+    Task Delete(BaseIdListInput input);
+
+    #endregion
 }

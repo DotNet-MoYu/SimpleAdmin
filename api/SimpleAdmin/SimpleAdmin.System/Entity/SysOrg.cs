@@ -59,6 +59,12 @@ public class SysOrg : BaseEntity
     public int? SortCode { get; set; }
 
     /// <summary>
+    /// 主管信息
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public UserSelectorOutPut DirectorInfo { get; set; }
+
+    /// <summary>
     /// 子节点
     /// </summary>
     [SugarColumn(IsIgnore = true)]
@@ -68,5 +74,5 @@ public class SysOrg : BaseEntity
     /// 设置为叶子节点(设置了loadData时有效)
     /// </summary>
     [SugarColumn(IsIgnore = true)]
-    public bool? IsLeaf { get; set; }
+    public bool? Leaf { get; set; }
 }

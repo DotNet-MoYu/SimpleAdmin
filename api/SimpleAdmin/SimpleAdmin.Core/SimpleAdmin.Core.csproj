@@ -15,10 +15,9 @@
         <PackageReference Include="Furion.Pure" Version="4.8.8.42"/>
         <PackageReference Include="Lazy.Captcha.Core" Version="2.0.6"/>
         <PackageReference Include="Minio" Version="5.0.0"/>
+        <PackageReference Include="NewLife.Core" Version="10.6.2023.1101"/>
         <PackageReference Include="Portable.BouncyCastle" Version="1.9.0"/>
-        <PackageReference Include="SimpleRedis" Version="1.1.5"/>
         <PackageReference Include="SimpleTool" Version="1.0.6"/>
-
         <PackageReference Include="Yitter.IdGenerator" Version="1.0.14"/>
         <PackageReference Include="Masuit.Tools.Core" Version="2.6.6.9"/>
         <PackageReference Include="SharpZipLib" Version="1.4.2"/>

@@ -18,12 +18,12 @@ const http = moduleRequest("/auth/b/");
 
 // 用户登录
 export const loginApi = (params: Login.LoginForm) => {
-  return http.post<Login.Login>("login", params, { noLoading: true }); // 正常 post json 请求  ==>  application/json
+  return http.post<Login.Login>("login", params, { loading: false }); // 正常 post json 请求  ==>  application/json
 };
 
 //获取验证码
 export const picCaptchaApi = () => {
-  return http.get<Login.ReqValidCode>("getPicCaptcha", {}, { noLoading: true });
+  return http.get<Login.ReqValidCode>("getPicCaptcha", {}, { loading: false });
 };
 
 // 用户退出登录
@@ -33,5 +33,5 @@ export const logoutApi = (params: Login.Logout) => {
 
 //获取用户信息
 export function getLoginUserApi() {
-  return http.get<Login.LoginUserInfo>("getLoginUser", {}, { noLoading: true });
+  return http.get<Login.LoginUserInfo>("getLoginUser", {}, { loading: false });
 }

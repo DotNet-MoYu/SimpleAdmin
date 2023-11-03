@@ -15,11 +15,13 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
 {
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly ISysOrgService _sysOrgService;
+    private readonly IDictService _dictService;
 
-    public SysPositionService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService)
+    public SysPositionService(ISimpleCacheService simpleCacheService, ISysOrgService sysOrgService, IDictService dictService)
     {
         _simpleCacheService = simpleCacheService;
         _sysOrgService = sysOrgService;
+        _dictService = dictService;
     }
 
     /// <summary>
@@ -84,6 +86,56 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         return pageInfo;
     }
 
+    /// <inheritdoc/>
+    public async Task<List<PositionTreeOutput>> Tree(PositionTreeInput input)
+    {
+        var result = new List<PositionTreeOutput>();//返回结果
+        var sysOrgList = await _sysOrgService.GetListAsync();//获取所有机构
+        var sysPositions = await GetListAsync();//获取所有职位
+        var posCategory = await _dictService.GetChildrenByDictValue(SysDictConst.POSITION_CATEGORY);//获取职位分类
+        var topOrgList = sysOrgList.Where(it => it.ParentId == 0).ToList();//获取顶级机构
+        //遍历顶级机构
+        foreach (var org in topOrgList)
+        {
+            var childIds = await _sysOrgService.GetOrgChildIds(org.Id, true, sysOrgList);//获取机构下的所有子级ID
+            var orgPositions = sysPositions.Where(it => childIds.Contains(it.OrgId)).ToList();//获取机构下的职位
+            if (orgPositions.Count == 0) continue;
+            var positionTreeOutput = new PositionTreeOutput
+            {
+                Id = org.Id,
+                Name = org.Name,
+                IsPosition = false
+            };//实例化机构树
+            //获取机构下的职位职位分类
+            foreach (var category in posCategory)
+            {
+                var id = CommonUtils.GetSingleId();//生成唯一ID临时用,因为前端需要ID
+                var categoryTreeOutput = new PositionTreeOutput
+                {
+                    Id = id,
+                    Name = category.DictLabel,
+                    IsPosition = false
+                };//实例化职位分类树
+                var positions = orgPositions.Where(it => it.Category == category.DictValue).ToList();//获取职位分类下的职位
+                //遍历职位，实例化职位树
+                positions.ForEach(it =>
+                {
+                    categoryTreeOutput.Children.Add(new PositionTreeOutput()
+                    {
+                        Id = it.Id,
+                        Name = it.Name,
+                        IsPosition = true
+                    });//添加职位
+                });
+                positionTreeOutput.Children.Add(categoryTreeOutput);
+            }
+            result.Add(positionTreeOutput);
+        }
+
+        return result;
+    }
+
+
     /// <inheritdoc />
     public async Task Add(PositionAddInput input, string name = SystemConst.SYS_POS)
     {
@@ -116,7 +168,8 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
             //获取用户表有兼任组织的信息 oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
-            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson).ToListAsync();
+            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson)
+                .ToListAsync();
             if (positionJsons.Count > 0)
             {
                 positionJsons.ForEach(it =>
@@ -170,7 +223,9 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             {
                 if (position.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
                 {
-                    if (await Context.Queryable<SysUser>().Where(it => it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson, sysPosition.Id.ToString())).AnyAsync())//如果职位下有用户
+                    if (await Context.Queryable<SysUser>()
+                            .Where(it => it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson, sysPosition.Id.ToString()))
+                            .AnyAsync())//如果职位下有用户
                         throw Oops.Bah($"该{name}下已存在用户,请先删除{name}下的用户");
                 }
             }

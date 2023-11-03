@@ -44,12 +44,7 @@ public class SysDict : BaseEntity
     ///</summary>
     [SugarColumn(ColumnName = "SortCode", ColumnDescription = "排序码")]
     public int SortCode { get; set; }
-
-    /// <summary>
-    /// 状态
-    ///</summary>
-    [SugarColumn(ColumnName = "Status", ColumnDescription = "状态", Length = 200)]
-    public virtual string Status { get; set; }
+    
 
     /// <summary>
     /// 子节点

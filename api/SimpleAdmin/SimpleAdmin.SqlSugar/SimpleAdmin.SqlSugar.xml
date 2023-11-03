@@ -4,6 +4,21 @@
         <name>SimpleAdmin.SqlSugar</name>
     </assembly>
     <members>
+        <member name="T:SimpleAdmin.SqlSugar.CommonStatusConst">
+            <summary>
+            通用状态常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.CommonStatusConst.ENABLE">
+            <summary>
+            启用
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.CommonStatusConst.DISABLED">
+            <summary>
+            停用
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.SqlSugar.EffTypeConst">
             <summary>
             前端控件作用类型常量
@@ -77,6 +92,11 @@
         <member name="F:SimpleAdmin.SqlSugar.SqlSugarConst.N_VAR_CHAR_MAX">
             <summary>
             varchar(max)
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.SqlSugar.SqlSugarConst.N_VAR_CHAR_20">
+            <summary>
+            varchar(20)
             </summary>
         </member>
         <member name="F:SimpleAdmin.SqlSugar.SqlSugarConst.LONG_TEXT">

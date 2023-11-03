@@ -13,7 +13,7 @@
  */
 
 import { defineStore } from "pinia";
-import piniaPersistConfig from "@/config/piniaPersist";
+import piniaPersistConfig from "@/stores/helper/persist";
 import { Dict } from "@/api/interface";
 import { getDictTreeApi } from "@/api";
 import { ElNotification } from "element-plus";

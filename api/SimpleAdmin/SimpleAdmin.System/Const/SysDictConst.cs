@@ -35,19 +35,10 @@ public class SysDictConst
     /// </summary>
     public const string CULTURE_LEVEL = "CULTURE_LEVEL";
 
-    #region 系统通用状态
-
     /// <summary>
-    /// 启用
+    /// 系统职位分类
     /// </summary>
-    public const string COMMON_STATUS_ENABLE = "ENABLE";
-
-    /// <summary>
-    /// 停用
-    /// </summary>
-    public const string COMMON_STATUS_DISABLED = "DISABLED";
-
-    #endregion 系统通用状态
+    public const string POSITION_CATEGORY = "POSITION_CATEGORY";
 
     #region 在线用户状态
 
