@@ -61,7 +61,7 @@ public class AuthService : IAuthService
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
     {
         //判断是否有验证码
-        var sysBase = await _configService.GetByConfigKey(CateGoryConst.Config_SYS_BASE, DevConfigConst.LOGIN_CAPTCHA_OPEN);
+        var sysBase = await _configService.GetByConfigKey(CateGoryConst.Config_LOGIN_POLICY, DevConfigConst.LOGIN_CAPTCHA_OPEN);
         if (sysBase != null)//如果有这个配置项
         {
             if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
