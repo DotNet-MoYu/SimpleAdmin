@@ -116,7 +116,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         if (sysUser == null)
         {
             var user = await GetUserFromDb(userId);//从数据库拿用户信息
-            if (sysUser != null)
+            if (user != null)
             {
                 sysUser = user.Adapt<T>();
             }
