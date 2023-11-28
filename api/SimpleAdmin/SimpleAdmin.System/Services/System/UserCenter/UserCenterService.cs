@@ -300,12 +300,14 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var parentList = new List<SysResource>();
         myMenus.ForEach(it =>
         {
-            //找到父ID对应的菜单
-            var parent = allMenuList.Where(r => r.Id == it.ParentId.Value).FirstOrDefault();
-            if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+            var parents = _resourceService.GetResourceParent(allMenuList, it.ParentId.Value);//获取父级
+            parents.ForEach(parent =>
             {
-                parentList.Add(parent);//添加到父列表
-            }
+                if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+                {
+                    parentList.Add(parent);//添加到父列表
+                }
+            });
         });
         return parentList;
     }

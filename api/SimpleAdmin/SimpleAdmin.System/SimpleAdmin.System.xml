@@ -4582,6 +4582,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <summary>
+            获取上级
+            </summary>
+            <param name="resourceList"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ResourceService">
             <inheritdoc cref="T:SimpleAdmin.System.IResourceService"/>
         </member>
@@ -4612,7 +4620,7 @@
         <member name="M:SimpleAdmin.System.ResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetMenuByMenuIds(System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetRouteName(System.String,System.String)">
@@ -4629,14 +4637,6 @@
             </summary>
             <param name="resourceList">资源列表</param>
             <param name="parentId">父ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <summary>
-            获取上级
-            </summary>
-            <param name="resourceList"></param>
-            <param name="parentId"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenus(System.Int64)">

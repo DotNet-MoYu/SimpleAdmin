@@ -29,7 +29,10 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         var sysResources = new List<SysResource>();
 
         //定义资源分类列表,如果是空的则获取全部资源
-        categoryList = categoryList != null ? categoryList : new List<string> { CateGoryConst.Resource_MENU, CateGoryConst.Resource_BUTTON, CateGoryConst.Resource_SPA, CateGoryConst.Resource_MODULE };
+        categoryList = categoryList != null
+            ? categoryList
+            : new List<string>
+                { CateGoryConst.Resource_MENU, CateGoryConst.Resource_BUTTON, CateGoryConst.Resource_SPA, CateGoryConst.Resource_MODULE };
         //遍历列表
         foreach (var category in categoryList)
         {
@@ -45,7 +48,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetaModuleAndMenuAndSpaList()
     {
         //获取所有的菜单和模块以及单页面列表，
-        var sysResources = await GetListAsync(new List<string> { CateGoryConst.Resource_MODULE, CateGoryConst.Resource_MENU, CateGoryConst.Resource_SPA });
+        var sysResources = await GetListAsync(new List<string>
+            { CateGoryConst.Resource_MODULE, CateGoryConst.Resource_MENU, CateGoryConst.Resource_SPA });
         if (sysResources != null)
         {
             //并按分类和排序码排序
@@ -143,7 +147,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         List<PermissionTreeSelector> permissions = new List<PermissionTreeSelector>();//权限列表
 
         // 获取所有需要数据权限的控制器
-        var controllerTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
+        var controllerTypes =
+            App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
             //获取数据权限特性
@@ -200,7 +205,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         return permissions;
     }
 
-    /// <inheritdoc />
+
     public async Task<List<SysResource>> GetMenuByMenuIds(List<long> menuIds)
     {
         //获取所有菜单
@@ -208,6 +213,23 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         //获取菜单信息
         var menus = menuList.Where(it => menuIds.Contains(it.Id)).ToList();
         return menus;
+    }
+
+
+    /// <inheritdoc />
+    public List<SysResource> GetResourceParent(List<SysResource> resourceList, long parentId)
+    {
+        //找上级资源ID列表
+        var resources = resourceList.Where(it => it.Id == parentId).FirstOrDefault();
+        if (resources != null)//如果数量大于0
+        {
+            var data = new List<SysResource>();
+            var parents = GetResourceParent(resourceList, resources.ParentId.Value);
+            data.AddRange(parents);//添加子节点;
+            data.Add(resources);//添加到列表
+            return data;//返回结果
+        }
+        return new List<SysResource>();
     }
 
     #region 方法
@@ -256,26 +278,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         return new List<SysResource>();
     }
 
-    /// <summary>
-    /// 获取上级
-    /// </summary>
-    /// <param name="resourceList"></param>
-    /// <param name="parentId"></param>
-    /// <returns></returns>
-    public List<SysResource> GetResourceParent(List<SysResource> resourceList, long parentId)
-    {
-        //找上级资源ID列表
-        var resources = resourceList.Where(it => it.Id == parentId).FirstOrDefault();
-        if (resources != null)//如果数量大于0
-        {
-            var data = new List<SysResource>();
-            var parents = GetResourceParent(resourceList, resources.ParentId.Value);
-            data.AddRange(parents);//添加子节点;
-            data.Add(resources);//添加到列表
-            return data;//返回结果
-        }
-        return new List<SysResource>();
-    }
+
 
     /// <summary>
     /// 获取授权菜单
