@@ -47,4 +47,11 @@ public interface IButtonService : ITransient
     /// <param name="input">查询条件</param>
     /// <returns>按钮分页列表</returns>
     Task<SqlSugarPagedList<SysResource>> Page(ButtonPageInput input);
+
+    /// <summary>
+    /// 按钮详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysResource> Detail(BaseIdInput input);
 }

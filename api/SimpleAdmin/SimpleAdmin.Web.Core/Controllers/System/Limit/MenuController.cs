@@ -51,7 +51,7 @@ public class MenuController : BaseController
     [HttpGet("menuTreeSelector")]
     public async Task<dynamic> MenuTreeSelector([FromQuery] MenuTreeInput input)
     {
-        return await _menuService.Tree(input);
+        return await _menuService.Tree(input, false);
         ;
     }
 

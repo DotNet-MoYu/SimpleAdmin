@@ -11,7 +11,7 @@
         :node-key="id"
         :data="multiple ? treeData : treeAllData"
         :show-checkbox="multiple"
-        :check-strictly="false"
+        :check-strictly="checkStrictly"
         :current-node-key="!multiple ? selected : ''"
         :highlight-current="!multiple"
         :expand-on-click-node="false"
@@ -50,13 +50,15 @@ interface TreeFilterProps {
   defaultValue?: any; // 默认选中的值 ==> 非必传
   defaultExpandAll?: boolean; // 是否默认展开所有节点 ==> 非必传，默认为 true
   defaultExpandLevel?: number; // 默认展开的层级 ==> 非必传，默认为 1,如果 defaultExpandAll 为 true，则此参数无效
+  checkStrictly?: boolean; // 是否开启子节点和父节点不关联 ==> 非必传，默认为 false
 }
 const props = withDefaults(defineProps<TreeFilterProps>(), {
   id: "id",
   label: "label",
   multiple: false,
   defaultExpandAll: true,
-  defaultExpandLevel: 1
+  defaultExpandLevel: 1,
+  checkStrictly: false
 });
 
 const defaultProps = {
@@ -129,6 +131,7 @@ const handleNodeClick = (data: { [key: string]: any }) => {
 
 // 多选
 const handleCheckChange = () => {
+  console.log("[ treeRef.value?.getCheckedKeys() ] >", treeRef.value?.getCheckedKeys());
   emit("change", treeRef.value?.getCheckedKeys());
 };
 

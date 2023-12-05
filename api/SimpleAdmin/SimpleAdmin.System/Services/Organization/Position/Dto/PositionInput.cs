@@ -27,6 +27,11 @@ public class PositionPageInput : BasePageInput
     /// 分类
     /// </summary>
     public string Category { get; set; }
+
+    /// <summary>
+    /// 状态
+    ///  </summary>
+    public string Status { get; set; }
 }
 
 /// <summary>

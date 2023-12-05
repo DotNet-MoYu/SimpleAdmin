@@ -28,6 +28,8 @@ export namespace Module {
     description: string;
     /** 菜单图标 */
     icon: string;
+    /** 状态 */
+    status: string;
     /** 排序 */
     sortCode: number;
     /** 创建时间 */

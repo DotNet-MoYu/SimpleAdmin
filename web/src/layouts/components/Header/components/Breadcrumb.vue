@@ -3,7 +3,7 @@
     <el-breadcrumb :separator-icon="ArrowRight">
       <transition-group name="breadcrumb">
         <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path">
-          <div class="el-breadcrumb__inner is-link" @click="onBreadcrumbClick(item, index)">
+          <div class="el-breadcrumb__inner is-link" :class="{ 'item-no-icon': !item.meta.icon }" @click="onBreadcrumbClick(item, index)">
             <svg-icon v-show="item.meta.icon && globalStore.breadcrumbIcon" :icon="item.meta.icon" class="breadcrumb-icon" />
             <span class="breadcrumb-title">{{ item.meta.title }}</span>
           </div>
@@ -52,6 +52,9 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
       position: relative;
       display: inline-block;
       float: none;
+      .item-no-icon {
+        transform: translateY(-3px);
+      }
       .el-breadcrumb__inner {
         display: inline-flex;
         el-breadcrumb-item &.is-link {
@@ -61,12 +64,12 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
           }
         }
         .breadcrumb-icon {
-          margin-top: 2px;
+          margin-top: 1px;
           margin-right: 6px;
           font-size: 16px;
         }
         .breadcrumb-title {
-          margin-top: 3px;
+          margin-top: 2px;
         }
       }
       &:last-child .el-breadcrumb__inner,
@@ -74,8 +77,7 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
         color: var(--el-header-text-color-regular);
       }
       :deep(.el-breadcrumb__separator) {
-        position: relative;
-        top: -1px;
+        transform: translateY(-1px);
       }
     }
   }
@@ -85,7 +87,10 @@ const onBreadcrumbClick = (item: Menu.MenuOptions, index: number) => {
     .el-breadcrumb__item {
       top: -2px;
       :deep(.el-breadcrumb__separator) {
-        top: 2px;
+        top: 4px;
+      }
+      .item-no-icon {
+        transform: translateY(0);
       }
     }
   }

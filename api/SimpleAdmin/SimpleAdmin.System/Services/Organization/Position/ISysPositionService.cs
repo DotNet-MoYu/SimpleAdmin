@@ -13,29 +13,7 @@ namespace SimpleAdmin.System;
 /// </summary>
 public interface ISysPositionService : ITransient
 {
-    /// <summary>
-    /// 添加职位
-    /// </summary>
-    /// <param name="input">添加参数</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Add(PositionAddInput input, string name = SystemConst.SYS_POS);
-
-    /// <summary>
-    /// 删除职位
-    /// </summary>
-    /// <param name="input">id列表</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Delete(BaseIdListInput input, string name = SystemConst.SYS_POS);
-
-    /// <summary>
-    /// 编辑职位
-    /// </summary>
-    /// <param name="input">编辑参数</param>
-    /// <param name="name">名称</param>
-    /// <returns></returns>
-    Task Edit(PositionEditInput input, string name = SystemConst.SYS_POS);
+    #region 查询
 
     /// <summary>
     /// 获取职位列表
@@ -62,13 +40,9 @@ public interface ISysPositionService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns></returns>
-    Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input);
+    Task<List<PositionSelectorOutput>> Selector(PositionSelectorInput input);
 
-    /// <summary>
-    /// 刷新缓存
-    /// </summary>
-    /// <returns></returns>
-    Task RefreshCache();
+
 
     /// <summary>
     /// 根据id集合获取职位集合
@@ -83,4 +57,56 @@ public interface ISysPositionService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<List<PositionTreeOutput>> Tree(PositionTreeInput input);
+
+    /// <summary>
+    /// 职位详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysPosition> Detail(BaseIdInput input);
+
+    #endregion
+
+    #region 编辑
+
+    /// <summary>
+    /// 编辑职位
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Edit(PositionEditInput input, string name = SystemConst.SYS_POS);
+
+
+    /// <summary>
+    /// 刷新缓存
+    /// </summary>
+    /// <returns></returns>
+    Task RefreshCache();
+
+    #endregion
+
+    #region 新增
+
+    /// <summary>
+    /// 添加职位
+    /// </summary>
+    /// <param name="input">添加参数</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Add(PositionAddInput input, string name = SystemConst.SYS_POS);
+
+    #endregion
+
+    #region 删除
+
+    /// <summary>
+    /// 删除职位
+    /// </summary>
+    /// <param name="input">id列表</param>
+    /// <param name="name">名称</param>
+    /// <returns></returns>
+    Task Delete(BaseIdListInput input, string name = SystemConst.SYS_POS);
+
+    #endregion
 }

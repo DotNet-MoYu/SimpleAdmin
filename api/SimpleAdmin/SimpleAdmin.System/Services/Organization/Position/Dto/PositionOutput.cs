@@ -9,7 +9,7 @@
 namespace SimpleAdmin.System;
 
 /// <summary>
-///  机构树输出参数
+///  组织树输出参数
 /// </summary>
 public class PositionTreeOutput
 {
@@ -32,4 +32,25 @@ public class PositionTreeOutput
     /// 子项
     /// </summary>
     public List<PositionTreeOutput> Children { get; set; } = new List<PositionTreeOutput>();
+}
+
+/// <summary>
+/// 组织选择器输出参数
+/// </summary>
+public class PositionSelectorOutput
+{
+    /// <summary>
+    /// 组织Id或者职位Id
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// 子项
+    /// </summary>
+    public List<PositionSelectorOutput> Children { get; set; } = new List<PositionSelectorOutput>();
 }

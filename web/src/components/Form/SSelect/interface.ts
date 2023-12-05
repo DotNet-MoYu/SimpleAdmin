@@ -1,5 +1,5 @@
 /**
- * @description 用户个人中心接口
+ * @description 选择框组件接口
  * @license Apache License Version 2.0
  * @remarks
  * SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
@@ -11,22 +11,13 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-import { moduleRequest } from "@/api/request";
-import { ReqId, UserCenter } from "@/api/interface";
-const http = moduleRequest("/sys/userCenter/");
 
-/** 获取用户菜单 */
-export const getAuthMenuListApi = (params: ReqId) => {
-  return http.get<Menu.MenuOptions[]>("loginMenu", params, { loading: false });
-  // return authMenuList;
-};
-
-/** 设置默认模块 */
-export const setDefaultModuleApi = (params: UserCenter.ResModuleDefault) => {
-  http.post("setDefaultModule", params, { loading: false });
-};
-
-/** 修改用户密码 */
-export const updatePasswordApi = () => {
-  return http.get<Menu.MenuOptions[]>("loginMenu", {}, { loading: false });
-};
+/** 选择框组件属性 */
+export interface SSelectProps {
+  /** 选项数组 */
+  options: any[];
+  /** 选项显示标签 */
+  label?: string;
+  /** 选项值 */
+  value?: string;
+}

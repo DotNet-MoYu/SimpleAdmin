@@ -9,25 +9,22 @@
         :model="orgProps.record"
         :hide-required-asterisk="orgProps.disabled"
         label-width="auto"
+        label-suffix=" :"
       >
         <s-form-item label="上级组织" prop="parentId">
           <org-selector v-model:org-value="orgProps.record.parentId" />
         </s-form-item>
         <s-form-item label="组织名称" prop="name">
-          <el-input v-model="orgProps.record.name" placeholder="请填写组织名称" clearable></el-input>
+          <s-input v-model="orgProps.record.name"></s-input>
         </s-form-item>
         <s-form-item label="组织编码" prop="code">
-          <el-input v-model="orgProps.record.code" placeholder="请填写组织编码,不填则为随机值" clearable></el-input>
+          <s-input v-model="orgProps.record.code" placeholder="请填写组织编码,不填则为随机值" clearable></s-input>
         </s-form-item>
         <s-form-item label="组织分类" prop="category">
-          <el-radio-group v-model="orgProps.record.category">
-            <el-radio-button v-for="(item, index) in orgCategoryOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-          </el-radio-group>
+          <el-radio-group v-model="orgProps.record.category" :options="orgCategoryOptions"></el-radio-group>
         </s-form-item>
         <s-form-item label="状态" prop="status">
-          <el-radio-group v-model="orgProps.record.status">
-            <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-          </el-radio-group>
+          <s-radio-group v-model="orgProps.record.status" :options="statusOptions" button />
         </s-form-item>
         <s-form-item label="指定主管" prop="sortCode">
           <el-button link type="primary" @click="showSelector">选择</el-button>
@@ -49,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { SysOrg, SysUser, sysOrgDetailApi, sysOrgSubmitFormApi } from "@/api";
+import { SysOrg, SysUser, sysOrgApi } from "@/api";
 import { FormOptEnum, SysDictEnum } from "@/enums";
 import { required } from "@/utils/formRules";
 import { FormInstance } from "element-plus";
@@ -83,7 +80,6 @@ const rules = reactive({
  * @param props 表单参数
  */
 function onOpen(props: FormProps.Base<SysOrg.SysOrgInfo>) {
-  console.log("[ props ] >", props);
   Object.assign(orgProps, props); //合并参数
   if (props.opt == FormOptEnum.ADD) {
     //如果是新增,设置默认值
@@ -94,7 +90,7 @@ function onOpen(props: FormProps.Base<SysOrg.SysOrgInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    sysOrgDetailApi({ id: props.record.id }).then(res => {
+    sysOrgApi.sysOrgDetail({ id: props.record.id }).then(res => {
       orgProps.record = res.data;
     });
   }
@@ -107,7 +103,8 @@ async function handleSubmit() {
   orgFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await sysOrgSubmitFormApi(orgProps.record, orgProps.record.id != undefined)
+    await sysOrgApi
+      .sysOrgSubmitForm(orgProps.record, orgProps.record.id != undefined)
       .then(() => {
         orgProps.successful!(); //调用父组件的successful方法
       })
@@ -125,7 +122,9 @@ function onClose() {
 const userSelectorRef = ref<UserSelectorInstance>(); //用户选择器引用
 /** 显示用户选择器 */
 function showSelector() {
-  userSelectorRef.value?.showSelector();
+  //将orgProps.record.directorInfo转为 SysUser.SysUserInfo[]类型
+  const directorInfo = orgProps.record.directorInfo ? [orgProps.record.directorInfo] : [];
+  userSelectorRef.value?.showSelector(directorInfo);
 }
 
 /** 选择用户 */

@@ -11,8 +11,7 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-export * from "./upload";
-export * from "./user";
+
 export * from "./userCenter";
 export * from "./limit";
 export * from "./ops";

@@ -174,7 +174,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         var permissions = new List<PermissionTreeSelector>();//权限列表
 
         // 获取所有需要数据权限的控制器
-        var controllerTypes = App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
+        var controllerTypes =
+            App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
             //获取数据权限特性
@@ -241,6 +242,23 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         return menus;
     }
 
+
+    /// <inheritdoc />
+    public List<SysResource> GetResourceParent(List<SysResource> resourceList, long parentId)
+    {
+        //找上级资源ID列表
+        var resources = resourceList.Where(it => it.Id == parentId).FirstOrDefault();
+        if (resources != null)//如果数量大于0
+        {
+            var data = new List<SysResource>();
+            var parents = GetResourceParent(resourceList, resources.ParentId.Value);
+            data.AddRange(parents);//添加子节点;
+            data.Add(resources);//添加到列表
+            return data;//返回结果
+        }
+        return new List<SysResource>();
+    }
+
     #region 方法
 
     /// <summary>
@@ -282,27 +300,6 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                 data.AddRange(res);//添加子节点;
                 data.Add(item);//添加到列表
             }
-            return data;//返回结果
-        }
-        return new List<SysResource>();
-    }
-
-    /// <summary>
-    /// 获取上级
-    /// </summary>
-    /// <param name="resourceList"></param>
-    /// <param name="parentId"></param>
-    /// <returns></returns>
-    public List<SysResource> GetResourceParent(List<SysResource> resourceList, long parentId)
-    {
-        //找上级资源ID列表
-        var resources = resourceList.Where(it => it.Id == parentId).FirstOrDefault();
-        if (resources != null)//如果数量大于0
-        {
-            var data = new List<SysResource>();
-            var parents = GetResourceParent(resourceList, resources.ParentId.Value);
-            data.AddRange(parents);//添加子节点;
-            data.Add(resources);//添加到列表
             return data;//返回结果
         }
         return new List<SysResource>();

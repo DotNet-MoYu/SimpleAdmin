@@ -16,27 +16,25 @@ import { moduleRequest } from "@/api/request";
 import { ReqId, ResPage, Button } from "@/api/interface";
 const http = moduleRequest("/sys/limit/button/");
 
-/** 获取单页分页 */
-export const buttonPageApi = (params: Button.Page) => {
-  return http.get<ResPage<Button.ButtonInfo>>("page", params);
-};
-
-/** 获取单页详情 */
-export const buttonDetailApi = (params: ReqId) => {
-  return http.get<Button.ButtonInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const buttonSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除单页 */
-export const buttonDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
-};
-
-/** 删除单页 */
-export const buttonBatchApi = (params: Button.Batch) => {
-  return http.post("batch", params);
+export default {
+  /** 获取单页分页 */
+  buttonPage(params: Button.Page) {
+    return http.get<ResPage<Button.ButtonInfo>>("page", params);
+  },
+  /** 获取单页详情 */
+  buttonDetail(params: ReqId) {
+    return http.get<Button.ButtonInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  buttonSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除单页 */
+  buttonDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  /** 删除单页 */
+  buttonBatch(params: Button.Batch) {
+    return http.post("batch", params);
+  }
 };

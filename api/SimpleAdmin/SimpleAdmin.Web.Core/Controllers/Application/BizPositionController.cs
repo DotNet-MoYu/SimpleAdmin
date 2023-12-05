@@ -82,4 +82,16 @@ public class BizPositionController
     {
         return await _positionService.Detail(input);
     }
+
+    /// <summary>
+    /// 岗位选择器
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("selector")]
+    [DisplayName("岗位选择器")]
+    public async Task<dynamic> Selector([FromQuery] PositionSelectorInput input)
+    {
+        return await _positionService.Selector(input);
+    }
 }

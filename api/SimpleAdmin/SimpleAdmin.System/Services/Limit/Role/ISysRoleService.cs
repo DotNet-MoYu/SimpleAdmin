@@ -11,7 +11,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// 角色服务
 /// </summary>
-public interface IRoleService : ITransient
+public interface ISysRoleService : ITransient
 {
     #region 查询
 
@@ -58,8 +58,6 @@ public interface IRoleService : ITransient
     /// <returns></returns>
     Task<SqlSugarPagedList<SysRole>> Page(RolePageInput input);
 
-
-
     /// <summary>
     /// 获取角色授权权限选择器
     /// </summary>
@@ -87,6 +85,13 @@ public interface IRoleService : ITransient
     /// <param name="input">角色树</param>
     /// <returns></returns>
     Task<List<RoleTreeOutput>> Tree(RoleTreeInput input);
+
+    /// <summary>
+    /// 角色详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysRole> Detail(BaseIdInput input);
 
     #endregion
 

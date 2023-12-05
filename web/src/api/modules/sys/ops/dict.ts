@@ -13,32 +13,28 @@
  */
 
 import { Dict, ReqId, ResPage } from "@/api/interface";
-
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/ops/dict/");
 
-/** 获取字典树 */
-export const getDictTreeApi = () => {
-  return http.get<Dict.DictTree[]>("tree", {}, { loading: false });
-};
-
-/** 获取字典分页 */
-export const dictPageApi = (params: Dict.Page) => {
-  return http.get<ResPage<Dict.DictInfo>>("page", params);
-};
-
-/** 获取单页详情 */
-export const dictDetailApi = (params: ReqId) => {
-  return http.get<Dict.DictInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const dictSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除单页 */
-export const dictDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取字典树 */
+  getDictTree() {
+    return http.get<Dict.DictTree[]>("tree", {}, { loading: false });
+  },
+  /** 获取字典分页 */
+  dictPage(params: Dict.Page) {
+    return http.get<ResPage<Dict.DictInfo>>("page", params);
+  },
+  /** 获取单页详情 */
+  dictDetail(params: ReqId) {
+    return http.get<Dict.DictInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  dictSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除单页 */
+  dictDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  }
 };

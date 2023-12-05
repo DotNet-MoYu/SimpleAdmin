@@ -31,6 +31,11 @@ public class SqlSugarConst
     public const string N_VAR_CHAR_MAX = "nvarchar(max)";
 
     /// <summary>
+    /// varchar(4000)
+    /// </summary>
+    public const string N_VAR_CHAR_4000 = "nvarchar(4000)";
+
+    /// <summary>
     /// varchar(20)
     /// </summary>
     public const string N_VAR_CHAR_20 = "nvarchar(20)";

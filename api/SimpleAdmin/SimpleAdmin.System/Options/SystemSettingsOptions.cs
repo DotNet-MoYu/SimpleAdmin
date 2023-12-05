@@ -15,4 +15,8 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class SystemSettingsOptions : BaseOptions, IConfigurableOptions
 {
+    /// <summary>
+    /// 超级管理员可以看到全部数据
+    /// </summary>
+    public bool SuperAdminViewAllData { get; set; }
 }

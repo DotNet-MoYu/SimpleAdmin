@@ -58,7 +58,7 @@ public class UserPageInput : BasePageInput
     /// 用户状态
     /// </summary>
 
-    public string UserStatus { get; set; }
+    public string Status { get; set; }
 }
 
 /// <summary>

@@ -276,8 +276,8 @@ public class ClientUser : DataEntityBase
     /// <summary>
     /// 用户状态
     ///</summary>
-    [SugarColumn(ColumnName = "UserStatus", ColumnDescription = "用户状态", Length = 200, IsNullable = true)]
-    public string UserStatus { get; set; }
+    [SugarColumn(ColumnName = "Status", ColumnDescription = "用户状态", Length = 200, IsNullable = true)]
+    public string Status { get; set; }
 
     /// <summary>
     /// 排序码

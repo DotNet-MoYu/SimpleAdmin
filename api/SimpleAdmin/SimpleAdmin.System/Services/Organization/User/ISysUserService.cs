@@ -49,7 +49,7 @@ public interface ISysUserService : ITransient
     /// </summary>
     /// <param name="input">查询参数</param>
     /// <returns></returns>
-    Task<SqlSugarPagedList<UserSelectorOutPut>> UserSelector(UserSelectorInput input);
+    Task<SqlSugarPagedList<UserSelectorOutPut>> Selector(UserSelectorInput input);
 
     /// <summary>
     /// 用户分页查询
@@ -144,6 +144,13 @@ public interface ISysUserService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<SysUser> Detail(BaseIdInput input);
+
+    /// <summary>
+    /// 获取用户头像
+    /// </summary>
+    /// <param name="userId">用户id</param>
+    /// <returns>base64头像</returns>
+    Task<string> GetUserAvatar(long userId);
 
     #endregion 查询
 

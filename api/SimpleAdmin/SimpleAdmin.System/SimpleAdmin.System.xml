@@ -101,6 +101,11 @@
             角色有哪些模块
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_MODULE">
+            <summary>
+            用户有哪些模块
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE">
              <summary>
             用户有哪些资源
@@ -113,7 +118,7 @@
         </member>
         <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION">
             <summary>
-            角色有哪些权限
+            用户有哪些权限
             </summary>
         </member>
         <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA">
@@ -516,6 +521,11 @@
             用户表缓存Key
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_USER_AVATAR">
+            <summary>
+            用户头像缓存关系Key
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.System.SystemConst.CACHE_SYS_USER_PHONE">
             <summary>
             用户手机号关系缓存Key
@@ -911,7 +921,7 @@
              最新登录设备
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.ClientUser.UserStatus">
+        <member name="P:SimpleAdmin.System.ClientUser.Status">
              <summary>
              用户状态
             </summary>
@@ -1662,11 +1672,6 @@
              主管id
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.SysUser.PositionJson">
-             <summary>
-             兼任信息
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.System.SysUser.PwdRemindUpdateTime">
              <summary>
              上次修改密码时间
@@ -1712,11 +1717,6 @@
              最新登录设备
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.SysUser.UserStatus">
-             <summary>
-             用户状态
-            </summary>
-        </member>
         <member name="P:SimpleAdmin.System.SysUser.SortCode">
              <summary>
              排序码
@@ -1740,6 +1740,16 @@
         <member name="P:SimpleAdmin.System.SysUser.PositionName">
             <summary>
             职位信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.OrgAndPosIdList">
+            <summary>
+            组织和机构ID列表,组织ID从上到下最后是职位
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysUser.DirectorInfo">
+            <summary>
+            主管信息
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysUser.ButtonCodeList">
@@ -1802,26 +1812,6 @@
             数据范围的机构ID列表
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.PositionJson">
-            <summary>
-            兼任信息
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PositionJson.OrgId">
-            <summary>
-            组织ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PositionJson.PositionId">
-            <summary>
-            机构ID
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.PositionJson.DirectorId">
-            <summary>
-            主管ID
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.System.AuthEventSubscriber">
             <summary>
             认证模块事件总线
@@ -1866,6 +1856,16 @@
         <member name="F:SimpleAdmin.System.EventSubscriberConst.CLEAR_USER_CACHE">
             <summary>
             清除用户缓存
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.CLEAR_ORG_TOKEN">
+            <summary>
+            清除组织下用户Token
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.EventSubscriberConst.CLEAR_MODULE_TOKEN">
+            <summary>
+            清除模块下用户Token
             </summary>
         </member>
         <member name="F:SimpleAdmin.System.EventSubscriberConst.USER_LOGIN_OUT">
@@ -1991,6 +1991,18 @@
             <param name="context"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.UserEventSubscriber.DeleteUserTokenByOrgIds(Furion.EventBus.EventHandlerExecutingContext)">
+            <summary>
+            根据机构ID列表清除用户token
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:SimpleAdmin.System.UserEventSubscriber.DeleteUserTokenByModuleId(Furion.EventBus.EventHandlerExecutingContext)">
+            <summary>
+            根据模块ID列表清除用户token
+            </summary>
+            <param name="context"></param>
+        </member>
         <member name="T:SimpleAdmin.System.RelationMsgUser">
             <summary>
             站内信与接收用户拓展
@@ -2114,6 +2126,11 @@
         <member name="T:SimpleAdmin.System.SystemSettingsOptions">
             <summary>
              系统配置
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SystemSettingsOptions.SuperAdminViewAllData">
+            <summary>
+            超级管理员可以看到全部数据
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.MinioUtils">
@@ -3502,6 +3519,9 @@
         <member name="M:SimpleAdmin.System.ButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
+        <member name="M:SimpleAdmin.System.ButtonService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
         <member name="M:SimpleAdmin.System.ButtonService.CheckInput(SimpleAdmin.System.SysResource)">
             <summary>
             检查输入参数
@@ -3577,6 +3597,13 @@
             </summary>
             <param name="input">查询条件</param>
             <returns>按钮分页列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IButtonService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            按钮详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.MenuTreeInput">
             <summary>
@@ -3683,11 +3710,12 @@
             <param name="parentId">父ID</param>
             <returns>菜单形结构</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+        <member name="M:SimpleAdmin.System.IMenuService.Tree(SimpleAdmin.System.MenuTreeInput,System.Boolean)">
             <summary>
             获取菜单树
             </summary>
             <param name="input">菜单树查询参数</param>
+            <param name="showDisabled">是否显示禁用的</param>
             <returns>菜单树列表</returns>
         </member>
         <member name="M:SimpleAdmin.System.IMenuService.Edit(SimpleAdmin.System.MenuEditInput)">
@@ -3719,7 +3747,7 @@
         <member name="M:SimpleAdmin.System.MenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.MenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+        <member name="M:SimpleAdmin.System.MenuService.Tree(SimpleAdmin.System.MenuTreeInput,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MenuService.Add(SimpleAdmin.System.MenuAddInput)">
@@ -3796,6 +3824,13 @@
             <param name="input">分页参数</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IModuleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            模块详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ModuleService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.IModuleService"/>
@@ -3808,6 +3843,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ModuleService.Edit(SimpleAdmin.System.ModuleEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
@@ -3979,32 +4017,32 @@
             子项
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.IRoleService">
+        <member name="T:SimpleAdmin.System.ISysRoleService">
             <summary>
             角色服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetListAsync">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GetListAsync">
             <summary>
             获取所有角色
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByUserId(System.Int64)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GetRoleListByUserId(System.Int64)">
             <summary>
             根据用户ID获取用户角色集合
             </summary>
             <param name="userId">用户ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取角色拥有权限
             </summary>
             <param name="input">角色ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
             <summary>
             角色拥有资源
             </summary>
@@ -4012,154 +4050,164 @@
             <param name="category">资源类型</param>
             <returns>角色拥有资源信息</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取角色下的用户
             </summary>
             <param name="input">角色ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Page(SimpleAdmin.System.RolePageInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.Page(SimpleAdmin.System.RolePageInput)">
             <summary>
             分页查询角色
             </summary>
             <param name="input">查询参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取角色授权权限选择器
             </summary>
             <param name="input">角色ID</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
             <summary>
             角色选择器
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
             <summary>
             根据id集合获取角色集合
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
             <summary>
             获取角色树
             </summary>
             <param name="input">角色树</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Add(SimpleAdmin.System.RoleAddInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            角色详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysRoleService.Add(SimpleAdmin.System.RoleAddInput)">
             <summary>
             添加角色
             </summary>
             <param name="input">添加参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
             <summary>
             编辑角色
             </summary>
             <param name="input">编辑参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
             <summary>
             给角色授权权限
             </summary>
             <param name="input">授权信息</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
             <summary>
             给角色授权
             </summary>
             <param name="input">授权参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
             <summary>
             给角色授权用户
             </summary>
             <param name="input">授权信息</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.RefreshCache">
+        <member name="M:SimpleAdmin.System.ISysRoleService.RefreshCache">
             <summary>
             刷新缓存
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+        <member name="M:SimpleAdmin.System.ISysRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除角色
             </summary>
             <param name="input">删除参数</param>
             <returns></returns>
         </member>
-        <member name="T:SimpleAdmin.System.RoleService">
-            <inheritdoc cref="T:SimpleAdmin.System.IRoleService"/>
+        <member name="T:SimpleAdmin.System.SysRoleService">
+            <inheritdoc cref="T:SimpleAdmin.System.ISysRoleService"/>
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetListAsync">
+        <member name="M:SimpleAdmin.System.SysRoleService.GetListAsync">
             <summary>
             获取所有
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByUserId(System.Int64)">
+        <member name="M:SimpleAdmin.System.SysRoleService.GetRoleListByUserId(System.Int64)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Page(SimpleAdmin.System.RolePageInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.Page(SimpleAdmin.System.RolePageInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+        <member name="M:SimpleAdmin.System.SysRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.OwnPermission(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.RolePermissionTreeSelector(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Add(SimpleAdmin.System.RoleAddInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.Add(SimpleAdmin.System.RoleAddInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.GrantPermission(SimpleAdmin.System.GrantPermissionInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+        <member name="M:SimpleAdmin.System.SysRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.RefreshCache">
+        <member name="M:SimpleAdmin.System.SysRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.RoleService.CheckInput(SimpleAdmin.System.SysRole)">
+        <member name="M:SimpleAdmin.System.SysRoleService.RefreshCache">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SysRoleService.CheckInput(SimpleAdmin.System.SysRole)">
             <summary>
             检查输入参数
             </summary>
@@ -4243,6 +4291,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISpaService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.SpaService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.ISpaService"/>
@@ -4258,6 +4313,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SpaService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SpaService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SpaService.CheckInput(SimpleAdmin.System.SysResource)">
@@ -4859,6 +4917,11 @@
             分类
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysOrgPageInput.Status">
+            <summary>
+             状态
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysOrgPageInput.OrgIds">
             <summary>
             机构列表
@@ -4971,11 +5034,12 @@
             <param name="sysOrgList">组织列表</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysOrgService.GetListAsync">
+        <member name="M:SimpleAdmin.System.ISysOrgService.GetListAsync(System.Boolean)">
             <summary>
             获取所有组织
             </summary>
-            <returns>组织列表</returns>
+            <param name="showDisabled">是否显示禁用的</param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysOrgService.GetOrgChildIds(System.Int64,System.Boolean,System.Collections.Generic.List{SimpleAdmin.System.SysOrg})">
             <summary>
@@ -5072,11 +5136,8 @@
         <member name="T:SimpleAdmin.System.SysOrgService">
             <inheritdoc cref="T:SimpleAdmin.System.ISysOrgService"/>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetListAsync">
-            <summary>
-            获取全部
-            </summary>
-            <returns></returns>
+        <member name="M:SimpleAdmin.System.SysOrgService.GetListAsync(System.Boolean)">
+            <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.GetSysOrgById(System.Int64)">
             <inheritdoc />
@@ -5158,24 +5219,26 @@
             <summary>
             赋值组织的所有下级
             </summary>
-            <param orgName="orgList">组织列表</param>
-            <param orgName="parentId">父Id</param>
-            <param orgName="newParentId">新父Id</param>
+            <param name="orgList">组织列表</param>
+            <param name="parentId">父Id</param>
+            <param name="newParentId">新父Id</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.SysOrgService.RedirectOrg(SimpleAdmin.System.SysOrg)">
             <summary>
             重新生成组织实体
             </summary>
-            <param orgName="org"></param>
+            <param name="org"></param>
         </member>
-        <member name="M:SimpleAdmin.System.SysOrgService.GetNames(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.String)">
+        <member name="M:SimpleAdmin.System.SysOrgService.GetNames(System.Collections.Generic.List{SimpleAdmin.System.SysOrg},System.Int64,System.String,System.String@,System.Collections.Generic.List{System.Int64}@)">
             <summary>
             获取全称
             </summary>
             <param name="sysOrgList">组织列表</param>
             <param name="parentId">父Id</param>
             <param name="orgName">组织名称</param>
+            <param name="names">组织全称</param>
+            <param name="parentIdList">组织父Id列表</param>
         </member>
         <member name="T:SimpleAdmin.System.PositionPageInput">
             <summary>
@@ -5196,6 +5259,11 @@
             <summary>
             分类
             </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionPageInput.Status">
+            <summary>
+            状态
+             </summary>
         </member>
         <member name="T:SimpleAdmin.System.PositionAddInput">
             <summary>
@@ -5239,7 +5307,7 @@
         </member>
         <member name="T:SimpleAdmin.System.PositionTreeOutput">
             <summary>
-             机构树输出参数
+             组织树输出参数
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.PositionTreeOutput.Id">
@@ -5262,34 +5330,30 @@
             子项
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.PositionSelectorOutput">
+            <summary>
+            组织选择器输出参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionSelectorOutput.Id">
+            <summary>
+            组织Id或者职位Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionSelectorOutput.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.PositionSelectorOutput.Children">
+            <summary>
+            子项
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.ISysPositionService">
             <summary>
             职位服务
             </summary>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.Add(SimpleAdmin.System.PositionAddInput,System.String)">
-            <summary>
-            添加职位
-            </summary>
-            <param name="input">添加参数</param>
-            <param name="name">名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
-            <summary>
-            删除职位
-            </summary>
-            <param name="input">id列表</param>
-            <param name="name">名称</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.Edit(SimpleAdmin.System.PositionEditInput,System.String)">
-            <summary>
-            编辑职位
-            </summary>
-            <param name="input">编辑参数</param>
-            <param name="name">名称</param>
-            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysPositionService.GetListAsync">
             <summary>
@@ -5311,17 +5375,11 @@
             <param name="input">查询参数</param>
             <returns>分页列表</returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
+        <member name="M:SimpleAdmin.System.ISysPositionService.Selector(SimpleAdmin.System.PositionSelectorInput)">
             <summary>
             职位选择器
             </summary>
             <param name="input">查询参数</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ISysPositionService.RefreshCache">
-            <summary>
-            刷新缓存
-            </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysPositionService.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
@@ -5338,6 +5396,43 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            职位详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.Edit(SimpleAdmin.System.PositionEditInput,System.String)">
+            <summary>
+            编辑职位
+            </summary>
+            <param name="input">编辑参数</param>
+            <param name="name">名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.RefreshCache">
+            <summary>
+            刷新缓存
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.Add(SimpleAdmin.System.PositionAddInput,System.String)">
+            <summary>
+            添加职位
+            </summary>
+            <param name="input">添加参数</param>
+            <param name="name">名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
+            <summary>
+            删除职位
+            </summary>
+            <param name="input">id列表</param>
+            <param name="name">名称</param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.SysPositionService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.ISysPositionService"/>
@@ -5352,7 +5447,7 @@
         <member name="M:SimpleAdmin.System.SysPositionService.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
+        <member name="M:SimpleAdmin.System.SysPositionService.Selector(SimpleAdmin.System.PositionSelectorInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.GetSysPositionById(System.Int64)">
@@ -5364,16 +5459,19 @@
         <member name="M:SimpleAdmin.System.SysPositionService.Tree(SimpleAdmin.System.PositionTreeInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.Add(SimpleAdmin.System.PositionAddInput,System.String)">
+        <member name="M:SimpleAdmin.System.SysPositionService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.Edit(SimpleAdmin.System.PositionEditInput,System.String)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
+        <member name="M:SimpleAdmin.System.SysPositionService.RefreshCache">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.SysPositionService.RefreshCache">
+        <member name="M:SimpleAdmin.System.SysPositionService.Add(SimpleAdmin.System.PositionAddInput,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.SysPositionService.Delete(SimpleAdmin.Core.BaseIdListInput,System.String)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.SysPositionService.CheckInput(SimpleAdmin.System.SysPosition,System.String)">
@@ -5428,7 +5526,7 @@
             动态查询条件
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.UserPageInput.UserStatus">
+        <member name="P:SimpleAdmin.System.UserPageInput.Status">
             <summary>
             用户状态
             </summary>
@@ -5864,7 +5962,7 @@
             <param name="phone">手机号</param>
             <returns>用户账号名称</returns>
         </member>
-        <member name="M:SimpleAdmin.System.ISysUserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.System.ISysUserService.Selector(SimpleAdmin.System.UserSelectorInput)">
             <summary>
             用户选择器
             </summary>
@@ -5964,6 +6062,13 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.ISysUserService.GetUserAvatar(System.Int64)">
+            <summary>
+            获取用户头像
+            </summary>
+            <param name="userId">用户id</param>
+            <returns>base64头像</returns>
         </member>
         <member name="M:SimpleAdmin.System.ISysUserService.Add(SimpleAdmin.System.UserAddInput)">
             <summary>
@@ -6094,7 +6199,7 @@
             <inheritdoc cref="T:SimpleAdmin.System.ISysUserService"/>
             </summary>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.GetUserByAccount(System.String)">
+        <member name="M:SimpleAdmin.System.SysUserService.GetUserAvatar(System.Int64)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.GetUserByPhone(System.String)">
@@ -6121,7 +6226,7 @@
         <member name="M:SimpleAdmin.System.SysUserService.GetLoginUserApiDataScope">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.SysUserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.System.SysUserService.Selector(SimpleAdmin.System.UserSelectorInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.SysUserService.Page(SimpleAdmin.System.UserPageInput)">
@@ -6323,12 +6428,13 @@
             <param name="clear">是否清除老的数据</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IRelationService.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.IRelationService.GetUserModuleId(System.Collections.Generic.List{System.Int64},System.Int64)">
             <summary>
-            根据角色ID获取模块ID列表
+            获取用户模块ID
             </summary>
-            <param name="roleIdList">角色ID列表</param>
-            <returns>模块ID列表</returns>
+            <param name="roleIdList"></param>
+            <param name="userId"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.RelationService">
             <inheritdoc cref="T:SimpleAdmin.System.IRelationService"/>
@@ -6360,7 +6466,7 @@
         <member name="M:SimpleAdmin.System.RelationService.SaveRelation(System.String,System.Int64,System.String,System.String,System.Boolean,System.Boolean)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.System.RelationService.GetModuleByRoleId(System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.System.RelationService.GetUserModuleId(System.Collections.Generic.List{System.Int64},System.Int64)">
             <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.System.ResTreeSelector">
@@ -6423,6 +6529,11 @@
             菜单下按钮集合
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton">
+            <summary>
+            角色授权资源按钮信息
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Id">
             <summary>
             按钮id
@@ -6431,6 +6542,11 @@
         <member name="P:SimpleAdmin.System.ResTreeSelector.RoleGrantResourceButton.Title">
             <summary>
             标题
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.PermissionTreeSelector">
+            <summary>
+             权限树选择器输出
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.PermissionTreeSelector.ApiName">
@@ -6533,6 +6649,14 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <summary>
+            获取上级
+            </summary>
+            <param name="resourceList"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ResourceService">
             <inheritdoc cref="T:SimpleAdmin.System.IResourceService"/>
         </member>
@@ -6569,6 +6693,9 @@
         <member name="M:SimpleAdmin.System.ResourceService.GetResourcesByIds(System.Collections.Generic.List{System.Int64},System.String)">
             <inheritdoc />
         </member>
+        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
+            <inheritdoc />
+        </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetRouteName(System.String,System.String)">
             <summary>
             获取路由地址名称
@@ -6583,14 +6710,6 @@
             </summary>
             <param name="resourceList">资源列表</param>
             <param name="parentId">父ID</param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.System.ResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Int64)">
-            <summary>
-            获取上级
-            </summary>
-            <param name="resourceList"></param>
-            <param name="parentId"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.System.ResourceService.GetRoleGrantResourceMenus(System.Int64)">

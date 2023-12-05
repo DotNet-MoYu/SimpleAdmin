@@ -8,20 +8,23 @@
       :model="moduleProps.record"
       :hide-required-asterisk="moduleProps.disabled"
       label-width="auto"
-      class="-mt-25px"
+      label-suffix=" :"
+      class="-mt-20px"
     >
       <s-form-item label="模块名称" prop="title">
-        <el-input v-model="moduleProps.record.title" placeholder="请填写模块名称" clearable></el-input>
+        <s-input v-model="moduleProps.record.title"></s-input>
       </s-form-item>
-
       <s-form-item label="图标" prop="icon">
         <SelectIconPlus v-model:icon-value="moduleProps.record.icon" />
+      </s-form-item>
+      <s-form-item label="状态" prop="status">
+        <s-radio-group v-model="moduleProps.record.status" :options="statusOptions" button />
       </s-form-item>
       <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="moduleProps.record.sortCode" show-input :min="1" />
       </s-form-item>
       <s-form-item label="说明" prop="description">
-        <el-input v-model="moduleProps.record.description" placeholder="请填写模块说明" clearable></el-input>
+        <s-input v-model="moduleProps.record.description"></s-input>
       </s-form-item>
     </el-form>
     <template #footer>
@@ -32,11 +35,17 @@
 </template>
 
 <script setup lang="ts">
-import { moduleDetailApi, moduleSubmitFormApi, Module } from "@/api";
+import { moduleApi, Module } from "@/api";
 import { required } from "@/utils/formRules";
-import { FormOptEnum } from "@/enums";
+import { FormOptEnum, SysDictEnum } from "@/enums";
 import { FormInstance } from "element-plus";
-const visible = ref(false); //是否显示表单
+import { useDictStore } from "@/stores/modules";
+
+const dictStore = useDictStore(); //字典仓库
+const visible = ref(false); //
+
+// 通用状态选项
+const statusOptions = dictStore.getDictList(SysDictEnum.COMMON_STATUS);
 
 // 表单参数
 const moduleProps = reactive<FormProps.Base<Module.ModuleInfo>>({
@@ -53,7 +62,8 @@ const rules = reactive({
   name: [required("请输入组件名称")],
   component: [required("请输入组件地址")],
   sortCode: [required("请输入排序")],
-  icon: [required("请选择图标")]
+  icon: [required("请选择图标")],
+  status: [required("请选择状态")]
 });
 
 /**
@@ -65,12 +75,13 @@ function onOpen(props: FormProps.Base<Module.ModuleInfo>) {
   if (props.opt == FormOptEnum.ADD) {
     //如果是新增,设置默认值
     moduleProps.record.sortCode = 99;
+    moduleProps.record.status = statusOptions[0].value;
   }
 
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    moduleDetailApi({ id: props.record.id }).then(res => {
+    moduleApi.moduleDetail({ id: props.record.id }).then(res => {
       moduleProps.record = res.data;
     });
   }
@@ -83,7 +94,8 @@ async function handleSubmit() {
   moduleFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await moduleSubmitFormApi(moduleProps.record, moduleProps.record.id != undefined)
+    await moduleApi
+      .moduleSubmitForm(moduleProps.record, moduleProps.record.id != undefined)
       .then(() => {
         moduleProps.successful!(); //调用父组件的successful方法
       })

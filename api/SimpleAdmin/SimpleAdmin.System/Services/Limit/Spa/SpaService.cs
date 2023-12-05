@@ -71,6 +71,15 @@ public class SpaService : DbRepository<SysResource>, ISpaService
         }
     }
 
+    /// <inheritdoc />
+    public async Task<SysResource> Detail(BaseIdInput input)
+    {
+        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_SPA);
+        var resource = sysResources.Where(it => it.Id == input.Id).FirstOrDefault();
+        return resource;
+    }
+
+
     #region 方法
 
     /// <summary>

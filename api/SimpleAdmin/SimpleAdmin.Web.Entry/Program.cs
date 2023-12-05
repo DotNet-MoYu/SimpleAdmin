@@ -6,6 +6,8 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+using Newtonsoft.Json.Linq;
+
 Console.WriteLine("源码地址: https://gitee.com/zxzyjs/SimpleAdmin");
 Console.WriteLine("ts演示地址: http://153.101.199.83:12802/login");
 Console.WriteLine("js演示地址: http://153.101.199.83:12801/login");

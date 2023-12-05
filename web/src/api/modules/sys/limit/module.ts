@@ -16,22 +16,21 @@ import { moduleRequest } from "@/api/request";
 import { ReqId, ResPage, Spa } from "@/api/interface";
 const http = moduleRequest("/sys/limit/module/");
 
-/** 获取模块分页 */
-export const modulePageApi = (params: Spa.Page) => {
-  return http.get<ResPage<Spa.SpaInfo>>("page", params);
-};
-
-/** 获取模块详情 */
-export const moduleDetailApi = (params: ReqId) => {
-  return http.get<Spa.SpaInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const moduleSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除模块 */
-export const moduleDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取模块分页 */
+  modulePage(params: Spa.Page) {
+    return http.get<ResPage<Spa.SpaInfo>>("page", params);
+  },
+  /** 获取模块详情 */
+  moduleDetail(params: ReqId) {
+    return http.get<Spa.SpaInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  moduleSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除模块 */
+  moduleDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  }
 };

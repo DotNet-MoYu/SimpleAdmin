@@ -1,3 +1,4 @@
+import { CommonStatusEnum } from "@/enums";
 /**
  * @description 用户管理
  * @license Apache License Version 2.0
@@ -12,33 +13,45 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 
-import { ReqId, ResPage, SysUser } from "@/api";
-
+import { ReqId, ResPage, SysRole, SysUser } from "@/api";
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/organization/user/");
 
-/** 用户分页 */
-export const sysUserPageApi = (params: SysUser.Page) => {
-  return http.get<ResPage<SysUser.SysUserInfo>>("page", params);
-};
-
-/** 用户选择器 */
-export const sysUserSelectorApi = (params: any) => {
-  return http.get<ResPage<SysUser.SysUserInfo>>("userSelector", params);
-};
-
-/** 获取用户详情 */
-export const sysUserDetailApi = (params: ReqId) => {
-  return http.get<SysUser.SysUserInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const sysUserSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除用户 */
-export const sysUserDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 用户分页 */
+  sysUserPage(params: SysUser.Page) {
+    return http.get<ResPage<SysUser.SysUserInfo>>("page", params);
+  },
+  /** 用户选择器 */
+  sysUserSelector(params: any) {
+    return http.get<ResPage<SysUser.SysUserInfo>>("selector", params);
+  },
+  /** 获取用户详情 */
+  sysUserDetail(params: ReqId) {
+    return http.get<SysUser.SysUserInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  sysUserSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除用户 */
+  sysUserDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  /** 修改用户状态 */
+  sysUserUpdateStatus(params: ReqId, operation: CommonStatusEnum) {
+    return http.post(operation === CommonStatusEnum.DISABLE ? "disableUser" : "enableUser", params);
+  },
+  /** 重置用户密码 */
+  sysUserResetPassword(params: ReqId) {
+    return http.post("resetPassword", params);
+  },
+  /** 获取用户拥有角色 */
+  sysUserOwnRole(params: ReqId) {
+    return http.get<SysRole.SysRoleInfo[]>("ownRole", params);
+  },
+  /** 给用户授权角色 */
+  sysUserGrantRole(params: any) {
+    return http.post("grantRole", params);
+  }
 };

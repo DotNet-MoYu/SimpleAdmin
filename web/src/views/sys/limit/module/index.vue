@@ -1,7 +1,7 @@
 <!-- 模块管理 -->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="模块列表" :columns="columns" :request-api="modulePageApi">
+    <ProTable ref="proTable" title="模块列表" :columns="columns" :request-api="moduleApi.modulePage">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="模块" @click="onOpen(FormOptEnum.ADD)" />
@@ -13,6 +13,13 @@
           :disabled="!scope.isSelected"
           @click="onDelete(scope.selectedListIds, '删除所选模块')"
         />
+      </template>
+      <!-- 状态 -->
+      <template #status="scope">
+        <el-tag v-if="scope.row.status === CommonStatusEnum.ENABLE" type="success">{{
+          dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status)
+        }}</el-tag>
+        <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
       </template>
       <!-- 操作 -->
       <template #operation="scope">
@@ -26,18 +33,20 @@
 </template>
 
 <script setup lang="tsx" name="sysModule">
-import { modulePageApi, moduleDeleteApi, Module } from "@/api";
+import { moduleApi, Module } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { FormOptEnum } from "@/enums";
+import { FormOptEnum, CommonStatusEnum, SysDictEnum } from "@/enums";
+import { useDictStore } from "@/stores/modules";
 import Form from "./components/form.vue";
 
+const dictStore = useDictStore(); //字典仓库
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref<ProTableInstance>();
 // 表格配置项
 const columns: ColumnProps<Module.ModuleInfo>[] = [
   { type: "selection", fixed: "left", width: 80 },
-  { prop: "title", label: "单页名称", search: { el: "input" } },
+  { prop: "title", label: "模块名称", search: { el: "input" } },
   {
     prop: "icon",
     label: "菜单图标",
@@ -48,6 +57,7 @@ const columns: ColumnProps<Module.ModuleInfo>[] = [
 
   { prop: "sortCode", label: "排序" },
   { prop: "description", label: "说明" },
+  { prop: "status", label: "状态" },
   { prop: "createTime", label: "创建时间" },
   { prop: "operation", label: "操作", width: 200, fixed: "right" }
 ];
@@ -74,7 +84,7 @@ function onOpen(opt: FormOptEnum, record: {} | Module.ModuleInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(moduleDeleteApi, { ids }, msg);
+  await useHandleData(moduleApi.moduleDelete, { ids }, msg);
   RefreshTable();
 }
 

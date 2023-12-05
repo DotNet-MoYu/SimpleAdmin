@@ -14,7 +14,7 @@
 import { defineStore } from "pinia";
 import { Login } from "@/api/interface";
 import piniaPersistConfig from "@/stores/helper/persist";
-import { getLoginUserApi } from "@/api";
+import { loginApi } from "@/api";
 import { ElNotification } from "element-plus";
 /* UserState */
 export interface UserState {
@@ -54,7 +54,7 @@ export const useUserStore = defineStore({
     },
     async getUserInfo() {
       /**  获取用户信息 */
-      const { data } = await getLoginUserApi();
+      const { data } = await loginApi.getLoginUser();
       if (data) {
         this.setUserInfo(data);
       } else {

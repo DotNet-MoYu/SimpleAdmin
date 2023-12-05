@@ -44,18 +44,28 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);
         if (userInfo != null)
         {
-            //获取用户所拥有的资源集合
-            var resourceList = await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
-            if (resourceList.Count == 0)//如果没有就获取角色的
-                //获取角色所拥有的资源集合
-                resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList,
-                    CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
             //定义菜单ID列表
-            var menuIdList = new HashSet<long>();
-            //获取菜单Id集合
-            menuIdList.AddRange(resourceList.Select(r => r.TargetId.ToLong()).ToList());
-            //获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
+            var menuIdList = new HashSet<long>();//获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
             var allModuleAndMenuAndSpaList = await _resourceService.GetMenuAndSpaListByModuleId(input.Id);
+            //通过 App.GetOptions<TOptions> 获取选项
+            var settings = App.GetOptions<SystemSettingsOptions>();
+            //如果设置了超级管理员可以看到全部
+            if (settings.SuperAdminViewAllData && UserManager.SuperAdmin)
+            {
+                menuIdList = allModuleAndMenuAndSpaList.Select(it => it.Id).ToHashSet();
+            }
+            else
+            {
+                //获取用户所拥有的资源集合
+                var resourceList =
+                    await _relationService.GetRelationListByObjectIdAndCategory(userInfo.Id, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);
+                if (resourceList.Count == 0)//如果没有就获取角色的
+                    //获取角色所拥有的资源集合
+                    resourceList = await _relationService.GetRelationListByObjectIdListAndCategory(userInfo.RoleIdList,
+                        CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
+                //获取菜单Id集合
+                menuIdList.AddRange(resourceList.Select(r => r.TargetId.ToLong()).ToList());
+            }
             var allMenuList = new List<SysResource>();//菜单列表
             var allSpaList = new List<SysResource>();//单页列表
             //遍历菜单集合
@@ -72,8 +82,8 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                         break;
                 }
             });
-            //获取我的菜单列表
-            var myMenus = allMenuList.Where(it => menuIdList.Contains(it.Id)).ToList();
+            //获取我的菜单列表,只显示启用的
+            var myMenus = allMenuList.Where(it => menuIdList.Contains(it.Id) && it.Status == CommonStatusConst.ENABLE).ToList();
             // 对获取到的角色对应的菜单列表进行处理，获取父列表
             var parentList = GetMyParentMenus(allMenuList, myMenus);
             myMenus.AddRange(parentList);//合并列表
@@ -294,12 +304,14 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var parentList = new List<SysResource>();
         myMenus.ForEach(it =>
         {
-            //找到父ID对应的菜单
-            var parent = allMenuList.Where(r => r.Id == it.ParentId.Value).FirstOrDefault();
-            if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+            var parents = _resourceService.GetResourceParent(allMenuList, it.ParentId.Value);//获取父级
+            parents.ForEach(parent =>
             {
-                parentList.Add(parent);//添加到父列表
-            }
+                if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+                {
+                    parentList.Add(parent);//添加到父列表
+                }
+            });
         });
         return parentList;
     }

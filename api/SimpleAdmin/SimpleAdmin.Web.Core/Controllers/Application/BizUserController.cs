@@ -89,18 +89,6 @@ public class BizUserController : IDynamicApiController
     }
 
     /// <summary>
-    /// 岗位选择器
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("positionSelector")]
-    [DisplayName("岗位选择器")]
-    public async Task<dynamic> PositionSelector([FromQuery] PositionSelectorInput input)
-    {
-        return await _positionService.PositionSelector(input);
-    }
-
-    /// <summary>
     /// 获取人员拥有角色
     /// </summary>
     /// <param name="input"></param>

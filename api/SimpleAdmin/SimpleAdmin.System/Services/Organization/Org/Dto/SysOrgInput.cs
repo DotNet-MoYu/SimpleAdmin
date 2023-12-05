@@ -34,6 +34,11 @@ public class SysOrgPageInput : BasePageInput
     public string Category { get; set; }
 
     /// <summary>
+    ///  状态
+    /// </summary>
+    public string Status { get; set; }
+
+    /// <summary>
     /// 机构列表
     /// </summary>
     public List<long> OrgIds { get; set; }

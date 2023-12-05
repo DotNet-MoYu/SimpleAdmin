@@ -3,9 +3,7 @@
   <form-container v-model="visible" :title="'更改模块->' + changeModuleProps.title" form-size="450px">
     <el-form ref="changeModuleFormRef" :rules="rules" :model="changeModuleProps">
       <s-form-item label="所属模块" prop="module">
-        <el-select v-model="changeModuleProps.module" placeholder="请选择模块">
-          <el-option v-for="item in changeModuleProps.moduleOptions" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
+        <s-select v-model="changeModuleProps.module" :options="changeModuleProps.moduleOptions"></s-select>
       </s-form-item>
     </el-form>
     <template #footer>
@@ -16,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { menuChangeModuleApi } from "@/api";
+import { menuApi } from "@/api";
 import { required } from "@/utils/formRules";
 import { FormInstance } from "element-plus/es/components/form";
 
@@ -54,10 +52,11 @@ async function handleSubmit() {
   changeModuleFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await menuChangeModuleApi({
-      id: changeModuleProps.id,
-      module: changeModuleProps.module
-    })
+    await menuApi
+      .menuChangeModule({
+        id: changeModuleProps.id,
+        module: changeModuleProps.module
+      })
       .then(() => {
         //提交成功
         changeModuleProps.successful?.();

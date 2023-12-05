@@ -80,4 +80,15 @@ public class ButtonController : BaseController
     {
         await _buttonService.AddBatch(input);
     }
+
+    /// <summary>
+    /// 获取按钮详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _buttonService.Detail(input);
+    }
 }

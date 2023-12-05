@@ -8,18 +8,18 @@
 
 namespace SimpleAdmin.System;
 
-/// <inheritdoc cref="IRoleService"/>
+/// <inheritdoc cref="ISysRoleService"/>
 //[Injection(Proxy = typeof(GlobalDispatchProxy))]
-public class RoleService : DbRepository<SysRole>, IRoleService
+public class SysRoleService : DbRepository<SysRole>, ISysRoleService
 {
-    private readonly ILogger<RoleService> _logger;
+    private readonly ILogger<SysRoleService> _logger;
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly IRelationService _relationService;
     private readonly ISysOrgService _sysOrgService;
     private readonly IResourceService _resourceService;
     private readonly IEventPublisher _eventPublisher;
 
-    public RoleService(ILogger<RoleService> logger, ISimpleCacheService simpleCacheService, IRelationService relationService,
+    public SysRoleService(ILogger<SysRoleService> logger, ISimpleCacheService simpleCacheService, IRelationService relationService,
         ISysOrgService sysOrgService, IResourceService resourceService, IEventPublisher eventPublisher)
     {
         _logger = logger;
@@ -82,7 +82,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<List<RoleTreeOutput>> Tree(RoleTreeInput input)
     {
         var result = new List<RoleTreeOutput>();//返回结果
-        var sysOrgList = await _sysOrgService.GetListAsync();//获取所有机构
+        var sysOrgList = await _sysOrgService.GetListAsync(false);//获取所有机构
         var sysRoles = await GetListAsync();//获取所有角色
         var topOrgList = sysOrgList.Where(it => it.ParentId == 0).ToList();//获取顶级机构
         var globalRole = sysRoles.Where(it => it.Category == CateGoryConst.ROLE_GLOBAL).ToList();//获取全局角色
@@ -214,6 +214,14 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         return roleList;
     }
 
+    /// <inheritdoc />
+    public async Task<SysRole> Detail(BaseIdInput input)
+    {
+        var roles = await GetListAsync();
+        var role = roles.Where(it => it.Id == input.Id).FirstOrDefault();
+        return role;
+    }
+
     #endregion
 
     #region 新增
@@ -223,7 +231,6 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     {
         await CheckInput(input);//检查参数
         var sysRole = input.Adapt<SysRole>();//实体转换
-        sysRole.Code = RandomHelper.CreateRandomString(10);//赋值Code
         if (await InsertAsync(sysRole))//插入数据
             await RefreshCache();//刷新缓存
     }
@@ -469,7 +476,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var delRelations = new List<string>
             {
                 CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE,
-                CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION
+                CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION,
+                CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE
             };
             //事务
             var result = await Tenant.UseTranAsync(async () =>
@@ -487,6 +495,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);//关系表刷新Relation_SYS_ROLE_HAS_RESOURCE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);//关系表刷新Relation_SYS_ROLE_HAS_PERMISSION缓存
+                await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE);//关系表刷新RELATION_SYS_ROLE_HAS_MODULE缓存
                 await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE, ids);//清除角色下用户缓存
             }
             else
@@ -532,6 +541,17 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             if (sysRole.OrgId == null)
                 throw Oops.Bah($"存在重复的全局角色:{sysRole.Name}");
             throw Oops.Bah($"同组织下存在重复的角色:{sysRole.Name}");
+        }
+        //如果code没填
+        if (string.IsNullOrEmpty(sysRole.Code))
+        {
+            sysRole.Code = RandomHelper.CreateRandomString(10);//赋值Code
+        }
+        else
+        {
+            //判断是否有相同的Code
+            if (sysRoles.Any(it => it.Code == sysRole.Code && it.Id != sysRole.Id))
+                throw Oops.Bah($"存在重复的编码:{sysRole.Code}");
         }
     }
 

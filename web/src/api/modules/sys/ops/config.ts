@@ -12,12 +12,12 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 import { Config } from "@/api/interface";
-
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/ops/config/");
 
-/** 获取系统配置 */
-export const configSysBaseApi = () => {
-  return http.get<Config.ConfigSysBase[]>("sysBaseList", {}, { loading: false });
+export default {
+  /** 获取系统配置 */
+  configSysBase() {
+    return http.get<Config.ConfigSysBase[]>("sysBaseList", {}, { loading: false });
+  }
 };

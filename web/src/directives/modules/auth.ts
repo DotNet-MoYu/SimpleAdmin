@@ -14,15 +14,24 @@
 import { useAuthStore } from "@/stores/modules/auth";
 import type { Directive, DirectiveBinding } from "vue";
 
+// 定义一个auth变量，类型为Directive
 const auth: Directive = {
+  // 当指令挂载时调用
   mounted(el: HTMLElement, binding: DirectiveBinding) {
+    // 获取传入的值
     const { value } = binding;
+    // 获取authStore
     const authStore = useAuthStore();
+    // 获取用户权限按钮列表
     const currentPageRoles = authStore.authButtonListGet ?? [];
+    // 如果传入的值是数组，并且数组的长度大于0
     if (value instanceof Array && value.length) {
+      // 判断传入的值是否包含当前页面的角色
       const hasPermission = value.every(item => currentPageRoles.includes(item));
+      // 如果不包含，则移除该元素
       if (!hasPermission) el.remove();
     } else {
+      // 如果传入的值不包含当前页面的角色，则移除该元素
       if (!currentPageRoles.includes(value)) el.remove();
     }
   }

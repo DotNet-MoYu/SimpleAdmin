@@ -38,6 +38,8 @@ export namespace Spa {
     icon: string;
     /** 菜单路径 */
     path: string;
+    /** 状态 */
+    status: string;
     /** 菜单组件 */
     component: string;
     /** 需要高亮的 path (通常用作详情页高亮父级菜单) */

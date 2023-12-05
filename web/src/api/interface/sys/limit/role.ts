@@ -1,3 +1,4 @@
+import { ReqId } from "@/api/interface";
 /**
  * @description 角色管理
  * @license Apache License Version 2.0
@@ -28,7 +29,8 @@ export namespace SysRole {
     code: string;
     /** 角色分类 */
     category: string;
-    defaultDataScope: defaultDataScope[];
+    /** 默认数据范围 */
+    defaultDataScope: DefaultDataScope;
     /** 状态 */
     status: string;
     /** 排序码 */
@@ -36,11 +38,13 @@ export namespace SysRole {
   }
 
   /** 默认数据范围 */
-  export interface defaultDataScope {
+  export interface DefaultDataScope {
     /** 权重 */
     level: number;
+    /** 标题 */
+    title: string;
     /** 范围分类 */
-    scopeCategory: string;
+    scopeCategory: DataScopeEnum;
     /** 机构ID列表 */
     scopeDefineOrgIdList: string[] | number[];
   }
@@ -55,5 +59,88 @@ export namespace SysRole {
     isRole: boolean;
     /** 子集 */
     children: SysRoleTree[];
+  }
+
+  /** 数据范围枚举 */
+  export enum DataScopeEnum {
+    /** 全部 */
+    SCOPE_ALL = "SCOPE_ALL",
+    /** 所属组织及以下 */
+    SCOPE_ORG_CHILD = "SCOPE_ORG_CHILD",
+    /** 所属组织 */
+    SCOPE_ORG = "SCOPE_ORG",
+    /** 仅自己 */
+    SCOPE_SELF = "SCOPE_SELF",
+    /** 自定义 */
+    SCOPE_ORG_DEFINE = "SCOPE_ORG_DEFINE"
+  }
+
+  /** 数据范围数组 */
+  export const dataScopeOptions: DefaultDataScope[] = [
+    {
+      level: 5,
+      title: "全部",
+      scopeCategory: DataScopeEnum.SCOPE_ALL,
+      scopeDefineOrgIdList: []
+    },
+    {
+      level: 4,
+      title: "所属组织及以下",
+      scopeCategory: DataScopeEnum.SCOPE_ORG_CHILD,
+      scopeDefineOrgIdList: []
+    },
+    {
+      level: 2,
+      title: "所属组织",
+      scopeCategory: DataScopeEnum.SCOPE_ORG,
+      scopeDefineOrgIdList: []
+    },
+    {
+      level: 1,
+      title: "仅自己",
+      scopeCategory: DataScopeEnum.SCOPE_SELF,
+      scopeDefineOrgIdList: []
+    },
+    {
+      level: 3,
+      title: "自定义",
+      scopeCategory: DataScopeEnum.SCOPE_ORG_DEFINE,
+      scopeDefineOrgIdList: []
+    }
+  ];
+
+  /** 角色拥有资源 */
+  export interface RoleOwnResource {
+    /** id */
+    id: number | string;
+    /** 已授权资源信息 */
+    grantInfoList: RelationRoleResource[];
+  }
+
+  /** 角色有哪些资源 */
+  export interface RelationRoleResource {
+    /** 菜单id */
+    menuId: number | string;
+    /** 按钮信息 */
+    buttonInfo: number[] | string[];
+  }
+
+  /** 角色权限关系扩展 */
+  export interface RelationRolePermission {
+    /** 数据范围 */
+    scopeCategory: string;
+    /** 自定义机构范围列表 */
+    scopeDefineOrgIdList: string[] | number[];
+    /** 接口Url */
+    apiUrl: string;
+  }
+
+  /** 角色拥有权限 */
+  export interface RoleOwnPermission extends RoleOwnResource {}
+
+  /** 角色授权资源请求参数 */
+  export interface GrantResourceReq extends ReqId {
+    /** 授权资源信息 */
+    grantInfoList: RelationRoleResource[];
   }
 }

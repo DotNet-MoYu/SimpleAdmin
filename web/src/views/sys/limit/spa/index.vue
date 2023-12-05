@@ -1,7 +1,7 @@
 <!-- 单页管理 -->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="单页列表" :columns="columns" :request-api="spaPageApi">
+    <ProTable ref="proTable" title="单页列表" :columns="columns" :request-api="spaApi.spaPage">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="单页" @click="onOpen(FormOptEnum.ADD)" />
@@ -39,7 +39,7 @@
 </template>
 
 <script setup lang="tsx" name="sysSpa">
-import { spaPageApi, spaDeleteApi } from "@/api";
+import { spaApi } from "@/api";
 import { Spa } from "@/api/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
@@ -99,7 +99,7 @@ function onOpen(opt: FormOptEnum, record: {} | Spa.SpaInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(spaDeleteApi, { ids }, msg);
+  await useHandleData(spaApi.spaDelete, { ids }, msg);
   RefreshTable();
 }
 

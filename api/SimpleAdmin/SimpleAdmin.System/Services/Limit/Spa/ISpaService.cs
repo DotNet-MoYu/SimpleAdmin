@@ -40,4 +40,11 @@ public interface ISpaService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<SqlSugarPagedList<SysResource>> Page(SpaPageInput input);
+
+    /// <summary>
+    /// 详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysResource> Detail(BaseIdInput input);
 }

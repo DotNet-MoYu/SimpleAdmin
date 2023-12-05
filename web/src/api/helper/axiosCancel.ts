@@ -1,4 +1,3 @@
-// ? 暂未使用，目前使用全局 Loading 来控制重复请求
 import { CustomAxiosRequestConfig } from "../request/instance";
 import qs from "qs";
 
@@ -7,7 +6,7 @@ let pendingMap = new Map<string, AbortController>();
 
 // 序列化参数
 export const getPendingUrl = (config: CustomAxiosRequestConfig) =>
-  [config.method, config.url, qs.stringify(config.data), qs.stringify(config.params)].join("&");
+  [config.method, config.baseURL, config.url, qs.stringify(config.data), qs.stringify(config.params)].join("&");
 
 export class AxiosCanceler {
   /**
@@ -18,6 +17,7 @@ export class AxiosCanceler {
   addPending(config: CustomAxiosRequestConfig) {
     // 在请求开始前，对之前的请求做检查取消操作
     this.removePending(config);
+
     const url = getPendingUrl(config);
     const controller = new AbortController();
     config.signal = controller.signal;

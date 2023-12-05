@@ -86,11 +86,13 @@ export namespace SysUser {
     /** 职级 */
     positionLevel?: string;
     /** 主管id */
-    directorId?: number;
-    /** 兼任信息 (需要定义 PositionJson 类型) */
-    positionJson?: string;
+    directorId?: number | string | null;
+    /** 主管id */
+    orgAndPosIdList: number[] | string[];
+    /** 主管id */
+    directorInfo?: SysUser.SysUserInfo | null;
     /** 用户状态 */
-    userStatus?: string;
+    status?: string;
     /** 排序码 */
     sortCode?: number;
     /** 默认模块 */

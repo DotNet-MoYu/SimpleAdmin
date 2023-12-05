@@ -14,13 +14,13 @@ namespace SimpleAdmin.Application;
 public class UserService : DbRepository<SysUser>, IUserService
 {
     private readonly ISysUserService _sysUserService;
-    private readonly IRoleService _roleService;
+    private readonly ISysRoleService _sysRoleService;
     private readonly IImportExportService _importExportService;
 
-    public UserService(ISysUserService sysUserService, IRoleService roleService, IImportExportService importExportService)
+    public UserService(ISysUserService sysUserService, ISysRoleService sysRoleService, IImportExportService importExportService)
     {
         _sysUserService = sysUserService;
-        _roleService = roleService;
+        _sysRoleService = sysRoleService;
         _importExportService = importExportService;
     }
 
@@ -47,11 +47,11 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null)
-            return await _sysUserService.UserSelector(input);//查询
+            return await _sysUserService.Selector(input);//查询
         if (dataScope.Count > 0)
         {
             input.OrgIds = dataScope;//赋值机构列表
-            return await _sysUserService.UserSelector(input);//查询
+            return await _sysUserService.Selector(input);//查询
         }
         //返回自己
         return new SqlSugarPagedList<UserSelectorOutPut>
@@ -85,11 +85,11 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         if (dataScope == null)
-            sysRoles = await _roleService.RoleSelector(input);//获取角色选择器列表
+            sysRoles = await _sysRoleService.RoleSelector(input);//获取角色选择器列表
         else if (dataScope.Count > 0)//如果有机构
         {
             input.OrgIds = dataScope;//将数据范传进去
-            sysRoles = await _roleService.RoleSelector(input);//获取角色选择器列表
+            sysRoles = await _sysRoleService.RoleSelector(input);//获取角色选择器列表
         }
         return sysRoles;
     }
@@ -129,7 +129,8 @@ public class UserService : DbRepository<SysUser>, IUserService
         //获取数据范围
         var dataScope = await _sysUserService.GetLoginUserApiDataScope();
         var ids = input.Ids;
-        var sysUsers = await GetListAsync(it => ids.Contains(it.Id), it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
+        var sysUsers = await GetListAsync(it => ids.Contains(it.Id),
+            it => new SysUser { OrgId = it.OrgId, CreateUserId = it.CreateUserId });//根据用户ID获取机构id、
         sysUsers.ForEach(it =>
         {
             if (dataScope != null && !dataScope.Contains(it.OrgId) && it.CreateUserId != UserManager.UserId)

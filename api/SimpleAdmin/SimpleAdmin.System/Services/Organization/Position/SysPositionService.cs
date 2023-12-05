@@ -24,6 +24,8 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         _dictService = dictService;
     }
 
+    #region 查询
+
     /// <summary>
     /// 获取全部
     /// </summary>
@@ -54,16 +56,15 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     }
 
     /// <inheritdoc/>
-    public async Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input)
+    public async Task<List<PositionSelectorOutput>> Selector(PositionSelectorInput input)
     {
-        var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
-        var positions = await GetListAsync();
-        var result = positions.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//父级
-            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
-            .ToList().LinqPagedList(input.PageNum, input.PageSize);
+        var sysOrgList = await _sysOrgService.GetListAsync(false);//获取所有组织
+        var sysPositions = await GetListAsync();//获取所有职位
+        var result = await ConstructPositionSelector(sysOrgList, sysPositions);//构造树
         return result;
     }
+
+
 
     /// <inheritdoc />
     public async Task<SysPosition> GetSysPositionById(long id)
@@ -76,37 +77,40 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<SysPosition>> Page(PositionPageInput input)
     {
-        var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
+        var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级组织
         var query = Context.Queryable<SysPosition>().WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId))//根据组织ID查询
-            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定机构列表查询
+            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId))//在指定组织列表查询
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
+            .WhereIF(!string.IsNullOrEmpty(input.Status), it => it.Status == input.Status)//根据状态
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
         return pageInfo;
     }
 
+
+
     /// <inheritdoc/>
     public async Task<List<PositionTreeOutput>> Tree(PositionTreeInput input)
     {
         var result = new List<PositionTreeOutput>();//返回结果
-        var sysOrgList = await _sysOrgService.GetListAsync();//获取所有机构
+        var sysOrgList = await _sysOrgService.GetListAsync(false);//获取所有组织
         var sysPositions = await GetListAsync();//获取所有职位
         var posCategory = await _dictService.GetChildrenByDictValue(SysDictConst.POSITION_CATEGORY);//获取职位分类
-        var topOrgList = sysOrgList.Where(it => it.ParentId == 0).ToList();//获取顶级机构
-        //遍历顶级机构
+        var topOrgList = sysOrgList.Where(it => it.ParentId == 0).ToList();//获取顶级组织
+        //遍历顶级组织
         foreach (var org in topOrgList)
         {
-            var childIds = await _sysOrgService.GetOrgChildIds(org.Id, true, sysOrgList);//获取机构下的所有子级ID
-            var orgPositions = sysPositions.Where(it => childIds.Contains(it.OrgId)).ToList();//获取机构下的职位
+            var childIds = await _sysOrgService.GetOrgChildIds(org.Id, true, sysOrgList);//获取组织下的所有子级ID
+            var orgPositions = sysPositions.Where(it => childIds.Contains(it.OrgId)).ToList();//获取组织下的职位
             if (orgPositions.Count == 0) continue;
             var positionTreeOutput = new PositionTreeOutput
             {
                 Id = org.Id,
                 Name = org.Name,
                 IsPosition = false
-            };//实例化机构树
-            //获取机构下的职位职位分类
+            };//实例化组织树
+            //获取组织下的职位职位分类
             foreach (var category in posCategory)
             {
                 var id = CommonUtils.GetSingleId();//生成唯一ID临时用,因为前端需要ID
@@ -135,16 +139,17 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         return result;
     }
 
-
     /// <inheritdoc />
-    public async Task Add(PositionAddInput input, string name = SystemConst.SYS_POS)
+    public async Task<SysPosition> Detail(BaseIdInput input)
     {
-        await CheckInput(input, name);//检查参数
-        var sysPosition = input.Adapt<SysPosition>();//实体转换
-        sysPosition.Code = RandomHelper.CreateRandomString(10);//赋值Code
-        if (await InsertAsync(sysPosition))//插入数据
-            await RefreshCache();//刷新缓存
+        var sysPositions = await GetListAsync();
+        var sysPosition = sysPositions.Where(it => it.Id == input.Id).FirstOrDefault();
+        return sysPosition;
     }
+
+    #endregion
+
+    #region 编辑
 
     /// <inheritdoc />
     public async Task Edit(PositionEditInput input, string name = SystemConst.SYS_POS)
@@ -154,6 +159,32 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         if (await UpdateAsync(sysPosition))//更新数据
             await RefreshCache();//刷新缓存
     }
+
+
+
+    /// <inheritdoc />
+    public async Task RefreshCache()
+    {
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_POSITION);//删除Key
+        await GetListAsync();//重新写入缓存
+    }
+
+    #endregion
+
+    #region 新增
+
+    /// <inheritdoc />
+    public async Task Add(PositionAddInput input, string name = SystemConst.SYS_POS)
+    {
+        await CheckInput(input, name);//检查参数
+        var sysPosition = input.Adapt<SysPosition>();//实体转换
+        if (await InsertAsync(sysPosition))//插入数据
+            await RefreshCache();//刷新缓存
+    }
+
+    #endregion
+
+    #region 删除
 
     /// <inheritdoc />
     public async Task Delete(BaseIdListInput input, string name = SystemConst.SYS_POS)
@@ -167,35 +198,13 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
             {
                 throw Oops.Bah($"请先删除{name}下的用户");
             }
-            //获取用户表有兼任组织的信息 oracle要改成Context.Queryable<SysUser>().Where(it => SqlFunc.Length(it.PositionJson) > 0).Select(it => it.PositionJson).ToListAsync();
-            var positionJsons = await Context.Queryable<SysUser>().Where(it => !SqlFunc.IsNullOrEmpty(it.PositionJson)).Select(it => it.PositionJson)
-                .ToListAsync();
-            if (positionJsons.Count > 0)
-            {
-                positionJsons.ForEach(it =>
-                {
-                    //获取机构列表
-                    var positionIds = it.Select(it => it.PositionId).ToList();
-                    //获取交集
-                    var samePositionIds = ids.Intersect(positionIds).ToList();
-                    if (samePositionIds.Count > 0)
-                    {
-                        throw Oops.Bah($"请先删除{name}下的兼任用户");
-                    }
-                });
-            }
             //删除职位
             if (await DeleteByIdsAsync(ids.Cast<object>().ToArray()))
                 await RefreshCache();//刷新缓存
         }
     }
 
-    /// <inheritdoc />
-    public async Task RefreshCache()
-    {
-        _simpleCacheService.Remove(SystemConst.CACHE_SYS_POSITION);//删除Key
-        await GetListAsync();//重新写入缓存
-    }
+    #endregion
 
     #region 方法
 
@@ -219,19 +228,60 @@ public class SysPositionService : DbRepository<SysPosition>, ISysPositionService
         if (sysPosition.Id > 0)//如果ID大于0表示编辑
         {
             var position = sysPositions.Where(it => it.Id == sysPosition.Id).FirstOrDefault();//获取当前职位
-            if (position != null)
-            {
-                if (position.OrgId != sysPosition.OrgId)//如果orgId不一样表示换机构了
-                {
-                    if (await Context.Queryable<SysUser>()
-                            .Where(it => it.PositionId == sysPosition.Id || SqlFunc.JsonLike(it.PositionJson, sysPosition.Id.ToString()))
-                            .AnyAsync())//如果职位下有用户
-                        throw Oops.Bah($"该{name}下已存在用户,请先删除{name}下的用户");
-                }
-            }
-            else
+            if (position == null)
                 throw Oops.Bah($"{name}不存在");
         }
+        //如果code没填
+        if (string.IsNullOrEmpty(sysPosition.Code))
+        {
+            sysPosition.Code = RandomHelper.CreateRandomString(10);//赋值Code
+        }
+        else
+        {
+            //判断是否有相同的Code
+            if (sysPositions.Any(it => it.Code == sysPosition.Code && it.Id != sysPosition.Id))
+                throw Oops.Bah($"存在重复的编码:{sysPosition.Code}");
+        }
+    }
+
+    public async Task<List<PositionSelectorOutput>> ConstructPositionSelector(List<SysOrg> orgList, List<SysPosition> sysPositions,
+        long parentId = SimpleAdminConst.ZERO)
+    {
+        //找下级组织列表
+        var orgInfos = orgList.Where(it => it.ParentId == parentId).OrderBy(it => it.SortCode).ToList();
+        var data = new List<PositionSelectorOutput>();
+        if (orgInfos.Count > 0)//如果数量大于0
+        {
+            foreach (var item in orgInfos)//遍历组织
+            {
+                var childIds = await _sysOrgService.GetOrgChildIds(item.Id, true, orgList);//获取组织下的所有子级ID
+                var orgPositions = sysPositions.Where(it => childIds.Contains(it.OrgId)).ToList();//获取组织下的职位
+                if (orgPositions.Count > 0)//如果组织和组织下级有职位
+                {
+                    var positionSelectorOutput = new PositionSelectorOutput
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Children = await ConstructPositionSelector(orgList, sysPositions, item.Id)//递归
+                    };//实例化职位树
+                    var positions = orgPositions.Where(it => it.OrgId == item.Id).ToList();//获取组织下的职位
+                    if (positions.Count > 0)//如果数量大于0
+                    {
+                        foreach (var position in positions)
+                        {
+                            positionSelectorOutput.Children.Add(new PositionSelectorOutput
+                            {
+                                Id = position.Id,
+                                Name = position.Name
+                            });//添加职位
+                        }
+                    }
+                    data.Add(positionSelectorOutput);//添加到列表
+                }
+            }
+            return data;//返回结果
+        }
+        return new List<PositionSelectorOutput>();
     }
 
     #endregion 方法

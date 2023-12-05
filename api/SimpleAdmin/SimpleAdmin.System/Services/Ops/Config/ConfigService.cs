@@ -48,7 +48,8 @@ public class ConfigService : DbRepository<SysConfig>, IConfigService
     public async Task<SqlSugarPagedList<SysConfig>> Page(ConfigPageInput input)
     {
         var query = Context.Queryable<SysConfig>().Where(it => it.Category == CateGoryConst.CONFIG_BIZ_DEFINE)//自定义配置
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.SortCode);
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页

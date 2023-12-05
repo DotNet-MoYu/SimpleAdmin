@@ -19,12 +19,15 @@ import { ResultData } from "@/api/interface";
 import { ResultEnum, TokenEnum } from "@/enums";
 import { checkStatus } from "../helper/checkStatus";
 import { useUserStore } from "@/stores/modules/user";
+import { AxiosCanceler } from "../helper/axiosCancel";
 import router from "@/routers";
 
 // 自定义 AxiosRequestConfig 接口，增加 noLoading 属性
 export interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
   loading?: boolean;
+  cancel?: boolean;
 }
+const axiosCanceler = new AxiosCanceler();
 
 export default class RequestHttp {
   service: AxiosInstance;
@@ -54,6 +57,9 @@ export default class RequestHttp {
     this.service.interceptors.request.use(
       (config: CustomAxiosRequestConfig) => {
         const userStore = useUserStore();
+        // 重复请求不需要取消，在 api 服务中通过指定的第三个参数: { cancel: false } 来控制
+        config.cancel ?? (config.cancel = true);
+        config.cancel && axiosCanceler.addPending(config);
         // 当前请求不需要显示 loading，在 api 服务中通过指定的第三个参数: { loading: false } 来控制
         config.loading ?? (config.loading = true);
         config.loading && showFullScreenLoading();
@@ -91,10 +97,11 @@ export default class RequestHttp {
       (response: AxiosResponse) => {
         // 检查并存储授权信息
         this.checkAndStoreAuthentication(response);
-        const { data } = response;
+        const { data, config } = response;
         const userStore = useUserStore();
+        axiosCanceler.removePending(config);
         tryHideFullScreenLoading();
-        // 登陆失效
+        // 登录失效
         if (data.code == ResultEnum.OVERDUE) {
           userStore.clearUserStore();
           router.replace(LOGIN_URL);

@@ -1,10 +1,10 @@
 <!-- 用户选择器 -->
 <template>
   <form-container v-model="visible" title="用户选择" form-size="90%" v-bind="$attrs">
-    <div class="-mt-20px min-h-350px">
+    <div class="-mt-15px min-h-350px">
       <el-row :gutter="12" justify="space-between">
         <el-col :span="4">
-          <el-tabs v-model="activeName" type="card" stretch @tab-click="handleClick">
+          <el-tabs v-model="activeName" type="card" stretch>
             <el-tab-pane label="组织" class="ml-5px mr-5px" name="org">
               <el-scrollbar max-height="650px">
                 <TreeFilter
@@ -53,7 +53,6 @@
             <!-- 操作 -->
             <template #operation="scope">
               <el-button type="primary" link :icon="Plus" plain @click="addRecords([scope.row])">添加</el-button>
-              <!-- <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" /> -->
             </template>
           </ProTable>
         </el-col>
@@ -84,19 +83,18 @@
 </template>
 
 <script setup lang="ts" name="UserSelector">
-import { SysUser, sysOrgTreeApi, sysUserSelectorApi, SysPosition, SysPositionTreeApi, SysRole, SysRoleTreeApi } from "@/api";
+import { SysUser, sysOrgApi, sysUserApi, SysPosition, sysPositionApi, SysRole, sysRoleApi } from "@/api";
 import { UserSelectProps, UserSelectTableInitParams } from "./interface";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
-import { ElMessage, type TabsPaneContext } from "element-plus";
+import { ElMessage } from "element-plus";
 import { Plus, Delete } from "@element-plus/icons-vue";
 const activeName = ref("org");
 const emit = defineEmits({ successful: null }); // 自定义事件
-const handleClick = (tab: TabsPaneContext, event: Event) => {
-  console.log(tab, event);
-};
+// const handleClick = (tab: TabsPaneContext, event: Event) => {
+//   console.log(tab, event);
+// };
 const visible = ref(false); //是否显示
 
-// 表单参数
 // 定义组件props
 const props = withDefaults(defineProps<UserSelectProps>(), {
   permission: false,
@@ -119,10 +117,10 @@ const columns: ColumnProps<SysUser.SysUserInfo>[] = [
 ];
 
 /** 显示选择器 */
-function showSelector() {
+function showSelector(data: SysUser.SysUserInfo[] = []) {
   visible.value = true;
-  chooseDataTmp.value = [];
-  chooseData.value = [];
+  chooseDataTmp.value = data;
+  chooseData.value = data;
 }
 
 /** 关闭选择器 */
@@ -135,42 +133,41 @@ function onClose() {
 /** 提交数据 */
 function handleOk() {
   visible.value = false;
-  ElMessage.success(JSON.stringify(chooseData.value));
   emit("successful", chooseData.value);
 }
 
 /** 获取组织树 */
-function getOrgTree(): Promise<any> {
+async function getOrgTree(): Promise<any> {
   if (props.permission) {
-    return sysOrgTreeApi();
+    return await sysOrgApi.sysOrgTree();
   }
-  return sysOrgTreeApi();
+  return await sysOrgApi.sysOrgTree();
 }
 
-/** 获取组织树 */
-function getPositionTree(): Promise<any> {
+/** 获取职位树 */
+async function getPositionTree(): Promise<any> {
   if (props.permission) {
-    return SysPositionTreeApi();
+    return await sysPositionApi.positionTree();
   }
-  return SysPositionTreeApi();
+  return await sysPositionApi.positionTree();
 }
 
 /** 获取角色树 */
-function getRoleTree(): Promise<any> {
+async function getRoleTree(): Promise<any> {
   if (props.permission) {
-    return SysRoleTreeApi();
+    return await sysRoleApi.sysRoleTree();
   }
-  return SysRoleTreeApi();
+  return await sysRoleApi.sysRoleTree();
 }
 
 // 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
 // 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
 /** 获取用户分页 */
-function getUserPage(params: any) {
+async function getUserPage(params: any) {
   if (props.permission) {
-    return sysUserSelectorApi(params);
+    return await sysUserApi.sysUserSelector(params);
   }
-  return sysUserSelectorApi(params);
+  return await sysUserApi.sysUserSelector(params);
 }
 
 /** 部门切换 */

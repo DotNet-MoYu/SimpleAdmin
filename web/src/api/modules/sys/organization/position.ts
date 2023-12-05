@@ -13,32 +13,32 @@
  */
 
 import { ReqId, ResPage, SysPosition } from "@/api";
-
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/organization/position/");
 
-/** 获取职位分页 */
-export const SysPositionPageApi = (params: SysPosition.Page) => {
-  return http.get<ResPage<SysPosition.SysPositionInfo>>("page", params);
-};
-
-/** 获取职位树 */
-export const SysPositionTreeApi = () => {
-  return http.get<SysPosition.SysPositionTree[]>("tree");
-};
-
-/** 获取职位详情 */
-export const SysPositionDetailApi = (params: ReqId) => {
-  return http.get<SysPosition.SysPositionInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const SysPositionSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除职位 */
-export const SysPositionDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取职位分页 */
+  positionPage(params: SysPosition.Page) {
+    return http.get<ResPage<SysPosition.SysPositionInfo>>("page", params);
+  },
+  /** 获取职位树 */
+  positionTree() {
+    return http.get<SysPosition.SysPositionTree[]>("tree", {}, { loading: false });
+  },
+  /** 获取职位详情 */
+  positionDetail(params: ReqId) {
+    return http.get<SysPosition.SysPositionInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  positionSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除职位 */
+  positionDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  /** 职位选择器 */
+  positionSelector() {
+    return http.get<SysPosition.SysPositionSelector[]>("selector", {}, { loading: false });
+  }
 };

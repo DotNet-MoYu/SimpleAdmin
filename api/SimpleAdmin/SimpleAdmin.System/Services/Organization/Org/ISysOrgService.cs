@@ -42,11 +42,13 @@ public interface ISysOrgService : ITransient
     /// <returns></returns>
     Task<List<SysOrg>> GetChildListById(long orgId, bool isContainOneself = true, List<SysOrg> sysOrgList = null);
 
+
     /// <summary>
     /// 获取所有组织
     /// </summary>
-    /// <returns>组织列表</returns>
-    Task<List<SysOrg>> GetListAsync();
+    /// <param name="showDisabled">是否显示禁用的</param>
+    /// <returns></returns>
+    Task<List<SysOrg>> GetListAsync(bool showDisabled = true);
 
     /// <summary>
     /// 获取机构及下级ID列表
@@ -140,7 +142,7 @@ public interface ISysOrgService : ITransient
     /// <param name="orgList">组织列表</param>
     /// <param name="parentId">父ID</param>
     /// <returns>树型结构</returns>
-    List<SysOrg> ConstructOrgTrees(List<SysOrg> orgList, long parentId = 0);
+    List<SysOrg> ConstructOrgTrees(List<SysOrg> orgList, long parentId = SimpleAdminConst.ZERO);
 
     /// <summary>
     /// 刷新缓存

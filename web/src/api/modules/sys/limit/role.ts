@@ -12,33 +12,61 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 
-import { ReqId, ResPage, SysRole } from "@/api";
-
+import { ReqId, ResPage, SysRole, SysResource, SysUser } from "@/api";
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/limit/role/");
 
-/** 获取角色分页 */
-export const SysRolePageApi = (params: SysRole.Page) => {
-  return http.get<ResPage<SysRole.SysRoleInfo>>("page", params);
-};
-
-/** 获取角色树 */
-export const SysRoleTreeApi = () => {
-  return http.get<SysRole.SysRoleTree[]>("tree");
-};
-
-/** 获取角色详情 */
-export const SysRoleDetailApi = (params: ReqId) => {
-  return http.get<SysRole.SysRoleInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const SysRoleSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除角色 */
-export const SysRoleDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取角色分页 */
+  sysRolePage(params: SysRole.Page) {
+    return http.get<ResPage<SysRole.SysRoleInfo>>("page", params);
+  },
+  /** 获取角色树 */
+  sysRoleTree() {
+    return http.get<SysRole.SysRoleTree[]>("tree", {}, { loading: false });
+  },
+  /** 获取角色详情 */
+  sysRoleDetail(params: ReqId) {
+    return http.get<SysRole.SysRoleInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  sysRoleSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除角色 */
+  sysRoleDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  // 获取资源授权树
+  roleResourceTreeSelector() {
+    return http.get<SysResource.ResTreeSelector[]>("resourceTreeSelector", {}, { loading: false });
+  },
+  // 获取权限授权树
+  permissionTreeSelector() {
+    return http.get<string[]>("permissionTreeSelector", {}, { loading: false });
+  },
+  // 获取角色拥有资源
+  ownResource(params: ReqId) {
+    return http.get<SysRole.RoleOwnResource>("ownResource", params, { loading: false });
+  },
+  // 给角色授权资源
+  grantResource(params: SysRole.GrantResourceReq) {
+    return http.post("grantResource", params);
+  },
+  // 获取角色拥有权限
+  ownPermission(params: ReqId) {
+    return http.get<SysRole.RoleOwnPermission[]>("ownPermission", params, { loading: false });
+  },
+  // 给角色授权权限
+  grantPermission(params: any) {
+    return http.post("grantPermission", params);
+  },
+  // 获取角色下的用户
+  roleOwnUser(params: any) {
+    return http.get<SysUser.SysUserInfo[]>("ownUser", params, { loading: false });
+  },
+  // 给角色授权用户
+  roleGrantUser(params: any) {
+    return http.post("grantUser", params);
+  }
 };

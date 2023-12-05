@@ -3,10 +3,10 @@
   <el-dialog v-model="visible" title="批量新增按钮" width="500px">
     <el-form ref="buttonFormRef" :rules="rules" :model="buttonProps" label-width="auto">
       <s-form-item label="权限简称" prop="title">
-        <el-input v-model="buttonProps.title" placeholder="请填写权限简称" clearable></el-input>
+        <s-input v-model="buttonProps.title"></s-input>
       </s-form-item>
       <s-form-item label="编码前缀" prop="code">
-        <el-input v-model="buttonProps.code" placeholder="请填写编码前缀" clearable></el-input>
+        <s-input v-model="buttonProps.code"></s-input>
       </s-form-item>
     </el-form>
     <template #footer>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { buttonBatchApi, Button } from "@/api";
+import { buttonApi, Button } from "@/api";
 import { required } from "@/utils/formRules";
 import { FormInstance } from "element-plus/es/components/form";
 const visible = ref(false); //是否显示表单
@@ -57,7 +57,8 @@ async function handleSubmit() {
   buttonFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await buttonBatchApi(buttonProps)
+    await buttonApi
+      .buttonBatch(buttonProps)
       .then(() => {
         buttonProps.successful!(); //调用父组件的successful方法
       })

@@ -39,8 +39,9 @@ public interface IMenuService : ITransient
     /// 获取菜单树
     /// </summary>
     /// <param name="input">菜单树查询参数</param>
+    /// <param name="showDisabled">是否显示禁用的</param>
     /// <returns>菜单树列表</returns>
-    Task<List<SysResource>> Tree(MenuTreeInput input);
+    Task<List<SysResource>> Tree(MenuTreeInput input, bool showDisabled = true);
 
     /// <summary>
     /// 编辑菜单

@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { Login } from "@/api/interface";
-import { configSysBaseApi, picCaptchaApi } from "@/api";
+import { configApi, loginApi } from "@/api";
 import { useAuthStore } from "@/stores/modules";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
@@ -99,7 +99,7 @@ onMounted(() => {
     }
   };
   // 获取验证码开关
-  configSysBaseApi().then(async res => {
+  configApi.configSysBase().then(async res => {
     // 如果验证码开关是开就加载验证码
     if (res.data) {
       captchaOpen.value = res.data.find(item => item.configKey === SysBaseEnum.LOGIN_CAPTCHA_OPEN)?.configValue === "true"; // 判断是否开启验证码
@@ -112,7 +112,7 @@ onMounted(() => {
 
 /** 加载图片验证码 */
 async function loginCaptcha() {
-  const { data } = await picCaptchaApi(); // 获取验证码
+  const { data } = await loginApi.picCaptcha(); // 获取验证码
   if (data) {
     validCodeBase64.value = data.validCodeBase64; // 验证码base64
     loginForm.validCodeReqNo = data.validCodeReqNo; // 验证码请求号

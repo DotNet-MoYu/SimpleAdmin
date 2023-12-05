@@ -13,25 +13,23 @@
  */
 import { Login } from "@/api/interface";
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/auth/b/");
 
-// 用户登录
-export const loginApi = (params: Login.LoginForm) => {
-  return http.post<Login.Login>("login", params, { loading: false }); // 正常 post json 请求  ==>  application/json
+export default {
+  // 用户登录
+  login(params: Login.LoginForm) {
+    return http.post<Login.Login>("login", params, { loading: false }); // 正常 post json 请求  =  application/json
+  },
+  //获取验证码
+  picCaptcha() {
+    return http.get<Login.ReqValidCode>("getPicCaptcha", {}, { loading: false });
+  },
+  // 用户退出登录
+  logout(params: Login.Logout) {
+    return http.post("logout", params);
+  },
+  //获取用户信息
+  getLoginUser() {
+    return http.get<Login.LoginUserInfo>("getLoginUser", {}, { loading: false });
+  }
 };
-
-//获取验证码
-export const picCaptchaApi = () => {
-  return http.get<Login.ReqValidCode>("getPicCaptcha", {}, { loading: false });
-};
-
-// 用户退出登录
-export const logoutApi = (params: Login.Logout) => {
-  return http.post("logout", params);
-};
-
-//获取用户信息
-export function getLoginUserApi() {
-  return http.get<Login.LoginUserInfo>("getLoginUser", {}, { loading: false });
-}

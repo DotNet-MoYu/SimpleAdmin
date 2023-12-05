@@ -16,27 +16,25 @@ import { moduleRequest } from "@/api/request";
 import { ReqId, Spa, Menu } from "@/api/interface";
 const http = moduleRequest("/sys/limit/menu/");
 
-/** 获取菜单树 */
-export const menuTreeApi = (params: Menu.Tree) => {
-  return http.get<Menu.MenuInfo[]>("tree", params);
-};
-
-/** 获取菜单详情 */
-export const menuDetailApi = (params: ReqId) => {
-  return http.get<Spa.SpaInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const menuSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除菜单 */
-export const menuDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
-};
-
-/** 修改模块菜单 */
-export const menuChangeModuleApi = (params: { id: number | string; module: number | string }) => {
-  return http.post("changeModule", params);
+export default {
+  /** 获取菜单树 */
+  menuTree(params: Menu.Tree) {
+    return http.get<Menu.MenuInfo[]>("tree", params);
+  },
+  /** 获取菜单详情 */
+  menuDetail(params: ReqId) {
+    return http.get<Spa.SpaInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  menuSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除菜单 */
+  menuDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  /** 修改模块菜单 */
+  menuChangeModule(params: { id: number | string; module: number | string }) {
+    return http.post("changeModule", params);
+  }
 };

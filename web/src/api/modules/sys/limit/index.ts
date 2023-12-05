@@ -11,8 +11,8 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-export * from "./spa";
-export * from "./module";
-export * from "./menu";
-export * from "./button";
-export * from "./role";
+export { default as spaApi } from "./spa";
+export { default as moduleApi } from "./module";
+export { default as menuApi } from "./menu";
+export { default as buttonApi } from "./button";
+export { default as sysRoleApi } from "./role";

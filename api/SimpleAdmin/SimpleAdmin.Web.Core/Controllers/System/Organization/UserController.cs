@@ -18,15 +18,15 @@ public class UserController : BaseController
     private readonly ISysUserService _sysUserService;
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysPositionService _sysPositionService;
-    private readonly IRoleService _roleService;
+    private readonly ISysRoleService _sysRoleService;
 
     public UserController(ISysUserService sysUserService, ISysOrgService sysOrgService, ISysPositionService sysPositionService,
-        IRoleService roleService)
+        ISysRoleService sysRoleService)
     {
         _sysUserService = sysUserService;
         _sysOrgService = sysOrgService;
         _sysPositionService = sysPositionService;
-        _roleService = roleService;
+        _sysRoleService = sysRoleService;
     }
 
     #region Get请求
@@ -48,7 +48,7 @@ public class UserController : BaseController
     [HttpGet("roleSelector")]
     public async Task<dynamic> RoleSelector([FromQuery] RoleSelectorInput input)
     {
-        return await _roleService.RoleSelector(input);
+        return await _sysRoleService.RoleSelector(input);
     }
 
     /// <summary>
@@ -67,22 +67,12 @@ public class UserController : BaseController
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    [HttpGet("userSelector")]
-    public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
+    [HttpGet("selector")]
+    public async Task<dynamic> Selector([FromQuery] UserSelectorInput input)
     {
-        return await _sysUserService.UserSelector(input);
+        return await _sysUserService.Selector(input);
     }
 
-    /// <summary>
-    /// 职位选择器
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("positionSelector")]
-    public async Task<dynamic> PositionSelector([FromQuery] PositionSelectorInput input)
-    {
-        return await _sysPositionService.PositionSelector(input);
-    }
 
     /// <summary>
     /// 获取用户拥有角色

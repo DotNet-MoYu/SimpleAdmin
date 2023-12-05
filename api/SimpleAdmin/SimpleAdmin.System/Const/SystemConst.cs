@@ -29,6 +29,11 @@ public class SystemConst
     public const string CACHE_SYS_USER = CacheConst.CACHE_PREFIX_WEB + "SysUser";
 
     /// <summary>
+    /// 用户头像缓存关系Key
+    /// </summary>
+    public const string CACHE_SYS_USER_AVATAR = CacheConst.CACHE_PREFIX_WEB + "SysUserAvatar";
+
+    /// <summary>
     /// 用户手机号关系缓存Key
     /// </summary>
     public const string CACHE_SYS_USER_PHONE = CacheConst.CACHE_PREFIX_WEB + "SysUserPhone";

@@ -21,7 +21,7 @@
 
 <script setup lang="ts" name="MenuSelector">
 import { MenuSelectProps } from "./interface";
-import { menuTreeApi, Menu } from "@/api";
+import { menuApi, Menu } from "@/api";
 // 定义组件props
 const props = withDefaults(defineProps<MenuSelectProps>(), {
   menuValue: "",
@@ -51,7 +51,7 @@ const emit = defineEmits(["update:menuValue", "change"]); // 定义更新父组�
 /** 获取菜单树 */
 function getMenuTree() {
   // 获取菜单树数据
-  menuTreeApi({ module: props.module }).then(res => {
+  menuApi.menuTree({ module: props.module }).then(res => {
     // 加个顶级作为一级菜单
     menuTreeData.value = [
       {

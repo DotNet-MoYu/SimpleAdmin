@@ -216,12 +216,6 @@ public class SysUser : BaseEntity
     [SugarColumn(ColumnName = "DirectorId", ColumnDescription = "主管id", IsNullable = true)]
     public long? DirectorId { get; set; }
 
-    /// <summary>
-    /// 兼任信息
-    ///</summary>
-    [SugarColumn(ColumnName = "PositionJson", ColumnDescription = "兼任信息", IsJson = true, ColumnDataType = StaticConfig.CodeFirst_BigString,
-        IsNullable = true)]
-    public List<PositionJson> PositionJson { get; set; }
 
     /// <summary>
     /// 上次修改密码时间
@@ -277,11 +271,6 @@ public class SysUser : BaseEntity
     [SugarColumn(ColumnName = "LatestLoginDevice", ColumnDescription = "最新登录设备", IsNullable = true)]
     public string LatestLoginDevice { get; set; }
 
-    /// <summary>
-    /// 用户状态
-    ///</summary>
-    [SugarColumn(ColumnName = "UserStatus", ColumnDescription = "用户状态", Length = 200, IsNullable = true)]
-    public string UserStatus { get; set; }
 
     /// <summary>
     /// 排序码
@@ -312,6 +301,18 @@ public class SysUser : BaseEntity
     /// </summary>
     [SugarColumn(IsIgnore = true)]
     public string PositionName { get; set; }
+
+    /// <summary>
+    /// 组织和机构ID列表,组织ID从上到下最后是职位
+    /// </summary>
+    [SugarColumn(IsIgnore = true, IsJson = true)]
+    public List<long> OrgAndPosIdList { get; set; } = new List<long>();
+
+    /// <summary>
+    /// 主管信息
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public UserSelectorOutPut DirectorInfo { get; set; }
 
     /// <summary>
     /// 按钮码集合
@@ -381,25 +382,4 @@ public class DataScope
     /// 数据范围的机构ID列表
     /// </summary>
     public List<long>? DataScopes { get; set; }
-}
-
-/// <summary>
-/// 兼任信息
-/// </summary>
-public class PositionJson
-{
-    /// <summary>
-    /// 组织ID
-    /// </summary>
-    public long OrgId { get; set; }
-
-    /// <summary>
-    /// 机构ID
-    /// </summary>
-    public long PositionId { get; set; }
-
-    /// <summary>
-    /// 主管ID
-    /// </summary>
-    public long? DirectorId { get; set; }
 }

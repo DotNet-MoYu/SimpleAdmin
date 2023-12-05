@@ -69,6 +69,9 @@ public class ResTreeSelector
         public List<RoleGrantResourceButton> Button { get; set; } = new List<RoleGrantResourceButton>();
     }
 
+    /// <summary>
+    /// 角色授权资源按钮信息
+    /// </summary>
     public class RoleGrantResourceButton
     {
         /// <summary>
@@ -83,6 +86,9 @@ public class ResTreeSelector
     }
 }
 
+/// <summary>
+///  权限树选择器输出
+/// </summary>
 public class PermissionTreeSelector
 {
     /// <summary>

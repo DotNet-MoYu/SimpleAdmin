@@ -22,6 +22,9 @@ public class SysOrg : BaseEntity
     [SugarColumn(ColumnName = "ParentId", ColumnDescription = "父id")]
     public long ParentId { get; set; }
 
+    [SugarColumn(ColumnName = "ParentIdList", ColumnDescription = "父id列表", IsNullable = true, IsJson = true)]
+    public List<long> ParentIdList { get; set; } = new List<long>();
+
     /// <summary>
     /// 主管ID
     ///</summary>

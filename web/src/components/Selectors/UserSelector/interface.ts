@@ -1,5 +1,5 @@
 /**
- * @description 接口
+ * @description 用户选择器接口
  * @license Apache License Version 2.0
  * @remarks
  * SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
@@ -23,7 +23,7 @@ export interface UserSelectProps {
   maxCount?: number;
 }
 
-/** 用户选择器属性 */
+/** 用户选择器表格初始化参数 */
 export interface UserSelectTableInitParams {
   /** 组织ID */
   orgId?: number | string | null;

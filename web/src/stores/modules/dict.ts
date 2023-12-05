@@ -14,8 +14,7 @@
 
 import { defineStore } from "pinia";
 import piniaPersistConfig from "@/stores/helper/persist";
-import { Dict } from "@/api/interface";
-import { getDictTreeApi } from "@/api";
+import { dictApi, Dict } from "@/api";
 import { ElNotification } from "element-plus";
 import { SysDictEnum, CommonStatusEnum } from "@/enums";
 
@@ -40,7 +39,7 @@ export const useDictStore = defineStore({
     /**  设置字典信息 */
     async setDictTree() {
       /**  获取字典信息 */
-      const { data } = await getDictTreeApi();
+      const { data } = await dictApi.getDictTree();
       if (data) {
         this.dictInfo = data;
       } else {

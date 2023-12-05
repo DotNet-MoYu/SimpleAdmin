@@ -61,10 +61,10 @@ public class OrgController : BaseController
     /// 获取用户选择器
     /// </summary>
     /// <returns></returns>
-    [HttpGet("userSelector")]
+    [HttpGet("selector")]
     public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
     {
-        return await _sysUserService.UserSelector(input);
+        return await _sysUserService.Selector(input);
     }
 
     /// <summary>

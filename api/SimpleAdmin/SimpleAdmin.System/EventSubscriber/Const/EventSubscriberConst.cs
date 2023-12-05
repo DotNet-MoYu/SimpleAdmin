@@ -34,6 +34,16 @@ public class EventSubscriberConst
     /// </summary>
     public const string CLEAR_USER_CACHE = "清除用户缓存";
 
+    /// <summary>
+    /// 清除组织下用户Token
+    /// </summary>
+    public const string CLEAR_ORG_TOKEN = "清除组织下用户Token";
+
+    /// <summary>
+    /// 清除模块下用户Token
+    /// </summary>
+    public const string CLEAR_MODULE_TOKEN = "清除模块下用户Token";
+
     #endregion UserEventSubscriber
 
     #region NoticeEventSubscriber

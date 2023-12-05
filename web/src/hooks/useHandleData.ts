@@ -35,14 +35,18 @@ export const useHandleData = (
       cancelButtonText: "取消",
       type: confirmType,
       draggable: true
-    }).then(async () => {
-      const res = await api(params);
-      if (!res) return reject(false);
-      ElMessage({
-        type: "success",
-        message: `${message}成功!`
+    })
+      .then(async () => {
+        const res = await api(params);
+        if (!res) return reject(false);
+        ElMessage({
+          type: "success",
+          message: `${message}成功!`
+        });
+        resolve(true);
+      })
+      .catch(() => {
+        //啥也不干
       });
-      resolve(true);
-    });
   });
 };

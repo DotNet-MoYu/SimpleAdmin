@@ -153,13 +153,19 @@ public class RelationService : DbRepository<SysRelation>, IRelationService
     }
 
     /// <inheritdoc/>
-    public async Task<List<long>> GetModuleByRoleId(List<long> roleIdList)
+    public async Task<List<long>> GetUserModuleId(List<long> roleIdList, long userId)
     {
         var moduleIds = new List<long>();
-        var relation = await GetRelationByCategory(CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE);//获取关系集合
-        if (relation != null && relation.Count > 0)
+        var roleRelation = await GetRelationByCategory(CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE);//获取角色模块关系集合
+        if (roleRelation != null && roleRelation.Count > 0)
         {
-            moduleIds = relation.Where(it => roleIdList.Contains(it.ObjectId)).Select(it => it.TargetId.ToLong()).ToList();
+            moduleIds = roleRelation.Where(it => roleIdList.Contains(it.ObjectId)).Select(it => it.TargetId.ToLong()).ToList();
+        }
+        var userRelation = await GetRelationByCategory(CateGoryConst.RELATION_SYS_USER_HAS_MODULE);//获取用户模块关系集合
+        if (userRelation != null && userRelation.Count > 0)
+        {
+            var userModuleIds = userRelation.Where(it => it.ObjectId == userId).Select(it => it.TargetId.ToLong()).ToList();
+            moduleIds.AddRange(userModuleIds);
         }
         return moduleIds;
     }

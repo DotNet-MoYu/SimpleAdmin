@@ -137,7 +137,7 @@
             <param name="input">查询参数</param>
             <returns>分页列表</returns>
         </member>
-        <member name="M:SimpleAdmin.Application.IPositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
+        <member name="M:SimpleAdmin.Application.IPositionService.Selector(SimpleAdmin.System.PositionSelectorInput)">
             <summary>
             岗位选择器
             </summary>
@@ -168,7 +168,7 @@
         <member name="M:SimpleAdmin.Application.PositionService.Edit(SimpleAdmin.System.PositionEditInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.Application.PositionService.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
+        <member name="M:SimpleAdmin.Application.PositionService.Selector(SimpleAdmin.System.PositionSelectorInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.PositionService.Detail(SimpleAdmin.Core.BaseIdInput)">

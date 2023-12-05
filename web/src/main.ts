@@ -38,7 +38,8 @@ import "virtual:uno.css";
 import "highlight.js/styles/atom-one-dark.css";
 import hljsCommon from "highlight.js/lib/common";
 import hljsVuePlugin from "@highlightjs/vue-plugin";
-
+//解决谷歌浏览器 Added non-passive event listener to a scroll-blocking 'touchstart' event. Consider markin...
+import "default-passive-events";
 const app = createApp(App);
 
 app.config.errorHandler = errorHandler;

@@ -46,7 +46,7 @@ public interface IPositionService : ITransient
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
-    Task<LinqPagedList<SysPosition>> PositionSelector(PositionSelectorInput input);
+    Task<List<PositionSelectorOutput>> Selector(PositionSelectorInput input);
 
     /// <summary>
     /// 岗位详情

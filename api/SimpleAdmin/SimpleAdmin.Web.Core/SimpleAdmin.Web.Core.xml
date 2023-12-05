@@ -131,6 +131,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Selector(SimpleAdmin.System.PositionSelectorInput)">
+            <summary>
+            岗位选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.BizUserController">
             <summary>
             人员管理控制器
@@ -166,13 +173,6 @@
             <summary>
             获取人员选择器
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
-            <summary>
-            岗位选择器
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.OwnRole(SimpleAdmin.Core.BaseIdInput)">
@@ -577,6 +577,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.ButtonController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取按钮详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.MenuController">
             <summary>
             菜单管理控制器
@@ -663,6 +670,13 @@
         <member name="M:SimpleAdmin.Web.Core.ModuleController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除模块
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.ModuleController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取模块详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -772,6 +786,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.SpaController">
             <summary>
             单页管理控制器
@@ -801,6 +822,13 @@
         <member name="M:SimpleAdmin.Web.Core.SpaController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除单页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.SpaController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取单页详情
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1048,6 +1076,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Selector(SimpleAdmin.System.PositionSelectorInput)">
+            <summary>
+            职位选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.PositionController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取职位详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.PositionController.Add(SimpleAdmin.System.PositionAddInput)">
             <summary>
             添加职位
@@ -1093,16 +1135,9 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Web.Core.UserController.Selector(SimpleAdmin.System.UserSelectorInput)">
             <summary>
             获取用户选择器
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserController.PositionSelector(SimpleAdmin.System.PositionSelectorInput)">
-            <summary>
-            职位选择器
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -1322,30 +1357,6 @@
             </summary>
             <param name="input"></param>
             <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetUserListByIdList(SimpleAdmin.Core.IdListInput)">
-            <summary>
-             根据id集合获取用户集合
-            </summary>
-            <param name="input"></param>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetPositionListByIdList(SimpleAdmin.Core.IdListInput)">
-            <summary>
-             根据id集合获取职位集合
-            </summary>
-            <param name="input"></param>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetOrgListByIdList(SimpleAdmin.Core.IdListInput)">
-            <summary>
-             根据id集合获取组织集合
-            </summary>
-            <param name="input"></param>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.GetRoleListByIdList(SimpleAdmin.Core.IdListInput)">
-            <summary>
-             根据id集合获取角色集合
-            </summary>
-            <param name="input"></param>
         </member>
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDefaultModule(SimpleAdmin.System.SetDefaultModuleInput)">
             <summary>

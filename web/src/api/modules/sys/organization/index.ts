@@ -11,6 +11,6 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-export * from "./org";
-export * from "./user";
-export * from "./position";
+export { default as sysOrgApi } from "./org";
+export { default as sysUserApi } from "./user";
+export { default as sysPositionApi } from "./position";

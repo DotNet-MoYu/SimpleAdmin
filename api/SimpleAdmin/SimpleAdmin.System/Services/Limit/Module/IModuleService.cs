@@ -40,4 +40,11 @@ public interface IModuleService : ITransient
     /// <param name="input">分页参数</param>
     /// <returns></returns>
     Task<SqlSugarPagedList<SysResource>> Page(ModulePageInput input);
+
+    /// <summary>
+    /// 模块详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysResource> Detail(BaseIdInput input);
 }

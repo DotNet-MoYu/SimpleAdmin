@@ -11,5 +11,5 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
-export * from "./config";
-export * from "./dict";
+export { default as configApi } from "./config";
+export { default as dictApi } from "./dict";

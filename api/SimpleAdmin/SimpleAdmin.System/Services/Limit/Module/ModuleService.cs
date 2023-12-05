@@ -16,12 +16,15 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     private readonly ILogger<ModuleService> _logger;
     private readonly IResourceService _resourceService;
     private readonly IRelationService _relationService;
+    private readonly IEventPublisher _eventPublisher;
 
-    public ModuleService(ILogger<ModuleService> logger, IResourceService resourceService, IRelationService relationService)
+    public ModuleService(ILogger<ModuleService> logger, IResourceService resourceService, IRelationService relationService,
+        IEventPublisher eventPublisher)
     {
         _logger = logger;
         _resourceService = resourceService;
         _relationService = relationService;
+        _eventPublisher = eventPublisher;
     }
 
     /// <inheritdoc/>
@@ -49,7 +52,19 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await UpdateAsync(sysResource))//更新数据
+        {
+            if (sysResource.Status == CommonStatusConst.DISABLED)//如果禁用
+                await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_MODULE_TOKEN, sysResource.Id);//清除角色下用户缓存
             await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MODULE);//刷新缓存
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<SysResource> Detail(BaseIdInput input)
+    {
+        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MODULE);
+        var resource = sysResources.Where(it => it.Id == input.Id).FirstOrDefault();
+        return resource;
     }
 
     /// <inheritdoc />
@@ -62,13 +77,16 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             //获取所有
             var resourceList = await _resourceService.GetListAsync();
             //找到要删除的模块
-            var sysresources = resourceList.Where(it => ids.Contains(it.Id)).ToList();
+            var sysResources = resourceList.Where(it => ids.Contains(it.Id)).ToList();
             //查找内置模块
-            var system = sysresources.Where(it => it.Code == SysResourceConst.SYSTEM).FirstOrDefault();
+            var system = sysResources.Where(it => it.Code == SysResourceConst.SYSTEM).FirstOrDefault();
             if (system != null)
                 throw Oops.Bah($"不可删除系统内置模块:{system.Title}");
+            if (sysResources.Any(it => it.Status == CommonStatusConst.ENABLE))//如果有启用的模块
+                throw Oops.Bah($"请先禁用模块再删除");
             //获取模块下的所有菜单Id列表
-            var menuIds = resourceList.Where(it => ids.Contains(it.Module.ToLong()) && it.ParentId.ToLong() == SimpleAdminConst.ZERO).Select(it => it.Id).ToList();
+            var menuIds = resourceList.Where(it => ids.Contains(it.Module.ToLong()) && it.ParentId.ToLong() == SimpleAdminConst.ZERO)
+                .Select(it => it.Id).ToList();
             //需要删除的资源ID列表
             var resourceIds = new List<long>();
             //遍历列表
@@ -86,7 +104,8 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
-                    .Where(it => it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId))).ExecuteCommandAsync();
+                    .Where(it => it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId)))
+                    .ExecuteCommandAsync();
             });
             if (result.IsSuccess)//如果成功了
             {
@@ -117,6 +136,8 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         {
             throw Oops.Bah($"存在重复的模块:{sysResource.Title}");
         }
+        if (sysResource.Status == CommonStatusConst.DISABLED)//如果禁用
+            await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_MODULE_TOKEN, sysResource.Id);//清除角色下用户缓存
         //设置为模块
         sysResource.Category = CateGoryConst.RESOURCE_MODULE;
     }

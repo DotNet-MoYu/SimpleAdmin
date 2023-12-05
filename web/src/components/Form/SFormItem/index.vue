@@ -9,15 +9,16 @@
         </el-tooltip>
         {{ $attrs.label }}
       </el-space>
-      <span v-else-if="$attrs.label">{{ $attrs.label }}</span>
+      <span v-else-if="$attrs.label">{{ $attrs.label }}{{ formContext?.labelSuffix }}</span>
     </template>
   </el-form-item>
 </template>
 
 <script setup lang="ts" name="SFormItem">
-import { FormItemContext } from "element-plus";
+import { FormItemContext, formContextKey } from "element-plus";
 
-const formItemRef = ref<FormItemContext>();
+const formContext = inject(formContextKey, undefined); //表单实例
+const formItemRef = ref<FormItemContext>(); //表单Item实例
 
 interface Props {
   tooltip?: string | undefined;

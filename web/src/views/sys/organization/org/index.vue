@@ -5,12 +5,12 @@
       ref="treeFilter"
       label="name"
       title="组织列表"
-      :request-api="sysOrgTreeApi"
+      :request-api="sysOrgApi.sysOrgTree"
       :default-value="initParam.parentId"
       @change="changeTreeFilter"
     />
     <div class="table-box">
-      <ProTable ref="proTable" title="用户列表" :columns="columns" :request-api="sysOrgPageApi" :init-param="initParam">
+      <ProTable ref="proTable" title="组织列表" :columns="columns" :request-api="sysOrgApi.sysOrgPage" :init-param="initParam">
         <!-- 表格 header 按钮 -->
         <template #tableHeader="scope">
           <s-button suffix="组织" @click="onOpen(FormOptEnum.ADD)" />
@@ -23,6 +23,13 @@
             :disabled="!scope.isSelected"
             @click="onDelete(scope.selectedListIds, '删除所选组织')"
           />
+        </template>
+        <!-- 状态 -->
+        <template #status="scope">
+          <el-tag v-if="scope.row.status === CommonStatusEnum.ENABLE" type="success">{{
+            dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status)
+          }}</el-tag>
+          <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
         </template>
         <!-- 操作 -->
         <template #operation="scope">
@@ -39,10 +46,10 @@
 </template>
 
 <script setup lang="ts" name="sysOrg">
-import { sysOrgTreeApi, sysOrgPageApi, SysOrg, sysOrgDeleteApi } from "@/api";
+import { sysOrgApi, SysOrg } from "@/api";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { CopyDocument } from "@element-plus/icons-vue";
-import { SysDictEnum, FormOptEnum } from "@/enums";
+import { SysDictEnum, FormOptEnum, CommonStatusEnum } from "@/enums";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDictStore } from "@/stores/modules";
 import TreeFilter from "@/components/TreeFilter/index.vue";
@@ -52,7 +59,8 @@ import Copy from "./components/copy.vue";
 const dictStore = useDictStore(); //字典仓库
 // 组织类型选项
 const orgCategoryOptions = dictStore.getDictList(SysDictEnum.ORG_CATEGORY);
-
+// 状态选项
+const statusOptions = dictStore.getDictList(SysDictEnum.COMMON_STATUS);
 const treeFilter = ref<InstanceType<typeof TreeFilter> | null>(null);
 
 interface InitParam {
@@ -75,8 +83,10 @@ const columns: ColumnProps<SysOrg.SysOrgInfo>[] = [
     search: { el: "tree-select" }
   },
   { prop: "code", label: "编码", search: { el: "input" } },
+  { prop: "status", label: "状态", enum: statusOptions, search: { el: "tree-select" } },
   { prop: "sortCode", label: "排序" },
   { prop: "createTime", label: "创建时间" },
+
   { prop: "operation", label: "操作", width: 150, fixed: "right" }
 ];
 
@@ -105,15 +115,15 @@ function onOpen(opt: FormOptEnum, record: {} | SysOrg.SysOrgInfo = {}) {
 }
 
 // 表单引用
-const copyRef = ref<InstanceType<typeof Form> | null>(null);
+const copyRef = ref<InstanceType<typeof Copy> | null>(null);
 
 /**
  * 打开复制表单
  * @param opt  操作类型
  * @param record  记录
  */
-function onOpenCopy(ids: string[]) {
-  console.log("[ ids ] >", ids);
+function onOpenCopy(ids: string[] | number[]) {
+  copyRef.value?.onOpen(ids, RefreshTable);
 }
 
 /**
@@ -122,7 +132,7 @@ function onOpenCopy(ids: string[]) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(sysOrgDeleteApi, { ids }, msg);
+  await useHandleData(sysOrgApi.sysOrgDelete, { ids }, msg);
   RefreshTable();
 }
 

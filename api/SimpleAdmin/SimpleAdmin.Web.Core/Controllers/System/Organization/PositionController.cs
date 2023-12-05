@@ -47,6 +47,29 @@ public class PositionController : BaseController
         return await _sysPositionService.Tree(input);
     }
 
+    /// <summary>
+    /// 职位选择器
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("selector")]
+    public async Task<dynamic> Selector([FromQuery] PositionSelectorInput input)
+    {
+        return await _sysPositionService.Selector(input);
+    }
+
+    /// <summary>
+    /// 获取职位详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    [DisplayName("获取职位详情")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _sysPositionService.Detail(input);
+    }
+
     #endregion
 
     #region Post

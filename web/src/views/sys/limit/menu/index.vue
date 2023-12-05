@@ -1,11 +1,17 @@
 <!-- 菜单管理 -->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuTreeApi" :pagination="false">
+    <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuApi.menuTree" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)" />
-        <s-button suffix="菜单" :opt="FormOptEnum.DELETE" plain :disabled="!scope.isSelected" />
+        <s-button
+          suffix="菜单"
+          :opt="FormOptEnum.DELETE"
+          plain
+          :disabled="!scope.isSelected"
+          @click="onDelete(scope.selectedListIds, '删除所选菜单')"
+        />
       </template>
       <!-- 表格 菜单类型 按钮 -->
       <template #menuType="scope">
@@ -13,6 +19,13 @@
           <el-tag>{{ dictStore.dictTranslation(SysDictEnum.MENU_TYPE, scope.row.menuType) }}</el-tag>
           <el-tag v-if="scope.row.isHome === true" type="warning">首页</el-tag>
         </el-space>
+      </template>
+      <!-- 状态 -->
+      <template #status="scope">
+        <el-tag v-if="scope.row.status === CommonStatusEnum.ENABLE" type="success">{{
+          dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status)
+        }}</el-tag>
+        <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
       </template>
       <!-- 操作 -->
       <template #operation="scope">
@@ -23,10 +36,12 @@
             <el-link type="primary" :underline="false" :icon="ArrowDown"> 更多 </el-link>
             <template #dropdown>
               <el-dropdown-menu>
-                <el-dropdown-item v-if="scope.row.parentId === 0" :command="command(scope.row, cmdEnum.changeModule)">{{
-                  "更改模块"
+                <el-dropdown-item v-if="scope.row.parentId === 0" :command="command(scope.row, cmdEnum.ChangeModule)">{{
+                  cmdEnum.ChangeModule
                 }}</el-dropdown-item>
-                <el-dropdown-item v-if="isMenu(scope.row.menuType)" :command="command(scope.row, cmdEnum.button)">{{ "权限按钮" }}</el-dropdown-item>
+                <el-dropdown-item v-if="isMenu(scope.row.menuType)" :command="command(scope.row, cmdEnum.Button)">{{
+                  cmdEnum.Button
+                }}</el-dropdown-item>
               </el-dropdown-menu>
             </template>
           </el-dropdown>
@@ -43,11 +58,11 @@
 </template>
 
 <script setup lang="tsx" name="sysMenu">
-import { menuTreeApi, Menu, menuDeleteApi } from "@/api";
+import { menuApi, Menu } from "@/api";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { ArrowDown } from "@element-plus/icons-vue";
 import { useUserStore, useDictStore } from "@/stores/modules";
-import { SysDictEnum, FormOptEnum, MenuTypeDictEnum } from "@/enums";
+import { SysDictEnum, FormOptEnum, MenuTypeDictEnum, CommonStatusEnum } from "@/enums";
 import Form from "./components/form.vue";
 import { useHandleData } from "@/hooks/useHandleData";
 import ChangeModule from "./components/changeModule.vue";
@@ -79,7 +94,7 @@ const columns: ColumnProps<Menu.MenuInfo>[] = [
     },
     isShow: false
   },
-  { prop: "title", label: "菜单名称", align: "left", search: { el: "input" } },
+  { prop: "title", label: "菜单名称", width: 150, align: "left", search: { el: "input" } },
   {
     prop: "icon",
     label: "菜单图标",
@@ -92,6 +107,7 @@ const columns: ColumnProps<Menu.MenuInfo>[] = [
   { prop: "path", label: "路由地址", width: 200, search: { el: "input" } },
   { prop: "component", label: "组件路径", width: 250 },
   { prop: "sortCode", label: "排序", width: 80 },
+  { prop: "status", label: "状态" },
   { prop: "description", label: "说明" },
 
   { prop: "operation", label: "操作", width: 230, fixed: "right" }
@@ -122,7 +138,7 @@ function onOpen(opt: FormOptEnum, record: {} | Menu.MenuInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(menuDeleteApi, { ids }, msg);
+  await useHandleData(menuApi.menuDelete, { ids }, msg);
   RefreshTable();
 }
 /**
@@ -139,8 +155,8 @@ const isMenu = computed(() => (menuType: string) => {
 
 /** 更多下拉菜单命令枚举 */
 enum cmdEnum {
-  changeModule, //更改模块
-  button //权限按钮
+  ChangeModule = "更改模块",
+  Button = "权限按钮"
 }
 
 /** 下拉菜单参数接口 */
@@ -161,13 +177,14 @@ function command(row: Menu.MenuInfo, command: cmdEnum): Command {
 const changeModuleFormRef = ref<InstanceType<typeof ChangeModule> | null>(null);
 // 权限按钮表单引用
 const buttonFormRef = ref<InstanceType<typeof Button> | null>(null);
+
 /**
  * 更多下拉菜单点击事件
  * @param command
  */
 function handleCommand(command: Command) {
   switch (command.command) {
-    case cmdEnum.changeModule:
+    case cmdEnum.ChangeModule:
       //更改模块
       changeModuleFormRef.value?.onOpen({
         moduleOptions,
@@ -177,7 +194,7 @@ function handleCommand(command: Command) {
         successful: () => RefreshTable()
       });
       break;
-    case cmdEnum.button:
+    case cmdEnum.Button:
       //权限按钮
       buttonFormRef.value?.onOpenTable(command.row.id);
       break;

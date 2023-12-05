@@ -55,7 +55,7 @@
       ref="proTableChild"
       :columns="columns"
       :tool-button="false"
-      :request-api="dictPageApi"
+      :request-api="dictApi.dictPage"
       :request-auto="false"
       :init-param="childInitParam"
     >
@@ -103,7 +103,7 @@
 <script setup lang="ts" name="sysDict">
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { Search } from "@element-plus/icons-vue";
-import { Dict, dictPageApi, dictDeleteApi } from "@/api";
+import { Dict, dictApi } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { SysDictEnum, FormOptEnum, CommonStatusEnum, DictCategoryEnum } from "@/enums";
 import { useDictStore } from "@/stores/modules";
@@ -127,10 +127,10 @@ const initParam = reactive<InitParam>({ category: DictCategoryEnum.FRM }); //主
 const childInitParam = reactive<ChildInitParam>({ parentId: defaultParentId }); //子表格初始化参数
 
 // 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
-// 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
+// 默认不做操作就直接在 ProTable 组件上绑定	:request="getUserList"
 const getDictPage = (params: any) => {
   childInitParam.parentId = defaultParentId;
-  return dictPageApi(params);
+  return dictApi.dictPage(params);
 };
 
 // 字典类型选项
@@ -179,7 +179,7 @@ function onOpen(opt: FormOptEnum, category: DictCategoryEnum, parentId: number |
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(dictDeleteApi, { ids }, msg);
+  await useHandleData(dictApi.dictDelete, { ids }, msg);
   RefreshTable();
 }
 

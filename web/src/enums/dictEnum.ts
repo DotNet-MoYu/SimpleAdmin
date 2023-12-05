@@ -74,3 +74,11 @@ export enum DictCategoryEnum {
   /** 业务 */
   BIZ = "BIZ"
 }
+
+/** 角色类型枚举 */
+export enum OrgCategoryEnum {
+  /** 全局 */
+  GLOBAL = "GLOBAL",
+  /** 机构 */
+  ORG = "ORG"
+}

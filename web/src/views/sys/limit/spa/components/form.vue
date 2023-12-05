@@ -8,17 +8,16 @@
       :model="spaProps.record"
       :hide-required-asterisk="spaProps.disabled"
       label-width="auto"
+      label-suffix=" :"
       class="-mt-25px"
     >
       <!-- 基本设置 -->
       <el-divider content-position="left">基本设置</el-divider>
       <s-form-item label="单页名称" prop="title">
-        <el-input v-model="spaProps.record.title" placeholder="请填写单页名称" clearable></el-input>
+        <s-input v-model="spaProps.record.title"></s-input>
       </s-form-item>
       <s-form-item label="单页类型" prop="menuType">
-        <el-radio-group v-model="spaProps.record.menuType">
-          <el-radio-button v-for="(item, index) in spaTypeOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-        </el-radio-group>
+        <s-radio-group v-model="spaProps.record.menuType" :options="spaTypeOptions" button />
       </s-form-item>
       <s-form-item label="图标" prop="icon">
         <SelectIconPlus v-model:icon-value="spaProps.record.icon" />
@@ -26,66 +25,56 @@
 
       <div v-if="spaProps.record.menuType === MenuTypeDictEnum.MENU">
         <s-form-item label="路由地址" prop="path">
-          <el-input v-model="spaProps.record.path" placeholder="请填写路由地址,例:/home/index" clearable></el-input>
+          <s-input v-model="spaProps.record.path" placeholder="请填写路由地址,例:/home/index"></s-input>
         </s-form-item>
         <s-form-item label="组件名称" prop="name">
-          <el-input v-model="spaProps.record.name" placeholder="请填写组件名称" clearable>
+          <s-input v-model="spaProps.record.name">
             <template #prepend>setup name=</template>
-          </el-input>
+          </s-input>
         </s-form-item>
         <s-form-item label="组件地址" prop="component">
-          <el-input v-model="spaProps.record.component" placeholder="请填写组件地址" clearable>
+          <s-input v-model="spaProps.record.component">
             <template #prepend>src/views/</template>
-          </el-input>
+          </s-input>
         </s-form-item>
       </div>
       <div v-else>
         <s-form-item label="链接地址:" prop="path">
-          <el-input v-model="spaProps.record.path" placeholder="请填写链接地址,例:http://www.baidu.com" clearable></el-input>
+          <s-input v-model="spaProps.record.path" placeholder="请填写链接地址,例:http://www.baidu.com"></s-input>
         </s-form-item>
       </div>
       <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="spaProps.record.sortCode" show-input :min="1" />
       </s-form-item>
       <s-form-item label="说明" prop="description">
-        <el-input v-model="spaProps.record.description" placeholder="请填写单页说明" clearable></el-input>
+        <s-input v-model="spaProps.record.description"></s-input>
       </s-form-item>
       <!-- 功能设置 -->
       <el-divider content-position="left">功能设置</el-divider>
       <el-row :gutter="24">
         <el-col :span="12">
           <s-form-item label="设置主页" prop="isHome">
-            <el-radio-group v-model="spaProps.record.isHome">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-            </el-radio-group>
+            <s-radio-group v-model="spaProps.record.isHome" :options="yesOptions" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="隐藏页面" prop="isHide">
-            <el-radio-group v-model="spaProps.record.isHide">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-            </el-radio-group>
+            <s-radio-group v-model="spaProps.record.isHide" :options="yesOptions" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="页面全屏" prop="isFull">
-            <el-radio-group v-model="spaProps.record.isFull">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-            </el-radio-group>
+            <s-radio-group v-model="spaProps.record.isFull" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="固定标签页" prop="isAffix">
-            <el-radio-group v-model="spaProps.record.isAffix">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-            </el-radio-group>
+            <s-radio-group v-model="spaProps.record.isAffix" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="路由缓存" prop="isKeepAlive">
-            <el-radio-group v-model="spaProps.record.isKeepAlive">
-              <el-radio-button v-for="(item, index) in yesOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-            </el-radio-group>
+            <s-radio-group v-model="spaProps.record.isKeepAlive" button />
           </s-form-item>
         </el-col>
       </el-row>
@@ -98,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { Spa, spaDetailApi, spaSubmitFormApi } from "@/api";
+import { Spa, spaApi } from "@/api";
 import { required } from "@/utils/formRules";
 import { FormOptEnum, SysDictEnum, MenuTypeDictEnum } from "@/enums";
 import { FormInstance } from "element-plus";
@@ -151,7 +140,7 @@ function onOpen(props: FormProps.Base<Spa.SpaInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    spaDetailApi({ id: props.record.id }).then(res => {
+    spaApi.spaDetail({ id: props.record.id }).then(res => {
       spaProps.record = res.data;
     });
   }
@@ -164,7 +153,8 @@ async function handleSubmit() {
   spaFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await spaSubmitFormApi(spaProps.record, spaProps.record.id != undefined)
+    await spaApi
+      .spaSubmitForm(spaProps.record, spaProps.record.id != undefined)
       .then(() => {
         spaProps.successful!(); //调用父组件的successful方法
       })
@@ -185,7 +175,7 @@ defineExpose({
 });
 </script>
 <style lang="scss" scoped>
-:deep(.el-input-group__prepend) {
+:deep(.s-input-group__prepend) {
   padding: 0 10px !important;
 }
 </style>

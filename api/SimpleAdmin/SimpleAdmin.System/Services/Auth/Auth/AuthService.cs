@@ -15,14 +15,16 @@ public class AuthService : IAuthService
     private readonly IEventPublisher _eventPublisher;
     private readonly IConfigService _configService;
     private readonly ISysUserService _userService;
+    private readonly ISysOrgService _sysOrgService;
 
     public AuthService(ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher, IConfigService configService,
-        ISysUserService userService)
+        ISysUserService userService, ISysOrgService sysOrgService)
     {
         _simpleCacheService = simpleCacheService;
         _eventPublisher = eventPublisher;
         _configService = configService;
         _userService = userService;
+        _sysOrgService = sysOrgService;
     }
 
     /// <inheritdoc/>
@@ -67,7 +69,7 @@ public class AuthService : IAuthService
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
     {
         //判断是否有验证码
-        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE, SysConfigConst.LOGIN_CAPTCHA_OPEN);
+        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY, SysConfigConst.LOGIN_CAPTCHA_OPEN);
         if (sysBase != null)//如果有这个配置项
         {
             if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
@@ -140,6 +142,7 @@ public class AuthService : IAuthService
         var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);//根据账号获取用户信息
         if (userInfo != null)
         {
+            userInfo.Avatar = await _userService.GetUserAvatar(userInfo.Id);//获取头像
             return userInfo.Adapt<LoginUserOutput>();
         }
         return null;
@@ -259,9 +262,11 @@ public class AuthService : IAuthService
     /// <returns></returns>
     public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device, LoginClientTypeEnum loginClientType)
     {
-        if (sysUser.UserStatus == CommonStatusConst.DISABLED)
+        if (sysUser.Status == CommonStatusConst.DISABLED)
             throw Oops.Bah("账号已停用");//账号冻结
         if (sysUser.ModuleList.Count == 0) throw Oops.Bah("该账号未分配模块,请联系管理员");//没有分配菜单权限
+        var org = await _sysOrgService.GetSysOrgById(sysUser.OrgId);//获取机构
+        if (org.Status == CommonStatusConst.DISABLED) throw Oops.Bah("所属公司/部门已停用,请联系管理员");//机构冻结
         //生成Token
         var accessToken = JWTEncryption.Encrypt(new Dictionary<string, object>
         {

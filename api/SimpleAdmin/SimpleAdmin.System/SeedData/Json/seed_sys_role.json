@@ -16,7 +16,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "212725263001002",
@@ -34,7 +35,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "359567292014661",
@@ -52,7 +54,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "360645671104581",
@@ -70,7 +73,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "360646281904197",
@@ -88,7 +92,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "360646662586437",
@@ -106,7 +111,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     },
     {
       "Id": "363084914917445",
@@ -124,7 +130,8 @@
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": "ENABLE"
     }
   ]
 }

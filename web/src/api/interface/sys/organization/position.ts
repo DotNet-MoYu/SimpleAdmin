@@ -45,4 +45,16 @@ export namespace SysPosition {
     /** 子集 */
     children: SysPositionTree[];
   }
+
+  /** 职位选择器 */
+  export interface SysPositionSelector {
+    /** id */
+    id: number | string;
+    /** 名称 */
+    name: string;
+    /** 组织Id */
+    orgId: number | string;
+    /** 子集 */
+    children: SysPositionSelector[];
+  }
 }

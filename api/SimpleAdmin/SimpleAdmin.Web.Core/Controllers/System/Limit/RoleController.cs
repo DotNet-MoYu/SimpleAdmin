@@ -15,15 +15,15 @@ namespace SimpleAdmin.Web.Core;
 [Route("sys/limit/[controller]")]
 public class RoleController : BaseController
 {
-    private readonly IRoleService _roleService;
+    private readonly ISysRoleService _sysRoleService;
     private readonly IResourceService _resourceService;
     private readonly ISysOrgService _sysOrgService;
     private readonly ISysUserService _sysUserService;
 
-    public RoleController(IRoleService roleService, IResourceService resourceService, ISysOrgService sysOrgService,
+    public RoleController(ISysRoleService sysRoleService, IResourceService resourceService, ISysOrgService sysOrgService,
         ISysUserService sysUserService)
     {
-        _roleService = roleService;
+        _sysRoleService = sysRoleService;
         _resourceService = resourceService;
         _sysOrgService = sysOrgService;
         _sysUserService = sysUserService;
@@ -37,7 +37,7 @@ public class RoleController : BaseController
     [HttpGet("page")]
     public async Task<dynamic> Page([FromQuery] RolePageInput input)
     {
-        return await _roleService.Page(input);
+        return await _sysRoleService.Page(input);
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class RoleController : BaseController
     [DisplayName("添加角色")]
     public async Task Add([FromBody] RoleAddInput input)
     {
-        await _roleService.Add(input);
+        await _sysRoleService.Add(input);
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class RoleController : BaseController
     [DisplayName("修改角色")]
     public async Task Edit([FromBody] RoleEditInput input)
     {
-        await _roleService.Edit(input);
+        await _sysRoleService.Edit(input);
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class RoleController : BaseController
     [DisplayName("删除角色")]
     public async Task Delete([FromBody] BaseIdListInput input)
     {
-        await _roleService.Delete(input);
+        await _sysRoleService.Delete(input);
     }
 
     /// <summary>
@@ -94,7 +94,7 @@ public class RoleController : BaseController
     [HttpGet("ownResource")]
     public async Task<dynamic> OwnResource([FromQuery] BaseIdInput input)
     {
-        return await _roleService.OwnResource(input, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
+        return await _sysRoleService.OwnResource(input, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public class RoleController : BaseController
     [DisplayName("角色授权资源")]
     public async Task GrantResource([FromBody] GrantResourceInput input)
     {
-        await _roleService.GrantResource(input);
+        await _sysRoleService.GrantResource(input);
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public class RoleController : BaseController
     [HttpGet("permissionTreeSelector")]
     public async Task<dynamic> PermissionTreeSelector([FromQuery] BaseIdInput input)
     {
-        return await _roleService.RolePermissionTreeSelector(input);
+        return await _sysRoleService.RolePermissionTreeSelector(input);
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public class RoleController : BaseController
     [HttpGet("ownPermission")]
     public async Task<dynamic> OwnPermission([FromQuery] BaseIdInput input)
     {
-        return await _roleService.OwnPermission(input);
+        return await _sysRoleService.OwnPermission(input);
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ public class RoleController : BaseController
     [DisplayName("角色授权权限")]
     public async Task GrantPermission([FromBody] GrantPermissionInput input)
     {
-        await _roleService.GrantPermission(input);
+        await _sysRoleService.GrantPermission(input);
     }
 
     /// <summary>
@@ -159,7 +159,7 @@ public class RoleController : BaseController
     [HttpGet("userSelector")]
     public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
     {
-        return await _sysUserService.UserSelector(input);
+        return await _sysUserService.Selector(input);
     }
 
     /// <summary>
@@ -170,7 +170,7 @@ public class RoleController : BaseController
     [HttpGet("ownUser")]
     public async Task<dynamic> OwnUser([FromQuery] BaseIdInput input)
     {
-        return await _roleService.OwnUser(input);
+        return await _sysRoleService.OwnUser(input);
     }
 
     /// <summary>
@@ -182,7 +182,7 @@ public class RoleController : BaseController
     [DisplayName("角色授权")]
     public async Task GrantUser([FromBody] GrantUserInput input)
     {
-        await _roleService.GrantUser(input);
+        await _sysRoleService.GrantUser(input);
     }
 
     /// <summary>
@@ -193,6 +193,18 @@ public class RoleController : BaseController
     [DisplayName("获取角色树")]
     public async Task<dynamic> Tree([FromQuery] RoleTreeInput input)
     {
-        return await _roleService.Tree(input);
+        return await _sysRoleService.Tree(input);
+    }
+
+
+    /// <summary>
+    /// 获取角色详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _sysRoleService.Detail(input);
     }
 }

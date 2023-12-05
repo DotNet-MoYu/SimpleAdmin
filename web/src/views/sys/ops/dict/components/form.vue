@@ -8,17 +8,16 @@
       :model="dictProps.record"
       :hide-required-asterisk="dictProps.disabled"
       label-width="auto"
+      label-suffix=" :"
     >
       <s-form-item label="字典名称" prop="dictLabel">
-        <el-input v-model="dictProps.record.dictLabel" placeholder="请填写单页名称" clearable></el-input>
+        <s-input v-model="dictProps.record.dictLabel"></s-input>
       </s-form-item>
       <s-form-item label="字典值" prop="dictValue">
-        <el-input v-model="dictProps.record.dictValue" placeholder="请填写单页名称" clearable></el-input>
+        <s-input v-model="dictProps.record.dictValue"></s-input>
       </s-form-item>
       <s-form-item label="字典状态" prop="status">
-        <el-radio-group v-model="dictProps.record.status">
-          <el-radio-button v-for="(item, index) in statusOptions" :key="index" :label="item.value">{{ item.label }}</el-radio-button>
-        </el-radio-group>
+        <s-radio-group v-model="dictProps.record.status" :options="statusOptions" />
       </s-form-item>
       <s-form-item label="排序" prop="sortCode">
         <el-slider v-model="dictProps.record.sortCode" show-input :min="1" />
@@ -32,7 +31,7 @@
 </template>
 
 <script setup lang="ts">
-import { Dict, dictDetailApi, dictSubmitFormApi } from "@/api";
+import { Dict, dictApi } from "@/api";
 import { required } from "@/utils/formRules";
 import { useDictStore } from "@/stores/modules";
 import { FormOptEnum, CommonStatusEnum, SysDictEnum, DictCategoryEnum } from "@/enums";
@@ -84,7 +83,7 @@ function onOpen(props: DictProps) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    dictDetailApi({ id: props.record.id }).then(res => {
+    dictApi.dictDetail({ id: props.record.id }).then(res => {
       dictProps.record = res.data;
     });
   }
@@ -97,7 +96,8 @@ async function handleSubmit() {
   spaFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await dictSubmitFormApi(dictProps.record, dictProps.record.id != undefined)
+    await dictApi
+      .dictSubmitForm(dictProps.record, dictProps.record.id != undefined)
       .then(() => {
         dictProps.successful!(); //调用父组件的successful方法
       })

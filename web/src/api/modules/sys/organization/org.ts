@@ -13,32 +13,32 @@
  */
 
 import { ReqId, ResPage, SysOrg } from "@/api";
-
 import { moduleRequest } from "@/api/request";
-
 const http = moduleRequest("/sys/organization/org/");
 
-/** 获取组织分页 */
-export const sysOrgPageApi = (params: SysOrg.Page) => {
-  return http.get<ResPage<SysOrg.SysOrgInfo>>("page", params);
-};
-
-/** 获取组织树 */
-export const sysOrgTreeApi = () => {
-  return http.get<SysOrg.SysOrgTree[]>("tree");
-};
-
-/** 获取组织详情 */
-export const sysOrgDetailApi = (params: ReqId) => {
-  return http.get<SysOrg.SysOrgInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const sysOrgSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除组织 */
-export const sysOrgDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取组织分页 */
+  sysOrgPage(params: SysOrg.Page) {
+    return http.get<ResPage<SysOrg.SysOrgInfo>>("page", params);
+  },
+  /** 获取组织树 */
+  sysOrgTree() {
+    return http.get<SysOrg.SysOrgTree[]>("tree");
+  },
+  /** 获取组织详情 */
+  sysOrgDetail(params: ReqId) {
+    return http.get<SysOrg.SysOrgInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  sysOrgSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除组织 */
+  sysOrgDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  },
+  /** 复制组织 */
+  sysOrgCopy(params: {}) {
+    return http.post("copy", params);
+  }
 };

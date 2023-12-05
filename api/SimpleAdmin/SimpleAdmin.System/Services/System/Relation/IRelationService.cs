@@ -92,9 +92,10 @@ public interface IRelationService : ITransient
         List<string> extJsons, bool clear);
 
     /// <summary>
-    /// 根据角色ID获取模块ID列表
+    /// 获取用户模块ID
     /// </summary>
-    /// <param name="roleIdList">角色ID列表</param>
-    /// <returns>模块ID列表</returns>
-    Task<List<long>> GetModuleByRoleId(List<long> roleIdList);
+    /// <param name="roleIdList"></param>
+    /// <param name="userId"></param>
+    /// <returns></returns>
+    Task<List<long>> GetUserModuleId(List<long> roleIdList, long userId);
 }

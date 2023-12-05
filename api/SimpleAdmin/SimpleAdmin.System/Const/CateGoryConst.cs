@@ -74,6 +74,11 @@ public class CateGoryConst
     public const string RELATION_SYS_ROLE_HAS_MODULE = "SYS_ROLE_HAS_MODULE";
 
     /// <summary>
+    /// 用户有哪些模块
+    /// </summary>
+    public const string RELATION_SYS_USER_HAS_MODULE = "SYS_USER_HAS_MODULE";
+
+    /// <summary>
     ///用户有哪些资源
     /// </summary>
     public const string RELATION_SYS_USER_HAS_RESOURCE = "SYS_USER_HAS_RESOURCE";
@@ -84,7 +89,7 @@ public class CateGoryConst
     public const string RELATION_SYS_ROLE_HAS_PERMISSION = "SYS_ROLE_HAS_PERMISSION";
 
     /// <summary>
-    /// 角色有哪些权限
+    /// 用户有哪些权限
     /// </summary>
     public const string RELATION_SYS_USER_HAS_PERMISSION = "SYS_USER_HAS_PERMISSION";
 

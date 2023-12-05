@@ -68,4 +68,15 @@ public class SpaController : BaseController
     {
         await _spaService.Delete(input);
     }
+
+    /// <summary>
+    /// 获取单页详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _spaService.Detail(input);
+    }
 }

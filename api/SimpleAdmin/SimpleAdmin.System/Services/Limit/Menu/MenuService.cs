@@ -43,7 +43,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     }
 
     /// <inheritdoc />
-    public async Task<List<SysResource>> Tree(MenuTreeInput input)
+    public async Task<List<SysResource>> Tree(MenuTreeInput input, bool showDisabled = true)
     {
         //获取所有菜单
         var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
@@ -106,7 +106,8 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             {
                 await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除菜单和按钮
                 await Context.Deleteable<SysRelation>()//关系表删除对应SYS_ROLE_HAS_RESOURCE
-                    .Where(it => it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId))).ExecuteCommandAsync();
+                    .Where(it => it.Category == CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE && resourceIds.Contains(SqlFunc.ToInt64(it.TargetId)))
+                    .ExecuteCommandAsync();
             });
             if (result.IsSuccess)//如果成功了
             {

@@ -15,22 +15,21 @@ import { moduleRequest } from "@/api/request";
 import { ReqId, ResPage, Spa } from "@/api/interface";
 const http = moduleRequest("/sys/limit/spa/");
 
-/** 获取单页分页 */
-export const spaPageApi = (params: Spa.Page) => {
-  return http.get<ResPage<Spa.SpaInfo>>("page", params);
-};
-
-/** 获取单页详情 */
-export const spaDetailApi = (params: ReqId) => {
-  return http.get<Spa.SpaInfo>("detail", params);
-};
-
-/**  提交表单 edit为true时为编辑，默认为新增 */
-export const spaSubmitFormApi = (params: {}, edit: boolean = false) => {
-  return http.post(edit ? "edit" : "add", params);
-};
-
-/** 删除单页 */
-export const spaDeleteApi = (params: ReqId[]) => {
-  return http.post("delete", params);
+export default {
+  /** 获取单页分页 */
+  spaPage(params: Spa.Page) {
+    return http.get<ResPage<Spa.SpaInfo>>("page", params);
+  },
+  /** 获取单页详情 */
+  spaDetail(params: ReqId) {
+    return http.get<Spa.SpaInfo>("detail", params);
+  },
+  /**  提交表单 edit为true时为编辑，默认为新增 */
+  spaSubmitForm(params: {}, edit: boolean = false) {
+    return http.post(edit ? "edit" : "add", params);
+  },
+  /** 删除单页 */
+  spaDelete(params: ReqId[]) {
+    return http.post("delete", params);
+  }
 };

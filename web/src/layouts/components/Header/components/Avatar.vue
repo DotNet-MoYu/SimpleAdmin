@@ -31,7 +31,7 @@
 import { ref } from "vue";
 import { LOGIN_URL } from "@/config";
 import { useRouter } from "vue-router";
-import { logoutApi } from "@/api/modules";
+import { loginApi } from "@/api/modules";
 import { useUserStore } from "@/stores/modules/user";
 import { ElMessageBox, ElMessage } from "element-plus";
 import InfoDialog from "./InfoDialog.vue";
@@ -50,7 +50,7 @@ const logout = () => {
   }).then(async () => {
     const { accessToken } = userStore;
     // 1.执行退出登录接口
-    await logoutApi({ token: accessToken });
+    await loginApi.logout({ token: accessToken });
 
     // 2.清除 Token
     userStore.clearToken();

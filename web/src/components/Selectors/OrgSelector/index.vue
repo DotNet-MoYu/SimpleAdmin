@@ -22,7 +22,7 @@
 
 <script setup lang="ts" name="OrgSelector">
 import { OrgSelectProps } from "./interface";
-import { sysOrgTreeApi, SysOrg } from "@/api";
+import { sysOrgApi, SysOrg } from "@/api";
 // 定义组件props
 const props = withDefaults(defineProps<OrgSelectProps>(), {
   orgValue: "",
@@ -52,7 +52,7 @@ const emit = defineEmits(["update:orgValue", "change"]); // 定义更新父组�
 /** 获取组织树 */
 function getOrgTree() {
   // 获取组织树数据
-  sysOrgTreeApi().then(res => {
+  sysOrgApi.sysOrgTree().then(res => {
     // 加个顶级作为一级组织
     orgTreeData.value = [
       {

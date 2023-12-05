@@ -12,10 +12,9 @@
  * @see https://gitee.com/zxzyjs/SimpleAdmin
  */
 import { defineStore } from "pinia";
-import { getAuthMenuListApi } from "@/api/modules";
 import { getFlatMenuList, getShowMenuList, getAllBreadcrumbList } from "@/utils";
 import { Login, UserCenter } from "@/api/interface";
-import { loginApi, setDefaultModuleApi } from "@/api";
+import { loginApi, userCenterApi } from "@/api";
 import { useUserStore } from "./user";
 import { useTabsStore } from "./tabs";
 import { useKeepAliveStore } from "./keepAlive";
@@ -69,7 +68,7 @@ export const useAuthStore = defineStore({
     async chooseModule(config: UserCenter.ResModuleDefault) {
       const userStore = useUserStore();
       userStore.setModule(config.id); //存储选择的模块
-      await setDefaultModuleApi(config); //设置默认模块
+      await userCenterApi.setDefaultModule(config); //设置默认模块
       this.showChooseModule = false; //选择模块状态为关闭
     },
     /** 获取按钮列表 */
@@ -80,14 +79,15 @@ export const useAuthStore = defineStore({
     },
     /** 获取菜单列表 */
     async getAuthMenuList(moduleId: number | string) {
-      const { data } = await getAuthMenuListApi({ id: moduleId });
+      const { data } = await userCenterApi.getAuthMenuList({ id: moduleId });
       this.authMenuList = data;
     },
     //登录
     async loginPwd(model: Login.LoginForm) {
       this.loginLoading = true;
       // 登录接口
-      await loginApi(model)
+      await loginApi
+        .login(model)
         .then(res => {
           if (res.data) {
             const { defaultModule, moduleList } = res.data;

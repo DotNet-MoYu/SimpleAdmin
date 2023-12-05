@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { buttonPageApi, buttonDeleteApi, Button } from "@/api";
+import { buttonApi, Button } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { FormOptEnum } from "@/enums";
@@ -94,7 +94,7 @@ function onOpenBatch() {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(buttonDeleteApi, { ids }, msg);
+  await useHandleData(buttonApi.buttonDelete, { ids }, msg);
   RefreshTable();
 }
 
@@ -127,7 +127,7 @@ function onClose() {
 function getButtonPage(params: any) {
   let newParams = JSON.parse(JSON.stringify(params)); //转换成json字符串再转换成json对象
   newParams.parentId = parentId.value; //按钮父Id
-  return buttonPageApi(newParams);
+  return buttonApi.buttonPage(newParams);
 }
 // 暴露给父组件的方法
 defineExpose({

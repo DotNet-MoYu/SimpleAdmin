@@ -68,4 +68,15 @@ public class ModuleController : BaseController
     {
         await _moduleService.Delete(input);
     }
+
+    /// <summary>
+    /// 获取模块详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("detail")]
+    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    {
+        return await _moduleService.Detail(input);
+    }
 }

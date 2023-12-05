@@ -92,4 +92,12 @@ public interface IResourceService : ITransient
     /// </summary>
     /// <returns></returns>
     Task<List<ResTreeSelector>> ResourceTreeSelector();
+
+    /// <summary>
+    /// 获取上级
+    /// </summary>
+    /// <param name="resourceList"></param>
+    /// <param name="parentId"></param>
+    /// <returns></returns>
+    List<SysResource> GetResourceParent(List<SysResource> resourceList, long parentId);
 }
