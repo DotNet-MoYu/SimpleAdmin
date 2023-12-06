@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Runtime.InteropServices;
 
 namespace SimpleAdmin.Core;
 
@@ -61,7 +62,10 @@ public sealed class LoggingFileComponent : IServiceComponent
         //定义日志文件名
         options.FileNameRule = fileName =>
         {
-            return rootPath + "\\" + string.Format(fileName, DateTime.UtcNow);
+            var pathSeparator = @"\";
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                pathSeparator = "/";//为linux或bsd时修改路径
+            return rootPath + pathSeparator + string.Format(fileName, DateTime.UtcNow);
         };
         options.FileSizeLimitBytes = 500000 * 1024;//日志最大500M
         if (_loggingSetting.MessageFormat)
