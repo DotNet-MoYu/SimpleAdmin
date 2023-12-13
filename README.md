@@ -20,24 +20,6 @@
 
 本系统是基于前端 Vue3+Vite+Vuex+JS,。市面上主流的 Vue3 框架大部分都是采用`TypeScript`开发，虽然是官方推荐，但是也增加了一些学习成本，如果您之前使用的事 vue2+js 的开发方式，那么再使用本系统就非常的好上手，也不用担心 vue2 打包之后第一次加载巨慢的问题。
 
-#### 📗 后台基于 Furion 脚手架
-
-后端基于 Furion 脚手架搭建。Furion 是目前.NET 最好用的后端框架之一,有着全网最详细的使用文档和说明，作为新手或二次开发也能很快的上手，你想要的功能基本都能在 Furion 中找到。而且只要提 issues 作者基本上都能快速解答，没有后顾之忧。
-
-##### 🍎 Furion 框架特点
-
-- 全新面貌：基于 `.NET5/6/7+` 平台，没有历史包袱
-- 极少依赖：框架只依赖两个第三方包
-- 极易入门：只需要一个 `Inject()` 即可完成配置
-- 极速开发：内置丰富的企业应用开发功能
-- 极其灵活：轻松面对多变复杂的需求
-- 极易维护：采用独特的架构思想，只为长久维护设计
-- 完整文档：提供完善的开发文档
-- **跨全平台：支持所有主流操作系统及 .NET 全部项目类型**
-
-文档地址:[https://dotnetchina.gitee.io/furion](https://dotnetchina.gitee.io/furion)
-
-源码地址:[https://gitee.com/dotnetchina/Furion](https://gitee.com/dotnetchina/Furion)
 
 #### 🍭ORM 基于 Sqlsugar
 
@@ -137,7 +119,6 @@ MQTT 客户端使用的是我基于[NewLife.MQTT](https://github.com/NewLifeX/Ne
 
 ## 🔖 友情链接 🔖
 
-- 👉 Furion：[https://dotnetchina.gitee.io/furion](https://dotnetchina.gitee.io/furion)
 - 👉 SqlSugar：[https://www.donet5.com/Doc/1/1180](https://www.donet5.com/Doc/1/1180)
 - 👉 NewLife：[https://www.newlifex.com/](https://www.newlifex.com/)
 - 👉 IdGenerator：[https://github.com/yitter/idgenerator](https://github.com/yitter/idgenerator)
