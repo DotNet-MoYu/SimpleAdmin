@@ -41,7 +41,8 @@ public class ConfigService : DbRepository<DevConfig>, IConfigService
     {
         var query = Context.Queryable<DevConfig>()
             .Where(it => it.Category == CateGoryConst.Config_BIZ_DEFINE)//自定义配置
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigKey.Contains(input.SearchKey))//根据关键字查询
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                it => it.ConfigKey.Contains(input.SearchKey) || it.ConfigValue.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")//排序
             .OrderBy(it => it.SortCode);
         var pageInfo = await query.ToPagedListAsync(input.Current, input.Size);//分页
