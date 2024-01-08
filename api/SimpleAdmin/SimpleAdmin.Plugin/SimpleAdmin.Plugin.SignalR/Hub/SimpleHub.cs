@@ -10,7 +10,6 @@ namespace SimpleAdmin.Plugin.SignalR;
 /// </summary>
 [Authorize]
 [MapHub("/hubs/simple")]
-[Authorize]
 public class SimpleHub : Hub<ISimpleHub>
 {
     private readonly ISimpleCacheService _simpleCacheService;
