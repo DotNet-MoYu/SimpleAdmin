@@ -4,7 +4,8 @@
 /// 系统首页控制器
 /// </summary>
 [ApiDescriptionSettings(Tag = "系统首页")]
-[Route("sys/[controller]")]
+[Route("/index")]
+[RolePermission]
 public class IndexController : IDynamicApiController
 {
     private readonly IVisitLogService _visitLogService;
@@ -22,7 +23,6 @@ public class IndexController : IDynamicApiController
     /// 获取当前用户访问日志列表
     /// </summary>
     /// <returns></returns>
-
     [HttpGet("visLog/list")]
     public async Task<dynamic> VisLogList()
     {

@@ -151,6 +151,8 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
             App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
+            var apiAttribute = controller.GetCustomAttribute<ApiDescriptionSettingsAttribute>();//获取接口描述特性
+            var tag = apiAttribute.Tag;//获取标签
             //获取数据权限特性
             var routeAttributes = controller.GetCustomAttributes<RouteAttribute>().ToList();
             if (routeAttributes == null)
@@ -189,7 +191,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                             apiRoute = route.Template + $"/{apiRoute}";
                             var apiName = displayName.DisplayName;//如果描述不为空则接口名称用描述的名称
                             //合并
-                            var permissionName = apiRoute + $"[{apiName}]";
+                            var permissionName = apiRoute + $"[{tag}-{apiName}]";
                             //添加到权限列表
                             permissions.Add(new PermissionTreeSelector
                             {

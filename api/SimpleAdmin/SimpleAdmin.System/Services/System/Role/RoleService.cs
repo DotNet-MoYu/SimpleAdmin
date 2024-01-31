@@ -242,7 +242,11 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                         ObjectId = sysRole.Id,
                         TargetId = it.ApiRoute,
                         Category = CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION,
-                        ExtJson = new RelationRolePermission { ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory, ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList }
+                        ExtJson = new RelationRolePermission
+                            {
+                                ApiUrl = it.ApiRoute, ScopeCategory = defaultDataScope.ScopeCategory,
+                                ScopeDefineOrgIdList = defaultDataScope.ScopeDefineOrgIdList
+                            }
                             .ToJson()
                     });
                 });
@@ -260,7 +264,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
                 //如果不是代码生成,就删除老的
                 if (!input.IsCodeGen)
                     await relatioRep.DeleteAsync(it =>
-                        it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE));
+                        it.ObjectId == sysRole.Id && (it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION
+                        || it.Category == CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE));
                 await relatioRep.InsertRangeAsync(relationRoles);//添加新的
             });
             if (result.IsSuccess)//如果成功了
@@ -306,7 +311,8 @@ public class RoleService : DbRepository<SysRole>, IRoleService
         {
             var apiUrls = input.GrantInfoList.Select(it => it.ApiUrl).ToList();//apiurl列表
             var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
-            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, apiUrls, extJsons, true);//添加到数据库
+            await _relationService.SaveRelationBatch(CateGoryConst.Relation_SYS_ROLE_HAS_PERMISSION, input.Id, apiUrls, extJsons,
+                true);//添加到数据库
             await _eventPublisher.PublishAsync(EventSubscriberConst.ClearUserCache, new List<long> { input.Id });//清除角色下用户缓存
         }
     }
@@ -376,6 +382,16 @@ public class RoleService : DbRepository<SysRole>, IRoleService
     public async Task<List<string>> RolePermissionTreeSelector(BaseIdInput input)
     {
         var permissionTreeSelectors = new List<string>();//授权树结果集
+        //获取单页信息
+        var spa = await _resourceService.GetListByCategory(CateGoryConst.Resource_SPA);
+        var spaIds = spa.Select(it => it.Id).ToList();
+        if (spaIds.Any())
+        {
+            //获取权限授权树
+            var permissions = _resourceService.PermissionTreeSelector(spa.Select(it => it.Path).ToList());
+            if (permissions.Count > 0)
+                permissionTreeSelectors.AddRange(permissions.Select(it => it.PermissionName).ToList());//返回授权树权限名称列表
+        }
         //获取角色资源关系
         var relationsRes = await _relationService.GetRelationByCategory(CateGoryConst.Relation_SYS_ROLE_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id).Select(it => it.TargetId.ToLong()).ToList();
@@ -387,7 +403,7 @@ public class RoleService : DbRepository<SysRole>, IRoleService
             var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
             if (permissions.Count > 0)
             {
-                permissionTreeSelectors = permissions.Select(it => it.PermissionName).ToList();//返回授权树权限名称列表
+                permissionTreeSelectors.AddRange(permissions.Select(it => it.PermissionName).ToList());//返回授权树权限名称列表
             }
         }
         return permissionTreeSelectors;
