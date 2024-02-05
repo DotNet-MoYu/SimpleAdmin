@@ -84,9 +84,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         var userId = _simpleCacheService.HashGetOne<long>(SystemConst.Cache_SysUserPhone, phone);
         if (userId == 0)
         {
-            phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
+            var sm4Phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
             //单查获取用户手机号对应的账号
-            userId = await GetFirstAsync(it => it.Phone == phone, it => it.Id);
+            userId = await GetFirstAsync(it => it.Phone == sm4Phone, it => it.Id);
             if (userId > 0)
             {
                 //插入Redis
