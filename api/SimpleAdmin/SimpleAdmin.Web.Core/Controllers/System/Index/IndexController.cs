@@ -5,7 +5,7 @@
 /// </summary>
 [ApiDescriptionSettings(Tag = "系统首页")]
 [Route("/index")]
-[RolePermission]
+// [RolePermission]//默认不开启
 public class IndexController : IDynamicApiController
 {
     private readonly IVisitLogService _visitLogService;
