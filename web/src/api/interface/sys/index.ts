@@ -16,6 +16,6 @@ export * from "./upload";
 export * from "./userCenter";
 export * from "./limit";
 export * from "./ops";
-export * from "./log";
+export * from "./audit";
 export * from "./organization";
 export * from "./auth";

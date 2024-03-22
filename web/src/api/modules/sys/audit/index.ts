@@ -12,12 +12,5 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
-
-export * from "./auth";
-export * from "./userCenter";
-export * from "./limit";
-export * from "./ops";
-export * from "./audit";
-export * from "./organization";
-export * from "./upload";
-export * from "./common";
+export * from "./visLog";
+export * from "./opLog";

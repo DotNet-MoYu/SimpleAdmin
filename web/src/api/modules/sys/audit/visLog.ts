@@ -1,5 +1,5 @@
 /**
- * @description
+ * @description 访问日志
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks
@@ -13,11 +13,32 @@
  * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 
-export * from "./auth";
-export * from "./userCenter";
-export * from "./limit";
-export * from "./ops";
-export * from "./audit";
-export * from "./organization";
-export * from "./upload";
-export * from "./common";
+import { ResPage, VisLog } from "@/api/interface";
+import { moduleRequest } from "@/api/request";
+const http = moduleRequest("/sysaudit/logVisit/");
+
+/**
+ * @Description: 访问日志
+ * @Author: huguodong
+ * @Date: 2023-12-15 15:34:54
+ */
+const visLogApi = {
+  /** 获取访问日志分页 */
+  page(params: VisLog.Page) {
+    return http.get<ResPage<VisLog.VisLogInfo>>("page", params);
+  },
+  /** 获取访问日志折线图数据 */
+  lineChart() {
+    return http.get<VisLog.LineChart[]>("lineChartData", {}, { loading: false });
+  },
+  /** 获取访问日志饼状图数据 */
+  pieChart() {
+    return http.get<VisLog.PineChart[]>("pieChartData", {}, { loading: false });
+  },
+  /** 清空访问日志 */
+  delete(category: string) {
+    return http.post("delete", { category });
+  }
+};
+
+export { visLogApi };

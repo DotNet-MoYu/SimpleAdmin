@@ -14,7 +14,7 @@ namespace SimpleAdmin.Web.Core;
 /// 访问日志控制器
 /// </summary>
 [ApiDescriptionSettings(Tag = "访问日志")]
-[Route("sys/log/[controller]")]
+[Route("sys/audit/[controller]")]
 [SuperAdmin]
 public class LogVisitController : BaseController
 {

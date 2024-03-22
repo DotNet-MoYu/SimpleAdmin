@@ -13,11 +13,5 @@
  * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 
-export * from "./auth";
-export * from "./userCenter";
-export * from "./limit";
-export * from "./ops";
-export * from "./audit";
-export * from "./organization";
-export * from "./upload";
-export * from "./common";
+export * from "./visLog";
+export * from "./opLog";

@@ -17,16 +17,20 @@ declare module "vue" {
     CropUpload: (typeof import("./src/components/CropUpload/index.vue"))["default"];
     DatePicker: (typeof import("./src/components/Form/DatePicker/index.vue"))["default"];
     ECharts: (typeof import("./src/components/ECharts/index.vue"))["default"];
+    ElAlert: (typeof import("element-plus/es"))["ElAlert"];
     ElAside: (typeof import("element-plus/es"))["ElAside"];
     ElAutocomplete: (typeof import("element-plus/es"))["ElAutocomplete"];
+    ElAvatar: (typeof import("element-plus/es"))["ElAvatar"];
     ElBadge: (typeof import("element-plus/es"))["ElBadge"];
     ElBreadcrumb: (typeof import("element-plus/es"))["ElBreadcrumb"];
     ElBreadcrumbItem: (typeof import("element-plus/es"))["ElBreadcrumbItem"];
     ElButton: (typeof import("element-plus/es"))["ElButton"];
+    ElCascader: (typeof import("element-plus/es"))["ElCascader"];
     ElCheckbox: (typeof import("element-plus/es"))["ElCheckbox"];
     ElCol: (typeof import("element-plus/es"))["ElCol"];
     ElColorPicker: (typeof import("element-plus/es"))["ElColorPicker"];
     ElContainer: (typeof import("element-plus/es"))["ElContainer"];
+    ElDatePicker: (typeof import("element-plus/es"))["ElDatePicker"];
     ElDialog: (typeof import("element-plus/es"))["ElDialog"];
     ElDivider: (typeof import("element-plus/es"))["ElDivider"];
     ElDrawer: (typeof import("element-plus/es"))["ElDrawer"];
@@ -42,6 +46,7 @@ declare module "vue" {
     ElImageViewer: (typeof import("element-plus/es"))["ElImageViewer"];
     ElInput: (typeof import("element-plus/es"))["ElInput"];
     ElInputNumber: (typeof import("element-plus/es"))["ElInputNumber"];
+    ElLink: (typeof import("element-plus/es"))["ElLink"];
     ElMain: (typeof import("element-plus/es"))["ElMain"];
     ElMenu: (typeof import("element-plus/es"))["ElMenu"];
     ElMenuItem: (typeof import("element-plus/es"))["ElMenuItem"];
