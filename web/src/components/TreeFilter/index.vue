@@ -51,6 +51,8 @@ interface TreeFilterProps {
   defaultExpandAll?: boolean; // 是否默认展开所有节点 ==> 非必传，默认为 true
   defaultExpandLevel?: number; // 默认展开的层级 ==> 非必传，默认为 1,如果 defaultExpandAll 为 true，则此参数无效
   checkStrictly?: boolean; // 是否开启子节点和父节点不关联 ==> 非必传，默认为 false
+  topName?: string; // 顶级分类名称 ==> 非必传，默认为 “全部”
+  showAll?: boolean; // 是否显示全部选项 ==> 非必传，默认为 true
 }
 const props = withDefaults(defineProps<TreeFilterProps>(), {
   id: "id",
@@ -58,7 +60,9 @@ const props = withDefaults(defineProps<TreeFilterProps>(), {
   multiple: false,
   defaultExpandAll: true,
   defaultExpandLevel: 1,
-  checkStrictly: false
+  checkStrictly: false,
+  topName: "全部",
+  showAll: true
 });
 
 const defaultProps = {
@@ -88,12 +92,22 @@ watch(
   { deep: true, immediate: true }
 );
 
+const setTreeAllData = (data: any) => {
+  //如果需要显示全部选项就加上全部,否则就拿到什么输出什么
+  if (props.showAll) {
+    treeAllData.value = [{ id: "", [props.label]: props.topName }, ...data];
+  } else {
+    treeAllData.value = data;
+  }
+};
+
 watch(
   () => props.data,
   () => {
     if (props.data?.length) {
       treeData.value = props.data;
-      treeAllData.value = [{ id: "", [props.label]: "全部" }, ...props.data];
+      //如果需要显示全部选项就加上全部,否则就拿到什么输出什么
+      setTreeAllData(props.data);
     }
   },
   { deep: true, immediate: true }
@@ -145,7 +159,7 @@ const refresh = async () => {
 const getRequestData = async () => {
   const { data } = await props.requestApi!();
   treeData.value = data;
-  treeAllData.value = [{ id: "", [props.label]: "全部" }, ...data];
+  setTreeAllData(data);
 };
 
 /** 获取默认展开层级 */

@@ -1,4 +1,8 @@
-<!-- 选择框组件封装 -->
+<!-- 
+ * @Description: 选择框组件封装
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:32
+!-->
 <template>
   <el-select :placeholder="placeholder" class="w-full" v-bind="$attrs" clearable>
     <el-option v-for="(item, index) in options" :key="index" :label="item[props.label]" :value="item[props.value]" />

@@ -1,4 +1,8 @@
-<!-- 系统字典 -->
+<!-- 
+ * @Description: 系统字典
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:10
+!-->
 <template>
   <div class="main-box gap-10px">
     <div class="w-7/12">
@@ -55,7 +59,7 @@
       ref="proTableChild"
       :columns="columns"
       :tool-button="false"
-      :request-api="dictApi.dictPage"
+      :request-api="sysDictApi.page"
       :request-auto="false"
       :init-param="childInitParam"
     >
@@ -103,7 +107,7 @@
 <script setup lang="ts" name="sysDict">
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { Search } from "@element-plus/icons-vue";
-import { Dict, dictApi } from "@/api";
+import { SysDict, sysDictApi } from "@/api";
 import { useHandleData } from "@/hooks/useHandleData";
 import { SysDictEnum, FormOptEnum, CommonStatusEnum, DictCategoryEnum } from "@/enums";
 import { useDictStore } from "@/stores/modules";
@@ -130,7 +134,7 @@ const childInitParam = reactive<ChildInitParam>({ parentId: defaultParentId }); 
 // 默认不做操作就直接在 ProTable 组件上绑定	:request="getUserList"
 const getDictPage = (params: any) => {
   childInitParam.parentId = defaultParentId;
-  return dictApi.dictPage(params);
+  return sysDictApi.page(params);
 };
 
 // 字典类型选项
@@ -141,7 +145,7 @@ const proTable = ref<ProTableInstance>();
 const proTableChild = ref<ProTableInstance>();
 
 // 表格配置项
-const columns: ColumnProps<Dict.DictInfo>[] = [
+const columns: ColumnProps<SysDict.DictInfo>[] = [
   { type: "selection", fixed: "left", width: 50 },
   { prop: "dictLabel", label: "字典名称" },
   { prop: "dictValue", label: "字典值" },
@@ -158,7 +162,7 @@ const formRef = ref<InstanceType<typeof Form> | null>(null);
  * @param opt  操作类型
  * @param record  记录
  */
-function onOpen(opt: FormOptEnum, category: DictCategoryEnum, parentId: number | string = 0, record: {} | Dict.DictInfo = {}) {
+function onOpen(opt: FormOptEnum, category: DictCategoryEnum, parentId: number | string = 0, record: {} | SysDict.DictInfo = {}) {
   //如果parentId是-1代表没有选择任何字典，此时不打开表单
   if (parentId === defaultParentId) {
     ElMessage("请先选择字典");
@@ -179,7 +183,7 @@ function onOpen(opt: FormOptEnum, category: DictCategoryEnum, parentId: number |
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(dictApi.dictDelete, { ids }, msg);
+  await useHandleData(sysDictApi.delete, { ids }, msg);
   RefreshTable();
 }
 
@@ -195,7 +199,7 @@ function RefreshTable() {
  * 表格当前行变化
  * @param val 选中的值
  */
-function handleCurrentChange(val: Dict.DictInfo | undefined) {
+function handleCurrentChange(val: SysDict.DictInfo | undefined) {
   // 如果val存在，则将parentId和category赋值给childInitParam
   if (val) {
     childInitParam.parentId = val.id;

@@ -1,8 +1,12 @@
-<!-- 字典表单 -->
+<!-- 
+ * @Description: 字典表单
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:05
+!-->
 <template>
   <form-container v-model="visible" :title="`${dictProps.opt}字典`" form-size="600px">
     <el-form
-      ref="spaFormRef"
+      ref="dictFormRef"
       :rules="rules"
       :disabled="dictProps.disabled"
       :model="dictProps.record"
@@ -31,7 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { Dict, dictApi } from "@/api";
+import { SysDict, sysDictApi } from "@/api";
 import { required } from "@/utils/formRules";
 import { useDictStore } from "@/stores/modules";
 import { FormOptEnum, CommonStatusEnum, SysDictEnum, DictCategoryEnum } from "@/enums";
@@ -44,7 +48,7 @@ const dictStore = useDictStore(); //字典仓库
 const statusOptions = dictStore.getDictList(SysDictEnum.COMMON_STATUS);
 
 // 表单参数接口
-interface DictProps extends FormProps.Base<Dict.DictInfo> {
+interface DictProps extends FormProps.Base<SysDict.DictInfo> {
   category: DictCategoryEnum; //字典分类
   parentId?: number | string; //父Id
 }
@@ -78,26 +82,18 @@ function onOpen(props: DictProps) {
     dictProps.record.category = props.category;
     dictProps.record.parentId = props.parentId;
   }
-  console.log(dictProps.record);
-
   visible.value = true; //显示表单
-  if (props.record.id) {
-    //如果传了id，就去请求api获取record
-    dictApi.dictDetail({ id: props.record.id }).then(res => {
-      dictProps.record = res.data;
-    });
-  }
 }
 
 // 提交数据（新增/编辑）
-const spaFormRef = ref<FormInstance>();
+const dictFormRef = ref<FormInstance>();
 /** 提交表单 */
 async function handleSubmit() {
-  spaFormRef.value?.validate(async valid => {
+  dictFormRef.value?.validate(async valid => {
     if (!valid) return; //表单验证失败
     //提交表单
-    await dictApi
-      .dictSubmitForm(dictProps.record, dictProps.record.id != undefined)
+    await sysDictApi
+      .submitForm(dictProps.record, dictProps.record.id != undefined)
       .then(() => {
         dictProps.successful!(); //调用父组件的successful方法
       })

@@ -1,16 +1,20 @@
-<!--职位管理 -->
+<!-- 
+ * @Description: 职位管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:43
+!-->
 <template>
   <div class="main-box">
     <TreeFilter
       ref="treeFilter"
       label="name"
       title="组织列表"
-      :request-api="sysOrgApi.sysOrgTree"
+      :request-api="sysOrgApi.tree"
       :default-value="initParam.orgId"
       @change="changeTreeFilter"
     />
     <div class="table-box">
-      <ProTable ref="proTable" title="职位列表" :columns="columns" :request-api="sysPositionApi.positionPage" :init-param="initParam">
+      <ProTable ref="proTable" title="职位列表" :columns="columns" :request-api="sysPositionApi.page" :init-param="initParam">
         <!-- 表格 header 按钮 -->
         <template #tableHeader="scope">
           <s-button suffix="职位" @click="onOpen(FormOptEnum.ADD)" />
@@ -114,7 +118,7 @@ function onOpen(opt: FormOptEnum, record: {} | SysPosition.SysPositionInfo = {})
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(sysPositionApi.positionDelete, { ids }, msg);
+  await useHandleData(sysPositionApi.delete, { ids }, msg);
   RefreshTable();
 }
 

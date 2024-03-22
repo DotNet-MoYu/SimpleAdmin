@@ -1,4 +1,8 @@
-<!-- 复制 -->
+<!-- 
+ * @Description: 复制
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:25
+!-->
 <template>
   <form-container v-model="visible" title="复制组织" form-size="600px">
     <el-form ref="orgFormRef" :rules="rules" :model="copyProps" label-width="auto">
@@ -7,6 +11,9 @@
       </s-form-item>
       <s-form-item label="包含子集" prop="containsChild" tooltip="将选择组织及以下组织全部复制到目标组织">
         <s-radio-group v-model="copyProps.containsChild" :options="yesOptions" button />
+      </s-form-item>
+      <s-form-item label="包含职位" prop="containsPosition" tooltip="将组织下的岗位也复制一份到目标组织">
+        <s-radio-group v-model="copyProps.containsPosition" :options="yesOptions" button />
       </s-form-item>
     </el-form>
     <template #footer>
@@ -27,10 +34,17 @@ const dictStore = useDictStore(); //字典仓库
 // 是否选项
 const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO);
 
+// 表单参数
 interface copyProps {
+  /** 目标组织id */
   targetId: string | number;
+  /** 选择的组织id */
   ids: string[] | number[];
+  /** 是否包含子集 */
   containsChild: boolean;
+  /** 是否包含职位 */
+  containsPosition: boolean;
+  /** 成功后的回调 */
   successful?: () => void;
 }
 
@@ -38,13 +52,15 @@ interface copyProps {
 const copyProps = reactive<copyProps>({
   targetId: 0,
   ids: [],
-  containsChild: true
+  containsChild: true,
+  containsPosition: true
 });
 
 // 表单验证规则
 const rules = reactive({
   targetId: [required("请选择目标组织")],
-  containsChild: [required("请选择是否包含子集")]
+  containsChild: [required("请选择是否包含子集")],
+  containsPosition: [required("请选择是否包含职位")]
 });
 
 /**
@@ -65,7 +81,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await sysOrgApi
-      .sysOrgCopy(copyProps)
+      .copy(copyProps)
       .then(() => {
         copyProps.successful!(); //调用父组件的successful方法
       })

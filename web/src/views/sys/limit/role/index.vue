@@ -1,16 +1,20 @@
-<!--角色管理 -->
+<!-- 
+ * @Description: 角色管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:53
+!-->
 <template>
   <div class="main-box">
     <TreeFilter
       ref="treeFilter"
       label="name"
       title="组织列表"
-      :request-api="sysOrgApi.sysOrgTree"
+      :request-api="sysOrgApi.tree"
       :default-value="initParam.orgId"
       @change="changeTreeFilter"
     />
     <div class="table-box">
-      <ProTable ref="proTable" :columns="columns" :request-api="sysRoleApi.sysRolePage" :init-param="initParam">
+      <ProTable ref="proTable" :columns="columns" :request-api="sysRoleApi.page" :init-param="initParam">
         <!-- 表格 header 按钮 -->
         <template #tableHeader="scope">
           <s-button suffix="角色" @click="onOpen(FormOptEnum.ADD)" />
@@ -48,14 +52,26 @@
       </ProTable>
       <!-- 新增/编辑表单 -->
       <Form ref="formRef" />
-      <!-- 授权资源表单 -->
-      <GrantResourceForm ref="grantResourceFormRef" />
+      <!-- 授权资源组件 -->
+      <GrantResource ref="grantResourceRef" />
+      <!-- 授权权限组件 -->
+      <GrantPermission ref="grantPermissionRef" />
+      <!-- 用户选择器 -->
+      <user-selector
+        ref="userSelectorRef"
+        :org-tree-api="sysOrgApi.tree"
+        :position-tree-api="sysPositionApi.tree"
+        :role-tree-api="sysRoleApi.tree"
+        :user-selector-api="sysUserApi.selector"
+        multiple
+        @successful="handleChooseUser"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="sysRole">
-import { sysOrgApi, sysRoleApi, SysRole } from "@/api";
+import { sysOrgApi, sysRoleApi, SysRole, SysUser, sysUserApi, sysPositionApi } from "@/api";
 import { ArrowDown } from "@element-plus/icons-vue";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { SysDictEnum, FormOptEnum, CommonStatusEnum } from "@/enums";
@@ -63,13 +79,16 @@ import { useHandleData } from "@/hooks/useHandleData";
 import { useDictStore } from "@/stores/modules";
 import TreeFilter from "@/components/TreeFilter/index.vue";
 import Form from "./components/form.vue";
-import GrantResourceForm from "./components/grantResourceForm.vue";
+import GrantResource from "./components/grantResource.vue";
+import GrantPermission from "./components/grantPermission.vue";
+import { UserSelectorInstance } from "@/components/Selectors/UserSelector/interface";
 
 const dictStore = useDictStore(); //字典仓库
 // 角色类型选项
 const roleCategoryOptions = dictStore.getDictList(SysDictEnum.ROLE_CATEGORY);
 // 状态选项
 const statusOptions = dictStore.getDictList(SysDictEnum.COMMON_STATUS);
+// 组织列表组件
 const treeFilter = ref<InstanceType<typeof TreeFilter> | null>(null);
 
 interface InitParam {
@@ -115,7 +134,7 @@ function onOpen(opt: FormOptEnum, record: {} | SysRole.SysRoleInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(sysRoleApi.sysRoleDelete, { ids }, msg);
+  await useHandleData(sysRoleApi.delete, { ids }, msg);
   RefreshTable();
 }
 
@@ -143,7 +162,7 @@ function changeTreeFilter(val: number | string) {
 enum cmdEnum {
   GrantResource = "授权资源",
   GrantPermission = "授权权限",
-  GrantUser = "授权角色"
+  GrantUser = "授权用户"
 }
 
 /** 下拉菜单参数接口 */
@@ -160,7 +179,11 @@ function command(row: SysRole.SysRoleInfo, command: cmdEnum): Command {
   };
 }
 
-const grantResourceFormRef = ref<InstanceType<typeof GrantResourceForm> | null>(null); //授权资源表单引用
+const grantResourceRef = ref<InstanceType<typeof GrantResource> | null>(null); //授权资源组件引用
+const grantPermissionRef = ref<InstanceType<typeof GrantPermission> | null>(null); //授权权限组件引用
+const userSelectorRef = ref<UserSelectorInstance>(); //用户选择器引用
+const roleId = ref<number | string>(0); //角色id
+
 /**
  * 更多下拉菜单点击事件
  * @param command
@@ -168,18 +191,38 @@ const grantResourceFormRef = ref<InstanceType<typeof GrantResourceForm> | null>(
 function handleCommand(command: Command) {
   switch (command.command) {
     case cmdEnum.GrantUser:
+      roleId.value = command.row.id; //获取角色id
+      sysRoleApi.ownUser({ id: command.row.id }).then(res => {
+        userSelectorRef.value?.showSelector(res.data); //显示用户选择器
+      });
       break;
     case cmdEnum.GrantResource:
-      // 打开授权资源表单
-      grantResourceFormRef.value?.onOpen({
+      // 打开授权资源组件
+      grantResourceRef.value?.onOpen({
         opt: FormOptEnum.EDIT,
         record: command.row,
         successful: RefreshTable
       });
       break;
     case cmdEnum.GrantPermission:
+      // 打开授权权限组件
+      grantPermissionRef.value?.onOpen({
+        opt: FormOptEnum.EDIT,
+        record: command.row,
+        successful: RefreshTable
+      });
       break;
   }
+}
+
+/** 选择用户 */
+function handleChooseUser(data: SysUser.SysUserInfo[]) {
+  //组装参数
+  const grantUser: SysRole.GrantUserReq = {
+    id: roleId.value,
+    grantInfoList: data.map(item => item.id) as number[] | string[]
+  };
+  sysRoleApi.grantUser(grantUser);
 }
 </script>
 

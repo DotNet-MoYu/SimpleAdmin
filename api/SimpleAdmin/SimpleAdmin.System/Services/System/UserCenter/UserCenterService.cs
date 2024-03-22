@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 using System.Text.RegularExpressions;
@@ -41,7 +43,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     {
         var result = new List<SysResource>();
         //获取用户信息
-        var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);
+        var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount, UserManager.TenantId);
         if (userInfo != null)
         {
             //定义菜单ID列表
@@ -154,6 +156,50 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return await _messageService.UnReadCount(UserManager.UserId);
     }
 
+    /// <inheritdoc />
+    public async Task<List<SysResource>> ShortcutTree()
+    {
+        var sysResourceList = await _resourceService.GetAllModuleAndMenuAndSpaList();//获取模块和菜单和单页列表
+        var userInfo = await _userService.GetUserById(UserManager.UserId);
+        var hasResourcesList = new HashSet<long>();//拥有的资源列表
+        var hasModuleList = new HashSet<long>();//拥有的资源列表
+        var userResourceList =
+            (await _relationService.GetRelationListByObjectIdAndCategory(UserManager.UserId, CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE))
+            .Select(it => it.TargetId.ToLong()).ToList();//获取用户资源id列表
+        var userModuleList =
+            (await _relationService.GetRelationListByObjectIdAndCategory(UserManager.UserId, CateGoryConst.RELATION_SYS_USER_HAS_MODULE))
+            .Select(it => it.TargetId.ToLong()).ToList();//获取用户模块id列表
+        if (userResourceList.Count > 0)//如果用户资源列表大于0就以用户为主
+        {
+            hasResourcesList.AddRange(userResourceList);
+            hasResourcesList.AddRange(userModuleList);
+        }
+        else
+        {
+            var roleIds = userInfo.RoleIdList;//获取角色ID列表
+            var roleResourceList =
+                (await _relationService.GetRelationListByObjectIdListAndCategory(roleIds, CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE))
+                .Select(it => it.TargetId.ToLong()).ToList();//获取角色资源id列表
+            var roleModuleList =
+                (await _relationService.GetRelationListByObjectIdListAndCategory(roleIds, CateGoryConst.RELATION_SYS_ROLE_HAS_MODULE))
+                .Select(it => it.TargetId.ToLong()).ToList();//获取角色模块id列表
+            hasResourcesList.AddRange(roleResourceList);
+            hasResourcesList.AddRange(roleModuleList);
+        }
+
+        // 获取目录
+        var catalogList = sysResourceList.Where(it => it.MenuType == SysResourceConst.CATALOG).ToList();
+        //过滤出拥有的资源列表
+        sysResourceList =
+            sysResourceList.Where(it =>
+                    hasResourcesList.Contains(it.Id) || it.Category == CateGoryConst.RESOURCE_SPA)
+                .ToList();//获取拥有的资源列表
+        var parentIds = sysResourceList.Select(it => it.ParentId).Distinct().ToList();//获取父ID列表
+        var parentList = catalogList.Where(it => parentIds.Contains(it.Id)).ToList();//获取所拥有的父级目录
+        sysResourceList.AddRange(parentList);//添加到列表
+        return await _menuService.ShortcutTree(sysResourceList);
+    }
+
     #endregion 查询
 
     #region 编辑
@@ -196,16 +242,16 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     public async Task UpdateSignature(UpdateSignatureInput input)
     {
         var signatureArray = input.Signature.Split(",");//分割
-        var base64String = signatureArray[1];//根据逗号分割取到base64字符串
-        var image = base64String.GetSkBitmapFromBase64();//转成图片
-        var resizeImage = image.ResizeImage(100, 50);//重新裁剪
-        var newBase64String = resizeImage.ImgToBase64String();//重新转为base64
-        var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名
+        // var base64String = signatureArray[1];//根据逗号分割取到base64字符串
+        // var image = base64String.GetSkBitmapFromBase64();//转成图片
+        // var resizeImage = image.ResizeImage(100, 50);//重新裁剪
+        // var newBase64String = resizeImage.ImgToBase64String();//重新转为base64
+        // var newSignature = signatureArray[0] + "," + newBase64String;//赋值新的签名
 
         //更新签名
         var result = await UpdateSetColumnsTrueAsync(it => new SysUser
         {
-            Signature = newSignature
+            Signature = input.Signature
         }, it => it.Id == UserManager.UserId);
         if (result)
             _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
@@ -233,7 +279,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
         if (userInfo.Password != password) throw Oops.Bah("原密码错误");
         var newPassword = CryptogramUtil.Sm2Decrypt(input.NewPassword);//sm2解密
-        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
+        var loginPolicy = await _configService.GetConfigsByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
         var containNumber = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_NUM).ConfigValue.ToBoolean();//是否包含数字
         var containLower = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_LOWER).ConfigValue.ToBoolean();//是否包含小写
         var containUpper = loginPolicy.First(it => it.ConfigKey == SysConfigConst.PWD_CONTAIN_UPPER).ConfigValue.ToBoolean();//是否包含大写
@@ -307,7 +353,9 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
             var parents = _resourceService.GetResourceParent(allMenuList, it.ParentId.Value);//获取父级
             parents.ForEach(parent =>
             {
-                if (parent != null && !parentList.Contains(parent) && !myMenus.Contains(parent))//如果不为空且两个列表里没有
+                // 如果父级菜单存在，并且父级菜单状态为启用,并不在父级列表中，则添加到父级列表
+                if (parent != null && parent.Status == CommonStatusConst.ENABLE && !parentList.Contains(parent)
+                    && !myMenus.Contains(parent))
                 {
                     parentList.Add(parent);//添加到父列表
                 }

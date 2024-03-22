@@ -1,4 +1,8 @@
-<!-- 组织选择器  -->
+<!-- 
+ * @Description: 组织选择器
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:40:18
+!-->
 <template>
   <el-cascader filterable clearable :options="options" :props="cascaderProps" v-bind="$attrs" class="w-full" />
 </template>
@@ -12,27 +16,19 @@ const cascaderProps = {
   value: "id",
   label: "name"
 };
-
+// 选择器数据
 const options = ref<SysPosition.SysPositionSelector[]>([]);
 // 定义组件props
 const props = withDefaults(defineProps<PositionSelectProps>(), {
-  permission: false
+  selectorApi: sysPositionApi.selector
 });
 
-// 组件挂载时获取组织树
+// 组件挂载时获取选择器数据
 onMounted(async () => {
-  await getPositionSelector().then(res => {
+  props.selectorApi().then(res => {
     options.value = res.data;
   });
 });
-
-/** 获取组织树 */
-function getPositionSelector(): Promise<any> {
-  if (props.permission) {
-    return sysPositionApi.positionSelector();
-  }
-  return sysPositionApi.positionSelector();
-}
 
 /** 点击事件 */
 // const handleChange = (value: any) => {

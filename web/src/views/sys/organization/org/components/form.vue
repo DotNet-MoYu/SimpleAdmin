@@ -1,4 +1,8 @@
-<!-- 表单 -->
+<!-- 
+ * @Description: 表单
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:28
+!-->
 <template>
   <div>
     <form-container v-model="visible" :title="`${orgProps.opt}组织`" form-size="600px">
@@ -21,7 +25,7 @@
           <s-input v-model="orgProps.record.code" placeholder="请填写组织编码,不填则为随机值" clearable></s-input>
         </s-form-item>
         <s-form-item label="组织分类" prop="category">
-          <el-radio-group v-model="orgProps.record.category" :options="orgCategoryOptions"></el-radio-group>
+          <s-radio-group v-model="orgProps.record.category" :options="orgCategoryOptions" button />
         </s-form-item>
         <s-form-item label="状态" prop="status">
           <s-radio-group v-model="orgProps.record.status" :options="statusOptions" button />
@@ -41,12 +45,19 @@
         <el-button v-show="!orgProps.disabled" type="primary" @click="handleSubmit"> 确定 </el-button>
       </template>
     </form-container>
-    <user-selector ref="userSelectorRef" @successful="handleChooseUser" />
+    <user-selector
+      ref="userSelectorRef"
+      :org-tree-api="sysOrgApi.tree"
+      :position-tree-api="sysPositionApi.tree"
+      :role-tree-api="sysRoleApi.tree"
+      :user-selector-api="sysUserApi.selector"
+      @successful="handleChooseUser"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { SysOrg, SysUser, sysOrgApi } from "@/api";
+import { SysOrg, SysUser, sysOrgApi, sysPositionApi, sysRoleApi, sysUserApi } from "@/api";
 import { FormOptEnum, SysDictEnum } from "@/enums";
 import { required } from "@/utils/formRules";
 import { FormInstance } from "element-plus";
@@ -90,7 +101,7 @@ function onOpen(props: FormProps.Base<SysOrg.SysOrgInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    sysOrgApi.sysOrgDetail({ id: props.record.id }).then(res => {
+    sysOrgApi.detail({ id: props.record.id }).then(res => {
       orgProps.record = res.data;
     });
   }
@@ -104,7 +115,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await sysOrgApi
-      .sysOrgSubmitForm(orgProps.record, orgProps.record.id != undefined)
+      .submitForm(orgProps.record, orgProps.record.id != undefined)
       .then(() => {
         orgProps.successful!(); //调用父组件的successful方法
       })

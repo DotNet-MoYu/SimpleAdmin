@@ -1,4 +1,8 @@
-<!-- 权限按钮表单页面 -->
+<!-- 
+ * @Description: 权限按钮表单页面
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:42:36
+!-->
 <template>
   <el-dialog v-model="visible" :title="`${buttonProps.opt}按钮`" width="500px">
     <el-form
@@ -63,7 +67,7 @@ function onOpen(props: FormProps.Base<Button.ButtonInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    buttonApi.buttonDetail({ id: props.record.id }).then(res => {
+    buttonApi.detail({ id: props.record.id }).then(res => {
       buttonProps.record = res.data;
     });
   }
@@ -77,7 +81,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await buttonApi
-      .buttonSubmitForm(buttonProps.record, buttonProps.record.id != undefined)
+      .submitForm(buttonProps.record, buttonProps.record.id != undefined)
       .then(() => {
         buttonProps.successful!(); //调用父组件的successful方法
       })

@@ -1,8 +1,11 @@
 <!-- 密码登录 -->
 <template>
   <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
+    <s-form-item v-if="tenantOption == TenantEnum.CHOSE" prop="orgId" class="-ml-12px">
+      <s-select v-model="loginForm.tenantId" :options="tenantOptions" label="name" value="id" placeholder="请选择租户"></s-select>
+    </s-form-item>
     <el-form-item prop="account">
-      <el-input v-model="loginForm.account" placeholder="用户名:admin / user">
+      <el-input v-model="loginForm.account" placeholder="请输入用户名">
         <template #prefix>
           <el-icon class="el-input__icon">
             <user />
@@ -11,7 +14,7 @@
       </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input v-model="loginForm.password" type="password" placeholder="密码:123456" show-password autocomplete="new-password">
+      <el-input v-model="loginForm.password" type="password" placeholder="请输入密码" show-password autocomplete="new-password">
         <template #prefix>
           <el-icon class="el-input__icon">
             <lock />
@@ -44,19 +47,45 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 import { Login } from "@/api/interface";
-import { configApi, loginApi } from "@/api";
-import { useAuthStore } from "@/stores/modules";
+import { SysOrg, commonApi, loginApi } from "@/api";
+import { useAuthStore, useConfigStore } from "@/stores/modules";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
-import { SysBaseEnum } from "@/enums";
+import { SysBaseEnum, TenantEnum } from "@/enums";
 import smCrypto from "@/utils/smCrypto";
+import { required } from "@/utils/formRules";
 
 const auth = useAuthStore();
+const config = useConfigStore();
 const { loginPwd } = useAuthStore();
 
 type FormInstance = InstanceType<typeof ElForm>;
 const captchaOpen = ref(false); // 是否开启验证码
 const validCodeBase64 = ref(); // 验证码base64
+
+// 密码登录接口
+interface PwdProps {
+  /** 多租户选项 */
+  tenantOption: TenantEnum;
+  /** 租户列表 */
+  tenantOptions: SysOrg.SysOrgInfo[];
+}
+
+//props
+const props = defineProps<PwdProps>();
+
+//监听tenantOptions变化
+watch(
+  () => props.tenantOptions,
+  (newVal: SysOrg.SysOrgInfo[]) => {
+    if (newVal.length > 0) {
+      // 如果没有选择租户就默认选中第一个
+      if (!loginForm.tenantId) {
+        loginForm.tenantId = newVal[0].id;
+      }
+    }
+  }
+);
 
 const loginFormRef = ref<FormInstance>(); // 表单实例
 // 表单数据
@@ -64,14 +93,20 @@ const loginForm = reactive<Login.LoginForm>({
   account: "superAdmin", //用户名
   password: "123456", // 密码
   validCode: "", // 验证码
-  validCodeReqNo: "" // 验证码请求号
+  validCodeReqNo: "", // 验证码请求号
+  tenantId: config.tenantIdGet
 });
+// 如果没有租户id就默认选中第一个
+if (!config.tenantIdGet) {
+  loginForm.tenantId = props.tenantOptions[0]?.id;
+}
 
 // 表单验证规则
 const loginRules = reactive({
-  account: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  validCode: [{ required: true, message: "请输入验证码", trigger: "blur" }]
+  account: [required("请输入用户名")],
+  password: [required("请输入密码")],
+  tenantId: [required("请选择租户")],
+  validCode: [required("请输入验证码")]
 });
 
 const handleSubmit = (formEl: FormInstance | undefined) => {
@@ -79,7 +114,9 @@ const handleSubmit = (formEl: FormInstance | undefined) => {
   // 表单验证
   formEl.validate(async valid => {
     if (!valid) return;
-    await loginPwd({ ...loginForm, password: smCrypto.doSm2Encrypt(loginForm.password) }); // 调用登录接口
+    await loginPwd({ ...loginForm, password: smCrypto.doSm2Encrypt(loginForm.password) }).catch(async () => {
+      await loginCaptcha(); // 加载验证码
+    }); // 调用登录接口
   });
 };
 
@@ -95,11 +132,11 @@ onMounted(() => {
     e = (window.event as KeyboardEvent) || e;
     if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
       if (auth.loginLoading) return;
-      loginPwd({ ...loginForm, password: smCrypto.doSm2Encrypt(loginForm.password) }); // 调用登录接口
+      handleSubmit(loginFormRef.value);
     }
   };
   // 获取验证码开关
-  configApi.configSysBase().then(async res => {
+  commonApi.loginPolicy().then(async res => {
     // 如果验证码开关是开就加载验证码
     if (res.data) {
       captchaOpen.value = res.data.find(item => item.configKey === SysBaseEnum.LOGIN_CAPTCHA_OPEN)?.configValue === "true"; // 判断是否开启验证码

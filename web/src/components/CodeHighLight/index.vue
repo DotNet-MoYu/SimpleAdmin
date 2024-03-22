@@ -1,4 +1,8 @@
-<!-- 代码高亮组件 -->
+<!-- 
+ * @Description: 代码高亮组件
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:37:43
+!-->
 <template>
   <div :codetype="props.language">
     <highlightjs :language="props.language" :autodetect="!props.language" :code="props.code"></highlightjs>

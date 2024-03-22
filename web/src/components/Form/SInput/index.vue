@@ -1,4 +1,8 @@
-<!-- 输入框封装 -->
+<!-- 
+ * @Description: 输入框封装
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:24
+!-->
 <template>
   <el-input :placeholder="placeholder" clearable v-bind="$attrs" />
 </template>

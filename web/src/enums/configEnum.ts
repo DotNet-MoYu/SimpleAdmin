@@ -1,21 +1,37 @@
 /**
  * @description 系统配置枚举
  * @license Apache License Version 2.0
+ * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks
  * SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
  * 1.请不要删除和修改根目录下的LICENSE文件。
  * 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
- * 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
+ * 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
  * 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
  * 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
- * @see https://gitee.com/zxzyjs/SimpleAdmin
+ * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 
 /**
  * @description：系统配置
  */
 export enum SysBaseEnum {
-  //验证码开关
-  LOGIN_CAPTCHA_OPEN = "LOGIN_CAPTCHA_OPEN"
+  /** 验证码开关 */
+  LOGIN_CAPTCHA_OPEN = "LOGIN_CAPTCHA_OPEN",
+  /** 系统默认工作台数据 */
+  SYS_DEFAULT_WORKBENCH_DATA = "SYS_DEFAULT_WORKBENCH_DATA",
+  /** 超链接 */
+  SYS_FOOTER_LINKS = "SYS_FOOTER_LINKS"
+}
+
+export enum SysConfigTypeEnum {
+  /** 基本配置 */
+  SYS_BASE = "SYS_BASE",
+  /** 登录配置 */
+  LOGIN_POLICY = "LOGIN_POLICY",
+  /** 密码配置 */
+  PWD_POLICY = "PWD_POLICY",
+  /** 业务其他配置 */
+  BIZ_DEFINE = "BIZ_DEFINE"
 }

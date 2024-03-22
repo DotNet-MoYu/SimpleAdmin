@@ -441,7 +441,7 @@
             <param name="sqlSugarClient"></param>
             <param name="logger"></param>
         </member>
-        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.BeginTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.BeginTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,MoYu.DatabaseAccessor.UnitOfWorkAttribute)">
             <summary>
             开启工作单元处理
             </summary>
@@ -449,7 +449,7 @@
             <param name="unitOfWork"></param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.CommitTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.CommitTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,MoYu.DatabaseAccessor.UnitOfWorkAttribute)">
             <summary>
             提交工作单元处理
             </summary>
@@ -457,7 +457,7 @@
             <param name="unitOfWork"></param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
-        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.RollbackTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,Furion.DatabaseAccessor.UnitOfWorkAttribute)">
+        <member name="M:SimpleAdmin.SqlSugar.SqlSugarUnitOfWork.RollbackTransaction(Microsoft.AspNetCore.Mvc.Filters.FilterContext,MoYu.DatabaseAccessor.UnitOfWorkAttribute)">
             <summary>
             回滚工作单元处理
             </summary>

@@ -1,9 +1,13 @@
-<!-- 权限按钮管理 -->
+<!-- 
+ * @Description: 权限按钮管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:42:52
+!-->
 <template>
   <div>
     <form-container v-model="visible" title="权限按钮" form-size="60%">
       <div class="table-box min-h-300px">
-        <ProTable ref="proTable" title="按钮列表" class="table" :columns="columns" :request-api="getButtonPage">
+        <ProTable ref="proTable" title="按钮列表" class="table" :columns="columns" :request-api="getPage">
           <!-- 表格 header 按钮 -->
           <template #tableHeader="scope">
             <s-button suffix="按钮" @click="onOpen(FormOptEnum.ADD)" />
@@ -94,7 +98,7 @@ function onOpenBatch() {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(buttonApi.buttonDelete, { ids }, msg);
+  await useHandleData(buttonApi.delete, { ids }, msg);
   RefreshTable();
 }
 
@@ -124,10 +128,10 @@ function onClose() {
  * 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
  * 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
  */
-function getButtonPage(params: any) {
+function getPage(params: any) {
   let newParams = JSON.parse(JSON.stringify(params)); //转换成json字符串再转换成json对象
   newParams.parentId = parentId.value; //按钮父Id
-  return buttonApi.buttonPage(newParams);
+  return buttonApi.page(newParams);
 }
 // 暴露给父组件的方法
 defineExpose({

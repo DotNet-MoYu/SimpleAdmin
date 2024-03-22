@@ -2,14 +2,14 @@
 <template>
   <el-radio-group v-bind="$attrs">
     <template v-if="props.button">
-      <el-radio-button v-for="(item, index) in options" :key="index" :label="item[props.value]">
+      <el-radio-button v-for="(item, index) in options" :key="index" :label="item[props.value]" v-show="item.show !== false">
         <slot name="radio" :item="item">
           {{ item[props.label] }}
         </slot>
       </el-radio-button>
     </template>
     <template v-else>
-      <el-radio v-for="(item, index) in options" :key="index" :label="item[props.value]">
+      <el-radio v-for="(item, index) in options" :key="index" :label="item[props.value]" v-show="item.show !== false">
         <slot name="radio" :item="item">
           {{ item[props.label] }}
         </slot>
@@ -18,7 +18,7 @@
   </el-radio-group>
 </template>
 
-<script setup lang="ts">
+<script setup lang="ts" name="SRadioGroup">
 import { SRadioGroupProps } from "./interface";
 
 // 定义组件props

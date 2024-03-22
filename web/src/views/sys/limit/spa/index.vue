@@ -1,7 +1,11 @@
-<!-- 单页管理 -->
+<!-- 
+ * @Description: 单页管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:44:05
+!-->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="单页列表" :columns="columns" :request-api="spaApi.spaPage">
+    <ProTable ref="proTable" title="单页列表" :columns="columns" :request-api="spaApi.page">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="单页" @click="onOpen(FormOptEnum.ADD)" />
@@ -54,7 +58,7 @@ const dictStore = useDictStore();
 // 单页类型选项
 const spaTypeOptions = dictStore
   .getDictList(SysDictEnum.MENU_TYPE)
-  .filter(item => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
+  .filter((item: { value: MenuTypeDictEnum }) => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
 // 表格配置项
 const columns: ColumnProps<Spa.SpaInfo>[] = [
   { type: "selection", fixed: "left", width: 80 },
@@ -99,7 +103,7 @@ function onOpen(opt: FormOptEnum, record: {} | Spa.SpaInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(spaApi.spaDelete, { ids }, msg);
+  await useHandleData(spaApi.delete, { ids }, msg);
   RefreshTable();
 }
 

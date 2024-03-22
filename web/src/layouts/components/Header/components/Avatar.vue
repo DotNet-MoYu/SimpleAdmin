@@ -6,10 +6,7 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item @click="openDialog('infoRef')">
-          <el-icon><User /></el-icon>个人信息
-        </el-dropdown-item>
-        <el-dropdown-item @click="openDialog('passwordRef')">
-          <el-icon><Edit /></el-icon>修改密码
+          <el-icon><User /></el-icon>个人中心
         </el-dropdown-item>
         <el-dropdown-item @click="openDialog('changeModuleRef')">
           <el-icon><Switch /></el-icon>切换应用
@@ -29,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { LOGIN_URL } from "@/config";
+import { LOGIN_URL, USER_CENTER_URL } from "@/config";
 import { useRouter } from "vue-router";
 import { loginApi } from "@/api/modules";
 import { useUserStore } from "@/stores/modules/user";
@@ -66,8 +63,7 @@ const infoRef = ref<InstanceType<typeof InfoDialog> | null>(null);
 const passwordRef = ref<InstanceType<typeof PasswordDialog> | null>(null);
 const changeModuleRef = ref<InstanceType<typeof ChooseModule> | null>(null);
 const openDialog = (ref: string) => {
-  if (ref == "infoRef") infoRef.value?.openDialog();
-  if (ref == "passwordRef") passwordRef.value?.openDialog();
+  if (ref == "infoRef") router.replace(USER_CENTER_URL);
   if (ref == "changeModuleRef") changeModuleRef.value?.openDialog();
 };
 </script>

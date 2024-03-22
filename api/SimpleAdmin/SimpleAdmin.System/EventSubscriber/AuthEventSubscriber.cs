@@ -1,12 +1,15 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-using IPTools.Core;
+
+using IP2Region.Net.Abstractions;
 
 namespace SimpleAdmin.System;
 
@@ -16,14 +19,16 @@ namespace SimpleAdmin.System;
 public class AuthEventSubscriber : IEventSubscriber, ISingleton
 {
     private readonly ISimpleCacheService _simpleCacheService;
+    private readonly ISearcher _searcher;
 
     public IServiceProvider Services { get; }
     private readonly SqlSugarScope _db;
 
-    public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services)
+    public AuthEventSubscriber(ISimpleCacheService simpleCacheService, IServiceProvider services, ISearcher searcher)
     {
         _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
+        _searcher = searcher;
         Services = services;
     }
 
@@ -50,7 +55,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
         var configService = scope.ServiceProvider.GetRequiredService<IConfigService>();
         var messageService = scope.ServiceProvider.GetRequiredService<IMessageService>();
         var pwdRemindUpdateTime = sysUser.PwdRemindUpdateTime;//获取上次提醒修改密码时间
-        var loginPolicy = await configService.GetListByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
+        var loginPolicy = await configService.GetConfigsByCategory(CateGoryConst.CONFIG_PWD_POLICY);//获取密码策略
         //获取用户token列表
         var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, sysUser.Id.ToString());
         var userToken = tokenInfos.Where(it => it.Token == loginEvent.Token).FirstOrDefault();
@@ -148,10 +153,8 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
     {
         try
         {
-            var ipInfo = IpTool.Search(ip);
-            var loginAddressList = new List<string> { ipInfo.Country, ipInfo.Province, ipInfo.City, ipInfo.NetworkOperator };//定义登录地址列表
-            var loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
-            return loginAddress;
+            var ipInfo = _searcher.Search(ip).Replace("0|", "");//解析ip并格式化
+            return ipInfo;
         }
         catch
         {

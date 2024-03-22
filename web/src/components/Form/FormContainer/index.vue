@@ -1,4 +1,8 @@
-<!-- 表单容器组件 -->
+<!-- 
+ * @Description: 表单容器组件
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:02
+!-->
 <template>
   <!-- 抽屉 -->
   <el-drawer v-if="globalStore.drawerForm" v-model="visible" :destroy-on-close="true" :size="formProps.formSize" v-bind="$attrs" @close="close">
@@ -33,4 +37,8 @@ function close() {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+:deep(.el-dialog__body) {
+  margin-top: 20px;
+}
+</style>

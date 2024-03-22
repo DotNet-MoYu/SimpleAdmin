@@ -1,4 +1,8 @@
-<!-- 操作按钮封装 -->
+<!-- 
+ * @Description: 操作按钮封装
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:07
+!-->
 <template>
   <el-button type="primary" :icon="icon" v-bind="$attrs">
     <slot>{{ getTitle }}</slot>

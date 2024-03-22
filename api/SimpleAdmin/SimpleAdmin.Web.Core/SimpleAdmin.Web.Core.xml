@@ -44,6 +44,25 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.OrgTreeSelector">
+            <summary>
+            获取机构树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+            <summary>
+            获取人员选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            机构详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.BizOrgController.Add(SimpleAdmin.System.SysOrgAddInput)">
             <summary>
             添加机构
@@ -72,33 +91,34 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.OrgTreeSelector">
-            <summary>
-            获取机构树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
-            <summary>
-            获取人员选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.BizOrgController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            测试详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.BizPositionController">
             <summary>
             岗位管理控制器
             </summary>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Tree(SimpleAdmin.System.PositionTreeInput)">
+            <summary>
+            获取职位树
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.Web.Core.BizPositionController.Page(SimpleAdmin.System.PositionPageInput)">
             <summary>
             岗位分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            岗位详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Selector(SimpleAdmin.System.PositionSelectorInput)">
+            <summary>
+            岗位选择器
             </summary>
             <param name="input"></param>
             <returns></returns>
@@ -124,18 +144,90 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Detail(SimpleAdmin.Core.BaseIdInput)">
+        <member name="T:SimpleAdmin.Web.Core.BizRoleController">
             <summary>
-            测试详情
+            业务角色管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Page(SimpleAdmin.System.RolePageInput)">
+            <summary>
+            角色分页查询
             </summary>
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizPositionController.Selector(SimpleAdmin.System.PositionSelectorInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Add(SimpleAdmin.System.RoleAddInput)">
             <summary>
-            岗位选择器
+            添加角色
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Edit(SimpleAdmin.System.RoleEditInput)">
+            <summary>
+            修改角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.ResourceTreeSelector">
+            <summary>
+            获取角色授权资源树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.OwnResource(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色拥有资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            给角色授权资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色下的用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <summary>
+            给角色授权用户
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Tree(SimpleAdmin.System.RoleTreeInput)">
+            <summary>
+            获取角色树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.BizRoleController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            获取角色选择器
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.BizUserController">
@@ -156,12 +248,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Page(SimpleAdmin.System.UserPageInput)">
             <summary>
             人员分页查询
@@ -169,7 +255,7 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Web.Core.BizUserController.Selector(SimpleAdmin.System.UserSelectorInput)">
             <summary>
             获取人员选择器
             </summary>
@@ -180,12 +266,6 @@
             获取人员拥有角色
             </summary>
             <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.BizUserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <summary>
-            获取角色选择器
-            </summary>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.BizUserController.Detail(SimpleAdmin.Core.BaseIdInput)">
@@ -419,6 +499,35 @@
             批量更新同步
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.CommonController">
+            <summary>
+            系统通用控制器,一般是一些公共的接口
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.CommonController.Ico">
+            <summary>
+            获取系统基础配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.CommonController.SysInfo">
+            <summary>
+            获取系统基础配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.CommonController.LoginPolicy">
+            <summary>
+            获取系统基础配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.CommonController.TenantList">
+            <summary>
+            获取租户列表
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.FileController">
@@ -754,18 +863,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.RoleController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.RoleController.UserSelector(SimpleAdmin.System.UserSelectorInput)">
-            <summary>
-            获取用户选择器
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.RoleController.OwnUser(SimpleAdmin.Core.BaseIdInput)">
             <summary>
             获取角色下的用户
@@ -791,6 +888,12 @@
             获取角色详情
             </summary>
             <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.RoleController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            获取角色选择器
+            </summary>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.SpaController">
@@ -913,11 +1016,10 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.ConfigController.List(System.String)">
+        <member name="M:SimpleAdmin.Web.Core.ConfigController.List">
             <summary>
-            获取配置列表
+            获取系统配置列表
             </summary>
-            <param name="category">分类</param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.ConfigController.Page(SimpleAdmin.System.ConfigPageInput)">
@@ -1116,18 +1218,6 @@
             用户管理控制器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserController.OrgTreeSelector">
-            <summary>
-            获取组织树选择器
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserController.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
-            <summary>
-            获取角色选择器
-            </summary>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.UserController.Page(SimpleAdmin.System.UserPageInput)">
             <summary>
             用户分页查询
@@ -1273,6 +1363,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.UploadController.UploadImg(Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>1
+            上传图片
+            </summary>
+            <param name="file"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.UserCenterController">
             <summary>
             用户个人信息控制器
@@ -1290,31 +1387,10 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
-            <summary>
-            编辑个人信息
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
-            <summary>
-            更新签名
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginOrgTree">
             <summary>
             获取组织架构
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
-            <summary>
-            编辑工作台
-            </summary>
-            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
@@ -1363,6 +1439,34 @@
             修改默认模块
             </summary>
             <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.ShortcutTree">
+            <summary>
+            快捷方式菜单树
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <summary>
+            编辑个人信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateSignature(SimpleAdmin.System.UpdateSignatureInput)">
+            <summary>
+            更新签名
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
+            <summary>
+            编辑工作台
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Web.Core.MyActionFilter">
             <summary>
@@ -1657,6 +1761,16 @@
         <member name="P:SimpleAdmin.Web.Core.Validation.Message">
             <summary>
             错误详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.WebStatusMiddleware">
+            <summary>
+             网站开启状态 状态中间件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.WebStatusMiddlewareExtensions">
+            <summary>
+            中间件拓展类
             </summary>
         </member>
         <member name="T:SimpleAdmin.Web.Core.WebSettingsOptions">

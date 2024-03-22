@@ -4,3 +4,4 @@ export * from "./keepAlive";
 export * from "./tabs";
 export * from "./user";
 export * from "./dict";
+export * from "./config";

@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 using System.ComponentModel;
@@ -14,10 +16,12 @@ namespace SimpleAdmin.System;
 public class ResourceService : DbRepository<SysResource>, IResourceService
 {
     private readonly ISimpleCacheService _simpleCacheService;
+    private readonly IRelationService _relationService;
 
-    public ResourceService(ISimpleCacheService simpleCacheService)
+    public ResourceService(ISimpleCacheService simpleCacheService, IRelationService relationService)
     {
         _simpleCacheService = simpleCacheService;
+        _relationService = relationService;
     }
 
     /// <inheritdoc />
@@ -56,7 +60,7 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     }
 
     /// <inheritdoc/>
-    public async Task<List<SysResource>> GetaModuleAndMenuAndSpaList()
+    public async Task<List<SysResource>> GetAllModuleAndMenuAndSpaList()
     {
         //获取所有的菜单和模块以及单页面列表，
         var sysResources = await GetListAsync(new List<string>
@@ -172,12 +176,13 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public List<PermissionTreeSelector> PermissionTreeSelector(List<string> routes)
     {
         var permissions = new List<PermissionTreeSelector>();//权限列表
-
-        // 获取所有需要数据权限的控制器
         var controllerTypes =
-            App.EffectiveTypes.Where(u => !u.IsInterface && !u.IsAbstract && u.IsClass && u.IsDefined(typeof(RolePermissionAttribute), false));
+            App.EffectiveTypes.Where(u =>
+                !u.IsInterface && !u.IsAbstract && u.IsDefined(typeof(RolePermissionAttribute), false));
         foreach (var controller in controllerTypes)
         {
+            var apiAttribute = controller.GetCustomAttribute<ApiDescriptionSettingsAttribute>();//获取接口描述特性
+            var tag = apiAttribute.Tag;//获取标签
             //获取数据权限特性
             var routeAttributes = controller.GetCustomAttributes<RouteAttribute>().ToList();
             if (routeAttributes == null)
@@ -214,9 +219,11 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
                                     apiRoute = requestPost.Template;
                             }
                             apiRoute = route.Template + $"/{apiRoute}";
+                            if (!apiRoute.StartsWith("/"))
+                                apiRoute = "/" + apiRoute;//如果路由地址不是/开头则加上/防止控制器没写
                             var apiName = displayName.DisplayName;//如果描述不为空则接口名称用描述的名称
                             //合并
-                            var permissionName = apiRoute + $"[{apiName}]";
+                            var permissionName = apiRoute + $"[{tag}-{apiName}]";
                             //添加到权限列表
                             permissions.Add(new PermissionTreeSelector
                             {
@@ -396,13 +403,9 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
         return roleGrantResourceMenus;
     }
 
-    /// <summary>
-    /// 获取授权菜单类菜单名称
-    /// </summary>
-    /// <param name="menuList">菜单列表</param>
-    /// <param name="menu">当前菜单</param>
-    /// <returns></returns>
-    private string GetRoleGrantResourceMenuTitle(List<SysResource> menuList, SysResource menu)
+
+    /// <inheritdoc />
+    public string GetRoleGrantResourceMenuTitle(List<SysResource> menuList, SysResource menu)
     {
         //查找菜单上级
         var parentList = GetResourceParent(menuList, menu.ParentId.Value);

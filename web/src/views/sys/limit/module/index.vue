@@ -1,7 +1,11 @@
-<!-- 模块管理 -->
+<!-- 
+ * @Description: 模块管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:19
+!-->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="模块列表" :columns="columns" :request-api="moduleApi.modulePage">
+    <ProTable ref="proTable" title="模块列表" :columns="columns" :request-api="moduleApi.page">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="模块" @click="onOpen(FormOptEnum.ADD)" />
@@ -84,7 +88,7 @@ function onOpen(opt: FormOptEnum, record: {} | Module.ModuleInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(moduleApi.moduleDelete, { ids }, msg);
+  await useHandleData(moduleApi.delete, { ids }, msg);
   RefreshTable();
 }
 

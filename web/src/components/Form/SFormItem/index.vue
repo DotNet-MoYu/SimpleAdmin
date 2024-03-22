@@ -1,4 +1,8 @@
-<!-- 表单Item组件封装 -->
+<!-- 
+ * @Description: 表单Item组件封装
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:14
+!-->
 <template>
   <el-form-item ref="formItemRef" v-bind="$attrs">
     <slot></slot>

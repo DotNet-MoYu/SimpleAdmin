@@ -151,6 +151,13 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Application.IPositionService.Tree(SimpleAdmin.System.PositionTreeInput)">
+            <summary>
+            岗位树形结构
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Application.PositionService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.Application.IPositionService"/>
@@ -159,13 +166,10 @@
         <member name="M:SimpleAdmin.Application.PositionService.Page(SimpleAdmin.System.PositionPageInput)">
             <inheritdoc />
         </member>
+        <member name="M:SimpleAdmin.Application.PositionService.Tree(SimpleAdmin.System.PositionTreeInput)">
+            <inheritdoc/>
+        </member>
         <member name="M:SimpleAdmin.Application.PositionService.Add(SimpleAdmin.System.PositionAddInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.Application.PositionService.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.Application.PositionService.Edit(SimpleAdmin.System.PositionEditInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.Application.PositionService.Selector(SimpleAdmin.System.PositionSelectorInput)">
@@ -174,12 +178,156 @@
         <member name="M:SimpleAdmin.Application.PositionService.Detail(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc />
         </member>
+        <member name="M:SimpleAdmin.Application.PositionService.Edit(SimpleAdmin.System.PositionEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Application.PositionService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
         <member name="M:SimpleAdmin.Application.PositionService.CheckInput(SimpleAdmin.System.SysPosition,System.String)">
             <summary>
             检查输入参数
             </summary>
             <param name="sysPosition">参数</param>
             <param name="operate">操作名称</param>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+            <summary>
+            角色拥有资源
+            </summary>
+            <param name="input">角色id</param>
+            <param name="category">资源类型</param>
+            <returns>角色拥有资源信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色下的用户
+            </summary>
+            <param name="input">角色ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Page(SimpleAdmin.System.RolePageInput)">
+            <summary>
+            分页查询角色
+            </summary>
+            <param name="input">查询参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <summary>
+            角色选择器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
+            <summary>
+            获取角色树
+            </summary>
+            <param name="input">角色树</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            角色详情
+            </summary>
+            <param name="input">角色Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.ResourceTreeSelector">
+            <summary>
+            资源树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Add(SimpleAdmin.System.RoleAddInput)">
+            <summary>
+            添加角色
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+            <summary>
+            编辑角色
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            给角色授权
+            </summary>
+            <param name="input">授权参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <summary>
+            给角色授权用户
+            </summary>
+            <param name="input">授权信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Application.IRoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除角色
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Application.RoleService">
+            <inheritdoc cref="T:SimpleAdmin.Application.IRoleService"/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.OwnResource(SimpleAdmin.Core.BaseIdInput,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.OwnUser(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Page(SimpleAdmin.System.RolePageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Tree(SimpleAdmin.System.RoleTreeInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.ResourceTreeSelector">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Add(SimpleAdmin.System.RoleAddInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Edit(SimpleAdmin.System.RoleEditInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.GrantResource(SimpleAdmin.System.GrantResourceInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.GrantUser(SimpleAdmin.System.GrantUserInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.CheckInput(SimpleAdmin.System.SysRole)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysRole"></param>
+        </member>
+        <member name="M:SimpleAdmin.Application.RoleService.GetRoleGrantResourceMenus(System.Int64,System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">
+            <summary>
+            获取授权菜单
+            </summary>
+            <param name="moduleId">模块Id</param>
+            <param name="ownMenuList">拥有菜单列表</param>
+            <param name="ownButtonList">拥有权限按钮列表</param>
+            <returns></returns>
         </member>
         <member name="T:SimpleAdmin.Application.BizUserImportInput">
             <summary>
@@ -196,7 +344,7 @@
             人员管理服务
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Application.IUserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Application.IUserService.Selector(SimpleAdmin.System.UserSelectorInput)">
             <summary>
             人员选择器
             </summary>
@@ -325,7 +473,7 @@
         <member name="M:SimpleAdmin.Application.UserService.OwnRole(SimpleAdmin.Core.BaseIdInput)">
             <inheritdoc/>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.UserSelector(SimpleAdmin.System.UserSelectorInput)">
+        <member name="M:SimpleAdmin.Application.UserService.Selector(SimpleAdmin.System.UserSelectorInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.RoleSelector(SimpleAdmin.System.RoleSelectorInput)">
@@ -377,14 +525,12 @@
             <param name="sysUser"></param>
             <param name="operate">操作类型</param>
         </member>
-        <member name="M:SimpleAdmin.Application.UserService.CheckPermission(System.Int64,System.String,System.Collections.Generic.List{System.Int64})">
+        <member name="M:SimpleAdmin.Application.UserService.CheckInput(System.Int64,System.String)">
             <summary>
-            检查权限
+            检查输入参数
             </summary>
             <param name="userId">用户ID</param>
-            <param name="operate">操作名称</param>
-            <param name="dataScope">数据范围</param>
-            <returns></returns>
+            <param name="operate">操作</param>
         </member>
         <member name="M:SimpleAdmin.Application.UserService.CheckImport(System.Collections.Generic.List{SimpleAdmin.Application.BizUserImportInput},System.Collections.Generic.List{System.Int64},System.Boolean)">
             <summary>

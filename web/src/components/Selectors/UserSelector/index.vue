@@ -1,42 +1,49 @@
-<!-- 用户选择器 -->
+<!-- 
+ * @Description: 用户选择器
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:40:45
+!-->
 <template>
-  <form-container v-model="visible" title="用户选择" form-size="90%" v-bind="$attrs">
+  <form-container v-model="visible" :title="`${userName}选择`" form-size="90%" v-bind="$attrs">
     <div class="-mt-15px min-h-350px">
       <el-row :gutter="12" justify="space-between">
         <el-col :span="4">
-          <el-tabs v-model="activeName" type="card" stretch>
-            <el-tab-pane label="组织" class="ml-5px mr-5px" name="org">
+          <el-tabs v-model="activeName" type="card" stretch class="min-h-350px">
+            <el-tab-pane :label="`${orgName}`" class="ml-5px mr-5px" name="org">
               <el-scrollbar max-height="650px">
                 <TreeFilter
                   label="name"
                   class="filterWidth"
-                  title="组织列表"
+                  :title="`${orgName}列表`"
+                  :show-all="!biz"
                   :default-expand-all="false"
-                  :request-api="getOrgTree"
+                  :request-api="orgTreeApi"
                   @change="changeOrgTreeFilter"
                 />
               </el-scrollbar>
             </el-tab-pane>
-            <el-tab-pane label="职位" class="ml-5px mr-5px" name="pos">
+            <el-tab-pane v-if="positionTreeApi" :label="`${positionName}`" class="ml-5px mr-5px" name="pos">
               <el-scrollbar max-height="650px">
                 <TreeFilter
                   label="name"
                   class="filterWidth"
-                  title="职位列表"
+                  :title="`${positionName}列表`"
+                  :show-all="!biz"
                   :default-expand-all="false"
-                  :request-api="getPositionTree"
+                  :request-api="positionTreeApi"
                   @change="changePositionTreeFilter"
                 />
               </el-scrollbar>
             </el-tab-pane>
-            <el-tab-pane label="角色" class="ml-5px mr-5px" name="role">
+            <el-tab-pane v-if="roleTreeApi" label="角色" class="ml-5px mr-5px" name="role">
               <el-scrollbar max-height="650px">
                 <TreeFilter
                   label="name"
                   class="filterWidth"
                   title="角色列表"
+                  :show-all="!biz"
                   :default-expand-all="false"
-                  :request-api="getRoleTree"
+                  :request-api="roleTreeApi"
                   @change="changeRoleTreeFilter"
                 />
               </el-scrollbar>
@@ -44,7 +51,7 @@
           </el-tabs>
         </el-col>
         <el-col :span="10">
-          <ProTable ref="userTable" :columns="columns" :tool-button="false" :init-param="initParam" :request-api="getUserPage">
+          <ProTable ref="userTable" :columns="columns" :tool-button="false" :init-param="initParam" :request-api="userSelectorApi">
             <!-- 表格 header 按钮 -->
             <template #tableHeader="scope">
               <el-button type="primary" @click="addRecords(userTable!.tableData)">添加当前</el-button>
@@ -65,7 +72,7 @@
             </template>
             <template #toolButton>
               <span>已选择:{{ chooseData.length }}人</span>
-              <span>,最多选择:{{ props.maxCount }}人</span>
+              <span v-if="maxCount">,最多选择:{{ maxCount }}人</span>
             </template>
             <!-- 操作 -->
             <template #operation="scope">
@@ -76,14 +83,16 @@
       </el-row>
     </div>
     <template #footer>
-      <el-button @click="onClose"> 取消 </el-button>
-      <el-button type="primary" @click="handleOk"> 确定 </el-button>
+      <div class="mt-20px">
+        <el-button @click="onClose"> 取消 </el-button>
+        <el-button type="primary" @click="handleOk"> 确定 </el-button>
+      </div>
     </template>
   </form-container>
 </template>
 
 <script setup lang="ts" name="UserSelector">
-import { SysUser, sysOrgApi, sysUserApi, SysPosition, sysPositionApi, SysRole, sysRoleApi } from "@/api";
+import { SysUser, SysPosition, SysRole } from "@/api";
 import { UserSelectProps, UserSelectTableInitParams } from "./interface";
 import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import { ElMessage } from "element-plus";
@@ -97,10 +106,14 @@ const visible = ref(false); //是否显示
 
 // 定义组件props
 const props = withDefaults(defineProps<UserSelectProps>(), {
-  permission: false,
   multiple: false,
-  maxCount: 1
+  biz: false
 });
+
+// 根据是否业务显示不同名称
+const userName = props.biz ? "人员" : "用户";
+const positionName = props.biz ? "职位" : "岗位";
+const orgName = props.biz ? "机构" : "组织";
 
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive<UserSelectTableInitParams>({});
@@ -136,40 +149,6 @@ function handleOk() {
   emit("successful", chooseData.value);
 }
 
-/** 获取组织树 */
-async function getOrgTree(): Promise<any> {
-  if (props.permission) {
-    return await sysOrgApi.sysOrgTree();
-  }
-  return await sysOrgApi.sysOrgTree();
-}
-
-/** 获取职位树 */
-async function getPositionTree(): Promise<any> {
-  if (props.permission) {
-    return await sysPositionApi.positionTree();
-  }
-  return await sysPositionApi.positionTree();
-}
-
-/** 获取角色树 */
-async function getRoleTree(): Promise<any> {
-  if (props.permission) {
-    return await sysRoleApi.sysRoleTree();
-  }
-  return await sysRoleApi.sysRoleTree();
-}
-
-// 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
-// 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
-/** 获取用户分页 */
-async function getUserPage(params: any) {
-  if (props.permission) {
-    return await sysUserApi.sysUserSelector(params);
-  }
-  return await sysUserApi.sysUserSelector(params);
-}
-
 /** 部门切换 */
 function changeOrgTreeFilter(val: number | string) {
   userTable.value!.pageable.pageNum = 1;
@@ -184,27 +163,21 @@ function changeOrgTreeFilter(val: number | string) {
 /** 职位切换 */
 function changePositionTreeFilter(val: number | string, data: SysPosition.SysPositionTree) {
   userTable.value!.pageable.pageNum = 1;
-  console.log("[ data ] >", data);
   if (data.isPosition) {
     // 如果是职位
     initParam.positionId = val;
-  }
-  if (val == "") {
-    // 如果传入的val不为空
+  } else {
     initParam.positionId = null;
   }
 }
-
-/** 职位切换 */
+/** 角色切换 */
 function changeRoleTreeFilter(val: number | string, data: SysRole.SysRoleTree) {
   userTable.value!.pageable.pageNum = 1;
-  console.log("[ data ] >", data);
   if (data.isRole) {
     // 如果是角色
     initParam.roleId = val;
-  }
-  if (val == "") {
-    // 如果传入的val不为空
+  } else {
+    // 置空
     initParam.roleId = null;
   }
 }
@@ -224,7 +197,7 @@ function addRecords(records: any[]) {
     chooseDataTmp.value = chooseData.value;
   } else {
     //如果是多选,先判断已添加列表是否有重复,有则过滤掉,没有则直接添加
-    records = records.filter(item => !chooseData.value.includes(item));
+    records = records.filter(item => !chooseData.value.find(it => it.id == item.id));
     if (props.maxCount && props.maxCount < records.length + chooseData.value.length) {
       ElMessage.warning("最多选择" + props.maxCount + "条");
       return;

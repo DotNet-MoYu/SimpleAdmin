@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.System.Services.Auth;
@@ -34,7 +36,7 @@ public class AuthService : IAuthService
         var captchaType = (CaptchaType)Enum.Parse(typeof(CaptchaType), config.ConfigValue);
         //生成验证码
         var captchaInfo = CaptchaUtil.CreateCaptcha(captchaType, 4, 100, 38);
-        //生成请求号，并将验证码放入redis
+        //生成请求号，并将验证码放入缓存
         var reqNo = AddValidCodeToRedis(captchaInfo.Code);
         //返回验证码和请求号
         return new PicValidCodeOutPut
@@ -60,7 +62,7 @@ public class AuthService : IAuthService
 
         #endregion 发送短信和记录数据库等操作
 
-        //生成请求号，并将验证码放入redis
+        //生成请求号，并将验证码放入缓存
         var reqNo = AddValidCodeToRedis(phoneValidCode);
         return reqNo;
     }
@@ -68,32 +70,25 @@ public class AuthService : IAuthService
     /// <inheritdoc/>
     public async Task<LoginOutPut> Login(LoginInput input, LoginClientTypeEnum loginClientType)
     {
-        //判断是否有验证码
-        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY, SysConfigConst.LOGIN_CAPTCHA_OPEN);
-        if (sysBase != null)//如果有这个配置项
-        {
-            if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
-            {
-                //如果没填验证码，提示验证码不能为空
-                if (string.IsNullOrEmpty(input.ValidCode) || string.IsNullOrEmpty(input.ValidCodeReqNo))
-                    throw Oops.Bah("验证码不能为空").StatusCode(410);
-                ValidValidCode(input.ValidCode, input.ValidCodeReqNo);//校验验证码
-            }
-        }
+        await CheckCaptcha(input);//检查验证码
+        await CheckWebOpen(input);//检查网站是否开启
         var password = CryptogramUtil.Sm2Decrypt(input.Password);//SM2解密
-        var loginPolicy = await _configService.GetListByCategory(CateGoryConst.CONFIG_LOGIN_POLICY);
-        BeforeLogin(loginPolicy, input.Account);//登录前校验
+        //获取多租户配置
+        var isTenant = await _configService.IsTenant();
+        //获取登录策略
+        var loginPolicy = await _configService.GetConfigsByCategory(CateGoryConst.CONFIG_LOGIN_POLICY);
+        await BeforeLogin(loginPolicy, input, isTenant);//登录前校验
         // 根据账号获取用户信息，根据B端或C端判断
         if (loginClientType == LoginClientTypeEnum.B)//如果是B端
         {
-            var userInfo = await _userService.GetUserByAccount(input.Account);//获取用户信息
+            var userInfo = await _userService.GetUserByAccount(input.Account, input.TenantId);//获取用户信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
             if (userInfo.Password != password)
             {
-                LoginError(loginPolicy, input.Account);//登录错误操作
+                LoginError(loginPolicy, input, isTenant);//登录错误操作
                 throw Oops.Bah("账号密码错误");//账号密码错误
             }
-            var result = await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
+            var result = await ExecLoginB(userInfo, input.Device, loginClientType, input.TenantId);// 执行B端登录
             return result;
         }
         //执行c端登录
@@ -109,7 +104,7 @@ public class AuthService : IAuthService
         {
             var userInfo = await _userService.GetUserByPhone(input.Phone);//获取信息
             if (userInfo == null) throw Oops.Bah("用户不存在");//用户不存在
-            var result = await ExecLoginB(userInfo, input.Device, loginClientType);// 执行B端登录
+            var result = await ExecLoginB(userInfo, input.Device, loginClientType, input.TenantId);// 执行B端登录
             RemoveValidCodeFromRedis(input.ValidCodeReqNo);//删除验证码
             return result;
         }
@@ -121,7 +116,7 @@ public class AuthService : IAuthService
     public async Task LoginOut(string token, LoginClientTypeEnum loginClientType)
     {
         //获取用户信息
-        var userinfo = await _userService.GetUserByAccount(UserManager.UserAccount);
+        var userinfo = await _userService.GetUserByAccount(UserManager.UserAccount, UserManager.TenantId);
         if (userinfo != null)
         {
             var loginEvent = new LoginEvent
@@ -139,7 +134,7 @@ public class AuthService : IAuthService
     /// <inheritdoc/>
     public async Task<LoginUserOutput> GetLoginUser()
     {
-        var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount);//根据账号获取用户信息
+        var userInfo = await _userService.GetUserByAccount(UserManager.UserAccount, UserManager.TenantId);//根据账号获取用户信息
         if (userInfo != null)
         {
             userInfo.Avatar = await _userService.GetUserAvatar(userInfo.Id);//获取头像
@@ -151,15 +146,80 @@ public class AuthService : IAuthService
     #region 方法
 
     /// <summary>
+    /// 检查验证码
+    /// </summary>
+    /// <param name="input"></param>
+    /// <exception cref="AppFriendlyException"></exception>
+    public async Task CheckCaptcha(LoginInput input)
+    {
+        //判断是否有验证码
+        var sysBase = await _configService.GetByConfigKey(CateGoryConst.CONFIG_LOGIN_POLICY, SysConfigConst.LOGIN_CAPTCHA_OPEN);
+        if (sysBase != null)//如果有这个配置项
+        {
+            if (sysBase.ConfigValue.ToBoolean())//如果需要验证码
+            {
+                //如果没填验证码，提示验证码不能为空
+                if (string.IsNullOrEmpty(input.ValidCode) || string.IsNullOrEmpty(input.ValidCodeReqNo))
+                    throw Oops.Bah("验证码不能为空").StatusCode(410);
+                ValidValidCode(input.ValidCode, input.ValidCodeReqNo);//校验验证码
+            }
+        }
+    }
+
+    /// <summary>
+    /// 检查网站是否开启
+    /// </summary>
+    /// <param name="input"></param>
+    /// <exception cref="AppFriendlyException"></exception>
+    public async Task CheckWebOpen(LoginInput input)
+    {
+        //判断是否开启web访问
+        var webStatus = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE, SysConfigConst.SYS_WEB_STATUS);
+        if (webStatus != null && webStatus.ConfigValue == CommonStatusConst.DISABLED
+            && input.Account.ToLower() != SysRoleConst.SUPER_ADMIN.ToLower())//如果禁用了网站并且不是超级管理员
+        {
+            var closePrompt = await _configService.GetByConfigKey(CateGoryConst.CONFIG_SYS_BASE, SysConfigConst.SYS_WEB_CLOSE_PROMPT);
+            throw Oops.Bah(closePrompt.ConfigValue);
+        }
+    }
+
+    /// <summary>
     /// 登录之前执行的方法
     /// </summary>
     /// <param name="loginPolicy"></param>
-    /// <param name="userName"></param>
-    public void BeforeLogin(List<SysConfig> loginPolicy, string userName)
+    /// <param name="input"></param>
+    /// <param name="isTenant"></param>
+    public async Task BeforeLogin(List<SysConfig> loginPolicy, LoginInput input, bool isTenant)
     {
         var lockTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_LOCK).ConfigValue.ToInt();//获取锁定时间
         var errorCount = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_COUNT).ConfigValue.ToInt();//获取错误次数
-        var key = SystemConst.CACHE_LOGIN_ERROR_COUNT + userName;//获取登录错误次数Key值
+        var key = SystemConst.CACHE_LOGIN_ERROR_COUNT;//获取登录错误次数Key值
+        //如果是关闭多租户则直接用账号
+        if (!isTenant)
+            key += input.Account;
+        else
+        {
+            //如果租户ID为空表示用域名登录
+            if (input.TenantId == null)
+            {
+                //获取域名
+                var origin = App.HttpContext.Request.Headers["Origin"].ToString();
+                // 如果Origin头不存在，可以尝试使用Referer头作为备选
+                if (string.IsNullOrEmpty(origin))
+                    origin = App.HttpContext.Request.Headers["Referer"].ToString();
+                //根据域名获取二级域名
+                var domain = origin.Split("//")[1].Split(".")[0];
+                //根据二级域名获取租户
+                var tenantList = await _sysOrgService.GetTenantList();
+                var tenant = tenantList.FirstOrDefault(x => x.Code.ToLower() == domain);//获取租户默认是机构编码
+                if (tenant != null)
+                    input.TenantId = tenant.Id;
+                else
+                    throw Oops.Bah("租户不存在");
+            }
+            //如果是手动选择多租户则用账号+租户
+            key += $"{input.TenantId}:{input.Account}";
+        }
         var errorCountCache = _simpleCacheService.Get<int>(key);//获取登录错误次数
         if (errorCountCache >= errorCount)
         {
@@ -172,11 +232,20 @@ public class AuthService : IAuthService
     /// 登录错误操作
     /// </summary>
     /// <param name="loginPolicy"></param>
-    /// <param name="userName"></param>
-    public void LoginError(List<SysConfig> loginPolicy, string userName)
+    /// <param name="input"></param>
+    /// <param name="isTenant"></param>
+    public void LoginError(List<SysConfig> loginPolicy, LoginInput input, bool isTenant)
     {
         var resetTime = loginPolicy.First(x => x.ConfigKey == SysConfigConst.LOGIN_ERROR_RESET_TIME).ConfigValue.ToInt();//获取重置时间
-        var key = SystemConst.CACHE_LOGIN_ERROR_COUNT + userName;//获取登录错误次数Key值
+        var key = SystemConst.CACHE_LOGIN_ERROR_COUNT;//获取登录错误次数Key值
+        //如果是关闭多租户则直接用账号
+        if (!isTenant)
+            key += input.Account;
+        else
+        {
+            //如果是手动选择多租户则用账号+租户
+            key += $"{input.TenantId}:{input.Account}";
+        }
         _simpleCacheService.Increment(key, 1);// 登录错误次数+1
         _simpleCacheService.SetExpire(key, TimeSpan.FromMinutes(resetTime));//设置过期时间
     }
@@ -190,7 +259,7 @@ public class AuthService : IAuthService
     public void ValidValidCode(string validCode, string validCodeReqNo, bool isDelete = true)
     {
         var key = SystemConst.CACHE_CAPTCHA + validCodeReqNo;//获取验证码Key值
-        var code = _simpleCacheService.Get<string>(key);//从redis拿数据
+        var code = _simpleCacheService.Get<string>(key);//从缓存拿数据
         if (isDelete) RemoveValidCodeFromRedis(validCodeReqNo);//如果需要删除验证码
         if (code != null && validCode != null)//如果有
         {
@@ -239,7 +308,7 @@ public class AuthService : IAuthService
     }
 
     /// <summary>
-    /// 添加验证码到redis
+    /// 添加验证码到缓存
     /// </summary>
     /// <param name="code">验证码</param>
     /// <param name="expire">过期时间</param>
@@ -248,7 +317,7 @@ public class AuthService : IAuthService
     {
         //生成请求号
         var reqNo = CommonUtils.GetSingleId().ToString();
-        //插入redis
+        //插入缓存
         _simpleCacheService.Set(SystemConst.CACHE_CAPTCHA + reqNo, code, TimeSpan.FromMinutes(expire));
         return reqNo;
     }
@@ -259,8 +328,10 @@ public class AuthService : IAuthService
     /// <param name="sysUser">用户信息</param>
     /// <param name="device">登录设备</param>
     /// <param name="loginClientType">登录类型</param>
+    /// <param name="tenantId">租户id</param>
     /// <returns></returns>
-    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device, LoginClientTypeEnum loginClientType)
+    public async Task<LoginOutPut> ExecLoginB(SysUser sysUser, AuthDeviceTypeEnum device, LoginClientTypeEnum loginClientType,
+        long? tenantId)
     {
         if (sysUser.Status == CommonStatusConst.DISABLED)
             throw Oops.Bah("账号已停用");//账号冻结
@@ -284,6 +355,9 @@ public class AuthService : IAuthService
             },
             {
                 ClaimConst.ORG_ID, sysUser.OrgId
+            },
+            {
+                ClaimConst.TENANT_ID, tenantId
             }
         });
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
@@ -302,7 +376,7 @@ public class AuthService : IAuthService
             SysUser = sysUser,
             Token = accessToken
         };
-        await WriteTokenToRedis(loginEvent, loginClientType);//写入token到redis
+        await WriteTokenToRedis(loginEvent, loginClientType);//写入token到缓存
         await _eventPublisher.PublishAsync(EventSubscriberConst.LOGIN_B, loginEvent);//发布登录事件总线
         //返回结果
         return new LoginOutPut
@@ -316,7 +390,7 @@ public class AuthService : IAuthService
     }
 
     /// <summary>
-    /// 写入用户token到redis
+    /// 写入用户token到缓存
     /// </summary>
     /// <param name="loginEvent">登录事件参数</param>
     /// <param name="loginClientType">登录类型</param>
@@ -334,7 +408,7 @@ public class AuthService : IAuthService
             LoginClientType = loginClientType,
             Token = loginEvent.Token
         };
-        //如果redis有数据
+        //如果缓存有数据
         if (tokenInfos != null)
         {
             var isSingle = false;//默认不开启单用户登录
@@ -366,7 +440,7 @@ public class AuthService : IAuthService
     }
 
     /// <summary>
-    /// redis删除用户token
+    /// 缓存删除用户token
     /// </summary>
     /// <param name="loginEvent">登录事件参数</param>
     /// <param name="loginClientType">登录类型</param>
@@ -400,7 +474,7 @@ public class AuthService : IAuthService
     /// <returns>token列表</returns>
     private List<TokenInfo> GetTokenInfos(long userId)
     {
-        //redis获取用户token列表
+        //缓存获取用户token列表
         var tokenInfos = _simpleCacheService.HashGetOne<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, userId.ToString());
         if (tokenInfos != null)
         {

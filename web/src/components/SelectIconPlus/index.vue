@@ -1,4 +1,8 @@
-<!-- 图标选择组件 -->
+<!-- 
+ * @Description: 图标选择组件
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:38:47
+!-->
 <template>
   <div class="icon-box">
     <el-input

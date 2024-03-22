@@ -1,36 +1,106 @@
 {
   "RECORDS": [
     {
-      "Id": "252875263003710",
-      "ConfigKey": "SYS_DEFAULT_DESCRRIPTION",
-      "ConfigValue": "🪶SimpleAdmin是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于小诺2.0版本二次开发,采用Vue3+Vite+Vuex+JS,并在此基础上增加更人性化功能,后端基于.NET6/7+Furion,ORM采用Sqlsugar+单例模式,插件式开发。采用RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制，集成国密加解密，导入导出、导入导出、批量修改等常用插件。后端代码注释覆盖率>90%，并配备超牛皮的代码生成器和超详细的手摸手教学文档，非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。",
+      "Id": "252875233003720",
+      "ConfigKey": "SYS_FOOTER_LINKS",
+      "ConfigValue": "[{\"name\":\"苏ICP备2023040827号\",\"url\":\"https://beian.miit.gov.cn/\",\"sortCode\":1}]",
       "Category": "SYS_BASE",
-      "Remark": "系统描述",
+      "Remark": "底部超链接",
       "SortCode": "1",
-      "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "CreateTime": "2024-1-24 10:32:12.58",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
+    },
+    {
+      "Id": "252875262003737",
+      "ConfigKey": "SYS_TENANT_OPTIONS",
+      "ConfigValue": "CHOSE",
+      "Category": "SYS_BASE",
+      "Remark": "多租户配置",
+      "SortCode": "1",
+      "CreateTime": "2024-1-24 10:32:12.587",
+      "UpdateTime": "2024-2-21 16:42:34.143",
+      "CreateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": ""
+    },
+    {
+      "Id": "252875263002722",
+      "ConfigKey": "SYS_ICO",
+      "ConfigValue": "data:image/x-icon;base64,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",
+      "Category": "SYS_BASE",
+      "Remark": "系统ICO文件",
+      "SortCode": "1",
+      "CreateTime": "",
+      "UpdateTime": "2024-2-21 16:42:34.143",
+      "CreateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": ""
+    },
+    {
+      "Id": "252875263002737",
+      "ConfigKey": "SYS_WEB_STATUS",
+      "ConfigValue": "ENABLE",
+      "Category": "SYS_BASE",
+      "Remark": "网站开启访问",
+      "SortCode": "1",
+      "CreateTime": "2024-1-24 10:32:12.587",
+      "UpdateTime": "2024-2-21 16:42:34.143",
+      "CreateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": ""
+    },
+    {
+      "Id": "252875263003710",
+      "ConfigKey": "SYS_WEB_CLOSE_PROMPT",
+      "ConfigValue": "网站维护中，暂时无法访问！本网站正在进行系统维护和技术升级，网站暂时无法访问，敬请谅解！",
+      "Category": "SYS_BASE",
+      "Remark": "网站关闭提示",
+      "SortCode": "1",
+      "CreateTime": "",
+      "UpdateTime": "2024-2-21 16:42:34.143",
+      "CreateUserId": "",
+      "UpdateUserId": "212725263002001",
+      "CreateUser": "",
+      "UpdateUser": "superAdmin",
+      "IsDelete": "0",
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003720",
       "ConfigKey": "SYS_DEFAULT_WORKBENCH_DATA",
-      "ConfigValue": "{\"shortcut\":[{\"id\":212725263003722,\"title\":\"系统首页\",\"icon\":\"home-outlined\",\"path\":\"/index\"},{\"id\":212725263003723,\"title\":\"个人中心\",\"icon\":\"appstore-outlined\",\"path\":\"/usercenter\"}]}",
+      "ConfigValue": "{\"shortcut\":[212725263003723,212725263003722]}",
       "Category": "SYS_BASE",
       "Remark": "系统默认工作台数据",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003721",
@@ -40,13 +110,14 @@
       "Remark": "系统LOGO",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003722",
@@ -56,29 +127,31 @@
       "Remark": "系统名称",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003723",
       "ConfigKey": "SYS_VERSION",
-      "ConfigValue": "V2.1.0",
+      "ConfigValue": "V3.0.0",
       "Category": "SYS_BASE",
       "Remark": "系统版本",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003724",
@@ -88,29 +161,31 @@
       "Remark": "系统版权",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003725",
       "ConfigKey": "SYS_COPYRIGHT_URL",
-      "ConfigValue": "https://gitee.com/zxzyjs/SimpleAdmin",
+      "ConfigValue": "https://gitee.com/dotnetmoyu/SimpleAdmin",
       "Category": "SYS_BASE",
       "Remark": "系统版权链接地址",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003726",
@@ -120,13 +195,14 @@
       "Remark": "登录验证码开关",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003727",
@@ -136,13 +212,14 @@
       "Remark": "默认文件存储引擎",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-6-6 09:22:59.433",
+      "UpdateTime": "2024-2-21 16:42:34.143",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "252875263003728",
@@ -152,13 +229,14 @@
       "Remark": "默认用户密码",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825413",
@@ -168,13 +246,14 @@
       "Remark": "单用户登录开关",
       "SortCode": "1",
       "CreateTime": "2022-12-16 13:58:23.783",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825414",
@@ -184,13 +263,14 @@
       "Remark": "MQTT服务端地址",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2022-12-26 11:03:32.013",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825415",
@@ -200,13 +280,14 @@
       "Remark": "MQTT用户名",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2022-12-26 11:03:32.013",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825416",
@@ -216,13 +297,14 @@
       "Remark": "MQTT密码",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "2022-12-26 11:03:32.013",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825417",
@@ -232,13 +314,14 @@
       "Remark": "本地文件Windows存储位置",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825418",
@@ -248,13 +331,14 @@
       "Remark": "本地文件Linux存储位置",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825419",
@@ -264,13 +348,14 @@
       "Remark": "MINIO文件AccessKey",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825420",
@@ -280,13 +365,14 @@
       "Remark": "MINIO文件SecetKey",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825421",
@@ -296,13 +382,14 @@
       "Remark": "MINIO文件EndPoint",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "364564896825422",
@@ -312,13 +399,14 @@
       "Remark": "MINIO文件默认存储桶",
       "SortCode": "1",
       "CreateTime": "",
-      "UpdateTime": "",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
       "UpdateUser": "",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432079395405893",
@@ -328,29 +416,31 @@
       "Remark": "验证码类型",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:35:35.663",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432079540875333",
       "ConfigKey": "LOGIN_ERROR_COUNT",
-      "ConfigValue": "5",
+      "ConfigValue": "6",
       "Category": "LOGIN_POLICY",
       "Remark": "登录错误次数",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:36:11.18",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432079718375493",
@@ -360,13 +450,14 @@
       "Remark": "错误重置时间",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:36:54.513",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432079850803269",
@@ -376,13 +467,14 @@
       "Remark": "登录错误锁定时长",
       "SortCode": "99",
       "CreateTime": "2023-6-25 08:37:26.847",
-      "UpdateTime": "2023-8-10 10:37:15.207",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432110816800837",
@@ -392,13 +484,14 @@
       "Remark": "密码定期提醒更新",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:43:26.903",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432110956560453",
@@ -408,13 +501,14 @@
       "Remark": "密码定期提醒更新时间",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:44:01.023",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432111166894149",
@@ -424,13 +518,14 @@
       "Remark": "修改初始密码提醒",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:44:52.377",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432111701160005",
@@ -440,13 +535,14 @@
       "Remark": "密码最小长度",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:47:02.81",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432112135159877",
@@ -456,13 +552,14 @@
       "Remark": "包含数字",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:48:48.77",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432112321953861",
@@ -472,13 +569,14 @@
       "Remark": "包含小写字母",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:49:34.373",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432112380907589",
@@ -488,13 +586,14 @@
       "Remark": "包含大写字母",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:49:48.767",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     },
     {
       "Id": "432112495247429",
@@ -504,13 +603,14 @@
       "Remark": "包含特殊字符",
       "SortCode": "99",
       "CreateTime": "2023-6-25 10:50:16.68",
-      "UpdateTime": "2023-7-24 10:52:36.343",
+      "UpdateTime": "2024-2-18 15:53:20.813",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
       "UpdateUser": "superAdmin",
       "IsDelete": "0",
-      "ExtJson": ""
+      "ExtJson": "",
+      "Status": ""
     }
   ]
 }

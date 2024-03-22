@@ -1,12 +1,13 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-using IPTools.Core;
 using Masuit.Tools;
 using Microsoft.Extensions.Logging;
 using NewLife.Serialization;
@@ -21,13 +22,15 @@ namespace SimpleAdmin.Web.Core;
 /// </summary>
 public class DatabaseLoggingWriter : IDatabaseLoggingWriter
 {
+    private readonly ISearcher _searcher;
     private readonly SqlSugarScope _db;
     private readonly ILogger<DatabaseLoggingWriter> _logger;
 
-    public DatabaseLoggingWriter(ILogger<DatabaseLoggingWriter> logger)
+    public DatabaseLoggingWriter(ILogger<DatabaseLoggingWriter> logger, ISearcher searcher)
     {
         _db = DbContext.DB;
         _logger = logger;
+        _searcher = searcher;
     }
 
     public async void Write(LogMessage logMsg, bool flush)
@@ -111,7 +114,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
             OpUser = name,
             OpAccount = opAccount
         };
-        await _db.InsertableWithAttr(devLogVisit).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
+        await _db.CopyNew().InsertableWithAttr(devLogVisit).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
     }
 
     /// <summary>
@@ -131,7 +134,9 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var opAccount = loggingMonitor.AuthorizationClaims?.Where(it => it.Type == ClaimConst.ACCOUNT).Select(it => it.Value).FirstOrDefault();
 
         //获取参数json字符串，
-        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0 ? null : loggingMonitor.Parameters[0].Value.ToJsonString();
+        var paramJson = loggingMonitor.Parameters == null || loggingMonitor.Parameters.Count == 0
+            ? null
+            : loggingMonitor.Parameters[0].Value.ToJsonString();
 
         //获取结果json字符串
         var resultJson = string.Empty;
@@ -139,7 +144,9 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             if (loggingMonitor.ReturnInformation.Value != null)//如果返回值不为空
             {
-                var time = loggingMonitor.ReturnInformation.Value.Time != null ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time) : DateTime.Now;//转成时间
+                var time = loggingMonitor.ReturnInformation.Value.Time != null
+                    ? DateTime.Parse(loggingMonitor.ReturnInformation.Value.Time)
+                    : DateTime.Now;//转成时间
                 loggingMonitor.ReturnInformation.Value.Time = time.ToString(CultureInfo.CurrentCulture);//转成字符串
                 resultJson = loggingMonitor.ReturnInformation.Value.ToJsonString();
             }
@@ -170,9 +177,10 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         {
             devLogOperate.Category = CateGoryConst.LOG_EXCEPTION;//操作类型为异常
             devLogOperate.ExeStatus = SysLogConst.FAIL;//操作状态为失败
-            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":" + loggingMonitor.Exception.Message + "\n" + loggingMonitor.Exception.StackTrace;
+            devLogOperate.ExeMessage = loggingMonitor.Exception.Type + ":" + loggingMonitor.Exception.Message + "\n"
+                + loggingMonitor.Exception.StackTrace;
         }
-        await _db.InsertableWithAttr(devLogOperate).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
+        await _db.CopyNew().InsertableWithAttr(devLogOperate).IgnoreColumns(true).SplitTable().ExecuteCommandAsync();//入库
     }
 
     /// <summary>
@@ -185,15 +193,8 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         var loginAddress = "未知";
         try
         {
-            var ipInfo = IpTool.Search(ip);//解析IP信息
-            var loginAddressList = new List<string>
-            {
-                ipInfo.Country,
-                ipInfo.Province,
-                ipInfo.City,
-                ipInfo.NetworkOperator
-            };//定义登录地址列表
-            loginAddress = string.Join("|", loginAddressList.Where(it => it != "0").ToList());//过滤掉0的信息并用|连接成字符串
+            var ipInfo = _searcher.Search(ip);//解析ip
+            loginAddress = ipInfo?.Replace("0|", "");//去掉前面的0|
         }
         catch (global::System.Exception ex)
         {

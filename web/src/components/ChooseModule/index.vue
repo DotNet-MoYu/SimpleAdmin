@@ -1,4 +1,8 @@
-<!-- 选择模块组件 -->
+<!-- 
+ * @Description: 选择模块组件
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:37:35
+!-->
 <template>
   <el-dialog
     v-model="showModal"

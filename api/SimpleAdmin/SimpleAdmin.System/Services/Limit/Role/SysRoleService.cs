@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.System;
@@ -70,7 +72,9 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
     public async Task<SqlSugarPagedList<SysRole>> Page(RolePageInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
-        var query = Context.Queryable<SysRole>().WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId.Value))//根据组织
+        var query = Context.Queryable<SysRole>()
+            .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId.Value))//根据组织
+            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId.Value))//数据权限
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
@@ -84,19 +88,27 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
         var result = new List<RoleTreeOutput>();//返回结果
         var sysOrgList = await _sysOrgService.GetListAsync(false);//获取所有机构
         var sysRoles = await GetListAsync();//获取所有角色
+        if (input.OrgIds != null)//根据数据范围查
+        {
+            sysOrgList = sysOrgList.Where(it => input.OrgIds.Contains(it.Id)).ToList();//在指定组织列表查询
+            sysRoles = sysRoles.Where(it => input.OrgIds.Contains(it.OrgId.GetValueOrDefault())).ToList();//在指定职位列表查询
+        }
         var topOrgList = sysOrgList.Where(it => it.ParentId == 0).ToList();//获取顶级机构
         var globalRole = sysRoles.Where(it => it.Category == CateGoryConst.ROLE_GLOBAL).ToList();//获取全局角色
-        result.Add(new RoleTreeOutput()
+        if (globalRole.Count > 0)
         {
-            Id = CommonUtils.GetSingleId(),
-            Name = "全局角色",
-            Children = globalRole.Select(it => new RoleTreeOutput
+            result.Add(new RoleTreeOutput()
             {
-                Id = it.Id,
-                Name = it.Name,
-                IsRole = true
-            }).ToList()
-        });//添加全局角色
+                Id = CommonUtils.GetSingleId(),
+                Name = "全局角色",
+                Children = globalRole.Select(it => new RoleTreeOutput
+                {
+                    Id = it.Id,
+                    Name = it.Name,
+                    IsRole = true
+                }).ToList()
+            });//添加全局角色
+        }
         //遍历顶级机构
         foreach (var org in topOrgList)
         {
@@ -161,15 +173,17 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
     }
 
     /// <inheritdoc />
-    public async Task<List<long>> OwnUser(BaseIdInput input)
+    public async Task<List<UserSelectorOutPut>> OwnUser(BaseIdInput input)
     {
         //获取关系列表
         var relations = await _relationService.GetRelationListByTargetIdAndCategory(input.Id.ToString(), CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
-        return relations.Select(it => it.ObjectId).ToList();
+        var userIds = relations.Select(it => it.ObjectId).ToList();
+        var userList = await Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id)).Select<UserSelectorOutPut>().ToListAsync();
+        return userList;
     }
 
     /// <inheritdoc />
-    public async Task<SqlSugarPagedList<SysRole>> RoleSelector(RoleSelectorInput input)
+    public async Task<SqlSugarPagedList<RoleSelectorOutPut>> RoleSelector(RoleSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级组织
         //如果机构ID列表不为空
@@ -177,9 +191,11 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
         {
             orgIds = orgIds.Where(it => input.OrgIds.Contains(it)).ToList();//包含在机构ID列表中的组织ID
         }
-        var result = await Context.Queryable<SysRole>().WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId.Value))//组织ID
-            .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//分类
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+        var result = await Context.Queryable<SysRole>()
+            .WhereIF(input.OrgId == 0, it => it.Category == CateGoryConst.ROLE_GLOBAL)//不传机构ID就是全局角色
+            .WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId.Value))//组织ID
+            .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据关键字查询
+            .Select<RoleSelectorOutPut>()
             .ToPagedListAsync(input.PageNum, input.PageSize);
         return result;
     }
@@ -188,6 +204,16 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
     public async Task<List<string>> RolePermissionTreeSelector(BaseIdInput input)
     {
         var permissionTreeSelectors = new List<string>();//授权树结果集
+        //获取单页信息
+        var spa = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_SPA);
+        var spaIds = spa.Select(it => it.Id).ToList();
+        if (spaIds.Any())
+        {
+            //获取权限授权树
+            var permissions = _resourceService.PermissionTreeSelector(spa.Select(it => it.Path).ToList());
+            if (permissions.Count > 0)
+                permissionTreeSelectors.AddRange(permissions.Select(it => it.PermissionName).ToList());//返回授权树权限名称列表
+        }
         //获取角色资源关系
         var relationsRes = await _relationService.GetRelationByCategory(CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);
         var menuIds = relationsRes.Where(it => it.ObjectId == input.Id).Select(it => it.TargetId.ToLong()).ToList();
@@ -198,9 +224,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
             //获取权限授权树
             var permissions = _resourceService.PermissionTreeSelector(menus.Select(it => it.Path).ToList());
             if (permissions.Count > 0)
-            {
-                permissionTreeSelectors = permissions.Select(it => it.PermissionName).ToList();//返回授权树权限名称列表
-            }
+                permissionTreeSelectors.AddRange(permissions.Select(it => it.PermissionName).ToList());//返回授权树权限名称列表
         }
         return permissionTreeSelectors;
     }
@@ -282,7 +306,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
             if (result.IsSuccess)//如果成功了
             {
                 await RefreshCache();//刷新缓存
-                if (permissions.Any())//如果有授权权
+                if (permissions.Any())//如果有授权
                     await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);//关系表刷新SYS_ROLE_HAS_PERMISSION缓存
                 await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE, new List<long> { input.Id });//清除角色下用户缓存
             }
@@ -300,6 +324,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
     public async Task GrantResource(GrantResourceInput input)
     {
         var allMenus = await _resourceService.GetListByCategory(SysResourceConst.MENU);//获取所有菜单
+        var spas = await _resourceService.GetListByCategory(SysResourceConst.SPA);
         var menuIds = input.GrantInfoList.Select(it => it.MenuId).ToList();//菜单ID
         var extJsons = input.GrantInfoList.Select(it => it.ToJson()).ToList();//拓展信息
         var relationRoles = new List<SysRelation>();//要添加的角色资源和授权关系表
@@ -348,6 +373,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
 
             //获取菜单信息
             var menus = allMenus.Where(it => menuIds.Contains(it.Id)).ToList();
+            menus.AddRange(spas);//单页id添加到列表
             if (menus.Count > 0)
             {
                 //获取权限授权树
@@ -529,7 +555,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
         if (sysRole.Category != CateGoryConst.ROLE_GLOBAL && sysRole.Category != CateGoryConst.ROLE_ORG)
             throw Oops.Bah($"角色所属分类错误:{sysRole.Category}");
         //如果是机构角色orgId不能为空
-        if (sysRole.Category == CateGoryConst.ROLE_ORG && sysRole.OrgId == null)
+        if (sysRole is { Category: CateGoryConst.ROLE_ORG, OrgId: null })
             throw Oops.Bah("orgId不能为空");
         if (sysRole.Category == CateGoryConst.ROLE_GLOBAL)//如果是全局
             sysRole.OrgId = null;//机构id设null

@@ -14,22 +14,19 @@ declare module "vue" {
     ChooseModule: (typeof import("./src/components/ChooseModule/index.vue"))["default"];
     CodeHighLight: (typeof import("./src/components/CodeHighLight/index.vue"))["default"];
     ColSetting: (typeof import("./src/components/ProTable/components/ColSetting.vue"))["default"];
+    CropUpload: (typeof import("./src/components/CropUpload/index.vue"))["default"];
     DatePicker: (typeof import("./src/components/Form/DatePicker/index.vue"))["default"];
     ECharts: (typeof import("./src/components/ECharts/index.vue"))["default"];
-    ElAlert: (typeof import("element-plus/es"))["ElAlert"];
     ElAside: (typeof import("element-plus/es"))["ElAside"];
     ElAutocomplete: (typeof import("element-plus/es"))["ElAutocomplete"];
-    ElAvatar: (typeof import("element-plus/es"))["ElAvatar"];
     ElBadge: (typeof import("element-plus/es"))["ElBadge"];
     ElBreadcrumb: (typeof import("element-plus/es"))["ElBreadcrumb"];
     ElBreadcrumbItem: (typeof import("element-plus/es"))["ElBreadcrumbItem"];
     ElButton: (typeof import("element-plus/es"))["ElButton"];
-    ElCascader: (typeof import("element-plus/es"))["ElCascader"];
     ElCheckbox: (typeof import("element-plus/es"))["ElCheckbox"];
     ElCol: (typeof import("element-plus/es"))["ElCol"];
     ElColorPicker: (typeof import("element-plus/es"))["ElColorPicker"];
     ElContainer: (typeof import("element-plus/es"))["ElContainer"];
-    ElDatePicker: (typeof import("element-plus/es"))["ElDatePicker"];
     ElDialog: (typeof import("element-plus/es"))["ElDialog"];
     ElDivider: (typeof import("element-plus/es"))["ElDivider"];
     ElDrawer: (typeof import("element-plus/es"))["ElDrawer"];
@@ -42,8 +39,9 @@ declare module "vue" {
     ElFormItem: (typeof import("element-plus/es"))["ElFormItem"];
     ElHeader: (typeof import("element-plus/es"))["ElHeader"];
     ElIcon: (typeof import("element-plus/es"))["ElIcon"];
+    ElImageViewer: (typeof import("element-plus/es"))["ElImageViewer"];
     ElInput: (typeof import("element-plus/es"))["ElInput"];
-    ElLink: (typeof import("element-plus/es"))["ElLink"];
+    ElInputNumber: (typeof import("element-plus/es"))["ElInputNumber"];
     ElMain: (typeof import("element-plus/es"))["ElMain"];
     ElMenu: (typeof import("element-plus/es"))["ElMenu"];
     ElMenuItem: (typeof import("element-plus/es"))["ElMenuItem"];
@@ -67,6 +65,8 @@ declare module "vue" {
     ElTag: (typeof import("element-plus/es"))["ElTag"];
     ElTooltip: (typeof import("element-plus/es"))["ElTooltip"];
     ElTreeSelect: (typeof import("element-plus/es"))["ElTreeSelect"];
+    ElUpload: (typeof import("element-plus/es"))["ElUpload"];
+    ESign: (typeof import("./src/components/ESign/index.vue"))["default"];
     FormContainer: (typeof import("./src/components/Form/FormContainer/index.vue"))["default"];
     Grid: (typeof import("./src/components/Grid/index.vue"))["default"];
     GridItem: (typeof import("./src/components/Grid/components/GridItem.vue"))["default"];
@@ -76,9 +76,11 @@ declare module "vue" {
     Pagination: (typeof import("./src/components/ProTable/components/Pagination.vue"))["default"];
     PositionSelector: (typeof import("./src/components/Selectors/PositionSelector/index.vue"))["default"];
     ProTable: (typeof import("./src/components/ProTable/index.vue"))["default"];
+    RoleSelector: (typeof import("./src/components/Selectors/RoleSelector/index.vue"))["default"];
     RouterLink: (typeof import("vue-router"))["RouterLink"];
     RouterView: (typeof import("vue-router"))["RouterView"];
     SButton: (typeof import("./src/components/Form/SButton/index.vue"))["default"];
+    SCheckboxGroup: (typeof import("./src/components/Form/SCheckboxGroup/index.vue"))["default"];
     SearchForm: (typeof import("./src/components/SearchForm/index.vue"))["default"];
     SearchFormItem: (typeof import("./src/components/SearchForm/components/SearchFormItem.vue"))["default"];
     SelectFilter: (typeof import("./src/components/SelectFilter/index.vue"))["default"];
@@ -92,6 +94,8 @@ declare module "vue" {
     SwitchDark: (typeof import("./src/components/SwitchDark/index.vue"))["default"];
     TableColumn: (typeof import("./src/components/ProTable/components/TableColumn.vue"))["default"];
     TreeFilter: (typeof import("./src/components/TreeFilter/index.vue"))["default"];
+    UploadImg: (typeof import("./src/components/Upload/UploadImg.vue"))["default"];
+    UploadImgs: (typeof import("./src/components/Upload/UploadImgs.vue"))["default"];
     UserSelector: (typeof import("./src/components/Selectors/UserSelector/index.vue"))["default"];
   }
 }

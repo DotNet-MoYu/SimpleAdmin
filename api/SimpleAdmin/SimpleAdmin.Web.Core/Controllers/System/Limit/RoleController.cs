@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.Web.Core;
@@ -13,20 +15,16 @@ namespace SimpleAdmin.Web.Core;
 /// </summary>
 [ApiDescriptionSettings(Tag = "角色管理")]
 [Route("sys/limit/[controller]")]
+[SuperAdmin]
 public class RoleController : BaseController
 {
     private readonly ISysRoleService _sysRoleService;
     private readonly IResourceService _resourceService;
-    private readonly ISysOrgService _sysOrgService;
-    private readonly ISysUserService _sysUserService;
 
-    public RoleController(ISysRoleService sysRoleService, IResourceService resourceService, ISysOrgService sysOrgService,
-        ISysUserService sysUserService)
+    public RoleController(ISysRoleService sysRoleService, IResourceService resourceService)
     {
         _sysRoleService = sysRoleService;
         _resourceService = resourceService;
-        _sysOrgService = sysOrgService;
-        _sysUserService = sysUserService;
     }
 
     /// <summary>
@@ -142,25 +140,6 @@ public class RoleController : BaseController
         await _sysRoleService.GrantPermission(input);
     }
 
-    /// <summary>
-    /// 获取组织树选择器
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("orgTreeSelector")]
-    public async Task<dynamic> OrgTreeSelector()
-    {
-        return await _sysOrgService.Tree();
-    }
-
-    /// <summary>
-    /// 获取用户选择器
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("userSelector")]
-    public async Task<dynamic> UserSelector([FromQuery] UserSelectorInput input)
-    {
-        return await _sysUserService.Selector(input);
-    }
 
     /// <summary>
     /// 获取角色下的用户
@@ -206,5 +185,15 @@ public class RoleController : BaseController
     public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
     {
         return await _sysRoleService.Detail(input);
+    }
+
+    /// <summary>
+    /// 获取角色选择器
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("roleSelector")]
+    public async Task<dynamic> RoleSelector([FromQuery] RoleSelectorInput input)
+    {
+        return await _sysRoleService.RoleSelector(input);
     }
 }

@@ -1,4 +1,8 @@
-<!-- 更改菜单模块 -->
+<!-- 
+ * @Description: 更改菜单模块
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:42:57
+!-->
 <template>
   <form-container v-model="visible" :title="'更改模块->' + changeModuleProps.title" form-size="450px">
     <el-form ref="changeModuleFormRef" :rules="rules" :model="changeModuleProps">
@@ -53,7 +57,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await menuApi
-      .menuChangeModule({
+      .changeModule({
         id: changeModuleProps.id,
         module: changeModuleProps.module
       })

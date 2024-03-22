@@ -1,7 +1,11 @@
-<!-- 菜单管理 -->
+<!-- 
+ * @Description: 菜单管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:08
+!-->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuApi.menuTree" :pagination="false">
+    <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuApi.tree" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)" />
@@ -138,7 +142,7 @@ function onOpen(opt: FormOptEnum, record: {} | Menu.MenuInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(menuApi.menuDelete, { ids }, msg);
+  await useHandleData(menuApi.delete, { ids }, msg);
   RefreshTable();
 }
 /**

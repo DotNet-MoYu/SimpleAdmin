@@ -30,7 +30,7 @@ const breadcrumbList = computed(() => {
   let breadcrumbData = authStore.breadcrumbListGet[route.matched[route.matched.length - 1].path] ?? [];
   // 🙅‍♀️不需要首页面包屑可删除以下判断
   if (breadcrumbData.length > 0 && breadcrumbData[0].path !== HOME_URL) {
-    breadcrumbData = [{ path: HOME_URL, meta: { icon: "ep-home-filled", title: "首页" } }, ...breadcrumbData];
+    breadcrumbData = [{ path: HOME_URL, meta: { icon: "ant-design:home-outlined", title: "首页" } }, ...breadcrumbData];
   }
   return breadcrumbData;
 });

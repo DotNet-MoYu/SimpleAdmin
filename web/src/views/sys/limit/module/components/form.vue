@@ -1,4 +1,8 @@
-<!-- 模块管理表单页面 -->
+<!-- 
+ * @Description: 模块管理表单页面
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:14
+!-->
 <template>
   <form-container v-model="visible" :title="`${moduleProps.opt}模块`" form-size="600px">
     <el-form
@@ -81,7 +85,7 @@ function onOpen(props: FormProps.Base<Module.ModuleInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    moduleApi.moduleDetail({ id: props.record.id }).then(res => {
+    moduleApi.detail({ id: props.record.id }).then(res => {
       moduleProps.record = res.data;
     });
   }
@@ -95,7 +99,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await moduleApi
-      .moduleSubmitForm(moduleProps.record, moduleProps.record.id != undefined)
+      .submitForm(moduleProps.record, moduleProps.record.id != undefined)
       .then(() => {
         moduleProps.successful!(); //调用父组件的successful方法
       })

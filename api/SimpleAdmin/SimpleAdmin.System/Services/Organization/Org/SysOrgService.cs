@@ -1,21 +1,27 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using System.Diagnostics;
 
 namespace SimpleAdmin.System;
 
 /// <inheritdoc cref="ISysOrgService"/>
 public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
 {
+    private readonly ILogger<SysOrgService> _logger;
     private readonly ISimpleCacheService _simpleCacheService;
     private readonly IEventPublisher _eventPublisher;
 
-    public SysOrgService(ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher)
+    public SysOrgService(ILogger<SysOrgService> logger, ISimpleCacheService simpleCacheService, IEventPublisher eventPublisher)
     {
+        _logger = logger;
         _simpleCacheService = simpleCacheService;
         _eventPublisher = eventPublisher;
     }
@@ -25,7 +31,6 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <inheritdoc />
     public async Task<List<SysOrg>> GetListAsync(bool showDisabled = true)
     {
-        //先从Redis拿
         var sysOrgList = _simpleCacheService.Get<List<SysOrg>>(SystemConst.CACHE_SYS_ORG);
         if (sysOrgList == null)
         {
@@ -87,11 +92,10 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         var query = Context.Queryable<SysOrg>()
             .WhereIF(input.ParentId > 0,
                 it => it.ParentId == input.ParentId || it.Id == input.ParentId || SqlFunc.JsonLike(it.ParentIdList, input.ParentId.ToString()))//父级
-            .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.Id))//机构ID查询
             .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据名称查询
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类查询
             .WhereIF(!string.IsNullOrEmpty(input.Code), it => it.Code.Contains(input.Code))//根据编码查询
-            .WhereIF(input.Status != null, it => it.Status == input.Status)//根据状态查询
+            .WhereIF(!string.IsNullOrEmpty(input.Status), it => it.Status == input.Status)//根据状态查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode)
             .OrderBy(it => it.CreateTime);//排序
         var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
@@ -176,6 +180,63 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
         return orgList;
     }
 
+
+    /// <inheritdoc />
+    public async Task<List<SysOrg>> GetTenantList()
+    {
+        var tenantList = _simpleCacheService.Get<List<SysOrg>>(SystemConst.CACHE_SYS_TENANT);
+        if (tenantList == null)
+        {
+            var orgList = await GetListAsync(false);
+            tenantList = orgList.Where(it => it.Category == CateGoryConst.ORG_COMPANY).ToList();
+            if (tenantList.Count > 0)
+            {
+                //插入Redis
+                _simpleCacheService.Set(SystemConst.CACHE_SYS_TENANT, tenantList);
+            }
+        }
+        return tenantList;
+    }
+
+    /// <inheritdoc />
+    public async Task<long?> GetTenantIdByOrgId(long orgId, List<SysOrg> sysOrgList = null)
+    {
+        //先从缓存拿租户Id
+        var tenantId = _simpleCacheService.HashGetOne<long?>(SystemConst.CACHE_SYS_ORG_TENANT, orgId.ToString());
+        if (tenantId == null)
+        {
+            //获取所有组织
+            sysOrgList ??= await GetListAsync();
+            var userOrg = sysOrgList.FirstOrDefault(it => it.Id == orgId);
+            if (userOrg != null)
+            {
+                //如果是公司直接返回
+                if (userOrg.Category == CateGoryConst.ORG_COMPANY)
+                {
+                    tenantId = userOrg.Id;
+                }
+                else
+                {
+                    var parentIds = userOrg.ParentIdList;//获取父级ID列表
+                    //从最后一个往前遍历,取第一个公司ID为租户ID
+                    for (var i = parentIds.Count - 1; i >= 0; i--)
+                    {
+                        var parentId = parentIds[i];
+                        var org = sysOrgList.FirstOrDefault(it => it.Id == parentId);
+                        if (org.Category == CateGoryConst.ORG_COMPANY)
+                        {
+                            tenantId = org.Id;//租户ID
+                            break;
+                        }
+                    }
+                }
+                if (tenantId != null)
+                    _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_ORG_TENANT, orgId.ToString(), tenantId);//插入缓存
+            }
+        }
+        return tenantId;
+    }
+
     #endregion 查询
 
     #region 新增
@@ -193,15 +254,17 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public async Task Copy(SysOrgCopyInput input)
     {
         var orgList = await GetListAsync();//获取所有
+        var positionList = await Context.Queryable<SysPosition>().ToListAsync();//获取所有职位
         var ids = new HashSet<long>();//定义不重复Id集合
         var addOrgList = new List<SysOrg>();//添加机构列表
+        var addPositionList = new List<SysPosition>();//添加职位列表
         var alreadyIds = new HashSet<long>();//定义已经复制过得组织Id
         ids.AddRange(input.Ids);//加到集合
         if (ids.Contains(input.TargetId))
             throw Oops.Bah("不能包含自己");
         //获取目标组织
         var target = orgList.Where(it => it.Id == input.TargetId).FirstOrDefault();
-        if (target != null || input.TargetId == SimpleAdminConst.ZERO)
+        if (target != null)
         {
             //需要复制的组织名称列表
             var orgNames = orgList.Where(it => ids.Contains(it.Id)).Select(it => it.Name).ToList();
@@ -211,24 +274,37 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
             {
                 if (targetChildNames.Contains(it)) throw Oops.Bah($"已存在{it}");
             });
-
             foreach (var id in input.Ids)
             {
-                var org = orgList.Where(o => o.Id == id).FirstOrDefault();//获取下级
+                var org = orgList.Where(o => o.Id == id).FirstOrDefault();//获取组织
                 if (org != null && !alreadyIds.Contains(id))
                 {
                     alreadyIds.Add(id);//添加到已复制列表
                     RedirectOrg(org);//生成新的实体
                     org.ParentId = input.TargetId;//父id为目标Id
                     addOrgList.Add(org);
+                    //是否包含职位
+                    if (input.ContainsPosition)
+                    {
+                        var positions = positionList.Where(p => p.OrgId == id).ToList();//获取机构下的职位
+                        positions.ForEach(p =>
+                        {
+                            p.OrgId = org.Id;//赋值新的机构ID
+                            p.Id = CommonUtils.GetSingleId();//生成新的ID
+                            p.Code = RandomHelper.CreateRandomString(10);//生成新的Code
+                            addPositionList.Add(p);//添加到职位列表
+                        });
+                    }
                     //是否包含下级
                     if (input.ContainsChild)
                     {
                         var childIds = await GetOrgChildIds(id, false);//获取下级id列表
                         alreadyIds.AddRange(childIds);//添加到已复制id
                         var childList = orgList.Where(c => childIds.Contains(c.Id)).ToList();//获取下级
-                        var sysOrgChildren = CopySysOrgChildren(childList, id, org.Id);//赋值下级组织
-                        addOrgList.AddRange(sysOrgChildren);
+                        var sysOrgChildren = CopySysOrgChildren(childList, id, org.Id, input.ContainsPosition,
+                            positionList);//赋值下级组织
+                        addOrgList.AddRange(sysOrgChildren.Item1);//添加到组织列表
+                        addPositionList.AddRange(sysOrgChildren.Item2);//添加到职位列表
                     }
                 }
             }
@@ -246,8 +322,25 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
                 }
             });
 
-            if (await InsertRangeAsync(addOrgList))//插入数据
+            //事务
+            var result = await Tenant.UseTranAsync(async () =>
+            {
+                await InsertRangeAsync(addOrgList);//插入组织
+                if (addPositionList.Count > 0)
+                {
+                    await Context.Insertable(addPositionList).ExecuteCommandAsync();
+                }
+            });
+            if (result.IsSuccess)//如果成功了
+            {
                 await RefreshCache();//刷新缓存
+                if (addPositionList.Count > 0) _simpleCacheService.Remove(SystemConst.CACHE_SYS_POSITION);//删除机构缓存
+            }
+            else
+            {
+                _logger.LogError(result.ErrorException, result.ErrorMessage);
+                throw Oops.Oh($"复制失败");
+            }
         }
     }
 
@@ -316,6 +409,7 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     public async Task RefreshCache()
     {
         _simpleCacheService.Remove(SystemConst.CACHE_SYS_ORG);//从redis删除
+        _simpleCacheService.Remove(SystemConst.CACHE_SYS_TENANT);//从redis删除
         _simpleCacheService.Remove(SystemConst.CACHE_SYS_USER);//清空redis所有的用户信息
         await GetListAsync();//刷新缓存
     }
@@ -467,26 +561,45 @@ public class SysOrgService : DbRepository<SysOrg>, ISysOrgService
     /// <param name="orgList">组织列表</param>
     /// <param name="parentId">父Id</param>
     /// <param name="newParentId">新父Id</param>
+    /// <param name="isCopyPosition"></param>
+    /// <param name="positions"></param>
     /// <returns></returns>
-    public List<SysOrg> CopySysOrgChildren(List<SysOrg> orgList, long parentId, long newParentId)
+    public Tuple<List<SysOrg>, List<SysPosition>> CopySysOrgChildren(List<SysOrg> orgList, long parentId, long newParentId,
+        bool isCopyPosition,
+        List<SysPosition> positions)
     {
         //找下级组织列表
         var orgInfos = orgList.Where(it => it.ParentId == parentId).ToList();
         if (orgInfos.Count > 0)//如果数量大于0
         {
-            var data = new List<SysOrg>();
+            var result = new Tuple<List<SysOrg>, List<SysPosition>>(
+                new List<SysOrg>(), new List<SysPosition>()
+                );
             foreach (var item in orgInfos)//遍历组织
             {
                 var oldId = item.Id;//获取旧Id
                 RedirectOrg(item);//实体重新赋值
-                var children = CopySysOrgChildren(orgList, oldId, item.Id);//获取子节点
-                item.ParentId = newParentId;//赋值父Idv
-                data.AddRange(children);//添加子节点);
-                data.Add(item);//添加到列表
+                var children = CopySysOrgChildren(orgList, oldId, item.Id, isCopyPosition,
+                    positions);//获取子节点
+                item.ParentId = newParentId;//赋值新的父Id
+                result.Item1.AddRange(children.Item1);//添加下级组织;
+                if (isCopyPosition)//如果包含职位
+                {
+                    var positionList = positions.Where(it => it.OrgId == oldId).ToList();//获取职位列表
+                    positionList.ForEach(it =>
+                    {
+                        it.OrgId = item.Id;//赋值新的机构ID
+                        it.Id = CommonUtils.GetSingleId();//生成新的ID
+                        it.Code = RandomHelper.CreateRandomString(10);//生成新的Code
+                    });
+                    result.Item2.AddRange(positionList);//添加职位列表
+                }
             }
-            return data;//返回结果
+            return result;//返回结果
         }
-        return new List<SysOrg>();
+        return new Tuple<List<SysOrg>, List<SysPosition>>(
+            new List<SysOrg>(), new List<SysPosition>()
+            );
     }
 
     /// <summary>

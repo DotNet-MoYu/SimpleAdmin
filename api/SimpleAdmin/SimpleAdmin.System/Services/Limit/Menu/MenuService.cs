@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.System;
@@ -25,7 +27,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     }
 
     /// <inheritdoc/>
-    public List<SysResource> ConstructMenuTrees(List<SysResource> resourceList, long parentId = 0)
+    public List<SysResource> ConstructMenuTrees(List<SysResource> resourceList, long? parentId = 0)
     {
         //找下级资源ID列表
         var resources = resourceList.Where(it => it.ParentId == parentId).OrderBy(it => it.SortCode).ToList();
@@ -48,10 +50,34 @@ public class MenuService : DbRepository<SysResource>, IMenuService
         //获取所有菜单
         var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
         sysResources = sysResources.WhereIF(input.Module != null, it => it.Module.Value == input.Module.Value)//根据模块查找
+            .WhereIF(!showDisabled, it => it.Status == CommonStatusConst.ENABLE)//是否显示禁用的
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Title == input.SearchKey)//根据关键字查找
             .ToList();
         //构建菜单树
         var tree = ConstructMenuTrees(sysResources);
+        return tree;
+    }
+
+    /// <inheritdoc />
+    public async Task<List<SysResource>> ShortcutTree(List<SysResource> sysResources = null)
+    {
+        if (sysResources == null)
+            //获取所有菜单
+            sysResources = (await _resourceService.GetAllModuleAndMenuAndSpaList())
+                .Where(it => it.Status == CommonStatusConst.ENABLE).ToList();
+        // //获取所有单页
+        // var sysSpas = (await _resourceService.GetConfigsByCategory(CateGoryConst.RESOURCE_SPA))
+        //     .Where(it => it.Status == CommonStatusConst.ENABLE).ToList();
+        sysResources.ForEach(it =>
+        {
+            if (it.MenuType == SysResourceConst.CATALOG)
+                it.ParentId = it.Module.Value;//目录的父级ID设置为模块ID
+        });
+
+        //构建菜单树
+        var tree = ConstructMenuTrees(sysResources, null);
+        //将单页的排前面根据排序码排序
+        tree = tree.OrderByDescending(it => it.Category == CateGoryConst.RESOURCE_SPA).ThenBy(it => it.SortCode).ToList();
         return tree;
     }
 
@@ -68,10 +94,45 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     /// <inheritdoc />
     public async Task Edit(MenuEditInput input)
     {
-        await CheckInput(input);//检查参数
+        var resource = await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
-        if (await UpdateAsync(sysResource))//更新数据
+        var updatePath = resource.Path != input.Path;//是否更新路径
+        var permissions = new List<SysRelation>();
+        if (updatePath)
+        {
+            //获取所有角色和用户的权限关系
+            var rolePermissions = await _relationService.GetRelationByCategory(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);
+            var userPermissions = await _relationService.GetRelationByCategory(CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION);
+            //找到所有匹配的权限
+            rolePermissions = rolePermissions.Where(it => it.TargetId.Contains(resource.Path)).ToList();
+            userPermissions = userPermissions.Where(it => it.TargetId.Contains(resource.Path)).ToList();
+            //更新路径
+            rolePermissions.ForEach(it => it.TargetId = it.TargetId.Replace(resource.Path, input.Path));
+            userPermissions.ForEach(it => it.TargetId = it.TargetId.Replace(resource.Path, input.Path));
+            //添加到权限列表
+            permissions.AddRange(rolePermissions);
+            permissions.AddRange(userPermissions);
+        }
+        //事务
+        var result = await Tenant.UseTranAsync(async () =>
+        {
+            await UpdateAsync(sysResource);//更新数据
+            if (permissions.Count > 0)//如果权限列表大于0就更新    
+            {
+                await Context.Updateable(permissions)
+                    .ExecuteCommandAsync();//更新关系表
+            }
+        });
+        if (result.IsSuccess)//如果成功了
+        {
             await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MENU);//刷新菜单缓存
+            //刷新关系表缓存
+            if (updatePath)
+            {
+                await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);
+                await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION);
+            }
+        }
     }
 
     /// <inheritdoc />
@@ -164,7 +225,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     /// 检查输入参数
     /// </summary>
     /// <param name="sysResource"></param>
-    private async Task CheckInput(SysResource sysResource)
+    private async Task<SysResource> CheckInput(SysResource sysResource)
     {
         //获取所有菜单列表
         var menList = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
@@ -187,6 +248,15 @@ public class MenuService : DbRepository<SysResource>, IMenuService
                 throw Oops.Bah($"上级菜单不存在:{sysResource.ParentId}");
             }
         }
+        //如果ID大于0表示编辑
+        if (sysResource.Id > 0)
+        {
+            var resource = menList.Where(it => it.Id == sysResource.Id).FirstOrDefault();
+            if (resource == null)
+                throw Oops.Bah($"菜单不存在:{sysResource.Id}");
+            return resource;
+        }
+        return null;
     }
 
     #endregion 方法

@@ -1,10 +1,14 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using SimpleAdmin.Core.Extension;
 
 namespace SimpleAdmin.System;
 
@@ -48,7 +52,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task<string> GetUserAvatar(long userId)
     {
-        //先从Redis拿
+        //先从缓存拿
         var avatar = _simpleCacheService.HashGetOne<string>(SystemConst.CACHE_SYS_USER_AVATAR, userId.ToString());
         if (string.IsNullOrEmpty(avatar))
         {
@@ -56,17 +60,18 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             avatar = await GetFirstAsync(it => it.Id == userId, it => it.Avatar);
             if (!string.IsNullOrEmpty(avatar))
             {
-                //插入Redis
+                //插入缓存
                 _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_AVATAR, userId.ToString(), avatar);
             }
         }
         return avatar;
     }
 
-    public async Task<SysUser> GetUserByAccount(string account)
+    /// <inheritdoc/>
+    public async Task<SysUser> GetUserByAccount(string account, long? tenantId = null)
     {
-        var userId = await GetIdByAccount(account);//获取用户ID
-        if (userId > 0)
+        var userId = await GetIdByAccount(account, tenantId);//获取用户ID
+        if (userId != SimpleAdminConst.ZERO)
         {
             var sysUser = await GetUserById(userId);//获取用户信息
             if (sysUser.Account == account)//这里做了比较用来限制大小写
@@ -77,9 +82,9 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<SysUser> GetUserByPhone(string phone)
+    public async Task<SysUser> GetUserByPhone(string phone, long? tenantId = null)
     {
-        var userId = await GetIdByPhone(phone);//获取用户ID
+        var userId = await GetIdByPhone(phone, tenantId);//获取用户ID
         if (userId > 0)
         {
             return await GetUserById(userId);//获取用户信息
@@ -88,19 +93,30 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<long> GetIdByPhone(string phone)
+    public async Task<long> GetIdByPhone(string phone, long? tenantId = null)
     {
-        //先从Redis拿
-        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.CACHE_SYS_USER_PHONE, phone);
+        var orgIds = new List<long>();
+        var key = SystemConst.CACHE_SYS_USER_PHONE;
+        if (tenantId != null)
+        {
+            key += $":{tenantId}";
+            orgIds = await _sysOrgService.GetOrgChildIds(tenantId.Value);//获取下级机构
+        }
+        //先从缓存拿
+        var userId = _simpleCacheService.HashGetOne<long>(key, phone);
         if (userId == 0)
         {
-            phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
+            var sm4Phone = CryptogramUtil.Sm4Encrypt(phone);//SM4加密一下
             //单查获取用户手机号对应的账号
-            userId = await GetFirstAsync(it => it.Phone == phone, it => it.Id);
+            userId = await Context.Queryable<SysUser>()
+                .Where(it => it.Phone == sm4Phone)
+                .WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId))
+                .Select(it => it.Id)
+                .FirstAsync();
             if (userId > 0)
             {
-                //插入Redis
-                _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_PHONE, phone, userId);
+                //插入缓存
+                _simpleCacheService.HashAdd(key, phone, userId);
             }
         }
         return userId;
@@ -109,7 +125,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <inheritdoc/>
     public async Task<SysUser> GetUserById(long userId)
     {
-        //先从Redis拿 
+        //先从缓存拿 
         var sysUser = _simpleCacheService.HashGetOne<SysUser>(SystemConst.CACHE_SYS_USER, userId.ToString());
         if (sysUser == null)
         {
@@ -126,18 +142,29 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<long> GetIdByAccount(string account)
+    public async Task<long> GetIdByAccount(string account, long? tenantId = null)
     {
-        //先从Redis拿
-        var userId = _simpleCacheService.HashGetOne<long>(SystemConst.CACHE_SYS_USER_ACCOUNT, account);
+        var orgIds = new List<long>();
+        var key = SystemConst.CACHE_SYS_USER_ACCOUNT;
+        if (tenantId != null)
+        {
+            key += $":{tenantId}";
+            orgIds = await _sysOrgService.GetOrgChildIds(tenantId.Value);//获取下级机构
+        }
+        //先从缓存拿
+        var userId = _simpleCacheService.HashGetOne<long>(key, account);
         if (userId == 0)
         {
             //单查获取用户账号对应ID
-            userId = await GetFirstAsync(it => it.Account == account, it => it.Id);
+            userId = await Context.Queryable<SysUser>()
+                .Where(it => it.Account == account)
+                .WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId))
+                .Select(it => it.Id)
+                .FirstAsync();
             if (userId != 0)
             {
-                //插入Redis
-                _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_ACCOUNT, account, userId);
+                //插入缓存
+                _simpleCacheService.HashAdd(key, account, userId);
             }
         }
         return userId;
@@ -224,56 +251,11 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         return permissions;
     }
 
-    /// <inheritdoc/>
-    public async Task<List<long>?> GetLoginUserApiDataScope()
-    {
-        var userInfo = await GetUserById(UserManager.UserId);//获取用户信息
-        // 路由名称
-        var routeName = App.HttpContext.Request.Path.Value;
-        //获取当前url的数据范围
-        var dataScope = userInfo.DataScopeList.Where(it => it.ApiUrl == routeName).FirstOrDefault();
-        if (dataScope != null)
-        {
-            //根据数据范围分类获取数据范围
-            //null:代表拥有全部数据权限
-            //[xx,xx]:代表拥有部分机构的权限
-            //[]：代表仅自己权限
-            switch (dataScope.ScopeCategory)
-            {
-                case CateGoryConst.SCOPE_ALL:
-                    return null;
-
-                case CateGoryConst.SCOPE_ORG_CHILD:
-                    return userInfo.ScopeOrgChildList;
-
-                case CateGoryConst.SCOPE_ORG:
-                    return new List<long> { userInfo.OrgId };
-
-                case CateGoryConst.SCOPE_ORG_DEFINE:
-                    return dataScope.DataScopes;
-
-                case CateGoryConst.SCOPE_SELF:
-                    return new List<long>();
-            }
-        }
-        return new List<long>();
-    }
 
     /// <inheritdoc/>
     public async Task<SqlSugarPagedList<UserSelectorOutPut>> Selector(UserSelectorInput input)
     {
         var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
-        /*弃用方法
-        var result = await Context.Queryable<SysUser>().LeftJoin<SysOrg>((u, o) => u.OrgId == o.Id)
-            .LeftJoin<SysPosition>((u, o, p) => u.PositionId == p.Id).WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//指定机构
-            .WhereIF(input.OrgIds != null, u => input.OrgIds.Contains(u.OrgId))//在指定机构列表查询
-            .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
-            .Select((u, o, p) => new UserSelectorOutPut
-            {
-                Id = u.Id.SelectAll(),
-                OrgName = o.Name,
-                PositionName = p.Name
-            }).ToPagedListAsync(input.PageNum, input.PageSize);*/
         var result = await Context.Queryable<SysUser>()
             .WhereIF(input.OrgId > 0, u => orgIds.Contains(u.OrgId))//指定机构
             .WhereIF(input.OrgIds != null, u => input.OrgIds.Contains(u.OrgId))//在指定机构列表查询
@@ -304,10 +286,12 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     /// <inheritdoc/>
-    public async Task<List<long>> OwnRole(BaseIdInput input)
+    public async Task<List<RoleSelectorOutPut>> OwnRole(BaseIdInput input)
     {
         var relations = await _relationService.GetRelationListByObjectIdAndCategory(input.Id, CateGoryConst.RELATION_SYS_USER_HAS_ROLE);
-        return relations.Select(it => it.TargetId.ToLong()).ToList();
+        var roleIds = relations.Select(it => it.TargetId.ToLong()).ToList();
+        var roleList = await Context.Queryable<SysRole>().Where(it => roleIds.Contains(it.Id)).Select<RoleSelectorOutPut>().ToListAsync();
+        return roleList;
     }
 
     /// <inheritdoc />
@@ -377,6 +361,88 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     }
 
     #endregion 查询
+
+    #region 数据范围相关
+
+    /// <inheritdoc/>
+    public async Task<List<long>?> GetLoginUserApiDataScope()
+    {
+        var userInfo = await GetUserById(UserManager.UserId);//获取用户信息
+        // 路由名称
+        var routeName = App.HttpContext.Request.Path.Value;
+        //获取当前url的数据范围
+        var dataScope = userInfo.DataScopeList.Where(it => it.ApiUrl == routeName).FirstOrDefault();
+        if (dataScope != null)
+        {
+            //根据数据范围分类获取数据范围
+            //null:代表拥有全部数据权限
+            //[xx,xx]:代表拥有部分机构的权限
+            //[]：代表仅自己权限
+            switch (dataScope.ScopeCategory)
+            {
+                case CateGoryConst.SCOPE_ALL:
+                    return null;
+
+                case CateGoryConst.SCOPE_ORG_CHILD:
+                    return userInfo.ScopeOrgChildList;
+
+                case CateGoryConst.SCOPE_ORG:
+                    return new List<long> { userInfo.OrgId };
+
+                case CateGoryConst.SCOPE_ORG_DEFINE:
+                    return dataScope.DataScopes;
+
+                case CateGoryConst.SCOPE_SELF:
+                    return new List<long>();
+            }
+        }
+        return new List<long>();
+    }
+
+    /// <inheritdoc/>
+    public async Task<bool> CheckApiDataScope(long? orgId, long? createUerId, string errMsg = "")
+    {
+        var hasPermission = true;
+        //判断数据范围
+        var dataScope = await GetLoginUserApiDataScope();
+        if (dataScope is { Count: > 0 })//如果有机构
+        {
+            if (orgId == null || !dataScope.Contains(orgId.Value))//判断机构id是否在数据范围
+                hasPermission = false;
+        }
+        else if (dataScope is { Count: 0 })// 表示仅自己
+        {
+            if (createUerId != UserManager.UserId)
+                hasPermission = false;//机构的创建人不是自己则报错
+        }
+        //如果传了错误信息，直接抛出异常
+        if (!hasPermission && !string.IsNullOrEmpty(errMsg))
+            throw Oops.Bah(errMsg);
+        return hasPermission;
+    }
+
+    public async Task<bool> CheckApiDataScope(List<long> orgIds, List<long> createUerIds, string errMsg = "")
+    {
+        var hasPermission = true;
+        //判断数据范围
+        var dataScope = await GetLoginUserApiDataScope();
+        if (dataScope is { Count: > 0 })//如果有机构
+        {
+            if (orgIds == null || !dataScope.ContainsAll(orgIds))//判断机构id列表是否全在数据范围
+                hasPermission = false;
+        }
+        else if (dataScope is { Count: 0 })// 表示仅自己
+        {
+            if (createUerIds.Any(it => it != UserManager.UserId))//如果创建者id里有任何不是自己创建的机构
+                hasPermission = false;
+        }
+        //如果传了错误信息，直接抛出异常
+        if (!hasPermission && !string.IsNullOrEmpty(errMsg))
+            throw Oops.Bah(errMsg);
+        return hasPermission;
+    }
+
+    #endregion
 
     #region 新增
 
@@ -459,7 +525,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 Status = CommonStatusConst.DISABLED
             }, it => it.Id == input.Id))
-                DeleteUserFromRedis(input.Id);//从redis删除用户信息
+                DeleteUserFromRedis(input.Id);//从缓存删除用户信息
         }
     }
 
@@ -472,7 +538,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             Status = CommonStatusConst.ENABLE
         }, it => it.Id == input.Id))
-            DeleteUserFromRedis(input.Id);//从redis删除用户信息
+            DeleteUserFromRedis(input.Id);//从缓存删除用户信息
     }
 
     /// <inheritdoc/>
@@ -484,7 +550,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             Password = password
         }, it => it.Id == input.Id))
-            DeleteUserFromRedis(input.Id);//从redis删除用户信息
+            DeleteUserFromRedis(input.Id);//从缓存删除用户信息
     }
 
     /// <inheritdoc />
@@ -500,7 +566,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             //给用户赋角色
             await _relationService.SaveRelationBatch(CateGoryConst.RELATION_SYS_USER_HAS_ROLE, input.Id,
                 input.RoleIdList.Select(it => it.ToString()).ToList(), null, true);
-            DeleteUserFromRedis(input.Id);//从redis删除用户信息
+            DeleteUserFromRedis(input.Id);//从缓存删除用户信息
         }
     }
 
@@ -668,14 +734,13 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             });
             if (result.IsSuccess)//如果成功了
             {
-                DeleteUserFromRedis(ids);//redis删除用户
+                DeleteUserFromRedis(ids);//缓存删除用户
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_RESOURCE);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_PERMISSION);//关系表刷新SYS_USER_HAS_ROLE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_MODULE);//关系表刷新RELATION_SYS_USER_HAS_MODULE缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_SCHEDULE_DATA);//关系表刷新RELATION_SYS_USER_SCHEDULE_DATA缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_WORKBENCH_DATA);//关系表刷新RELATION_SYS_USER_WORKBENCH_DATA缓存
-
                 // TODO 此处需要将这些用户踢下线，并永久注销这些用户
                 var idArray = ids.Select(it => it.ToString()).ToArray();
                 //从列表中删除
@@ -713,11 +778,30 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             _simpleCacheService.HashDel<SysUser>(SystemConst.CACHE_SYS_USER, userIds);
             //删除用户头像信息
             _simpleCacheService.HashDel<string>(SystemConst.CACHE_SYS_USER_AVATAR, userIds);
-            //删除账号
-            _simpleCacheService.HashDel<long>(SystemConst.CACHE_SYS_USER_ACCOUNT, accounts);
-            //删除手机
-            if (phones != null)
-                _simpleCacheService.HashDel<long>(SystemConst.CACHE_SYS_USER_PHONE, phones);
+            var userAccountKey = SystemConst.CACHE_SYS_USER_ACCOUNT;
+            var userPhoneKey = SystemConst.CACHE_SYS_USER_PHONE;
+            if (sysUsers.Any(it => it.TenantId != null))//如果有租户id不是空的表示是多租户模式
+            {
+                var tenantIds = sysUsers.Where(it => it.TenantId != null).Select(it => it.TenantId.Value).Distinct().ToArray();//租户id列表
+                foreach (var tenantId in tenantIds)
+                {
+                    userAccountKey = $"{userAccountKey}:{tenantId}";
+                    userPhoneKey = $"{userPhoneKey}:{tenantId}";
+                    //删除账号
+                    _simpleCacheService.HashDel<long>(userAccountKey, accounts);
+                    //删除手机
+                    if (phones != null)
+                        _simpleCacheService.HashDel<long>(userPhoneKey, phones);
+                }
+            }
+            else
+            {
+                //删除账号
+                _simpleCacheService.HashDel<long>(userAccountKey, accounts);
+                //删除手机
+                if (phones != null)
+                    _simpleCacheService.HashDel<long>(userPhoneKey, phones);
+            }
         }
     }
 
@@ -918,8 +1002,17 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
     /// <param name="sysUser"></param>
     private async Task CheckInput(SysUser sysUser)
     {
-        //判断账号重复,直接从redis拿
-        var accountId = await GetIdByAccount(sysUser.Account);
+        var sysOrgList = await _sysOrgService.GetListAsync();//获取组织列表
+        var userOrg = sysOrgList.FirstOrDefault(it => it.Id == sysUser.OrgId);
+        if (userOrg == null)
+            throw Oops.Bah($"组织机构不存在");
+        //获取多租户配置
+        var isTenant = await _configService.IsTenant();
+        long? tenantId = null;
+        if (isTenant)
+            tenantId = await _sysOrgService.GetTenantIdByOrgId(sysUser.OrgId, sysOrgList);
+        //判断账号重复,直接从缓存拿
+        var accountId = await GetIdByAccount(sysUser.Account, tenantId);
         if (accountId > 0 && accountId != sysUser.Id)
             throw Oops.Bah($"存在重复的账号:{sysUser.Account}");
         //如果手机号不是空
@@ -927,7 +1020,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
         {
             if (!sysUser.Phone.MatchPhoneNumber())//验证手机格式
                 throw Oops.Bah($"手机号码：{sysUser.Phone} 格式错误");
-            var phoneId = await GetIdByPhone(sysUser.Phone);
+            var phoneId = await GetIdByPhone(sysUser.Phone, tenantId);
             if (phoneId > 0 && sysUser.Id != phoneId)//判断重复
                 throw Oops.Bah($"存在重复的手机号:{sysUser.Phone}");
             sysUser.Phone = CryptogramUtil.Sm4Encrypt(sysUser.Phone);
@@ -990,6 +1083,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             .WhereIF(!string.IsNullOrEmpty(input.Status), u => u.Status == input.Status)//根据状态查询
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), u => u.Name.Contains(input.SearchKey) || u.Account.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"u.{input.SortField} {input.SortOrder}").OrderBy(u => u.Id)//排序
+            .OrderBy((u, o) => u.CreateTime)//排序
             .Select((u, o, p) => new SysUser
             {
                 Id = u.Id.SelectAll(),
@@ -1018,6 +1112,7 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             {
                 Id = u.Id.SelectAll(),
                 OrgName = o.Name,
+                OrgNames = o.Names,
                 PositionName = p.Name,
                 OrgAndPosIdList = o.ParentIdList
             }).FirstAsync();
@@ -1044,13 +1139,20 @@ public class SysUserService : DbRepository<SysUser>, ISysUserService
             sysUser.RoleIdList = roleCodeList.Select(it => it.Id).ToList();
             sysUser.PermissionCodeList = permissionCodeList;
             sysUser.DataScopeList = dataScopeList;
-            var scopeOrgChildList = (await _sysOrgService.GetChildListById(sysUser.OrgId)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
+            var sysOrgList = await _sysOrgService.GetListAsync();
+            var scopeOrgChildList =
+                (await _sysOrgService.GetChildListById(sysUser.OrgId, true, sysOrgList)).Select(it => it.Id).ToList();//获取所属机构的下级机构Id列表
             sysUser.ScopeOrgChildList = scopeOrgChildList;
+            if (await _configService.IsTenant())//如果是多租户就获取用户的租户Id
+            {
+                var tenantId = await _sysOrgService.GetTenantIdByOrgId(sysUser.OrgId, sysOrgList);
+                sysUser.TenantId = tenantId;
+            }
             var moduleIds = await _relationService.GetUserModuleId(sysUser.RoleIdList, sysUser.Id);//获取模块ID列表
             var modules = await _resourceService.GetResourcesByIds(moduleIds, CateGoryConst.RESOURCE_MODULE);//获取模块列表
             sysUser.ModuleList = modules;//模块列表赋值给用户
-            //插入Redis
-            _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER, sysUser.Id.ToString(), sysUser.Avatar);
+            //插入缓存
+            _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER_AVATAR, sysUser.Id.ToString(), sysUser.Avatar);
             sysUser.Avatar = null;//头像清空,减少CACHE_SYS_USER的大小
             _simpleCacheService.HashAdd(SystemConst.CACHE_SYS_USER, sysUser.Id.ToString(), sysUser);
             return sysUser;

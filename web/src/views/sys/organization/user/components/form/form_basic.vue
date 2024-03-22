@@ -1,4 +1,8 @@
-<!-- 基本信息 -->
+<!-- 
+ * @Description: 基本信息
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:50
+!-->
 <template>
   <div>
     <el-tab-pane label="基础信息" name="basic">
@@ -78,12 +82,19 @@
         </el-col>
       </el-row>
     </el-tab-pane>
-    <user-selector ref="userSelectorRef" @successful="handleChooseUser" />
+    <user-selector
+      ref="userSelectorRef"
+      :org-tree-api="sysOrgApi.tree"
+      :position-tree-api="sysPositionApi.tree"
+      :role-tree-api="sysRoleApi.tree"
+      :user-selector-api="sysUserApi.selector"
+      @successful="handleChooseUser"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { SysUser } from "@/api";
+import { SysUser, sysOrgApi, sysPositionApi, sysRoleApi, sysUserApi } from "@/api";
 import { useDictStore } from "@/stores/modules";
 import { SysDictEnum } from "@/enums";
 import { UserSelectorInstance } from "@/components/Selectors/UserSelector/interface";
@@ -101,8 +112,7 @@ const userInfo = computed({
   set: val => emit("update:modelValue", val)
 });
 
-// 通用状态选项
-const genderOptions = dictStore.getDictList(SysDictEnum.GENDER);
+const genderOptions = dictStore.getDictList(SysDictEnum.GENDER); //性别选项
 onMounted(() => {
   // 初始化
   userInfo.value.gender = userInfo.value.gender ? userInfo.value.gender : genderOptions[0].value;

@@ -1,4 +1,8 @@
-<!-- 权限按钮批量表单页面 -->
+<!-- 
+ * @Description: 权限按钮批量表单页面
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:42:29
+!-->
 <template>
   <el-dialog v-model="visible" title="批量新增按钮" width="500px">
     <el-form ref="buttonFormRef" :rules="rules" :model="buttonProps" label-width="auto">
@@ -58,7 +62,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await buttonApi
-      .buttonBatch(buttonProps)
+      .batch(buttonProps)
       .then(() => {
         buttonProps.successful!(); //调用父组件的successful方法
       })

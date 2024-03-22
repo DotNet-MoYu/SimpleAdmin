@@ -1,9 +1,11 @@
-﻿// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
 // 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
-// 3.分发源码时候，请注明软件出处 https://gitee.com/zxzyjs/SimpleAdmin
-// 4.基于本软件的作品。，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
-// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
 namespace SimpleAdmin.System;
@@ -26,8 +28,9 @@ public interface ISysUserService : ITransient
     /// 根据账号获取用户信息
     /// </summary>
     /// <param name="account">用户名</param>
+    /// <param name="tenantId">租户ID</param>
     /// <returns>用户信息</returns>
-    Task<SysUser> GetUserByAccount(string account);
+    Task<SysUser> GetUserByAccount(string account, long? tenantId = null);
 
     /// <summary>
     /// 根据用户ID和机构ID获取角色权限
@@ -41,8 +44,9 @@ public interface ISysUserService : ITransient
     /// 根据手机号获取用户账号
     /// </summary>
     /// <param name="phone">手机号</param>
+    /// <param name="tenantId">租户ID</param>
     /// <returns>用户账号名称</returns>
-    Task<long> GetIdByPhone(string phone);
+    Task<long> GetIdByPhone(string phone, long? tenantId = null);
 
     /// <summary>
     /// 用户选择器
@@ -80,35 +84,28 @@ public interface ISysUserService : ITransient
     /// <returns></returns>
     Task<T> GetUserById<T>(long userId);
 
-    /// <summary>
-    ///根据用户账号获取用户ID
-    /// </summary>
-    /// <param name="account">用户账号</param>
-    /// <returns></returns>
-    Task<long> GetIdByAccount(string account);
+    ///  <summary>
+    /// 根据用户账号获取用户ID
+    ///  </summary>
+    ///  <param name="account">用户账号</param>
+    ///  <param name="tenantId">租户id</param>
+    ///  <returns></returns>
+    Task<long> GetIdByAccount(string account, long? tenantId = null);
 
     /// <summary>
     /// 根据用户手机获取用户信息
     /// </summary>
     /// <param name="phone">手机号</param>
+    /// <param name="tenantId">租户Id</param>
     /// <returns>用户信息</returns>
-    Task<SysUser> GetUserByPhone(string phone);
+    Task<SysUser> GetUserByPhone(string phone, long? tenantId = null);
 
     /// <summary>
     /// 获取用户拥有角色
     /// </summary>
     /// <param name="input">用户ID</param>
     /// <returns></returns>
-    Task<List<long>> OwnRole(BaseIdInput input);
-
-    /// <summary>
-    /// 获取当前API用户的数据范围
-    ///null:代表拥有全部数据权限
-    ///[xx,xx]:代表拥有部分机构的权限
-    ///[]：代表仅自己权限
-    /// </summary>
-    /// <returns>机构列表</returns>
-    Task<List<long>?> GetLoginUserApiDataScope();
+    Task<List<RoleSelectorOutPut>> OwnRole(BaseIdInput input);
 
     /// <summary>
     /// 获取用户拥有的资源
@@ -153,6 +150,37 @@ public interface ISysUserService : ITransient
     Task<string> GetUserAvatar(long userId);
 
     #endregion 查询
+
+    #region 数据范围相关
+
+    /// <summary>
+    /// 获取当前API用户的数据范围
+    /// null:代表拥有全部数据权限
+    /// [xx,xx]:代表拥有部分机构的权限
+    /// []：代表仅自己权限
+    /// </summary>
+    /// <returns>机构列表</returns>
+    Task<List<long>?> GetLoginUserApiDataScope();
+
+    /// <summary>
+    /// 检查用户是否有机构的数据权限
+    /// </summary>
+    /// <param name="orgId">机构id</param>
+    /// <param name="createUerId">创建者id</param>
+    /// <param name="errMsg">错误提示:不为空则直接抛出异常</param>
+    /// <returns>是否有权限</returns>
+    Task<bool> CheckApiDataScope(long? orgId, long? createUerId, string errMsg = "");
+
+    /// <summary>
+    /// 检查用户是否有机构的数据权限
+    /// </summary>
+    /// <param name="orgIds">机构id列表</param>
+    /// <param name="createUerIds">创建者id列表</param>
+    /// <param name="errMsg">错误提示:不为空则直接抛出异常</param>
+    /// <returns></returns>
+    Task<bool> CheckApiDataScope(List<long> orgIds, List<long> createUerIds, string errMsg = "");
+
+    #endregion
 
     #region 新增
 

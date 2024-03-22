@@ -1,16 +1,20 @@
-<!-- 组织管理 -->
+<!-- 
+ * @Description: 组织管理
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:32
+!-->
 <template>
   <div class="main-box">
     <TreeFilter
       ref="treeFilter"
       label="name"
       title="组织列表"
-      :request-api="sysOrgApi.sysOrgTree"
+      :request-api="sysOrgApi.tree"
       :default-value="initParam.parentId"
       @change="changeTreeFilter"
     />
     <div class="table-box">
-      <ProTable ref="proTable" title="组织列表" :columns="columns" :request-api="sysOrgApi.sysOrgPage" :init-param="initParam">
+      <ProTable ref="proTable" title="组织列表" :columns="columns" :request-api="sysOrgApi.page" :init-param="initParam">
         <!-- 表格 header 按钮 -->
         <template #tableHeader="scope">
           <s-button suffix="组织" @click="onOpen(FormOptEnum.ADD)" />
@@ -132,7 +136,7 @@ function onOpenCopy(ids: string[] | number[]) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(sysOrgApi.sysOrgDelete, { ids }, msg);
+  await useHandleData(sysOrgApi.delete, { ids }, msg);
   RefreshTable();
 }
 

@@ -1,4 +1,8 @@
-<!-- 单页管理表单页面 -->
+<!-- 
+ * @Description: 单页管理表单页面
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:59
+!-->
 <template>
   <form-container v-model="visible" :title="`${spaProps.opt}单页`" form-size="600px">
     <el-form
@@ -22,7 +26,6 @@
       <s-form-item label="图标" prop="icon">
         <SelectIconPlus v-model:icon-value="spaProps.record.icon" />
       </s-form-item>
-
       <div v-if="spaProps.record.menuType === MenuTypeDictEnum.MENU">
         <s-form-item label="路由地址" prop="path">
           <s-input v-model="spaProps.record.path" placeholder="请填写路由地址,例:/home/index"></s-input>
@@ -64,17 +67,17 @@
         </el-col>
         <el-col :span="12">
           <s-form-item label="页面全屏" prop="isFull">
-            <s-radio-group v-model="spaProps.record.isFull" button />
+            <s-radio-group v-model="spaProps.record.isFull" :options="yesOptions" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="固定标签页" prop="isAffix">
-            <s-radio-group v-model="spaProps.record.isAffix" button />
+            <s-radio-group v-model="spaProps.record.isAffix" :options="yesOptions" button />
           </s-form-item>
         </el-col>
         <el-col :span="12">
           <s-form-item label="路由缓存" prop="isKeepAlive">
-            <s-radio-group v-model="spaProps.record.isKeepAlive" button />
+            <s-radio-group v-model="spaProps.record.isKeepAlive" :options="yesOptions" button />
           </s-form-item>
         </el-col>
       </el-row>
@@ -98,7 +101,7 @@ const dictStore = useDictStore(); //字典仓库
 // 单页类型选项
 const spaTypeOptions = dictStore
   .getDictList(SysDictEnum.MENU_TYPE)
-  .filter(item => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
+  .filter((item: { value: MenuTypeDictEnum }) => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
 // 是否选项
 const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO);
 
@@ -140,7 +143,7 @@ function onOpen(props: FormProps.Base<Spa.SpaInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    spaApi.spaDetail({ id: props.record.id }).then(res => {
+    spaApi.detail({ id: props.record.id }).then(res => {
       spaProps.record = res.data;
     });
   }
@@ -154,7 +157,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await spaApi
-      .spaSubmitForm(spaProps.record, spaProps.record.id != undefined)
+      .submitForm(spaProps.record, spaProps.record.id != undefined)
       .then(() => {
         spaProps.successful!(); //调用父组件的successful方法
       })

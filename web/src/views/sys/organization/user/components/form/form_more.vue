@@ -1,4 +1,8 @@
-<!-- 更多信息 -->
+<!-- 
+ * @Description: 更多信息
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:55
+!-->
 <template>
   <el-tab-pane label="更多信息" name="more">
     <el-row :gutter="16">

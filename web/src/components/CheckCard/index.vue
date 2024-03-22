@@ -1,4 +1,8 @@
-<!-- 可选卡片 -->
+<!-- 
+ * @Description: 可选卡片
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:34:54 
+!-->
 <template>
   <n-space>
     <!-- 遍历选项列表 -->

@@ -1,4 +1,8 @@
-<!-- 表单 -->
+<!-- 
+ * @Description: 表单
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:37
+!-->
 <template>
   <div>
     <form-container v-model="visible" :title="`${positionProps.opt}职位`" form-size="600px">
@@ -12,7 +16,7 @@
         label-suffix=" :"
       >
         <s-form-item label="所属组织" prop="orgId">
-          <org-selector v-model:org-value="positionProps.record.orgId" />
+          <org-selector v-model:org-value="positionProps.record.orgId" :show-all="false" />
         </s-form-item>
         <s-form-item label="职位名称" prop="name">
           <s-input v-model="positionProps.record.name"></s-input>
@@ -83,7 +87,7 @@ function onOpen(props: FormProps.Base<SysPosition.SysPositionInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    sysPositionApi.positionDetail({ id: props.record.id }).then(res => {
+    sysPositionApi.detail({ id: props.record.id }).then(res => {
       positionProps.record = res.data;
     });
   }
@@ -97,7 +101,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await sysPositionApi
-      .positionSubmitForm(positionProps.record, positionProps.record.id != undefined)
+      .submitForm(positionProps.record, positionProps.record.id != undefined)
       .then(() => {
         positionProps.successful!(); //调用父组件的successful方法
       })

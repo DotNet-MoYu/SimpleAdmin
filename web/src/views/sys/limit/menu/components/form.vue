@@ -1,4 +1,8 @@
-<!-- 菜单管理表菜单面 -->
+<!-- 
+ * @Description: 菜单管理表菜单面
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:43:02
+!-->
 <template>
   <form-container v-model="visible" :title="`${menuProps.opt}菜单`" form-size="600px">
     <el-form
@@ -23,7 +27,12 @@
         <SelectIconPlus v-model:icon-value="menuProps.record.icon" />
       </s-form-item>
       <s-form-item label="上级菜单" prop="parentId">
-        <MenuSelector v-model:menu-value="menuProps.record.parentId" :module="module" @change="changeMenu" />
+        <MenuSelector
+          v-model:menu-value="menuProps.record.parentId"
+          show-all
+          @change="changeMenu"
+          :menu-tree-api="() => menuApi.menuTreeSelector({ module: module })"
+        />
       </s-form-item>
       <s-form-item label="状态" prop="status">
         <s-radio-group v-model="menuProps.record.status" :options="statusOptions" button />
@@ -102,7 +111,9 @@ import { useDictStore } from "@/stores/modules";
 const visible = ref(false); //是否显示表单
 const dictStore = useDictStore(); //字典仓库
 // 菜单类型选项
-const menuTypeOptions = dictStore.getDictList(SysDictEnum.MENU_TYPE).filter(item => item.value !== MenuTypeDictEnum.BUTTON);
+const menuTypeOptions = dictStore
+  .getDictList(SysDictEnum.MENU_TYPE)
+  .filter((item: { value: MenuTypeDictEnum }) => item.value !== MenuTypeDictEnum.BUTTON);
 // 是否选项
 const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO);
 
@@ -159,7 +170,7 @@ function onOpen(props: FormProps.Base<Menu.MenuInfo>, moduleId: number | string)
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    menuApi.menuDetail({ id: props.record.id }).then(res => {
+    menuApi.detail({ id: props.record.id }).then(res => {
       menuProps.record = res.data;
     });
   }
@@ -173,7 +184,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await menuApi
-      .menuSubmitForm(menuProps.record, menuProps.record.id != undefined)
+      .submitForm(menuProps.record, menuProps.record.id != undefined)
       .then(() => {
         menuProps.successful!(); //调用父组件的successful方法
       })

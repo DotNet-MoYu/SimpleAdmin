@@ -1,4 +1,8 @@
-<!-- 表单 -->
+<!-- 
+ * @Description: 表单
+ * @Author: huguodong 
+ * @Date: 2023-12-15 15:45:59
+!-->
 <template>
   <div>
     <form-container v-model="visible" :title="`${sysUserProps.opt}用户`" form-size="800px" @close="onClose">
@@ -69,7 +73,7 @@ function onOpen(props: FormProps.Base<SysUser.SysUserInfo>) {
   visible.value = true; //显示表单
   if (props.record.id) {
     //如果传了id，就去请求api获取record
-    sysUserApi.sysUserDetail({ id: props.record.id }).then(res => {
+    sysUserApi.detail({ id: props.record.id }).then(res => {
       sysUserProps.record = res.data;
     });
   }
@@ -83,7 +87,7 @@ async function handleSubmit() {
     if (!valid) return; //表单验证失败
     //提交表单
     await sysUserApi
-      .sysUserSubmitForm(sysUserProps.record, sysUserProps.record.id != undefined)
+      .submitForm(sysUserProps.record, sysUserProps.record.id != undefined)
       .then(() => {
         sysUserProps.successful!(); //调用父组件的successful方法
       })

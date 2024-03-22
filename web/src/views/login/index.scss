@@ -30,6 +30,7 @@
       }
     }
     .login-form {
+      position: relative;
       width: 420px;
       padding: 50px 40px 45px;
       background-color: var(--el-bg-color);
@@ -65,6 +66,15 @@
         .el-button {
           width: 185px;
         }
+      }
+
+      /* 这是需要固定在右下角的元素的样式 */
+      .fixed-corner {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        /* 其余样式... */
       }
     }
   }
