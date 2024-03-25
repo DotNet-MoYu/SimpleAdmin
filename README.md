@@ -42,14 +42,14 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 提供多种布局方式切换，主题颜色配置，暗黑、灰色、色弱等模式。
 - 丰富的代码注释,每一个页面都有解释说明,新手也能快速上手。
 
-## 适用场景
+## 💵 适用场景
 
 - 搭建企业内部后台管理框架
 - 接外包项目/私活
 - 个人学习.Net 搭建 Web 框架
 - 搭建商用项目
 
-## 适用人群
+## 👨 适用人群
 
 - 对系统 UI 美观有要求
 - 对学习新技术有兴趣，愿意接受新的技术
@@ -58,7 +58,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 想要花更多时间陪陪家人,出去走走
 - 不想在各种低级 bug 上浪费时间
 
-## 分支说明
+## 🍔 分支说明
 
 - master
   正式稳定版本，具体版本升级内容看更新标签
@@ -69,7 +69,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - js
   js 版本的分支,适配于 js 版本前端的代码
 
-## 效果展示
+## 🚩 效果展示
 
 <table>
     <tr>
@@ -90,15 +90,17 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
     </tr>
 </table>
 
-## 🎈 相关连接 🎈
+## 🎈 相关连接
+
+预览地址： [点击查看](http://153.101.199.83:12802)
 
 更新日志：[点击查看](https://gitee.com/dotnetmoyu/SimpleAdmin/commits/master)
 
-文档地址(待更新)：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
+文档地址(旧)：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
 
-常见问题合集(待更新)：[https://www.cnblogs.com/huguodong/p/17021241.html](https://www.cnblogs.com/huguodong/p/17021241.html)
+文档地址(新)：[https://dotnetmoyu.gitee.io/simpleadmin-doc/](https://dotnetmoyu.gitee.io/simpleadmin-doc/)
 
-## 🔖 友情链接 🔖
+## 🔖 友情链接
 
 - 👉 Geeker Admin：[https://docs.spicyboy.cn/](https://docs.spicyboy.cn/)
 - 👉 MoYu：[https://gitee.com/dotnetmoyu/MoYu](https://gitee.com/dotnetmoyu/MoYu)
@@ -117,7 +119,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 <img src="https://images.gitee.com/uploads/images/2020/0406/220236_f5275c90_5531506.png" >
 </p>
 
-## 🤌 赞助 🤌
+## 🤌 赞助
 
 ```
 如果对您有帮助，请点击右上角⭐Star关注或扫码捐赠，感谢支持开源！捐赠金额≥99元即可加入内部交流群一起讨论学习，捐赠之后加q531035580即可。
