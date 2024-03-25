@@ -1,4 +1,4 @@
-<div align="center"><img  src="https://gitee.com/dotnetmoyu/SimpleAdmin/raw/master/doc/Image/ikun.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
+<div align="center"><img  src="https://cdn.52moyu.net/logo.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
 <div align="center"><strong><span style="font-size: x-large;">SimpleAdmin</span></strong></div>
 <div align="center"><h4 align="center">🐔没有花里胡哨，只有简单、稳定、灵活、高效🐔</h4></div>
 
@@ -68,20 +68,20 @@
 
 <table>
     <tr>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/login.png"/></td>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/index.png"/></td>
+        <td><img src="https://cdn.52moyu.net/login.png"/></td>
+        <td><img src="https://cdn.52moyu.net/index.png"/></td>
     </tr>
     <tr>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/settings.png"/></td>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/menu.png"/></td>
+        <td><img src="https://cdn.52moyu.net/settings.png"/></td>
+        <td><img src="https://cdn.52moyu.net/menu.png"/></td>
     </tr>
     <tr>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/role.png"/></td>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/user.png"/></td>
+        <td><img src="https://cdn.52moyu.net/role.png"/></td>
+        <td><img src="https://cdn.52moyu.net/user.png"/></td>
     </tr>
     <tr>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/icon.png"/></td>
-        <td><img src="http://sa0dsse5x.hn-bkt.clouddn.com/choose.png"/></td>
+        <td><img src="https://cdn.52moyu.net/icon.png"/></td>
+        <td><img src="https://cdn.52moyu.net/choose.png"/></td>
     </tr>
 </table>
 
@@ -118,7 +118,7 @@
 如果对您有帮助，请点击右上角⭐Star关注或扫码捐赠，感谢支持开源！捐赠金额≥99元即可加入内部交流群一起讨论学习，捐赠之后加q531035580即可。
 ```
 
-<img src="https://gitee.com/dotnetmoyu/SimpleAdmin/raw/master/doc/Image/微信.jpg"/>
+<img src="https://cdn.52moyu.net/zanshang.png"/>
 
 ## 💾 版权声明 💾
 
