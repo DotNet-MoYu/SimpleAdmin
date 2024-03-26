@@ -15,7 +15,7 @@
 
 import { ResPage, VisLog } from "@/api/interface";
 import { moduleRequest } from "@/api/request";
-const http = moduleRequest("/sysaudit/logVisit/");
+const http = moduleRequest("/sys/audit/logVisit/");
 
 /**
  * @Description: 访问日志
