@@ -87,6 +87,7 @@ export const useConfigStore = defineStore({
     async setTenantList() {
       const { data } = await commonApi.tenantList();
       this.tenantList = data;
+      return data;
     },
     /** 设置租户ID */
     setTenantId(tenantId: number | string) {

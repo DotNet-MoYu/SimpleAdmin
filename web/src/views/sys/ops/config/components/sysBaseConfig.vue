@@ -54,7 +54,7 @@
 
       <el-row :gutter="16">
         <el-col :span="8">
-          <s-form-item label="多租户配置(开发中)" prop="SYS_TENANT_OPTIONS">
+          <s-form-item label="多租户配置" prop="SYS_TENANT_OPTIONS">
             <s-radio-group v-model="sysBaseProps.SYS_TENANT_OPTIONS" :options="tenantOptions" button />
           </s-form-item>
         </el-col>

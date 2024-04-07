@@ -88,7 +88,9 @@ function updateSysConfig(props: LoginProps, config: ReturnType<typeof useConfigS
     props.sysTenantOption = res.SYS_TENANT_OPTIONS;
     // 如果多租户选项是选择就加载租户列表
     if (props.sysTenantOption === TenantEnum.CHOSE) {
-      config.setTenantList();
+      config.setTenantList().then(res => {
+        props.tenantOptions = res;
+      });
     } else {
       props.tenantOptions = [];
       config.delTenantId();
