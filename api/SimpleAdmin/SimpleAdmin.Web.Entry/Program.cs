@@ -12,7 +12,7 @@ Console.WriteLine("源码地址: https://gitee.com/dotnetmoyu/SimpleAdmin");
 Console.WriteLine("ts演示地址: http://153.101.199.83:12802/login");
 Console.WriteLine("js演示地址: http://153.101.199.83:12801/login");
 Console.WriteLine("QQ:531035580");
-Console.WriteLine("拒绝屎山,只玩真实,让.NET 开发更简单!");
+Console.WriteLine("简单之名，非凡之质——稳定、灵活、高效，实力不需夸耀。");
 Serve.Run(RunOptions.Default.ConfigureBuilder(builder =>
 {
     builder.WebHost.UseUrls(builder.Configuration["AppSettings:Urls"]);

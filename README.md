@@ -1,6 +1,6 @@
 <div align="center"><img  src="https://cdn.52moyu.net/logo.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
 <div align="center"><strong><span style="font-size: x-large;">SimpleAdmin</span></strong></div>
-<div align="center"><h4 align="center">🐔没有花里胡哨，只有简单、稳定、灵活、高效🐔</h4></div>
+<div align="center"><h4 align="center">🐔简单之名，非凡之质——稳定、灵活、高效，实力不需夸耀。🐔</h4></div>
 
 <div align="center">
 
@@ -27,6 +27,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 
 - 启动及运行,不会出现拉下来代码跑不起来的情况，自动生成数据库表和种子文件。
 - 基于 SqlSugar 单例模式+CodeFirst+仓储的结构，无需担心作用域问题，直接爽撸。
+- 集成国密加密,是国`首个`.NET 内置国密算法且前后端分离快速开发平台。其他说首个的都是吹牛皮的!
 - 插件式开发，代码更灵活，架构更清晰,每个业务层都可以是独立的，避免后期功能越来越多导致项目成为屎山。
 - 极致缓存,系统快人一步,一些基础配置和用户权限信息都放在了缓存中，用户首次登录后，下次再登录接口耗时实测`10-30ms`。
 - RBAC+多机构的权限+动态刷新,修改用户权限后无需重新登录即可刷新用户权限。
