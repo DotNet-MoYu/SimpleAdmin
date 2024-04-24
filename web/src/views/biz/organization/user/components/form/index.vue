@@ -14,7 +14,6 @@
         :hide-required-asterisk="sysUserProps.disabled"
         label-width="auto"
         label-suffix=" :"
-        class="-mt-25px"
       >
         <el-tabs v-model="activeName">
           <Basic v-model="sysUserProps.record"></Basic>
