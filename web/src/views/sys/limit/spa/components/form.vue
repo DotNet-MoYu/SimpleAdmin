@@ -13,7 +13,6 @@
       :hide-required-asterisk="spaProps.disabled"
       label-width="auto"
       label-suffix=" :"
-      class="-mt-25px"
     >
       <!-- 基本设置 -->
       <el-divider content-position="left">基本设置</el-divider>
