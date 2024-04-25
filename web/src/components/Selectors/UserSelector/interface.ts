@@ -29,7 +29,7 @@ export interface UserSelectProps {
   /** 最大用户数 */
   maxCount?: number;
   /** 是否是业务 */
-  biz: boolean;
+  biz?: boolean;
 }
 
 /** 用户选择器表格初始化参数 */
