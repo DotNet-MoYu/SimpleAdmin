@@ -1,4 +1,4 @@
-<div align="center"><img  src="https://cdn.52moyu.net/logo.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
+<div align="center"><img  src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/ikun.png" width="120" height="120" style="margin-bottom: 10px;"/></div>
 <div align="center"><strong><span style="font-size: x-large;">SimpleAdmin</span></strong></div>
 <div align="center"><h4 align="center">🐔简单之名，非凡之质——稳定、灵活、高效，实力不需夸耀。🐔</h4></div>
 
@@ -74,20 +74,20 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 
 <table>
     <tr>
-        <td><img src="https://cdn.52moyu.net/login.png"/></td>
-        <td><img src="https://cdn.52moyu.net/index.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/login.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/index.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://cdn.52moyu.net/settings.png"/></td>
-        <td><img src="https://cdn.52moyu.net/menu.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/settings.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/menu.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://cdn.52moyu.net/role.png"/></td>
-        <td><img src="https://cdn.52moyu.net/user.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/role.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/user.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://cdn.52moyu.net/icon.png"/></td>
-        <td><img src="https://cdn.52moyu.net/choose.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/icon.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/choose.png"/></td>
     </tr>
 </table>
 
@@ -126,7 +126,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 如果对您有帮助，请点击右上角⭐Star关注或扫码捐赠，感谢支持开源！捐赠金额≥99元即可加入内部交流群一起讨论学习，捐赠之后加q531035580即可。
 ```
 
-<img src="https://cdn.52moyu.net/zanshang.png"/>
+<img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/zanshang.jpg"/>
 
 ## 💾 版权声明 💾
 
