@@ -21,8 +21,9 @@ public class JwtHandler : AppAuthorizeHandler
     ///     重写 Handler 添加自动刷新
     /// </summary>
     /// <param name="context"></param>
+    /// <param name="httpContext"></param>
     /// <returns></returns>
-    public override async Task HandleAsync(AuthorizationHandlerContext context)
+    public override async Task HandleAsync(AuthorizationHandlerContext context, DefaultHttpContext httpContext)
     {
         var expire = App.GetConfig<int>("JWTSettings:ExpiredTime");//获取过期时间(分钟)
         var currentHttpContext = context.GetCurrentHttpContext();

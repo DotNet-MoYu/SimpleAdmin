@@ -17,6 +17,12 @@ namespace SimpleAdmin.Core;
 [UnifyModel(typeof(SimpleAdminResult<>))]
 public class SimpleAdminResultProvider : IUnifyResultProvider
 {
+    public IActionResult OnAuthorizeException(DefaultHttpContext context, ExceptionMetadata metadata)
+    {
+        return new JsonResult(ResTfulResult(metadata.StatusCode, data: metadata.Data, errors: metadata.Errors),
+            UnifyContext.GetSerializerSettings(context));
+    }
+
     /// <summary>
     /// 异常返回
     /// </summary>

@@ -33,7 +33,7 @@ public class DatabaseLoggingWriter : IDatabaseLoggingWriter
         _searcher = searcher;
     }
 
-    public async void Write(LogMessage logMsg, bool flush)
+    public async Task WriteAsync(LogMessage logMsg, bool flush)
     {
         //获取请求json字符串
         var jsonString = logMsg.Context.Get("loggingMonitor").ToString();
