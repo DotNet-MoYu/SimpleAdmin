@@ -1478,11 +1478,12 @@
             自定义授权筛选器
             </summary>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)">
+        <member name="M:SimpleAdmin.Web.Core.JwtHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext,Microsoft.AspNetCore.Http.DefaultHttpContext)">
             <summary>
                 重写 Handler 添加自动刷新
             </summary>
             <param name="context"></param>
+            <param name="httpContext"></param>
             <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Web.Core.JwtHandler.CheckTokenFromRedis(Microsoft.AspNetCore.Http.DefaultHttpContext,System.Int32)">

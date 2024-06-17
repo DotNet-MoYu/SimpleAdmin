@@ -27,8 +27,44 @@ public class SeedDataUtil
         {
             //字段没有数据的替换成null
             dataString = dataString.Replace("\"\"", "null");
+
+            #region 针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
+            //正则匹配"ConfigValue": "[{开头的字符串以]"结尾
+            var matcheDefaultDataScope = Regex.Matches(dataString, "\"DefaultDataScope\": \"\\{.*?\\}\"");
+            foreach (Match match in matcheDefaultDataScope)
+            {
+                //获取匹配的值
+                var value = match.Value;
+                //将匹配的值替换成"ConfigValue": "{XXX}"
+                //字符串是\"的替换成"
+                var newValue = value.Replace("\\\"", "\"");
+                //字符串是\{替换成{
+                newValue = newValue.Replace("\"{", "{");
+                //字符串是}"的替换成}
+                newValue = newValue.Replace("}\"", "}");
+                dataString = dataString.Replace(value, newValue);
+            }
+
+            #endregion 针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
+            #region Sys_Org
+
+            //如果T是Sys_Org 
+            var nameofT = typeof(T).Name;//获取类型名称
+            if (nameofT == "SysOrg")
+            {
+                //字段是"[的替换成[
+                dataString = dataString.Replace("\"[", "[");
+                //字段是]"的替换成]
+                dataString = dataString.Replace("]\"", "]");
+            }
+
+            #endregion
+
             //将json字符串转为实体，这里ExtJson可以正常转换为字符串
             var seedDataRecord1 = dataString.ToJsonEntity<SeedDataRecords<T>>();
+
 
             //正则匹配"ConfigValue": "[{开头的字符串以]"结尾
             var matches = Regex.Matches(dataString, "\"ConfigValue\": \"\\[\\{.*?\\}\\]\"");
@@ -48,11 +84,11 @@ public class SeedDataUtil
             dataString = dataString.Replace("\"{", "{");
             //字符串是}"的替换成}
             dataString = dataString.Replace("}\"", "}");
-
             //将json字符串转为实体,这里ExtJson会转为null，替换字符串把ExtJson值变为实体类型而实体类是string类型
             var seedDataRecord2 = dataString.ToJsonEntity<SeedDataRecords<T>>();
 
             #endregion 针对导出的json字符串嵌套json字符串如 "DefaultDataScope": "{\"Level\":5,\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[]}"
+
 
             //遍历seedDataRecord2
             for (var i = 0; i < seedDataRecord2.Records.Count; i++)
