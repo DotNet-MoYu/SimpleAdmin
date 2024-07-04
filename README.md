@@ -99,7 +99,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 
 文档地址(旧)：[https://www.cnblogs.com/huguodong/p/17021233.html](https://www.cnblogs.com/huguodong/p/17021233.html)
 
-文档地址(新)：[http://218.93.208.209:10105/](http://218.93.208.209:10105/)
+文档地址(新)：[https://simpledoc.52moyu.net/](https://simpledoc.52moyu.net/)
 
 ## 🔖 友情链接
 
