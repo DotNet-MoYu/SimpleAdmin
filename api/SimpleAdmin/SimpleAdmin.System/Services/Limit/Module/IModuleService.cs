@@ -49,4 +49,10 @@ public interface IModuleService : ITransient
     /// <param name="input"></param>
     /// <returns></returns>
     Task<SysResource> Detail(BaseIdInput input);
+
+    /// <summary>
+    /// 模块列表
+    /// </summary>
+    /// <returns></returns>
+    Task<List<SysResource>> List();
 }

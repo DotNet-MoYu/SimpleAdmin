@@ -19,14 +19,16 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
     private readonly IResourceService _resourceService;
     private readonly IRelationService _relationService;
     private readonly IEventPublisher _eventPublisher;
+    private readonly ISysUserService _sysUserService;
 
     public ModuleService(ILogger<ModuleService> logger, IResourceService resourceService, IRelationService relationService,
-        IEventPublisher eventPublisher)
+        IEventPublisher eventPublisher, ISysUserService sysUserService)
     {
         _logger = logger;
         _resourceService = resourceService;
         _relationService = relationService;
         _eventPublisher = eventPublisher;
+        _sysUserService = sysUserService;
     }
 
     /// <inheritdoc/>
@@ -45,7 +47,10 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
         await CheckInput(input);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         if (await InsertAsync(sysResource))//插入数据
+        {
             await _resourceService.RefreshCache(CateGoryConst.RESOURCE_MODULE);//刷新缓存
+            _sysUserService.DeleteUserFromRedis(UserManager.UserId);
+        }
     }
 
     /// <inheritdoc />
@@ -113,6 +118,7 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
             {
                 await _resourceService.RefreshCache();//资源表刷新缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);//关系表刷新缓存
+                _sysUserService.DeleteUserFromRedis(UserManager.UserId);
             }
             else
             {
@@ -121,6 +127,13 @@ public class ModuleService : DbRepository<SysResource>, IModuleService
                 throw Oops.Oh(ErrorCodeEnum.A0002);
             }
         }
+    }
+
+    /// <inheritdoc />
+    public async Task<List<SysResource>> List()
+    {
+        var sysResources = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MODULE);
+        return sysResources;
     }
 
     #region 方法

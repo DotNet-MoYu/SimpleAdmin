@@ -3938,6 +3938,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IModuleService.List">
+            <summary>
+            模块列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.ModuleService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.IModuleService"/>
@@ -3956,6 +3962,9 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.ModuleService.List">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.ModuleService.CheckInput(SimpleAdmin.System.SysResource)">
