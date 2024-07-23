@@ -790,6 +790,12 @@
             <param name="input"></param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.Web.Core.ModuleController.List">
+            <summary>
+            模块列表
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.RoleController">
             <summary>
             角色管理控制器

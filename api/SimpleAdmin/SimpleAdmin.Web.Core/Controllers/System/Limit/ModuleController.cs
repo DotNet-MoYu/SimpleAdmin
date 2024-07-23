@@ -82,4 +82,14 @@ public class ModuleController : BaseController
     {
         return await _moduleService.Detail(input);
     }
+
+    /// <summary>
+    /// 模块列表
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("list")]
+    public async Task<dynamic> List()
+    {
+        return await _moduleService.List();
+    }
 }

@@ -48,10 +48,13 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
         if (relations.Count > 0)
         {
             var userIds = relations.Select(it => it.ObjectId).ToList();//用户ID列表
-            // 解析用户服务
-            var userService = scope.ServiceProvider.GetRequiredService<ISysUserService>();
-            //从redis中删除
-            userService.DeleteUserFromRedis(userIds);
+            if (userIds.Count > 0)
+            {
+                // 解析用户服务
+                var userService = scope.ServiceProvider.GetRequiredService<ISysUserService>();
+                //从redis中删除
+                userService.DeleteUserFromRedis(userIds);
+            }
         }
     }
 
@@ -94,9 +97,12 @@ public class UserEventSubscriber : IEventSubscriber, ISingleton
         userIds.AddRange(userRoleRelations.Select(it => it.ObjectId).ToList());//添加用户ID列表
         // 解析用户服务
         var userService = scope.ServiceProvider.GetRequiredService<ISysUserService>();
-        //从redis中删除用户信息
-        userService.DeleteUserFromRedis(userIds);
-        //从redis中删除用户token
-        _simpleCacheService.HashDel<List<Token>>(CacheConst.CACHE_USER_TOKEN, userIds.Select(it => it.ToString()).ToArray());
+        if (userIds.Count > 0)
+        {
+            //从redis中删除用户信息
+            userService.DeleteUserFromRedis(userIds);
+            //从redis中删除用户token
+            _simpleCacheService.HashDel<List<Token>>(CacheConst.CACHE_USER_TOKEN, userIds.Select(it => it.ToString()).ToArray());
+        }
     }
 }

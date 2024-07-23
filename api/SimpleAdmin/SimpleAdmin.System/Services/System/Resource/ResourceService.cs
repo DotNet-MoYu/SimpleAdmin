@@ -243,9 +243,12 @@ public class ResourceService : DbRepository<SysResource>, IResourceService
     public async Task<List<SysResource>> GetResourcesByIds(List<long> ids, string category)
     {
         //获取所有菜单
-        var menuList = await GetListByCategory(category);
-        //获取菜单信息
-        var menus = menuList.Where(it => ids.Contains(it.Id)).ToList();
+        var menus = await GetListByCategory(category);
+        if (!UserManager.SuperAdmin)//超级管理员获取所有
+        {
+            //获取菜单信息
+            menus = menus.Where(it => ids.Contains(it.Id)).ToList();
+        }
         return menus;
     }
 
