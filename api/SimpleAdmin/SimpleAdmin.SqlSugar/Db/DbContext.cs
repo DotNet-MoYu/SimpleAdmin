@@ -68,7 +68,7 @@ public static class DbContext
                 //默认不写IsNullable为非必填
                 //if (new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
                 //    p.IsNullable = true;
-                if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_'))
+                if (config.IsUnderLine && !p.IsIgnore && !p.DbColumnName.Contains('_') && p.DbColumnName != "ColumnName")
                     p.DbColumnName = UtilMethods.ToUnderLine(p.DbColumnName);// 驼峰转下划线
             }
         };
