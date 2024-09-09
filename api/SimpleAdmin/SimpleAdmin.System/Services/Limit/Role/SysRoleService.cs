@@ -416,6 +416,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
             {
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_RESOURCE);//刷新关系缓存
                 await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_ROLE_HAS_PERMISSION);//刷新关系缓存
+                await _relationService.RefreshCache(CateGoryConst.RELATION_SYS_USER_HAS_MODULE);//刷新关系缓存
                 await _eventPublisher.PublishAsync(EventSubscriberConst.CLEAR_USER_CACHE, new List<long> { input.Id });//发送事件清除角色下用户缓存
             }
             else
