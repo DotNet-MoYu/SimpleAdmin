@@ -3,7 +3,18 @@
     <h4 v-if="title" class="title sle">
       {{ title }}
     </h4>
-    <el-input v-model="filterText" placeholder="输入关键字进行过滤" clearable />
+    <div class="search">
+      <el-input v-model="filterText" placeholder="输入关键字进行过滤" clearable />
+      <el-dropdown trigger="click">
+        <el-icon size="20"><More /></el-icon>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item @click="toggleTreeNodes(true)">展开全部</el-dropdown-item>
+            <el-dropdown-item @click="toggleTreeNodes(false)">折叠全部</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
     <el-scrollbar :style="{ height: title ? `calc(100% - 95px)` : `calc(100% - 56px)` }">
       <el-tree
         ref="treeRef"
@@ -132,6 +143,17 @@ const filterNode = (value: string, data: { [key: string]: any }, node: any) => {
   return labels.some(label => label.indexOf(value) !== -1);
 };
 
+// 切换树节点的展开或折叠状态
+const toggleTreeNodes = (isExpand: boolean) => {
+  let nodes = treeRef.value?.store.nodesMap;
+  if (!nodes) return;
+  for (const node in nodes) {
+    if (nodes.hasOwnProperty(node)) {
+      nodes[node].expanded = isExpand;
+    }
+  }
+};
+
 // emit
 const emit = defineEmits<{
   change: [value: any, data?: any];
@@ -189,5 +211,5 @@ defineExpose({ treeData, treeAllData, treeRef, refresh });
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@import "./index";
 </style>

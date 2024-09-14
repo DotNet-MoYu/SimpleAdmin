@@ -36,7 +36,7 @@ const bizOrgApi = {
     return http.get<SysOrg.SysOrgInfo>("detail", params);
   },
   /**  提交表单 edit为true时为编辑，默认为新增 */
-  submitForm(params: {}, edit: boolean = false) {
+  submitForm(params = {}, edit: boolean = false) {
     return http.post(edit ? "edit" : "add", params);
   },
   /** 删除机构 */
@@ -44,7 +44,7 @@ const bizOrgApi = {
     return http.post("delete", params);
   },
   /** 复制机构 */
-  copy(params: {}) {
+  copy(params = {}) {
     return http.post("copy", params);
   }
 };

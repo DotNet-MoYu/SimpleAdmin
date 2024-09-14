@@ -13,7 +13,7 @@
       :hide-required-asterisk="moduleProps.disabled"
       label-width="auto"
       label-suffix=" :"
-      class="-mt-20px"
+      class="mt-20px"
     >
       <s-form-item label="模块名称" prop="title">
         <s-input v-model="moduleProps.record.title"></s-input>
