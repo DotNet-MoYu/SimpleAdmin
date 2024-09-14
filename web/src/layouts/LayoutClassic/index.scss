@@ -22,9 +22,9 @@
         .logo-img {
           width: 28px;
           object-fit: contain;
-          margin-right: 6px;
         }
         .logo-text {
+          margin-right: 6px;
           overflow: hidden; /* 隐藏超出父容器的内容 */
           font-size: 21px; // font-size: 1vw;自动适配
           font-weight: bold;

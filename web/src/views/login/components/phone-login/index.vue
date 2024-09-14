@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { Login, SysOrg, loginApi } from "@/api";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
@@ -224,8 +224,12 @@ function getPhoneValidCode() {
       });
   });
 }
+
+onBeforeUnmount(() => {
+  document.onkeydown = null;
+});
 </script>
 
 <style scoped lang="scss">
-@import "../../index.scss";
+@import "../../index";
 </style>

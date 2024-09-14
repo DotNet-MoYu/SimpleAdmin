@@ -35,6 +35,7 @@ export interface GlobalState {
   tabsIcon: boolean;
   footer: boolean;
   drawerForm: boolean;
+  watermark: boolean;
 }
 
 /* tabsMenuProps */

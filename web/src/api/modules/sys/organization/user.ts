@@ -37,7 +37,7 @@ const sysUserApi = {
     return http.get<SysUser.SysUserInfo>("detail", params);
   },
   /**  提交表单 edit为true时为编辑，默认为新增 */
-  submitForm(params: {}, edit: boolean = false) {
+  submitForm(params = {}, edit: boolean = false) {
     return http.post(edit ? "edit" : "add", params);
   },
   /** 删除用户 */

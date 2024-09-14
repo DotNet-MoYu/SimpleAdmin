@@ -4,16 +4,14 @@
  * @Date: 2023-12-15 15:38:02
 !-->
 <template>
-  <div class="form-container">
-    <!-- 抽屉 -->
-    <el-drawer v-if="globalStore.drawerForm" v-model="visible" :destroy-on-close="true" :size="formProps.formSize" v-bind="$attrs" @close="close">
-      <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
-    </el-drawer>
-    <!-- 对话框 -->
-    <el-dialog v-else top="50px" :visible="visible" :destroy-on-close="true" draggable v-bind="$attrs" @close="close" :width="formProps.formSize">
-      <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
-    </el-dialog>
-  </div>
+  <!-- 抽屉 -->
+  <el-drawer v-if="globalStore.drawerForm" v-model="visible" :destroy-on-close="true" :size="formProps.formSize" v-bind="$attrs" @close="close">
+    <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
+  </el-drawer>
+  <!-- 对话框 -->
+  <el-dialog v-else top="50px" :visible="visible" :destroy-on-close="true" draggable v-bind="$attrs" @close="close" :width="formProps.formSize">
+    <template v-for="slotKey in slotKeys" #[slotKey]> <slot :name="slotKey" /></template>
+  </el-dialog>
 </template>
 
 <script setup lang="ts" name="FormContainer">
@@ -40,12 +38,7 @@ function close() {
 </script>
 
 <style lang="scss" scoped>
-.form-container {
-  :deep(.el-dialog__body) {
-    margin-top: 0;
-  }
-  :deep(.el-drawer__body) {
-    margin-top: -20px;
-  }
+:deep(.el-dialog__body) {
+  margin-top: 20px;
 }
 </style>

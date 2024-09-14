@@ -49,10 +49,10 @@ const keepAliveStore = useKeepAliveStore();
 const refreshCurrentPage: Function = inject("refresh") as Function;
 const refresh = () => {
   setTimeout(() => {
-    route.meta.isKeepAlive && keepAliveStore.removeKeepAliveName(route.name as string);
+    route.meta.isKeepAlive && keepAliveStore.removeKeepAliveName(route.fullPath as string);
     refreshCurrentPage(false);
     nextTick(() => {
-      route.meta.isKeepAlive && keepAliveStore.addKeepAliveName(route.name as string);
+      route.meta.isKeepAlive && keepAliveStore.addKeepAliveName(route.fullPath as string);
       refreshCurrentPage(true);
     });
   }, 0);
@@ -77,5 +77,5 @@ const closeAllTab = () => {
 </script>
 
 <style scoped lang="scss">
-@import "../index.scss";
+@import "../index";
 </style>

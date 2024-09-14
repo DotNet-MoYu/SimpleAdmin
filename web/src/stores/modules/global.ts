@@ -57,7 +57,9 @@ export const useGlobalStore = defineStore({
     // 页脚
     footer: true,
     // 抽屉表单
-    drawerForm: false
+    drawerForm: false,
+    //页面水印
+    watermark: false
   }),
   getters: {},
   actions: {

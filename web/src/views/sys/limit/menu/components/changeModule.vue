@@ -5,7 +5,7 @@
 !-->
 <template>
   <form-container v-model="visible" :title="'更改模块->' + changeModuleProps.title" form-size="450px">
-    <el-form ref="changeModuleFormRef" :rules="rules" :model="changeModuleProps">
+    <el-form ref="changeModuleFormRef" :rules="rules" :model="changeModuleProps" class="mt-20px">
       <s-form-item label="所属模块" prop="module">
         <s-select v-model="changeModuleProps.module" :options="changeModuleProps.moduleOptions"></s-select>
       </s-form-item>

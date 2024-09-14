@@ -37,7 +37,7 @@ export const useTabsStore = defineStore({
       }
       // 如果tabItem的name不包含在keepAliveStore的keepAliveName中，并且tabItem的isKeepAlive为true，则添加keepAliveStore的keepAliveName
       if (!keepAliveStore.keepAliveName.includes(tabItem.name) && tabItem.isKeepAlive) {
-        keepAliveStore.addKeepAliveName(tabItem.name);
+        keepAliveStore.addKeepAliveName(tabItem.path);
       }
     },
     // Remove Tabs
@@ -54,7 +54,7 @@ export const useTabsStore = defineStore({
       this.tabsMenuList = this.tabsMenuList.filter((item: { path: string }) => item.path !== tabPath);
       // remove keepalive
       const tabItem = this.tabsMenuList.find((item: { path: string }) => item.path === tabPath);
-      tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.name);
+      tabItem?.isKeepAlive && keepAliveStore.removeKeepAliveName(tabItem.path);
       // set tabs
       this.tabsMenuList = this.tabsMenuList.filter((item: { path: string }) => item.path !== tabPath);
     },
@@ -71,7 +71,7 @@ export const useTabsStore = defineStore({
       }
       // set keepalive
       const KeepAliveList = this.tabsMenuList.filter((item: { isKeepAlive: any }) => item.isKeepAlive);
-      keepAliveStore.setKeepAliveName(KeepAliveList.map((item: { name: any }) => item.name));
+      keepAliveStore.setKeepAliveName(KeepAliveList.map((item: { path: any }) => item.path));
     },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
@@ -81,7 +81,7 @@ export const useTabsStore = defineStore({
       });
       // set keepalive
       const KeepAliveList = this.tabsMenuList.filter((item: { isKeepAlive: any }) => item.isKeepAlive);
-      keepAliveStore.setKeepAliveName(KeepAliveList.map((item: { name: any }) => item.name));
+      keepAliveStore.setKeepAliveName(KeepAliveList.map((item: { path: any }) => item.path));
     },
     // Set Tabs
     async setTabs(tabsMenuList: TabsMenuProps[]) {

@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
 import { Login } from "@/api/interface";
 import { SysOrg, commonApi, loginApi } from "@/api";
 import { useAuthStore, useConfigStore } from "@/stores/modules";
@@ -155,8 +155,12 @@ async function loginCaptcha() {
     loginForm.validCodeReqNo = data.validCodeReqNo; // 验证码请求号
   }
 }
+
+onBeforeUnmount(() => {
+  document.onkeydown = null;
+});
 </script>
 
 <style scoped lang="scss">
-@import "../../index.scss";
+@import "../../index";
 </style>
