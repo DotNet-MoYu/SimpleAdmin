@@ -132,6 +132,10 @@ const createVitePwa = (viteEnv: ViteEnv): PluginOption | PluginOption[] => {
   const { VITE_GLOB_APP_TITLE } = viteEnv;
   return VitePWA({
     registerType: "autoUpdate",
+    workbox: {
+      // 添加此项配置，增加需要缓存的最大文件大小
+      maximumFileSizeToCacheInBytes: 4 * 1024 * 1024
+    },
     manifest: {
       name: VITE_GLOB_APP_TITLE,
       short_name: VITE_GLOB_APP_TITLE,
