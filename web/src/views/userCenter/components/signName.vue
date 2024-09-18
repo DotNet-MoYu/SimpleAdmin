@@ -16,7 +16,7 @@
             :is-crop="options.isCrop"
             :line-width="options.lineWidth"
             :line-color="options.lineColor"
-            v-model:bgColor="options.bgColor"
+            v-model:bg-color="options.bgColor"
           />
         </div>
       </el-col>

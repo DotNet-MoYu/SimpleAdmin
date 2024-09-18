@@ -91,16 +91,13 @@ function signSuccess(url: string) {
 
 /** 上传成功回调 */
 function uploadSuccess(data: { fileName: string; blobData: any }) {
-  let result = null;
+  let result = new File([data.blobData], data.fileName, {
+    type: "image/jpeg",
+    lastModified: Date.now()
+  });
   // 如果没有文件名，就转换为file类型，否则就是file类型
   if (data.fileName === "") {
-    result = blobToFile(data.blobData, "avatar.jpg");
-  } else {
-    // 转换为file类型
-    result = new File([data.blobData], data.fileName, {
-      type: "image/jpeg",
-      lastModified: Date.now()
-    });
+    result = blobToFile(data.blobData, "avatar.jpg")!;
   }
   let formData = new FormData();
   formData.append("file", result);

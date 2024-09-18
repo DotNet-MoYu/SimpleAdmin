@@ -25,7 +25,7 @@ const sortedStringify = (obj: any) => {
 
 // 获取请求的唯一标识
 export const getPendingUrl = (config: CustomAxiosRequestConfig) => {
-  return [config.method, config.url, sortedStringify(config.data), sortedStringify(config.params)].join("&");
+  return [config.baseURL, config.method, config.url, sortedStringify(config.data), sortedStringify(config.params)].join("&");
 };
 
 export class AxiosCanceler {
@@ -37,10 +37,11 @@ export class AxiosCanceler {
   addPending(config: CustomAxiosRequestConfig) {
     // 在请求开始前，对之前的请求做检查取消操作
     this.removePending(config);
-
     const url = getPendingUrl(config);
     const controller = new AbortController();
     config.signal = controller.signal;
+    console.log("[ url ] >", url);
+    console.log("[ url ] >", controller);
     pendingMap.set(url, controller);
   }
 

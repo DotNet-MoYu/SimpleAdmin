@@ -13,6 +13,7 @@
  */
 
 import { ReqPage } from "@/api";
+import { CascaderOption } from "element-plus";
 /**
  * @Description: 职位管理接口
  * @Author: huguodong
@@ -52,9 +53,9 @@ export namespace SysPosition {
   }
 
   /** 职位选择器 */
-  export interface SysPositionSelector {
+  export interface SysPositionSelector extends CascaderOption {
     /** id */
-    id: number | string;
+    id: string | number;
     /** 名称 */
     name: string;
     /** 组织Id */

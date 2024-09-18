@@ -16,7 +16,7 @@
         label-suffix=" :"
       >
         <s-form-item label="上级组织" prop="parentId">
-          <org-selector v-model:org-value="orgProps.record.parentId" />
+          <org-selector v-model:org-value="orgProps.record.parentId!" />
         </s-form-item>
         <s-form-item label="组织名称" prop="name">
           <s-input v-model="orgProps.record.name"></s-input>

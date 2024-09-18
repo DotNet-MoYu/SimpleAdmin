@@ -23,7 +23,7 @@
         <s-radio-group v-model="spaProps.record.menuType" :options="spaTypeOptions" button />
       </s-form-item>
       <s-form-item label="图标" prop="icon">
-        <SelectIconPlus v-model:icon-value="spaProps.record.icon" />
+        <SelectIconPlus v-model:icon-value="spaProps.record.icon!" />
       </s-form-item>
       <div v-if="spaProps.record.menuType === MenuTypeDictEnum.MENU">
         <s-form-item label="路由地址" prop="path">

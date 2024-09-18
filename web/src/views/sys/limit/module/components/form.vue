@@ -19,7 +19,7 @@
         <s-input v-model="moduleProps.record.title"></s-input>
       </s-form-item>
       <s-form-item label="图标" prop="icon">
-        <SelectIconPlus v-model:icon-value="moduleProps.record.icon" />
+        <SelectIconPlus v-model:icon-value="moduleProps.record.icon!" />
       </s-form-item>
       <s-form-item label="状态" prop="status">
         <s-radio-group v-model="moduleProps.record.status" :options="statusOptions" button />

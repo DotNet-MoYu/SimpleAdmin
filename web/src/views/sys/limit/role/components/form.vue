@@ -21,7 +21,7 @@
         <s-radio-group v-model="sysRoleProps.record.category" :options="roleCategoryOptions" button />
       </s-form-item>
       <s-form-item v-if="sysRoleProps.record.category === OrgCategoryEnum.ORG" label="所属组织" prop="orgId">
-        <org-selector v-model:org-value="sysRoleProps.record.orgId" />
+        <org-selector v-model:org-value="sysRoleProps.record.orgId!" />
       </s-form-item>
       <s-form-item label="角色编码" prop="code">
         <s-input v-model="sysRoleProps.record.code" placeholder="请填写角色编码,不填则为随机值"></s-input>

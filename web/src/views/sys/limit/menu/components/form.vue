@@ -23,7 +23,7 @@
         <s-radio-group v-model="menuProps.record.menuType" :options="menuTypeOptions" button />
       </s-form-item>
       <s-form-item label="图标" prop="icon">
-        <SelectIconPlus v-model:icon-value="menuProps.record.icon as string" />
+        <SelectIconPlus v-model:icon-value="menuProps.record.icon!" />
       </s-form-item>
       <s-form-item label="上级菜单" prop="parentId">
         <MenuSelector

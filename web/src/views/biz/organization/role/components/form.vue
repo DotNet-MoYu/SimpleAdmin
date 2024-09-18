@@ -18,7 +18,7 @@
         <s-input v-model="sysRoleProps.record.name"></s-input>
       </s-form-item>
       <s-form-item label="所属组织" prop="orgId">
-        <org-selector v-model:org-value="sysRoleProps.record.orgId" :org-tree-api="bizOrgApi.tree" :show-all="false" />
+        <org-selector v-model:org-value="sysRoleProps.record.orgId!" :org-tree-api="bizOrgApi.tree" :show-all="false" />
       </s-form-item>
       <s-form-item label="默认数据范围" prop="code">
         <DataScopeSelector v-model="sysRoleProps.record.defaultDataScope"></DataScopeSelector>

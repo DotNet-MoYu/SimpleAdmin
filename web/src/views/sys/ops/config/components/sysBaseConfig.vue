@@ -19,7 +19,14 @@
         </el-col>
         <el-col :span="8">
           <s-form-item label="系统ico文件" prop="SYS_ICO">
-            <UploadImg v-model:image-url="sysBaseProps.SYS_ICO" width="135px" height="135px" :file-size="1" :file-type="icoType" :auto-upload="false">
+            <UploadImg
+              v-model:image-url="sysBaseProps.SYS_ICO!"
+              width="135px"
+              height="135px"
+              :file-size="1"
+              :file-type="icoType"
+              :auto-upload="false"
+            >
               <template #empty>
                 <el-icon><Picture /></el-icon>
                 <span>请上传.ICO文件</span>

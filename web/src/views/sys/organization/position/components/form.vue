@@ -16,7 +16,7 @@
         label-suffix=" :"
       >
         <s-form-item label="所属组织" prop="orgId">
-          <org-selector v-model:org-value="positionProps.record.orgId" :show-all="false" />
+          <org-selector v-model:org-value="positionProps.record.orgId!" :show-all="false" />
         </s-form-item>
         <s-form-item label="职位名称" prop="name">
           <s-input v-model="positionProps.record.name"></s-input>
