@@ -67,16 +67,24 @@ export const useDictStore = defineStore({
       return dict?.dictLabel || "无此字典";
     },
     /** 获取某个code下字典的列表，多用于字典下拉框 */
-    getDictList(dictValue: dictValue) {
+    getDictList(dictValue: dictValue, isBool?: boolean) {
       const tree = this.dictInfo.find((item: { dictValue: string }) => item.dictValue === dictValue);
       if (tree) {
         //过滤停用的子项
         tree.children = tree.children.filter((item: { status: CommonStatusEnum }) => item.status === CommonStatusEnum.ENABLE);
         return tree.children.map((item: { [x: string]: any }) => {
-          return {
-            value: item["dictValue"],
-            label: item["dictLabel"]
-          };
+          //是和否要特殊处理
+          if (isBool) {
+            return {
+              value: item["dictValue"] === "true" ? true : false,
+              label: item["dictLabel"]
+            };
+          } else {
+            return {
+              value: item["dictValue"],
+              label: item["dictLabel"]
+            };
+          }
         });
       }
       return [];

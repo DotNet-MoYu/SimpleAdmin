@@ -86,7 +86,6 @@ function getMenuTree() {
 /** 选中菜单事件 */
 function changeMenu(value: number | string | string[] | number[]) {
   valueMenu.value = value;
-  console.log("[ value ] >", value);
   //更新父组件数据
   emit("update:menuValue", value);
   emit("change", treeRef.value.getCurrentNode().path);

@@ -114,7 +114,7 @@ const menuTypeOptions = dictStore
   .getDictList(SysDictEnum.MENU_TYPE)
   .filter((item: { value: MenuTypeDictEnum }) => item.value !== MenuTypeDictEnum.BUTTON);
 // 是否选项
-const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO);
+const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO, true);
 
 // 通用状态选项
 const statusOptions = dictStore.getDictList(SysDictEnum.COMMON_STATUS);

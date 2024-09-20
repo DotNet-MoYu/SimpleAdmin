@@ -102,7 +102,7 @@ const spaTypeOptions = dictStore
   .getDictList(SysDictEnum.MENU_TYPE)
   .filter((item: { value: MenuTypeDictEnum }) => item.value == MenuTypeDictEnum.MENU || item.value == MenuTypeDictEnum.LINK);
 // 是否选项
-const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO);
+const yesOptions = dictStore.getDictList(SysDictEnum.YES_NO, true);
 
 // 表单参数
 const spaProps = reactive<FormProps.Base<Spa.SpaInfo>>({
@@ -132,10 +132,10 @@ function onOpen(props: FormProps.Base<Spa.SpaInfo>) {
     //如果是新增,设置默认值
     spaProps.record.menuType = MenuTypeDictEnum.MENU;
     spaProps.record.sortCode = 99;
-    spaProps.record.isHome = false;
-    spaProps.record.isHide = false;
-    spaProps.record.isFull = false;
-    spaProps.record.isAffix = false;
+    spaProps.record.isHome = true;
+    spaProps.record.isHide = true;
+    spaProps.record.isFull = true;
+    spaProps.record.isAffix = true;
     spaProps.record.isKeepAlive = true;
   }
 
