@@ -115,4 +115,14 @@ export namespace SysConfig {
     /** 包含特殊字符 */
     PWD_CONTAIN_CHARACTER: string;
   }
+
+  /** mqtt配置接口 */
+  export interface MqttPolicyConfig {
+    /** MQTT服务端地址 */
+    MQTT_PARAM_URL: string;
+    /** MQTT用户名 */
+    MQTT_PARAM_USERNAME: string;
+    /** MQTT密码 */
+    MQTT_PARAM_PASSWORD: string;
+  }
 }

@@ -589,7 +589,19 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.MessageController.Detail(SimpleAdmin.Core.BaseIdInput)">
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Add(SimpleAdmin.System.MessageSendInput)">
+            <summary>
+            添加站内信
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Edit(SimpleAdmin.System.MessageSendUpdateInput)">
+            <summary>
+            编辑站内信
+            </summary>
+            <param name="input"></param>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MessageController.Detail(SimpleAdmin.System.MessageDetailInput)">
             <summary>
             消息详情
             </summary>
@@ -1399,33 +1411,6 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
-            <summary>
-            获取登录用户的站内信分页
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.LoginUnreadMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            读取登录用户站内信详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UnReadCount">
-            <summary>
-            未读消息数
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.UserCenterController.DeleteMessage(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            删除我的消息
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
             <summary>
             修改密码
@@ -1470,6 +1455,52 @@
         <member name="M:SimpleAdmin.Web.Core.UserCenterController.UpdateUserWorkbench(SimpleAdmin.System.UpdateWorkbenchInput)">
             <summary>
             编辑工作台
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.MyMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.MyMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.UnReadCount">
+            <summary>
+            未读消息数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.NewUnRead">
+            <summary>
+            最新未读消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.DeleteMessage(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetRead(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            设置已读
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.UserCenterController.SetDelete(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            设置未读
             </summary>
             <param name="input"></param>
             <returns></returns>

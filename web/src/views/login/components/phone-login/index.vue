@@ -65,7 +65,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
+import { ref, reactive, onBeforeUnmount } from "vue";
 import { Login, SysOrg, loginApi } from "@/api";
 import { CircleClose, UserFilled } from "@element-plus/icons-vue";
 import type { ElForm } from "element-plus";
@@ -129,17 +129,6 @@ const loginRules = reactive({
 
 const captchaRules = reactive({
   validCode: [required("请输入验证码")]
-});
-
-onMounted(() => {
-  // 监听 enter 事件（调用登录）
-  document.onkeydown = (e: KeyboardEvent) => {
-    e = (window.event as KeyboardEvent) || e;
-    if (e.code === "Enter" || e.code === "enter" || e.code === "NumpadEnter") {
-      if (auth.loginLoading) return;
-      handleSubmit(loginFormRef.value);
-    }
-  };
 });
 
 //监听tenantOptions变化

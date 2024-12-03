@@ -103,5 +103,64 @@ public class SysDictConst
 
     #endregion
 
+    #region 站内信
+
+    /// <summary>
+    /// 消息分类
+    /// </summary>
+    public const string MESSAGE_CATEGORY = "MESSAGE_CATEGORY";
+
+    /// <summary>
+    /// 接受者类型
+    /// </summary>
+    public const string RECEIVER_TYPE = "RECEIVER_TYPE";
+
+    /// <summary>
+    /// 发送方式
+    /// </summary>
+    public const string MESSAGE_WAY = "MESSAGE_WAY";
+
+    /// <summary>
+    /// 立即发送
+    /// </summary>
+    public const string SEND_WAY_NOW = "NOW";
+
+    /// <summary>
+    /// 延迟发送
+    /// </summary>
+    public const string SEND_WAY_DELAY = "DELAY";
+
+    /// <summary>
+    /// 指定时间
+    /// </summary>
+    public const string SEND_WAY_SCHEDULE = "SCHEDULE";
+
+    /// <summary>
+    /// 待发送
+    /// </summary>
+    public const string MESSAGE_STATUS_READY = "READY";
+
+    /// <summary>
+    /// 已发送
+    /// </summary>
+    public const string MESSAGE_STATUS_ALREADY = "ALREADY";
+
+    /// <summary>
+    /// 所有
+    /// </summary>
+    public const string RECEIVER_TYPE_ALL = "ALL";
+
+    /// <summary>
+    /// 角色
+    /// </summary>
+    public const string RECEIVER_TYPE_ROLE = "ROLE";
+
+    /// <summary>
+    /// 指定
+    /// </summary>
+    public const string RECEIVER_TYPE_APPOINT = "APPOINT";
+
+    #endregion
+
     #endregion 系统字典
 }

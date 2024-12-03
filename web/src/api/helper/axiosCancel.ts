@@ -40,8 +40,6 @@ export class AxiosCanceler {
     const url = getPendingUrl(config);
     const controller = new AbortController();
     config.signal = controller.signal;
-    console.log("[ url ] >", url);
-    console.log("[ url ] >", controller);
     pendingMap.set(url, controller);
   }
 

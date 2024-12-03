@@ -30,6 +30,8 @@ export enum SysConfigTypeEnum {
   SYS_BASE = "SYS_BASE",
   /** 登录配置 */
   LOGIN_POLICY = "LOGIN_POLICY",
+  /** mqtt配置 */
+  MQTT_POLICY = "MQTT_BASE",
   /** 密码配置 */
   PWD_POLICY = "PWD_POLICY",
   /** 业务其他配置 */

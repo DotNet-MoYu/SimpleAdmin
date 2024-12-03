@@ -9,7 +9,7 @@
 <script setup lang="ts" name="layout">
 import { computed, reactive, watch, type Component } from "vue";
 import { LayoutType } from "@/stores/interface";
-import { useGlobalStore } from "@/stores/modules/global";
+import { useGlobalStore, useMqttStore, useMessageStore } from "@/stores/modules";
 import ThemeDrawer from "./components/ThemeDrawer/index.vue";
 import LayoutVertical from "./LayoutVertical/index.vue";
 import LayoutClassic from "./LayoutClassic/index.vue";
@@ -27,11 +27,32 @@ const globalStore = useGlobalStore();
 const isDark = computed(() => globalStore.isDark);
 const layout = computed(() => globalStore.layout);
 const watermark = computed(() => globalStore.watermark);
-
+const mqttStore = useMqttStore(); //mqttStore
+const messageStore = useMessageStore(); //messageStore
+const openMqtt = import.meta.env.VITE_MQTT === "true"; //mqtt开关
 const font = reactive({ color: "rgba(0, 0, 0, .15)" });
 watch(isDark, () => (font.color = isDark.value ? "rgba(255, 255, 255, .15)" : "rgba(0, 0, 0, .15)"), {
   immediate: true
 });
+
+onMounted(async () => {
+  await initMqtt();
+});
+
+onUnmounted(() => {
+  if (openMqtt) {
+    mqttStore.disconnect(); //销毁mqtt
+  }
+});
+
+/**初始化mqtt */
+async function initMqtt() {
+  if (openMqtt) {
+    await mqttStore.initMqttClient(); //初始化mqtt
+  } else {
+    await messageStore.getNewMessageInterval(); //定时获取新消息
+  }
+}
 </script>
 
 <style scoped lang="scss">

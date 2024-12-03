@@ -4,7 +4,7 @@
  * @Date: 2023-12-15 15:40:39
 !-->
 <template>
-  <form-container v-model="visible" title="用户选择" form-size="90%" v-bind="$attrs">
+  <form-container v-model="visible" title="角色选择" form-size="90%" v-bind="$attrs">
     <div class="-mt-15px min-h-350px">
       <el-row :gutter="12" justify="space-between">
         <el-col :span="4">

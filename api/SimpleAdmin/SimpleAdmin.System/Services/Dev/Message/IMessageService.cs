@@ -33,10 +33,9 @@ public interface IMessageService : ITransient
     /// <summary>
     /// 获取消息详情
     /// </summary>
-    /// <param name="input">消息ID</param>
-    /// <param name="isSelf">是否是自己</param>
+    /// <param name="input">输入参数</param>
     /// <returns>消息详情</returns>
-    Task<MessageDetailOutPut> Detail(BaseIdInput input, bool isSelf = false);
+    Task<SysMessage> Detail(MessageDetailInput input);
 
     /// <summary>
     /// 我的消息列表
@@ -58,12 +57,47 @@ public interface IMessageService : ITransient
     /// </summary>
     /// <param name="input">站内信信息</param>
     /// <returns></returns>
-    Task Send(MessageSendInput input);
+    Task Send(SysMessage input);
 
     /// <summary>
     /// 获取未读消息数
     /// </summary>
+    /// <param name="userId">用户Id</param>
+    /// <returns></returns>
+    Task<List<MessageUnReadOutPut>> UnReadCount(long userId);
+
+    /// <summary>
+    /// 最新未读
+    /// </summary>
     /// <param name="userId"></param>
     /// <returns></returns>
-    Task<int> UnReadCount(long userId);
+    Task<List<SysMessage>> NewUnRead(long userId);
+
+    /// <summary>
+    /// 标记已读
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<int> SetRead(MessageReadInput input);
+
+    /// <summary>
+    /// 删除消息
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<int> SetDelete(MessageReadInput input);
+
+    /// <summary>
+    /// 新增
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task Add(MessageSendInput input);
+
+    /// <summary>
+    /// 编辑
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task Edit(MessageSendUpdateInput input);
 }

@@ -75,7 +75,7 @@ public class MenuAddInput : SysResource, IValidatableObject
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         //如果菜单类型是菜单
-        if (MenuType is SysResourceConst.MENU or SysResourceConst.SUBSET)
+        if (MenuType is SysResourceConst.MENU or SysResourceConst.SUBSET or SysResourceConst.LINK)
         {
             if (string.IsNullOrEmpty(Name))
                 yield return new ValidationResult("Name不能为空", new[] { nameof(Name) });

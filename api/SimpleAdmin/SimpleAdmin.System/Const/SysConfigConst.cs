@@ -178,4 +178,23 @@ public class SysConfigConst
     public const string FILE_MINIO_DEFAULT_BUCKET_NAME = "FILE_MINIO_DEFAULT_BUCKET_NAME";
 
     #endregion 存储引擎
+
+    #region MQTT
+
+    /// <summary>
+    /// mqtt连接地址
+    /// </summary>
+    public const string MQTT_PARAM_URL = "MQTT_PARAM_URL";
+
+    /// <summary>
+    /// mqtt连接用户名
+    /// </summary>
+    public const string MQTT_PARAM_USERNAME = "MQTT_PARAM_USERNAME";
+
+    /// <summary>
+    /// mqtt连接密码
+    /// </summary>
+    public const string MQTT_PARAM_PASSWORD = "MQTT_PARAM_PASSWORD";
+
+    #endregion
 }

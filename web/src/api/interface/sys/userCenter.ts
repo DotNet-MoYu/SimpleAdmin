@@ -39,4 +39,34 @@ export namespace UserCenter {
     /** 快捷方式 */
     WorkbenchData: string;
   }
+
+  /** 未读消息数量 */
+  export interface ResUnReadCount {
+    /** 分类 */
+    category: string;
+    /** 数量 */
+    unReadCount: number;
+  }
+  /** 消息详情 */
+  export interface ResSysMessageDetail {
+    /** 消息id */
+    id: number | string;
+    /** 消息类型 */
+    category: string;
+    /** 消息标题 */
+    subject: string;
+    /** 消息内容 */
+    content: string;
+    /** 是否已读 */
+    read: boolean;
+    /**发送时间 */
+    sendTime: string;
+    /**发送时间格式化 */
+    sendTimeFormat: string;
+  }
+
+  export interface ReqMyMessagePage {
+    category?: string; //消息分类
+    searchKey?: string; //关键字
+  }
 }

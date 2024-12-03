@@ -8,6 +8,8 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+using Masuit.Tools.DateTimeExt;
+
 namespace SimpleAdmin.System;
 
 /// <summary>
@@ -48,7 +50,9 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
         var query = Context.Queryable<SysMessageUser>().LeftJoin<SysMessage>((u, m) => u.MessageId == m.Id)
             .Where((u, m) => u.IsDelete == false && u.UserId == userId)
             .WhereIF(!string.IsNullOrEmpty(input.Category), (u, m) => m.Category == input.Category)//根据分类查询
-            .OrderBy((u, m) => u.Read, OrderByType.Asc).OrderBy((u, m) => m.CreateTime, OrderByType.Desc).Select((u, m) => new SysMessage
+            .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
+                (u, m) => m.Subject.Contains(input.SearchKey) || m.Content.Contains(input.SearchKey))//根据关键字查询
+            .OrderBy((u, m) => u.Read).OrderBy((u, m) => u.CreateTime, OrderByType.Desc).Select((u, m) => new SysMessage
             {
                 Id = m.Id.SelectAll(),
                 Read = u.Read
@@ -58,29 +62,86 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     }
 
     /// <inheritdoc />
-    public async Task Send(MessageSendInput input)
+    public async Task Add(MessageSendInput input)
     {
+        CheckInput(input);
         var message = input.Adapt<SysMessage>();//实体转换
-        var messageUsers = new List<SysMessageUser>();
-        input.ReceiverIdList.ForEach(it =>
-        {
-            //遍历用户ID列表，生成拓展列表
-            messageUsers.Add(new SysMessageUser { UserId = it, Read = false, IsDelete = false });
-        });
-
         //事务
         var result = await Tenant.UseTranAsync(async () =>
         {
             message = await InsertReturnEntityAsync(message);//添加消息
-            messageUsers.ForEach(it => it.MessageId = message.Id);//添加关系
+        });
+        if (result.IsSuccess)//如果成功了
+        {
+            //如果是立即发送,就直接调用发送方法
+            if (message.SendWay == SysDictConst.SEND_WAY_NOW)
+                await Send(message);//发送消息
+        }
+        else
+        {
+            //写日志
+            _logger.LogError(result.ErrorMessage, result.ErrorException);
+            throw Oops.Oh(ErrorCodeEnum.A0003);
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task Edit(MessageSendUpdateInput input)
+    {
+        CheckInput(input);
+        var sysMessage = input.Adapt<SysMessage>();//实体转换
+        await UpdateAsync(sysMessage);//更新数据
+    }
+
+
+    /// <inheritdoc />
+    public async Task Send(SysMessage sysMessage)
+    {
+        var messageUsers = new List<SysMessageUser>();
+        var userIds = new List<long>();
+        //根据接收人获取需要发送的用户id
+        switch (sysMessage.ReceiverType)
+        {
+            case SysDictConst.RECEIVER_TYPE_ALL:
+                userIds = await Context.Queryable<SysUser>().Select(it => it.Id).ToListAsync();
+                break;
+            case SysDictConst.RECEIVER_TYPE_ROLE:
+                var roleIds = sysMessage.ReceiverInfo.Select(it => it.Id.ToString()).ToList();//获取角色ID列表
+                var roleUsers =
+                    await _relationService.GetRelationListByTargetIdListAndCategory(roleIds, CateGoryConst.RELATION_SYS_USER_HAS_ROLE);//获取角色用户列表
+                userIds = roleUsers.Select(it => it.ObjectId).ToList();//获取用户ID列表
+                break;
+            case SysDictConst.RECEIVER_TYPE_APPOINT:
+                userIds = sysMessage.ReceiverInfo.Select(it => it.Id).ToList();
+                break;
+        }
+        //去掉自己
+        userIds = userIds.Where(it => it != UserManager.UserId).ToList();
+        //遍历用户ID
+        userIds.ForEach(userId =>
+        {
+            messageUsers.Add(new SysMessageUser
+            {
+                MessageId = sysMessage.Id,
+                UserId = userId,
+                Read = false,
+                IsDelete = false
+            });
+        });
+        //修改发送时间
+        sysMessage.SendTime = DateTime.Now;
+        sysMessage.Status = SysDictConst.MESSAGE_STATUS_ALREADY;
+        //事务
+        var result = await Tenant.UseTranAsync(async () =>
+        {
+            await UpdateAsync(sysMessage);//更新消息
             await Context.Insertable(messageUsers).ExecuteCommandAsync();
         });
         if (result.IsSuccess)//如果成功了
         {
             await _eventPublisher.PublishAsync(EventSubscriberConst.NEW_MESSAGE, new NewMessageEvent
             {
-                UserIds = input.ReceiverIdList.Select(it => it.ToString()).ToList(),
-                Message = input.Subject
+                Id = sysMessage.Id
             });//通知用户有新的消息
         }
         else
@@ -92,57 +153,52 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     }
 
     /// <inheritdoc />
-    public async Task<MessageDetailOutPut> Detail(BaseIdInput input, bool isSelf = false)
+    public async Task<SysMessage> Detail(MessageDetailInput input)
     {
         //获取消息
         var message = await GetFirstAsync(it => it.Id == input.Id);
-        if (message != null)
+        if (message != null && message.SendWay == SysDictConst.SEND_WAY_DELAY)
         {
-            var messageDetail = message.Adapt<MessageDetailOutPut>();//实体转换
+            //delayTime等于发送时间减掉创建时间
+            message.DelayTime = (int)(message.SendTime.GetTotalSeconds() - message.CreateTime.Value.GetTotalSeconds());
+        }
+        if (message != null && input.ShowReceiveInfo)
+        {
             var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
             var messageUsers = await messageUserRep.GetListAsync(it => it.MessageId == message.Id);
-            var myMessage = messageUsers.Where(it => it.UserId == UserManager.UserId && it.MessageId == input.Id).FirstOrDefault();//查询是否发给自己
-            if (myMessage != null)
-            {
-                myMessage.Read = true;//设置已读
-                await messageUserRep.UpdateAsync(myMessage);//修改状态
-            }
-            if (!isSelf)//如果不是自己则把所有的用户都列出来
-            {
-                var userIds = messageUsers.Select(it => it.UserId).ToList();//获取用户ID列表
-                var userInfos = await Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id)).Select(it => new { it.Id, it.Name })
-                    .ToListAsync();//获取用户姓名信息列表
 
-                //遍历关系
-                messageUsers.ForEach(messageUser =>
+            var userIds = messageUsers.Select(it => it.UserId).ToList();//获取用户ID列表
+            var userInfos = await Context.Queryable<SysUser>().Where(it => userIds.Contains(it.Id)).Select(it => new { it.Id, it.Name })
+                .ToListAsync();//获取用户姓名信息列表
+            //遍历关系
+            messageUsers.ForEach(messageUser =>
+            {
+                var user = userInfos.Where(u => u.Id == messageUser.UserId).FirstOrDefault();//获取用户信息
+                if (user != null)
                 {
-                    var user = userInfos.Where(u => u.Id == messageUser.UserId).FirstOrDefault();//获取用户信息
-                    if (user != null)
+                    //添加到已读列表
+                    message.ReceiverDetail.Add(new ReceiverDetail
                     {
-                        //添加到已读列表
-                        messageDetail.ReceiveInfoList.Add(new MessageDetailOutPut.ReceiveInfo
-                        {
-                            ReceiveUserId = user.Id,
-                            ReceiveUserName = user.Name,
-                            Read = messageUser.Read
-                        });
-                    }
-                    else//用户ID没找到
-                    {
-                        //添加到已读列表
-                        messageDetail.ReceiveInfoList.Add(new MessageDetailOutPut.ReceiveInfo
-                        {
-                            ReceiveUserId = messageUser.UserId,
-                            ReceiveUserName = "未知用户",
-                            Read = messageUser.Read
-                        });
-                    }
-                });
-            }
-            return messageDetail;
+                        Id = user.Id,
+                        Name = user.Name,
+                        Read = messageUser.Read
+                    });
+                }
+            });
         }
-        return null;
+        //设置已读
+        if (input.Read)
+        {
+            await Context.Updateable<SysMessageUser>()
+                .SetColumns(it => it.Read == true)
+                .SetColumns(it => it.UpdateTime == DateTime.Now)
+                .Where(it => it.MessageId == input.Id && it.Read == false && it.UserId == UserManager.UserId).ExecuteCommandAsync();
+        }
+        return message;
     }
+
+
+
 
     /// <inheritdoc />
     public async Task Delete(BaseIdListInput input)
@@ -174,11 +230,126 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     }
 
     /// <inheritdoc />
-    public async Task<int> UnReadCount(long userId)
+    public async Task<List<MessageUnReadOutPut>> UnReadCount(long userId)
     {
-        var messageUserRep = ChangeRepository<DbRepository<SysMessageUser>>();//切换仓储
-        //获取未读数量
-        var unRead = await messageUserRep.CountAsync(it => it.UserId == userId && it.Read == false && it.IsDelete == false);
-        return unRead;
+        // 连表查询未读
+        var unReadList = await Context.Queryable<SysMessage>().LeftJoin<SysMessageUser>((m, u) => u.MessageId == m.Id)
+            .Where((m, u) => u.UserId == userId && u.Read == false && u.IsDelete == false)
+            .Select<SysMessage>().ToListAsync();
+        //根据消息分类分组
+        var groupList = unReadList.GroupBy(it => it.Category).Select(it => new MessageUnReadOutPut
+        {
+            Category = it.Key,
+            UnReadCount = it.Count()
+        }).ToList();
+        return groupList;
     }
+
+    /// <inheritdoc />
+    public async Task<List<SysMessage>> NewUnRead(long userId)
+    {
+        //根据消息分类分组,获取每组未读前五条
+        var result = await Context.Queryable<SysMessage>().LeftJoin<SysMessageUser>((m, u) => u.MessageId == m.Id)
+            .Where((m, u) => u.UserId == userId && u.IsDelete == false)
+            .Select((m, u) => new SysMessage
+            {
+                Index2 = SqlFunc.RowNumber($"{m.Id} desc",
+                    m.Category),//order by id partition by name，参考sqlsugar分组查询https://www.donet5.com/Doc/1/2243
+                Subject = m.Subject,
+                CreateTime = m.CreateTime,
+                SendTime = m.SendTime,
+                Category = m.Category,
+                Read = u.Read
+            })
+            .MergeTable()//将结果合并成一个表
+            .Where(it => it.Index2 <= 5)//取第五条
+            .Mapper(it =>
+            {
+                it.SendTimeFormat = TimeHelper.FormatTimeAgo(it.SendTime);
+            })
+            .ToListAsync();
+        return result;
+    }
+
+    /// <inheritdoc />
+    public async Task<int> SetRead(MessageReadInput input)
+    {
+        //如果ID列表为空，就是全部已读
+        if (input.Ids.Count == 0 && input.Category != null)
+        {
+            var result = await Context.Updateable<SysMessageUser>()
+                .SetColumns(it => it.Read == true)
+                .SetColumns(it => it.UpdateTime == DateTime.Now)
+                .Where(it => it.UserId == UserManager.UserId && it.Read == false)
+                .Where(it => SqlFunc.Subqueryable<SysMessage>().Where(s => s.Id == it.MessageId && s.Category == input.Category).Any())
+                .ExecuteCommandAsync();
+            return result;
+        }
+        else
+        {
+            return await Context.Updateable<SysMessageUser>()
+                .SetColumns(it => it.Read == true)
+                .SetColumns(it => it.UpdateTime == DateTime.Now)
+                .Where(it => it.UserId == UserManager.UserId && input.Ids.Contains(it.MessageId))
+                .Where(it => it.Read == false)
+                .ExecuteCommandAsync();
+        }
+    }
+
+    /// <inheritdoc />
+    public async Task<int> SetDelete(MessageReadInput input)
+    {
+        //如果ID列表为空，就是全部删除
+        if (input.Ids.Count == 0 && input.Category != null)
+        {
+            var result = await Context.Updateable<SysMessageUser>()
+                .SetColumns(it => it.IsDelete == true)
+                .SetColumns(it => it.UpdateTime == DateTime.Now)
+                .Where(it => it.UserId == UserManager.UserId && it.IsDelete == false)
+                .Where(it => SqlFunc.Subqueryable<SysMessage>().Where(s => s.Id == it.MessageId && s.Category == input.Category).Any())
+                .ExecuteCommandAsync();
+            return result;
+        }
+        else
+        {
+            return await Context.Updateable<SysMessageUser>()
+                .SetColumns(it => it.IsDelete == true)
+                .SetColumns(it => it.UpdateTime == DateTime.Now)
+                .Where(it => it.UserId == UserManager.UserId && input.Ids.Contains(it.MessageId))
+                .Where(it => it.IsDelete == false)
+                .ExecuteCommandAsync();
+        }
+    }
+
+    #region 方法
+
+    /// <summary>
+    /// 检查输入
+    /// </summary>
+    /// <param name="input"></param>
+    private void CheckInput(MessageSendInput input)
+    {
+        if (input.Status == SysDictConst.MESSAGE_STATUS_ALREADY)
+            throw Oops.Oh("已发送的消息不能修改");
+        switch (input.SendWay)
+        {
+            case SysDictConst.SEND_WAY_NOW:
+                input.SendTime = DateTime.Now;
+                break;
+            case SysDictConst.SEND_WAY_DELAY:
+                if (input.CreateTime != null)
+                    input.SendTime = input.CreateTime.Value.AddSeconds(input.DelayTime);
+                else
+                    input.SendTime = DateTime.Now.AddSeconds(input.DelayTime);
+
+                break;
+            case SysDictConst.SEND_WAY_SCHEDULE:
+                if (input.SendTime < DateTime.Now)
+                    throw Oops.Oh("发送时间不能小于当前时间");
+                input.SendTime = input.SendTime;
+                break;
+        }
+    }
+
+    #endregion
 }

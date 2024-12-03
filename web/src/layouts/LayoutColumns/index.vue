@@ -12,7 +12,7 @@
             :key="item.path"
             class="split-item"
             :class="{
-              'split-active': splitActive === item.path || `/${splitActive.split('/')[1]}` === item.path
+              'split-active': splitActive === item.path || splitActive.includes(item.path)
             }"
             @click="changeSubMenu(item)"
           >
@@ -74,7 +74,7 @@ watch(
       const parts = route.path.split("/"); // 将路由按照 '/' 分割成数组
       return route.path === item.path || parts.slice(0, parts.length - 1).join("/") == item.path || `/${parts[1]}` === item.path;
     });
-    if (menuItem[0].children?.length) return (subMenuList.value = menuItem[0].children);
+    if (menuItem.length > 0 && menuItem[0].children?.length) return (subMenuList.value = menuItem[0].children);
     subMenuList.value = [];
   },
   {
@@ -93,5 +93,5 @@ const changeSubMenu = (item: Menu.MenuOptions) => {
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@import "./index";
 </style>

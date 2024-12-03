@@ -54,22 +54,6 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
     public async Task NewMessage(EventHandlerExecutingContext context)
     {
         var newMessageEvent = (NewMessageEvent)context.Source.Payload;//获取参数
-
-        var clientIds = new List<string>();
-        //获取用户token列表
-        var tokenInfos = _simpleCacheService.HashGet<List<TokenInfo>>(CacheConst.CACHE_USER_TOKEN, newMessageEvent.UserIds.ToArray());
-        tokenInfos.ForEach(it =>
-        {
-            if (it != null)
-            {
-                it = it.Where(it => it.TokenTimeout > DateTime.Now).ToList();//去掉登录超时的
-                //遍历token
-                it.ForEach(it =>
-                {
-                    clientIds.AddRange(it.ClientIds);//添加到客户端ID列表
-                });
-            }
-        });
     }
 
     /// <summary>

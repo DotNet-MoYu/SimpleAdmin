@@ -48,12 +48,34 @@ public class MessageController : BaseController
     }
 
     /// <summary>
+    /// 添加站内信
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("add")]
+    [DisplayName("添加站内信")]
+    public async Task Add([FromBody] MessageSendInput input)
+    {
+        await _messageService.Add(input);
+    }
+
+    /// <summary>
+    /// 编辑站内信
+    /// </summary>
+    /// <param name="input"></param>
+    [HttpPost("edit")]
+    [DisplayName("编辑站内信")]
+    public async Task Edit([FromBody] MessageSendUpdateInput input)
+    {
+        await _messageService.Edit(input);
+    }
+
+    /// <summary>
     /// 消息详情
     /// </summary>
     /// <param name="input"></param>
     /// <returns></returns>
     [HttpGet("detail")]
-    public async Task<dynamic> Detail([FromQuery] BaseIdInput input)
+    public async Task<dynamic> Detail([FromQuery] MessageDetailInput input)
     {
         return await _messageService.Detail(input);
     }

@@ -19,7 +19,7 @@ export const HOME_URL: string = "/home/index";
 // 登录页地址（默认）
 export const LOGIN_URL: string = "/login";
 
-// 登录页地址（默认）
+// 个人中心页地址
 export const USER_CENTER_URL: string = "/userCenter";
 
 // 默认主题颜色

@@ -30,14 +30,94 @@ public class SysMessage : BaseEntity
     public virtual string Subject { get; set; }
 
     /// <summary>
+    /// 接收人类型
+    /// </summary>
+    [SugarColumn(ColumnName = "ReceiverType", ColumnDescription = "接收人类型")]
+    public virtual string ReceiverType { get; set; }
+
+    /// <summary>
+    /// 接收人列表
+    /// </summary>
+    [SugarColumn(ColumnName = "ReceiverInfo", ColumnDescription = "接收人列表", IsJson = true)]
+    public virtual List<ReceiverInfo> ReceiverInfo { get; set; }
+
+    /// <summary>
+    /// 发送方式
+    /// </summary>
+    [SugarColumn(ColumnName = "SendWay", ColumnDescription = "发送方式")]
+    public virtual string SendWay { get; set; }
+
+    /// <summary>
+    /// 发送时间
+    /// </summary>
+    [SugarColumn(ColumnDescription = "发送时间")]
+    public virtual DateTime SendTime { get; set; }
+
+    /// <summary>
     /// 正文
     ///</summary>
     [SugarColumn(ColumnName = "Content", ColumnDescription = "正文", ColumnDataType = StaticConfig.CodeFirst_BigString, IsNullable = true)]
     public virtual string Content { get; set; }
 
+
+    /// <summary>
+    /// 延迟时间(秒)
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public int DelayTime { get; set; }
+
+    /// <summary>
+    /// 已读情况
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public List<ReceiverDetail> ReceiverDetail { get; set; } = new List<ReceiverDetail>();
+
+    /// <summary>
+    /// 发送时间格式化
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public string SendTimeFormat { get; set; }
+
+    /// <summary>
+    /// 分组查询用
+    /// </summary>
+    [SugarColumn(IsIgnore = true)]
+    public int Index2 { get; set; }
+
     /// <summary>
     /// 是否已读
     /// </summary>
     [SugarColumn(IsIgnore = true)]
-    public bool Read { get; set; } = true;
+    public bool Read { get; set; }
+}
+
+public class ReceiverInfo
+{
+    /// <summary>
+    /// ID
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+}
+
+public class ReceiverDetail
+{
+    /// <summary>
+    /// ID
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 名称
+    /// </summary>
+    public string Name { get; set; }
+
+    /// <summary>
+    /// 是否已读
+    /// </summary>
+    public bool Read { get; set; }
 }

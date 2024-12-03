@@ -1,5 +1,5 @@
 /**
- * @description
+ * @description 用户中心接口
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks

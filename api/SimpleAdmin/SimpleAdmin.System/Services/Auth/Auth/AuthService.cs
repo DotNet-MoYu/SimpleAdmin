@@ -303,7 +303,7 @@ public class AuthService : IAuthService
         else
         {
             //校验C段用户手机号
-            throw Oops.Bah("手机号不存在");//抛出验证码不能为空
+            throw Oops.Bah("手机号不存在");//手机号不存在
         }
     }
 

@@ -2,14 +2,14 @@
 <template>
   <el-radio-group v-bind="$attrs">
     <template v-if="props.button">
-      <el-radio-button v-for="(item, index) in options" :key="index" :label="item[props.value]" v-show="item.show !== false">
+      <el-radio-button v-for="(item, index) in options" :key="index" :value="item[props.value]" v-show="item.show !== false">
         <slot name="radio" :item="item">
           {{ item[props.label] }}
         </slot>
       </el-radio-button>
     </template>
     <template v-else>
-      <el-radio v-for="(item, index) in options" :key="index" :label="item[props.value]" v-show="item.show !== false">
+      <el-radio v-for="(item, index) in options" :key="index" :value="item[props.value]" v-show="item.show !== false">
         <slot name="radio" :item="item">
           {{ item[props.label] }}
         </slot>
