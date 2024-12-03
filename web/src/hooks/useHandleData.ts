@@ -44,7 +44,7 @@ export const useHandleData = (
           type: "success",
           message: `${message}成功!`
         });
-        resolve(true);
+        resolve(res);
       })
       .catch(() => {
         //啥也不干

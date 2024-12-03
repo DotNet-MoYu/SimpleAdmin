@@ -36,10 +36,10 @@
       <s-form-item label="状态" prop="status">
         <s-radio-group v-model="menuProps.record.status" :options="statusOptions" button />
       </s-form-item>
-      <s-form-item v-if="isCatalog || isMenu || isSubSet" label="路由地址" prop="path">
+      <s-form-item label="路由地址" prop="path">
         <s-input v-model="menuProps.record.path" placeholder="请填写路由地址,例:/home/index"></s-input>
       </s-form-item>
-      <div v-if="isMenu || isSubSet">
+      <div v-if="isMenu || isSubSet || isLink">
         <s-form-item label="组件名称" prop="name">
           <s-input v-model="menuProps.record.name">
             <template #prepend>setup name=</template>
@@ -52,8 +52,8 @@
         </s-form-item>
       </div>
       <div v-if="isLink">
-        <s-form-item label="链接地址:" prop="path">
-          <s-input v-model="menuProps.record.path" placeholder="请填写链接地址,例:http://www.baidu.com"></s-input>
+        <s-form-item label="链接地址:" prop="isLink">
+          <s-input v-model="menuProps.record.isLink" placeholder="请填写链接地址,例:http://www.baidu.com"></s-input>
         </s-form-item>
       </div>
       <s-form-item label="排序" prop="sortCode">
@@ -138,10 +138,11 @@ const rules = reactive({
   component: [required("请输入组件地址")],
   sortCode: [required("请输入排序")],
   icon: [required("请选择图标")],
-  status: [required("请选择状态")]
+  status: [required("请选择状态")],
+  isLink: [required("请输入链接地址")]
 });
 
-const isCatalog = computed(() => menuProps.record.menuType === MenuTypeDictEnum.CATALOG); //是否是目录
+// const isCatalog = computed(() => menuProps.record.menuType === MenuTypeDictEnum.CATALOG); //是否是目录
 const isMenu = computed(() => menuProps.record.menuType === MenuTypeDictEnum.MENU); //是否是菜单
 const isLink = computed(() => menuProps.record.menuType === MenuTypeDictEnum.LINK); //是否
 const isSubSet = computed(() => menuProps.record.menuType === MenuTypeDictEnum.SUBSET); //是否是子集

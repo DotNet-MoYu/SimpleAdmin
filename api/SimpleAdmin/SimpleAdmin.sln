@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.SqlSugar", "Sim
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Cache", "SimpleAdmin.Cache\SimpleAdmin.Cache.csproj", "{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.Plugin.MQTT", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.MQTT\SimpleAdmin.Plugin.MQTT.csproj", "{E2A29774-4229-474E-9D92-E9127AC3F423}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A29774-4229-474E-9D92-E9127AC3F423}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A29774-4229-474E-9D92-E9127AC3F423}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A29774-4229-474E-9D92-E9127AC3F423}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A29774-4229-474E-9D92-E9127AC3F423}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{8D130807-5AD8-4894-A694-6EBECBF89A5A} = {9EB00985-8989-4020-B0BA-536C90BEDEBC}
 		{AA783B66-6F91-4164-86D4-6D053E5A549C} = {88EF0885-575A-4E7A-BBC7-77F762E31A0E}
 		{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977} = {88EF0885-575A-4E7A-BBC7-77F762E31A0E}
+		{E2A29774-4229-474E-9D92-E9127AC3F423} = {3B049767-E6E3-4E89-B45B-9066448E0573}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {409A4605-C03F-4838-9B22-C8C2AA82EB23}

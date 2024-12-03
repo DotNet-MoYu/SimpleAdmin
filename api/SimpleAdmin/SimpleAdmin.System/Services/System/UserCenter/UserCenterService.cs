@@ -137,24 +137,6 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return new List<LoginOrgTreeOutput>();
     }
 
-    /// <inheritdoc />
-    public async Task<SqlSugarPagedList<SysMessage>> LoginMessagePage(MessagePageInput input)
-    {
-        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
-        return messages;
-    }
-
-    /// <inheritdoc />
-    public async Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input)
-    {
-        return await _messageService.Detail(input, true);//返回详情，不带用户列表
-    }
-
-    /// <inheritdoc />
-    public async Task<int> UnReadCount()
-    {
-        return await _messageService.UnReadCount(UserManager.UserId);
-    }
 
     /// <inheritdoc />
     public async Task<List<SysResource>> ShortcutTree()
@@ -337,6 +319,48 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
 
     #endregion 编辑
 
+    #region 我的消息
+
+    /// <inheritdoc />
+    public async Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input)
+    {
+        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
+        return messages;
+    }
+
+    /// <inheritdoc />
+    public async Task<SysMessage> MyMessageDetail(BaseIdInput input)
+    {
+        return await _messageService.Detail(new MessageDetailInput() { Id = input.Id, Read = true });//返回详情，不带用户列表
+    }
+
+    /// <inheritdoc />
+    public async Task<List<MessageUnReadOutPut>> UnReadCount()
+    {
+        return await _messageService.UnReadCount(UserManager.UserId);
+    }
+
+    /// <inheritdoc />
+    public async Task<List<SysMessage>> NewUnRead()
+    {
+        return await _messageService.NewUnRead(UserManager.UserId);
+    }
+
+
+    /// <inheritdoc />
+    public async Task<int> SetRead(MessageReadInput input)
+    {
+        return await _messageService.SetRead(input);
+    }
+
+    /// <inheritdoc />
+    public async Task<int> SetDelete(MessageReadInput input)
+    {
+        return await _messageService.SetDelete(input);
+    }
+
+    #endregion
+
     #region 方法
 
     /// <summary>
@@ -382,7 +406,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
                 IsKeepAlive = it.IsKeepAlive,
                 IsFull = it.IsFull,
                 ActiveMenu = it.ActiveMenu,
-                IsLink = it.Category == SysResourceConst.LINK ? it.Path : ""
+                IsLink = it.IsLink
             };
             it.Meta = meta;
         });

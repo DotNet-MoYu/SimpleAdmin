@@ -41,6 +41,12 @@ export enum SysDictEnum {
   CULTURE_LEVEL = "CULTURE_LEVEL",
   /** 系统消息类型			 */
   MESSAGE_CATEGORY = "MESSAGE_CATEGORY",
+  /** 系统消息接受者类型			 */
+  RECEIVER_TYPE = "RECEIVER_TYPE",
+  /** 系统消息接受者类型			 */
+  MESSAGE_WAY = "MESSAGE_WAY",
+  /** 系统消息接受者类型			 */
+  MESSAGE_STATUS = "MESSAGE_STATUS",
   /** 用户在线状态		 */
   ONLINE_STATUS = "ONLINE_STATUS",
   /** 是否		 */
@@ -96,4 +102,42 @@ export enum TenantEnum {
   CLOSE = "CLOSE",
   /** 根据域名 */
   DOMAIN = "DOMAIN"
+}
+
+/** 消息类型 */
+export enum MessageTypeDictEnum {
+  /** 通知 */
+  INFORM = "INFORM",
+  /** 公告 */
+  NOTICE = "NOTICE",
+  /** 消息 */
+  MESSAGE = "MESSAGE"
+}
+
+/** 消息通知者类型 */
+export enum MessageReceiverTypeDictEnum {
+  /** 全部 */
+  ALL = "ALL",
+  /** 角色 */
+  ROLE = "ROLE",
+  /** 指定 */
+  APPOINT = "APPOINT"
+}
+
+/** 消息发送方式 */
+export enum MessageSendWayDictEnum {
+  /** 立即 */
+  NOW = "NOW",
+  /** 延迟 */
+  DELAY = "DELAY",
+  /** 指定 */
+  SCHEDULE = "SCHEDULE"
+}
+
+/**消息状态 */
+export enum MessageStatusDictEnum {
+  /** 等待 */
+  READY = "READY",
+  /** 延迟 */
+  ALREADY = "ALREADY"
 }

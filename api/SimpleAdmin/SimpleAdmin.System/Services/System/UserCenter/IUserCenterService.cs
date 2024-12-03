@@ -37,26 +37,6 @@ public interface IUserCenterService : ITransient
     Task<List<LoginOrgTreeOutput>> LoginOrgTree();
 
     /// <summary>
-    /// 获取登录用户的站内信分页
-    /// </summary>
-    /// <param name="input">查询参数</param>
-    /// <returns>站内信列表</returns>
-    Task<SqlSugarPagedList<SysMessage>> LoginMessagePage(MessagePageInput input);
-
-    /// <summary>
-    /// 读取登录用户站内信详情
-    /// </summary>
-    /// <param name="input">消息ID</param>
-    /// <returns>消息详情</returns>
-    Task<MessageDetailOutPut> LoginMessageDetail(BaseIdInput input);
-
-    /// <summary>
-    /// 获取未读消息数量
-    /// </summary>
-    /// <returns>未读消息数量</returns>
-    Task<int> UnReadCount();
-
-    /// <summary>
     /// 获取快捷菜单树
     /// </summary>
     /// <returns></returns>
@@ -116,4 +96,48 @@ public interface IUserCenterService : ITransient
     Task SetDefaultModule(SetDefaultModuleInput input);
 
     #endregion 编辑
+
+    #region 我的消息
+
+    /// <summary>
+    /// 获取登录用户的站内信分页
+    /// </summary>
+    /// <param name="input">查询参数</param>
+    /// <returns>站内信列表</returns>
+    Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input);
+
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input">消息ID</param>
+    /// <returns>消息详情</returns>
+    Task<SysMessage> MyMessageDetail(BaseIdInput input);
+
+    /// <summary>
+    /// 获取未读消息数量
+    /// </summary>
+    /// <returns>未读消息数量</returns>
+    Task<List<MessageUnReadOutPut>> UnReadCount();
+
+    /// <summary>
+    /// 最新未读消息
+    /// </summary>
+    /// <returns></returns>
+    Task<List<SysMessage>> NewUnRead();
+
+    /// <summary>
+    /// 设置已读
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<int> SetRead(MessageReadInput input);
+
+    /// <summary>
+    /// 删除我的消息
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<int> SetDelete(MessageReadInput input);
+
+    #endregion
 }

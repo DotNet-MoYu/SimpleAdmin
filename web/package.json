@@ -48,6 +48,7 @@
     "highlight.js": "^11.10.0",
     "md5": "^2.3.0",
     "mitt": "^3.0.1",
+    "mqtt": "^5.10.1",
     "nprogress": "^0.2.0",
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^3.2.1",

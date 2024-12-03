@@ -406,6 +406,21 @@
             MINIO文件默认存储桶
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_URL">
+            <summary>
+            mqtt连接地址
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_USERNAME">
+            <summary>
+            mqtt连接用户名
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysConfigConst.MQTT_PARAM_PASSWORD">
+            <summary>
+            mqtt连接密码
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.SysDictConst">
             <summary>
             字典常量
@@ -479,6 +494,61 @@
         <member name="F:SimpleAdmin.System.SysDictConst.TENANT_OPTIONS_DOMAIN">
             <summary>
             根据域名
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.MESSAGE_CATEGORY">
+            <summary>
+            消息分类
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.RECEIVER_TYPE">
+            <summary>
+            接受者类型
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.MESSAGE_WAY">
+            <summary>
+            发送方式
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.SEND_WAY_NOW">
+            <summary>
+            立即发送
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.SEND_WAY_DELAY">
+            <summary>
+            延迟发送
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.SEND_WAY_SCHEDULE">
+            <summary>
+            指定时间
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.MESSAGE_STATUS_READY">
+            <summary>
+            待发送
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.MESSAGE_STATUS_ALREADY">
+            <summary>
+            已发送
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.RECEIVER_TYPE_ALL">
+            <summary>
+            所有
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.RECEIVER_TYPE_ROLE">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.SysDictConst.RECEIVER_TYPE_APPOINT">
+            <summary>
+            指定
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.SysLogConst">
@@ -1221,12 +1291,77 @@
              主题
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysMessage.ReceiverType">
+            <summary>
+            接收人类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.ReceiverInfo">
+            <summary>
+            接收人列表
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.SendWay">
+            <summary>
+            发送方式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.SendTime">
+            <summary>
+            发送时间
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysMessage.Content">
              <summary>
              正文
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.SysMessage.DelayTime">
+            <summary>
+            延迟时间(秒)
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.ReceiverDetail">
+            <summary>
+            已读情况
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.SendTimeFormat">
+            <summary>
+            发送时间格式化
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysMessage.Index2">
+            <summary>
+            分组查询用
+            </summary>
+        </member>
         <member name="P:SimpleAdmin.System.SysMessage.Read">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ReceiverInfo.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ReceiverInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ReceiverDetail.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ReceiverDetail.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.ReceiverDetail.Read">
             <summary>
             是否已读
             </summary>
@@ -1449,6 +1584,11 @@
         <member name="P:SimpleAdmin.System.SysResource.SortCode">
              <summary>
              排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SysResource.IsLink">
+             <summary>
+             外链地址
             </summary>
         </member>
         <member name="P:SimpleAdmin.System.SysResource.Meta">
@@ -2013,14 +2153,9 @@
             新消息事件
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.NewMessageEvent.UserIds">
+        <member name="P:SimpleAdmin.System.NewMessageEvent.Id">
             <summary>
-            用户Id
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.NewMessageEvent.Message">
-            <summary>
-            内容
+            消息Id
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.NoticeEventSubscriber">
@@ -3186,29 +3321,64 @@
             接收人Id
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.MessageSendUpdateInput.Id">
+            <summary>
+            消息Id
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MessageDetailInput">
+            <summary>
+            消息详情输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MessageDetailInput.ShowReceiveInfo">
+            <summary>
+            是否显示接收信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MessageDetailInput.Read">
+            <summary>
+            是否已读
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MessageReadInput">
+            <summary>
+            已读输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MessageReadInput.Category">
+            <summary>
+            分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MessageReadInput.Id">
+            <summary>
+            用户Id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MessageReadInput.Ids">
+            <summary>
+            消息Id
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.MessageDetailOutPut">
             <summary>
             消息详情
             </summary>
         </member>
-        <member name="T:SimpleAdmin.System.MessageDetailOutPut.ReceiveInfo">
+        <member name="T:SimpleAdmin.System.MessageUnReadOutPut">
             <summary>
-            接收信息类
+            未读消息数量输出
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.MessageDetailOutPut.ReceiveInfo.ReceiveUserId">
+        <member name="P:SimpleAdmin.System.MessageUnReadOutPut.UnReadCount">
             <summary>
-            接收人ID
+            未读消息数量
             </summary>
         </member>
-        <member name="P:SimpleAdmin.System.MessageDetailOutPut.ReceiveInfo.ReceiveUserName">
+        <member name="P:SimpleAdmin.System.MessageUnReadOutPut.Category">
             <summary>
-            接收人姓名
-            </summary>
-        </member>
-        <member name="P:SimpleAdmin.System.MessageDetailOutPut.ReceiveInfo.Read">
-            <summary>
-            是否已读
+            分类
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.IMessageService">
@@ -3231,12 +3401,11 @@
             <param name="userId"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMessageService.Detail(SimpleAdmin.Core.BaseIdInput,System.Boolean)">
+        <member name="M:SimpleAdmin.System.IMessageService.Detail(SimpleAdmin.System.MessageDetailInput)">
             <summary>
             获取消息详情
             </summary>
-            <param name="input">消息ID</param>
-            <param name="isSelf">是否是自己</param>
+            <param name="input">输入参数</param>
             <returns>消息详情</returns>
         </member>
         <member name="M:SimpleAdmin.System.IMessageService.MyMessagePage(SimpleAdmin.System.MessagePageInput,System.Int64)">
@@ -3254,7 +3423,7 @@
             <param name="input">查询参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMessageService.Send(SimpleAdmin.System.MessageSendInput)">
+        <member name="M:SimpleAdmin.System.IMessageService.Send(SimpleAdmin.System.SysMessage)">
             <summary>
             发送站内信
             </summary>
@@ -3265,7 +3434,42 @@
             <summary>
             获取未读消息数
             </summary>
+            <param name="userId">用户Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.NewUnRead(System.Int64)">
+            <summary>
+            最新未读
+            </summary>
             <param name="userId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.SetRead(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            标记已读
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.SetDelete(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            删除消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.Add(SimpleAdmin.System.MessageSendInput)">
+            <summary>
+            新增
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMessageService.Edit(SimpleAdmin.System.MessageSendUpdateInput)">
+            <summary>
+            编辑
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="T:SimpleAdmin.System.MessageService">
@@ -3279,10 +3483,16 @@
         <member name="M:SimpleAdmin.System.MessageService.MyMessagePage(SimpleAdmin.System.MessagePageInput,System.Int64)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.MessageService.Send(SimpleAdmin.System.MessageSendInput)">
+        <member name="M:SimpleAdmin.System.MessageService.Add(SimpleAdmin.System.MessageSendInput)">
             <inheritdoc />
         </member>
-        <member name="M:SimpleAdmin.System.MessageService.Detail(SimpleAdmin.Core.BaseIdInput,System.Boolean)">
+        <member name="M:SimpleAdmin.System.MessageService.Edit(SimpleAdmin.System.MessageSendUpdateInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.Send(SimpleAdmin.System.SysMessage)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.Detail(SimpleAdmin.System.MessageDetailInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Delete(SimpleAdmin.Core.BaseIdListInput)">
@@ -3293,6 +3503,21 @@
         </member>
         <member name="M:SimpleAdmin.System.MessageService.UnReadCount(System.Int64)">
             <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.NewUnRead(System.Int64)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.SetRead(SimpleAdmin.System.MessageReadInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.SetDelete(SimpleAdmin.System.MessageReadInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.MessageService.CheckInput(SimpleAdmin.System.MessageSendInput)">
+            <summary>
+            检查输入
+            </summary>
+            <param name="input"></param>
         </member>
         <member name="T:SimpleAdmin.System.ImportPreviewInput">
             <summary>
@@ -7085,26 +7310,6 @@
             </summary>
             <returns>组织架构</returns>
         </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
-            <summary>
-            获取登录用户的站内信分页
-            </summary>
-            <param name="input">查询参数</param>
-            <returns>站内信列表</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            读取登录用户站内信详情
-            </summary>
-            <param name="input">消息ID</param>
-            <returns>消息详情</returns>
-        </member>
-        <member name="M:SimpleAdmin.System.IUserCenterService.UnReadCount">
-            <summary>
-            获取未读消息数量
-            </summary>
-            <returns>未读消息数量</returns>
-        </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.ShortcutTree">
             <summary>
             获取快捷菜单树
@@ -7160,6 +7365,46 @@
             <param name="input">默认模块输入参数</param>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.MyMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input">查询参数</param>
+            <returns>站内信列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.MyMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input">消息ID</param>
+            <returns>消息详情</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.UnReadCount">
+            <summary>
+            获取未读消息数量
+            </summary>
+            <returns>未读消息数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.NewUnRead">
+            <summary>
+            最新未读消息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.SetRead(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            设置已读
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.SetDelete(SimpleAdmin.System.MessageReadInput)">
+            <summary>
+            删除我的消息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.System.UserCenterService">
             <inheritdoc cref="T:SimpleAdmin.System.IUserCenterService"/>
         </member>
@@ -7170,15 +7415,6 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.LoginOrgTree">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessageDetail(SimpleAdmin.Core.BaseIdInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.ShortcutTree">
@@ -7203,6 +7439,24 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.SetDefaultModule(SimpleAdmin.System.SetDefaultModuleInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.MyMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.MyMessageDetail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.UnReadCount">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.NewUnRead">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.SetRead(SimpleAdmin.System.MessageReadInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.SetDelete(SimpleAdmin.System.MessageReadInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.System.SysResource},System.Collections.Generic.List{SimpleAdmin.System.SysResource})">

@@ -40,10 +40,11 @@
 
       <el-col :lg="17" :md="24">
         <div class="card">
-          <el-tabs v-model="activeName" class="-mt-4">
-            <el-tab-pane label="基本信息" name="accountBasic"><AccountBasic /></el-tab-pane>
-            <el-tab-pane label="账号相关" name="file"><AccountBind /></el-tab-pane>
-            <el-tab-pane label="快捷方式" name="other"><ShortcutSetting /></el-tab-pane>
+          <el-tabs v-model="activeName" class="-mt-4" @tab-click="tabClick">
+            <el-tab-pane label="基本信息" :name="centerStore.getAccountBasic"><AccountBasic /></el-tab-pane>
+            <el-tab-pane label="账号相关" :name="centerStore.getFile"><AccountBind /></el-tab-pane>
+            <el-tab-pane label="快捷方式" :name="centerStore.getShort"><ShortcutSetting /></el-tab-pane>
+            <el-tab-pane label="我的消息" :name="centerStore.getMessage"><MyMessage /></el-tab-pane>
           </el-tabs>
         </div>
       </el-col>
@@ -59,12 +60,22 @@ import SignName from "./components/signName.vue";
 import AccountBasic from "./components/accountBasic.vue";
 import AccountBind from "./components/accountBind.vue";
 import ShortcutSetting from "./components/shortcutSetting.vue";
-import { useUserStore } from "@/stores/modules";
+import MyMessage from "./components/myMessage.vue";
+import { useUserStore, useCenterStore } from "@/stores/modules";
 import { CropUploadInstance } from "@/components/CropUpload/interface";
+import { TabsPaneContext } from "element-plus";
+
+const centerStore = useCenterStore();
 const userStore = useUserStore();
 const userInfo = userStore.userInfoGet;
-const activeName = ref("accountBasic");
+const activeName = ref(centerStore.getTab);
 const cropUploadRef = ref<CropUploadInstance>();
+
+// Tab Click
+const tabClick = (tabItem: TabsPaneContext) => {
+  const name = tabItem.props.name as string;
+  centerStore.setTab(name);
+};
 
 /** 上传头像 */
 function uploadAvatar() {
@@ -113,6 +124,11 @@ function blobToFile(blob: BlobPart, fileName: string) {
     lastModified: Date.now()
   });
 }
+
+/** 监听是否点击了显示更多 */
+centerStore.$subscribe((mutations, state) => {
+  activeName.value = state.tab;
+});
 </script>
 
 <style lang="scss" scoped>

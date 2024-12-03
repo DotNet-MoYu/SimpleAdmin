@@ -208,4 +208,9 @@ function handleCurrentChange(val: SysDict.DictInfo | undefined) {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// 表格按钮样式
+.el-space__item > .el-button {
+  margin-top: -13px;
+}
+</style>

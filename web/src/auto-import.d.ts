@@ -76,12 +76,15 @@ declare global {
     Component,
     ComponentPublicInstance,
     ComputedRef,
+    DirectiveBinding,
     ExtractDefaultPropTypes,
     ExtractPropTypes,
     ExtractPublicPropTypes,
     InjectionKey,
     PropType,
     Ref,
+    MaybeRef,
+    MaybeRefOrGetter,
     VNode,
     WritableComputedRef
   } from "vue";

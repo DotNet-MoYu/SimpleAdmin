@@ -126,6 +126,12 @@ public class SysResource : BaseEntity
     public int? SortCode { get; set; }
 
     /// <summary>
+    /// 外链地址
+    ///</summary>
+    [SugarColumn(ColumnName = "IsLink", ColumnDescription = "外链地址", IsNullable = true)]
+    public string IsLink { get; set; }
+
+    /// <summary>
     /// 菜单元标签
     /// </summary>
     [SugarColumn(IsIgnore = true)]

@@ -61,5 +61,7 @@ export namespace Spa {
     isAffix: boolean;
     /** 是否全屏 */
     isFull: boolean;
+    /** 外链地址 */
+    isLink: string;
   }
 }

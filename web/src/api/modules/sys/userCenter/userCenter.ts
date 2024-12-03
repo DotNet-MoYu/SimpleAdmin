@@ -13,7 +13,7 @@
  * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 import { moduleRequest } from "@/api/request";
-import { ReqId, UserCenter, Login, Menu } from "@/api";
+import { ReqId, UserCenter, Login, Menu, SysMessage } from "@/api";
 const http = moduleRequest("/userCenter/");
 
 /**
@@ -53,11 +53,43 @@ const userCenterApi = {
   },
   /** 获取用户快捷方式 */
   loginWorkbench() {
-    return http.get<any>("loginWorkbench", { loading: false });
+    return http.get<any>("loginWorkbench", {}, { loading: false });
   },
   /** 获取快捷方式菜单树 */
   shortcutTree() {
-    return http.get<Menu.MenuInfo[]>("shortcutTree", { loading: false });
+    return http.get<Menu.MenuInfo[]>("shortcutTree", {}, { loading: false });
+  },
+  /** 获取未读shu*/
+  unReadCount() {
+    return http.get<UserCenter.ResUnReadCount[]>("unReadCount", {}, { loading: false });
+  },
+  /** 获取最新未读*/
+  newUnRead() {
+    return http.get<SysMessage.SysMessageInfo[]>("newUnRead", {}, { loading: false });
+  },
+  /** 我的消息分页*/
+  myMessagePage(params: UserCenter.ReqMyMessagePage) {
+    return http.get<SysMessage.SysMessageInfo>("myMessagePage", params, { loading: false });
+  },
+  /** 消息详情*/
+  myMessageDetail(params: ReqId) {
+    return http.get<UserCenter.ResSysMessageDetail>("myMessageDetail", params);
+  },
+  /** 标记已读*/
+  setRead(params: { ids: string[] | number[] }) {
+    return http.post("setRead", params);
+  },
+  /** 全部已读*/
+  allRead(params: { category: string }) {
+    return http.post("setRead", params);
+  },
+  /** 全部删除*/
+  allDelete(params: { category: string }) {
+    return http.post("setDelete", params);
+  },
+  /** 标记删除*/
+  setDelete(params: ReqId[]) {
+    return http.post("setDelete", params);
   }
 };
 

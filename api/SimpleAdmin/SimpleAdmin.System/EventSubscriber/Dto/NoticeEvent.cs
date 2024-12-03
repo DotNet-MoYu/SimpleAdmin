@@ -38,12 +38,7 @@ public class UserLoginOutEvent
 public class NewMessageEvent
 {
     /// <summary>
-    /// 用户Id
+    /// 消息Id
     /// </summary>
-    public List<string> UserIds { get; set; }
-
-    /// <summary>
-    /// 内容
-    /// </summary>
-    public string Message { get; set; } = "收到一条新的消息!";
+    public long Id { get; set; }
 }

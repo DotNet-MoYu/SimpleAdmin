@@ -12,7 +12,7 @@
             :key="item.path"
             class="split-item"
             :class="{
-              'split-active': splitActive === item.path || `/${splitActive.split('/')[1]}/${splitActive.split('/')[2]}` === item.path
+              'split-active': splitActive === item.path || splitActive.includes(item.path)
             }"
             @click="changeSubMenu(item)"
           >

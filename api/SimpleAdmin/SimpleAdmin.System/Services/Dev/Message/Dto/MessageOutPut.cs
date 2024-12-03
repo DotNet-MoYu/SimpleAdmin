@@ -15,26 +15,20 @@ namespace SimpleAdmin.System;
 /// </summary>
 public class MessageDetailOutPut : SysMessage
 {
-    public List<ReceiveInfo> ReceiveInfoList { get; set; } = new List<ReceiveInfo>();
+}
+
+/// <summary>
+/// 未读消息数量输出
+/// </summary>
+public class MessageUnReadOutPut
+{
+    /// <summary>
+    /// 未读消息数量
+    /// </summary>
+    public int UnReadCount { get; set; }
 
     /// <summary>
-    /// 接收信息类
+    /// 分类
     /// </summary>
-    public class ReceiveInfo
-    {
-        /// <summary>
-        /// 接收人ID
-        /// </summary>
-        public long ReceiveUserId { get; set; }
-
-        /// <summary>
-        /// 接收人姓名
-        /// </summary>
-        public string ReceiveUserName { get; set; }
-
-        /// <summary>
-        /// 是否已读
-        /// </summary>
-        public bool Read { get; set; }
-    }
+    public string Category { get; set; }
 }

@@ -60,52 +60,6 @@ public class UserCenterController : BaseController
     }
 
 
-
-    /// <summary>
-    /// 获取登录用户的站内信分页
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("loginUnreadMessagePage")]
-    public async Task<dynamic> LoginUnreadMessagePage([FromQuery] MessagePageInput input)
-    {
-        return await _userCenterService.LoginMessagePage(input);
-    }
-
-    /// <summary>
-    /// 读取登录用户站内信详情
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpGet("loginUnreadMessageDetail")]
-    public async Task<dynamic> LoginUnreadMessageDetail([FromQuery] BaseIdInput input)
-    {
-        return await _userCenterService.LoginMessageDetail(input);
-    }
-
-    /// <summary>
-    /// 未读消息数
-    /// </summary>
-    /// <returns></returns>
-    [HttpGet("UnReadCount")]
-    public async Task<dynamic> UnReadCount()
-    {
-        return await _userCenterService.UnReadCount();
-    }
-
-
-    /// <summary>
-    /// 删除我的消息
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpPost("deleteMessage")]
-    [DisplayName("删除个人消息")]
-    public async Task DeleteMessage([FromBody] BaseIdInput input)
-    {
-        await _userCenterService.DeleteMyMessage(input);
-    }
-
     /// <summary>
     /// 修改密码
     /// </summary>
@@ -193,6 +147,87 @@ public class UserCenterController : BaseController
     public async Task UpdateUserWorkbench([FromBody] UpdateWorkbenchInput input)
     {
         await _userCenterService.UpdateWorkbench(input);
+    }
+
+    #endregion
+
+    #region 我的消息
+
+    /// <summary>
+    /// 获取登录用户的站内信分页
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("myMessagePage")]
+    public async Task<dynamic> MyMessagePage([FromQuery] MessagePageInput input)
+    {
+        return await _userCenterService.MyMessagePage(input);
+    }
+
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpGet("myMessageDetail")]
+    public async Task<dynamic> MyMessageDetail([FromQuery] BaseIdInput input)
+    {
+        return await _userCenterService.MyMessageDetail(input);
+    }
+
+    /// <summary>
+    /// 未读消息数
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("UnReadCount")]
+    public async Task<dynamic> UnReadCount()
+    {
+        return await _userCenterService.UnReadCount();
+    }
+
+    /// <summary>
+    /// 最新未读消息
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet("newUnRead")]
+    public async Task<dynamic> NewUnRead()
+    {
+        return await _userCenterService.NewUnRead();
+    }
+
+    /// <summary>
+    /// 删除我的消息
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("deleteMessage")]
+    [DisplayName("删除个人消息")]
+    public async Task DeleteMessage([FromBody] BaseIdInput input)
+    {
+        await _userCenterService.DeleteMyMessage(input);
+    }
+
+    /// <summary>
+    /// 设置已读
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("setRead")]
+    public async Task<int> SetRead([FromBody] MessageReadInput input)
+    {
+        input.Id = UserManager.UserId;
+        return await _userCenterService.SetRead(input);
+    }
+
+    /// <summary>
+    /// 设置未读
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    [HttpPost("setDelete")]
+    public async Task<int> SetDelete([FromBody] MessageReadInput input)
+    {
+        input.Id = UserManager.UserId;
+        return await _userCenterService.SetDelete(input);
     }
 
     #endregion

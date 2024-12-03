@@ -30,7 +30,7 @@
         <s-form-item label="状态" prop="status">
           <s-radio-group v-model="orgProps.record.status" :options="statusOptions" button />
         </s-form-item>
-        <s-form-item label="指定主管" prop="sortCode">
+        <s-form-item label="指定主管" prop="directorId">
           <el-button link type="primary" @click="showSelector">选择</el-button>
           <el-tag v-if="orgProps.record.directorId" class="ml-3px" type="warning" closable @close="removeDirector">{{
             orgProps.record.directorInfo?.name

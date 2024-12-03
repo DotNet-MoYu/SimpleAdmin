@@ -21,7 +21,7 @@ public class MessagePageInput : BasePageInput
 /// <summary>
 /// 发送参数
 /// </summary>
-public class MessageSendInput : SysMessage, IValidatableObject
+public class MessageSendInput : SysMessage
 {
     /// <summary>
     /// 主题
@@ -38,14 +38,53 @@ public class MessageSendInput : SysMessage, IValidatableObject
     /// <summary>
     /// 接收人Id
     /// </summary>
-    [Required(ErrorMessage = "ReceiverIdList不能为空")]
     public List<long> ReceiverIdList { get; set; }
 
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        if (Category != CateGoryConst.MESSAGE_INFORM && Category != CateGoryConst.MESSAGE_NOTICE)
-        {
-            yield return new ValidationResult("分类错误", new[] { nameof(Category) });
-        }
-    }
+    public override string Status { get; set; } = SysDictConst.MESSAGE_STATUS_READY;
+}
+
+public class MessageSendUpdateInput : MessageSendInput
+{
+    /// <summary>
+    /// 消息Id
+    /// </summary>
+    [Required(ErrorMessage = "Id不能为空")]
+    public override long Id { get; set; }
+}
+
+/// <summary>
+/// 消息详情输入参数
+/// </summary>
+public class MessageDetailInput : BaseIdInput
+{
+    /// <summary>
+    /// 是否显示接收信息
+    /// </summary>
+    public bool ShowReceiveInfo { get; set; } = false;
+
+    /// <summary>
+    /// 是否已读
+    /// </summary>
+    public bool Read { get; set; } = false;
+}
+
+/// <summary>
+/// 已读输入参数
+/// </summary>
+public class MessageReadInput
+{
+    /// <summary>
+    /// 分类
+    /// </summary>
+    public string Category { get; set; }
+
+    /// <summary>
+    /// 用户Id
+    /// </summary>
+    public long Id { get; set; }
+
+    /// <summary>
+    /// 消息Id
+    /// </summary>
+    public List<long> Ids { get; set; } = new List<long>();
 }
