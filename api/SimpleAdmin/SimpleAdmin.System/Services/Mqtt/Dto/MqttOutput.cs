@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Plugin.Mqtt;
+﻿namespace SimpleAdmin.System;
 
 /// <summary>
 /// mqtt登录参数输出

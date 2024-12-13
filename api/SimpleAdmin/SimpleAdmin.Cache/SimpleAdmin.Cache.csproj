@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
+
     <ItemGroup>
-        <PackageReference Include="SimpleRedis" Version="1.1.9" />
+        <PackageReference Include="SimpleRedis" Version="1.1.9"/>
     </ItemGroup>
 
     <ItemGroup>
@@ -15,6 +15,10 @@
         <None Update="Cache.Production.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Const\"/>
     </ItemGroup>
 
 </Project>

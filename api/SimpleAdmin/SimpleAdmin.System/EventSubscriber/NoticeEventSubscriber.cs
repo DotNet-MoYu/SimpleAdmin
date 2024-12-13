@@ -8,6 +8,8 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+using Microsoft.Extensions.Options;
+
 namespace SimpleAdmin.System;
 
 /// <summary>
@@ -18,13 +20,16 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
     private readonly ISimpleCacheService _simpleCacheService;
 
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly bool _useMessageCenter;
     private readonly SqlSugarScope _db;
 
-    public NoticeEventSubscriber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory)
+    public NoticeEventSubscriber(ISimpleCacheService simpleCacheService, IServiceScopeFactory scopeFactory,
+        IOptionsMonitor<SystemSettingsOptions> options)
     {
         _db = DbContext.DB;
         _simpleCacheService = simpleCacheService;
         _scopeFactory = scopeFactory;
+        _useMessageCenter = options.CurrentValue.UseMessageCenter;
     }
 
     /// <summary>
@@ -54,6 +59,24 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
     public async Task NewMessage(EventHandlerExecutingContext context)
     {
         var newMessageEvent = (NewMessageEvent)context.Source.Payload;//获取参数
+        var messageId = newMessageEvent.Id;
+        //如果启用了通知中心
+        if (_useMessageCenter)
+        {
+            switch (newMessageEvent.SendWay)
+            {
+                case SysDictConst.SEND_WAY_NOW:
+                    //立即发送
+                    await SendMessage();
+                    _simpleCacheService.AddDelayQueue(CacheConst.CACHE_NOTIFICATION, messageId, 0);
+                    break;
+            }
+        }
+    }
+
+    private async Task SendMessage()
+        
+    {
     }
 
     /// <summary>

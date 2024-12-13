@@ -48,7 +48,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     public async Task<SqlSugarPagedList<SysMessage>> MyMessagePage(MessagePageInput input, long userId)
     {
         var query = Context.Queryable<SysMessageUser>().LeftJoin<SysMessage>((u, m) => u.MessageId == m.Id)
-            .Where((u, m) => u.IsDelete == false && u.UserId == userId)
+            .Where((u, m) => u.IsDelete == false && u.UserId == userId && u.Status == SysDictConst.MESSAGE_STATUS_ALREADY)
             .WhereIF(!string.IsNullOrEmpty(input.Category), (u, m) => m.Category == input.Category)//根据分类查询
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey),
                 (u, m) => m.Subject.Contains(input.SearchKey) || m.Content.Contains(input.SearchKey))//根据关键字查询
@@ -65,38 +65,11 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     public async Task Add(MessageSendInput input)
     {
         CheckInput(input);
-        var message = input.Adapt<SysMessage>();//实体转换
-        //事务
-        var result = await Tenant.UseTranAsync(async () =>
-        {
-            message = await InsertReturnEntityAsync(message);//添加消息
-        });
-        if (result.IsSuccess)//如果成功了
-        {
-            //如果是立即发送,就直接调用发送方法
-            if (message.SendWay == SysDictConst.SEND_WAY_NOW)
-                await Send(message);//发送消息
-        }
-        else
-        {
-            //写日志
-            _logger.LogError(result.ErrorMessage, result.ErrorException);
-            throw Oops.Oh(ErrorCodeEnum.A0003);
-        }
-    }
-
-    /// <inheritdoc />
-    public async Task Edit(MessageSendUpdateInput input)
-    {
-        CheckInput(input);
         var sysMessage = input.Adapt<SysMessage>();//实体转换
-        await UpdateAsync(sysMessage);//更新数据
-    }
-
-
-    /// <inheritdoc />
-    public async Task Send(SysMessage sysMessage)
-    {
+        sysMessage.Id = CommonUtils.GetSingleId();
+        //如果是立即发送的直接修改状态
+        if (sysMessage.SendWay == SysDictConst.SEND_WAY_NOW)
+            sysMessage.Status = SysDictConst.MESSAGE_STATUS_ALREADY;//已发送
         var messageUsers = new List<SysMessageUser>();
         var userIds = new List<long>();
         //根据接收人获取需要发送的用户id
@@ -117,6 +90,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
         }
         //去掉自己
         userIds = userIds.Where(it => it != UserManager.UserId).ToList();
+
         //遍历用户ID
         userIds.ForEach(userId =>
         {
@@ -125,23 +99,22 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
                 MessageId = sysMessage.Id,
                 UserId = userId,
                 Read = false,
-                IsDelete = false
+                IsDelete = false,
+                Status = sysMessage.SendWay == SysDictConst.SEND_WAY_NOW ? SysDictConst.MESSAGE_STATUS_READY : SysDictConst.MESSAGE_STATUS_ALREADY
             });
         });
-        //修改发送时间
-        sysMessage.SendTime = DateTime.Now;
-        sysMessage.Status = SysDictConst.MESSAGE_STATUS_ALREADY;
         //事务
         var result = await Tenant.UseTranAsync(async () =>
         {
-            await UpdateAsync(sysMessage);//更新消息
+            await InsertAsync(sysMessage);//添加消息
             await Context.Insertable(messageUsers).ExecuteCommandAsync();
         });
         if (result.IsSuccess)//如果成功了
         {
             await _eventPublisher.PublishAsync(EventSubscriberConst.NEW_MESSAGE, new NewMessageEvent
             {
-                Id = sysMessage.Id
+                Id = sysMessage.Id,
+                SendWay = sysMessage.SendWay
             });//通知用户有新的消息
         }
         else
@@ -151,6 +124,17 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
             throw Oops.Oh(ErrorCodeEnum.A0003);
         }
     }
+
+    /// <inheritdoc />
+    public async Task Edit(MessageSendUpdateInput input)
+    {
+        CheckInput(input);
+        var sysMessage = input.Adapt<SysMessage>();//实体转换
+        await UpdateAsync(sysMessage);//更新数据
+    }
+
+
+
 
     /// <inheritdoc />
     public async Task<SysMessage> Detail(MessageDetailInput input)
@@ -250,7 +234,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
     {
         //根据消息分类分组,获取每组未读前五条
         var result = await Context.Queryable<SysMessage>().LeftJoin<SysMessageUser>((m, u) => u.MessageId == m.Id)
-            .Where((m, u) => u.UserId == userId && u.IsDelete == false)
+            .Where((m, u) => u.UserId == userId && u.IsDelete == false && u.Status == SysDictConst.MESSAGE_STATUS_ALREADY)
             .Select((m, u) => new SysMessage
             {
                 Index2 = SqlFunc.RowNumber($"{m.Id} desc",
@@ -341,7 +325,6 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
                     input.SendTime = input.CreateTime.Value.AddSeconds(input.DelayTime);
                 else
                     input.SendTime = DateTime.Now.AddSeconds(input.DelayTime);
-
                 break;
             case SysDictConst.SEND_WAY_SCHEDULE:
                 if (input.SendTime < DateTime.Now)

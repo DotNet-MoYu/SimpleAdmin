@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.Plugin.Mqtt;
+﻿namespace SimpleAdmin.Web.Core;
 
 /// <summary>
 /// mqtt服务控制器

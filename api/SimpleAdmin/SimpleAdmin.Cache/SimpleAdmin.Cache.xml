@@ -4,32 +4,10 @@
         <name>SimpleAdmin.Cache</name>
     </assembly>
     <members>
-        <member name="T:SimpleAdmin.Cache.CacheConst">
-            <summary>
-            Redis常量
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_PREFIX_WEB">
-            <summary>
-            Redis Key前缀(可删除)
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_PREFIX">
-            <summary>
-            Redis Key前缀(需要持久化，不随系统重启删除)
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_HASH">
-            <summary>
-            Redis Hash类型
-            </summary>
-        </member>
-        <member name="F:SimpleAdmin.Cache.CacheConst.CACHE_USER_TOKEN">
-            <summary>
-            用户Token缓存Key
-            </summary>
-        </member>
         <member name="T:SimpleAdmin.Cache.ISimpleCacheService">
+            <summary>
+            缓存服务
+            </summary>
             <summary>
             缓存服务
             </summary>
@@ -89,6 +67,87 @@
             <typeparam name="T"></typeparam>
             <param name="key">键</param>
             <returns>数据字典</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.AddQueue``1(System.String,``0[])">
+            <summary>
+            添加到队列
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值数组</param>
+            <returns>添加数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.AddQueue``1(System.String,``0)">
+            <summary>
+            添加到队列
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns>添加数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.GetRedisQueue``1(System.String)">
+            <summary>
+            获取队列实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <returns>队列实例</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.GetQueue``1(System.String,System.Int32)">
+            <summary>
+            从队列中获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="Count">数量</param>
+            <returns>数据列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.GetQueueOne``1(System.String,System.Int32)">
+            <summary>
+            取一条数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="timeout">阻塞时间</param>
+            <returns>数据</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.GetQueueOneAsync``1(System.String,System.Int32)">
+            <summary>
+            异步取一条数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="timeout">阻塞时间</param>
+            <returns>数据</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.AddDelayQueue``1(System.String,``0,System.Int32)">
+            <summary>
+            添加一条数据到延迟队列
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="delay">延迟时间</param>
+            <returns>添加成功数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.AddDelayQueue``1(System.String,System.Collections.Generic.List{``0},System.Int32)">
+            <summary>
+            批量添加数据到延迟队列
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="delay">延迟时间</param>
+            <returns>添加成功数量</returns>
+        </member>
+        <member name="M:SimpleAdmin.Cache.ISimpleCacheService.GetDelayQueue``1(System.String)">
+            <summary>
+            获取延迟队列实例
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">键</param>
+            <returns></returns>
         </member>
         <member name="M:SimpleAdmin.Cache.ISimpleCacheService.ContainsKey(System.String)">
             <summary>是否包含缓存项</summary>
@@ -296,6 +355,10 @@
             <inheritdoc cref="T:SimpleAdmin.Cache.ISimpleCacheService"/>
             内存缓存
             </summary>
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Cache.ISimpleCacheService"/>
+            内存缓存
+            </summary>
         </member>
         <member name="M:SimpleAdmin.Cache.MemoryCacheService.HashAdd``1(System.String,System.String,``0)">
             <inheritdoc/>
@@ -313,6 +376,33 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Cache.MemoryCacheService.HashGetAll``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.AddQueue``1(System.String,``0[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.AddQueue``1(System.String,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.GetRedisQueue``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.GetQueue``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.GetQueueOne``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.GetQueueOneAsync``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.AddDelayQueue``1(System.String,``0,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.AddDelayQueue``1(System.String,System.Collections.Generic.List{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.MemoryCacheService.GetDelayQueue``1(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Cache.MemoryCacheService.Get``1(System.String)">
@@ -402,6 +492,10 @@
             <inheritdoc cref="T:SimpleAdmin.Cache.ISimpleCacheService"/>
             Redis缓存
             </summary>
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Cache.ISimpleCacheService"/>
+            Redis缓存
+            </summary>
         </member>
         <member name="M:SimpleAdmin.Cache.RedisCacheService.HashAdd``1(System.String,System.String,``0)">
             <inheritdoc/>
@@ -419,6 +513,33 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Cache.RedisCacheService.HashGetAll``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.AddQueue``1(System.String,``0[])">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.AddQueue``1(System.String,``0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.GetRedisQueue``1(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.GetQueue``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.GetQueueOne``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.GetQueueOneAsync``1(System.String,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.AddDelayQueue``1(System.String,``0,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.AddDelayQueue``1(System.String,System.Collections.Generic.List{``0},System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Cache.RedisCacheService.GetDelayQueue``1(System.String)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.Cache.RedisCacheService.Get``1(System.String)">

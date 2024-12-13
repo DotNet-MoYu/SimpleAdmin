@@ -22,6 +22,7 @@
   "SystemSettings": {
     "InitTable": false, //是否初始化表结构
     "InitSeedData": false, //是否初始化种子数据
-    "SuperAdminViewAllData": false //是否超级管理员可以查看所有数据
+    "SuperAdminViewAllData": false, //是否超级管理员可以查看所有数据
+    "UseMessageCenter": false, //是否启用通知中心
   }
 }

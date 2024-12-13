@@ -69,7 +69,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                 //如果密码初始化提醒为true
                 if (pwdUpdateDefault)
                 {
-                    await messageService.Send(new MessageSendInput
+                    await messageService.Add(new MessageSendInput
                     {
                         Subject = subject,
                         Content = "请及时修改初始密码",
@@ -87,12 +87,13 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                     var pwdRemindDay = loginPolicy.First(x => x.ConfigKey == SysConfigConst.PWD_REMIND_DAY).ConfigValue.ToInt();//获取密码提醒时间
                     if (DateTime.Now - pwdRemindUpdateTime > TimeSpan.FromDays(pwdRemindDay))
                     {
-                        await messageService.Send(new MessageSendInput
+                        await messageService.Add(new MessageSendInput
                         {
                             Subject = subject,
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
                             Category = CateGoryConst.MESSAGE_INFORM,
-                            ReceiverIdList = new List<long> { sysUser.Id }
+                            SendWay = SysDictConst.SEND_WAY_NOW,
+                            ReceiverInfo = new List<ReceiverInfo> { new ReceiverInfo { Id = sysUser.Id, Name = sysUser.Name } }
                         });
                     }
                     sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间,避免重复提醒
