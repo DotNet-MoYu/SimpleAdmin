@@ -97,14 +97,12 @@ export const useMessageStore = defineStore({
       return this.unReadInfo[category] || 0;
     },
     /**提示有新消息 */
-    getNewMessage(notice: boolean = false) {
-      console.log(123);
-
+    getNewMessage(notice: boolean = false, message: string = "您有一条新消息,请注意查收!") {
       this.getNewUnRead();
       if (notice) {
         ElNotification({
-          title: "新消息",
-          message: "您有一条新消息,请注意查收!",
+          title: "收到一条新消息",
+          message: message,
           icon: Message,
           offset: 40
         });

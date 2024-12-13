@@ -17,6 +17,7 @@ import mqtt from "mqtt";
 import { defineStore } from "pinia";
 import { mqttApi } from "@/api";
 import { useMessageStore } from "@/stores/modules";
+import { MqttMessage, MsgTypeEnum } from "../interface/mqtt";
 
 const name = "simple-mqtt"; // 定义模块名称
 
@@ -161,10 +162,19 @@ export const useMqttStore = defineStore({
     },
     /** 消息事件 */
     onMessage(topic: string, message: any) {
+      console.log(message.toString());
       const messageStore = useMessageStore();
-      const msg = JSON.parse(message.toString());
+      const msg = JSON.parse(message.toString()) as MqttMessage;
       console.log(`客户端: ${this.clientId}, 接收到消息:`, topic, msg);
-      messageStore.getNewMessage(true);
+      switch (msg.MsgType) {
+        case MsgTypeEnum.NewMessage:
+          messageStore.getNewMessage(true, msg.Data.Subject);
+          break;
+        case MsgTypeEnum.LoginOut:
+          break;
+        case MsgTypeEnum.UpdatePassword:
+          break;
+      }
     }
   }
 });
