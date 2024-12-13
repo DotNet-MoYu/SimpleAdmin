@@ -192,6 +192,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
             orgIds = orgIds.Where(it => input.OrgIds.Contains(it)).ToList();//包含在机构ID列表中的组织ID
         }
         var result = await Context.Queryable<SysRole>()
+            .Where(it => it.Code != SysRoleConst.SUPER_ADMIN)
             .WhereIF(input.OrgId == 0, it => it.Category == CateGoryConst.ROLE_GLOBAL)//不传机构ID就是全局角色
             .WhereIF(orgIds.Count > 0, it => orgIds.Contains(it.OrgId.Value))//组织ID
             .WhereIF(!string.IsNullOrEmpty(input.Name), it => it.Name.Contains(input.Name))//根据关键字查询
