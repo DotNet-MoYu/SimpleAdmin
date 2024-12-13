@@ -34,18 +34,7 @@ public class MessageController : BaseController
     {
         return await _messageService.Page(input);
     }
-
-    /// <summary>
-    /// 发送站内信
-    /// </summary>
-    /// <param name="input"></param>
-    /// <returns></returns>
-    [HttpPost("send")]
-    [DisplayName("发送站内信")]
-    public async Task Send([FromBody] MessageSendInput input)
-    {
-        await _messageService.Send(input);
-    }
+    
 
     /// <summary>
     /// 添加站内信

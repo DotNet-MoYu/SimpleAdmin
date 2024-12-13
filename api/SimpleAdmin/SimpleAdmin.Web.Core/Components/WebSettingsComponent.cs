@@ -18,8 +18,6 @@ public sealed class WebSettingsComponent : IServiceComponent
 {
     public void Load(IServiceCollection services, ComponentContext componentContext)
     {
-        // 配置ip2region
-        services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content, Path.Combine(App.HostEnvironment.ContentRootPath, "ip2region.xdb")));
         //web设置配置转实体
         services.AddConfigurableOptions<WebSettingsOptions>();
 

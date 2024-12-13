@@ -151,6 +151,36 @@
             <param name="options"></param>
             <param name="logLevel"></param>
         </member>
+        <member name="T:SimpleAdmin.Core.CacheConst">
+            <summary>
+            Redis常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CacheConst.CACHE_PREFIX_WEB">
+            <summary>
+            Redis Key前缀(可删除)
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CacheConst.CACHE_PREFIX">
+            <summary>
+            Redis Key前缀(需要持久化，不随系统重启删除)
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CacheConst.CACHE_HASH">
+            <summary>
+            Redis Hash类型
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CacheConst.CACHE_USER_TOKEN">
+            <summary>
+            用户Token缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.CacheConst.CACHE_NOTIFICATION">
+            <summary>
+            通知消息队列
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Core.ClaimConst">
             <summary>
             授权用户常量
@@ -181,6 +211,31 @@
             组织机构Id
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.CACHE_MQTT_CLIENT_USER">
+            <summary>
+            mqtt认证登录信息key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.MQTT_TOPIC_PREFIX">
+            <summary>
+            mqtt主题前缀
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.MQTT_MESSAGE_LOGIN_OUT">
+            <summary>
+            登出
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.MQTT_MESSAGE_NEW">
+            <summary>
+            新消息
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Core.MqttConst.MQTT_MESSAGE_UPDATE_PASSWORD">
+            <summary>
+            修改密码
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.Core.SimpleAdminConst.ZERO">
             <summary>
             0
@@ -204,6 +259,21 @@
         <member name="P:SimpleAdmin.Core.MqttMessage.DetTime">
             <summary>
             时间
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Core.MessageData">
+            <summary>
+            消息格式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.MessageData.Subject">
+            <summary>
+            主题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Core.MessageData.Content">
+            <summary>
+             内容
             </summary>
         </member>
         <member name="T:SimpleAdmin.Core.TokenInfo">

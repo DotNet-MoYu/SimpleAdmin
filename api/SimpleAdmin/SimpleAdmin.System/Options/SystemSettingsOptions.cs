@@ -21,4 +21,9 @@ public class SystemSettingsOptions : BaseOptions, IConfigurableOptions
     /// 超级管理员可以看到全部数据
     /// </summary>
     public bool SuperAdminViewAllData { get; set; }
+
+    /// <summary>
+    /// 启用通知中心
+    /// </summary>
+    public bool UseMessageCenter { get; set; }
 }

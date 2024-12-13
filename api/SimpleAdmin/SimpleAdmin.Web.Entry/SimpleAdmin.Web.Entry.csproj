@@ -3,9 +3,6 @@
         <None Update="ip2region.db">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="ip2region.xdb">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\SimpleAdmin.Web.Core\SimpleAdmin.Web.Core.csproj"/>

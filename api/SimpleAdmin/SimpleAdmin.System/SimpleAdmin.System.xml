@@ -2158,6 +2158,16 @@
             消息Id
             </summary>
         </member>
+        <member name="P:SimpleAdmin.System.NewMessageEvent.SendWay">
+            <summary>
+            发送方式
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.NewMessageEvent.SendTime">
+            <summary>
+            发送时间
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.NoticeEventSubscriber">
             <summary>
             通知事件总线
@@ -2336,6 +2346,11 @@
         <member name="P:SimpleAdmin.System.SystemSettingsOptions.SuperAdminViewAllData">
             <summary>
             超级管理员可以看到全部数据
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.SystemSettingsOptions.UseMessageCenter">
+            <summary>
+            启用通知中心
             </summary>
         </member>
         <member name="T:SimpleAdmin.System.MinioUtils">
@@ -3423,13 +3438,6 @@
             <param name="input">查询参数</param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.System.IMessageService.Send(SimpleAdmin.System.SysMessage)">
-            <summary>
-            发送站内信
-            </summary>
-            <param name="input">站内信信息</param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.System.IMessageService.UnReadCount(System.Int64)">
             <summary>
             获取未读消息数
@@ -3487,9 +3495,6 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Edit(SimpleAdmin.System.MessageSendUpdateInput)">
-            <inheritdoc />
-        </member>
-        <member name="M:SimpleAdmin.System.MessageService.Send(SimpleAdmin.System.SysMessage)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.MessageService.Detail(SimpleAdmin.System.MessageDetailInput)">
@@ -4882,6 +4887,106 @@
         </member>
         <member name="M:SimpleAdmin.System.VisitLogService.Delete(System.String)">
             <inheritdoc />
+        </member>
+        <member name="T:SimpleAdmin.System.MqttAuthInput">
+            <summary>
+            mqtt认证参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthInput.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthInput.Username">
+            <summary>
+            账号
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthInput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthInput.ClientId">
+            <summary>
+            客户端ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MqttParameterOutput">
+            <summary>
+            mqtt登录参数输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttParameterOutput.Url">
+            <summary>
+            地址
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttParameterOutput.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttParameterOutput.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttParameterOutput.ClientId">
+            <summary>
+            客户端ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttParameterOutput.Topics">
+            <summary>
+            主题列表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.MqttAuthOutput">
+            <summary>
+            mqtt认证输出
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthOutput.Result">
+            <summary>
+            结果 "allow" | "deny" | "ignore", // Default `"ignore"`
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.MqttAuthOutput.Is_superuser">
+            <summary>
+            是否超级管理员
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.System.IMqttService">
+             <summary>
+            Mqtt服务
+             </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.IMqttService.Auth(SimpleAdmin.System.MqttAuthInput)">
+            <summary>
+            mqtt登录http认证
+            </summary>
+            <param name="input">认证参数</param>
+            <param name="userId">用户Id</param>
+            <returns>认证结果</returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IMqttService.GetWebLoginParameter">
+            <summary>
+            获取mqtt登录web端参数
+            </summary>
+            <returns>登录参数</returns>
+        </member>
+        <member name="T:SimpleAdmin.System.MqttService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.System.IMqttService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.System.MqttService.GetWebLoginParameter">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.MqttService.Auth(SimpleAdmin.System.MqttAuthInput)">
+            <inheritdoc/>
         </member>
         <member name="T:SimpleAdmin.System.ConfigService">
             <inheritdoc cref="T:SimpleAdmin.System.IConfigService"/>

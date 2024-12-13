@@ -8,6 +8,9 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+using IP2Region.Net.Abstractions;
+using IP2Region.Net.XDB;
+
 namespace SimpleAdmin.System;
 
 /// <summary>
@@ -23,6 +26,9 @@ public class Startup : AppStartup
     /// <param name="services"></param>
     public void ConfigureServices(IServiceCollection services)
     {
+        // 配置ip2region
+        services.AddSingleton<ISearcher>(new Searcher(CachePolicy.Content, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ip2region.xdb")));
+
         //系统配置转实体
         services.AddConfigurableOptions<SystemSettingsOptions>();
         //事件总线
@@ -36,6 +42,15 @@ public class Startup : AppStartup
         var fullName = Assembly.GetExecutingAssembly().FullName;//获取程序集全名
         //通过 App.GetOptions<TOptions> 获取选项
         var settings = App.GetOptions<SystemSettingsOptions>();
+        if (settings.UseMessageCenter)
+        {
+            //通过 App.GetOptions<TOptions> 获取选项
+            var cacheSettings = App.GetOptions<CacheSettingsOptions>();
+            if (!cacheSettings.UseRedis)
+            {
+                throw Oops.Oh("启用通知中心必须使用Redis缓存");
+            }
+        }
         CodeFirstUtils.CodeFirst(settings, fullName);//CodeFirst
     }
 }

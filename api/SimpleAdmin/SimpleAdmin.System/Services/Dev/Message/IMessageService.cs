@@ -52,12 +52,6 @@ public interface IMessageService : ITransient
     /// <returns></returns>
     Task<SqlSugarPagedList<SysMessage>> Page(MessagePageInput input);
 
-    /// <summary>
-    /// 发送站内信
-    /// </summary>
-    /// <param name="input">站内信信息</param>
-    /// <returns></returns>
-    Task Send(SysMessage input);
 
     /// <summary>
     /// 获取未读消息数

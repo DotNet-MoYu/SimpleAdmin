@@ -8,47 +8,33 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Core;
 
-/// <summary>
-/// 用户登出事件
-/// </summary>
-public class UserLoginOutEvent
+public class MqttConst
 {
     /// <summary>
-    /// 用户Id
+    /// mqtt认证登录信息key
     /// </summary>
-    public string UserId { get; set; }
+    public const string CACHE_MQTT_CLIENT_USER = CacheConst.CACHE_PREFIX_WEB + "MqttClientUser:";
 
     /// <summary>
-    /// token信息
+    /// mqtt主题前缀
     /// </summary>
+    public const string MQTT_TOPIC_PREFIX = "SimpleAdmin/";
 
-    public List<TokenInfo> TokenInfos { get; set; }
-
-    /// <summary>
-    /// 内容
-    /// </summary>
-    public string Message { get; set; }
-}
-
-/// <summary>
-/// 新消息事件
-/// </summary>
-public class NewMessageEvent
-{
-    /// <summary>
-    /// 消息Id
-    /// </summary>
-    public long Id { get; set; }
 
     /// <summary>
-    /// 发送方式
+    /// 登出
     /// </summary>
-    public string SendWay { get; set; }
+    public const string MQTT_MESSAGE_LOGIN_OUT = "LoginOut";
 
     /// <summary>
-    /// 发送时间
+    /// 新消息
     /// </summary>
-    public string SendTime { get; set; }
+    public const string MQTT_MESSAGE_NEW = "NewMessage";
+
+    /// <summary>
+    /// 修改密码
+    /// </summary>
+    public const string MQTT_MESSAGE_UPDATE_PASSWORD = "UpdatePassword";
 }

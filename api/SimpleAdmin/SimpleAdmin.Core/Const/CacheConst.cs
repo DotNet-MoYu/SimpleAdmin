@@ -8,47 +8,40 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.System;
+namespace SimpleAdmin.Core;
 
 /// <summary>
-/// 用户登出事件
+/// Redis常量
 /// </summary>
-public class UserLoginOutEvent
+public class CacheConst
 {
     /// <summary>
-    /// 用户Id
+    /// Redis Key前缀(可删除)
     /// </summary>
-    public string UserId { get; set; }
+    public const string CACHE_PREFIX_WEB = "SimpleAdminWeb:";
 
     /// <summary>
-    /// token信息
+    /// Redis Key前缀(需要持久化，不随系统重启删除)
     /// </summary>
-
-    public List<TokenInfo> TokenInfos { get; set; }
-
-    /// <summary>
-    /// 内容
-    /// </summary>
-    public string Message { get; set; }
-}
-
-/// <summary>
-/// 新消息事件
-/// </summary>
-public class NewMessageEvent
-{
-    /// <summary>
-    /// 消息Id
-    /// </summary>
-    public long Id { get; set; }
+    public const string CACHE_PREFIX = "SimpleAdmin:";
 
     /// <summary>
-    /// 发送方式
+    /// Redis Hash类型
     /// </summary>
-    public string SendWay { get; set; }
+    public const string CACHE_HASH = "Hash";
 
     /// <summary>
-    /// 发送时间
+    /// 用户Token缓存Key
     /// </summary>
-    public string SendTime { get; set; }
+    public const string CACHE_USER_TOKEN = CACHE_PREFIX + "UserToken";
+
+
+    #region 消息中心队列key
+
+    /// <summary>
+    /// 通知消息队列
+    /// </summary>
+    public const string CACHE_NOTIFICATION = CACHE_PREFIX + "MsgNotification";
+
+    #endregion
 }

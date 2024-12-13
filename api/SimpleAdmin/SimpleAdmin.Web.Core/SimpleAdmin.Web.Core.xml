@@ -582,13 +582,6 @@
             <param name="input"></param>
             <returns></returns>
         </member>
-        <member name="M:SimpleAdmin.Web.Core.MessageController.Send(SimpleAdmin.System.MessageSendInput)">
-            <summary>
-            发送站内信
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="M:SimpleAdmin.Web.Core.MessageController.Add(SimpleAdmin.System.MessageSendInput)">
             <summary>
             添加站内信
@@ -1019,6 +1012,24 @@
         <member name="M:SimpleAdmin.Web.Core.LogVisitController.Delete(SimpleAdmin.System.VisitLogDeleteInput)">
             <summary>
             清空日志
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.MqttController">
+            <summary>
+            mqtt服务控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MqttController.GetParameter">
+            <summary>
+            获取mqtt登录参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.MqttController.Auth(SimpleAdmin.System.MqttAuthInput)">
+            <summary>
+            mqtt认证
             </summary>
             <param name="input"></param>
             <returns></returns>

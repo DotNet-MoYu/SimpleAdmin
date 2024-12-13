@@ -8,30 +8,36 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-namespace SimpleAdmin.Cache;
+using MoYu.DependencyInjection;
+
+namespace SimpleAdmin.Plugin.Notice;
 
 /// <summary>
-/// Redis常量
+/// 通知接口
 /// </summary>
-public class CacheConst
+public interface INoticeService : ISingleton
 {
     /// <summary>
-    /// Redis Key前缀(可删除)
+    /// 通知用户下线
     /// </summary>
-    public const string CACHE_PREFIX_WEB = "SimpleAdminWeb:";
+    /// <param name="userId">用户ID</param>
+    /// <param name="message">通知内容</param>
+    /// <returns></returns>
+    internal Task UserLoginOut(string userId, string message);
 
     /// <summary>
-    /// Redis Key前缀(需要持久化，不随系统重启删除)
+    /// 通知用户修改密码
     /// </summary>
-    public const string CACHE_PREFIX = "SimpleAdmin:";
+    /// <param name="userId">用户ID</param>
+    /// <param name="message">通知内容</param>
+    /// <returns></returns>
+    internal Task UpdatePassWord(string userId, string message);
 
     /// <summary>
-    /// Redis Hash类型
+    /// 收到新的消息
     /// </summary>
-    public const string CACHE_HASH = "Hash";
-
-    /// <summary>
-    /// 用户Token缓存Key
-    /// </summary>
-    public const string CACHE_USER_TOKEN = CACHE_PREFIX + "UserToken";
+    /// <param name="userIds">用户Id列表</param>
+    /// <param name="message"></param>
+    /// <returns></returns>
+    internal Task NewMesage(List<string> userIds, string message);
 }
