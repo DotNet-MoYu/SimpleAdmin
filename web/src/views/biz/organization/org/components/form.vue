@@ -47,7 +47,7 @@
       biz
       :org-tree-api="bizOrgApi.tree"
       :position-tree-api="bizPositionApi.tree"
-      :role-tree-api="sysRoleApi.tree"
+      :role-tree-api="bizRoleApi.tree"
       :user-selector-api="bizUserApi.selector"
       @successful="handleChooseUser"
     />
@@ -55,7 +55,7 @@
 </template>
 
 <script setup lang="ts">
-import { SysOrg, SysUser, bizOrgApi, bizPositionApi, sysRoleApi, bizUserApi } from "@/api";
+import { SysOrg, SysUser, bizOrgApi, bizRoleApi, bizPositionApi, bizUserApi } from "@/api";
 import { FormOptEnum, SysDictEnum } from "@/enums";
 import { required } from "@/utils/formRules";
 import { FormInstance } from "element-plus";

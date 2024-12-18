@@ -88,6 +88,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
         var result = new List<RoleTreeOutput>();//返回结果
         var sysOrgList = await _sysOrgService.GetListAsync(false);//获取所有机构
         var sysRoles = await GetListAsync();//获取所有角色
+        sysRoles = sysRoles.Where(it => it.Code != SysRoleConst.SUPER_ADMIN).ToList();//排除超管
         if (input.OrgIds != null)//根据数据范围查
         {
             sysOrgList = sysOrgList.Where(it => input.OrgIds.Contains(it.Id)).ToList();//在指定组织列表查询
