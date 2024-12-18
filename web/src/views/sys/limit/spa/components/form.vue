@@ -6,7 +6,7 @@
 <template>
   <form-container v-model="visible" :title="`${spaProps.opt}单页`" form-size="600px">
     <el-form
-      ref="messageFormRef"
+      ref="spaFormRef"
       :rules="rules"
       :disabled="spaProps.disabled"
       :model="spaProps.record"
