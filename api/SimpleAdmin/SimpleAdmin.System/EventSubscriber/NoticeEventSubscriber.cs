@@ -63,20 +63,37 @@ public class NoticeEventSubscriber : IEventSubscriber, ISingleton
         //如果启用了通知中心
         if (_useMessageCenter)
         {
-            switch (newMessageEvent.SendWay)
+            if (newMessageEvent.SendWay == SysDictConst.SEND_WAY_NOW)
             {
-                case SysDictConst.SEND_WAY_NOW:
-                    //立即发送
-                    await SendMessage();
-                    _simpleCacheService.AddDelayQueue(CacheConst.CACHE_NOTIFICATION, messageId, 0);
-                    break;
+                //立即发送
+                await SendMessage(messageId);
+            }
+            else
+            {
+                //延迟发送
+                var sendTime = newMessageEvent.SendTime;
+                //计算延迟时间
+                var delay = (int)(sendTime - DateTime.Now).TotalSeconds;
+                if (delay > 0)
+                {
+                    await SendMessage(messageId, delay);
+                }
+                else
+                {
+                    await SendMessage(messageId);
+                }
             }
         }
     }
 
-    private async Task SendMessage()
-        
+    /// <summary>
+    /// 发送消息
+    /// </summary>
+    /// <param name="messageId">消息id</param>
+    /// <param name="delay">延迟</param>
+    private async Task SendMessage(long messageId, int delay = 0)
     {
+        _simpleCacheService.AddDelayQueue(CacheConst.CACHE_NOTIFICATION, messageId, delay);
     }
 
     /// <summary>

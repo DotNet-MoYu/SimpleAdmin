@@ -50,5 +50,5 @@ public class NewMessageEvent
     /// <summary>
     /// 发送时间
     /// </summary>
-    public string SendTime { get; set; }
+    public DateTime SendTime { get; set; }
 }

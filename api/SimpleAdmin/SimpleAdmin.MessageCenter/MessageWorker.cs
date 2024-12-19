@@ -37,12 +37,13 @@ public class MessageWorker : BackgroundService
                 var message = await db.Queryable<SysMessage>().InSingleAsync(data);
                 if (message != null)
                 {
+                    message.Status = SysDictConst.MESSAGE_STATUS_ALREADY;
                     //获取待发送的消息
                     var messageUsers = await db.Queryable<SysMessageUser>()
                         .Where(it => it.MessageId == message.Id && it.Status == SysDictConst.MESSAGE_STATUS_READY).ToListAsync();
                     var hasError = false;
                     //开启事务
-                    var result = db.UseTranAsync(async () =>
+                    var result = await db.UseTranAsync(async () =>
                     {
                         messageUsers.ForEach(it =>
                         {
@@ -68,6 +69,7 @@ public class MessageWorker : BackgroundService
                             }
                         });
                         await db.Updateable(messageUsers).ExecuteCommandAsync();
+                        await db.Updateable(message).ExecuteCommandAsync();
                     });
                     //如果有失败的，重写发到延迟队列
                     if (hasError)

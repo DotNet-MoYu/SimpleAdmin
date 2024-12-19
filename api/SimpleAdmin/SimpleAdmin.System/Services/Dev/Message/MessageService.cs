@@ -100,7 +100,7 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
                 UserId = userId,
                 Read = false,
                 IsDelete = false,
-                Status = sysMessage.SendWay == SysDictConst.SEND_WAY_NOW ? SysDictConst.MESSAGE_STATUS_READY : SysDictConst.MESSAGE_STATUS_ALREADY
+                Status = sysMessage.SendWay == SysDictConst.SEND_WAY_NOW ? SysDictConst.MESSAGE_STATUS_ALREADY : SysDictConst.MESSAGE_STATUS_READY
             });
         });
         //事务
@@ -114,7 +114,8 @@ public class MessageService : DbRepository<SysMessage>, IMessageService
             await _eventPublisher.PublishAsync(EventSubscriberConst.NEW_MESSAGE, new NewMessageEvent
             {
                 Id = sysMessage.Id,
-                SendWay = sysMessage.SendWay
+                SendWay = sysMessage.SendWay,
+                SendTime = sysMessage.SendTime
             });//通知用户有新的消息
         }
         else
