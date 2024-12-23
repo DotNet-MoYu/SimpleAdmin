@@ -15,7 +15,7 @@
       "Icon": "ep:setting",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.633",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -28,7 +28,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003722",
@@ -45,7 +46,7 @@
       "Icon": "ant-design:home-outlined",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.633",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -58,7 +59,8 @@
       "IsAffix": "1",
       "IsKeepAlive": "0",
       "IsHome": "1",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003723",
@@ -71,11 +73,11 @@
       "Module": "",
       "MenuType": "MENU",
       "Path": "/usercenter",
-      "Component": "sys/user/userCenter",
+      "Component": "userCenter/index",
       "Icon": "ep:user",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-9-20 08:35:15.35",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -88,7 +90,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003724",
@@ -105,7 +108,7 @@
       "Icon": "ep:office-building",
       "SortCode": "4",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -118,7 +121,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003725",
@@ -135,7 +139,7 @@
       "Icon": "ant-design:apartment-outlined",
       "SortCode": "5",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -148,7 +152,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003726",
@@ -165,7 +170,7 @@
       "Icon": "eva:people-outline",
       "SortCode": "6",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -178,7 +183,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003727",
@@ -195,7 +201,7 @@
       "Icon": "ep:postcard",
       "SortCode": "7",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -208,7 +214,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003728",
@@ -225,7 +232,7 @@
       "Icon": "eva:shield-outline",
       "SortCode": "8",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -238,7 +245,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003729",
@@ -255,7 +263,7 @@
       "Icon": "ep:user",
       "SortCode": "9",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -268,7 +276,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003730",
@@ -285,7 +294,7 @@
       "Icon": "eva:grid-outline",
       "SortCode": "10",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -298,7 +307,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003731",
@@ -315,7 +325,7 @@
       "Icon": "ep:menu",
       "SortCode": "11",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -328,7 +338,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212725263003732",
@@ -345,7 +356,7 @@
       "Icon": "eva:book-open-outline",
       "SortCode": "12",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -358,7 +369,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212735263003733",
@@ -370,16 +382,16 @@
       "Category": "MENU",
       "Module": "212725263003721",
       "MenuType": "CATALOG",
-      "Path": "/ozmlc6eyw5",
+      "Path": "/sys/dev",
       "Component": "",
-      "Icon": "ep:home-filled",
+      "Icon": "ant-design:tool-outlined",
       "SortCode": "13",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-11-11 08:42:34.04",
       "CreateUserId": "",
-      "UpdateUserId": "",
+      "UpdateUserId": "212725263002001",
       "CreateUser": "",
-      "UpdateUser": "",
+      "UpdateUser": "superAdmin",
       "IsDelete": "0",
       "ExtJson": "",
       "ActiveMenu": "",
@@ -388,7 +400,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212735263003734",
@@ -400,16 +413,16 @@
       "Category": "MENU",
       "Module": "212725263003721",
       "MenuType": "MENU",
-      "Path": "/dev/message/index",
-      "Component": "dev/message/index",
-      "Icon": "ep:home-filled",
+      "Path": "/sys/dev/message",
+      "Component": "sys/dev/message/index",
+      "Icon": "ep:message",
       "SortCode": "14",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-11-11 08:43:10.76",
       "CreateUserId": "",
-      "UpdateUserId": "",
+      "UpdateUserId": "212725263002001",
       "CreateUser": "",
-      "UpdateUser": "",
+      "UpdateUser": "superAdmin",
       "IsDelete": "0",
       "ExtJson": "",
       "ActiveMenu": "",
@@ -418,7 +431,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212745263003735",
@@ -435,7 +449,7 @@
       "Icon": "zondicons:servers",
       "SortCode": "15",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -448,7 +462,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212745263003736",
@@ -465,7 +480,7 @@
       "Icon": "ep:notebook",
       "SortCode": "16",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -478,7 +493,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212745263003737",
@@ -495,7 +511,7 @@
       "Icon": "eva:settings-2-outline",
       "SortCode": "17",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -508,7 +524,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212745263003738",
@@ -525,7 +542,7 @@
       "Icon": "line-md:clipboard-list",
       "SortCode": "14",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -538,7 +555,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003739",
@@ -555,7 +573,7 @@
       "Icon": "ant-design:read-outlined",
       "SortCode": "18",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.823",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -568,7 +586,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003740",
@@ -585,7 +604,7 @@
       "Icon": "ant-design:solution-outlined",
       "SortCode": "19",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -598,7 +617,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003743",
@@ -615,7 +635,7 @@
       "Icon": "local:ikun",
       "SortCode": "2",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -628,7 +648,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003744",
@@ -645,7 +666,7 @@
       "Icon": "ep:school",
       "SortCode": "22",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 16:44:09.07",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -658,7 +679,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003745",
@@ -675,7 +697,7 @@
       "Icon": "ant-design:group-outlined",
       "SortCode": "23",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-19 14:19:38.567",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -688,7 +710,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003746",
@@ -705,7 +728,7 @@
       "Icon": "ep:user",
       "SortCode": "24",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-21 11:39:01.623",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -718,7 +741,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212755263003747",
@@ -735,7 +759,7 @@
       "Icon": "ant-design:idcard-outlined",
       "SortCode": "25",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-19 14:20:58.927",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -748,7 +772,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263004728",
@@ -765,7 +790,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -778,7 +803,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263004729",
@@ -795,7 +821,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -808,7 +834,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263004730",
@@ -825,7 +852,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -838,7 +865,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263004731",
@@ -855,7 +883,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -868,7 +896,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005734",
@@ -885,7 +914,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -898,7 +927,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005735",
@@ -915,7 +945,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -928,7 +958,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005736",
@@ -945,7 +976,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -958,7 +989,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005737",
@@ -975,7 +1007,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -988,7 +1020,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005738",
@@ -1005,7 +1038,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1018,7 +1051,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005739",
@@ -1035,7 +1069,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1048,7 +1082,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263005740",
@@ -1065,7 +1100,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1078,7 +1113,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263006739",
@@ -1095,7 +1131,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1108,7 +1144,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263006749",
@@ -1125,7 +1162,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1138,7 +1175,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263006750",
@@ -1155,7 +1193,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1168,7 +1206,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "212825263006751",
@@ -1185,7 +1224,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1198,7 +1237,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "363798244282437",
@@ -1210,12 +1250,12 @@
       "Category": "MENU",
       "Module": "212725263003721",
       "MenuType": "MENU",
-      "Path": "/auth/monitor",
-      "Component": "auth/monitor/index",
+      "Path": "/sys/ops/monitor",
+      "Component": "sys/ops/monitor/index",
       "Icon": "ep:refrigerator",
       "SortCode": "23",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-9-24 10:56:44.767",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "",
@@ -1228,7 +1268,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "369089951367237",
@@ -1245,7 +1286,7 @@
       "Icon": "ep:home-filled",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "",
@@ -1258,7 +1299,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "383020955254853",
@@ -1275,7 +1317,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1288,7 +1330,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "383022400483397",
@@ -1305,7 +1348,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1318,7 +1361,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "391869166551109",
@@ -1335,7 +1379,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1348,7 +1392,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "391869250662469",
@@ -1365,7 +1410,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1378,7 +1423,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "395712751292485",
@@ -1395,7 +1441,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2023-8-14 16:19:29.637",
-      "UpdateTime": "2024-2-18 15:53:24.653",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1408,7 +1454,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "516428665102405",
@@ -1425,7 +1472,7 @@
       "Icon": "ep:set-up",
       "SortCode": "99",
       "CreateTime": "2024-2-18 16:53:39.087",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1438,7 +1485,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "517412647174213",
@@ -1455,7 +1503,7 @@
       "Icon": "ant-design:team-outlined",
       "SortCode": "99",
       "CreateTime": "2024-2-21 11:37:29.083",
-      "UpdateTime": "2024-2-21 11:39:43.367",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "212725263002001",
       "CreateUser": "superAdmin",
@@ -1468,7 +1516,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "1",
       "IsHome": "0",
-      "Status": "ENABLE"
+      "Status": "ENABLE",
+      "IsLink": ""
     },
     {
       "Id": "517470837813317",
@@ -1485,7 +1534,7 @@
       "Icon": "",
       "SortCode": "1",
       "CreateTime": "2024-2-21 15:34:15.803",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1498,7 +1547,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     },
     {
       "Id": "517470837813318",
@@ -1515,7 +1565,7 @@
       "Icon": "",
       "SortCode": "2",
       "CreateTime": "2024-2-21 15:34:15.807",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1528,7 +1578,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     },
     {
       "Id": "517470837813319",
@@ -1545,7 +1596,7 @@
       "Icon": "",
       "SortCode": "3",
       "CreateTime": "2024-2-21 15:34:15.81",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1558,7 +1609,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     },
     {
       "Id": "517470837813320",
@@ -1575,7 +1627,7 @@
       "Icon": "",
       "SortCode": "4",
       "CreateTime": "2024-2-21 15:34:15.81",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1588,7 +1640,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     },
     {
       "Id": "517480163758149",
@@ -1605,7 +1658,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2024-2-21 16:12:12.627",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1618,7 +1671,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     },
     {
       "Id": "517480218902597",
@@ -1635,7 +1689,7 @@
       "Icon": "",
       "SortCode": "99",
       "CreateTime": "2024-2-21 16:12:26.087",
-      "UpdateTime": "",
+      "UpdateTime": "2024-7-23 09:09:41.827",
       "CreateUserId": "212725263002001",
       "UpdateUserId": "",
       "CreateUser": "superAdmin",
@@ -1648,7 +1702,8 @@
       "IsAffix": "0",
       "IsKeepAlive": "0",
       "IsHome": "0",
-      "Status": ""
+      "Status": "",
+      "IsLink": ""
     }
   ]
 }
