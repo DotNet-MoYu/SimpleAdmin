@@ -18,6 +18,7 @@ import { Login, UserCenter } from "@/api/interface";
 import { loginApi, userCenterApi } from "@/api";
 import { useUserStore } from "./user";
 import { useTabsStore } from "./tabs";
+import { useMessageStore } from "./message";
 import { useKeepAliveStore } from "./keepAlive";
 import { useConfigStore } from "./config";
 import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
@@ -131,9 +132,11 @@ export const useAuthStore = defineStore({
           // 初始化动态路由
           const tabsStore = useTabsStore();
           const keepAliveStore = useKeepAliveStore();
+          const messageStore = useMessageStore();
           // 3.清空 tabs、keepAlive 数据
           tabsStore.setTabs([]);
           keepAliveStore.setKeepAliveName([]);
+          messageStore.reSet();
           // 4.跳转到首页
           router.push(path);
           ElNotification({

@@ -113,6 +113,12 @@ export const useMessageStore = defineStore({
       setInterval(() => {
         this.getUnReadInfo(true);
       }, 10000);
+    },
+    /* 重置未读消息数 */
+    reSet() {
+      this.unReadCount = 0;
+      this.unReadInfo = {};
+      this.newUnRead = [];
     }
   }
 });
