@@ -18,9 +18,9 @@ export interface SRadioGroupProps {
   /** 选项数组 */
   options: any[];
   /** 选项显示标签 */
-  label?: string;
+  labelKey?: string;
   /** 选项值 */
-  value?: string;
+  valueKey?: string;
   /** 是否为按钮 */
   button?: boolean;
 }
