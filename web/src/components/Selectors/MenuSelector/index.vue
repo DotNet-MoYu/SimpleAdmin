@@ -26,14 +26,18 @@
 
 <script setup lang="ts" name="MenuSelector">
 import { MenuSelectProps } from "./interface";
-import { Menu } from "@/api";
+import { Menu } from "@/api/interface";
+import { MenuTypeDictEnum } from "@/enums";
+
 // 定义组件props
 const props = withDefaults(defineProps<MenuSelectProps>(), {
   clearable: true,
   placeholder: "请选择菜单",
   multiple: false,
   checkStrictly: true,
-  showAll: false
+  showAll: false,
+  menuTreeData: [],
+  onlyCatalog: false
 });
 // 菜单树的引用
 const treeRef = ref();
@@ -52,6 +56,7 @@ onMounted(() => {
 const menuTreeData = ref<Menu.MenuTreeInfo[]>([]);
 // 定义响应式变量
 const valueMenu = ref(props.menuValue); // 当前选中的菜单名称
+
 //  定义方法
 const emit = defineEmits(["update:menuValue", "change"]); // 定义更新父组件数据的方法
 
@@ -63,24 +68,61 @@ watch(
   }
 );
 
+// 监听menuTreeData的变化
+watch(
+  () => props.menuTreeData,
+  newVal => {
+    setMenuTreeData(newVal);
+  }
+);
+
 /** 获取菜单树 */
 function getMenuTree() {
   // 获取菜单树数据
-  props.menuTreeApi().then(res => {
-    if (props.showAll) {
-      // 加个顶级作为一级菜单
-      menuTreeData.value = [
-        {
-          id: 0,
-          parentId: 0,
-          title: "顶级",
-          children: res.data
-        }
-      ];
-    } else {
-      menuTreeData.value = res.data;
-    }
-  });
+  if (props.menuTreeApi) {
+    props.menuTreeApi().then(res => {
+      setMenuTreeData(res.data);
+    });
+  } else {
+    setMenuTreeData(props.menuTreeData);
+  }
+}
+
+/** 设置菜单树数据*/
+function setMenuTreeData(data: Menu.MenuTreeInfo[]) {
+  //如果是目录，则禁用其他
+  if (props.onlyCatalog) {
+    data.forEach(item => {
+      setDisabled(item);
+    });
+  }
+  if (props.showAll) {
+    // 加个顶级作为一级菜单
+    menuTreeData.value = [
+      {
+        id: 0,
+        parentId: 0,
+        title: "顶级",
+        disabled: false,
+        menuType: MenuTypeDictEnum.CATALOG,
+        children: data
+      }
+    ];
+  } else {
+    menuTreeData.value = data;
+  }
+}
+
+/** 设置菜单禁用 **/
+function setDisabled(item: Menu.MenuTreeInfo) {
+  if (item.menuType != MenuTypeDictEnum.CATALOG) {
+    item.disabled = true;
+  }
+  if (item.children && item.children.length > 0) {
+    item.children.forEach(child => {
+      setDisabled(child);
+    });
+  }
 }
 
 /** 选中菜单事件 */

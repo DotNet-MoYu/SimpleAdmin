@@ -28,5 +28,9 @@ export interface MenuSelectProps {
   /** 是否显示全部选项,默认为 false */
   showAll?: boolean;
   /** 组织树api */
-  menuTreeApi: (data?: any) => Promise<any>;
+  menuTreeApi?: (data?: any) => Promise<any>;
+  /** 菜单树数据 */
+  menuTreeData?: any;
+  /** 只有目录可以选择 */
+  onlyCatalog?: boolean;
 }
