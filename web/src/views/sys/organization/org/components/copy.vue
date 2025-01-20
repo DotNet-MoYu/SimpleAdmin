@@ -9,10 +9,10 @@
       <s-form-item label="目标组织" prop="targetId">
         <org-selector v-model:org-value="copyProps.targetId" />
       </s-form-item>
-      <s-form-item label="包含子集" prop="containsChild" tooltip="将选择组织及以下组织全部复制到目标组织">
+      <s-form-item label="包含子集" prop="containsChild" :tooltip="{ content: '将组织下的子机构也复制一份到目标组织' }">
         <s-radio-group v-model="copyProps.containsChild" :options="yesOptions" button />
       </s-form-item>
-      <s-form-item label="包含职位" prop="containsPosition" tooltip="将组织下的岗位也复制一份到目标组织">
+      <s-form-item label="包含职位" prop="containsPosition" :tooltip="{ content: '将组织下的子机构也复制一份到目标组织' }">
         <s-radio-group v-model="copyProps.containsPosition" :options="yesOptions" button />
       </s-form-item>
     </el-form>
