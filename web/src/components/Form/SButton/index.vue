@@ -4,7 +4,7 @@
  * @Date: 2023-12-15 15:38:07
 !-->
 <template>
-  <el-button type="primary" :icon="icon" v-bind="$attrs">
+  <el-button :type="buttonType" :icon="icon" v-bind="$attrs">
     <slot>{{ getTitle }}</slot>
   </el-button>
 </template>
@@ -50,6 +50,16 @@ const icon = computed(() => {
       return View;
     default:
       return CirclePlus;
+  }
+});
+
+//根据操作类型绑定按钮类型
+const buttonType = computed(() => {
+  switch (props.opt) {
+    case FormOptEnum.DELETE:
+      return "danger";
+    default:
+      return "primary";
   }
 });
 

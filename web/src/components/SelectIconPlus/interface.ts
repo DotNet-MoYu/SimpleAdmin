@@ -17,7 +17,7 @@ export type IconPrefixType = "ep" | "local" | "ant-design" | "et" | "flat-color-
 /** 图标选择器属性 */
 export interface SelectIconProps {
   /** 图标对应的值 */
-  iconValue: string;
+  iconValue: string | undefined;
   /** 图标选择器标题 */
   title?: string;
   /** 是否可清除 */
