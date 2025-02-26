@@ -75,6 +75,7 @@ public class SysRoleService : DbRepository<SysRole>, ISysRoleService
         var query = Context.Queryable<SysRole>()
             .WhereIF(input.OrgId > 0, it => orgIds.Contains(it.OrgId.Value))//根据组织
             .WhereIF(input.OrgIds != null, it => input.OrgIds.Contains(it.OrgId.Value))//数据权限
+            .WhereIF(!string.IsNullOrEmpty(input.Status), it => it.Status == input.Status)//根据分类
             .WhereIF(!string.IsNullOrEmpty(input.Category), it => it.Category == input.Category)//根据分类
             .WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
             .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}").OrderBy(it => it.SortCode);//排序
