@@ -112,6 +112,8 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 👉 Emqx：[https://www.emqx.com/zh](https://www.emqx.com/zh)
 - 👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
 
+
+![[驰骋工作流](https://ccflow.org/index.html?frm=simple)](images/hz1.png)
 ## 👏 鸣谢 👏
 
 - 感谢 JetBrains 提供的免费开源 License：
