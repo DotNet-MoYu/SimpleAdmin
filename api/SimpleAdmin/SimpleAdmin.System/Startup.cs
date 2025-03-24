@@ -35,6 +35,8 @@ public class Startup : AppStartup
         services.AddEventBus();
         //配置验证码
         services.AddCaptcha(App.Configuration);
+        //配置视图引擎
+        services.AddViewEngine();
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -48,7 +50,7 @@ public class Startup : AppStartup
             var cacheSettings = App.GetOptions<CacheSettingsOptions>();
             if (!cacheSettings.UseRedis)
             {
-                throw Oops.Oh("启用通知中心必须使用Redis缓存");
+                throw Oops.Oh("启用通知中心必须使用Redis缓存,如不需要,在SimpleAdmin.System项目中设置UseMessageCenter为false即可");
             }
         }
         CodeFirstUtils.CodeFirst(settings, fullName);//CodeFirst

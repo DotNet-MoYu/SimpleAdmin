@@ -1,0 +1,191 @@
+@{
+var name=@Model.FunctionName+@Model.FunctionNameSuffix;//接口名称
+var author= @Model.AuthorName;//作者
+var tableFieIds=@Model.TableFields;//获取字段
+var currentTime =@Model.GenTime;
+var funcName= @Model.FunctionName;//获取功能名称
+var busName= @Model.BusName;//获取业务名称
+var props=@Model.BusName+"Pros";
+var updateColumns= tableFieIds.Where(it => it.WhetherAddUpdate == "Y").ToList();//获取需要显示的字段
+var dictTypes= tableFieIds.Where(it => !string.IsNullOrEmpty(it.DictTypeCode)).ToList();//获取需要显示的字段
+}
+
+<!-- 
+ * @@Description: @(@name)表单页面
+ * @@Author: @author  
+ * @@Date: @currentTime
+!-->
+
+<template>
+  <form-container v-model="visible" :title="`${@(@props).opt}@(@funcName)`" form-size="600px">
+    <el-form
+      ref="@(@busName)FormRef"
+      :rules="rules"
+      :disabled="@(@props).disabled"
+      :model="@(@props).record"
+      :hide-required-asterisk="@(@props).disabled"                                                                                                  
+      label-width="auto"
+      label-suffix=" :"
+    >
+    @{FormItem();}
+    </el-form>
+    <template #footer>
+      <el-button @@click="onClose"> 取消 </el-button>
+      <el-button v-show="!@(@props).disabled" type="primary" @@click="handleSubmit"> 确定 </el-button>
+    </template>
+  </form-container>
+</template>
+@{
+
+void FormItem(){
+foreach(var column in updateColumns){
+      @:<s-form-item label="@(@column.FieldRemark)" prop="@(@column.FieldNameFirstLower)">
+      @switch (@column.EffectType) {
+        case "input":
+         <s-input v-model="@(@props).record.@(@column.FieldNameFirstLower)"></s-input>
+        break; 
+        case "inputNumber":
+         <el-input-number v-model="@(@props).record.@(@column.FieldNameFirstLower)" :min="1" :max="100" />
+        break;     
+        case "radio":
+        <s-radio-group v-model="@(@props).record.@(@column.FieldNameFirstLower)" :options="@(@column.FieldNameFirstLower)Options" button />
+        break;
+        case "select":
+          <s-select v-model="@(@props).record.@(@column.FieldNameFirstLower)" :options="@(@column.FieldNameFirstLower)Options"></s-select>
+        break;
+        case "textarea":
+           <s-input v-model="@(@props).record.@(@column.FieldNameFirstLower)" type="textarea" :autosize="{ minRows: 2, maxRows: 4 }"></s-input>
+        break;
+        case "checkbox":
+           <a-checkbox-group v-model="@(@props).record.@(@column.FieldNameFirstLower)" :options="@(@column.FieldNameFirstLower)Options" />
+        break;
+        case "datepicker":
+             <date-picker v-model="@(@props).record.@(@column.FieldNameFirstLower)"></date-picker>
+        break;
+        case "fk":
+           <s-select v-model:value="@(@props).record.@(@column.FieldNameFirstLower)" :options="fk@(@column.FieldNameFirstLower)OptionsOptions" />
+        break;
+
+      }
+      </s-form-item>
+}
+}
+}
+
+<script setup lang="ts">
+import { @(@Model.ClassNameFirstLower)Api,@(@Model.EntityName) } from "@@/api";
+import { FormOptEnum } from "@@/enums";
+import { required } from "@@/utils/formRules";
+import { FormInstance } from "element-plus";
+@if(dictTypes.Count>0){
+@:import { useDictStore } from "@@/stores/modules";
+}
+
+const visible = ref(false); //是否显示表单
+@{DictStore();}
+
+// 表单参数
+const @(@props) = reactive<FormProps.Base<@(@Model.EntityName).@(@Model.EntityName)Info>>({
+  opt: FormOptEnum.ADD,
+  record: {},
+  disabled: false
+});
+
+@{Rules();}
+
+/**
+ * 打开表单
+ * @@param props 表单参数
+ */
+function onOpen(props: FormProps.Base<@(@Model.EntityName).@(@Model.EntityName)Info>) {
+  Object.assign(@(@props), props); //合并参数
+  if (props.opt == FormOptEnum.ADD) {
+
+  @foreach (var column in updateColumns){//遍历增改字段
+  @if(column.FieldName=="SortCode"){//如果是SortCode
+    @://如果是新增,设置默认值
+    @:@(@props).record.sortCode = 99;
+     continue;
+  }
+  @if(column.FieldType=="int"){//如果是int
+    @:@(@props).record.@(@column.FieldNameFirstLower) = 0;
+     continue;
+  }
+  @if(!string.IsNullOrWhiteSpace(column.DictTypeCode)){//如果是有字典
+    @:@(@props).record.@(@column.FieldNameFirstLower) = @(@column.FieldNameFirstLower)Options[0].value;
+     continue;
+  }
+  }
+  }
+  visible.value = true; //显示表单
+  if (props.record.id) {
+    //如果传了id，就去请求api获取record
+    @(@Model.ClassNameFirstLower)Api.detail({ id: props.record.id }).then(res => {
+      @(@props).record = res.data;
+    });
+  }
+}
+
+// 提交数据（新增/编辑）
+const @(@busName)FormRef = ref<FormInstance>();
+/** 提交表单 */
+async function handleSubmit() {
+  @(@busName)FormRef.value?.validate(async valid => {
+    if (!valid) return; //表单验证失败
+    //提交表单
+    await @(@Model.ClassNameFirstLower)Api
+      .submitForm(@(@props).record, @(@props).record.id != undefined)
+      .then(() => {
+        @(@props).successful!(); //调用父组件的successful方法
+      })
+      .finally(() => {
+        onClose();
+      });
+  });
+}
+
+/** 关闭表单*/
+function onClose() {
+  visible.value = false;
+}
+
+// 暴露给父组件的方法
+defineExpose({
+  onOpen
+});
+</script>
+
+@{
+
+//字典生成
+void DictStore(){
+if(dictTypes.Count>0){
+@:const dictStore = useDictStore();
+@foreach(var column in dictTypes){
+@:const @(@column.FieldNameFirstLower)Options = dictStore.getDictList("@column.DictTypeCode"); //@(@column.FieldRemark)选项
+}
+}
+}
+
+void Rules(){
+// 表单验证规则
+@:const rules = reactive({
+@foreach(var column in updateColumns){
+@if(column.WhetherRequired=="Y"){
+@switch (column.EffectType){
+case "input":
+@:@(@column.FieldNameFirstLower): [required("请输入@(@column.FieldRemark)")],
+break;
+case "select":
+case "radio":
+@:@(@column.FieldNameFirstLower): [required("请选择@(@column.FieldRemark)")],
+break;
+deault:
+@:@(@column.FieldNameFirstLower): [required("请输入@(@column.FieldRemark)")],
+break;
+}
+}
+}
+@:});  
+}
+}

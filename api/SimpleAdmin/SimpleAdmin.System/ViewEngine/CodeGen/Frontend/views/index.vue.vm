@@ -1,0 +1,192 @@
+@{ 
+var busName= @Model.BusName;//获取业务名称
+var funcName= @Model.FunctionName;//获取功能名称
+var author= @Model.AuthorName;//作者
+var currentTime =@Model.GenTime;
+var name=@Model.FunctionName+@Model.FunctionNameSuffix;//接口名称
+var tableFieIds=@Model.TableFields;//获取字段
+var dataPermission=@Model.DataPermission=="Y";//是否需要数据权限
+var isLeftTree=@Model.LeftTree!="null";//是否有左侧树
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var isMasterChild = @Model.ModuleType=="masterChild";//是否是主子表
+var treeId=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeId);//获取树的id
+var treeName=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreeName);//获取树的名称
+var treePid=@SimpleTool.StringHelper.FirstCharToLower(@Model.TreePid);//获取树的父级id
+var showColumns= tableFieIds.Where(it => it.WhetherTable == "Y").ToList();//获取需要显示的字段
+var resizeColumn=showColumns.Any(it => it.WhetherResizable == "Y");//获取需要显示的字段
+var dictTypes= tableFieIds.Where(it => !string.IsNullOrEmpty(it.DictTypeCode)).ToList();//获取需要显示的字段
+}
+<!-- 
+ * @@Description:  @name
+ * @@Author: @author 
+ * @@Date: @currentTime
+!-->
+<template>
+  @{Template();}
+</template>
+
+@{
+//Template部分
+void Template()
+{
+ ProTable();
+}
+
+//表格部分
+void ProTable()
+{
+  <div class="table-box">
+    <ProTable ref="proTable" title="@(@funcName)列表" :columns="columns" :request-api="@(@Model.ClassNameFirstLower)Api.page">
+      <!-- 表格 header 按钮 -->
+      <template #tableHeader="scope">
+        <s-button suffix="@funcName" @@click="onOpen(FormOptEnum.ADD)" />
+        <s-button
+          type="danger"
+          plain
+          suffix="@funcName"
+          :opt="FormOptEnum.DELETE"
+          :disabled="!scope.isSelected"
+          @@click="onDelete(scope.selectedListIds, '删除所选@(@funcName)')"
+        />
+      </template>
+      @{Solt();}
+      @{Operation();}
+    </ProTable>
+    @{Form();}
+  </div>
+}
+
+//表格自定义字段
+void Solt(){
+    foreach(var column in showColumns){
+      @switch (@column.EffectType) {
+        case "image"://图片
+        <!-- @column.FieldName -->
+        <template #@(@column.FieldNameFirstLower)="scope">
+          <el-image :src="scope.row.@(@column.FieldNameFirstLower)" :size="30" />
+        </template>
+        break;    
+        case "datepicker"://日期
+        @if(@column.FieldNetType.ToLower()=="date")
+        {
+        <!-- @column.FieldName -->
+        <template #@(@column.FieldNameFirstLower)="scope">
+           {{ scope.row.@(@column.FieldNameFirstLower) && scope.row.@(@column.FieldNameFirstLower).substr(0, 10) }}
+        </template>
+        }
+        break;
+      }
+    }
+}
+
+//表格操作
+void Operation(){
+    <!-- 操作 -->
+    <template #operation="scope">
+      <s-button link :opt="FormOptEnum.EDIT" @@click="onOpen(FormOptEnum.EDIT, scope.row)" />
+      <s-button link :opt="FormOptEnum.DELETE" @@click="onDelete([scope.row.id], `删除所选@(@funcName)`)" />
+    </template>
+}
+
+//表单
+void Form(){
+    <!-- 新增/编辑表单 -->
+    <Form ref="formRef" />
+}
+ 
+}
+
+<script setup lang="ts" name="@busName">
+import { @(@Model.ClassNameFirstLower)Api,@(@Model.EntityName) } from "@@/api";
+import { FormOptEnum } from "@@/enums";
+import { ColumnProps, ProTableInstance } from "@@/components/ProTable/interface";
+import Form from "./components/form.vue";
+import { useHandleData } from "@@/hooks/useHandleData";
+@if(dictTypes.Count>0){
+@:import { useDictStore } from "@@/stores/modules";
+}
+
+// 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
+const proTable = ref<ProTableInstance>();
+@{DictStore();}
+
+@{Colums();}
+
+// 表单引用
+const formRef = ref<InstanceType<typeof Form> | null>(null);
+
+/**
+ * 打开表单
+ * @@param opt  操作类型
+ * @@param record  记录
+ */
+function onOpen(opt: FormOptEnum, record: {} | @(@Model.EntityName).@(@Model.EntityName)Info = {}) {
+  formRef.value?.onOpen({ opt: opt, record: record, successful: RefreshTable });
+}
+
+/**
+ * 删除
+ * @@param ids  id数组
+ */
+async function onDelete(ids: string[], msg: string) {
+  // 二次确认 => 请求api => 刷新表格
+  await useHandleData(@(@Model.ClassNameFirstLower)Api.delete, { ids }, msg);
+  RefreshTable();
+}
+
+/**
+ * 刷新表格
+ */
+function RefreshTable() {
+  proTable.value?.refresh();
+}
+</script>
+
+@{
+
+//字典生成
+void DictStore(){
+if(dictTypes.Count>0){
+@:const dictStore = useDictStore();
+@foreach(var column in dictTypes){
+@:const @(@column.FieldNameFirstLower)Options = dictStore.getDictList("@column.DictTypeCode"); //@(@column.FieldRemark)选项
+}
+}
+}
+
+// 表格配置项
+void Colums(){
+// 表格配置项
+@:const columns: ColumnProps<@(@Model.EntityName).@(@Model.EntityName)Info>[] = [
+  @:{ type: "selection", fixed: "left", width: 80 },
+  @foreach(var column in showColumns){
+  @:{ prop: "@column.FieldNameFirstLower", label: "@column.FieldRemark" @{GetEnum(@column);} @{GetSearch(@column);} },
+  }
+  @:{ prop: "operation", label: "操作", width: 230, fixed: "right" }
+@:];
+}
+
+//判断需要添加emum属性
+void GetEnum(SimpleAdmin.System.GenConfig column){
+@if(!string.IsNullOrEmpty(column.DictTypeCode)){//如果字典不为空
+@:,enum: @(@column.FieldNameFirstLower)Options
+}
+}
+
+void GetSearch(SimpleAdmin.System.GenConfig column){
+@if(column.QueryWhether=="Y"){//如果字典不为空
+@switch (column.EffectType){
+case "input":
+@:, search: { el: "input" }
+break;
+case "select":
+case "radio":
+@:, search: { el: "select" }
+break;
+}
+}
+}
+}
+
+<style lang="scss" scoped></style>

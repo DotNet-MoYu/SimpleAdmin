@@ -1,0 +1,180 @@
+@{
+  var tableFieIds=@Model.TableFields;//获取字段
+  var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+  var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+}
+// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using System;
+using System.ComponentModel.DataAnnotations;
+using Masuit.Tools.Core.Validator;
+namespace @(@Model.ServicePosition);
+
+/// <summary>
+/// @(@Model.DescriptionPage)参数
+/// </summary>
+public class @Model.PageInput : BasePageInput
+{
+  @{PageInput();}
+  @if(@Model.LeftTree=="org"){
+  @:/// <summary>
+  @:/// 组织机构Id
+  @:/// </summary>
+  @:public long OrgId { get; set; }
+  }
+  @if(isTreeList){
+  @:/// <summary>
+  @:/// 父Id
+  @:/// </summary>
+  @:public long @Model.TreePid { get; set; }
+  }
+}
+
+
+/// <summary>
+/// @(@Model.DescriptionAdd)参数
+/// </summary>
+public class @Model.AddInput
+{
+  @{AddInput();}
+}
+
+/// <summary>
+/// @(@Model.DescriptionEdit)参数
+/// </summary>
+public class @Model.EditInput : @Model.AddInput
+{
+    /// <summary>
+    /// Id
+    /// </summary>
+    [IdNotNull(ErrorMessage = "Id不能为空")]
+    public long Id { get; set; }
+}
+
+@if(isTreeTree){
+@{TreeTree();}
+}
+
+@{OtherInput();}
+
+@{
+
+void TreeTree(){
+@:/// <summary>
+@:/// @(@Model.DescriptionTree)参数
+@:/// </summary>
+@:public class @Model.TreeInput 
+@:{
+  @{PageInput();}
+@:}
+}
+
+void OtherInput(){
+var funcList=@Model.FuncList;//获取功能列表
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+@:/// <summary>
+@:/// @(@Model.DescriptionImport)
+@:/// </summary>
+@:public class @(@Model.ClassName)ImportInput : ImportTemplateInput
+@:{
+  ImportInput();
+@:}
+break;
+}}
+
+}
+
+//生成导入字段
+void ImportInput(){
+  foreach (var column in tableFieIds){
+  if(column.WhetherImportExport=="Y")//判断是否新增
+  {
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  @:[ImporterHeader(Name = "@column.FieldRemark")]
+  if(column.WhetherImportExport=="Y")//判断是否必填
+  {
+  @:[Required(ErrorMessage = "@(@column.FieldRemark)不能为空")]
+  }
+  if(column.FieldNetType!="string")//如果不是string类型后面要加?号
+  {
+  @:public @(@column.FieldNetType)? @column.FieldName { get; set; }
+  }else{
+  @:public @column.FieldNetType @column.FieldName { get; set; }
+  }
+  @:
+  }
+  }
+}
+
+//生成分页字段
+void PageInput()
+{
+  foreach (var column in tableFieIds){
+  if(column.QueryWhether=="Y")//判断是否查询
+  {
+  if(column.EffectType=="datepicker"){//如果是时间类型
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  @:public @column.FieldNetType? Start@(@column.FieldName)  { get; set; }
+  @:
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  @:public @column.FieldNetType? End@(@column.FieldName) { get; set; }
+  @:
+  }
+  else{
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  if(column.FieldNetType!="string")//如果不是string类型后面要加?号
+  {
+  @:public @(@column.FieldNetType)? @column.FieldName { get; set; }
+  }else{
+  @:public @column.FieldNetType @column.FieldName { get; set; }
+  }
+  @:
+  }}}}
+}
+
+@{
+//生成新增字段
+void AddInput()
+{
+  foreach (var column in tableFieIds){//遍历字段
+  if(column.WhetherAddUpdate=="Y")//判断是否新增
+  {
+  @:/// <summary>
+  @:/// @column.FieldRemark
+  @:/// </summary>
+  if(column.WhetherRequired=="Y")//判断是否必填
+  {
+  @:[Required(ErrorMessage = "@(@column.FieldName)不能为空")]
+  }
+  if(column.FieldNetType!="string")//如果不是string类型后面要加?号
+  {
+  @:public @(@column.FieldNetType)? @column.FieldName { get; set; }
+  }else{
+  @:public @column.FieldNetType @column.FieldName { get; set; }
+  }
+  @:
+  }
+  }
+}
+}
+

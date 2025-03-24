@@ -26,6 +26,53 @@
             模拟 Configure
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.GenTestController">
+            <summary>
+            测试控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Page(SimpleAdmin.Application.GenTestPageInput)">
+            <summary>
+            测试分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.List(SimpleAdmin.Application.GenTestPageInput)">
+            <summary>
+            测试列表查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            测试详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
+            <summary>
+            添加测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edit(SimpleAdmin.Application.GenTestEditInput)">
+            <summary>
+            修改测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除测试
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.BizOrgController">
             <summary>
             机构管理控制器
@@ -604,6 +651,91 @@
         <member name="M:SimpleAdmin.Web.Core.MessageController.Delete(SimpleAdmin.Core.BaseIdListInput)">
             <summary>
             删除站内信
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.GenBasicController">
+            <summary>
+            代码生成基础控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.Page(SimpleAdmin.Core.BasePageInput)">
+            <summary>
+            代码生成基础分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.Tables(System.Boolean)">
+            <summary>
+            获取所有表信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.GetAssemblies">
+            <summary>
+            获取项目所有程序集
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.Add(SimpleAdmin.System.GenBasicAddInput)">
+            <summary>
+            添加代码生成器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.Edit(SimpleAdmin.System.GenBasicEditInput)">
+            <summary>
+            编辑代码生成器
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除代码生成配置
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.PreviewGen(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            代码生成预览
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.ExecGenPro(SimpleAdmin.System.ExecGenInput)">
+            <summary>
+            执行代码生成(本地)"
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenBasicController.ExecGenZip(SimpleAdmin.System.ExecGenInput)">
+            <summary>
+            执行代码生成(压缩包)
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Web.Core.GenConfigController">
+            <summary>
+            代码生成配置控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenConfigController.List(System.String)">
+            <summary>
+            查询代码生成详细配置列表
+            </summary>
+            <param name="basicId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Web.Core.GenConfigController.EditBatch(System.Collections.Generic.List{SimpleAdmin.System.GenConfig})">
+            <summary>
+            编辑代码生成详细
             </summary>
             <param name="input"></param>
             <returns></returns>

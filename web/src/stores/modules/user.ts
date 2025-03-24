@@ -49,7 +49,8 @@ export const useUserStore = defineStore({
   }),
   getters: {
     userInfoGet: state => state.userInfo,
-    chooseModuleGet: state => state.chooseModule
+    chooseModuleGet: state => state.chooseModule,
+    moduleListGet: state => state.moduleList
   },
   actions: {
     // Set Token

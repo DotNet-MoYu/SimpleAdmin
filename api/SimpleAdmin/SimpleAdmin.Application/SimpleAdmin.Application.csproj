@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    
+
     <ItemGroup>
         <None Remove="applicationsettings.Development.json"/>
         <None Remove="applicationsettings.Production.json"/>
@@ -17,11 +17,6 @@
         <None Update="Application.Production.json">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-    </ItemGroup>
-
-
-    <ItemGroup>
-        <Folder Include="Entity\"/>
     </ItemGroup>
 
 </Project>

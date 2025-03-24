@@ -27,7 +27,7 @@
             @click="onDelete(scope.selectedListIds, '删除所选用户')"
           />
         </template>
-        <!-- 状态 -->
+        <!-- 头像 -->
         <template #avatar="scope">
           <el-avatar :src="scope.row.avatar" :size="30" />
           <!-- <span>{{ scope.row.avatar }}}</span> -->
@@ -115,7 +115,7 @@ const columns: ColumnProps<SysUser.SysUserInfo>[] = [
     label: "状态",
     width: 90,
     enum: statusOptions,
-    search: { el: "tree-select" }
+    search: { el: "select" }
   },
   { prop: "createTime", label: "创建时间" },
   { prop: "operation", label: "操作", width: 230, fixed: "right" }

@@ -67,8 +67,6 @@ export const useTable = (
         state.pageable.total = data.total;
       }
     } catch (error) {
-      console.log("error");
-
       if (requestError) requestError(error);
     }
   };

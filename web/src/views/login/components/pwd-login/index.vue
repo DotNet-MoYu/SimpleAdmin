@@ -110,8 +110,6 @@ const loginRules = reactive({
 });
 
 const handleSubmit = (formEl: FormInstance | undefined) => {
-  console.log(123213);
-
   if (!formEl) return;
   // 表单验证
   formEl.validate(async valid => {

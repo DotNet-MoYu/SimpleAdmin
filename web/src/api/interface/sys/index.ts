@@ -21,3 +21,4 @@ export * from "./organization";
 export * from "./auth";
 export * from "./im";
 export * from "./dev";
+export * from "./curd";

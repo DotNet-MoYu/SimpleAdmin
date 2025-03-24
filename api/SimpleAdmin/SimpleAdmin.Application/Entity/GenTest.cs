@@ -8,36 +8,49 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
-using MoYu.DependencyInjection;
-
-namespace SimpleAdmin.Plugin.Notice;
+namespace SimpleAdmin.Application;
 
 /// <summary>
-/// 通知接口
-/// </summary>
-public interface INoticeService : ISingleton
+/// 代码生成基础
+///</summary>
+[SugarTable("gen_test", TableDescription = "代码生成测试")]
+[Tenant(SqlSugarConst.DB_DEFAULT)]
+[CodeGen]
+public class GenTest : DataEntityBase
 {
     /// <summary>
-    /// 通知用户下线
+    /// 姓名
     /// </summary>
-    /// <param name="userId">用户ID</param>
-    /// <param name="message">通知内容</param>
-    /// <returns></returns>
-    internal Task UserLoginOut(string userId, string message);
+    public string Name { get; set; }
 
     /// <summary>
-    /// 通知用户修改密码
+    /// 性别
     /// </summary>
-    /// <param name="userId">用户ID</param>
-    /// <param name="message">通知内容</param>
-    /// <returns></returns>
-    internal Task UpdatePassWord(string userId, string message);
+    public string Sex { get; set; }
 
     /// <summary>
-    /// 收到新的消息
+    /// 民族
     /// </summary>
-    /// <param name="userIds">用户Id列表</param>
-    /// <param name="message"></param>
-    /// <returns></returns>
-    internal Task NewMesage(List<string> userIds, string message);
+    public string Nation { get; set; }
+
+    /// <summary>
+    /// 年龄
+    /// </summary>
+
+    public int Age { get; set; }
+
+    /// <summary>
+    /// 生日
+    /// </summary>
+    public DateTime Bir { get; set; }
+
+    /// <summary>
+    /// 存款
+    /// </summary>
+    public decimal Money { get; set; }
+
+    /// <summary>
+    /// 排序码
+    ///</summary>
+    public int SortCode { get; set; }
 }

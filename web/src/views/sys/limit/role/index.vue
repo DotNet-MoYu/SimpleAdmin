@@ -107,10 +107,10 @@ const columns: ColumnProps<SysRole.SysRoleInfo>[] = [
     prop: "category",
     label: "角色分类",
     enum: roleCategoryOptions,
-    search: { el: "tree-select" }
+    search: { el: "select" }
   },
   { prop: "code", label: "角色编码", search: { el: "input" } },
-  { prop: "status", label: "状态", enum: statusOptions, search: { el: "tree-select" } },
+  { prop: "status", label: "状态", enum: statusOptions, search: { el: "select" } },
   { prop: "sortCode", label: "排序" },
   { prop: "createTime", label: "创建时间" },
   { prop: "operation", label: "操作", width: 230, fixed: "right" }

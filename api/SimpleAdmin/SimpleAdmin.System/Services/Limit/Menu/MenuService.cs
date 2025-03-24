@@ -94,7 +94,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     /// <inheritdoc />
     public async Task Edit(MenuEditInput input)
     {
-        var resource = await CheckInput(input);//检查参数
+        var resource = await CheckInput(input, true);//检查参数
         var sysResource = input.Adapt<SysResource>();//实体转换
         var updatePath = resource.Path != input.Path;//是否更新路径
         var permissions = new List<SysRelation>();
@@ -225,7 +225,8 @@ public class MenuService : DbRepository<SysResource>, IMenuService
     /// 检查输入参数
     /// </summary>
     /// <param name="sysResource"></param>
-    private async Task<SysResource> CheckInput(SysResource sysResource)
+    /// <param name="update"></param>
+    private async Task<SysResource> CheckInput(SysResource sysResource, bool update = false)
     {
         //获取所有菜单列表
         var menList = await _resourceService.GetListByCategory(CateGoryConst.RESOURCE_MENU);
@@ -249,7 +250,7 @@ public class MenuService : DbRepository<SysResource>, IMenuService
             }
         }
         //如果ID大于0表示编辑
-        if (sysResource.Id > 0)
+        if (sysResource.Id > 0 && update)
         {
             var resource = menList.Where(it => it.Id == sysResource.Id).FirstOrDefault();
             if (resource == null)

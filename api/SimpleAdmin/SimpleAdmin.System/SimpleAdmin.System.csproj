@@ -46,11 +46,48 @@
         <None Update="ip2region.xdb">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="ViewEngine\CodeGen\Sql\MySql.sql.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Sql\Oracle.sql.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Sql\Sqlite.sql.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Sql\SqlServer.sql.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Backend\Controllers\Controller.cs.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Backend\Services\Dto\Input.cs.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Backend\Services\Dto\Output.cs.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Backend\Services\IService.cs.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Backend\Services\Service.cs.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Frontend\template.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Frontend\api\modules\modules.ts.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="ViewEngine\CodeGen\Frontend\api\interface\interface.ts.vm">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 
     <ItemGroup>
         <Folder Include="Services\LogAudit\"/>
+        <Folder Include="ViewEngine\CodeGen\"/>
     </ItemGroup>
 
 </Project>

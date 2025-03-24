@@ -84,10 +84,10 @@ const columns: ColumnProps<SysOrg.SysOrgInfo>[] = [
     prop: "category",
     label: "分类",
     enum: orgCategoryOptions,
-    search: { el: "tree-select" }
+    search: { el: "select" }
   },
   { prop: "code", label: "编码", search: { el: "input" } },
-  { prop: "status", label: "状态", enum: statusOptions, search: { el: "tree-select" } },
+  { prop: "status", label: "状态", enum: statusOptions, search: { el: "select" } },
   { prop: "sortCode", label: "排序" },
   { prop: "createTime", label: "创建时间" },
 

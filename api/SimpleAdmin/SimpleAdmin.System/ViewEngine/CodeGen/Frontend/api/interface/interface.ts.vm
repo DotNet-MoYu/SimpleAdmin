@@ -1,0 +1,85 @@
+/**
+ * @@description @(@Model.FunctionName+@Model.FunctionNameSuffix)接口
+ * @@license Apache License Version 2.0
+ * @@Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+ * @@remarks
+ * SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+ * 1.请不要删除和修改根目录下的LICENSE文件。
+ * 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+ * 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+ * 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+ * 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
+ * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
+ */ 
+
+@{ 
+var busName= @Model.BusName;//业务名称
+var author= @Model.AuthorName;//作者
+var currentTime =@Model.GenTime;
+var name=@Model.FunctionName+@Model.FunctionNameSuffix;//接口名称
+var tableFieIds=@Model.TableFields;//获取字段
+}
+
+import { ReqPage } from "@@/api/interface";
+
+/**
+ * @@Description: @(@Model.FunctionName+@Model.FunctionNameSuffix)接口
+ * @@Author: @author
+ * @@Date: @currentTime
+ */
+export namespace @Model.EntityName {
+
+  /**@(@Model.FunctionName)分页查询 */
+  export interface Page extends ReqPage {
+    @{PageQueryParams();}
+  }
+
+  /** @(@Model.FunctionName)信息 */
+  export interface @(@Model.EntityName)Info {
+    @{EntityToInterfaceParams();}
+  }
+}    
+
+
+@{
+//生成查询条件
+void PageQueryParams()
+{
+    var queryParams = tableFieIds.Where(x => x.QueryWhether=="Y").ToList();
+    //遍历字段
+    foreach (var column in queryParams){
+        @:/** @column.FieldRemark */
+      if(@column.FieldNetType.ToLower() == "string")//判断是否是字符串类型
+      {
+        @:@column.FieldNameFirstLower: string;
+      }
+      if(@column.FieldNetType.ToLower() == "int"||@column.FieldNetType.ToLower() == "long")//判断是否是数字类型
+      {
+        @:@column.FieldNameFirstLower: number;
+      }    
+    
+    }
+}
+//实体字段转接口参数
+void EntityToInterfaceParams(){
+    var numberParams =new string[]{"int","long","decimal","double"};//数字类型
+    var tableParams = tableFieIds.Where(x => x.WhetherTable=="Y"||x.IsPrimaryKey=="Y"||x.SortCode<99).ToList();
+        //遍历字段
+    foreach (var column in tableParams){
+        @:/** @column.FieldRemark */
+      if(numberParams.Contains(@column.FieldNetType.ToLower()))//判断是否是数字类型
+      {
+        @:@column.FieldNameFirstLower: number;
+      }  
+      else if(@column.FieldNetType.ToLower() == "bool")//判断是否是数字类型
+      {
+        @:@column.FieldNameFirstLower: boolean;
+      }    
+      else
+      {
+        @:@column.FieldNameFirstLower: string;
+      }
+}
+
+}
+

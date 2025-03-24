@@ -1,0 +1,174 @@
+@{
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var tableFieIds=@Model.TableFields;//获取字段
+}
+// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using MoYu.DependencyInjection;
+using SimpleAdmin.Core;
+
+namespace @(@Model.ServicePosition);
+
+/// <summary>
+/// @(@Model.FunctionName)服务
+/// </summary>
+public interface I@(@Model.ServiceName) : ITransient
+{
+    #region 查询
+
+    /// <summary>
+    /// @Model.DescriptionPage
+    /// </summary>
+    /// <param name="input">查询参数</param>
+    /// <returns>@(@Model.FunctionName)分页</returns>
+    Task<SqlSugarPagedList<@(@Model.EntityName)>> Page(@Model.PageInput input);	
+  
+    /// <summary>
+    /// @Model.DescriptionList
+    /// </summary>
+    /// <param name="input">查询参数</param>
+    /// <returns>@(@Model.FunctionName)列表</returns>
+    Task<List<@(@Model.EntityName)>> List(@Model.PageInput input);	
+
+    /// <summary>
+    /// @Model.DescriptionDetail
+    /// </summary>
+    /// <param name="input">Id参数</param>
+    /// <returns>详细信息</returns>
+    Task<@(@Model.EntityName)> Detail(BaseIdInput input);
+
+    @if(isTreeList){
+    @:/// <summary>
+    @:/// @Model.DescriptionTree
+    @:/// </summary>
+    @:/// <returns>@(@Model.FunctionName)树</returns>
+    @:Task<List<@(@Model.EntityName)>> Tree();
+    }
+    @if(isTreeTree){
+    @:/// <summary>
+    @:/// @Model.DescriptionTree
+    @:/// </summary>
+    @:/// <returns>@(@Model.FunctionName)树</returns>
+    @:Task<List<@(@Model.EntityName)>> Tree(@Model.TreeInput input);
+    }
+
+    @{Fk();}
+    #endregion
+    
+    #region 新增
+
+    /// <summary>
+    /// @Model.DescriptionAdd
+    /// </summary>
+    /// <param name="input">添加参数</param>
+    /// <returns></returns>
+    Task Add(@Model.AddInput input);
+
+    #endregion
+    
+    #region 编辑
+    /// <summary>
+    /// @Model.DescriptionEdit
+    /// </summary>
+    /// <param name="input">编辑参数</param>
+    /// <returns></returns>
+    Task Edit(@Model.EditInput input);
+    
+    @if(@Model.FuncList.Contains("batchEdit")){
+    @:/// <summary>
+    @:/// @(@Model.DescriptionEdits)
+    @:/// </summary>
+    @:/// <param name="input">批量编辑信息</param>
+    @:/// <returns></returns>
+    @:Task Edits(BatchEditInput input);
+    }
+    #endregion
+
+    #region 删除
+
+    /// <summary>
+    /// @Model.DescriptionDelete
+    /// </summary>
+    /// <param name="input">删除参数</param>
+    /// <returns></returns>
+    Task Delete(BaseIdListInput input);
+
+    #endregion
+
+    #region 导入导出
+
+    @{ImportExport();}
+
+    #endregion
+}
+
+@{
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:/// <summary>
+    @:/// @(column.FieldRemark)选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:Task<List<BaseSelectorOutput>> Fk@(column.FkEntityName)Selector();
+
+}
+}
+}
+
+void ImportExport(){
+
+var funcList=@Model.FuncList;//获取功能列表
+foreach(var func in funcList){
+switch (func)//根据类型生成不同请求
+{
+//导入
+case "import":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionTemplate)
+    @:/// </summary>
+    @:/// <returns>模板</returns>
+    @:Task<FileStreamResult> Template();
+    @:
+    @:/// <summary>
+    @:/// @(@Model.DescriptionPreview)
+    @:/// </summary>
+    @:/// <param name="input">预览参数</param>
+    @:/// <returns>预览结果</returns>
+    @:Task<ImportPreviewOutput<@(@Model.ClassName)ImportInput>> Preview(ImportPreviewInput input);
+    @:
+    @:/// <summary>
+    @:/// @(@Model.DescriptionImport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:Task<ImportResultOutPut<@(@Model.ClassName)ImportInput>> Import(ImportResultInput<@(@Model.ClassName)ImportInput> input);
+    @:
+break;
+//导出
+case "export":
+    @:/// <summary>
+    @:/// @(@Model.DescriptionExport)
+    @:/// </summary>
+    @:/// <param name="input"></param>
+    @:/// <returns></returns>
+    @:Task<FileStreamResult> Export(@Model.PageInput input);
+break;
+}
+}
+
+}
+
+
+
+}

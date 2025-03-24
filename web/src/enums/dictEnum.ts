@@ -141,3 +141,13 @@ export enum MessageStatusDictEnum {
   /** 延迟 */
   ALREADY = "ALREADY"
 }
+
+/** 菜单类型枚举 */
+export enum MenuCategoryEnum {
+  /*单页*/
+  SPA = "SPA",
+  /*模块*/
+  MOUDLE = "MOUDLE",
+  /*菜单*/
+  MENU = "MENU"
+}

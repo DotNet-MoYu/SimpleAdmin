@@ -1,4 +1,3 @@
-import { SysUser } from "@/api";
 /**
  * @description 组织管理接口
  * @license Apache License Version 2.0
@@ -13,6 +12,7 @@ import { SysUser } from "@/api";
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  */
 
+import { SysUser } from "@/api";
 import { ReqPage } from "@/api";
 /**
  * @Description: 组织管理接口

@@ -1,0 +1,461 @@
+@{
+var orgField=@Model.TableFields.Any(it=>it.FieldName=="OrgId")?"OrgId":"CreateOrgId";//机构字段
+var dataPermission=@Model.DataPermission=="Y";//是否有数据权限
+var tableFieIds=@Model.TableFields;//获取字段
+var isTreeList = @Model.ModuleType=="treeList";//是否是树表-列表
+var isTreeTree = @Model.ModuleType=="treeTree"; //是否是树-树
+var isMasterChild = @Model.ModuleType=="masterChild"; //是否是主子表
+}
+
+// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// 
+// SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
+// 1.请不要删除和修改根目录下的LICENSE文件。
+// 2.请不要删除和修改SimpleAdmin源码头部的版权声明。
+// 3.分发源码时候，请注明软件出处 https://gitee.com/dotnetmoyu/SimpleAdmin
+// 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
+// 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
+// 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
+
+using MoYu.FriendlyException;
+using Mapster;
+using SimpleAdmin.Core;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using SqlSugar;
+
+namespace @(@Model.ServicePosition);
+
+/// <summary>
+/// <inheritdoc cref="I@(@Model.ServiceName)"/>
+/// </summary>
+public class @(@Model.ServiceName) : DbRepository<@(@Model.EntityName)>, I@(@Model.ServiceName)
+{
+    private readonly ILogger<@(@Model.ServiceName)> _logger;
+    private readonly ISysUserService _sysUserService;
+    @if(@Model.FuncList.Contains("import")||@Model.FuncList.Contains("export")){
+    @:private readonly IImportExportService _importExportService;
+    }
+    @if(@Model.FuncList.Contains("batchEdit")){
+    @:private readonly IBatchEditService _batchEditService;
+    }
+    @if(@Model.LeftTree=="org"){
+    @:private readonly ISysOrgService _sysOrgService;
+    }
+
+    public @(@Model.ServiceName)(ILogger<@(@Model.ServiceName)> logger,ISysUserService sysUserService
+    @if(@Model.FuncList.Contains("import")||@Model.FuncList.Contains("export")){
+    @:,IImportExportService importExportService
+    }
+    @if(@Model.FuncList.Contains("batchEdit")){
+    @:,IBatchEditService updateBatchService
+    }
+    @if(@Model.LeftTree=="org"){
+    @:,ISysOrgService sysOrgService
+    }
+    )
+    {
+         _sysUserService = sysUserService;
+         _logger = logger;
+         @if(@Model.FuncList.Contains("import")||@Model.FuncList.Contains("export")){
+         @:_importExportService = importExportService;
+         }
+         @if(@Model.FuncList.Contains("batchEdit")){
+         @: _batchEditService = updateBatchService;
+         }
+         @if(@Model.LeftTree=="org"){
+         @: _sysOrgService = sysOrgService;
+         }
+
+    }
+	
+    #region 查询
+
+    /// <inheritdoc/>
+    public async Task<SqlSugarPagedList<@(@Model.EntityName)>> Page(@Model.PageInput input)
+    {
+        var query = await GetQuery(input);//获取查询条件
+        var pageInfo = await query.ToPagedListAsync(input.PageNum, input.PageSize);//分页
+        return pageInfo;
+    }
+
+    /// <inheritdoc/>
+    public async Task<List<@(@Model.EntityName)>> List(@Model.PageInput input)
+    {
+        var query = await GetQuery(input);//获取查询条件
+        var list = await query.ToListAsync();
+        return list;
+    }
+
+    /// <inheritdoc />
+    public async Task<@(@Model.EntityName)> Detail(BaseIdInput input)
+    {
+        var @Model.ClassNameFirstLower  =  await GetFirstAsync(it => it.Id == input.Id);
+        @if(dataPermission){
+        @:var errorMessage = $"您没有权限查看该数据";
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @:if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId))//判断机构ID是否在数据范围或者创建人是否为当前登录人
+           @:throw Oops.Bah(errorMessage);
+        }
+        @if(isMasterChild){
+        @:var child=await Context.Queryable<@Model.ChildTable>().Where(it => it.@(Model.ChildFk) == @(@Model.ClassNameFirstLower).Id).ToListAsync();
+        }
+        return @Model.ClassNameFirstLower ;
+
+    }
+    @if(isTreeList){
+    @:/// <inheritdoc />
+    @:public async Task<List<@(@Model.EntityName)>> Tree()
+    @:{
+        @://第三个参数为0 表示 ： parentid为 0 设置成根目录, 正常情况下最顶层的parentid不是0就是null
+        @:var tree = Context.Queryable<@(@Model.EntityName)>().ToTree(it => it.Children, it => it.ParentId, 0);
+        @:return tree;
+    @:}
+    }
+    @if(isTreeTree){
+    @:/// <inheritdoc />
+    @:public async Task<List<@(@Model.EntityName)>> Tree(@Model.TreeInput input)
+    @:{
+        @://第三个参数为0 表示 ： parentid为 0 设置成根目录, 正常情况下最顶层的parentid不是0就是null
+        @:var tree = Context.Queryable<@(@Model.EntityName)>()
+                     @if(isTreeTree){
+                     @{PageWhereIf();}//查询条件
+                     }
+                     @:.ToTree(it => it.Children, it => it.ParentId, 0);
+        @:return tree;
+    @:}
+    }
+
+    @{Fk();}//外键查询
+    #endregion
+
+    #region 新增
+
+    /// <inheritdoc />
+    public async Task Add(@Model.AddInput input)
+    {
+        var @Model.ClassNameFirstLower = input.Adapt<@(@Model.EntityName)>();//实体转换
+        await CheckInput(@Model.ClassNameFirstLower);//检查参数
+        @if(dataPermission){
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @://判断机构ID是否在数据范围,这里只是简单示例，根据实际情况判断
+        @://if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).OrgId)))
+        @://throw Oops.Bah("您没有权限添加该数据");
+        }
+        await InsertAsync(@Model.ClassNameFirstLower);//插入数据
+    }
+ 
+    #endregion
+ 
+    #region 编辑
+ 
+    /// <inheritdoc />
+    public async Task Edit(@Model.EditInput input)
+    {
+        var @Model.ClassNameFirstLower  = input.Adapt<@(@Model.EntityName)>();//实体转换
+        await CheckInput(@Model.ClassNameFirstLower);//检查参数
+        @if(dataPermission){
+        @://判断机构ID是否在数据范围并且创建者是自己,这里只是简单示例，根据实际情况判断
+        @://if (dataScope!=null&&(!dataScope.Contains(@(@Model.ClassNameFirstLower).@(orgField)) || @(@Model.ClassNameFirstLower).CreateUserId != UserManager.UserId))
+            @://throw Oops.Bah("您没有权限编辑该数据");
+        }
+        await UpdateAsync(@Model.ClassNameFirstLower);//更新数据
+    }
+    
+    @if(@Model.FuncList.Contains("batchEdit")){
+    @:/// <inheritdoc/>
+    @:public async Task Edits(BatchEditInput input)
+    @:{
+        Edits();
+    @:}
+    }
+
+    #endregion
+    
+    #region 删除
+
+    /// <inheritdoc />
+    public async Task Delete(BaseIdListInput input)
+    {
+        //获取所有ID
+        var ids = input.Ids.ToList();
+        if (ids.Count > 0)
+        {
+        @if(dataPermission){
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
+        @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
+        @:{
+        @:    if (dataScope!=null&&!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        @:});
+        }
+        @if(isMasterChild){
+        @://如果@(Model.FunctionName)下有下级数据则不允许删除
+        @:if (await Context.Queryable<@(@Model.ChildTable)>().AnyAsync(it => ids.Contains(it.@(Model.ChildFk))))
+        @:{
+          @:throw Oops.Bah($"有数据依赖@(Model.FunctionName),无法删除");
+        @:}
+        }                    
+        await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
+        ////事务
+        //var result = await itenant.UseTranAsync(async () =>
+        //{
+             //await DeleteByIdsAsync(ids.Cast<object>().ToArray());//删除数据
+             @if(isMasterChild){
+             @://Context.Deleteable<@(@Model.ChildTable)>().Where(it => ids.Contains(it.@(Model.ChildFk))).ExecuteCommandAsync();//删除子表数据
+             }
+        //});
+        //if (!result.IsSuccess)//如果成功了
+        //{
+             ////写日志
+             //_logger.LogError(result.ErrorMessage, result.ErrorException);
+             //throw Oops.Oh(ErrorCodeEnum.A0002);
+        //} 
+        }
+    }
+
+    #endregion
+
+    #region 导入导出
+    
+    @{ImportExport();}
+
+    #endregion	
+
+    #region 方法
+	
+    /// <summary>
+    /// 检查输入参数
+    /// </summary>
+    /// <param name="@(@Model.ClassNameFirstLower)"></param>
+    private async Task CheckInput(@Model.EntityName @Model.ClassNameFirstLower)
+    {
+        @{CheckInput();} 
+    }
+
+    /// <summary>
+    /// 获取Sqlsugar的ISugarQueryable
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    private async Task<ISugarQueryable<@(@Model.EntityName)>> GetQuery(@Model.PageInput input)
+    {
+
+        @if(dataPermission){
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @://动态查询条件,如果是连表查询,里面的it要改成连表里对应的别名
+        @:var exp = Expressionable.Create<@(@Model.EntityName)>();
+        @:exp.AndIF(dataScope is { Count: > 0 }, it => dataScope.Contains(it.@(orgField)));//用户机构在数据范围内
+        @:exp.AndIF(dataScope is { Count: 0 }, it => it.CreateUserId == UserManager.UserId);//默认创建者ID等于自己,根据实际情况修改条件        
+        }
+        @if(@Model.LeftTree=="org"){
+        @:var orgIds = await _sysOrgService.GetOrgChildIds(input.OrgId);//获取下级机构
+        }
+        var query = Context.Queryable<@(@Model.EntityName)>()
+                         @{PageWhereIf();}
+                         @if(dataPermission){
+                         @:.Where(exp.ToExpression())
+                         }
+                         @if(@Model.LeftTree=="org"){
+                         @:.WhereIF(input.OrgId > 0, it => orgIds.Contains(it.@(orgField)))//根据机构ID查询
+                         }
+                         @if(isTreeList){
+                         @:.WhereIF(input.@(@Model.TreePid) > 0, it => it.@(@Model.TreePid) ==input.@(@Model.TreePid))//父级
+                         }
+                         //.WhereIF(!string.IsNullOrEmpty(input.SearchKey), it => it.Name.Contains(input.SearchKey))//根据关键字查询
+                         .OrderByIF(!string.IsNullOrEmpty(input.SortField), $"{input.SortField} {input.SortOrder}")
+                         @{PageSortCode();}
+        return query;
+    }
+
+    /// <inheritdoc/>
+    public async Task<List<@(@Model.ClassName)ImportInput>> CheckImport<@(@Model.ClassName)ImportInput>(List<@(@Model.ClassName)ImportInput> data, bool clearError = false)
+    {
+       return data;
+    }
+    #endregion
+
+}
+
+@{
+
+void Fk(){
+foreach (var column in tableFieIds){//遍历字段
+if(column.EffectType=="fk"){//如果是外键
+    @:/// <summary>
+    @:/// @(column.FieldRemark)选择器
+    @:/// </summary>
+    @:/// <returns></returns>
+    @:public async Task<List<BaseSelectorOutput>> Fk@(column.FkEntityName)Selector()
+    @:{
+    @if(dataPermission){
+          @://获取数据范围
+          @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+    }
+          @:return await Context.Queryable<@(column.FkEntityName)>()
+    @if(dataPermission){
+          @://.WhereIf(dataScope!=null,it => it.CreateOrgId == UserManager.OrgId || (dataScope.Contains(it.Id)))
+    }
+          @:.Select(it => new BaseSelectorOutput { Value = it.@(column.FkColumnId), Label = it.@(column.FkColumnName) }).ToListAsync();
+    @:}
+
+}
+}
+}
+
+//删除
+void Delete(){
+
+}
+
+//批量编辑
+void Edits(){
+        @if(dataPermission){
+        @://获取数据范围
+        @:var dataScope = await _sysUserService.GetLoginUserApiDataScope();
+        @:var ids = input.Ids;//获取id列表
+        @:var @(@Model.ClassNameFirstLower)s = await GetListAsync(it => ids.Contains(it.Id), it =>new @(@Model.EntityName){ @(orgField)=it.@(orgField),CreateUserId=it.CreateUserId });//根据ID获取机构ID和创建者ID
+        @:@(@Model.ClassNameFirstLower)s.ForEach(it =>
+        @:{
+        @:    if (dataScope!=null&&!dataScope.Contains(it.@(orgField))&&it.CreateUserId != UserManager.UserId) throw Oops.Bah(ErrorCodeEnum.A0004);//如果不包含机构id并且不是自己创建的
+        @:});
+        }
+        @://获取参数字典
+        @:var data = await _batchEditService.GetUpdateBatchConfigDict(input.Code, input.Columns);
+        @:if (data.Count > 0)
+        @:{
+            @:await Context.Updateable<@(@Model.EntityName)>(data).Where(it => input.Ids.Contains(it.Id)).ExecuteCommandAsync();
+        @:} 
+}
+
+//检查输入
+void CheckInput(){
+      @:var errorMessage = $"您没有权限操作该数据";
+      @:if(@(@Model.ClassNameFirstLower).Id==SimpleAdminConst.ZERO){ 
+          @://表示新增
+      @:}
+      @:else{
+      @://表示编辑
+      @:}
+}
+
+//导入导出
+void ImportExport()
+{
+if(@Model.FuncList.Contains("import"))
+{
+    @:/// <inheritdoc/>
+    @:public async Task<FileStreamResult> Template()
+    @:{
+        @:var templateName = "@(@Model.FunctionName)信息";
+        @://var result = _importExportService.GenerateLocalTemplate(templateName);
+        @:var result = await _importExportService.GenerateTemplate<@(@Model.ClassName)ImportInput>(templateName);
+        @:return result;
+    @:}
+    @:
+    @:/// <inheritdoc/>
+    @:public async Task<ImportPreviewOutput<@(@Model.ClassName)ImportInput>> Preview(ImportPreviewInput input)
+    @:{
+        @:var importPreview = await _importExportService.GetImportPreview<@(@Model.ClassName)ImportInput>(input.File);
+        @:importPreview.Data = await CheckImport(importPreview.Data);//检查导入数据
+        @:return importPreview;
+    @:}
+    @:
+    @:/// <inheritdoc/>
+    @:public async Task<ImportResultOutPut<@(@Model.ClassName)ImportInput>> Import(ImportResultInput<@(@Model.ClassName)ImportInput> input)
+    @:{
+        @:var data = await CheckImport(input.Data, true);//检查数据格式
+        @:var result = _importExportService.GetImportResultPreview(data, out var importData);
+        @:var @Model.ClassNameFirstLower = importData.Adapt<List<@(@Model.EntityName)>>();//转实体
+        @:await InsertOrBulkCopy(@Model.ClassNameFirstLower);// 数据导入
+        @:return result;
+    @:}
+    @:
+}
+if(@Model.FuncList.Contains("export"))
+{
+    @:/// <inheritdoc/>
+    @:public async Task<FileStreamResult> Export(@Model.PageInput input)
+    @:{
+        @:var genTests = await List(input);
+        @:var data = genTests.Adapt<List<@(@Model.ClassName)ExportOutput>>();//转为Dto
+        @:var result = await _importExportService.Export(data, "@(@Model.FunctionName)信息");
+        @:return result;
+    @:}
+}
+}
+}
+
+
+@{
+//生成查询条件
+void PageWhereIf()
+{
+  foreach (var column in tableFieIds){//遍历字段
+  if(column.QueryWhether=="Y")//判断是否查询
+  {
+    if(@column.FieldNetType.ToLower() == "string")//判断是否是字符串类型
+    {
+      switch (@column.QueryType)//遍历查询方式
+      {
+        case "eq"://等于
+                         @:.WhereIF(!string.IsNullOrWhiteSpace(input.@column.FieldName), it => it.@(@column.FieldName) == input.@(@column.FieldName))
+        break;
+        case "like"://包含
+                         @:.WhereIF(!string.IsNullOrWhiteSpace(input.@column.FieldName), it => it.@(@column.FieldName).Contains(input.@(@column.FieldName).Trim()))
+        break;
+		case "notlike"://不包含
+                         @:.WhereIF(!string.IsNullOrWhiteSpace(input.@column.FieldName), it => !it.@(@column.FieldName).Contains(input.@(@column.FieldName).Trim()))
+        break;
+	    case "ne"://不等于
+                         @:.WhereIF(!string.IsNullOrWhiteSpace(input.@column.FieldName), it => it.@(@column.FieldName) != input.@(@column.FieldName))
+        break;
+      }
+	}
+	else if(@column.EffectType=="datepicker"){//如果是时间类型则生成时间戳
+                         @:.WhereIF(input.Start@(@column.FieldName)!=null||input.End@(@column.FieldName)!=null, it=> SqlFunc.Between(it.@column.FieldName, input.Start@(@column.FieldName), input.End@(@column.FieldName)))
+	}
+	else{//其他
+      switch (@column.QueryType)//遍历查询方式
+      {
+        case "eq"://等于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) == input.@(@column.FieldName))
+        break;
+		case "ne"://不等于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) != input.@(@column.FieldName))
+        break;
+		case "gt"://大于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) > input.@(@column.FieldName))
+        break;
+		case "ge"://大于等于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) >= input.@(@column.FieldName))
+        break;
+		case "lt"://小于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) < input.@(@column.FieldName))
+        break;
+		case "le"://小于等于
+                         @:.WhereIF(input.@column.FieldName!=null, it => it.@(@column.FieldName) <= input.@(@column.FieldName))
+        break;
+      }
+	}
+  }
+  }
+}
+}
+
+@{
+//生成根据SortCode排序
+void PageSortCode()
+{
+ var hasSortCode= tableFieIds.Any(it => it.FieldName == "SortCode");
+ if(hasSortCode){//如果有sortcode字段
+                         @:.OrderBy(it => it.SortCode);//排序
+ }else{
+                         @:;
+ }
+}
+}

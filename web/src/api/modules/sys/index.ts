@@ -23,3 +23,4 @@ export * from "./upload";
 export * from "./common";
 export * from "./im";
 export * from "./dev";
+export * from "./curd";

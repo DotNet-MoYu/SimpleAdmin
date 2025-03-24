@@ -1,5 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-    <ItemGroup>
-        <ProjectReference Include="..\..\SimpleAdmin.Core\SimpleAdmin.Core.csproj"/>
-    </ItemGroup>
-</Project>

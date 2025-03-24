@@ -88,6 +88,15 @@ export const useDictStore = defineStore({
         });
       }
       return [];
+    },
+    /**获取所有字典 */
+    getDictAll() {
+      return this.dictInfo.map(item => {
+        return {
+          label: item.dictLabel,
+          value: item.dictValue
+        };
+      });
     }
   },
   persist: piniaPersistConfig(name)

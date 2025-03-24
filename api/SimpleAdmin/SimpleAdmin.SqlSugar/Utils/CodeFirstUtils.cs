@@ -28,7 +28,7 @@ public static class CodeFirstUtils
         var appName = assemblyName.Split(",")[0];
         if (options.InitTable)//如果需要初始化表结构
         {
-            Console.WriteLine($"开始初始化{appName}数据库表结构");
+            Console.WriteLine($"开始初始化{appName}数据库表结构"); 
             InitTable(assemblyName);
         }
         if (options.InitSeedData)

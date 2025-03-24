@@ -23,7 +23,7 @@ export interface MenuSelectProps {
   placeholder?: string;
   /** 是否多选 */
   multiple?: boolean;
-  /** 是否严格模式,为true则只能选择子节点 */
+  /** 选择任意级别,当属性=true 时，任何节点都可以被选择，否则只有子节点可被选择。 */
   checkStrictly?: boolean;
   /** 是否显示全部选项,默认为 false */
   showAll?: boolean;

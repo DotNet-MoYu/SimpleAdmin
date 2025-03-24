@@ -111,7 +111,8 @@ export default class RequestHttp {
       (response: AxiosResponse & { config: CustomAxiosRequestConfig }) => {
         // 检查并存储授权信息
         this.checkAndStoreAuthentication(response);
-        const { data, config } = response;
+
+        const { data, config, headers } = response;
         const userStore = useUserStore();
         axiosCanceler.removePending(config);
         config.loading && tryHideFullScreenLoading();
@@ -120,6 +121,7 @@ export default class RequestHttp {
           userStore.clearUserStore();
           router.replace(LOGIN_URL);
           ElMessage.error(data.msg);
+
           return Promise.reject(data);
         }
         // 全局错误信息拦截（防止下载文件的时候返回数据流，没有 code 直接报错）
@@ -138,6 +140,11 @@ export default class RequestHttp {
               ElMessage.success(data.msg);
             }
           });
+        }
+        if (config.responseType === "blob") {
+          console.log("[ config ] >", config);
+          //返回response对象
+          return { data, headers };
         }
         // 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
         return data;

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @description 接口
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
@@ -53,3 +53,4 @@ export interface ReqId {
 }
 
 export * from "./sys";
+export * from "./biz";

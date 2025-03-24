@@ -13,6 +13,7 @@ global using MoYu.DataEncryption;
 global using MoYu.DependencyInjection;
 global using MoYu.EventBus;
 global using MoYu.FriendlyException;
+global using MoYu.ViewEngine;
 global using Magicodes.ExporterAndImporter.Core;
 global using Magicodes.ExporterAndImporter.Core.Models;
 global using Magicodes.ExporterAndImporter.Excel;

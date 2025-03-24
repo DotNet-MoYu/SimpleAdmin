@@ -36,6 +36,8 @@ export namespace Menu {
     module: number | string;
     /** 上级菜单 */
     parentId: number | string;
+    /** 分类 */
+    category: string;
     /** 子菜单 */
     children?: MenuInfo[];
   }
@@ -50,6 +52,10 @@ export namespace Menu {
     parentId: number | string;
     /** 菜单路由 */
     path?: string;
+    /** 是否禁用 */
+    disabled?: boolean;
+    /** 菜单类型 */
+    menuType: MenuType;
     /** 子菜单 */
     children?: MenuTreeInfo[];
   }

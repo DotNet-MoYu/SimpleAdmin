@@ -75,7 +75,7 @@ const columns: ColumnProps<Spa.SpaInfo>[] = [
     prop: "menuType",
     label: "单页类型",
     enum: spaTypeOptions,
-    search: { el: "tree-select" }
+    search: { el: "select" }
   },
   { prop: "path", label: "路由地址" },
   { prop: "component", label: "组件路径" },

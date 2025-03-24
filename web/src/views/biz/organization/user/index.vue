@@ -127,7 +127,7 @@ const columns: ColumnProps<SysUser.SysUserInfo>[] = [
     label: "状态",
     width: 90,
     enum: statusOptions,
-    search: { el: "tree-select" }
+    search: { el: "select" }
   },
   { prop: "createTime", label: "创建时间" },
   { prop: "operation", label: "操作", width: 230, fixed: "right" }
