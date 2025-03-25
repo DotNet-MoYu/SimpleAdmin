@@ -1,4 +1,4 @@
-﻿namespace SimpleAdmin.System;
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// <inheritdoc cref="IGenbasicService"/>
@@ -431,7 +431,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var backendCodeResults = new List<GenBasePreviewOutput.GenBaseCodeResult>();//结果集
         var backendTemplatePath = Path.Combine(templatePath, _backendDir);//获取后端模板文件路径
-        var serviceDir = Path.GetDirectoryName(App.WebHostEnvironment.ContentRootPath).CombinePath(genViewModel.ServicePosition);//服务文件夹
+        var serviceDir = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName.CombinePath(genViewModel.ServicePosition);//服务文件夹
         var serviceDicList = genViewModel.ServiceDictionary.Split("/").Where(it => !string.IsNullOrWhiteSpace(it)).ToList();//获取文件夹
         foreach (var item in serviceDicList)
         {
@@ -439,7 +439,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
         }
         serviceDir = serviceDir.CombinePath(genViewModel.ClassName);
         //获取控制器文件夹和后面的路径
-        var controllerDir = Path.GetDirectoryName(App.WebHostEnvironment.ContentRootPath).CombinePath(genViewModel.ControllerPosition);
+        var controllerDir = new DirectoryInfo(App.WebHostEnvironment.ContentRootPath).Parent.FullName.CombinePath(genViewModel.ControllerPosition);
         var controllerDicList = genViewModel.ControllerDictionary.Split("/").Where(it => !string.IsNullOrWhiteSpace(it)).ToList();
         foreach (var item in controllerDicList)
         {
