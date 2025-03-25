@@ -22,8 +22,8 @@
           <s-radio-group
             v-model="grantProps.moduleId"
             :options="grantProps.echoDatalist"
-            value="id"
-            label="title"
+            value-key="id"
+            label-key="title"
             button
             class="mb-2"
             @change="moduleClick"

@@ -6,7 +6,7 @@
 <template>
   <div>
     <el-space>
-      <s-radio-group v-model="defaultLevel" :options="scopeOptions" value="level" label="title" @change="changeDataScope">
+      <s-radio-group v-model="defaultLevel" :options="scopeOptions" value-key="level" label-key="title" @change="changeDataScope">
         <template #radio="{ item }">
           <el-badge
             v-if="
