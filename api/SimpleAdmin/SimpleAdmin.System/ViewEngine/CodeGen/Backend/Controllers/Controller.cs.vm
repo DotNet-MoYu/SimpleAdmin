@@ -17,7 +17,7 @@ namespace @(@Model.ControllerPosition);
 /// @(@Model.FunctionName)控制器
 /// </summary>
 [ApiDescriptionSettings("@(@Model.ApiGroup)", Tag = "@(@Model.FunctionName)")]
-[Route("/@(@Model.RouteName)/@(@Model.BusName)")]
+[Route("@(@Model.RouteName)/@(@Model.BusName)")]
 @if(dataPermission) @:[RolePermission]
 public class @(@Model.ClassName)Controller: IDynamicApiController
 {
