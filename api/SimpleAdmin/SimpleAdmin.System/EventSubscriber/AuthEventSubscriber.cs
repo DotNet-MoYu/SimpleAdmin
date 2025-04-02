@@ -74,7 +74,10 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                         Subject = subject,
                         Content = "请及时修改初始密码",
                         Category = CateGoryConst.MESSAGE_INFORM,
-                        ReceiverIdList = new List<long> { sysUser.Id }
+                        ReceiverIdList = new List<long> { sysUser.Id },
+                        SendWay = SysDictConst.SEND_WAY_NOW,
+                        ReceiverType = SysDictConst.RECEIVER_TYPE_APPOINT,
+                        ReceiverInfo = new List<ReceiverInfo> { new ReceiverInfo { Id = sysUser.Id, Name = sysUser.Name } }
                     });
                 }
                 sysUser.PwdRemindUpdateTime = DateTime.Now;//设置提醒时密码时间为当前时间
@@ -93,6 +96,7 @@ public class AuthEventSubscriber : IEventSubscriber, ISingleton
                             Content = $"已超过{pwdRemindDay}天未修改密码,请及时修改密码",
                             Category = CateGoryConst.MESSAGE_INFORM,
                             SendWay = SysDictConst.SEND_WAY_NOW,
+                            ReceiverType = SysDictConst.RECEIVER_TYPE_APPOINT,
                             ReceiverInfo = new List<ReceiverInfo> { new ReceiverInfo { Id = sysUser.Id, Name = sysUser.Name } }
                         });
                     }
