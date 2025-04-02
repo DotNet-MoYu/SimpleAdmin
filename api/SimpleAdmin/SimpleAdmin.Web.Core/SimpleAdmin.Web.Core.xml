@@ -26,53 +26,6 @@
             模拟 Configure
             </summary>
         </member>
-        <member name="T:SimpleAdmin.Web.Core.GenTestController">
-            <summary>
-            测试控制器
-            </summary>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Page(SimpleAdmin.Application.GenTestPageInput)">
-            <summary>
-            测试分页查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.List(SimpleAdmin.Application.GenTestPageInput)">
-            <summary>
-            测试列表查询
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Detail(SimpleAdmin.Core.BaseIdInput)">
-            <summary>
-            测试详情
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Add(SimpleAdmin.Application.GenTestAddInput)">
-            <summary>
-            添加测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Edit(SimpleAdmin.Application.GenTestEditInput)">
-            <summary>
-            修改测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
-        <member name="M:SimpleAdmin.Web.Core.GenTestController.Delete(SimpleAdmin.Core.BaseIdListInput)">
-            <summary>
-            删除测试
-            </summary>
-            <param name="input"></param>
-            <returns></returns>
-        </member>
         <member name="T:SimpleAdmin.Web.Core.BizOrgController">
             <summary>
             机构管理控制器
