@@ -1,5 +1,5 @@
 ﻿/**
- * @description
+ * @description 接口
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks
@@ -13,15 +13,5 @@
  * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 
-export * from "./auth";
-export * from "./userCenter";
-export * from "./limit";
-export * from "./ops";
-export * from "./audit";
-export * from "./organization";
-export * from "./upload";
-export * from "./common";
-export * from "./im";
-export * from "./dev";
-export * from "./curd";
-export * from "./mobile";
+export * from "./module";
+export * from "./menu";

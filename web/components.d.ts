@@ -13,6 +13,7 @@ declare module 'vue' {
     CheckCard: typeof import('./src/components/CheckCard/index.vue')['default']
     ChooseModule: typeof import('./src/components/ChooseModule/index.vue')['default']
     CodeHighLight: typeof import('./src/components/CodeHighLight/index.vue')['default']
+    ColorPicker: typeof import('./src/components/ColorPicker/index.vue')['default']
     ColSetting: typeof import('./src/components/ProTable/components/ColSetting.vue')['default']
     CropUpload: typeof import('./src/components/CropUpload/index.vue')['default']
     DatePicker: typeof import('./src/components/Form/DatePicker/index.vue')['default']

@@ -211,5 +211,5 @@ defineExpose({ treeData, treeAllData, treeRef, refresh });
 </script>
 
 <style scoped lang="scss">
-@import "./index";
+@use "./index";
 </style>

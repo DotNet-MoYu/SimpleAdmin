@@ -1,18 +1,19 @@
-<!-- 
- * @Description: 菜单管理
- * @Author: huguodong 
- * @Date: 2023-12-15 15:43:08
+﻿<!-- 
+ * @Description:  菜单管理
+ * @Author: superAdmin 
+ * @Date: 2025-06-26 16:41:59
 !-->
 <template>
   <div class="table-box">
-    <ProTable ref="proTable" title="菜单列表" :indent="20" :columns="columns" :request-api="menuApi.tree" :pagination="false">
+    <ProTable ref="proTable" title="菜单列表" :columns="columns" :request-api="getTableList" :request-auto="false" :pagination="false">
       <!-- 表格 header 按钮 -->
       <template #tableHeader="scope">
         <s-button suffix="菜单" @click="onOpen(FormOptEnum.ADD)" />
         <s-button
+          type="danger"
+          plain
           suffix="菜单"
           :opt="FormOptEnum.DELETE"
-          plain
           :disabled="!scope.isSelected"
           @click="onDelete(scope.selectedListIds, '删除所选菜单')"
         />
@@ -20,8 +21,11 @@
       <!-- 表格 菜单类型 按钮 -->
       <template #menuType="scope">
         <el-space>
-          <el-tag>{{ dictStore.dictTranslation(SysDictEnum.MENU_TYPE, scope.row.menuType) }}</el-tag>
-          <el-tag v-if="scope.row.isHome === true" type="warning">首页</el-tag>
+          <!-- <el-tag>{{ dictStore.dictTranslation(SysDictEnum.MENU_TYPE, scope.row.menuType) }}</el-tag> -->
+          <el-tag v-if="scope.row.menuType === MenuTypeDictEnum.MENU" type="success">{{
+            dictStore.dictTranslation(SysDictEnum.MENU_TYPE, scope.row.menuType)
+          }}</el-tag>
+          <el-tag v-else type="info">{{ dictStore.dictTranslation(SysDictEnum.MENU_TYPE, scope.row.menuType) }}</el-tag>
         </el-space>
       </template>
       <!-- 状态 -->
@@ -30,6 +34,14 @@
           dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status)
         }}</el-tag>
         <el-tag v-else type="danger">{{ dictStore.dictTranslation(SysDictEnum.COMMON_STATUS, scope.row.status) }}</el-tag>
+      </template>
+      <!-- 图标 -->
+      <template #icon="scope">
+        <svg-icon :icon="scope.row.icon" :color="scope.row.color" class="h-6 w-8" />
+      </template>
+      <!-- 颜色 -->
+      <template #color="scope">
+        <el-tag :color="scope.row.color" effect="dark" :style="{ borderColor: scope.row.color }" size="large">{{ scope.row.color }}</el-tag>
       </template>
       <!-- 操作 -->
       <template #operation="scope">
@@ -61,28 +73,26 @@
   </div>
 </template>
 
-<script setup lang="tsx" name="sysMenu">
-import { menuApi, Menu } from "@/api";
-import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
+<script setup lang="ts" name="mobileMenu">
+import { MobileMenu, mobileMenuApi } from "@/api";
 import { ArrowDown } from "@element-plus/icons-vue";
-import { useUserStore, useDictStore } from "@/stores/modules";
-import { SysDictEnum, FormOptEnum, MenuTypeDictEnum, CommonStatusEnum } from "@/enums";
+import { FormOptEnum, CommonStatusEnum, SysDictEnum, MenuTypeDictEnum } from "@/enums";
+import { ColumnProps, ProTableInstance } from "@/components/ProTable/interface";
 import Form from "./components/form.vue";
 import { useHandleData } from "@/hooks/useHandleData";
+import { useDictStore } from "@/stores/modules";
 import ChangeModule from "./components/changeModule.vue";
 import Button from "../button/index.vue";
 
-const userStore = useUserStore();
-const dictStore = useDictStore();
-//遍历模块列表，生成下拉选项
-const moduleOptions = userStore.moduleList.map(item => {
-  return { label: item.title, value: item.id };
-});
 // 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref<ProTableInstance>();
-// 表格配置项
-const columns: ColumnProps<Menu.MenuInfo>[] = [
-  { type: "selection", fixed: "left", width: 50 },
+const dictStore = useDictStore();
+const menuTypeOptions = dictStore.getDictList("MENU_TYPE"); //菜单类型选项
+const regTypeOptions = dictStore.getDictList("YES_NO"); //正规则选项
+const statusOptions = dictStore.getDictList("COMMON_STATUS"); //状态选项
+const moduleOptions = ref<{ label: string; value: string | number }[]>([]);
+const columns: ColumnProps<MobileMenu.MobileMenuInfo>[] = [
+  { type: "selection", fixed: "left", width: 80 },
   { prop: "id", label: "Id", isShow: false },
   {
     prop: "module",
@@ -93,29 +103,43 @@ const columns: ColumnProps<Menu.MenuInfo>[] = [
       props: {
         clearable: false,
         placeholder: "请选择应用模块"
-      },
-      defaultValue: moduleOptions[0].value
+      }
     },
     isShow: false
   },
   { prop: "title", label: "菜单名称", width: 150, align: "left", search: { el: "input" } },
-  {
-    prop: "icon",
-    label: "菜单图标",
-    render: scope => {
-      return <svg-icon icon={scope.row.icon} class="h-6 w-6" />;
-    }
-  },
-  { prop: "menuType", label: "菜单类型" },
-  { prop: "name", label: "组件名称" },
-  { prop: "path", label: "路由地址", width: 200, search: { el: "input" } },
-  { prop: "component", label: "组件路径", width: 250 },
-  { prop: "sortCode", label: "排序", width: 80 },
-  { prop: "status", label: "状态" },
-  { prop: "description", label: "说明" },
-
+  { prop: "menuType", label: "菜单类型", enum: menuTypeOptions, search: { el: "select" } },
+  { prop: "path", label: "路径" },
+  { prop: "icon", label: "图标" },
+  { prop: "color", label: "颜色" },
+  { prop: "sortCode", label: "排序码" },
+  { prop: "regType", label: "正规则", enum: regTypeOptions },
+  { prop: "status", label: "状态", enum: statusOptions },
+  { prop: "description", label: "描述" },
   { prop: "operation", label: "操作", width: 230, fixed: "right" }
 ];
+
+onMounted(() => {
+  // 获取应用模块下拉选项
+  mobileMenuApi.moduleSelector().then(res => {
+    moduleOptions.value = res.data.map(item => ({ label: item.title, value: item.id }));
+    // 设置默认值（取第一个模块）
+    if (moduleOptions.value.length > 0) {
+      // 1. 赋值初始化参数
+      proTable.value!.searchInitParam["module"] = moduleOptions.value[0].value;
+      // 2. 重置参数（使新参数生效）
+      proTable.value?.resetParam();
+      proTable.value?.getTableList();
+    }
+  });
+});
+
+// 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
+// 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
+const getTableList = (params: any) => {
+  let newParams = JSON.parse(JSON.stringify(params));
+  return mobileMenuApi.tree(newParams);
+};
 
 // 表单引用
 const formRef = ref<InstanceType<typeof Form> | null>(null);
@@ -125,15 +149,9 @@ const formRef = ref<InstanceType<typeof Form> | null>(null);
  * @param opt  操作类型
  * @param record  记录
  */
-function onOpen(opt: FormOptEnum, record: {} | Menu.MenuInfo = {}) {
-  formRef.value?.onOpen(
-    {
-      opt: opt,
-      record: record,
-      successful: () => RefreshTable()
-    },
-    proTable.value?.searchParam.module
-  );
+function onOpen(opt: FormOptEnum, record: {} | MobileMenu.MobileMenuInfo = {}) {
+  console.log("[ proTable.value?.searchParam.module ] >", proTable.value?.searchParam.module);
+  formRef.value?.onOpen({ opt: opt, record: record, successful: RefreshTable }, proTable.value?.searchParam.module);
 }
 
 /**
@@ -142,9 +160,10 @@ function onOpen(opt: FormOptEnum, record: {} | Menu.MenuInfo = {}) {
  */
 async function onDelete(ids: string[], msg: string) {
   // 二次确认 => 请求api => 刷新表格
-  await useHandleData(menuApi.delete, { ids }, msg);
+  await useHandleData(mobileMenuApi.delete, { ids }, msg);
   RefreshTable();
 }
+
 /**
  * 刷新表格
  */
@@ -155,7 +174,7 @@ function RefreshTable() {
 /**判断是否是菜单 */
 const isMenu = computed(() => (menuType: string) => {
   return menuType === MenuTypeDictEnum.MENU;
-}); //是否是菜单
+});
 
 /** 更多下拉菜单命令枚举 */
 enum cmdEnum {
@@ -165,12 +184,12 @@ enum cmdEnum {
 
 /** 下拉菜单参数接口 */
 interface Command {
-  row: Menu.MenuInfo;
+  row: MobileMenu.MobileMenuInfo;
   command: cmdEnum;
 }
 
 /**配置command的参数 */
-function command(row: Menu.MenuInfo, command: cmdEnum): Command {
+function command(row: MobileMenu.MobileMenuInfo, command: cmdEnum): Command {
   return {
     row: row,
     command: command
@@ -187,12 +206,11 @@ const buttonFormRef = ref<InstanceType<typeof Button> | null>(null);
  * @param command
  */
 function handleCommand(command: Command) {
-  console.log("[ 12312 ] >", 12312);
   switch (command.command) {
     case cmdEnum.ChangeModule:
       //更改模块
       changeModuleFormRef.value?.onOpen({
-        moduleOptions,
+        moduleOptions: moduleOptions.value,
         id: command.row.id,
         title: command.row.title,
         module: command.row.module,
@@ -207,14 +225,4 @@ function handleCommand(command: Command) {
 }
 </script>
 
-<style lang="scss" scoped>
-.el-dropdown-link {
-  display: flex;
-  align-items: center;
-  color: var(--el-color-primary);
-  cursor: pointer;
-}
-:deep(.el-link__inner) {
-  padding-left: 6px !important;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -2,7 +2,7 @@
   <svg v-if="renderLocalIcon" aria-hidden="true" width="1em" height="1em" v-bind="bindAttrs">
     <use :xlink:href="symbolId" fill="currentColor" />
   </svg>
-  <Icon v-else :icon="icon" width="1em" height="1em" v-bind="bindAttrs" />
+  <Icon v-else :icon="icon" :color="color" width="1em" height="1em" v-bind="bindAttrs" />
 </template>
 
 <script setup lang="ts" name="SvgIcon">
@@ -12,6 +12,10 @@ import { Icon } from "@iconify/vue";
 // props
 const props = defineProps({
   icon: {
+    type: String,
+    default: ""
+  },
+  color: {
     type: String,
     default: ""
   }

@@ -106,7 +106,7 @@ function updateSysConfig(props: LoginProps, config: ReturnType<typeof useConfigS
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 .demo-tabs > .el-tabs__content {
   padding: 32px;
   font-size: 32px;

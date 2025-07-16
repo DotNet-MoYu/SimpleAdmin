@@ -52,5 +52,5 @@ const sysInfo = computed(() => configStore.sysBaseInfoGet);
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

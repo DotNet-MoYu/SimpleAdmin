@@ -123,7 +123,7 @@ type FormInstance = InstanceType<typeof ElForm>; // 表单实例
 const loginFormRef = ref<FormInstance>(); // 表单实例引用
 const loginRules = reactive({
   phone: [required("请输入手机号码")],
-  code: [required("请输入短信验证码")],
+  validCode: [required("请输入短信验证码")],
   tenantId: [required("请选择租户")]
 });
 
@@ -220,5 +220,5 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-@import "../../index";
+@use "../../index";
 </style>

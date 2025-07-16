@@ -184,5 +184,5 @@ const getIcon = computed(() => (name: string): string => {
 </script>
 
 <style scoped lang="scss">
-@import "./index";
+@use "./index";
 </style>

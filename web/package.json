@@ -58,7 +58,8 @@
     "sortablejs": "^1.15.3",
     "vue": "^3.5.5",
     "vue-cropper": "^1.1.1",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vue3-colorpicker": "^2.3.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.5.0",
@@ -111,6 +112,7 @@
     "vite-plugin-pwa": "^0.20.5",
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-vue-devtools": "^7.3.5",
+    "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^2.1.6"
   },
   "engines": {

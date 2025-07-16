@@ -120,7 +120,7 @@
           </s-form-item>
         </el-col>
         <el-col :span="8">
-          <s-form-item label="上级目录" prop="servicePosition">
+          <s-form-item label="上级目录" prop="menuPid">
             <MenuSelector
               v-model:menu-value="basicProps.record.menuPid"
               :check-strictly="true"

@@ -104,5 +104,5 @@ const select = (item: SelectDataProps, option: OptionsProps) => {
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@use "./index";
 </style>

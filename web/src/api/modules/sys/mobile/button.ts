@@ -15,14 +15,14 @@
 
 import { moduleRequest } from "@/api/request";
 import { ReqId, ResPage, Button } from "@/api/interface";
-const http = moduleRequest("/sys/limit/button/");
+const http = moduleRequest("/sys/mobile/button/");
 
 /**
  * @Description: 权限按钮
  * @Author: huguodong
- * @Date: 2023-12-15 15:34:54
+ * @Date: 2025-07-02 15:34:54
  */
-const buttonApi = {
+const mobileButtonApi = {
   /** 获取单页分页 */
   page(params: Button.Page) {
     return http.get<ResPage<Button.ButtonInfo>>("page", params);
@@ -45,4 +45,4 @@ const buttonApi = {
   }
 };
 
-export { buttonApi };
+export { mobileButtonApi };

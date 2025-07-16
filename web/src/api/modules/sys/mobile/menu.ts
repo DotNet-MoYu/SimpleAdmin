@@ -1,5 +1,5 @@
-/**
- * @description 权限按钮
+﻿/**
+ * @description 菜单管理Api
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks
@@ -10,39 +10,45 @@
  * 4.基于本软件的作品，只能使用 SimpleAdmin 作为后台服务，除外情况不可商用且不允许二次分发或开源。
  * 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为不要删除和修改作者声明。
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
- * @see https://gitee.com/dotnetmoyu/SimpleAdmin
  */
 
-import { moduleRequest } from "@/api/request";
-import { ReqId, ResPage, Button } from "@/api/interface";
-const http = moduleRequest("/sys/limit/button/");
+import { ReqId, MobileMenu, moduleRequest } from "@/api";
+const http = moduleRequest("/sys/mobile/menu/");
 
 /**
- * @Description: 权限按钮
- * @Author: huguodong
- * @Date: 2023-12-15 15:34:54
+ * @Description: 菜单管理
+ * @Author: superAdmin
+ * @Date: 2025-06-26 16:41:59
  */
-const buttonApi = {
-  /** 获取单页分页 */
-  page(params: Button.Page) {
-    return http.get<ResPage<Button.ButtonInfo>>("page", params);
+const mobileMenuApi = {
+  /** 获取菜单树 */
+  tree(params: MobileMenu.Tree) {
+    return http.get<MobileMenu.MobileMenuInfo[]>("tree", params, { loading: false });
   },
-  /** 获取单页详情 */
+  /** 获取菜单分页 */
+  moduleSelector() {
+    return http.get<MobileMenu.MobileMenuInfo[]>("moduleSelector");
+  },
+  /** 获取菜单树选择器 */
+  menuTreeSelector(params: MobileMenu.MenuTreeSelectorReq) {
+    return http.get<MobileMenu.MobileMenuInfo[]>("menuTreeSelector", params);
+  },
+  /** 获取菜单详情 */
   detail(params: ReqId) {
-    return http.get<Button.ButtonInfo>("detail", params);
+    return http.get<MobileMenu.MobileMenuInfo>("detail", params);
   },
   /**  提交表单 edit为true时为编辑，默认为新增 */
   submitForm(params = {}, edit: boolean = false) {
     return http.post(edit ? "edit" : "add", params);
   },
-  /** 删除按钮 */
+  /** 删除菜单 */
   delete(params: ReqId[]) {
     return http.post("delete", params);
   },
-  /** 批量删除 */
-  batch(params: Button.Batch) {
-    return http.post("batch", params);
+  /** 修改模块菜单 */
+  changeModule(params: { id: number | string; module: number | string }) {
+    return http.post("changeModule", params);
   }
 };
 
-export { buttonApi };
+export { mobileMenuApi };

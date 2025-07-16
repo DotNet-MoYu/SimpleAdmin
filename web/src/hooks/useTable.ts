@@ -55,6 +55,7 @@ export const useTable = (
    * @return void
    * */
   const getTableList = async () => {
+    console.log("[getTableList  ] >", 11);
     if (!api) return;
     try {
       // 先把初始化参数和分页参数放到总参数里面
@@ -112,11 +113,22 @@ export const useTable = (
   };
 
   /**
+   * @description 表格查询重置
+   * @return void
+   * */
+  const resetParam = () => {
+    state.searchParam = { ...state.searchInitParam };
+    state.pageable.pageNum = 1;
+    updatedTotalParam();
+  };
+
+  /**
    * @description 每页条数改变
    * @param {Number} val 当前条数
    * @return void
    * */
   const handleSizeChange = (val: number) => {
+    console.log("[  handleSizeChange] >", val);
     state.pageable.pageNum = 1;
     state.pageable.pageSize = val;
     getTableList();
@@ -139,6 +151,7 @@ export const useTable = (
     reset,
     handleSizeChange,
     handleCurrentChange,
-    updatedTotalParam
+    updatedTotalParam,
+    resetParam
   };
 };
