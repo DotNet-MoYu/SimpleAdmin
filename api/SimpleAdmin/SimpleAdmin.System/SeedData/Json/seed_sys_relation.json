@@ -866,252 +866,252 @@
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/tree",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/tree\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/tree\"}"
     },
     {
       "Id": "516759084105802",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/page\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/page\"}"
     },
     {
       "Id": "516759084105803",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/add\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/add\"}"
     },
     {
       "Id": "516759084105804",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/edit\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/edit\"}"
     },
     {
       "Id": "516759084109893",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/copy",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/copy\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/copy\"}"
     },
     {
       "Id": "516759084109894",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/delete\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/delete\"}"
     },
     {
       "Id": "516759084109895",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/orgTreeSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/orgTreeSelector\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/orgTreeSelector\"}"
     },
     {
       "Id": "516759084109896",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/userSelector\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/userSelector\"}"
     },
     {
       "Id": "516759084109897",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/org/detail",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/org/detail\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/org/detail\"}"
     },
     {
       "Id": "516759084109898",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/page\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/page\"}"
     },
     {
       "Id": "516759084109899",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/add\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/add\"}"
     },
     {
       "Id": "516759084109900",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/edit\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/edit\"}"
     },
     {
       "Id": "516759084109901",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/delete\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/delete\"}"
     },
     {
       "Id": "516759084109902",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/detail",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/detail\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/detail\"}"
     },
     {
       "Id": "516759084109903",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/position/selector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/position/selector\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/position/selector\"}"
     },
     {
       "Id": "516759084109904",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/preview",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/preview\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/preview\"}"
     },
     {
       "Id": "516759084109905",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/page",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/page\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/page\"}"
     },
     {
       "Id": "516759084109906",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/userSelector",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/userSelector\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/userSelector\"}"
     },
     {
       "Id": "516759084109907",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/ownRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/ownRole\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/ownRole\"}"
     },
     {
       "Id": "516759084109908",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/detail",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/detail\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/detail\"}"
     },
     {
       "Id": "516759084109909",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/add\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/add\"}"
     },
     {
       "Id": "516759084109910",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/edit",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/edit\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/edit\"}"
     },
     {
       "Id": "516759084109911",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/edits",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/edits\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/edits\"}"
     },
     {
       "Id": "516759084109912",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/delete",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/delete\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/delete\"}"
     },
     {
       "Id": "516759084109913",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/disableUser",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/disableUser\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/disableUser\"}"
     },
     {
       "Id": "516759084109914",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/enableUser",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/enableUser\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/enableUser\"}"
     },
     {
       "Id": "516759084109915",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/resetPassword",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/resetPassword\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/resetPassword\"}"
     },
     {
       "Id": "516759084109916",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/grantRole",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/grantRole\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/grantRole\"}"
     },
     {
       "Id": "516759084109917",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/import",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/import\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/import\"}"
     },
     {
       "Id": "516759084109918",
       "ObjectId": "360646281904197",
       "TargetId": "/biz/organization/user/export",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/biz/organization/user/export\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/biz/organization/user/export\"}"
     },
     {
       "Id": "516759084109919",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/visLog/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/visLog/list\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/visLog/list\"}"
     },
     {
       "Id": "516759084109920",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/opLog/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/opLog/list\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/opLog/list\"}"
     },
     {
       "Id": "516759084109921",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/message/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/message/list\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/message/list\"}"
     },
     {
       "Id": "516759084109922",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/schedule/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/schedule/list\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/schedule/list\"}"
     },
     {
       "Id": "516759084109923",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/schedule/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/schedule/add\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/schedule/add\"}"
     },
     {
       "Id": "516759084109924",
       "ObjectId": "360646281904197",
       "TargetId": "/home/index/schedule/deleteSchedule",
       "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[360642028625989,361404296994885,360642028625989,361404296994885],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_DEFINE\",\"ScopeDefineOrgIdList\":[252885263003721,464837351616581,464837557956677],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
     },
     {
       "Id": "516759117541445",
@@ -2318,405 +2318,6 @@
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ORG_CHILD\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
     },
     {
-      "Id": "571526548275269",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003721",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "571526548279365",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "571526548279366",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003725",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003725,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279367",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003726",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003726,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279368",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003727",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003727,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279369",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003729",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003729,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279370",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003730",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003730,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279371",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003731",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003731,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279372",
-      "ObjectId": "212725263001001",
-      "TargetId": "212725263003732",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212725263003732,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279373",
-      "ObjectId": "212725263001001",
-      "TargetId": "212735263003734",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212735263003734,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279374",
-      "ObjectId": "212725263001001",
-      "TargetId": "369089951367237",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":369089951367237,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279375",
-      "ObjectId": "212725263001001",
-      "TargetId": "212745263003736",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212745263003736,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279376",
-      "ObjectId": "212725263001001",
-      "TargetId": "212745263003737",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212745263003737,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279377",
-      "ObjectId": "212725263001001",
-      "TargetId": "363798244282437",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":363798244282437,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279378",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003739",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003739,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279379",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003740",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003740,\"ButtonInfo\":[]}"
-    },
-    {
-      "Id": "571526548279380",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003745",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731,383020955254853,383022400483397]}"
-    },
-    {
-      "Id": "571526548279381",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003746",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740,391869166551109,391869250662469,395712751292485]}"
-    },
-    {
-      "Id": "571526548279382",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003747",
-      "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
-    },
-    {
-      "Id": "571526548279383",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/tree",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/tree\"}"
-    },
-    {
-      "Id": "571526548279384",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/page\"}"
-    },
-    {
-      "Id": "571526548279385",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/orgTreeSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/orgTreeSelector\"}"
-    },
-    {
-      "Id": "571526548279386",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/userSelector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/userSelector\"}"
-    },
-    {
-      "Id": "571526548279387",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/detail",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/detail\"}"
-    },
-    {
-      "Id": "571526548279388",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/add\"}"
-    },
-    {
-      "Id": "571526548279389",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/edit\"}"
-    },
-    {
-      "Id": "571526548279390",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/copy",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/copy\"}"
-    },
-    {
-      "Id": "571526548279391",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/org/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/delete\"}"
-    },
-    {
-      "Id": "571526548279392",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/tree",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/tree\"}"
-    },
-    {
-      "Id": "571526548279393",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/page\"}"
-    },
-    {
-      "Id": "571526548279394",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/detail",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/detail\"}"
-    },
-    {
-      "Id": "571526548279395",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/selector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/selector\"}"
-    },
-    {
-      "Id": "571526548279396",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/add\"}"
-    },
-    {
-      "Id": "571526548279397",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/edit\"}"
-    },
-    {
-      "Id": "571526548279398",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/position/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/delete\"}"
-    },
-    {
-      "Id": "571526548279399",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/preview",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/preview\"}"
-    },
-    {
-      "Id": "571526548279400",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/page",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/page\"}"
-    },
-    {
-      "Id": "571526548279401",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/selector",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/selector\"}"
-    },
-    {
-      "Id": "571526548279402",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/ownRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/ownRole\"}"
-    },
-    {
-      "Id": "571526548279403",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/detail",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/detail\"}"
-    },
-    {
-      "Id": "571526548279404",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/add\"}"
-    },
-    {
-      "Id": "571526548279405",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/edit",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/edit\"}"
-    },
-    {
-      "Id": "571526548279406",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/edits",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/edits\"}"
-    },
-    {
-      "Id": "571526548279407",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/delete",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/delete\"}"
-    },
-    {
-      "Id": "571526548279408",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/disableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/disableUser\"}"
-    },
-    {
-      "Id": "571526548279409",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/enableUser",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/enableUser\"}"
-    },
-    {
-      "Id": "571526548279410",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/resetPassword",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/resetPassword\"}"
-    },
-    {
-      "Id": "571526548279411",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/grantRole",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/grantRole\"}"
-    },
-    {
-      "Id": "571526548279412",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/import",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/import\"}"
-    },
-    {
-      "Id": "571526548279413",
-      "ObjectId": "212725263001001",
-      "TargetId": "/biz/organization/user/export",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/export\"}"
-    },
-    {
-      "Id": "571526548279414",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "571526548279415",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "571526548279416",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "571526548279417",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "571526548279418",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "571526548279419",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "592396865929285",
-      "ObjectId": "212725263002001",
-      "TargetId": "",
-      "Category": "SYS_USER_WORKBENCH_DATA",
-      "ExtJson": "{\"shortcut\":[212725263003723,212745263003737]}"
-    },
-    {
       "Id": "614733361340485",
       "ObjectId": "212725263002002",
       "TargetId": "",
@@ -3102,1239 +2703,616 @@
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
     },
     {
-      "Id": "643799520727109",
+      "Id": "661489164984389",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003721",
+      "Category": "SYS_ROLE_HAS_MODULE",
+      "ExtJson": ""
+    },
+    {
+      "Id": "661489165000773",
       "ObjectId": "212725263001001",
       "TargetId": "212755263003743",
       "Category": "SYS_ROLE_HAS_MODULE",
       "ExtJson": ""
     },
     {
-      "Id": "643799520731206",
+      "Id": "661489165000774",
       "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643799520731207",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643799520731208",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643799520731209",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643799520731210",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643799520731211",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "643799836930117",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "643799836930119",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643799836930120",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643799836930121",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643799836930122",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643799836930123",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643799836930124",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "643800693776453",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "643800693776455",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643800693776456",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643800693776457",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643800693776458",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643800693776459",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643800693776460",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "643801477410885",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "643801477410887",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643801477410888",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643801477410889",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643801477410890",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643801477410891",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643801477410892",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "643801580343365",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "643801580343367",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643801580343368",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643801580343369",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643801580343370",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643801580343371",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643801580343372",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "643802087034949",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "643802087034951",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "643802087034952",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "643802087034953",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "643802087034954",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "643802087034955",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "643802087034956",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "644433023234117",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "644433023238213",
-      "ObjectId": "212725263001001",
-      "TargetId": "644433021968453",
+      "TargetId": "212725263003725",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":644433021968453,\"ButtonInfo\":[644433022455877,644433022455878,644433022455879,644433022455880,644433022455881,644433022455882,644433022455883]}"
+      "ExtJson": "{\"MenuId\":212725263003725,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "644433023238214",
+      "Id": "661489165000775",
       "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "644433023238215",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "644433023238216",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "644433023238217",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "644433023238218",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "644433023238219",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655761462526021",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655761462530118",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655761462530119",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655761462530120",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655761462530121",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655761462530122",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655761462530123",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655769367629893",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655769367633990",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655769367633991",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655769367633992",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655769367633993",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655769367633994",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655769367633995",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655772842422341",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655772842426437",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655772842426438",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655772842426439",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655772842426440",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655772842426441",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655772842426442",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655815782748229",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655815782752325",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655815782752326",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655815782752327",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655815782752328",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655815782752329",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655815782752330",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655816140189765",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655816140189767",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655816140189768",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655816140189769",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655816140189770",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655816140189771",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655816140189772",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655816189681733",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655816189681735",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655816189681736",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655816189681737",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655816189681738",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655816189681739",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655816189681740",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "655833155792965",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "655833155797062",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "655833155797063",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "655833155797064",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "655833155797065",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "655833155797066",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "655833155797067",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656209172295749",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656209172299846",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656209172299847",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656209172299848",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656209172299849",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656209172299850",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656209172299851",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656218016104517",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656218016108613",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656218016108614",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656218016108615",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656218016108616",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656218016108617",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656218016108618",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656466183180357",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656466183184454",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656466183184455",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656466183184456",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656466183184457",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656466183184458",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656466183184459",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656468584480837",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656468584484934",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656468584484935",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656468584484936",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656468584484937",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656468584484938",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656468584484939",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656469771915333",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656469771919430",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656469771919431",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656469771919432",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656469771919433",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656469771919434",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656469771919435",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656472362315845",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656472362315847",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656472362315848",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656472362315849",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656472362315850",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656472362315851",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656472362315852",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656472721940549",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656472721944646",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656472721944647",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656472721944648",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656472721944649",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656472721944650",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656472721944651",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656475511889989",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656475511889991",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656475511889992",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656475511889993",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656475511889994",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656475511889995",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656475511889996",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656490523107397",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656490523107399",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656490523107400",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656490523107401",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656490523107402",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656490523107403",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656490523107404",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656520149291077",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656520149291079",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/visLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
-    },
-    {
-      "Id": "656520149291080",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/opLog/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
-    },
-    {
-      "Id": "656520149295173",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/message/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
-    },
-    {
-      "Id": "656520149295174",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/list",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
-    },
-    {
-      "Id": "656520149295175",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/add",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
-    },
-    {
-      "Id": "656520149295176",
-      "ObjectId": "212725263001001",
-      "TargetId": "/home/index/schedule/deleteSchedule",
-      "Category": "SYS_ROLE_HAS_PERMISSION",
-      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
-    },
-    {
-      "Id": "656531348742213",
-      "ObjectId": "212725263001001",
-      "TargetId": "212755263003743",
-      "Category": "SYS_ROLE_HAS_MODULE",
-      "ExtJson": ""
-    },
-    {
-      "Id": "656531348742214",
-      "ObjectId": "212725263001001",
-      "TargetId": "656531348217925",
+      "TargetId": "212725263003726",
       "Category": "SYS_ROLE_HAS_RESOURCE",
-      "ExtJson": "{\"MenuId\":656531348217925,\"ButtonInfo\":[656531348340805,656531348340806,656531348340807,656531348340808,656531348340809,656531348340810,656531348340811]}"
+      "ExtJson": "{\"MenuId\":212725263003726,\"ButtonInfo\":[]}"
     },
     {
-      "Id": "656531348742215",
+      "Id": "661489165000776",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003727",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212725263003727,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000777",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003729",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212725263003729,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000778",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003730",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212725263003730,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000779",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003731",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212725263003731,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000780",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003732",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212725263003732,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000781",
+      "ObjectId": "212725263001001",
+      "TargetId": "212735263003734",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212735263003734,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000782",
+      "ObjectId": "212725263001001",
+      "TargetId": "369089951367237",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":369089951367237,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000783",
+      "ObjectId": "212725263001001",
+      "TargetId": "212745263003736",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212745263003736,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000784",
+      "ObjectId": "212725263001001",
+      "TargetId": "212745263003737",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212745263003737,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000785",
+      "ObjectId": "212725263001001",
+      "TargetId": "363798244282437",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":363798244282437,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000786",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003739",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003739,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000787",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003740",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003740,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000788",
+      "ObjectId": "212725263001001",
+      "TargetId": "630698364239941",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":630698364239941,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "661489165000789",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003745",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003745,\"ButtonInfo\":[212825263004728,212825263004729,212825263004730,212825263004731,383020955254853,383022400483397]}"
+    },
+    {
+      "Id": "661489165000790",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003746",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003746,\"ButtonInfo\":[212825263005734,212825263005735,212825263005736,212825263005737,212825263005738,212825263005739,212825263005740,391869166551109,391869250662469,395712751292485]}"
+    },
+    {
+      "Id": "661489165000791",
+      "ObjectId": "212725263001001",
+      "TargetId": "212755263003747",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":212755263003747,\"ButtonInfo\":[212825263006739,212825263006749,212825263006750,212825263006751]}"
+    },
+    {
+      "Id": "661489165000793",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/tree",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/tree\"}"
+    },
+    {
+      "Id": "661489165000794",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/page\"}"
+    },
+    {
+      "Id": "661489165000795",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/orgTreeSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/orgTreeSelector\"}"
+    },
+    {
+      "Id": "661489165000796",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/userSelector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/userSelector\"}"
+    },
+    {
+      "Id": "661489165000797",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/detail",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/detail\"}"
+    },
+    {
+      "Id": "661489165000798",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/add\"}"
+    },
+    {
+      "Id": "661489165000799",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/edit\"}"
+    },
+    {
+      "Id": "661489165000800",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/copy",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/copy\"}"
+    },
+    {
+      "Id": "661489165000801",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/org/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/org/delete\"}"
+    },
+    {
+      "Id": "661489165004869",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/tree",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/tree\"}"
+    },
+    {
+      "Id": "661489165004870",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/page\"}"
+    },
+    {
+      "Id": "661489165004871",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/detail",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/detail\"}"
+    },
+    {
+      "Id": "661489165004872",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/selector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/selector\"}"
+    },
+    {
+      "Id": "661489165004873",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/add\"}"
+    },
+    {
+      "Id": "661489165004874",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/edit\"}"
+    },
+    {
+      "Id": "661489165004875",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/position/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/position/delete\"}"
+    },
+    {
+      "Id": "661489165004876",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/preview",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/preview\"}"
+    },
+    {
+      "Id": "661489165004877",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/page",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/page\"}"
+    },
+    {
+      "Id": "661489165004878",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/selector",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/selector\"}"
+    },
+    {
+      "Id": "661489165004879",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/ownRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/ownRole\"}"
+    },
+    {
+      "Id": "661489165004880",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/detail",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/detail\"}"
+    },
+    {
+      "Id": "661489165004881",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/add\"}"
+    },
+    {
+      "Id": "661489165004882",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/edit",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/edit\"}"
+    },
+    {
+      "Id": "661489165004883",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/edits",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/edits\"}"
+    },
+    {
+      "Id": "661489165004884",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/delete",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/delete\"}"
+    },
+    {
+      "Id": "661489165004885",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/disableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/disableUser\"}"
+    },
+    {
+      "Id": "661489165004886",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/enableUser",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/enableUser\"}"
+    },
+    {
+      "Id": "661489165004887",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/resetPassword",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/resetPassword\"}"
+    },
+    {
+      "Id": "661489165004888",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/grantRole",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/grantRole\"}"
+    },
+    {
+      "Id": "661489165004889",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/import",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/import\"}"
+    },
+    {
+      "Id": "661489165004890",
+      "ObjectId": "212725263001001",
+      "TargetId": "/biz/organization/user/export",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/biz/organization/user/export\"}"
+    },
+    {
+      "Id": "661489165004891",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/visLog/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
     },
     {
-      "Id": "656531348742216",
+      "Id": "661489165004892",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/opLog/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
     },
     {
-      "Id": "656531348742217",
+      "Id": "661489165004893",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/message/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
     },
     {
-      "Id": "656531348742218",
+      "Id": "661489165004894",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/schedule/list",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
     },
     {
-      "Id": "656531348742219",
+      "Id": "661489165004895",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/schedule/add",
       "Category": "SYS_ROLE_HAS_PERMISSION",
       "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
     },
     {
-      "Id": "656531348742220",
+      "Id": "661489165004896",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/deleteSchedule",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
+    },
+    {
+      "Id": "662576488869957",
+      "ObjectId": "212725263002001",
+      "TargetId": "",
+      "Category": "SYS_USER_WORKBENCH_DATA",
+      "ExtJson": "{\"shortcut\":[212725263003723,212745263003737,212725263003725]}"
+    },
+    {
+      "Id": "690856735096901",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003721",
+      "Category": "SYS_ROLE_HAS_MODULE",
+      "ExtJson": ""
+    },
+    {
+      "Id": "690856735100998",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/visLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
+    },
+    {
+      "Id": "690856735100999",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/opLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
+    },
+    {
+      "Id": "690856735101000",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/message/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
+    },
+    {
+      "Id": "690856735101001",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
+    },
+    {
+      "Id": "690856735101002",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
+    },
+    {
+      "Id": "690856735101003",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/deleteSchedule",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
+    },
+    {
+      "Id": "690861765922885",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003721",
+      "Category": "SYS_ROLE_HAS_MODULE",
+      "ExtJson": ""
+    },
+    {
+      "Id": "690861765926982",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/visLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
+    },
+    {
+      "Id": "690861765926983",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/opLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
+    },
+    {
+      "Id": "690861765926984",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/message/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
+    },
+    {
+      "Id": "690861765926985",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
+    },
+    {
+      "Id": "690861765926986",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
+    },
+    {
+      "Id": "690861765926987",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/deleteSchedule",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
+    },
+    {
+      "Id": "690865236963397",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003721",
+      "Category": "SYS_ROLE_HAS_MODULE",
+      "ExtJson": ""
+    },
+    {
+      "Id": "690865236963398",
+      "ObjectId": "212725263001001",
+      "TargetId": "690865236455493",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":690865236455493,\"ButtonInfo\":[690865236590661,690865236590662,690865236590663,690865236590664,690865236590665,690865236590666,690865236590667]}"
+    },
+    {
+      "Id": "690865236963399",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/visLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
+    },
+    {
+      "Id": "690865236963400",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/opLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
+    },
+    {
+      "Id": "690865236963401",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/message/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
+    },
+    {
+      "Id": "690865236963402",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
+    },
+    {
+      "Id": "690865236963403",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
+    },
+    {
+      "Id": "690865236963404",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/deleteSchedule",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/deleteSchedule\"}"
+    },
+    {
+      "Id": "691249630502981",
+      "ObjectId": "212725263001001",
+      "TargetId": "212725263003721",
+      "Category": "SYS_ROLE_HAS_MODULE",
+      "ExtJson": ""
+    },
+    {
+      "Id": "691249630507077",
+      "ObjectId": "212725263001001",
+      "TargetId": "691249628061765",
+      "Category": "SYS_ROLE_HAS_RESOURCE",
+      "ExtJson": "{\"MenuId\":691249628061765,\"ButtonInfo\":[691249628725317,691249628725318,691249628725319,691249628725320,691249628725321,691249628725322,691249628725323]}"
+    },
+    {
+      "Id": "691249630507078",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/visLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/visLog/list\"}"
+    },
+    {
+      "Id": "691249630507079",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/opLog/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/opLog/list\"}"
+    },
+    {
+      "Id": "691249630507080",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/message/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/message/list\"}"
+    },
+    {
+      "Id": "691249630507081",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/list",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/list\"}"
+    },
+    {
+      "Id": "691249630507082",
+      "ObjectId": "212725263001001",
+      "TargetId": "/home/index/schedule/add",
+      "Category": "SYS_ROLE_HAS_PERMISSION",
+      "ExtJson": "{\"ScopeCategory\":\"SCOPE_ALL\",\"ScopeDefineOrgIdList\":[],\"ApiUrl\":\"/home/index/schedule/add\"}"
+    },
+    {
+      "Id": "691249630507083",
       "ObjectId": "212725263001001",
       "TargetId": "/home/index/schedule/deleteSchedule",
       "Category": "SYS_ROLE_HAS_PERMISSION",
