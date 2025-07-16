@@ -1,0 +1,12 @@
+{
+  //swagger分组设置
+  "[openapi:Mobile]": {
+    "Order": 89, //分组排序，int 类型，数字越大排前面，默认 0
+    "Title": "移动端" //配置分组标题，string 类型
+  },
+  //代码生成器设置
+  "MobileSettings": {
+    "InitTable": false, //是否初始化表结构
+    "InitSeedData": false, //是否初始化种子数据
+  }
+}

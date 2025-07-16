@@ -688,7 +688,7 @@ public class GenBasicService : DbRepository<GenBasic>, IGenbasicService
     {
         var basePath = AppContext.BaseDirectory;//获取项目目录
         var templatePath = basePath.CombinePath("ViewEngine").CombinePath("CodeGen");//获取文件路径
-        // templatePath = "D:\\胡国东\\SimpleAdmin.Net\\SimpleAdmin\\SimpleAdmin.System\\ViewEngine\\CodeGen";//测试用
+        templatePath = "D:\\胡国东\\SimpleAdmin.Net\\SimpleAdmin\\SimpleAdmin.System\\ViewEngine\\CodeGen";//测试用
         var genViewModel = await GetGenViewModel(genBasic);
         var frontendResult = await GetForntCodeResult(genViewModel, templatePath);
         var backendResult = await GetBackendCodeResult(genViewModel, templatePath);

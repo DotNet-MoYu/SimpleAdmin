@@ -1,0 +1,39 @@
+{
+  "RECORDS": [
+    {
+      "Id": "425798456791109",
+      "ObjectId": "212725263001001",
+      "TargetId": "425472310554693",
+      "Category": "SYS_ROLE_HAS_MOBILE_RESOURCE",
+      "ExtJson": "{\"MenuId\":425472310554693,\"ButtonInfo\":[425710965174341,425711012839493,425711060901957]}"
+    },
+    {
+      "Id": "425798456791110",
+      "ObjectId": "212725263001001",
+      "TargetId": "425472601616453",
+      "Category": "SYS_ROLE_HAS_MOBILE_RESOURCE",
+      "ExtJson": "{\"MenuId\":425472601616453,\"ButtonInfo\":[425711343288389,425711397343301,425711457501253]}"
+    },
+    {
+      "Id": "425798456791111",
+      "ObjectId": "212725263001001",
+      "TargetId": "425472851824709",
+      "Category": "SYS_ROLE_HAS_MOBILE_RESOURCE",
+      "ExtJson": "{\"MenuId\":425472851824709,\"ButtonInfo\":[425711559307333,425711600533573,425711647805509]}"
+    },
+    {
+      "Id": "425798456791112",
+      "ObjectId": "212725263001001",
+      "TargetId": "425474847338565",
+      "Category": "SYS_ROLE_HAS_MOBILE_RESOURCE",
+      "ExtJson": "{\"MenuId\":425474847338565,\"ButtonInfo\":[]}"
+    },
+    {
+      "Id": "425798456791113",
+      "ObjectId": "212725263001001",
+      "TargetId": "425476704763973",
+      "Category": "SYS_ROLE_HAS_MOBILE_RESOURCE",
+      "ExtJson": "{\"MenuId\":425476704763973,\"ButtonInfo\":[]}"
+    }
+  ]
+}

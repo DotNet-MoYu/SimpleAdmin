@@ -42,6 +42,20 @@ public interface IUserCenterService : ITransient
     /// <returns></returns>
     Task<List<SysResource>> ShortcutTree();
 
+    /// <summary>
+    /// 读取登录用户站内信详情
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SysMessage> LoginMessageDetail(MessageDetailInput input);
+
+    /// <summary>
+    /// 获取登录用户的站内信分页
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<SqlSugarPagedList<SysMessage>> LoginMessagePage(MessagePageInput input);
+
     #endregion 查询
 
     #region 编辑

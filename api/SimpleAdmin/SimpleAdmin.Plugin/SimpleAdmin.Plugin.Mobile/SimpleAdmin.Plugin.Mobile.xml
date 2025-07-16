@@ -1,0 +1,865 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SimpleAdmin.Plugin.Mobile</name>
+    </assembly>
+    <members>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileConst">
+            <summary>
+            移动端常量
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mobile.MobileConst.CACHE_MOBILE_RESOURCE">
+            <summary>
+            资源表缓存Key
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mobile.MobileConst.RELATION_SYS_USER_HAS_MOBILE_RESOURCE">
+            <summary>
+            用户有哪些移动端资源
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Plugin.Mobile.MobileConst.RELATION_SYS_ROLE_HAS_MOBILE_RESOURCE">
+            <summary>
+            角色有哪些移动端资源
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileButtonController">
+            <summary>
+            移动端权限按钮控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileButtonController.Page(SimpleAdmin.System.ButtonPageInput)">
+            <summary>
+            按钮分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileButtonController.Add(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <summary>
+            添加按钮
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileButtonController.Edit(SimpleAdmin.Plugin.Mobile.MobileButtonEditInput)">
+            <summary>
+            修改按钮
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileButtonController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除按钮
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileButtonController.Batch(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <summary>
+            批量新增
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileMenuController">
+            <summary>
+            移动端菜单管理控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.ModuleSelector">
+            <summary>
+            模块选择
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.Tree(SimpleAdmin.System.MenuTreeInput)">
+            <summary>
+            获取菜单树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.ResourceTreeSelector">
+            <summary>
+            获取角色授权资源树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.RoleOwnMobileMenu(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取角色拥有移动端资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.MenuTreeSelector(SimpleAdmin.System.MenuTreeInput)">
+            <summary>
+            获取菜单树选择器
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.GrantRoleMobileResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            给角色授权移动端资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.Add(SimpleAdmin.Plugin.Mobile.MobileMenuAddInput)">
+            <summary>
+            添加菜单
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.Edit(SimpleAdmin.Plugin.Mobile.MobileMenuEditInput)">
+            <summary>
+            编辑菜单
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取菜单详情
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuController.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
+            <summary>
+            更改模块
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileModuleController">
+            <summary>
+            移动端模块管理
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleController.Page(SimpleAdmin.System.ModulePageInput)">
+            <summary>
+            模块分页查询
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleController.Add(SimpleAdmin.Plugin.Mobile.MobileModuleAddInput)">
+            <summary>
+            添加模块
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleController.Edit(SimpleAdmin.Plugin.Mobile.MobileModuleEditInput)">
+            <summary>
+            修改模块
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleController.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            获取模块详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleController.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除模块
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileUserCenterController">
+            <summary>
+            用户个人信息控制器
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.LoginMobileMenu">
+            <summary>
+            获取个人菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.GetLoginUser">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
+            <summary>
+            编辑个人信息
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.UpdatePassword(SimpleAdmin.System.UpdatePasswordInput)">
+            <summary>
+            修改密码
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.LoginUnreadMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterController.LoginUnreadMessageDetail(SimpleAdmin.System.MessageDetailInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileResource">
+             <summary>
+             资源
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.ParentId">
+             <summary>
+             父id
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Title">
+             <summary>
+             标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Name">
+             <summary>
+             别名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Description">
+             <summary>
+             描述
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Code">
+             <summary>
+             编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Category">
+             <summary>
+             分类
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Module">
+             <summary>
+             模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.MenuType">
+             <summary>
+             菜单类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Path">
+             <summary>
+             路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Icon">
+             <summary>
+             图标
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Color">
+             <summary>
+             颜色
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.SortCode">
+             <summary>
+             排序码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.RegType">
+             <summary>
+             颜色
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Meta">
+            <summary>
+            菜单元标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileResource.Children">
+            <summary>
+            字节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileSettingsOptions">
+            <summary>
+            代码生成器配置
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileResourceSeedData">
+            <summary>
+            移动端资源表
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.SysRelationSeedData">
+            <summary>
+            关系表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.SysResourceSeedData">
+            <summary>
+            资源表种子数据
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileButtonAddInput">
+            <summary>
+            添加按钮参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileButtonAddInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileButtonAddInput.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileButtonAddInput.Code">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileButtonEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.IMobileButtonService">
+            <summary>
+            权限按钮服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileButtonService.Add(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <summary>
+            添加按钮
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileButtonService.AddBatch(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <summary>
+            批量添加
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除按钮
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileButtonService.Edit(SimpleAdmin.Plugin.Mobile.MobileButtonEditInput)">
+            <summary>
+            编辑按钮
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
+            <summary>
+            按钮分页查询
+            </summary>
+            <param name="input">查询条件</param>
+            <returns>按钮分页列表</returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mobile.IMobileButtonService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.Page(SimpleAdmin.System.ButtonPageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.Add(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.AddBatch(SimpleAdmin.Plugin.Mobile.MobileButtonAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.Edit(SimpleAdmin.Plugin.Mobile.MobileButtonEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMobileButtonService.CheckInput(SimpleAdmin.Plugin.Mobile.MobileResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="MobileResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput">
+            <summary>
+            添加菜单参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput.MenuType">
+            <summary>
+            菜单类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput.Module">
+            <summary>
+            模块
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuAddInput.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileMenuEditInput">
+            <summary>
+            编辑菜单输入参数
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileMenuEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.IMobileMenuService">
+            <summary>
+            菜单服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.Add(SimpleAdmin.Plugin.Mobile.MobileMenuAddInput)">
+            <summary>
+            添加菜单
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            详情
+            </summary>
+            <param name="input">id</param>
+            <returns>详细信息</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64)">
+            <summary>
+            构建菜单树形结构
+            </summary>
+            <param name="resourceList">菜单列表</param>
+            <param name="parentId">父ID</param>
+            <returns>菜单形结构</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+            <summary>
+            获取菜单树
+            </summary>
+            <param name="input">菜单树查询参数</param>
+            <returns>菜单树列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.Edit(SimpleAdmin.Plugin.Mobile.MobileMenuEditInput)">
+            <summary>
+            编辑菜单
+            </summary>
+            <param name="input">菜单编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除菜单
+            </summary>
+            <param name="input">删除菜单参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
+            <summary>
+            改变菜单模块
+            </summary>
+            <param name="input">改变菜单模块参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileMenuService.GrantRoleMobileResource(SimpleAdmin.System.GrantResourceInput)">
+            <summary>
+            角色授权移动端资源
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileMenuService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mobile.IMobileMenuService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.ConstructMenuTrees(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.Tree(SimpleAdmin.System.MenuTreeInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.Add(SimpleAdmin.Plugin.Mobile.MobileMenuAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.Edit(SimpleAdmin.Plugin.Mobile.MobileMenuEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.ChangeModule(SimpleAdmin.System.MenuChangeModuleInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.GrantRoleMobileResource(SimpleAdmin.System.GrantResourceInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileMenuService.CheckInput(SimpleAdmin.Plugin.Mobile.MobileResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="mobileResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileModuleAddInput">
+            <summary>
+            添加模块输入
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileModuleEditInput">
+            <summary>
+            编辑模块输入
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileModuleEditInput.Id">
+            <summary>
+            ID
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.IMobileModuleService">
+            <summary>
+            模块管理服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileModuleService.Add(SimpleAdmin.Plugin.Mobile.MobileModuleAddInput)">
+            <summary>
+            添加模块
+            </summary>
+            <param name="input">添加参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <summary>
+            删除模块
+            </summary>
+            <param name="input">删除参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileModuleService.Edit(SimpleAdmin.Plugin.Mobile.MobileModuleEditInput)">
+            <summary>
+            编辑模块
+            </summary>
+            <param name="input">编辑参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileModuleService.Page(SimpleAdmin.System.ModulePageInput)">
+            <summary>
+            分页查询
+            </summary>
+            <param name="input">分页参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileModuleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <summary>
+            详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileModuleService">
+            <summary>
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mobile.IMobileModuleService"/>
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.Page(SimpleAdmin.System.ModulePageInput)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.Add(SimpleAdmin.Plugin.Mobile.MobileModuleAddInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.Edit(SimpleAdmin.Plugin.Mobile.MobileModuleEditInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.Delete(SimpleAdmin.Core.BaseIdListInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.Detail(SimpleAdmin.Core.BaseIdInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileModuleService.CheckInput(SimpleAdmin.Plugin.Mobile.MobileResource)">
+            <summary>
+            检查输入参数
+            </summary>
+            <param name="sysResource"></param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.IMobileResourceService">
+            <summary>
+            资源服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetaModuleAndMenuAndSpaList">
+            <summary>
+            获取所有的菜单和模块以及单页面列表，并按分类和排序码排序
+            </summary>
+            <returns>所有的菜单和模块以及单页面列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetChildListById(System.Int64,System.Boolean)">
+            <summary>
+            根据资源ID获取所有下级资源
+            </summary>
+            <param name="resId">资源ID</param>
+            <param name="isContainOneself">是否包含自己</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64,System.Boolean)">
+            <summary>
+            根据资源ID获取所有下级资源
+            </summary>
+            <param name="sysResources">资源列表</param>
+            <param name="resId">资源ID</param>
+            <param name="isContainOneself">是否包含自己</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <summary>
+            获取ID获取Code列表
+            </summary>
+            <param name="ids">id列表</param>
+            <param name="category">分类</param>
+            <returns>Code列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取资源列表
+            </summary>
+            <param name="categorys">资源分类列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetListByCategory(System.String)">
+            <summary>
+            根据分类获取资源列表
+            </summary>
+            <param name="category">分类名称</param>
+            <returns>资源列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.GetMenuByMenuIds(System.Collections.Generic.List{System.Int64})">
+            <summary>
+            根据菜单ID获取菜单
+            </summary>
+            <param name="menuIds">菜单id列表</param>
+            <returns>菜单列表</returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
+            <summary>
+            获取权限授权树
+            </summary>
+            <param name="routes">路由列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.RefreshCache(System.String)">
+            <summary>
+            刷新缓存
+            </summary>
+            <param name="category">分类名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileResourceService.ResourceTreeSelector">
+            <summary>
+            角色授权资源树
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileResourceService">
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mobile.IMobileResourceService"/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetCodeByIds(System.Collections.Generic.List{System.Int64},System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetListAsync(System.Collections.Generic.List{System.String})">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetaModuleAndMenuAndSpaList">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.RefreshCache(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetChildListById(System.Int64,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetChildListById(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetListByCategory(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.ResourceTreeSelector">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.PermissionTreeSelector(System.Collections.Generic.List{System.String})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetMenuByMenuIds(System.Collections.Generic.List{System.Int64})">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetRouteName(System.String,System.String)">
+            <summary>
+            获取路由地址名称
+            </summary>
+            <param name="controllerName">控制器地址</param>
+            <param name="template">路由名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetResourceChilden(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64)">
+            <summary>
+            获取资源所有下级
+            </summary>
+            <param name="resourceList">资源列表</param>
+            <param name="parentId">父ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetResourceParent(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Int64)">
+            <summary>
+            获取上级
+            </summary>
+            <param name="resourceList"></param>
+            <param name="parentId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetRoleGrantResourceMenus(System.Int64)">
+            <summary>
+            获取授权菜单
+            </summary>
+            <param name="moduleId">模块ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileResourceService.GetRoleGrantResourceMenuTitle(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},SimpleAdmin.Plugin.Mobile.MobileResource)">
+            <summary>
+            获取授权菜单类菜单名称
+            </summary>
+            <param name="menuList">菜单列表</param>
+            <param name="menu">当前菜单</param>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileLoginUserOutput">
+            <summary>
+             手机端登录用户信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Plugin.Mobile.MobileLoginUserOutput.MobileButtonCodeList">
+            <summary>
+            移动端按钮码集合
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobleMeta">
+            <summary>
+            手机端
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.IMobileUserCenterService">
+            <summary>
+            移动端用户个人信息服务
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileUserCenterService.GetOwnMobileMenu">
+            <summary>
+             获取个人移动端菜单
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.IMobileUserCenterService.GetLoginUser">
+            <summary>
+            获取登录用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.MobileUserCenterService">
+            <inheritdoc cref="T:SimpleAdmin.Plugin.Mobile.IMobileUserCenterService"/>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterService.GetOwnMobileMenu">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterService.GetLoginUser">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterService.GetMyParentMenus(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource})">
+            <summary>
+            获取父菜单集合
+            </summary>
+            <param name="allMenuList">所有菜单列表</param>
+            <param name="myMenus">我的菜单列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterService.GetMyModules(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource},System.Collections.Generic.List{System.Int64},System.Int32)">
+            <summary>
+            获取我的模块集合
+            </summary>
+            <param name="allModuleList"></param>
+            <param name="moduleIds"></param>
+            <param name="spaCount"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.MobileUserCenterService.ConstructMeta(System.Collections.Generic.List{SimpleAdmin.Plugin.Mobile.MobileResource})">
+            <summary>
+            构建Meta
+            </summary>
+            <param name="myMenus">我的菜单集合</param>
+        </member>
+        <member name="T:SimpleAdmin.Plugin.Mobile.Startup">
+            <summary>
+            AppStartup启动类
+            </summary>
+        </member>
+        <member name="M:SimpleAdmin.Plugin.Mobile.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices中不能解析服务，比如App.GetService()，尤其是不能在ConfigureServices中获取诸如缓存等数据进行初始化，应该在Configure中进行
+            服务都还没初始化完成，会导致内存中存在多份 IOC 容器！！
+            正确应该在 Configure 中，这个时候服务（IServiceCollection 已经完成 BuildServiceProvider() 操作了
+            </summary>
+            <param name="services"></param>
+        </member>
+    </members>
+</doc>

@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleAdmin.Cache", "Simple
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.MessageCenter", "SimpleAdmin.MessageCenter\SimpleAdmin.MessageCenter.csproj", "{DD0E936C-958B-4203-8566-1A17C1FAA477}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleAdmin.Plugin.Mobile", "SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mobile\SimpleAdmin.Plugin.Mobile.csproj", "{FBB6EC43-9918-4477-92B5-1CAE3E039445}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{DD0E936C-958B-4203-8566-1A17C1FAA477}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD0E936C-958B-4203-8566-1A17C1FAA477}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD0E936C-958B-4203-8566-1A17C1FAA477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB6EC43-9918-4477-92B5-1CAE3E039445}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB6EC43-9918-4477-92B5-1CAE3E039445}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB6EC43-9918-4477-92B5-1CAE3E039445}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB6EC43-9918-4477-92B5-1CAE3E039445}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +103,7 @@ Global
 		{AA783B66-6F91-4164-86D4-6D053E5A549C} = {88EF0885-575A-4E7A-BBC7-77F762E31A0E}
 		{B34C3A3E-EE0E-4D4F-9A3C-AADA575FA977} = {88EF0885-575A-4E7A-BBC7-77F762E31A0E}
 		{DD0E936C-958B-4203-8566-1A17C1FAA477} = {C6B98084-8431-4073-9311-A3508C31DF7F}
+		{FBB6EC43-9918-4477-92B5-1CAE3E039445} = {3B049767-E6E3-4E89-B45B-9066448E0573}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {409A4605-C03F-4838-9B22-C8C2AA82EB23}

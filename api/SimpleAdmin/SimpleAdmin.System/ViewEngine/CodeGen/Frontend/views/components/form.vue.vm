@@ -5,7 +5,7 @@ var tableFieIds=@Model.TableFields;//获取字段
 var currentTime =@Model.GenTime;
 var funcName= @Model.FunctionName;//获取功能名称
 var busName= @Model.BusName;//获取业务名称
-var props=@Model.BusName+"Pros";
+var props=@Model.BusName+"Props";
 var updateColumns= tableFieIds.Where(it => it.WhetherAddUpdate == "Y").ToList();//获取需要显示的字段
 var dictTypes= tableFieIds.Where(it => !string.IsNullOrEmpty(it.DictTypeCode)).ToList();//获取需要显示的字段
 }

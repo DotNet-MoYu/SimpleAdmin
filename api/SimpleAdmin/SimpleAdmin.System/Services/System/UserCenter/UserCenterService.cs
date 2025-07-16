@@ -182,6 +182,19 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         return await _menuService.ShortcutTree(sysResourceList);
     }
 
+    /// <inheritdoc />
+    public async Task<SqlSugarPagedList<SysMessage>> LoginMessagePage(MessagePageInput input)
+    {
+        var messages = await _messageService.MyMessagePage(input, UserManager.UserId);//分页查询
+        return messages;
+    }
+
+    /// <inheritdoc />
+    public async Task<SysMessage> LoginMessageDetail(MessageDetailInput input)
+    {
+        return await _messageService.Detail(input);//返回详情，不带用户列表
+    }
+
     #endregion 查询
 
     #region 编辑
@@ -282,7 +295,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         //     throw Oops.Bah($"新密码请勿与旧密码过于相似");
         newPassword = CryptogramUtil.Sm4Encrypt(newPassword);//SM4加密
         userInfo.Password = newPassword;
-        await UpdateSetColumnsTrueAsync(it => new SysUser() { Password = newPassword }, it => it.Id == userInfo.Id);//更新密码
+        await UpdateSetColumnsTrueAsync(it => new SysUser { Password = newPassword }, it => it.Id == userInfo.Id);//更新密码
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
     }
 
@@ -298,7 +311,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
         fileStream.Close();
         var base64String = Convert.ToBase64String(bytes);//转base64
         var avatar = base64String.ToImageBase64();//转图片
-        await UpdateSetColumnsTrueAsync(it => new SysUser() { Avatar = avatar }, it => it.Id == userInfo.Id);// 更新头像
+        await UpdateSetColumnsTrueAsync(it => new SysUser { Avatar = avatar }, it => it.Id == userInfo.Id);// 更新头像
         _userService.DeleteUserFromRedis(UserManager.UserId);//redis删除用户数据
         return avatar;
     }
@@ -331,7 +344,7 @@ public class UserCenterService : DbRepository<SysUser>, IUserCenterService
     /// <inheritdoc />
     public async Task<SysMessage> MyMessageDetail(BaseIdInput input)
     {
-        return await _messageService.Detail(new MessageDetailInput() { Id = input.Id, Read = true });//返回详情，不带用户列表
+        return await _messageService.Detail(new MessageDetailInput { Id = input.Id, Read = true });//返回详情，不带用户列表
     }
 
     /// <inheritdoc />

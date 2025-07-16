@@ -8328,6 +8328,20 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessageDetail(SimpleAdmin.System.MessageDetailInput)">
+            <summary>
+            读取登录用户站内信详情
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IUserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <summary>
+            获取登录用户的站内信分页
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="M:SimpleAdmin.System.IUserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">
             <summary>
             更新个人信息
@@ -8430,6 +8444,12 @@
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.ShortcutTree">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessagePage(SimpleAdmin.System.MessagePageInput)">
+            <inheritdoc />
+        </member>
+        <member name="M:SimpleAdmin.System.UserCenterService.LoginMessageDetail(SimpleAdmin.System.MessageDetailInput)">
             <inheritdoc />
         </member>
         <member name="M:SimpleAdmin.System.UserCenterService.UpdateUserInfo(SimpleAdmin.System.UpdateInfoInput)">

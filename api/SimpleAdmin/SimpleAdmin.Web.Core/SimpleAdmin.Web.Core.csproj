@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <ProjectReference Include="..\SimpleAdmin.Application\SimpleAdmin.Application.csproj"/>
+        <ProjectReference Include="..\SimpleAdmin.Plugin\SimpleAdmin.Plugin.Mobile\SimpleAdmin.Plugin.Mobile.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

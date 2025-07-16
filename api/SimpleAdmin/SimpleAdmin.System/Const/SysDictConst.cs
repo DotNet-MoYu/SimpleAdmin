@@ -129,7 +129,7 @@ public class SysDictConst
     /// 延迟发送
     /// </summary>
     public const string SEND_WAY_DELAY = "DELAY";
-
+  
     /// <summary>
     /// 指定时间
     /// </summary>

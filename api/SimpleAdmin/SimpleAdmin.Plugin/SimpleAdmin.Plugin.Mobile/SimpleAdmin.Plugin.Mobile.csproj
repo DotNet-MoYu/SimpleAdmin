@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\SimpleAdmin.System\SimpleAdmin.System.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="SeedData\Json\seed_sys_resource_mobile.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Mobile.Development.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Mobile.Production.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="SeedData\Json\seed_mobile_resource.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Services\Resource\Resource\Dto\"/>
+    </ItemGroup>
+
+</Project>
