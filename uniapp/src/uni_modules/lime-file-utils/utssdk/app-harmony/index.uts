@@ -1,0 +1,47 @@
+// @ts-nocheck
+export * from '../interface'
+import { ProcessFileOptions, NullableString } from '../interface'
+
+
+
+function readFileAs(
+	file : string,
+	method : 'readAsDataURL' | 'readAsText' | 'readAsArrayBuffer' | 'readAsBinaryString'
+) : Promise<string | ArrayBuffer> {
+
+	try {
+		return new Promise(async (resolve, reject) => {
+			
+		});
+	} catch (error) {
+		return Promise.reject(error)
+	}
+
+}
+
+export function fileToBase64(filePath : string) : Promise<string> {
+	return readFileAs(filePath, 'readAsDataURL').then(result => (result as string).split(',')?.[1])
+}
+
+export function fileToDataURL(filePath : string) : Promise<string> {
+	return readFileAs(filePath, 'readAsDataURL').then(result => (result as string));
+}
+
+export function dataURLToFile(dataURL : string, filename : NullableString = null) : Promise<string> {
+	return new Promise((resolve, reject)=>{
+		// mime类型
+		
+	})
+	
+}
+
+
+export function processFile(options: ProcessFileOptions){
+	if(options.type == 'toBase64'){
+		console.log('1')
+	} else if(options.type == 'toDataURL'){
+		console.log('1')
+	} else if(options.type == 'toFile'){
+		console.log('1')
+	}
+}

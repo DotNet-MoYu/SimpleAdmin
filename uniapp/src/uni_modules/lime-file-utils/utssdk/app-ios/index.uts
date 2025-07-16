@@ -1,0 +1,141 @@
+import { UTSiOS } from "DCloudUTSFoundation"
+import { URL, FileManager, NSData, Data } from 'Foundation';
+import { UTTypeCreatePreferredIdentifierForTag, kUTTagClassFilenameExtension, UTTypeCopyPreferredTagWithClass, kUTTagClassMIMEType } from "MobileCoreServices"
+import { ProcessFileOptions, NullableString } from '../interface'
+import { Bool } from 'Swift';
+
+
+export function getResourcePath(filePath : string) : string {
+	let path = filePath;
+	if (path.startsWith("http") || path.startsWith("<svg") || path.startsWith("data:image/")) {
+		return path
+	}
+	if (path.startsWith("file://")) {
+		path = path.substring(7) //path.replace("file://", "")
+	} else if (path.startsWith("unifile://")) {
+		path = UTSiOS.convert2AbsFullPath(filePath);
+	} else if (!path.startsWith("/var/")) {
+		path = UTSiOS.getResourcePath(filePath);
+	}
+	return path
+}
+
+/**
+ * 
+ */
+export function checkExistence(filePath : string):boolean[] {
+	let path = getResourcePath(filePath)
+	let isDirectory:ObjCBool = false
+	const exists = FileManager.default.fileExists(atPath = path, isDirectory = UTSiOS.getPointer(isDirectory))
+	return [exists,isDirectory.boolValue]
+}
+
+export function isFile(filePath : string):boolean {
+	const result = checkExistence(filePath);
+	return result[0] && !result[1]
+}
+
+export function isExists(filePath : string):boolean {
+	const result = checkExistence(filePath);
+	return result[0]
+}
+
+export function isDirectory(filePath : string):boolean {
+	const result = checkExistence(filePath);
+	return result[0] && result[1]
+}
+
+
+function getMimeType(filePath : string) : NullableString {
+	let path = getResourcePath(filePath)
+	if(!FileManager.default.fileExists(atPath = path)) return null
+	const pathExtension = new URL(fileURLWithPath = path).pathExtension;
+	const mimeType = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension as CFString, null)?.takeRetainedValue()
+	if(mimeType == null) return null
+	const mimeTypeString = UTTypeCopyPreferredTagWithClass(mimeType!, kUTTagClassMIMEType)?.takeRetainedValue();
+	if(mimeTypeString == null) return null
+	return mimeTypeString as string
+}
+
+export function fileToBase64(filePath : string) : NullableString {
+	let path = getResourcePath(filePath)
+	if(!FileManager.default.fileExists(atPath = path)) return null;
+	const fileData = FileManager.default.contents(atPath = path);
+	if(fileData == null) return null;
+	return fileData!.base64EncodedString(options = NSData.Base64EncodingOptions.lineLength64Characters)//.replace(/\s+/g,'')
+}
+
+export function fileToDataURL(filePath : string) : NullableString {
+	const base64 = fileToBase64(filePath)
+	const mimeType = getMimeType(filePath)
+	if(base64 == null || mimeType == null) return null
+	return ("data:" + mimeType! + ";base64," + base64!)//.replace(/\s+/g,'');
+}
+
+function getFileExtensionFromDataURL(dataURL : string) : string {
+	const commaIndex = dataURL.indexOf(",");
+	const mimeType = dataURL.substring(0, commaIndex).replace("data:", "").replace(";base64", "");
+	const mimeTypeParts = mimeType.split("/");
+	return mimeTypeParts[1];
+}
+
+
+export function dataURLToFile(dataURL : string, filename : NullableString = null) : NullableString {
+
+	const commaIndex = dataURL.indexOf(",");
+	const base64 = dataURL.substring(commaIndex + 1);
+	const data = new Data(base64Encoded = base64);
+	// #ifdef UNI-APP-X
+	const dataPath = UTSiOS.getDataPath();
+	// #endif
+	// #ifndef UNI-APP-X
+	const dataPath = UTSiOS.getDataPath().replace(/data$/, "doc");
+	// #endif
+	const name = filename ?? `${Date.now()}.${getFileExtensionFromDataURL(dataURL)}`;
+	if(data == null) return null
+	
+	let temporaryDirectoryURL = new URL(fileURLWithPath = dataPath);
+	let fileURL = temporaryDirectoryURL.appendingPathComponent(name);
+	try{
+		UTSiOS.try(data!.write(to = fileURL))
+		return `${dataPath}/${name}`
+	}catch(e){
+		return null
+	}
+}
+
+
+
+export function processFile(options: ProcessFileOptions){
+	if(options.type == 'toBase64'){
+		const res = fileToBase64(options.path)
+		const err = 'fileToBase64: 解析失败'
+		if(res != null){
+			options.success?.(res!)
+			options.complete?.(res!)
+		} else {
+			options.complete?.(err)
+			options.fail?.(err)
+		}
+	} else if(options.type == 'toDataURL'){
+		const res = fileToDataURL(options.path)
+		const err = 'fileToDataURL: 解析失败'
+		if(res != null){
+			options.success?.(res!)
+			options.complete?.(res!)
+		} else {
+			options.complete?.(err)
+			options.fail?.(err)
+		}
+	} else if(options.type == 'toFile'){
+		const res = dataURLToFile(options.path, options.filename)
+		const err = 'dataURLToFile: 解析失败'
+		if(res != null){
+			options.success?.(res!)
+			options.complete?.(res!)
+		} else {
+			options.complete?.(err)
+			options.fail?.(err)
+		}
+	}
+}

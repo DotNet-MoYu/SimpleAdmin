@@ -1,0 +1,17 @@
+/* #ifdef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+$is-app: true;
+/* #endif */
+/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+$is-app: false;
+/* #endif */
+
+@mixin is-app {
+	@if $is-app {
+		@content;
+	} 
+}
+@mixin not-app {
+	@if not($is-app) {
+		@content;
+	} 
+}

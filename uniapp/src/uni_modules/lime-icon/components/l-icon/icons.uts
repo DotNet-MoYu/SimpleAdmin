@@ -1,0 +1,22 @@
+// #ifndef APP-ANDROID || APP-IOS || APP-HARMONY
+import iconList from '../../static/icons.json';
+export const icons = ref<Map<string, any | null>>((iconList as UTSJSONObject).toMap())
+// #endif
+// #ifdef APP-ANDROID || APP-IOS || APP-HARMONY
+export const icons = ref<Map<string, any | null>>(new Map<string, any | null>())
+
+if (icons.value.size == 0) {
+	uni.getFileSystemManager().readFile({
+		filePath: 'uni_modules/lime-icon/static/icons.json',
+		encoding: 'utf-8',
+		success: (res) => {
+			const obj = JSON.parseObject(res.data as string)
+			if (obj == null) return
+			icons.value = obj.toMap();
+		},
+		fail(err) {
+			console.log('[lime-icon getFileSystemManager]', err)
+		}
+	} as ReadFileOptions);
+}
+// #endif

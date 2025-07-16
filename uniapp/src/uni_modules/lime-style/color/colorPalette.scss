@@ -1,0 +1,236 @@
+// #ifdef VUE3
+@use "sass:math";
+// #endif
+
+
+
+$hueStep: 2;
+$saturationStep1: 0.16;
+$saturationStep2: 0.05;
+$brightnessStep1: 0.05;
+$brightnessStep2: 0.15;
+$lightColorCount: 5;
+$darkColorCount: 4;
+
+$darkColorMap: (
+    (index: 7, opacity: 0.15),
+    (index: 6, opacity: 0.25),
+    (index: 5, opacity: 0.3),
+    (index: 5, opacity: 0.45),
+    (index: 5, opacity: 0.65),
+    (index: 5, opacity: 0.85),
+    (index: 4, opacity: 0.9),
+    (index: 3, opacity: 0.95),
+    (index: 2, opacity: 0.97),
+    (index: 1, opacity: 0.98)
+);
+
+@function div($dividend, $divisor) {
+	// #ifdef VUE3
+	@return math.div($dividend, $divisor);
+	// #endif
+	// #ifndef VUE3
+	@return $dividend / $divisor;
+	// #endif
+}
+
+// 求一个数的n次幂
+@function pow($number, $n) {
+	$ret: 1;
+	@if $n >= 0 {
+		@for $i from 1 through $n {
+			$ret: $ret * $number;
+		}
+		} @else {
+			@for $i from $n to 0 {
+				$ret: $ret / $number;
+			}
+	}
+	@return $ret;
+}
+
+// 浮点数保留小数位
+@function toFixed($float, $digits: 2) {
+	$pow: pow(10, $digits);
+	@return div(round($float * $pow) , $pow);
+}
+
+
+// 根据颜色获取对应的hsv，在tinycolor中首先进行了归一化处理，这里没有
+// 返回的结果h是0~360，代表的是色相的角度， sv的范围0-1
+@function rbgToHsv($color) {
+	$r: red($color);
+	$g: green($color);
+	$b: blue($color);
+	$max: max($r, $g, $b);
+	$min: min($r, $g, $b);
+	$diff: $max - $min;
+	$h: 0;
+	
+	@if $max == $min {
+		$h: 0
+	} @else if $max == $r {
+		$h: div(60 * ($g - $b) , $diff) + if($g >= $b, 0, 360);
+	} @else if $max == $g {
+		$h: 60 *  div($b - $r , $diff) + 120 //($b - $r) / $diff + 120;
+	} @else if $max == $b{
+		$h: div(60 * ($r - $g) , $diff)  + 240;
+	}
+	
+	$s: if($max == 0, 0, div($diff , $max));
+	$v: div($max , 255);
+	
+	@return $h, $s, $v;
+}
+// hsv转化成rgb，借鉴了tinycolor的做法，避免通过$th的值判断来获取对应的rgb的取值
+// $t1~4的计算目前不清楚为什么这样做
+@function hsvTorgb($h, $s, $v) {
+	// $th: floor(div($h , 60));
+	// $t1: div($h , 60) - $th;
+	// $t2: $v * (1 - $s);
+	// $t3: $v * (1 - $t1 * $s);
+	// $t4: $v * (1 - (1 - $t1) * $s);
+	// $i: $th + 1;
+	// $r: nth(($v, $t3, $t2, $t2, $t4, $v), $i);
+	// $g: nth(($t4, $v, $v, $t3, $t2, $t2), $i);
+	// $b: nth(($t2, $t2, $t4, $v, $v, $t3), $i);
+	
+	// @return rgb($r * 255, $g * 255, $b * 255);
+	$h: $h % 360;
+	
+	// 2. 计算色相区域 (0~5)，对应6个60度区间
+	$th: floor(div($h, 60)) % 6; // 强制th在0~5之间
+	
+	// 3. 计算中间变量
+	$t1: div($h, 60) - $th;
+	$t2: $v * (1 - $s);
+	$t3: $v * (1 - $t1 * $s);
+	$t4: $v * (1 - (1 - $t1) * $s);
+	
+	// 4. 根据色相区域选择RGB分量
+	$i: $th + 1; // 索引范围锁定为1~6
+	
+	// 定义各区域对应的RGB系数
+	$r-values: ($v, $t3, $t2, $t2, $t4, $v);
+	$g-values: ($t4, $v, $v, $t3, $t2, $t2);
+	$b-values: ($t2, $t2, $t4, $v, $v, $t3);
+	
+	// 5. 获取RGB分量并转换为0~255整数
+	$r: nth($r-values, $i) * 255;
+	$g: nth($g-values, $i) * 255;
+	$b: nth($b-values, $i) * 255;
+	
+	// 6. 返回RGB颜色值
+	@return rgb(round($r), round($g), round($b));
+}
+
+//转换色相
+@function getHue($h, $i, $isLight) {
+	$hue: null;
+	@if $h >= 60 and $h <= 240 {
+		$hue: if($isLight, $h - $hueStep * $i, $h + $hueStep * $i);
+	} @else {
+		$hue: if($isLight, $h + $hueStep * $i, $h - $hueStep * $i);
+	}
+	
+	$hue: ($hue + 360) % 360;
+	
+	@return round($hue);
+}
+
+// 转换饱和度
+@function getSaturation($s, $i, $isLight) {
+	$saturation: null;
+	@if $isLight {
+		$saturation: $s - $saturationStep1 * $i;
+	} @else if $i == $darkColorCount {
+		$saturation: $s + $saturationStep1;
+	} @else {
+		$saturation: $s + $saturationStep2 * $i;
+	}
+		$saturation: min($saturation, 1);
+
+	@if $isLight and $i == $lightColorCount and $saturation > 0.1 {
+		$saturation: 0.1;
+	}
+	
+	$saturation: max($saturation, 0.06);
+	
+	@return toFixed($saturation, 2);
+}
+
+// 转换明度
+@function getValue($v, $i, $isLight) {
+	$value: min(
+		if(
+			$isLight, 
+			$v + $brightnessStep1 * $i, 
+			$v - $brightnessStep2 * $i
+		), 
+	1);
+	
+	@return toFixed($value, 2);
+}
+
+
+@function mix($rgb1, $rgb2, $amount){
+	$p: $amount;
+	$r: (red($rgb2) - red($rgb1)) * $p + red($rgb1);
+	$g: (green($rgb2) - green($rgb1)) * $p + green($rgb1);
+	$b: (blue($rgb2) - blue($rgb1)) * $p + blue($rgb1);
+	
+	@return rgb($r, $g, $b)
+}
+
+// 根据颜色和对应的色板位置，计算出对应的色板颜色
+@function genColor($color, $index, $theme: 'default' , $bgColor: #141414) {
+	$isLight: if($index <= 6, true, false);
+	$hsv: rbgToHsv($color);
+	//这里将i转换成以主色为中心，两侧的i值逐渐增大
+	$i: if($isLight, $lightColorCount + 1 - $index, $index - $lightColorCount - 1);
+
+	@if $theme == 'dark' {
+		$item: nth($darkColorMap, $index);
+		$index2: map-get($item, index);
+		$opacity: map-get($item, opacity);
+
+		$rgb: genColor($color, $index2 + 1);
+
+		// @return $rgb;
+		@return mix(
+				$bgColor,
+				$rgb,
+				$opacity
+			)
+	}
+
+	@return hsvTorgb(
+		getHue(nth($hsv, 1), $i, $isLight),
+		getSaturation(nth($hsv, 2), $i, $isLight),
+		getValue(nth($hsv, 3), $i, $isLight)
+	);
+}
+
+@function getSolidColor($base-color, $brightness) {
+  // 验证输入参数
+  @if type-of($base-color) != 'color' {
+    @error "Expected color for $base-color, but got #{type-of($base-color)}: #{$base-color}";
+  }
+  
+  @if type-of($brightness) != 'number' {
+    @error "Expected number for $brightness, but got #{type-of($brightness)}: #{$brightness}";
+  }
+  
+  // 获取基础颜色的HSL值
+  $hue: hue($base-color);
+  $saturation: saturation($base-color);
+  $lightness: lightness($base-color);
+  
+  // 计算新的亮度值 (限制在0-100%范围内)
+  $new-lightness: clamp(0%, $lightness + $brightness, 100%);
+  
+  // 使用HSL函数创建新颜色
+  $new-color: hsl($hue, $saturation, $new-lightness);
+  
+  @return $new-color;
+}

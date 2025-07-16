@@ -1,0 +1,108 @@
+{
+  "id": "lime-svg",
+  "displayName": "lime-svg",
+  "version": "0.2.2",
+  "description": "lime-svg 是一款UTS原生图标插件,支持修改单色svg的颜色，支持本地、base64、网络等路径。支持uniapp/uniappx",
+  "keywords": [
+    "lime-svg",
+    "svg",
+    "uvue",
+    "vue"
+],
+  "repository": "",
+  "engines": {
+    "HBuilderX": "^4.17",
+    "uni-app": "^4.45",
+    "uni-app-x": "^4.61"
+  },
+  "dcloudext": {
+    "type": "uts-vue-component",
+    "sale": {
+      "regular": {
+        "price": "5.99"
+      },
+      "sourcecode": {
+        "price": "6.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": "",
+    "darkmode": "x",
+    "i18n": "x",
+    "widescreen": "x"
+  },
+  "uni_modules": {
+    "dependencies": [
+      "lime-file-utils"
+    ],
+    "encrypt": [],
+    "platforms": {
+      "cloud": {
+        "tcb": "√",
+        "aliyun": "√",
+        "alipay": "x"
+      },
+      "client": {
+        "uni-app": {
+          "vue": {
+            "vue2": "√",
+            "vue3": "√"
+          },
+          "web": {
+            "safari": "√",
+            "chrome": "√"
+          },
+          "app": {
+            "vue": "√",
+            "nvue": "-",
+            "android": {
+                "extVersion": "",
+                "minVersion": "21"
+            },
+            "ios": "√",
+            "harmony": "√"
+          },
+          "mp": {
+            "weixin": "√",
+            "alipay": "√",
+            "toutiao": "-",
+            "baidu": "-",
+            "kuaishou": "-",
+            "jd": "-",
+            "harmony": "-",
+            "qq": "-",
+            "lark": "-"
+          },
+          "quickapp": {
+            "huawei": "-",
+            "union": "-"
+          }
+        },
+        "uni-app-x": {
+          "web": {
+            "safari": "√",
+            "chrome": "√"
+          },
+          "app": {
+            "android": {
+                "extVersion": "",
+                "minVersion": "21"
+            },
+            "ios": "√",
+            "harmony": "√"
+          },
+          "mp": {
+            "weixin": "√"
+          }
+        }
+      }
+    }
+  }
+}

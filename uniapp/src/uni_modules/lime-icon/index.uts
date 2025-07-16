@@ -1,0 +1,111 @@
+// @ts-nocheck
+import {IconCollection} from './components/l-icon/types'
+// #ifndef UNI-APP-X
+
+// #ifdef VUE3
+import { reactive } from 'vue';
+function definePlugin(options: any) {
+	return options
+}
+// #endif
+
+// #ifdef VUE2
+import Vue from 'vue'
+let reactive = Vue.observable
+type VueApp = any
+// #endif
+
+type UTSJSONObject = any//Record<string, any>
+
+// #endif
+
+let topApp : VueApp | null = null;
+const _iconCollection = reactive<IconCollection>({
+	has: true,
+	// #ifdef UNI-APP-X
+	icons: new Map<string, any|null>()
+	// #endif
+	
+	// #ifndef UNI-APP-X
+	icons: {}
+	// #endif
+})
+
+
+export function useIconHost(iconHost : string) {
+	// #ifdef UNI-APP-X
+	uni.setStorageSync('$limeIconsHost', iconHost)
+	// #endif
+	// #ifndef UNI-APP-X
+	uni.$limeIconsHost = iconHost
+	// #endif
+}
+let isInstall = false
+export function useIconCollection(iconCollection: UTSJSONObject|null = {}) {
+	if(!isInstall) {
+		console.warn('[lime-icon]: useIconCollection 请先注册，app.use(limeIcons, null, iconjson)')
+		return
+	}
+	// #ifdef UNI-APP-X
+	const map = (iconCollection as UTSJSONObject).toMap()
+	if(map.size != 0) {
+		uni.setStorageSync('$limeIconCollection', iconCollection)
+		_iconCollection.icons = map
+	}
+	// #endif
+	// #ifndef UNI-APP-X
+	if(Object.keys(iconCollection).length != 0) {
+		uni.setStorageSync('$limeIconCollection', iconCollection)
+		_iconCollection.icons = iconCollection
+	}
+	// #endif
+}
+
+function useProvide() {
+	if(topApp == null) return
+	isInstall = true
+	// #ifdef VUE3
+	topApp!.provide('$iconCollection', _iconCollection)
+	// #endif
+	// #ifndef VUE3
+	topApp.mixin({
+		provide: {
+			$iconCollection: _iconCollection
+		}
+	})
+	// #endif
+}
+
+// #ifdef VUE3
+export const limeIcons = definePlugin({
+	install: (app: VueApp, iconHost: string | null, iconCollection: UTSJSONObject | null):void => {
+		topApp = app;
+		if(iconHost != null || iconHost != '') {
+			useIconHost(iconHost!)
+		}
+		if(iconCollection != null) {
+			useProvide()
+			useIconCollection(iconCollection)
+		}
+	 }
+})
+// #endif
+
+// #ifdef VUE2
+export const limeIcons = {
+	install: (app: any, options: any[]) => {
+		topApp = app;
+		let [iconHost, iconCollection] = options
+		if(iconHost != null && typeof iconHost == 'object') {
+			iconCollection = iconHost
+		}
+		if(iconHost && iconHost != '') {
+			useIconHost(iconHost!)
+		}
+		if(iconCollection != null) {
+			useProvide()
+			useIconCollection(iconCollection)
+		}
+	 }
+}
+// #endif

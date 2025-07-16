@@ -1,0 +1,66 @@
+// @import '../theme/default.scss';
+
+@mixin hairline-base {
+	position: absolute;
+	box-sizing: border-box;
+	content: ' ';
+	pointer-events: none;
+	transform-origin: center; /* cover wechat button:after default transforn-origin */
+}
+
+@mixin hairline($color: $border-color-2) {
+	@include hairline-base;
+	top: -50%;
+	right: -50%;
+	bottom: -50%;
+	left: -50%;
+	border: 1px solid $color;
+	transform: scale(.5);
+}
+
+@mixin hairline-top($color: $border-color-1, $left: 0, $right: 0) {
+	@include hairline-base;
+	top: 0;
+	right: $right;
+	left: $left;
+	border-top: 1px solid $color;
+	transform: scaleY(0.5);
+}
+
+@mixin hairline-bottom($color: $border-color-1, $left: 0, $right: 0) {
+	@include hairline-base;
+	right: $right;
+	bottom: 0;
+	left: $left;
+	border-bottom: 1px solid $color;
+	transform: scaleY(0.5);
+}
+
+@mixin hairline-left($color: $border-bolor-1) {
+	@include hairline-base;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	border-left: 1px solid $color;
+	transform: scaleX(.5);
+}
+
+@mixin hairline-right($color: $border-bolor-1) {
+	@include hairline-base;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	border-right: 1px solid $color;
+	transform: scaleX(.5);
+}
+
+// @mixin border {
+// 	/* #ifndef APP-ANDROID || APP-IOS || APP-HARMONY */
+// 	&:after {
+// 		@content;
+// 	}
+// 	/* #endif */
+// 	/* #ifdef APP-ANDROID || APP-IOS || APP-HARMONY */
+// 	@content;
+// 	/* #endif */
+// }

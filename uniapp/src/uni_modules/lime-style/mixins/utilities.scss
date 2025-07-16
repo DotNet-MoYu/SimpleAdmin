@@ -1,0 +1,7 @@
+@import './flex';
+
+@mixin resize-none {
+	/* #ifndef APP-IOS || APP-ANDROID || APP-HARMONY */
+	resize: none;
+	/* #endif */
+}

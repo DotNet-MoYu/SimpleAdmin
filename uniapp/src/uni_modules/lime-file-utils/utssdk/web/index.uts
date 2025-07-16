@@ -1,0 +1,95 @@
+// @ts-nocheck
+export * from '../interface'
+import { ProcessFileOptions, NullableString } from '../interface'
+
+
+
+function readFileAs(
+	file : File | string,
+	method : 'readAsDataURL' | 'readAsText' | 'readAsArrayBuffer' | 'readAsBinaryString'
+) : Promise<string | ArrayBuffer> {
+
+	try {
+		return new Promise(async (resolve, reject) => {
+			let blob : Blob | null = null;
+			if (typeof file === 'string') {
+				const response = await fetch(file);
+				if (!response || !response.ok) {
+					return reject('readFileAs null');
+				}
+				blob = await response!.blob();
+			}
+			const reader = new FileReader();
+			reader[method](blob ?? file);
+			reader.onload = () => {
+				resolve(reader.result);
+			};
+			reader.onerror = (error) => {
+				reject(error);
+			};
+		});
+	} catch (error) {
+		return Promise.reject(error)
+	}
+
+}
+
+export function fileToBase64(filePath : string | File) : Promise<string> {
+	return readFileAs(filePath, 'readAsDataURL').then(result => (result as string).split(',')?.[1])
+}
+
+export function fileToDataURL(filePath : string | File) : Promise<string> {
+	return readFileAs(filePath, 'readAsDataURL').then(result => (result as string));
+}
+
+export function dataURLToFile(dataURL : string, filename : NullableString = null) : Promise<string> {
+	return new Promise((resolve, reject)=>{
+		// mime类型
+		let mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+		//base64 解码
+		let byteString = atob(dataURL.split(',')[1]);
+		if (byteString == null) {
+			return reject('dataURLToFile: 解析失败')
+		};
+		//创建缓冲数组
+		let arrayBuffer = new ArrayBuffer(byteString.length);
+		//创建视图
+		let intArray = new Uint8Array(arrayBuffer);
+		for (let i = 0; i < byteString.length; i++) {
+			intArray[i] = byteString.charCodeAt(i);
+		}
+		// @ts-ignore
+		const blob = new Blob([intArray], { type: mimeString });
+		resolve(URL.createObjectURL(blob))
+	})
+	
+}
+
+
+export function processFile(options: ProcessFileOptions){
+	if(options.type == 'toBase64'){
+		fileToBase64(options.path).then(res =>{
+			options.success?.(res)
+			options.complete?.(res)
+		}).catch(err =>{
+			options.fail?.(err)
+			options.complete?.(err)
+		})
+	} else if(options.type == 'toDataURL'){
+		fileToDataURL(options.path).then(res =>{
+			options.success?.(res)
+			options.complete?.(res)
+		}).catch(err =>{
+			options.fail?.(err)
+			options.complete?.(err)
+		})
+	} else if(options.type == 'toFile'){
+		dataURLToFile(options.path).then(res =>{
+			options.success?.(res)
+			options.complete?.(res)
+		}).catch(err =>{
+			options.fail?.(err)
+			options.complete?.(err)
+		})
+	}
+}

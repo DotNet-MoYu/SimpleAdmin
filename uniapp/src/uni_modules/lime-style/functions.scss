@@ -1,0 +1,11 @@
+// #ifdef VUE3 || VUE2 && uniVersion >= 4.56
+@use "sass:math";
+// #endif
+@function divide($dividend, $divisor) {
+	// #ifdef VUE3 || VUE2 && uniVersion >= 4.56
+	@return math.div($dividend, $divisor);
+	// #endif
+	// #ifndef VUE3 || VUE2 && uniVersion >= 4.56
+	@return $dividend / $divisor;
+	// #endif
+}

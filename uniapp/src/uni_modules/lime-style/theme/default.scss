@@ -1,0 +1,153 @@
+@import '../mixins/create.scss';
+@import '../color/colorPalette.scss';
+@import '../color/colors.scss';
+
+$blue-1:  genColor($blue, 1);
+$blue-2:  genColor($blue, 2);
+$blue-3:  genColor($blue, 3);
+$blue-4:  genColor($blue, 4);
+$blue-5:  genColor($blue, 5);
+$blue-6:  $blue;
+$blue-7:  genColor($blue, 7);
+$blue-8:  genColor($blue, 8);
+$blue-9:  genColor($blue, 9);
+$blue-10: genColor($blue, 10);
+
+$primary-color-1:  create-var('primary-color-1', genColor($primary-color, 1)); // 浅色/白底悬浮
+$primary-color-2:  create-var('primary-color-2', genColor($primary-color, 2)); // 文字禁用
+$primary-color-3:  create-var('primary-color-3', genColor($primary-color, 3)); // 一般禁用
+$primary-color-4:  create-var('primary-color-4', genColor($primary-color, 4)); // 特殊场景 禁用
+$primary-color-5:  create-var('primary-color-5', genColor($primary-color, 5)); // 悬浮
+$primary-color-6:  create-var('primary-color-6', $primary-color); // 常规
+$primary-color-7:  create-var('primary-color-7', genColor($primary-color, 7)); // 点击
+$primary-color-8:  create-var('primary-color-8', genColor($primary-color, 8)); // 
+$primary-color-9:  create-var('primary-color-9', genColor($primary-color, 9));
+$primary-color-10: create-var('primary-color-10', genColor($primary-color, 10));
+
+$error-color-1:  create-var('error-color-1', genColor($error-color, 1));
+$error-color-2:  create-var('error-color-2', genColor($error-color, 2));
+$error-color-3:  create-var('error-color-3', genColor($error-color, 3));
+$error-color-4:  create-var('error-color-4', genColor($error-color, 4));
+$error-color-5:  create-var('error-color-5', genColor($error-color, 5));
+$error-color-6:  create-var('error-color-6', $error-color);
+$error-color-7:  create-var('error-color-7', genColor($error-color, 7));
+$error-color-8:  create-var('error-color-8', genColor($error-color, 8));
+$error-color-9:  create-var('error-color-9', genColor($error-color, 9));
+$error-color-10: create-var('error-color-10', genColor($error-color, 10));
+
+$warning-color-1:  create-var('warning-color-1', genColor($warning-color, 1));
+$warning-color-2:  create-var('warning-color-2', genColor($warning-color, 2));
+$warning-color-3:  create-var('warning-color-3', genColor($warning-color, 3));
+$warning-color-4:  create-var('warning-color-4', genColor($warning-color, 4));
+$warning-color-5:  create-var('warning-color-5', genColor($warning-color, 5));
+$warning-color-6:  create-var('warning-color-6', $warning-color);
+$warning-color-7:  create-var('warning-color-7', genColor($warning-color, 7));
+$warning-color-8:  create-var('warning-color-8', genColor($warning-color, 8));
+$warning-color-9:  create-var('warning-color-9', genColor($warning-color, 9));
+$warning-color-10: create-var('warning-color-10', genColor($warning-color, 10));
+
+$success-color-1:  create-var('success-color-1', genColor($success-color, 1)); // 浅色/白底悬浮
+$success-color-2:  create-var('success-color-2', genColor($success-color, 2)); // 文字禁用
+$success-color-3:  create-var('success-color-3', genColor($success-color, 3)); // 一般禁用
+$success-color-4:  create-var('success-color-4', genColor($success-color, 4)); // 特殊场景
+$success-color-5:  create-var('success-color-5', genColor($success-color, 5)); // 悬浮
+$success-color-6:  create-var('success-color-6', $success-color); // 常规
+$success-color-7:  create-var('success-color-7', genColor($success-color, 7)); // 点击
+$success-color-8:  create-var('success-color-8', genColor($success-color, 8));
+$success-color-9:  create-var('success-color-9', genColor($success-color, 9));
+$success-color-10: create-var('success-color-10', genColor($success-color, 10));
+
+$gray-1:  create-var('gray-1', #f3f3f3);
+$gray-2:  create-var('gray-2', #eeeeee);
+$gray-3:  create-var('gray-3', #e7e7e7);
+$gray-4:  create-var('gray-4', #dcdcdc);
+$gray-5:  create-var('gray-5', #c5c5c5);
+$gray-6:  create-var('gray-6', #a6a6a6);
+$gray-7:  create-var('gray-7', #8b8b8b);
+$gray-8:  create-var('gray-8', #777777);
+$gray-9:  create-var('gray-9', #5e5e5e);
+$gray-10: create-var('gray-10', #4b4b4b);
+$gray-11: create-var('gray-11', #383838);
+$gray-12: create-var('gray-12', #2c2c2c);
+$gray-13: create-var('gray-13', #242424);
+$gray-14: create-var('gray-14', #181818);
+
+$text-color-1: create-var('text-color-1', rgba(0,0,0,0.88)); //primary
+$text-color-2: create-var('text-color-2', rgba(0,0,0,0.65)); //secondary
+$text-color-3: create-var('text-color-3', rgba(0,0,0,0.45)); //placeholder
+$text-color-4: create-var('text-color-4', rgba(0,0,0,0.25)); //disabled
+
+// 容器
+$bg-color-page:  	  create-var('bg-color-page', #f5f5f5); // 整体背景色 布局
+$bg-color-container:  create-var('bg-color-container', #fff); // 一级容器背景 组件
+$bg-color-elevated:   create-var('bg-color-elevated', #fff); // 二级容器背景 浮层
+$bg-color-spotlight:  create-var('bg-color-spotlight', rgba(0, 0, 0, 0.85));  // 引起注意的如 Tooltip
+$bg-color-mask: 	  create-var('bg-color-mask', rgba(0, 0, 0, 0.45));  // 蒙层
+
+// 填充
+$fill-1: create-var('fill-1', rgba(0, 0, 0, 0.15));
+$fill-2: create-var('fill-2', rgba(0, 0, 0, 0.06));
+$fill-3: create-var('fill-3', rgba(0, 0, 0, 0.04));
+$fill-4: create-var('fill-4', rgba(0, 0, 0, 0.02));
+
+// 描边
+$border-color-1: create-var('border-color-1', $gray-2); // 浅色
+$border-color-2: create-var('border-color-2', $gray-3); // 一般
+$border-color-3: create-var('border-color-3', $gray-4); // 深/悬浮
+$border-color-4: create-var('border-color-4', $gray-6); // 重/按钮描边
+
+
+$alpha-disabled: create-var('alpha-disabled', 0.5);
+$alpha-pressed:  create-var('alpha-pressed', 0.07);
+
+// 投影
+/* #ifndef APP-ANDROID || APP-IOS || APP-HARMONY */
+$shadow-1: create-var(
+  shadow-1,
+  0 1px 10px rgba(0, 0, 0, 0.05),
+  0 4px 5px rgba(0, 0, 0, 0.08),
+  0 2px 4px -1px rgba(0, 0, 0, 0.12)
+);
+
+$shadow-2: create-var(
+	'shadow-2',
+	0 1px 10px rgba(0, 0, 0, 0.05),
+	0 4px 5px rgba(0, 0, 0, 0.08),
+	0 2px 4px -1px rgba(0, 0, 0, 0.12)
+);
+$shadow-3: create-var(
+  shadow-3,
+  0 6px 30px 5px rgba(0, 0, 0, 0.05),
+  0 16px 24px 2px rgba(0, 0, 0, 0.04),
+  0 8px 10px -5px rgba(0, 0, 0, 0.08)
+);
+
+/* #endif */
+/* #ifdef APP-ANDROID || APP-IOS || APP-HARMONY */
+$shadow-1: create-var(
+  shadow-1,
+  0 1px 10px rgba(0, 0, 0, 0.05)
+);
+$shadow-2: create-var(
+	'shadow-2',
+	0 1px 10px rgba(0, 0, 0, 0.05)
+);
+$shadow-3: create-var(
+  shadow-3,
+  /* #ifdef APP-HARMONY
+  0 6px 30px 5px $gray-3
+  /* #endif */
+  /* #ifndef APP-HARMONY
+  0 6px 30px 5px rgba(0, 0, 0, 0.05)
+  /* #endif */
+  
+);
+/* #endif */
+$shadow-4: create-var(shadow-4, 0 2px 8px 0 rgba(0, 0, 0, .06));
+
+// 基础颜色的扩展 用于 聚焦 / 禁用 / 点击 等状态  
+$primary-color-focus: create-var('primary-color-focus', $primary-color-1);// focus态，包括鼠标和键盘
+$primary-color-active: create-var('primary-color-active', $primary-color-8);// 点击态
+$primary-color-disabled: create-var('primary-color-disabled', $primary-color-3);
+$primary-color-light: create-var('primary-color-light', $primary-color-1);	// 浅色的选中态
+$primary-color-light-active: create-var('primary-color-light-active', $primary-color-2); // 浅色的选中态

@@ -1,0 +1,16 @@
+$prefix: l !default;
+/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+@font-face {
+  font-family: $prefix;
+  src: url('https://tdesign.gtimg.com/icon/0.3.0/fonts/t.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* #endif */
+
+/* #ifdef APP-ANDROID || APP-IOS || APP-HARMONY */
+@font-face {
+  font-family: $prefix;
+  src: url('uni_modules/lime-icon/hybrid/html/t3.ttf');
+}
+/* #endif */

@@ -1,0 +1,2 @@
+# 忽略整个 uni_modules 目录
+src/uni_modules/**

@@ -1,0 +1,101 @@
+@import '../mixins/create.scss';
+@import '../color/colorPalette.scss';
+@import '../color/colors.scss';
+@import '../mixins/useTheme';
+
+@include theme-dark {
+	--l-blue-1:  #{genColor($blue, 1, dark)};
+	--l-blue-2:  #{genColor($blue, 2, dark)};
+	--l-blue-3:  #{genColor($blue, 3, dark)};
+	--l-blue-4:  #{genColor($blue, 4, dark)};
+	--l-blue-5:  #{genColor($blue, 5, dark)};
+	--l-blue-6:  #{genColor($blue, 6, dark)};
+	--l-blue-7:  #{genColor($blue, 7, dark)};
+	--l-blue-8:  #{genColor($blue, 8, dark)};
+	--l-blue-9:  #{genColor($blue, 9, dark)};
+	--l-blue-10: #{genColor($blue, 10, dark)};
+	
+	--l-primary-color-1: #{genColor($primary-color, 1, dark)}; // 浅色/白底悬浮
+	--l-primary-color-2: #{genColor($primary-color, 2, dark)}; // 文字禁用
+	--l-primary-color-3: #{genColor($primary-color, 3, dark)}; // 一般禁用
+	--l-primary-color-4: #{genColor($primary-color, 4, dark)}; // 特殊场景 禁用
+	--l-primary-color-5: #{genColor($primary-color, 5, dark)}; // 悬浮
+	--l-primary-color-6: #{genColor($primary-color, 6, dark)}; // 常规
+	--l-primary-color-7: #{genColor($primary-color, 7, dark)}; // 点击
+	--l-primary-color-8: #{genColor($primary-color, 8, dark)}; // 
+	--l-primary-color-9: #{genColor($primary-color, 9, dark)};
+	--l-primary-color-10: #{genColor($primary-color, 10, dark)};
+	
+	--l-error-color-1: #{genColor($error-color, 1, dark)};
+	--l-error-color-2: #{genColor($error-color, 2, dark)};
+	--l-error-color-3: #{genColor($error-color, 3, dark)};
+	--l-error-color-4: #{genColor($error-color, 4, dark)};
+	--l-error-color-5: #{genColor($error-color, 5, dark)};
+	--l-error-color-6: #{genColor($error-color, 6, dark)};
+	--l-error-color-7: #{genColor($error-color, 7, dark)};
+	--l-error-color-8: #{genColor($error-color, 8, dark)};
+	--l-error-color-9: #{genColor($error-color, 9, dark)};
+	--l-error-color-10: #{genColor($error-color, 10, dark)};
+	
+	--l-warning-color-1: #{genColor($warning-color, 1, dark)};
+	--l-warning-color-2: #{genColor($warning-color, 2, dark)};
+	--l-warning-color-3: #{genColor($warning-color, 3, dark)};
+	--l-warning-color-4: #{genColor($warning-color, 4, dark)};
+	--l-warning-color-5: #{genColor($warning-color, 5, dark)};
+	--l-warning-color-6: #{genColor($warning-color, 6, dark)};
+	--l-warning-color-7: #{genColor($warning-color, 7, dark)};
+	--l-warning-color-8: #{genColor($warning-color, 8, dark)};
+	--l-warning-color-9: #{genColor($warning-color, 9, dark)};
+	--l-warning-color-10: #{genColor($warning-color, 10, dark)};
+	
+	--l-success-color-1: #{genColor($success-color, 1, dark)}; // 浅色/白底悬浮
+	--l-success-color-2: #{genColor($success-color, 2, dark)}; // 文字禁用
+	--l-success-color-3: #{genColor($success-color, 3, dark)}; // 一般禁用
+	--l-success-color-4: #{genColor($success-color, 4, dark)}; // 特殊场景
+	--l-success-color-5: #{genColor($success-color, 5, dark)}; // 悬浮
+	--l-success-color-6: #{genColor($success-color, 6, dark)}; // 常规
+	--l-success-color-7: #{genColor($success-color, 7, dark)}; // 点击
+	--l-success-color-8: #{genColor($success-color, 8, dark)};
+	--l-success-color-9: #{genColor($success-color, 9, dark)};
+	--l-success-color-10: #{genColor($success-color, 10, dark)};
+	
+	--l-gray-1: #f3f3f3;
+	--l-gray-2: #eeeeee;
+	--l-gray-3: #e7e7e7;
+	--l-gray-4: #dcdcdc;
+	--l-gray-5: #c5c5c5;
+	--l-gray-6: #a6a6a6;
+	--l-gray-7: #8b8b8b;
+	--l-gray-8: #777777;
+	--l-gray-9: #5e5e5e;
+	--l-gray-10: #4b4b4b;
+	--l-gray-11: #383838;
+	--l-gray-12: #2c2c2c;
+	--l-gray-13: #242424;
+	--l-gray-14: #181818;
+	
+	--l-text-color-1: rgba(255,255,255,0.88); //primary
+	--l-text-color-2: rgba(255,255,255,0.65); //secondary
+	--l-text-color-3: rgba(255,255,255,0.45); //placeholder
+	--l-text-color-4: rgba(255,255,255,0.25); //disabled
+	
+	// 容器
+	--l-bg-color-page: #000000; // 整体背景色 布局
+	--l-bg-color-container: #141414;//#1d1d1d; // 一级容器背景 组件
+	--l-bg-color-elevated: #1f1f1f; // 二级容器背景 浮层
+	--l-bg-color-spotlight: #424242;  // 引起注意的如 Tooltip
+	--l-bg-color-mask: rgba(0, 0, 0, 0.45);  // 蒙层
+	
+	// 填充
+	--l-fill-1: rgba(0, 0, 0, 0.18);
+	--l-fill-2: rgba(0, 0, 0, 0.12);
+	--l-fill-3: rgba(0, 0, 0, 0.08);
+	--l-fill-4: rgba(0, 0, 0, 0.04);
+	
+	// 描边
+	--l-border-color-1: #{getSolidColor(#000, 26%)}; //#424242; // 浅色
+	--l-border-color-2: #{getSolidColor(#000, 19%)}; //#303030; // 一般
+	--l-border-color-3: #{getSolidColor(#000, 15%)}; //$gray-4; // 深/悬浮
+	--l-border-color-4: #{getSolidColor(#000, 12%)}; //$gray-6; // 重/按钮描边
+	
+}

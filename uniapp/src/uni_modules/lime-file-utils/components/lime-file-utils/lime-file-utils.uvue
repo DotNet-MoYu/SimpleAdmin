@@ -1,0 +1,72 @@
+<template>
+	<view>
+		<!-- <text>测试</text> -->
+		<image :src="url"></image>
+		<image :src="src"></image>
+		<button @click="onClick">选择图片</button>
+	</view>
+</template>
+
+<script setup>
+	
+	import { isDirectory, isFile, isExists , fileToDataURL, dataURLToFile, processFile, ProcessFileOptions } from '@/uni_modules/lime-file-utils'
+	const url = ref('')
+	const src = ref('')
+	const base64 = `data:image/png;base64,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`
+	
+	
+	console.log('isDirectory', isDirectory('/static'))
+	console.log('isDirectory', isDirectory('/static/logo.png'))
+	console.log('isFile', isFile('/static/logo.png'))
+	console.log('isExists', isExists('/static/logo.png'))
+	// #ifdef WEB || MP
+	// fileToDataURL('/static/logo.png').then(res => {
+	// 	url.value = res
+	// })
+	// dataURLToFile(base64, 'logo.png').then(res =>{
+	// 	src.value = res
+	// })
+	// #endif
+	// #ifdef APP
+	//url.value = fileToDataURL('/static/logo.png')??''
+	//src.value = dataURLToFile(base64, 'logo.png')??'';
+	// #endif
+	
+	const onClick = () => {
+		uni.chooseImage({
+			success(res) {
+				console.log('res', res)
+				// #ifdef APP
+				// url.value = fileToDataURL(res.temp)
+				// #endif
+				// #ifndef APP
+				fileToDataURL(res.tempFiles[0]).then(res1 => {
+					console.log('res1', res1)
+					url.value = res1
+				})
+				// #endif
+			}
+		})
+	}
+	
+	// processFile({
+	// 	type: 'toDataURL',
+	// 	path: '/static/logo.png',
+	// 	// path: '/storage/emulated/0/Android/data/uni.UNI9D581D0/cache/1719285074362.png',
+	// 	success: (res: string)=>{
+	// 		url.value = res
+	// 	}
+	// } as ProcessFileOptions)
+	
+	// processFile({
+	// 	type: 'toFile',
+	// 	path: base64,
+	// 	success: (res: string)=>{
+	// 		src.value = res
+	// 	}
+	// } as ProcessFileOptions)
+</script>
+
+<style>
+
+</style>

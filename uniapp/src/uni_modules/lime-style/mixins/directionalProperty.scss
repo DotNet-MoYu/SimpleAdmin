@@ -1,0 +1,401 @@
+// =======================================================================
+// 方向属性核心生成器 (支持所有方向相关属性)
+// =======================================================================
+@mixin directional-property(
+  $property, 
+  $values, 
+  $exclude: ()
+) {
+  // 属性类型分组
+  $group-standard: padding, margin;                                 // 标准方向属性
+  $group-radius: border-radius;                                      // 圆角属性
+  $group-border: border, border-top, border-right, border-bottom, border-left; // 边框属性
+  $group-outline: outline, outline-top, outline-right, outline-bottom, outline-left; // 轮廓属性
+  $group-position: inset, inset-block, inset-inline, top, right, bottom, left; // 定位属性
+  $group-size: block-size, inline-size;                             // 块/行尺寸属性
+  
+  // 定义每个方向的值
+  $top: null;
+  $right: null;
+  $bottom: null;
+  $left: null;
+  
+  // 确定处理模式
+  $is-standard: index($group-standard, $property);
+  $is-radius: index($group-radius, $property);
+  $is-border: index($group-border, $property);
+  $is-outline: index($group-outline, $property);
+  $is-position: index($group-position, $property);
+  $is-size: index($group-size, $property);
+  
+  // =====================================================================
+  // 解析输入值 - 根据属性类型处理
+  // =====================================================================
+  @if type-of($values) == 'list' {
+    $length: length($values);
+    
+    // 单个值 - 所有方向相同值
+    @if $length == 1 {
+      $top: nth($values, 1);
+      $right: nth($values, 1);
+      $bottom: nth($values, 1);
+      $left: nth($values, 1);
+    }
+    
+    // 两个值
+    @else if $length == 2 {
+      // 特殊处理：border-radius
+      @if $is-radius {
+        $top: nth($values, 1);
+        $right: nth($values, 2);
+        $bottom: nth($values, 1);
+        $left: nth($values, 2);
+      }
+      // 标准处理：上下 | 左右
+      @else if $is-standard or $is-border or $is-outline or $is-position {
+        $top: nth($values, 1);
+        $bottom: nth($values, 1);
+        $right: nth($values, 2);
+        $left: nth($values, 2);
+      }
+      // 块/行尺寸处理
+      @else if $is-size {
+        $top: nth($values, 1);
+        $right: nth($values, 2);
+      }
+    }
+    
+    // 三个值
+    @else if $length == 3 {
+      // border-radius特殊处理
+      @if $is-radius {
+        $top: nth($values, 1);
+        $right: nth($values, 2);
+        $bottom: nth($values, 3);
+        $left: nth($values, 2);
+      }
+      // 标准处理
+      @else if $is-standard or $is-border or $is-outline or $is-position {
+        $top: nth($values, 1);
+        $right: nth($values, 2);
+        $left: nth($values, 2);
+        $bottom: nth($values, 3);
+      }
+    }
+    
+    // 四个值
+    @else if $length == 4 {
+      $top: nth($values, 1);
+      $right: nth($values, 2);
+      $bottom: nth($values, 3);
+      $left: nth($values, 4);
+    }
+  }
+  @else {
+    // 单个值传递
+    $top: $values;
+    $right: $values;
+    $bottom: $values;
+    $left: $values;
+  }
+
+  // =====================================================================
+  // 生成CSS属性（排除指定方向）
+  // =====================================================================
+  
+  // 1. 圆角处理
+  @if $is-radius {
+    @if not index($exclude, top-left) and $top != null {
+      border-top-left-radius: $top;
+    }
+    @if not index($exclude, top-right) and $right != null {
+      border-top-right-radius: $right;
+    }
+    @if not index($exclude, bottom-right) and $bottom != null {
+      border-bottom-right-radius: $bottom;
+    }
+    @if not index($exclude, bottom-left) and $left != null {
+      border-bottom-left-radius: $left;
+    }
+  }
+  
+  // 2. 标准方向处理 (padding, margin)
+  @else if $is-standard {
+    @if not index($exclude, top) and $top != null {
+      #{$property}-top: $top;
+    }
+    @if not index($exclude, right) and $right != null {
+      #{$property}-right: $right;
+    }
+    @if not index($exclude, bottom) and $bottom != null {
+      #{$property}-bottom: $bottom;
+    }
+    @if not index($exclude, left) and $left != null {
+      #{$property}-left: $left;
+    }
+  }
+  
+  // 3. 边框处理
+  @else if $is-border {
+    // 完整边框设置
+    @if $property == 'border' {
+      @if not index($exclude, top) and $top != null {
+        border-top-width: nth($values, 1);
+        border-top-style: nth($values, 2);
+        border-top-color: nth($values, 3);
+      }
+      @if not index($exclude, right) and $right != null {
+       border-right-width: nth($values, 1);
+       border-right-style: nth($values, 2);
+       border-right-color: nth($values, 3);
+      }
+      @if not index($exclude, bottom) and $bottom != null {
+        // border-bottom: $bottom;
+		border-bottom-width: nth($values, 1);
+		border-bottom-style: nth($values, 2);
+		border-bottom-color: nth($values, 3);
+      }
+      @if not index($exclude, left) and $left != null {
+        // border-left: $left;
+		border-left-width: nth($values, 1);
+		border-left-style: nth($values, 2);
+		border-left-color: nth($values, 3);
+      }
+    }
+    // 单边边框
+    @else {
+      $direction: str-slice($property, 8); // 提取方向
+      @if not index($exclude, $direction) {
+        // #{$property}: $top;
+		#{$property}-width: nth($values, 1);
+		#{$property}-style: nth($values, 2);
+		#{$property}-color: nth($values, 3);
+      }
+    }
+  }
+  
+  // 4. 轮廓处理
+  @else if $is-outline {
+    // 完整轮廓设置
+    @if $property == 'outline' {
+      @if not index($exclude, top) and $top != null {
+        outline-top: $top;
+      }
+      @if not index($exclude, right) and $right != null {
+        outline-right: $right;
+      }
+      @if not index($exclude, bottom) and $bottom != null {
+        outline-bottom: $bottom;
+      }
+      @if not index($exclude, left) and $left != null {
+        outline-left: $left;
+      }
+    }
+    // 单边轮廓
+    @else {
+      $direction: str-slice($property, 8); // 提取方向
+      @if not index($exclude, $direction) {
+        #{$property}: $top;
+      }
+    }
+  }
+  
+  // 5. 定位处理
+  @else if $is-position {
+    // inset简写处理
+    @if $property == 'inset' {
+      @if not index($exclude, top) and $top != null {
+        top: $top;
+      }
+      @if not index($exclude, right) and $right != null {
+        right: $right;
+      }
+      @if not index($exclude, bottom) and $bottom != null {
+        bottom: $bottom;
+      }
+      @if not index($exclude, left) and $left != null {
+        left: $left;
+      }
+    }
+    // inset-block 和 inset-inline
+    @else if $property == 'inset-block' {
+      @if not index($exclude, top) and $top != null {
+        top: $top;
+      }
+      @if not index($exclude, bottom) and $bottom != null {
+        bottom: $bottom;
+      }
+    }
+    @else if $property == 'inset-inline' {
+      @if not index($exclude, left) and $left != null {
+        left: $left;
+      }
+      @if not index($exclude, right) and $right != null {
+        right: $right;
+      }
+    }
+    // 单一定位
+    @else {
+      @if not index($exclude, $property) {
+        #{$property}: $top;
+      }
+    }
+  }
+  
+  // 6. 尺寸处理
+  @else if $is-size {
+    @if $property == 'block-size' {
+      @if not index($exclude, top) and $top != null {
+        height: $top;
+      }
+    }
+    @else if $property == 'inline-size' {
+      @if not index($exclude, left) and $left != null {
+        width: $left;
+      }
+    }
+  }
+}
+
+// =======================================================================
+// 快捷混合宏：标准属性
+// =======================================================================
+@mixin padding($values, $exclude: ()) {
+  @include directional-property(padding, $values, $exclude);
+}
+
+@mixin margin($values, $exclude: ()) {
+  @include directional-property(margin, $values, $exclude);
+}
+
+@mixin border-radius($values, $exclude: ()) {
+  @include directional-property(border-radius, $values, $exclude);
+}
+
+// =======================================================================
+// 快捷混合宏：边框属性
+// =======================================================================
+@mixin border($value, $exclude: ()) {
+  @include directional-property(border, $value, $exclude);
+}
+
+@mixin border-top($value, $exclude: ()) {
+  @include directional-property(border-top, $value, $exclude);
+}
+
+@mixin border-right($value, $exclude: ()) {
+  @include directional-property(border-right, $value, $exclude);
+}
+
+@mixin border-bottom($value, $exclude: ()) {
+  @include directional-property(border-bottom, $value, $exclude);
+}
+
+@mixin border-left($value, $exclude: ()) {
+  @include directional-property(border-left, $value, $exclude);
+}
+
+// =======================================================================
+// 快捷混合宏：轮廓属性
+// =======================================================================
+@mixin outline($value, $exclude: ()) {
+  @include directional-property(outline, $value, $exclude);
+}
+
+@mixin outline-top($value, $exclude: ()) {
+  @include directional-property(outline-top, $value, $exclude);
+}
+
+@mixin outline-right($value, $exclude: ()) {
+  @include directional-property(outline-right, $value, $exclude);
+}
+
+@mixin outline-bottom($value, $exclude: ()) {
+  @include directional-property(outline-bottom, $value, $exclude);
+}
+
+@mixin outline-left($value, $exclude: ()) {
+  @include directional-property(outline-left, $value, $exclude);
+}
+
+// =======================================================================
+// 快捷混合宏：定位属性
+// =======================================================================
+@mixin inset($values, $exclude: ()) {
+  @include directional-property(inset, $values, $exclude);
+}
+
+@mixin inset-block($values, $exclude: ()) {
+  @include directional-property(inset-block, $values, $exclude);
+}
+
+@mixin inset-inline($values, $exclude: ()) {
+  @include directional-property(inset-inline, $values, $exclude);
+}
+
+@mixin top($value, $exclude: ()) {
+  @include directional-property(top, $value, $exclude);
+}
+
+@mixin right($value, $exclude: ()) {
+  @include directional-property(right, $value, $exclude);
+}
+
+@mixin bottom($value, $exclude: ()) {
+  @include directional-property(bottom, $value, $exclude);
+}
+
+@mixin left($value, $exclude: ()) {
+  @include directional-property(left, $value, $exclude);
+}
+
+// =======================================================================
+// 快捷混合宏：尺寸属性
+// =======================================================================
+@mixin block-size($value, $exclude: ()) {
+  @include directional-property(block-size, $value, $exclude);
+}
+
+@mixin inline-size($value, $exclude: ()) {
+  @include directional-property(inline-size, $value, $exclude);
+}
+
+// =======================================================================
+// 组合混合宏
+// =======================================================================
+// 带圆角的边框
+@mixin bordered($border-value, $radius-value) {
+  @include border($border-value);
+  @include border-radius($radius-value);
+}
+
+// 绝对定位容器
+@mixin absolute-container($inset: 0) {
+  position: absolute;
+  @include inset($inset);
+}
+
+// 固定定位容器
+@mixin fixed-container($inset: 0) {
+  position: fixed;
+  @include inset($inset);
+}
+
+// =======================================================================
+// 圆角辅助混合宏
+// =======================================================================
+@mixin border-top-radius($value) {
+  @include border-radius($value 0 0, (bottom-right, bottom-left));
+}
+
+@mixin border-right-radius($value) {
+  @include border-radius(0 $value 0 0, (top-left, bottom-left));
+}
+
+@mixin border-bottom-radius($value) {
+  @include border-radius(0 0 $value, (top-right, top-left));
+}
+
+@mixin border-left-radius($value) {
+  @include border-radius(0 0 0 $value, (top-right, bottom-right));
+}

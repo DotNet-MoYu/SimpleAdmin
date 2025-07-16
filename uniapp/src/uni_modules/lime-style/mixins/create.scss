@@ -1,0 +1,336 @@
+// #ifdef VUE3 || VUE2 && uniVersion >= 4.56
+@use "sass:math";
+// #endif
+
+$use-css-var: false !default; 
+
+@function div($dividend, $divisor) {
+	// #ifdef VUE3 || VUE2 && uniVersion >= 4.56
+	@return math.div($dividend, $divisor);
+	// #endif
+	// #ifndef VUE3 || VUE2 && uniVersion >= 4.56
+	@return $dividend / $divisor;
+	// #endif
+}
+
+// @function to-number($string) {
+//    $result: 0;
+//    $is-negative: str-slice($string, 1, 1) == '-';
+//    $length: str-length($string);
+   
+//    @if $is-negative {
+//        $string: str-slice($string, 2);
+//        $length: $length - 1;
+//     }
+	
+// 	$decimal-index: str-index($string, '.');
+	
+// 	@if $decimal-index {
+// 		$decimal-str: str-slice($string, $decimal-index + 1);
+// 		$decimal-length: str-length($decimal-str);
+// 		$length: $length - $decimal-length - 1;
+// 		$string: str-slice($string, 1, $decimal-index - 1);
+		
+// 		$result: to-number($decimal-str) * pow(10, $decimal-length * -1);
+// 	}
+//    $numbers:(
+// 	'0': 0,
+// 	'1': 1,
+// 	'2': 2,
+// 	'3': 3,
+// 	'4': 4,
+// 	'5': 5,
+// 	'6': 6,
+// 	'7': 7,
+// 	'8': 8,
+// 	'9': 9,
+//    );
+	
+// 	@for $i from 1 through $length {
+// 		$key: str-slice($string, $i, $i);
+// 		$number: map-get($numbers, $key);
+// 		$digit: if($number == 0, 0, if($length - $i > 0, pow(10, $length - $i), 0));
+// 		$result: $result + $digit * $number + if($length - $i == 0, $number, 0);
+// 	}
+// 	@return if($is-negative, $result * -1, $result) ;
+// }
+
+// // 由于vue2 h5和app不支持动态rpx 故转成px
+// @function rpx-to-px($rpx-string) {
+// 	@if type-of($rpx-string) == list {
+// 		$new-list: ();
+// 		@each $value in $rpx-string {
+// 			$v: $value + '';
+// 			$start: str-index($v, 'rpx');
+// 			@if $start {
+// 				 $new-list: append($new-list, rpx-to-px($v));
+// 			} @else {
+// 				$new-list: append($new-list, $value);
+// 			}
+// 		}
+// 		@return $new-list;
+// 	}
+	
+// 	@if type-of($rpx-string) == number and comparable($rpx-string, 1rpx) {
+// 		@return rpx-to-px($rpx-string + '');
+// 	}
+	
+// 	@if type-of($rpx-string) != string {
+// 	   @return $rpx-string;
+// 	}
+// 	$start: str-index($rpx-string, 'rpx');
+// 	$number-map: (
+// 		'-': 1,
+// 		'0': 1,
+// 		'1': 1,
+// 		'2': 1,
+// 		'3': 1,
+// 		'4': 1,
+// 		'5': 1,
+// 		'6': 1,
+// 		'7': 1,
+// 		'8': 1,
+// 		'9': 1,
+// 	   );
+// 	@if not $start {
+// 	  @return $rpx-string;
+// 	}
+// 	$result: '';
+// 	@while $start {
+// 		// 获取 'rpx' 前的数字
+// 		$number-end: $start - 1;
+// 		$number-start: $number-end;
+// 		@while $number-start > 0 and map-get($number-map, str-slice($rpx-string, $number-start, $number-start)) ==1 {
+// 			$number-start: $number-start - 1;
+// 		}
+// 		// 提取数字部分
+// 		$number: to-number(str-slice($rpx-string, $number-start + 1, $number-end));
+		
+// 		// 转换 'rpx' 到 'px'
+// 		// $px-value: ($number / 2) + 'px';
+// 		$px-value: div($number, 2) + 'px';
+// 		$result: $result + str-slice($rpx-string, 0, $number-start) + $px-value;
+		
+// 		// 更新字符串和起始位置
+// 		$rpx-string: str-slice($rpx-string, $start + 3);
+// 		$start: str-index($rpx-string, 'rpx');
+// 	}
+	
+// 	@return $result + $rpx-string;
+// }
+
+@function rpx-to-px($value) {
+  // 递归处理列表
+  @if type-of($value) == list {
+    $new-list: ();
+    @each $item in $value {
+      $new-list: append($new-list, rpx-to-px($item));
+    }
+    @return $new-list;
+  }
+  
+  // 处理数字类型 - 带 rpx 单位
+  @if type-of($value) == number and unit($value) == 'rpx' {
+    // 安全处理单位转换
+    @return calc-strip-unit($value) * 0.5 * 1px;
+  }
+  
+  // 处理字符串类型
+  @if type-of($value) == string {
+    $string: $value;
+    $rpx-index: str-index($string, 'rpx');
+    
+    // 如果字符串以数字开头并以 rpx 结尾，转换为数值
+    @if $rpx-index == (str-length($string) - 2) {
+      $num-str: str-slice($string, 1, $rpx-index - 1);
+      $number: to-number($num-str);
+      @if type-of($number) == number {
+        @return $number * 0.5 * 1px;
+      }
+    }
+    
+    // 字符串中可能包含多个 rpx 值
+    @if $rpx-index {
+      $result: '';
+      @while $rpx-index {
+        // 找到数字部分起点
+        $num-end: $rpx-index - 1;
+        $num-start: $num-end;
+        @while $num-start > 0 and is-numeric-char(str-slice($string, $num-start, $num-start)) {
+          $num-start: $num-start - 1;
+        }
+        
+        // 提取数字部分
+        $num-str: str-slice($string, $num-start + 1, $num-end);
+        $number: to-number($num-str);
+        
+        // 转换为 px 数值
+        $px-value: $number * 0.5 * 1px;
+        
+        // 构建结果字符串
+        $result: $result + str-slice($string, 1, $num_start) + '#{$px_value}';
+        
+        // 更新剩余字符串
+        $string: str-slice($string, $rpx-index + 3);
+        $rpx-index: str-index($string, 'rpx');
+      }
+      @return #{$result + $string};
+    }
+  }
+  
+  // 其他类型直接返回
+  @return $value;
+}
+
+// 辅助函数：安全去除单位并返回数值
+@function calc-strip-unit($number) {
+  @if type-of($number) == number {
+    $unit: unit($number);
+    $units: ("px": 1px, "rpx": 1rpx, "em": 1em, "rem": 1rem, "%": 1%);
+    
+    @if map-has-key($units, $unit) {
+      @return div($number , map-get($units, $unit));
+    }
+    
+    @if unitless($number) {
+      @return $number;
+    }
+  }
+  
+  @return $number;
+}
+
+// 辅助函数：检查字符是否为数字
+@function is-numeric-char($char) {
+  $chars: "-.0123456789";
+  @return str-index($chars, $char) != null;
+}
+
+// 辅助函数：将字符串安全转换为数字
+@function to-number($string) {
+  // 如果输入已经是数字，直接返回
+  @if type-of($string) == number {
+    @return $string;
+  }
+  
+  // 处理带符号的数字
+  $is-negative: false;
+  $numeric: "";
+  $found-number: false;
+  
+  // 提取所有数字字符
+  @for $i from 1 through str-length($string) {
+    $char: str-slice($string, $i, $i);
+    
+    @if $char == "-" and $numeric == "" {
+      $is-negative: true;
+    }
+    @else if $char == "." and str-index($numeric, ".") == null {
+      $numeric: $numeric + $char;
+    }
+    @else if $char >= "0" and $char <= "9" {
+      $numeric: $numeric + $char;
+      $found-number: true;
+    }
+  }
+  
+  // 如果有实际数字内容，转换为数值
+  @if $found-number {
+    $result: 0;
+    $decimal-index: str-index($numeric, ".");
+    
+    @if $decimal-index {
+      // 处理带小数的数字
+      $integer-part: str-slice($numeric, 1, $decimal-index - 1);
+      $decimal-part: str-slice($numeric, $decimal-index + 1);
+      
+      @if $integer-part == "" { $integer-part: "0"; }
+      
+      $result: to-integer($integer-part);
+      
+      $divisor: 1;
+      @for $i from 1 through str-length($decimal-part) {
+        $divisor: $divisor * 10;
+        $digit: to-integer(str-slice($decimal-part, $i, $i));
+        $result: $result + ($digit / $divisor);
+      }
+    } @else {
+      // 处理整数
+      $result: to-integer($numeric);
+    }
+    
+    @return if($is-negative, -$result, $result);
+  }
+  
+  // 无法转换则返回原字符串
+  @return $string;
+}
+
+// 辅助函数：将整数字符串转换为数字
+@function to-integer($string) {
+  $result: 0;
+  
+  @for $i from 1 through str-length($string) {
+    $char: str-slice($string, $i, $i);
+    $result: $result * 10 + (str-index("0123456789", $char) - 1);
+  }
+  
+  @return $result;
+}
+
+@function create-var($name, $values...) {
+	// 将不定数量的参数转换为列表
+	// $use-css-var: false; 
+	// $use-css-var: nth($values, -1) == false;
+	$value-list: $values;
+	$css-value: null;
+	
+	// @if type-of(nth($values, -1)) == bool {
+	// 	$use-css-var: nth($values, -1); // 获取布尔值
+	// 	// 移除最后一个元素（布尔值）
+	// 	$value-list: ();
+	// 	@for $i from 1 through (length($values) - 1) {
+	// 	    $value-list: append($value-list, nth($values, $i));
+	// 	}
+	// }
+	
+	@if length($value-list) == 0 {
+		// @warn "The list must have at least 1 values.";
+		@return '';
+	} @else {
+		// 初始化CSS变量的值为列表中的第一个值
+		/* #ifndef VUE2 */
+		$css-value: nth($value-list, 1);
+		/* #endif */
+		/* #ifdef VUE2 */
+		$css-value: rpx-to-px(nth($value-list, 1));
+		/* #endif */
+	}
+	// 检查列表长度是否大于等于2
+	@if length($value-list) >= 2 {
+	    // 使用@for循环遍历剩余的值，并构建CSS变量的完整值
+	    @for $i from 2 through length($value-list) {
+			/* #ifndef VUE2 */
+			$css-value: $css-value + ", " + nth($value-list, $i);
+			/* #endif */
+			/* #ifdef VUE2 */
+			$css-value: $css-value + ", " + rpx-to-px(nth($value-list, $i));
+			/* #endif */
+	    }
+	}
+	
+	/* #ifdef UNI-APP-X && APP && uniVersion >= 4.71*/
+	@if $use-css-var {
+		@return var(--l-#{$name}, #{$css-value});
+	} @else {
+		@return $css-value;
+	}
+	/* #endif */
+	
+	/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+	@return var(--l-#{$name}, #{$css-value});
+	/* #endif */
+	/* #ifdef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY  */
+	@return $css-value;
+	/* #endif */
+}

@@ -1,0 +1,319 @@
+<template>
+	<!-- #ifdef APP-IOS || APP-ANDROID -->
+	<web-view class="l-svg" ref="webRef" v-if="web" @error="error" @load="loaded" @message="message"
+		src="/uni_modules/lime-svg/hybrid/html/index.html?v=21"></web-view>
+	<!-- <l-svg-x class="l-svg" v-else :src="path" :color="color" @error="onError" @load="onLoad"
+		@click="$emit('click')"></l-svg-x> -->
+	<native-view class="l-svg" v-else v-bind="$attrs" @init="onviewinit" @error="onError" @load="onLoad"></native-view>	
+	<!-- #endif -->
+	<!-- #ifdef WEB -->
+	<view class="l-svg" v-if="src.startsWith('<svg')" v-html="src" :style="styles"></view>
+	<view class="l-svg" :class="{'is-inherit': isInherit}" v-else :style="styles">
+		<image class="l-svg-img" :src="src" @error="onError" @load="onLoad" />
+	</view>
+	<!-- #endif -->
+	<!-- #ifdef APP-HARMONY -->
+	<native-view class="l-svg" v-bind="$attrs" @init="onviewinit" @error="onError" @load="onLoad"></native-view>
+	<!-- #endif -->
+	<!-- #ifndef APP-IOS || APP-ANDROID || APP-HARMONY  || WEB -->
+	<view class="l-svg" :class="{'is-inherit': isInherit}" :style="styles">
+		<image class="l-svg-img" :src="path" @error="onError" @load="onLoad"></image>
+	</view>
+	<!-- #endif -->
+</template>
+
+<script setup lang="uts">
+	/**
+	 * Svg SVG组件
+	 * @description 用于渲染SVG路径元素，支持动态颜色和继承属性
+	 * <br>插件类型：LSvpComponentPublicInstance 
+	 * @tutorial https://ext.dcloud.net.cn/plugin?name=lime-svg
+	 * 
+	 * @property {string} src SVG路径
+	 * @property {string} color 路径颜色（默认："currentColor"）
+	 * @property {boolean} web 是否启用Web优化模式（默认：false）
+	 * @property {boolean} inherit 是否继承父级SVG属性（默认：true）
+	 * @event {Function} load SVG路径加载完成时触发
+	 * @event {Function} error SVG路径加载失败时触发
+	 */
+	
+	import { LSvpProps } from './type'
+	// #ifndef APP-ANDROID || APP-IOS || APP-HARMONY || WEB
+	import { pathToDataUrl, svgToDataUrl } from './utils'
+	// #endif
+	// #ifdef APP-ANDROID || APP-IOS
+	import { pathToDataUrl, svgToDataUrl } from './utils'
+	// #endif
+	// #ifdef APP
+	import { NativeImage } from "@/uni_modules/lime-svg";
+	let nativeImage : NativeImage | null = null
+	// #endif
+
+
+	const props = withDefaults(defineProps<LSvpProps>(), {
+		src: '',
+		color: '',
+		web: false,
+		inherit: false
+	})
+	
+	const emit = defineEmits(['load', 'error'])
+	const path = ref(props.src)
+	const svgRef = ref<UniElement | null>(null)
+	// #ifndef APP-ANDROID || APP-IOS
+	const isInherit = computed(() : boolean => {
+		return props.color != ''
+	})
+	// #endif
+	
+	
+	const imageURL = ref('')
+	const formatUrl = (url : string, action : string) : string => {
+		if (url.indexOf(`'`) > 0) return `${action}("${url}")`
+		return `${action}('${url}')`
+	}
+	const styles = computed(() : Map<string, string> => {
+		const style = new Map<string, string>()
+		// #ifdef WEB
+		if (props.src != '' && !props.src.startsWith('<svg')) {
+			// style.set('--svg', formatUrl(props.src, 'url'))
+			style.set('--svg', formatUrl(imageURL.value ?? props.src, 'url'))
+		}
+		// #endif
+		// #ifndef APP || WEB
+		if (path.value != '') {
+			// style.set('--svg', formatUrl(props.src, 'url'))
+			style.set('--svg', formatUrl(path.value, 'url'))
+		}
+		// #endif
+		if (props.color != '') {
+			style.set('color', props.color)
+		}
+		return style
+	})
+
+	
+
+
+
+	// #ifdef APP-ANDROID
+	const errorDetaill = new UniImageErrorEventDetail('加载失败')
+	const errorEvent = new UniImageErrorEvent('error', errorDetaill)
+	// #endif
+	// #ifndef APP-ANDROID
+	const errorDetaill = {
+		errMsg: '加载失败'
+	}
+	const errorEvent = {
+		type: 'error',
+		detaill: errorDetaill
+	}
+	// #endif
+
+	const onError = () => {
+		emit('error', errorEvent)
+	}
+	const onLoad = (e : UniNativeViewEvent) => {
+		// #ifdef WEB
+		// @ts-ignore
+		imageURL.value = e.target.src
+		// #endif
+		// #ifdef APP-ANDROID
+		const detail = new ImageLoadEventDetail(512, 512)
+		const loadEvent = new UniImageLoadEvent('load', detail)
+		// #endif
+		// #ifndef APP-ANDROID
+		const detail = {
+			width: 512,
+			height: 512
+		}
+		const loadEvent = {
+			type: 'load',
+			detail
+		}
+		// #endif
+		emit('load', loadEvent)
+	}
+	// app
+	// #ifdef APP-ANDROID || APP-IOS
+	const webRef = ref<UniWebViewElement | null>(null)
+	const setSvgSrc = () => {
+		if (path.value != '') {
+			webRef.value?.evalJS(formatUrl(path.value, 'setSrc'));
+		}
+	}
+	const setSvgColor = () => {
+		if (props.color != '' && path.value != '') {
+			webRef.value?.evalJS(`setStyle({"--color": "${props.color}"})`);
+		}
+	}
+	const error = (_ : UniWebViewErrorEvent) => {
+		emit('error', errorEvent)
+	}
+	const loaded = (_ : UniWebViewLoadEvent) => {
+		watchEffect(() => {
+			if (props.src == '' || !props.web) return
+			if (props.src.startsWith('<svg')) {
+				path.value = svgToDataUrl(props.src)
+				setSvgSrc()
+				setSvgColor()
+			} else if (props.src.startsWith('/static')) {
+				pathToDataUrl(props.src).then(res => {
+					path.value = res;
+					setSvgSrc()
+					setSvgColor()
+				}).catch(err => {
+					emit('error', errorEvent)
+					console.warn("[lime-svg]" + props.src + JSON.stringify(err))
+				})
+			} else {
+				path.value = props.src
+				setSvgSrc()
+				setSvgColor()
+			}
+		})
+	}
+	const message = (event : UniWebViewMessageEvent) => {
+		const data = UTSJSONObject.assign({}, event.detail.data[0] as UTSJSONObject);  //event.detail.data[0] as UTSJSONObject
+		const type = data.getString('event')
+		// #ifdef APP-ANDROID
+		const detail = data.getJSON('data')?.getJSON('detail')
+		// #endif
+		// #ifndef APP-ANDROID
+		const detail = UTSJSONObject.assign({}, data?.data?.detail ?? {})
+		// #endif
+		if (type == 'click') {
+			emit('click')
+		} else if (type == 'load') {
+			const width = detail?.getNumber('width') ?? 512
+			const height = detail?.getNumber('height') ?? 512
+			// #ifdef APP-ANDROID
+			const loadDetail = new ImageLoadEventDetail(width, height)
+			const loadEvent = new UniImageLoadEvent('load', loadDetail)
+			// #endif
+			// #ifndef APP-ANDROID
+			const loadDetail = {
+				width,
+				height
+			}
+			const loadEvent = {
+				type: 'error',
+				detail: loadDetail
+			}
+			// #endif
+			emit(type, loadEvent)
+		} else if (type == 'error') {
+			emit(type, errorEvent)
+		}
+	}
+	// #endif
+
+
+	// #ifdef APP
+	function onviewinit(e : UniNativeViewInitEvent) {
+		nativeImage = new NativeImage(e.detail.element);
+		nativeImage?.updateSrc(path.value)
+		nativeImage?.updateColor(props.color)
+	}
+	const map = new Map<string, string>()
+	watchEffect(() => {
+		// #ifdef APP-ANDROID || APP-IOS
+		// ios uts组件使用uni.request会报错，故在这里使用
+		if (!props.web && props.src.startsWith('http')) {
+			if(map.has(props.src)) {
+				nativeImage?.updateSrc(map.get(props.src)!)
+				return
+			}
+			uni.downloadFile({
+				url: props.src,
+				success(res) {
+					path.value = res.tempFilePath
+					map.set(props.src, res.tempFilePath)
+					nativeImage?.updateSrc(res.tempFilePath)
+				}
+			})
+		} else {
+			// const a = UTSAndroid.convert2AbsFullPath(props.src)
+			path.value = props.src;
+			nativeImage?.updateSrc(props.src)
+		}
+		// #endif
+		// #ifdef APP-HARMONY
+		path.value = props.src;
+		nativeImage?.updateSrc(props.src)
+		// #endif
+	})
+	watchEffect(() => {
+		nativeImage?.updateColor(props.color)
+	})
+	// #endif
+
+	
+
+	// 小程序
+	// #ifndef APP || WEB
+	watchEffect(() => {
+		if (props.src == '') return
+		if (props.src.startsWith('<svg')) {
+			path.value = svgToDataUrl(props.src)
+		} else if (props.src.startsWith('/static')) {
+			pathToDataUrl(props.src).then(res => {
+				path.value = res;
+			}).catch(err => {
+				emit('error', errorEvent)
+				console.warn("[lime-svg]" + props.src + JSON.stringify(err))
+			})
+		} else {
+			path.value = props.src
+		}
+	})
+	// #endif
+</script>
+
+<style lang="scss">
+	.l-svg {
+		// align-self: flex-start;
+		/* #ifdef APP */
+		width: 24px;
+		height: 24px;
+		/* #endif */
+		/* #ifndef APP */
+		width: 1em;
+		height: 1em;
+		/* #endif */
+		/* #ifndef APP */
+		:deep(svg) {
+			width: 100%;
+			height: 100%;
+		}
+
+		&-img {
+			mix-blend-mode: lighten;
+			width: 100%;
+			height: 100%;
+		}
+
+		&.is-inherit {
+			-webkit-mask-image: var(--svg);
+			mask-image: var(--svg);
+			-webkit-mask-repeat: no-repeat;
+			mask-repeat: no-repeat;
+			-webkit-mask-size: 100% 100%;
+			mask-size: 100% 100%;
+			background-color: currentColor;
+		}
+
+		&:not(.is-inherit) {
+			background: var(--svg) no-repeat;
+			background-size: 100% 100%;
+			background-color: transparent;
+
+			image {
+				mix-blend-mode: inherit;
+				opacity: 0;
+			}
+		}
+
+		/* #endif */
+	}
+</style>

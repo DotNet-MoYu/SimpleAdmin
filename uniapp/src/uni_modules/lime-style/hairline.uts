@@ -1,0 +1,153 @@
+import { unitConvert } from '@/uni_modules/lime-shared/unitConvert';
+
+export type DrawBorderOptions = {
+	direction : 'top' | 'bottom' | 'left' | 'right';
+	color ?: string;
+	colorKey ?: string; // 在dom中获取颜色
+	startOffsetKey?: string; // 在dom哪个属性获取
+	startOffset ?: number | string; // 支持数字或 CSS 字符串（如 '10px'）
+	endOffset ?: number | string;
+	lineWidth ?: number;
+	watchSize ?: boolean; // 是否监听尺寸变化自动重绘
+	immediate ?: boolean; // 是否立即绘制
+	bordered?: boolean;
+	
+}
+
+export type UseDrawBorderReturn = {
+	color: Ref<string>,
+	renderBorder: () => void,
+	clearBorder: () => void;
+	dispose: () => void,
+}
+/**
+ * 在元素上绘制边框，并支持动态监听尺寸变化
+ * @param elementRef 目标元素的 Ref
+ * @param options 边框配置
+ * @returns 清理函数（用于卸载时取消监听）
+ */
+export function useDrawBorder(
+	elementRef : Ref<UniElement | null>,
+	options : DrawBorderOptions
+):UseDrawBorderReturn {
+	let resizeObserver : UniResizeObserver | null = null;
+	const { watchSize = true, immediate = true } = options;
+	const defalutColor = '#e7e7e7'
+	const color = ref(options.color ?? defalutColor)
+	const bordered = ref(options.bordered ?? true)
+	let computedStartOffset = 0
+	let computedEndOffset = 0
+	
+	// 绘制边框
+	const renderBorder = () => {
+		if (elementRef.value == null) return;
+		const ctx = elementRef.value!.getDrawableContext();
+		if (ctx == null) return;
+
+		const rect = elementRef.value!.getBoundingClientRect();
+		ctx.reset();
+
+		const {
+			direction,
+			startOffset = 0,
+			endOffset = 0,
+			lineWidth = 0.5,
+			colorKey,
+			startOffsetKey,
+		} = options;
+		 
+		
+		// 转换单位（如果是字符串，如 '10px'）
+		if(computedStartOffset == 0) {
+			computedStartOffset = unitConvert((startOffsetKey != null ? elementRef.value?.style.getPropertyValue(startOffsetKey!) ?? startOffset : startOffset))
+		}
+		if(computedEndOffset == 0) {
+			computedEndOffset = unitConvert(endOffset)
+		}
+		
+		if(color.value == defalutColor && colorKey != null) {
+			color.value = elementRef.value?.style.getPropertyValue(colorKey!) ?? defalutColor
+			// if(color.value.length == 0) {
+			// 	color.value = defalutColor
+			// }
+		}
+		ctx.strokeStyle = color.value;
+		ctx.lineWidth = lineWidth;
+
+		// 根据方向计算坐标
+		switch (direction) {
+			case 'top':
+				ctx.moveTo(computedStartOffset, 0);
+				ctx.lineTo(rect.width - computedEndOffset, 0);
+				break;
+			case 'bottom':
+				ctx.moveTo(computedStartOffset, rect.height - 0.25);
+				ctx.lineTo(rect.width - computedEndOffset, rect.height - 0.25);
+				break;
+			case 'left':
+				ctx.moveTo(0, computedStartOffset);
+				ctx.lineTo(0, rect.height - computedEndOffset);
+				break;
+			case 'right':
+				ctx.moveTo(rect.width, computedStartOffset);
+				ctx.lineTo(rect.width, rect.height - computedEndOffset);
+				break;
+		}
+
+		ctx.stroke();
+		ctx.update();
+	};
+	
+	const setupResizeObserver = () => {
+		// 监听尺寸变化（如果启用）
+		if (watchSize) {
+			if (resizeObserver == null) {
+				resizeObserver = new UniResizeObserver((entries : Array<UniResizeObserverEntry>) => {
+					if(!bordered.value) return
+					renderBorder();
+				})
+			}
+			watchEffect(()=>{
+				if (elementRef.value != null) {
+					resizeObserver!.observe(elementRef.value!);
+				}
+			})
+		}
+	}
+	
+
+	// 清理函数（卸载时取消监听）
+	const dispose = () => {
+		if (resizeObserver != null && elementRef.value != null) {
+			// resizeObserver.unobserve(elementRef.value!);
+			resizeObserver!.disconnect();
+			resizeObserver = null;
+		}
+	};
+	
+	const clearBorder = ()=> {
+		if (elementRef.value == null) return;
+		const ctx = elementRef.value!.getDrawableContext();
+		if (ctx == null) return;
+		bordered.value = false
+		ctx.reset()
+		ctx.update()
+	}
+	
+	setupResizeObserver()
+	// 初始绘制
+	if(immediate) {
+		renderBorder();
+	}
+	
+	
+	
+	
+	return {
+		renderBorder, // 手动触发绘制
+		dispose,    // 清理监听
+		clearBorder,
+		color
+	} as UseDrawBorderReturn
+	
+}

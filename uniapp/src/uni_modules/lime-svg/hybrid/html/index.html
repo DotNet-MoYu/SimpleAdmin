@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>lime-svg</title>
+		<style>
+			html,
+			body,
+			img,
+			div {
+				padding: 0;
+				margin: 0;
+				width: 100%;
+				height: 100%;
+				position: relative;
+				overflow: hidden;
+				pointer-events: none;
+			}
+
+			html,
+			body {
+				background-color: transparent;
+			}
+
+			#lime-icon {
+				transition: all 100ms;
+			}
+
+			#lime-icon.is-inherit {
+				-webkit-mask-image: var(--svg);
+				mask-image: var(--svg);
+				-webkit-mask-repeat: no-repeat;
+				mask-repeat: no-repeat;
+				-webkit-mask-size: 100% 100%;
+				mask-size: 100% 100%;
+				background-color: var(--color, transparent);
+				/* 设置背景颜色为--color的值，默认为透明 */
+				/* background-blend-mode: multiply; */
+			}
+
+			#lime-icon:not(.is-inherit) {
+				background: var(--svg) no-repeat;
+				background-size: 100% 100%;
+				background-color: transparent;
+			}
+
+			#lime-image {
+				mix-blend-mode: lighten;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="lime-icon">
+			<img id="lime-image" />
+		</div>
+		<script type="text/javascript" src="uni.webview.1.5.5.js"></script>
+		<script>
+			const image = document.getElementById('lime-image');
+			const icon = document.getElementById('lime-icon');
+			let lastSrc = ''
+
+			function setSrc(src) {
+				if (lastSrc == src) return
+				lastSrc = src;
+				const _src = src.split('<svg')
+				if (_src.length > 1) {
+					src = (_src[0] == '' ? 'data:image/svg+xml,' : _src[0]) + encodeURIComponent('<svg' + _src[1])
+				}
+				// src = src.replace(/#/g, '%23').replace(/"/g, `'`)
+
+
+				image.src = src
+				// icon.style.setProperty('--svg', `url('${src}')`);
+				icon.style.setProperty('--svg', `url("${src}")`);
+				// icon.style.setProperty('--svg', `url(${src})`);
+				image.onload = (e) => {
+					emit('load', {
+						type: "load",
+						timeStamp: e.timeStamp,
+						detail: {
+							width: image.naturalWidth,
+							height: image.naturalHeight,
+						}
+					})
+				}
+				image.onerror = (e) => {
+					emit('error', {
+						type: "error",
+						timeStamp: e.timeStamp,
+						detail: {
+							width: image.naturalWidth,
+							height: image.naturalHeight,
+						}
+					})
+				}
+			}
+
+			function setStyle(style) {
+				if (typeof style === 'object') {
+					for (let [key, value] of Object.entries(style)) {
+						if (key == '--color') {
+							if (value) {
+								icon.classList.add('is-inherit')
+							} else {
+								value = 'black'
+							}
+						}
+						icon.style.setProperty(key, value);
+					}
+				}
+			}
+
+			function emit(event, data = {}) {
+				postMessage({
+					event,
+					data
+				});
+			};
+
+			function postMessage(data) {
+				uni.webView.postMessage({data})
+
+				// if (window.__uniapp_x_) {
+				// 	window.__uniapp_x_.postMessage(JSON.stringify(data))
+				// } else if (uni.webView.postMessage) {
+				// 	uni.webView.postMessage({
+				// 		data
+				// 	})
+				// }
+			};
+
+			// setStyle({
+			// 	color: 'red',
+			// })
+			// setSrc('https://api.iconify.design/bi/bell-fill.svg')
+
+			// 禁用所有事件
+			document.addEventListener('mousedown', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+
+			document.addEventListener('mouseup', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+
+			document.addEventListener('click', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+				emit('click')
+			});
+
+			document.addEventListener('keydown', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+
+			document.addEventListener('keyup', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+
+			document.addEventListener('keypress', function(event) {
+				event.stopImmediatePropagation();
+				event.preventDefault();
+				event.stopPropagation();
+			});
+		</script>
+	</body>
+</html>

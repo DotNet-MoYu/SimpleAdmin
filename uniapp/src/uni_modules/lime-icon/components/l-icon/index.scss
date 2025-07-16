@@ -1,0 +1,66 @@
+// 公共前缀
+@import '@/uni_modules/lime-style/index.scss';
+@import './icon';
+
+/* #ifdef  uniVersion >= 4.75 */ 
+$use-css-var: true;
+/* #endif */
+
+$prefix: l !default;
+$icon: #{$prefix}-icon;
+
+/* #ifdef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+$icon-size: create-var(icon-size, 32px);
+$icon-color: create-var(icon-color, $text-color-1);
+/* #endif */
+
+
+
+/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+$icon-size: create-var(icon-size, 1em);
+$icon-color: create-var(icon-color, currentColor);
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+/* #endif */
+
+
+.#{$icon} {
+	/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+	font-family: $prefix;
+	display: inline-flex;
+	position: relative;
+	/* #endif */
+	
+	&--font {
+		font-family: $prefix;
+		text-align: center;
+		font-size: $icon-size;
+		color: $icon-color;
+		/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+		font-style: normal;
+		font-weight: normal;
+		font-variant: normal;
+		text-transform: none;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		// -webkit-background-clip: text;
+		// background-clip: text;
+		/* #endif */
+	}
+	&--image {
+		width: $icon-size;
+		height: $icon-size;
+		/* #ifndef APP-NVUE || APP-ANDROID || APP-IOS || APP-HARMONY */
+		display: block;
+		/* #endif */
+		/* #ifdef WEB */
+		position: relative;
+		::deep(img) {
+			z-index: -1;
+		}
+		/* #endif */
+	}
+}

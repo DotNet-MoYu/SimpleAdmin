@@ -1,0 +1,72 @@
+@import './mixins/create.scss';
+// 公共前缀
+$prefix: l;
+
+// Spacer
+$spacer: 	 create-var('spacer', 32rpx); // base
+$spacer-tn:  create-var('spacer-tn', 8rpx); // Tiny
+$spacer-xs:  create-var('spacer-xs', 16rpx); // Extra Small
+$spacer-sm:  create-var('spacer-sm', 24rpx); // Small
+$spacer-md:  create-var('spacer-md', 48rpx); // Medium
+$spacer-lg:  create-var('spacer-lg', 64rpx); // Large
+$spacer-xl:  create-var('spacer-xl', 96rpx); // Extra Large
+$spacer-hg:  create-var('spacer-hg', 160rpx); // Huge //Ultra Big
+
+// Font 官方建议字体不跟随页面变化
+// $font-size:    create-var('font-size', 28rpx);
+// $font-size-xs: create-var('font-size-xs', 20rpx);
+// $font-size-sm: create-var('font-size-sm', 24rpx);
+// $font-size-md: create-var('font-size-md', 32rpx);
+// $font-size-lg: create-var('font-size-lg', 40rpx);
+// $font-size-xl: create-var('font-size-xl', 72rpx);
+$font-size:    create-var('font-size', 14px);
+$font-size-xs: create-var('font-size-xs', 10px);
+$font-size-sm: create-var('font-size-sm', 12px);
+$font-size-md: create-var('font-size-md', 16px);
+$font-size-lg: create-var('font-size-lg',20px);
+$font-size-xl: create-var('font-size-xl', 36px);
+
+$font-size-heading-1: create-var('font-size-heading-1', 76rpx);
+$font-size-heading-2: create-var('font-size-heading-2', 60rpx);
+$font-size-heading-3: create-var('font-size-heading-3', 48rpx);
+$font-size-heading-4: create-var('font-size-heading-4', 40rpx);
+$font-size-heading-5: create-var('font-size-heading-5', 32rpx);
+
+
+$font-family:    create-var('font-family', PingFang SC, Microsoft YaHei, Arial Regular); // 字体-磅数-常规
+$font-family-md: create-var('font-family-md', PingFang SC, Microsoft YaHei, Arial Medium); // 字体-磅数-粗体
+
+
+// 行高
+$line-height:    create-var('line-height', 1.5714285714285714);
+$line-height-sm: create-var('line-height-sm', 1.6666666666666667);
+$line-height-md: create-var('line-height-lg', 1.5);
+$line-height-lg: create-var('line-height-lg', 1.4);
+
+$line-height-heading-1: create-var('line-height-heading-1', 1.2105263157894737);
+$line-height-heading-2: create-var('line-height-heading-2', 1.2666666666666666);
+$line-height-heading-3: create-var('line-height-heading-3', 1.3333333333333333);
+$line-height-heading-4: create-var('line-height-heading-4', 1.4);
+$line-height-heading-5: create-var('line-height-heading-5', 1.5);
+
+
+// 圆角
+$border-radius: 	create-var('border-radius', 12rpx);
+$border-radius-xs: 	create-var('border-radius-xs', 4rpx);
+$border-radius-sm: 	create-var('border-radius-sm', 6rpx);
+$border-radius-md: 	create-var('border-radius-md', 12rpx);
+$border-radius-lg: 	create-var('border-radius-lg', 18rpx);
+$border-radius-xl: 	create-var('border-radius-xl', 24rpx);
+$border-radius-hg:  create-var('border-radius-hg', 999px);
+// $border-radius-circle: var(--l-border-radius-circle, 50%);
+
+
+// 动画
+$anim-time-fn-easing: 		create-var('anim-time-fn-easing', cubic-bezier(0.38, 0, 0.24, 1));
+$anim-time-fn-ease-out: 	create-var('anim-time-fn-ease-out', cubic-bezier(0, 0, 0.15, 1));
+$anim-time-fn-ease-in: 		create-var('anim-time-fn-ease-in', cubic-bezier(0.82, 0, 1, 0.9));
+$anim-duration-base: 		create-var('anim-duration-base', 0.2s);
+$anim-duration-moderate: 	create-var('anim-duration-moderate', 0.24s);
+$anim-duration-slow: 		create-var('anim-duration-slow', 0.28s);
+
+
