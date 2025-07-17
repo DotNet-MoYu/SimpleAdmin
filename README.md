@@ -12,7 +12,7 @@
 
 ## 🎨 框架介绍
 
-🪶SimpleAdmin 是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于 ElementUI+Vue3+TypeScript,后端基于.NET6/7/8+SqlSugar 单例模式。采用 RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制。代码注释覆盖率大于`90%`,非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
+🪶SimpleAdmin 是一个小而美的通用业务型后台管理系统，专为解决开发过程中的痛点难点而生。前端基于 ElementUI+Vue3+TypeScript,后端基于.NET6/7/8+SqlSugar 单例模式。移动端基于 Uniapp+Typescript+Vue3.采用 RBAC+多机构的权限管理模式，实现全网最灵活的接口级别数据权限控制。代码注释覆盖率大于`90%`,非常适合二次开发。将日常开发中的业务场景和框架紧密结合，并坚持以人为本,以业务为中心,做到开箱即用,代码简洁、易扩展，注释详细，文档齐全，让你的开发少走弯路。
 
 ## 🎓 设计初衷和理念
 
@@ -34,7 +34,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 全网最灵活的接口级别数据范围权限控制，可以指定某个角色/人员的某个接口的数据权限范围。
 - 后端源码注释覆盖率超过<font color="#dd0000">90%</font><br />,每一个方法,每一步都有详细的解释和说明，根据注释和文档也能轻易看懂和二次开发,不用每天在群里问一些非常基础的问题，节约了大量的开发时间。
 
-### 📱 对于前端
+### 💻 对于前端
 
 - 基于 Vue3.3、Vite4、TS、Pinia、Element-Plus 等最新技术栈开发
 - 基于[GeeKer Admin](https://docs.spicyboy.cn/),界面比同类型 UI 更清爽又美观。
@@ -42,6 +42,21 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 提供丰富的组件、常用 Hooks 封装，在一定程度上节省你造轮子的时间。
 - 提供多种布局方式切换，主题颜色配置，暗黑、灰色、色弱等模式。
 - 丰富的代码注释,每一个页面都有解释说明,新手也能快速上手。
+
+### 📱 对于移动端
+
+- Vue 3, Vite, pnpm, esbuild - 就是快！
+- UnoCSS - 高性能且极具灵活性的即时原子化 CSS 引擎
+- UnoCSS Icons & icones - 海量图标供你选择。
+- pinia & pinia-plugin-persistedstate - 全端适配的全局数据管理
+- uni.request 请求封装 - 一键引入，快捷使用
+- uni-mini-router 路由拦截,快捷使用，拒绝黑盒
+- API 自动加载 - 直接使用 Composition API 无需引入
+- v3 Code Snippets 加快你的页面生成
+- Pritter & ESLint & Stylelint & husky & lint-staged + commitlint - 保证代码质量
+- TypeScript 加持，同时又兼容 js ，同时满足不同人群
+- ES6 import 自动排序，css 属性 自动排序，增强编码一致性
+- 多环境 配置分开，想则怎么配置就怎么配置
 
 ## 💵 适用场景
 
@@ -70,7 +85,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - js
   js 版本的分支,适配于 js 版本前端的代码
 
-## 🚩 效果展示
+## 🚩 桌面端展示
 
 <table>
     <tr>
@@ -88,6 +103,19 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
     <tr>
         <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/icon.png"/></td>
         <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/choose.png"/></td>
+    </tr>
+</table>
+
+## 🚩 移动端展示
+
+<table>
+    <tr>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/uniapp_login.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/uniapp_index.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/uniapp_work.png"/></td>
+        <td><img src="https://cdn.jsdelivr.net/gh/huguodong/doc-images@main/simple/uniapp_mine.png"/></td>
     </tr>
 </table>
 
@@ -113,6 +141,7 @@ SimpleAdmin 更像是一种信念，它以代码的形式表达了我们对简�
 - 👉 MagicodesIE: [https://github.com/dotnetcore/Magicodes.IE](https://github.com/dotnetcore/Magicodes.IE)
 
 [![驰骋工作流](images/hz1.png)](https://ccflow.org/index.html?frm=simple)
+
 ## 👏 鸣谢 👏
 
 - 感谢 JetBrains 提供的免费开源 License：
