@@ -46,6 +46,7 @@
       <wd-grid :column="4">
         <!-- 首页设置 -->
         <wd-grid-item
+          custom-class="custom-item"
           icon-size="36px"
           use-icon-slot
           text="首页设置"
@@ -63,6 +64,7 @@
 
         <!-- 建设中 1 -->
         <wd-grid-item
+          custom-class="custom-item"
           icon-size="36px"
           use-icon-slot
           text="建设中"
@@ -80,6 +82,7 @@
 
         <!-- 建设中 2 -->
         <wd-grid-item
+          custom-class="custom-item"
           icon-size="36px"
           use-icon-slot
           text="建设中"
@@ -97,6 +100,7 @@
 
         <!-- 建设中 3 -->
         <wd-grid-item
+          custom-class="custom-item"
           icon-size="36px"
           use-icon-slot
           text="建设中"
@@ -340,6 +344,13 @@ function handleLogout() {
     border-radius: 12rpx;
 
     --wot-button-border-radius: 5rpx;
+  }
+}
+
+:deep(.custom-item) {
+  .wd-grid-item__text {
+    margin-top: 25rpx; // 可根据需要调整间距大小
+    text-align: center;
   }
 }
 </style>
