@@ -25,6 +25,7 @@ import { initDynamicRouter } from "@/routers/modules/dynamicRouter";
 import { ElNotification } from "element-plus";
 import { getTimeState } from "@/utils";
 import router from "@/routers";
+import { TabsMenuProps } from "../interface";
 
 const name = "simple-auth"; // 定义模块名称
 
@@ -133,10 +134,24 @@ export const useAuthStore = defineStore({
           const tabsStore = useTabsStore();
           const keepAliveStore = useKeepAliveStore();
           const messageStore = useMessageStore();
-          // 3.清空 tabs、keepAlive 数据
-          tabsStore.setTabs([]);
+          // 3.清空keepAlive 数据
           keepAliveStore.setKeepAliveName([]);
           messageStore.reSet();
+          const home = this.authMenuList.filter(item => item.path === path); // 获取首页
+          if (home.length) {
+            //定义tab
+            const tabsParams: TabsMenuProps[] = [
+              {
+                icon: home[0].meta.icon as string,
+                title: home[0].meta.title as string,
+                path: path,
+                name: home[0].name as string,
+                close: !home[0].meta.isAffix,
+                isKeepAlive: home[0].meta.isKeepAlive as boolean
+              }
+            ];
+            tabsStore.setTabs(tabsParams); // 添加首页tab
+          }
           // 4.跳转到首页
           router.push(path);
           ElNotification({
