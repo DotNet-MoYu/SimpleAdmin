@@ -26,6 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="SimpleMQTT" Version="1.0.6"/>
+        <PackageReference Include="SimpleMQTT" Version="1.0.7"/>
     </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="SqlSugarCore" Version="5.1.4.166"/>
+        <PackageReference Include="SqlSugarCore" Version="5.1.4.198"/>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\SimpleAdmin.Core\SimpleAdmin.Core.csproj"/>

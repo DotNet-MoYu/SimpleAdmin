@@ -40,3 +40,4 @@ global using System.Runtime.InteropServices;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Hosting;
 global using Newtonsoft.Json.Linq;
+global using NewLife;

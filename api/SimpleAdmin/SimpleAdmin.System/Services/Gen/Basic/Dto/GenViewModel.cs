@@ -1,4 +1,6 @@
-﻿namespace SimpleAdmin.System;
+﻿using StringHelper = SimpleTool.StringHelper;
+
+namespace SimpleAdmin.System;
 
 /// <summary>
 /// 代码生成绑定视图

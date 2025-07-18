@@ -28,7 +28,8 @@ public class UploadController : BaseController
     [HttpPost("uploadImg")]
     [DisplayName("上传图片")]
     [DisableRequestSizeLimit]
-    public async Task<long> UploadImg([FromForm] IFormFile file)
+    [Consumes("multipart/form-data")]
+    public async Task<long> UploadImg(IFormFile file)
     {
         //先上传到本地,后面优化
         return await _fileService.UploadFile(SysDictConst.FILE_ENGINE_LOCAL, file);

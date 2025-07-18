@@ -50,3 +50,4 @@ global using System.Drawing.Drawing2D;
 global using ICSharpCode.SharpZipLib.Checksum;
 global using ICSharpCode.SharpZipLib.Zip;
 global using System.Net;
+global using NewLife;

@@ -16,6 +16,7 @@ namespace SimpleAdmin.System;
 /// <summary>
 /// AppStartup启动类
 /// </summary>
+[AppStartup(99)]
 public class Startup : AppStartup
 {
     /// <summary>

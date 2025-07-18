@@ -42,8 +42,9 @@ public class FileController : BaseController
     /// <returns></returns>
     [HttpPost("uploadLocal")]
     [DisplayName("上传本地文件")]
+    [Consumes("multipart/form-data")]
     [DisableRequestSizeLimit]
-    public async Task<long> UploadLocal([FromForm] IFormFile file)
+    public async Task<long> UploadLocal(IFormFile file)
     {
         return await _fileService.UploadFile(SysDictConst.FILE_ENGINE_LOCAL, file);
     }
@@ -56,7 +57,8 @@ public class FileController : BaseController
     [HttpPost("uploadMinio")]
     [DisplayName("上传MINIO文件")]
     [DisableRequestSizeLimit]
-    public async Task<long> UploadMinio([FromForm] IFormFile file)
+    [Consumes("multipart/form-data")]
+    public async Task<long> UploadMinio(IFormFile file)
     {
         return await _fileService.UploadFile(SysDictConst.FILE_ENGINE_MINIO, file);
     }

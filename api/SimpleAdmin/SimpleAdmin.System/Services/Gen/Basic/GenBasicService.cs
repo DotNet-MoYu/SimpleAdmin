@@ -1,3 +1,5 @@
+using StringHelper = SimpleTool.StringHelper;
+
 namespace SimpleAdmin.System;
 
 /// <summary>

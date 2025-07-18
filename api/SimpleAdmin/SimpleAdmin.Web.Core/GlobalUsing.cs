@@ -39,3 +39,4 @@ global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Hosting;
 global using IP2Region.Net.Abstractions;
 global using IP2Region.Net.XDB;
+global using NewLife;

@@ -4,12 +4,12 @@
     <ItemGroup>
         <PackageReference Include="Lazy.Captcha.Core" Version="2.0.7"/>
         <PackageReference Include="Minio" Version="5.0.0"/>
-        <PackageReference Include="MoYu.Extras.Authentication.JwtBearer" Version="1.0.6"/>
-        <PackageReference Include="MoYu.Extras.ObjectMapper.Mapster" Version="1.0.6"/>
-        <PackageReference Include="MoYu.Pure" Version="1.0.6"/>
-        <PackageReference Include="NewLife.Core" Version="10.10.2024.601"/>
+        <PackageReference Include="MoYu.Extras.Authentication.JwtBearer" Version="4.9.5.5"/>
+        <PackageReference Include="MoYu.Extras.ObjectMapper.Mapster" Version="4.9.5.5"/>
+        <PackageReference Include="MoYu.Pure" Version="4.9.5.5"/>
+        <PackageReference Include="NewLife.Core" Version="11.4.2025.401"/>
         <PackageReference Include="Portable.BouncyCastle" Version="1.9.0"/>
-        <PackageReference Include="SimpleTool" Version="1.0.8" />
+        <PackageReference Include="SimpleTool" Version="1.0.8"/>
         <PackageReference Include="System.Drawing.Common" Version="8.0.6"/>
         <PackageReference Include="Yitter.IdGenerator" Version="1.0.14"/>
         <PackageReference Include="Masuit.Tools.Core" Version="2024.3.4"/>

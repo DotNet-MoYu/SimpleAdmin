@@ -32,3 +32,4 @@ global using SimpleAdmin.Cache;
 global using System.Reflection;
 global using Masuit.Tools;
 global using NewLife.Serialization;
+global using NewLife;
