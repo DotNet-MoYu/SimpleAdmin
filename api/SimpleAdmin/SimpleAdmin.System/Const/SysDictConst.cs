@@ -89,17 +89,17 @@ public class SysDictConst
     /// <summary>
     /// 关闭
     /// </summary>
-    public const string TENANT_OPTIONS_CLOSE = "TENANT_OPTIONS_CLOSE";
+    public const string TENANT_OPTIONS_CLOSE = "CLOSE";
 
     /// <summary>
     /// 手动选择
     /// </summary>
-    public const string TENANT_OPTIONS_CHOSE = "TENANT_OPTIONS_CHOSE";
+    public const string TENANT_OPTIONS_CHOSE = "CHOSE";
 
     /// <summary>
     /// 根据域名
     /// </summary>
-    public const string TENANT_OPTIONS_DOMAIN = "TENANT_OPTIONS_DOMAIN";
+    public const string TENANT_OPTIONS_DOMAIN = "DOMAIN";
 
     #endregion
 
@@ -129,7 +129,7 @@ public class SysDictConst
     /// 延迟发送
     /// </summary>
     public const string SEND_WAY_DELAY = "DELAY";
-  
+
     /// <summary>
     /// 指定时间
     /// </summary>
