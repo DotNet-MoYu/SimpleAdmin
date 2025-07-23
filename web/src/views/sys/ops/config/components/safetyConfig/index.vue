@@ -47,4 +47,7 @@ watch(
   font-weight: 600;
   color: #6b778c;
 }
+:deep(.el-tabs__nav-scroll) {
+  height: 500px;
+}
 </style>
