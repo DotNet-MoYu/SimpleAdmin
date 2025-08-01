@@ -12,13 +12,15 @@
         :name="codeType.codeTypeKey"
         :label="codeType.codeTypeTitle"
       >
-        <el-tabs v-model="previewProps.codeListActiveKey" tab-position="left" type="card">
-          <el-tab-pane v-for="pan in codeType.codeTypeList" :key="pan.codeFileName" :name="pan.codeFileName" :label="pan.codeFileName">
-            <div style="height: calc(100vh - 160px); overflow: auto">
-              <el-input v-model="pan.codeFileContent" type="textarea" autosize />
-            </div>
-          </el-tab-pane>
-        </el-tabs>
+        <div class="tabs-wrapper">
+          <el-tabs v-model="previewProps.codeListActiveKey" tab-position="left" type="card" style="height: 100%">
+            <el-tab-pane v-for="pan in codeType.codeTypeList" :key="pan.codeFileName" :name="pan.codeFileName" :label="pan.codeFileName">
+              <div style="height: calc(100vh - 160px); overflow: auto">
+                <el-input v-model="pan.codeFileContent" type="textarea" autosize />
+              </div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
       </el-tab-pane>
     </el-tabs>
     <template #footer>
@@ -104,4 +106,9 @@ defineExpose({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.tabs-wrapper {
+  height: calc(100vh - 260px);
+  overflow: auto;
+}
+</style>
