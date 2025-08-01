@@ -89,6 +89,14 @@ export const useDictStore = defineStore({
       }
       return [];
     },
+    /**  //获取字典有包含dictValue的列表,比如传F_,获取所有F_开头的字典 */
+    getDictContainsList(dictValue: dictValue): SysDict.DictTree[] {
+      const tree = this.dictInfo.filter((item: { dictValue: string }) => item.dictValue.includes(dictValue));
+      if (tree.length > 0) {
+        return tree;
+      }
+      return [];
+    },
     /**获取所有字典 */
     getDictAll() {
       return this.dictInfo.map(item => {
