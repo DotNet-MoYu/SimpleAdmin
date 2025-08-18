@@ -14,6 +14,7 @@
 
 import { MobileModule } from "@/api/interface";
 import { MenuTypeDictEnum } from "@/enums";
+import { ReqId } from "@/api/interface";
 
 /**
  * @Description: 菜单管理接口
@@ -39,5 +40,67 @@ export namespace MobileMenu {
   export interface MenuTreeSelectorReq {
     /** 所属模块 */
     module?: number | string;
+  }
+
+  /** 移动端资源授权树 */
+  export interface MobileResTreeSelector {
+    /** 模块id */
+    id: number | string;
+    /** 模块名称 */
+    title: string;
+    /** 图标 */
+    icon: string;
+    /** 模块下菜单集合 */
+    menu: RoleGrantMobileResourceMenu[];
+  }
+
+  /** 角色授权移动端资源菜单信息 */
+  export interface RoleGrantMobileResourceMenu {
+    /** 菜单id */
+    id: number | string;
+    /** 父id */
+    parentId: number | string;
+    /** 父名称 */
+    parentName: string;
+    /** 菜单名称 */
+    title: string;
+    /** 模块id */
+    module: number;
+    /**菜单下按钮集合 */
+    button: RoleGrantResourceButton[];
+    /** 父级是否选中 */
+    parentCheck: boolean;
+    /** 是否选中 */
+    nameCheck: boolean;
+  }
+
+  export interface RoleGrantResourceButton {
+    /** 按钮id */
+    id: number | string;
+    /** 标题 */
+    title: string;
+    /** 是否被选中 */
+    check: boolean;
+  }
+  /** 角色拥有移动端资源 */
+  export interface RoleOwnMobileResource {
+    /** id */
+    id: number | string;
+    /** 已授权移动端资源信息 */
+    grantInfoList: RelationRoleMobileResource[];
+  }
+
+  /** 角色移动端资源关系 */
+  export interface RelationRoleMobileResource {
+    /** 菜单id */
+    menuId: number | string;
+    /** 按钮id */
+    buttonInfo: (string | number)[];
+  }
+
+  /** 角色授权移动端资源请求参数 */
+  export interface GrantMobileResourceReq extends ReqId {
+    /** 授权移动端资源信息 */
+    GrantInfoList: RelationRoleMobileResource[];
   }
 }

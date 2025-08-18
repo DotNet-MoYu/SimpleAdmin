@@ -48,6 +48,18 @@ const mobileMenuApi = {
   /** 修改模块菜单 */
   changeModule(params: { id: number | string; module: number | string }) {
     return http.post("changeModule", params);
+  },
+  /** 获取移动端资源授权树 */
+  resourceTreeSelector() {
+    return http.get<MobileMenu.MobileResTreeSelector[]>("resourceTreeSelector", {}, { loading: false });
+  },
+  /** 获取角色拥有移动端资源 */
+  roleOwnMobileMenu(params: ReqId) {
+    return http.get<MobileMenu.RoleOwnMobileResource>("roleOwnMobileMenu", params, { loading: false });
+  },
+  /** 给角色授权移动端资源 */
+  grantRoleMobileResource(params: MobileMenu.GrantMobileResourceReq) {
+    return http.post("grantRoleMobileResource", params);
   }
 };
 

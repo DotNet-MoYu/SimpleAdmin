@@ -54,6 +54,8 @@
       <Form ref="formRef" />
       <!-- 授权资源组件 -->
       <GrantResource ref="grantResourceRef" />
+      <!-- 授权移动端资源组件 -->
+      <GrantMobileResource ref="grantMobileResourceRef" />
       <!-- 授权权限组件 -->
       <GrantPermission ref="grantPermissionRef" />
       <!-- 用户选择器 -->
@@ -80,6 +82,7 @@ import { useDictStore } from "@/stores/modules";
 import TreeFilter from "@/components/TreeFilter/index.vue";
 import Form from "./components/form.vue";
 import GrantResource from "./components/grantResource.vue";
+import GrantMobileResource from "./components/grantMobileResource.vue";
 import GrantPermission from "./components/grantPermission.vue";
 import { UserSelectorInstance } from "@/components/Selectors/UserSelector/interface";
 
@@ -161,6 +164,7 @@ function changeTreeFilter(val: number | string) {
 /** 更多下拉菜单命令枚举 */
 enum cmdEnum {
   GrantResource = "授权资源",
+  GrantMobileResource = "授权移动端资源",
   GrantPermission = "授权权限",
   GrantUser = "授权用户"
 }
@@ -180,6 +184,7 @@ function command(row: SysRole.SysRoleInfo, command: cmdEnum): Command {
 }
 
 const grantResourceRef = ref<InstanceType<typeof GrantResource> | null>(null); //授权资源组件引用
+const grantMobileResourceRef = ref<InstanceType<typeof GrantMobileResource> | null>(null); //授权移动端资源组件引用
 const grantPermissionRef = ref<InstanceType<typeof GrantPermission> | null>(null); //授权权限组件引用
 const userSelectorRef = ref<UserSelectorInstance>(); //用户选择器引用
 const roleId = ref<number | string>(0); //角色id
@@ -199,6 +204,14 @@ function handleCommand(command: Command) {
     case cmdEnum.GrantResource:
       // 打开授权资源组件
       grantResourceRef.value?.onOpen({
+        opt: FormOptEnum.EDIT,
+        record: command.row,
+        successful: RefreshTable
+      });
+      break;
+    case cmdEnum.GrantMobileResource:
+      // 打开授权移动端资源组件
+      grantMobileResourceRef.value?.onOpen({
         opt: FormOptEnum.EDIT,
         record: command.row,
         successful: RefreshTable
