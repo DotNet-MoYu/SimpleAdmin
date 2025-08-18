@@ -11,7 +11,7 @@
       show-icon
       style="margin-bottom: 10px"
     />
-    <ProTable ref="proTable" :columns="columns" :tool-button="false" :data="grantProps.tableData">
+    <ProTable ref="proTable" :columns="columns" :tool-button="false" :data="grantProps.tableData" row-key="api">
       <!-- 自定义api表头 -->
       <template #apiHeader>
         <el-row class="row-bg" justify="space-between">
