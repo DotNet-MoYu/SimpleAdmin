@@ -156,17 +156,6 @@
   </view>
 </template>
 
-<route lang="jsonc" type="page">
-{
-  "layout": "tabbar",
-  "name": "mine",
-  "style": {
-    "navigationStyle": "custom",
-    "navigationBarTitleText": "工作台"
-  }
-}
-</route>
-
 <script setup lang="ts">
 import { useRouter } from 'uni-mini-router'
 import { loginApi } from '@/api'
@@ -174,6 +163,16 @@ import SimpleIcon from '@/components/simple-icon/index.vue'
 import { useUserStore } from '@/store/modules'
 import modal from '@/utils/modal'
 import tab from '@/utils/tab'
+
+definePage(
+  {
+    name: 'mine',
+    style: {
+      navigationStyle: 'custom',
+      navigationBarTitleText: '工作台',
+    },
+  },
+)
 // 使用hooks（推荐）
 const router = useRouter()
 const userStore = useUserStore()

@@ -19,6 +19,7 @@ const {
   VITE_APP_PUBLIC_BASE,
   VITE_FALLBACK_LOCALE,
 } = env
+// console.log('manifest.config.ts env:', env)
 
 export default defineManifestConfig({
   'name': VITE_APP_TITLE,
@@ -30,7 +31,7 @@ export default defineManifestConfig({
   'locale': VITE_FALLBACK_LOCALE, // 'zh-Hans'
   'h5': {
     router: {
-      // base: VITE_APP_PUBLIC_BASE,
+      base: VITE_APP_PUBLIC_BASE,
     },
   },
   /* 5+App特有相关 */
@@ -53,7 +54,7 @@ export default defineManifestConfig({
     distribute: {
       /* android打包配置 */
       android: {
-        minSdkVersion: 30,
+        minSdkVersion: 21,
         targetSdkVersion: 30,
         abiFilters: ['armeabi-v7a', 'arm64-v8a'],
         permissions: [
@@ -127,12 +128,28 @@ export default defineManifestConfig({
     optimization: {
       subPackages: true,
     },
+    // 是否合并组件虚拟节点外层属性，uni-app 3.5.1+ 开始支持。目前仅支持 style、class 属性。
+    // 默认不开启（undefined），这里设置为开启。
+    mergeVirtualHostAttributes: true,
+    // styleIsolation: 'shared',
     usingComponents: true,
     // __usePrivacyCheck__: true,
   },
   'mp-alipay': {
     usingComponents: true,
     styleIsolation: 'shared',
+    optimization: {
+      subPackages: true,
+    },
+    // 解决支付宝小程序开发工具报错 【globalThis is not defined】
+    compileOptions: {
+      globalObjectMode: 'enable',
+      transpile: {
+        script: {
+          ignore: ['node_modules/**'],
+        },
+      },
+    },
   },
   'mp-baidu': {
     usingComponents: true,

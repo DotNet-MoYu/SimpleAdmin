@@ -1,14 +1,8 @@
+import type { CustomRequestOptions } from '@/http/types'
 import { RequestEnum, ResultEnum, TokenEnum } from '@/enum'
 import { useUserStore } from '@/store'
 import { getEnvBaseUrl } from '@/utils'
-import { platform } from '@/utils/platform'
-import { stringifyQuery } from './queryString'
-
-export type CustomRequestOptions = UniApp.RequestOptions & {
-  query?: Record<string, any>
-  /** 出错时是否隐藏错误提示 */
-  hideErrorToast?: boolean
-} & IUniUploadFileOptions // 添加uni.uploadFile参数类型
+import { stringifyQuery } from './tools/queryString'
 
 // 请求基准地址
 const baseUrl = getEnvBaseUrl()
@@ -18,7 +12,10 @@ const httpInterceptor = {
   // 拦截前触发
   invoke(options: CustomRequestOptions) {
     // 添加时间戳参数防缓存（仅 GET 请求）
-    if ((options.method || RequestEnum.GET).toUpperCase() === RequestEnum.GET) {
+    if (
+      (options.method || RequestEnum.GET).toUpperCase()
+      === RequestEnum.GET
+    ) {
       options.query = {
         ...(options.query || {}),
         t: Date.now(),
@@ -41,7 +38,8 @@ const httpInterceptor = {
       // console.log(__VITE_APP_PROXY__)
       if (JSON.parse(__VITE_APP_PROXY__)) {
         // 自动拼接代理前缀
-        options.url = import.meta.env.VITE_APP_PROXY_PREFIX + options.url
+        options.url
+          = import.meta.env.VITE_APP_PROXY_PREFIX + options.url
       }
       else {
         options.url = baseUrl + options.url
@@ -58,7 +56,6 @@ const httpInterceptor = {
     options.timeout = ResultEnum.TIMEOUT as number // 10s
     // 2. （可选）添加小程序端请求头标识
     options.header = {
-      platform, // 可选，与 uniapp 定义的平台一致，告诉后台来源
       ...options.header,
     }
 
@@ -67,8 +64,7 @@ const httpInterceptor = {
     const { accessToken, refreshToken } = userStore
     if (accessToken) {
       const token_key = TokenEnum.TOKEN_NAME as string
-      options.header[token_key]
-        = TokenEnum.TOKEN_PREFIX + accessToken
+      options.header[token_key] = TokenEnum.TOKEN_PREFIX + accessToken
       // 判断 accessToken 是否过期
       const jwt = decryptJWT(accessToken)
       const exp = getJWTDate(jwt.exp)
@@ -146,7 +142,10 @@ function base64UrlDecode(str: string): string {
   // #ifdef MP-WEIXIN
   try {
     const byteArray = wx.base64ToArrayBuffer(str)
-    const binary = String.fromCharCode.apply(null, new Uint8Array(byteArray) as any)
+    const binary = String.fromCharCode.apply(
+      null,
+      new Uint8Array(byteArray) as any,
+    )
     return decodeURIComponent(escape(binary))
   }
   catch (err) {

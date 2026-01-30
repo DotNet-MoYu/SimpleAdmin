@@ -53,23 +53,24 @@
   </view>
 </template>
 
-<route lang="jsonc" type="page">
-{
-  "layout": "default",
-  "name": "login",
-  "style": {
-    "navigationStyle": "custom",
-    "navigationBarTitleText": "登录"
-  }
-}
-</route>
-
 <script lang="ts" setup>
 import type { SysConfig, SysOrg } from '@/api'
 import { TenantEnum } from '@/enum'
 import { useConfigStore } from '@/store/modules'
 import LoginPhoneForm from './components/phone-login/index.vue'
 import LoginForm from './components/pwd-login/index.vue'
+
+defineOptions({
+  name: 'Login',
+})
+definePage({
+  name: 'login',
+  style: {
+    // 'custom' 表示开启自定义导航栏，默认 'default'
+    navigationStyle: 'custom',
+    navigationBarTitleText: '登录',
+  },
+})
 
 /** 登录参数接口 */
 interface LoginProps {

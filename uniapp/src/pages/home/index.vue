@@ -16,21 +16,21 @@
   </view>
 </template>
 
-<route lang="jsonc" type="page">
-{
-  "layout": "default",
-  "name": "home",
-  "style": {
-    // 'custom' 表示开启自定义导航栏，默认 'default'
-    "navigationStyle": "custom",
-    "navigationBarTitleText": "首页"
-  }
-}
-</route>
-
 <script setup lang="ts">
 import HomeChart from './components/home-chart.vue'
 import HomeSwiper from './components/home-swiper.vue'
+
+definePage(
+  {
+    layout: 'default',
+    name: 'home',
+    style: {
+    // 'custom' 表示开启自定义导航栏，默认 'default'
+      navigationStyle: 'custom',
+      navigationBarTitleText: '首页',
+    },
+  },
+)
 </script>
 
 <style lang="scss" scoped>

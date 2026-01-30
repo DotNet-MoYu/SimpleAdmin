@@ -7,18 +7,19 @@
   <div>消息</div>
 </template>
 
-<route lang="jsonc" type="page">
-{
-  "layout": "tabbar",
-  "name": "msg",
-  "style": {
-    "navigationBarTitleText": "消息"
-  }
-}
-</route>
+<script setup lang="ts">
+defineOptions({
+  name: 'Msg',
+})
 
-<script setup lang='ts'>
-
+definePage(
+  {
+    name: 'msg',
+    style: {
+      navigationBarTitleText: '消息',
+    },
+  },
+)
 </script>
 
 <style lang='scss' scoped>

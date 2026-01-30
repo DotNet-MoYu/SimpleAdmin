@@ -1,6 +1,9 @@
 <template>
-  <view class="container-icon" :style="{ backgroundColor }">
-    <svg-icon v-bind="$attrs" />
+  <view
+    class="container-icon"
+    :style="{ backgroundColor, width: size, height: size }"
+  >
+    <svg-icon v-bind="$attrs" :size="iconSize" />
   </view>
 </template>
 
@@ -13,6 +16,16 @@ defineProps({
     required: false,
     default: '#FFFFFF',
   },
+  size: {
+    type: String,
+    required: false,
+    default: '80upx',
+  },
+  iconSize: {
+    type: String,
+    required: false,
+    default: '48upx',
+  },
 })
 </script>
 
@@ -21,8 +34,6 @@ defineProps({
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80upx;
-  height: 80upx;
   border-radius: 25upx;
   box-shadow: 1upx 4upx 5upx rgb(72 22 174 / 30%);
 }

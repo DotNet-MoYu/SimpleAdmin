@@ -53,14 +53,15 @@
             )"
             :key="handleKey(item, j)" custom-class="custom-item"
             :index="j"
-            use-icon-slot :text="item.title" icon-size="36px" @itemclick="gridItemClick(userMenu.id, item)"
+            use-icon-slot :text="item.title" icon-size="48px" @itemclick="gridItemClick(userMenu.id, item)"
           >
             <template #icon>
               <simple-icon
                 :background-color="item.color"
                 :icon="item.icon"
                 color="#FFFFFF"
-                class="h-5 w-5"
+                size="100upx"
+                icon-size="50upx"
               />
             </template>
           </wd-grid-item>
@@ -70,16 +71,6 @@
   </view>
 </template>
 
-<route lang="jsonc" type="page">
-{
-  "layout": "tabbar",
-  "style": {
-    "navigationStyle": "custom",
-    "navigationBarTitleText": "工作台"
-  }
-}
-</route>
-
 <script setup lang="ts">
 import type { MobileUserCenter } from '@/api'
 import SimpleIcon from '@/components/simple-icon/index.vue'
@@ -87,6 +78,16 @@ import SvgIcon from '@/components/svg-icon/index.vue'
 import { useUserStore } from '@/store/modules'
 import modal from '@/utils/modal'
 import tab from '@/utils/tab'
+
+definePage(
+  {
+    name: 'work',
+    style: {
+      navigationStyle: 'custom',
+      navigationBarTitleText: '工作台',
+    },
+  },
+)
 
 const statusBarHeight = ref(30) // 默认给个20作为兜底
 
