@@ -1,12 +1,232 @@
 .home {
+  position: relative;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
+  padding: 22px 16px 10px;
+  gap: 20px;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(2px);
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -140px;
+    left: -120px;
+    width: 340px;
+    height: 340px;
+    background: radial-gradient(circle, rgba(94, 145, 255, 0.2) 0%, rgba(94, 145, 255, 0) 70%);
+  }
+
+  &::after {
+    bottom: -160px;
+    right: -150px;
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(119, 183, 255, 0.18) 0%, rgba(119, 183, 255, 0) 72%);
+  }
+
   .home-bg {
-    width: 70%;
+    width: min(70%, 1200px);
     max-width: 1200px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+  }
+
+  .ad-section {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(280px, 1fr));
+    width: 100%;
+    max-width: 1200px;
+    gap: 16px;
+  }
+
+  .ad-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    border: 1px solid #dfe8f4;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #243447;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    min-height: 260px;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: #95b4e8;
+      box-shadow: 0 10px 24px rgba(44, 90, 160, 0.14);
+
+      .ad-link {
+        background-color: #2f6adf;
+        color: #fff;
+      }
+    }
+  }
+
+  .ad-card--1 {
+    border-top: 4px solid #4b86ff;
+  }
+
+  .ad-card--2 {
+    border-top: 4px solid #00a2a2;
+  }
+
+  .ad-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .ad-tag {
+    display: inline-flex;
+    align-items: center;
+    height: 24px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #2c5aa0;
+    background-color: #eaf2ff;
+  }
+
+  .ad-note {
+    font-size: 12px;
+    color: #6d7f97;
+  }
+
+  .ad-title-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ad-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #3f7df2 0%, #5ba4ff 100%);
+  }
+
+  .ad-card--2 .ad-icon {
+    background: linear-gradient(135deg, #0ea4a4 0%, #33c4c4 100%);
+  }
+
+  .ad-title {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .ad-desc {
+    margin-top: -2px;
+    font-size: 13px;
+    color: #5f7189;
+    line-height: 1.5;
+  }
+
+  .ad-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2f6adf;
+  }
+
+  .ad-card--2 .ad-price {
+    color: #0c8a8a;
+  }
+
+  .ad-points {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    li {
+      position: relative;
+      padding-left: 12px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #556579;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 8px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #83a6e6;
+      }
+    }
+  }
+
+  .ad-link {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: auto;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background-color: #edf3ff;
+    color: #2f6adf;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .ad-arrow {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .home {
+    .home-bg,
+    .ad-section {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .home {
+    padding-top: 12px;
+    gap: 14px;
+
+    .ad-section {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .ad-card {
+      min-height: auto;
+    }
   }
 }

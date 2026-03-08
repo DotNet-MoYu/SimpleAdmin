@@ -13,6 +13,10 @@ Console.WriteLine("ts演示地址: http://153.101.199.83:12802/login");
 Console.WriteLine("js演示地址: http://153.101.199.83:12801/login");
 Console.WriteLine("QQ:531035580");
 Console.WriteLine("简单之名，非凡之质——稳定、灵活、高效，实力不需夸耀。");
+Console.WriteLine("广告推荐 | 性价比机场：单月12元，128G流量，纯净IP，畅用AI");
+Console.WriteLine("邀请链接: https://www.zou666.net/#/register?code=hfkhGLG5");
+Console.WriteLine("广告推荐 | 性价比AI中转站：纯血Codex中转，支持GPT-5.4，无需梯子即可访问");
+Console.WriteLine("邀请链接: https://teamplus.space/register?invite_code=TP000013LEEI");
 Serve.Run(RunOptions.Default.ConfigureBuilder(builder =>
 {
     builder.WebHost.UseUrls(builder.Configuration["AppSettings:Urls"]);
