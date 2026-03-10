@@ -204,6 +204,100 @@
   .ad-arrow {
     font-size: 14px;
   }
+
+  .package-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #d9e4f5;
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .package-table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+  }
+
+  .package-table thead th {
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4f627d;
+    background: #f3f7ff;
+    border-bottom: 1px solid #dbe6f6;
+  }
+
+  .package-table tbody td {
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #3e526f;
+    border-bottom: 1px solid #edf2fa;
+    line-height: 1.45;
+    white-space: nowrap;
+  }
+
+  .package-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .package-table tbody tr:nth-child(2n) {
+    background: #fafcff;
+  }
+
+  .package-col-price {
+    font-size: 20px !important;
+    font-weight: 700;
+    color: #1f57bf !important;
+  }
+
+  .package-footer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .package-footer__tip {
+    font-size: 13px;
+    color: #5f7189;
+    line-height: 1.5;
+  }
+
+  :deep(.package-tabs .el-tabs__header) {
+    margin-bottom: 16px;
+  }
+
+  :deep(.package-tabs .el-tabs__nav-wrap::after) {
+    height: 0;
+  }
+
+  :deep(.package-tabs .el-tabs__nav) {
+    width: 100%;
+    padding: 4px;
+    border-radius: 14px;
+    background: #f3f7fd;
+  }
+
+  :deep(.package-tabs .el-tabs__item) {
+    height: 42px;
+    border-radius: 10px;
+    color: #5f7189;
+    font-weight: 700;
+    transition: color 0.2s ease, background-color 0.2s ease;
+  }
+
+  :deep(.package-tabs .el-tabs__active-bar) {
+    display: none;
+  }
+
+  :deep(.package-tabs .is-active) {
+    color: #214ea8;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(55, 98, 176, 0.12);
+  }
 }
 
 @media (max-width: 1200px) {
@@ -227,6 +321,11 @@
 
     .ad-card {
       min-height: auto;
+    }
+
+    .package-footer {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 }
