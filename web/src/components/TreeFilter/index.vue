@@ -179,9 +179,16 @@ const refresh = async () => {
 };
 
 const getRequestData = async () => {
-  const { data } = await props.requestApi!();
-  treeData.value = data;
-  setTreeAllData(data);
+  if (typeof props.requestApi === "function") {
+    const { data } = await props.requestApi();
+    treeData.value = data;
+    setTreeAllData(data);
+    return;
+  }
+
+  const localData = props.data ?? [];
+  treeData.value = localData;
+  setTreeAllData(localData);
 };
 
 /** 获取默认展开层级 */

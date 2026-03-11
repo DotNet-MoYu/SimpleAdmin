@@ -70,9 +70,9 @@ export const useDictStore = defineStore({
     getDictList(dictValue: dictValue, isBool?: boolean) {
       const tree = this.dictInfo.find((item: { dictValue: string }) => item.dictValue === dictValue);
       if (tree) {
-        //过滤停用的子项
-        tree.children = tree.children.filter((item: { status: CommonStatusEnum }) => item.status === CommonStatusEnum.ENABLE);
-        return tree.children.map((item: { [x: string]: any }) => {
+        // 这里不能直接改写 tree.children，否则会在响应式读取中触发递归更新
+        const enabledChildren = tree.children.filter((item: { status: CommonStatusEnum }) => item.status === CommonStatusEnum.ENABLE);
+        return enabledChildren.map((item: { [x: string]: any }) => {
           //是和否要特殊处理
           if (isBool) {
             return {

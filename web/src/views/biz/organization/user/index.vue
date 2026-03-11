@@ -49,7 +49,7 @@
               @click="onDelete([scope.row.id], `删除【${scope.row.account}】人员`)"
             />
             <el-dropdown @command="handleCommand">
-              <el-link type="primary" :underline="false" :icon="ArrowDown"> 更多 </el-link>
+              <el-link type="primary" underline="never" :icon="ArrowDown"> 更多 </el-link>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item v-auth="bizUserButtonCode.pwdReset" :command="command(scope.row, cmdEnum.ResetPassword)">{{

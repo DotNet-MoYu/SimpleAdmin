@@ -42,7 +42,7 @@
             <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
             <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.account}】用户`)" />
             <el-dropdown @command="handleCommand">
-              <el-link type="primary" :underline="false" :icon="ArrowDown"> 更多 </el-link>
+              <el-link type="primary" underline="never" :icon="ArrowDown"> 更多 </el-link>
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item v-for="(item, index) in cmdEnum" :key="index" :command="command(scope.row, item)">{{ item }}</el-dropdown-item>

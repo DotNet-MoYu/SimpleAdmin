@@ -1,5 +1,5 @@
 /**
- * @description 基础工具接口
+ * @description 文件管理
  * @license Apache License Version 2.0
  * @Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
  * @remarks
@@ -12,5 +12,30 @@
  * 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关
  */
 
-export * from "./message";
-export * from "./file";
+import { ReqId, ResPage, SysFile } from "@/api";
+import { moduleRequest } from "@/api/request";
+
+const http = moduleRequest("/sys/dev/file/");
+
+const fileApi = {
+  /** 获取文件分页 */
+  page(params: SysFile.Page) {
+    return http.get<ResPage<SysFile.SysFileInfo>>("page", params);
+  },
+  /** 上传本地文件 */
+  uploadLocal(params: FormData) {
+    return http.post<number>("uploadLocal", params, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+  },
+  /** 删除文件 */
+  delete(params: { ids: Array<number | string> }) {
+    return http.post("delete", params);
+  },
+  /** 下载文件 */
+  download(params: ReqId) {
+    return http.get<any>("download", params, { responseType: "blob" });
+  }
+};
+
+export { fileApi };

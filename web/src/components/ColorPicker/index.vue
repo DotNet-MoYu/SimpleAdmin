@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 
@@ -28,7 +28,7 @@ const forceResize = () => {
   window.dispatchEvent(new Event("resize"));
 };
 
-const update = val => {
+const update = (val: string) => {
   console.log("color-picker", val);
   const currentColor = document.querySelector(".current-color");
   if (currentColor) {

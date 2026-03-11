@@ -1,9 +1,8 @@
-import { VNode, ComponentPublicInstance, Ref } from "vue";
+import { VNode } from "vue";
 import { BreakPoint, Responsive } from "@/components/Grid/interface";
+import { ElTable } from "element-plus";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import type { DefaultRow } from "element-plus/es/components/table/src/table/defaults";
-import { ProTableProps } from "@/components/ProTable/index.vue";
-import ProTable from "@/components/ProTable/index.vue";
 
 export interface EnumProps {
   label?: string; // 选项框显示的文字
@@ -69,8 +68,9 @@ export type HeaderRenderScope<T extends DefaultRow> = {
   [key: string]: any;
 };
 
-export interface ColumnProps<T extends DefaultRow = any>
-  extends Partial<Omit<TableColumnCtx<T>, "type" | "children" | "renderCell" | "renderHeader">> {
+export interface ColumnProps<T extends DefaultRow = any> extends Partial<
+  Omit<TableColumnCtx<T>, "type" | "children" | "renderCell" | "renderHeader">
+> {
   type?: TypeProps; // 列类型
   tag?: boolean | Ref<boolean>; // 是否是标签展示
   isShow?: boolean | Ref<boolean>; // 是否显示在表格当中
@@ -84,4 +84,23 @@ export interface ColumnProps<T extends DefaultRow = any>
   _children?: ColumnProps<T>[]; // 多级表头
 }
 
-export type ProTableInstance = Omit<InstanceType<typeof ProTable>, keyof ComponentPublicInstance | keyof ProTableProps>;
+export interface ProTableInstance {
+  element: InstanceType<typeof ElTable> | undefined;
+  tableData: any[];
+  radio: string;
+  pageable: { pageNum: number; pageSize: number; total: number; [key: string]: any };
+  searchParam: Record<string, any>;
+  searchInitParam: Record<string, any>;
+  isSelected: boolean;
+  selectedList: Record<string, any>[];
+  selectedListIds: string[];
+  getTableList: () => Promise<void>;
+  search: () => void;
+  reset: () => void;
+  resetParam: () => void;
+  handleSizeChange: (val: number) => void;
+  handleCurrentChange: (val: number) => void;
+  clearSelection: () => void;
+  refresh: () => Promise<void>;
+  enumMap: Map<string, { [key: string]: any }[]>;
+}

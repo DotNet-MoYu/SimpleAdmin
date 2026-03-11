@@ -1,6 +1,13 @@
 <template>
   <!-- 抽屉方式 -->
-  <el-drawer v-if="globalStore.drawerForm" v-model="visible" :destroy-on-close="true" :size="formProps.formSize" v-bind="$attrs" @close="close">
+  <el-drawer
+    v-if="globalStore.drawerForm"
+    v-model="visible"
+    :destroy-on-close="formProps.destroyOnClose"
+    :size="formProps.formSize"
+    v-bind="$attrs"
+    @close="close"
+  >
     <!-- header 插槽 -->
     <template #header>
       <slot name="header" />
@@ -18,7 +25,16 @@
   </el-drawer>
 
   <!-- 对话框方式 -->
-  <el-dialog v-else top="50px" v-model="visible" :destroy-on-close="true" draggable v-bind="$attrs" :width="formProps.formSize" @close="close">
+  <el-dialog
+    v-else
+    top="50px"
+    v-model="visible"
+    :destroy-on-close="formProps.destroyOnClose"
+    draggable
+    v-bind="$attrs"
+    :width="formProps.formSize"
+    @close="close"
+  >
     <!-- title 插槽 -->
     <template #header>
       <slot name="title" />
@@ -47,6 +63,10 @@ const formProps = defineProps({
   formSize: {
     type: String,
     default: "600px"
+  },
+  destroyOnClose: {
+    type: Boolean,
+    default: true
   }
 });
 

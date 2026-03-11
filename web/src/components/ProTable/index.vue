@@ -184,7 +184,7 @@ const processTableData = computed(() => {
 watch(() => props.initParam, getTableList, { deep: true });
 
 // 接收 columns 并设置为响应式
-const tableColumns = reactive<ColumnProps[]>(props.columns);
+const tableColumns = reactive(props.columns) as ColumnProps[];
 
 // 扁平化 columns
 const flatColumns = computed(() => flatColumnsFunc(tableColumns));

@@ -49,7 +49,7 @@
           <s-button link :opt="FormOptEnum.EDIT" @click="onOpen(FormOptEnum.EDIT, scope.row)" />
           <s-button link :opt="FormOptEnum.DELETE" @click="onDelete([scope.row.id], `删除【${scope.row.title}】菜单`)" />
           <el-dropdown @command="handleCommand">
-            <el-link type="primary" :underline="false" :icon="ArrowDown"> 更多 </el-link>
+            <el-link type="primary" underline="never" :icon="ArrowDown"> 更多 </el-link>
             <template #dropdown>
               <el-dropdown-menu>
                 <el-dropdown-item v-if="scope.row.parentId === 0" :command="command(scope.row, cmdEnum.ChangeModule)">{{

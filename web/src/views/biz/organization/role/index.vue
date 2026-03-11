@@ -47,7 +47,7 @@
               @click="onDelete([scope.row.id], `删除【${scope.row.name}】角色`)"
             />
             <el-dropdown @command="handleCommand">
-              <el-link type="primary" :underline="false" :icon="ArrowDown"> 授权 </el-link>
+              <el-link type="primary" underline="never" :icon="ArrowDown"> 授权 </el-link>
               <template #dropdown>
                 <el-dropdown-menu>
                   <div v-auth="bizRoleButtonCode.grantResource">

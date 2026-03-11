@@ -33,7 +33,7 @@
                 </div>
                 <!-- div居中 -->
                 <div class="flex-center pt-2">
-                  <el-link type="primary" :underline="false" @click="toMessage">去处理</el-link>
+                  <el-link type="primary" underline="never" @click="toMessage">去处理</el-link>
                 </div>
               </div>
             </el-tab-pane>
