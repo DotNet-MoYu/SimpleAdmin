@@ -14,6 +14,151 @@
             岗位
             </summary>
         </member>
+        <member name="F:SimpleAdmin.Application.ApplicationConst.BIZ_DOCUMENT">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentNodeType">
+            <summary>
+            文件节点类型
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Application.DocumentNodeType.Folder">
+            <summary>
+            文件夹
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.Application.DocumentNodeType.File">
+            <summary>
+            文件
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.BizDocument">
+            <summary>
+            文件节点
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.ParentId">
+            <summary>
+            父级ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.RootId">
+            <summary>
+            授权根目录ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Ancestors">
+            <summary>
+            祖先链
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.NodeType">
+            <summary>
+            节点类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.FileId">
+            <summary>
+            文件ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Engine">
+            <summary>
+            存储引擎
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.SizeKb">
+            <summary>
+            文件大小KB
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Suffix">
+            <summary>
+            后缀名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Label">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Remark">
+            <summary>
+            备注
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.IsDeleted">
+            <summary>
+            是否已删除
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Visible">
+            <summary>
+            是否可见
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocument.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentLogType">
+            <summary>
+            文件日志类型
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.BizDocumentLog">
+            <summary>
+            文件日志
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.Id">
+            <summary>
+            主键
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.DocumentId">
+            <summary>
+            文件ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.Name">
+            <summary>
+            操作名称
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.Detail">
+            <summary>
+            操作详情
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.Type">
+            <summary>
+            操作类型
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.UserId">
+            <summary>
+            用户ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentLog.DoTime">
+            <summary>
+            操作时间
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Application.GenTest">
              <summary>
              代码生成基础
@@ -58,6 +203,116 @@
             <summary>
              系统配置
             </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentAccessService">
+            <inheritdoc cref="T:SimpleAdmin.Application.IDocumentAccessService"/>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentStorageService">
+            <inheritdoc cref="T:SimpleAdmin.Application.IDocumentStorageService"/>
+        </member>
+        <member name="T:SimpleAdmin.Application.IDocumentAccessService">
+            <summary>
+            文档访问服务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.IDocumentStorageService">
+            <summary>
+            文件存储服务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentService">
+            <inheritdoc cref="T:SimpleAdmin.Application.IDocumentService"/>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentPageInput">
+            <summary>
+            文件分页入参
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentTreeInput">
+            <summary>
+            文件树入参
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.AddFolderInput">
+            <summary>
+            新建文件夹
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.RenameDocumentInput">
+            <summary>
+            重命名
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.MoveDocumentInput">
+            <summary>
+            移动
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.UploadDocumentInput">
+            <summary>
+            上传
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GrantDocumentUsersInput">
+            <summary>
+            用户授权
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.GrantDocumentRolesInput">
+            <summary>
+            角色授权
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentPreviewOutput">
+            <summary>
+            文件预览出参
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentOutput">
+            <summary>
+            文件输出
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentTreeOutput">
+            <summary>
+            文件树
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentGrantOutput">
+            <summary>
+            文件授权详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.IDocumentService">
+            <summary>
+            文件服务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentLogService">
+            <inheritdoc cref="T:SimpleAdmin.Application.IDocumentLogService"/>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentLogPageInput">
+            <summary>
+            文件日志分页
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.DocumentLogOutput">
+            <summary>
+            文件日志输出
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.IDocumentLogService">
+            <summary>
+            文件日志服务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ITrashService">
+            <summary>
+            回收站服务
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.TrashService">
+            <inheritdoc cref="T:SimpleAdmin.Application.ITrashService"/>
         </member>
         <member name="T:SimpleAdmin.Application.IOrgService">
             <summary>

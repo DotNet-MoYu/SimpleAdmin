@@ -131,6 +131,16 @@
             用户日程数据
             </summary>
         </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_BIZ_DOCUMENT_FOLDER_TO_USER">
+            <summary>
+            用户有哪些文件夹
+            </summary>
+        </member>
+        <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_BIZ_DOCUMENT_FOLDER_TO_ROLE">
+            <summary>
+            角色有哪些文件夹
+            </summary>
+        </member>
         <member name="F:SimpleAdmin.System.CateGoryConst.RELATION_MSG_TO_USER">
             <summary>
             站内信与接收用户

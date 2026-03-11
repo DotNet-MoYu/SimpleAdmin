@@ -26,6 +26,11 @@
             模拟 Configure
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Web.Core.TrashController">
+            <summary>
+            文件回收站
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Web.Core.BizOrgController">
             <summary>
             机构管理控制器

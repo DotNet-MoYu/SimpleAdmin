@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
 // 
 // SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
@@ -10,25 +10,16 @@
 
 namespace SimpleAdmin.Application;
 
-public class ApplicationConst
+/// <summary>
+/// 回收站服务
+/// </summary>
+public interface ITrashService : ITransient
 {
-    #region 别称
+    Task<SqlSugarPagedList<DocumentOutput>> Page(DocumentPageInput input);
 
-    /// <summary>
-    /// 机构
-    /// </summary>
-    public const string BIZ_ORG = "机构";
+    Task Recover(BaseIdListInput input);
 
+    Task DeletePermanent(BaseIdListInput input);
 
-    /// <summary>
-    /// 岗位
-    /// </summary>
-    public const string BIZ_POS = "岗位";
-
-    /// <summary>
-    /// 文件
-    /// </summary>
-    public const string BIZ_DOCUMENT = "文件";
-
-    #endregion 别称
+    Task Empty();
 }

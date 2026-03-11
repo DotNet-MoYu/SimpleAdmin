@@ -1,4 +1,4 @@
-﻿// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
+// Copyright (c) 2022-Now 少林寺驻北固山办事处大神父王喇嘛
 // 
 // SimpleAdmin 基于 Apache License Version 2.0 协议发布，可用于商业项目，但必须遵守以下补充条款:
 // 1.请不要删除和修改根目录下的LICENSE文件。
@@ -8,27 +8,26 @@
 // 5.请不得将本软件应用于危害国家安全、荣誉和利益的行为，不能以任何形式用于非法为目的的行为。
 // 6.任何基于本软件而产生的一切法律纠纷和责任，均于我司无关。
 
+#nullable enable
+
 namespace SimpleAdmin.Application;
 
-public class ApplicationConst
+/// <summary>
+/// 文档访问服务
+/// </summary>
+public interface IDocumentAccessService : ITransient
 {
-    #region 别称
+    Task<List<long>?> GetAuthorizedRootIds();
 
-    /// <summary>
-    /// 机构
-    /// </summary>
-    public const string BIZ_ORG = "机构";
+    Task<BizDocument> GetDocumentForRead(long id, bool includeDeleted = false, bool includeInvisible = false);
 
+    Task<BizDocument> GetDocumentForWrite(long id, bool includeDeleted = false, bool includeInvisible = false, bool allowProtectedRoot = false);
 
-    /// <summary>
-    /// 岗位
-    /// </summary>
-    public const string BIZ_POS = "岗位";
+    Task<List<BizDocument>> GetSubtree(long id, bool includeInvisible = false);
 
-    /// <summary>
-    /// 文件
-    /// </summary>
-    public const string BIZ_DOCUMENT = "文件";
+    Task<bool> IsSuperAdmin();
 
-    #endregion 别称
+    bool IsProtectedRoot(BizDocument document);
 }
+
+#nullable restore

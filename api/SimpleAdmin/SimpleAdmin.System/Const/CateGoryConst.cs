@@ -106,6 +106,16 @@ public class CateGoryConst
     public const string RELATION_SYS_USER_SCHEDULE_DATA = "SYS_USER_SCHEDULE_DATA";
 
     /// <summary>
+    /// 用户有哪些文件夹
+    /// </summary>
+    public const string RELATION_BIZ_DOCUMENT_FOLDER_TO_USER = "BIZ_DOCUMENT_FOLDER_TO_USER";
+
+    /// <summary>
+    /// 角色有哪些文件夹
+    /// </summary>
+    public const string RELATION_BIZ_DOCUMENT_FOLDER_TO_ROLE = "BIZ_DOCUMENT_FOLDER_TO_ROLE";
+
+    /// <summary>
     /// 站内信与接收用户
     /// </summary>
     public const string RELATION_MSG_TO_USER = "MSG_TO_USER";
