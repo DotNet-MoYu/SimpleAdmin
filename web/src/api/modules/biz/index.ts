@@ -15,3 +15,6 @@
 
 export * from "./organization";
 export * from "./ops";
+export * from "./document";
+export * from "./documentLog";
+export * from "./trash";
