@@ -124,7 +124,8 @@ pnpm build:h5
 > 个人使用推荐，非强制选项，请根据自身需求自行甄别与评估风险。
 
 - 性价比机场（单月 12 元 / 128G，纯净 IP，畅用 AI）：[https://www.zou666.net/#/register?code=hfkhGLG5](https://www.zou666.net/#/register?code=hfkhGLG5)
-- 性价比 AI 中转站（纯血 Codex 中转，支持 GPT-5.4，无需梯子即可访问）：请联系作者
+- 性价比 AI 中转站（纯血 Codex 中转，支持 GPT-5.4，无需梯子即可访问）：[https://ai.52moyu.net](https://ai.52moyu.net)
+- 良心云机场（适合日常访问、模型使用和稳定开发场景）：[https://xn--9kqz23b19z.com/#/register?code=8QreqkoR](https://xn--9kqz23b19z.com/#/register?code=8QreqkoR)
 - 腾讯云轻量服务器推荐（适合部署后台管理系统、Web 服务和轻量业务应用）：[https://curl.qcloud.com/Uw9jZRJr](https://curl.qcloud.com/Uw9jZRJr)
 - 腾讯云云产品优惠推荐（云服务器、云数据库、COS、CDN、短信等云产品特惠热卖中）：[https://curl.qcloud.com/Im4ILEeM](https://curl.qcloud.com/Im4ILEeM)
 
