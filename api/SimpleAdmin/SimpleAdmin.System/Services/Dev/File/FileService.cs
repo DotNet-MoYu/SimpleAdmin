@@ -40,6 +40,17 @@ public class FileService : DbRepository<SysFile>, IFileService
     }
 
     /// <inheritdoc/>
+    public async Task<long> CreateFileFromPath(CreateFileFromPathInput input)
+    {
+        if (input == null)
+            throw Oops.Bah("文件参数不能为空");
+        if (string.IsNullOrWhiteSpace(input.SourcePath) || !File.Exists(input.SourcePath))
+            throw Oops.Bah("临时文件不存在");
+
+        return await StorageExistingFile(input.Engine, input.FileName, input.SourcePath);
+    }
+
+    /// <inheritdoc/>
     public async Task Delete(BaseIdListInput input)
     {
         var ids = input.Ids;//获取ID
@@ -138,35 +149,40 @@ public class FileService : DbRepository<SysFile>, IFileService
         }
         var fileSizeKb = (long)(file.Length / 1024.0);// 文件大小KB
         var fileSuffix = Path.GetExtension(file.FileName).ToLower();// 文件后缀
-        var devFile = new SysFile
+        var devFile = await BuildSysFile(objectId, engine, bucketName, file.FileName, objName, fileSizeKb, storageUrl, async () =>
         {
-            Id = objectId,
-            Engine = engine,
-            Bucket = bucketName,
-            Name = file.FileName,
-            Suffix = fileSuffix.Split(".")[1],
-            ObjName = objName,
-            SizeKb = fileSizeKb,
-            SizeInfo = GetSizeInfo(fileSizeKb),
-            StoragePath = storageUrl
-        };
-        if (engine != CateGoryConst.CONFIG_FILE_LOCAL)//如果不是本地，设置下载地址
-        {
-            devFile.DownloadPath = storageUrl;
-        }
-        //如果是图片,生成缩略图
-        if (IsPic(fileSuffix))
-        {
-            //$"data:image/png;base64," + imgByte;
+            if (!IsPic(fileSuffix))
+                return null;
+
             await using var fileStream = file.OpenReadStream();//获取文件流
-            var image = SKImage.FromEncodedData(fileStream);//获取图片
-            var bmp = SKBitmap.FromImage(image);
-            var thubnail = bmp.GetPicThumbnail(100, 100);//压缩图片
-            var thubnailBase64 = ImageUtil.ImgToBase64String(thubnail);//转base64
-            devFile.Thumbnail = "data:image/png;base64," + thubnailBase64;
-        }
-        await InsertAsync(devFile);
-        return objectId;
+            return await BuildThumbnail(fileStream);
+        });
+        return devFile.Id;
+    }
+
+    /// <summary>
+    /// 存储已存在的本地文件
+    /// </summary>
+    private async Task<long> StorageExistingFile(string engine, string fileName, string sourcePath)
+    {
+        if (engine != SysDictConst.FILE_ENGINE_LOCAL)
+            throw Oops.Bah("当前仅支持本地引擎分片上传");
+
+        var objectId = CommonUtils.GetSingleId();
+        var bucketName = "defaultBucketName";
+        var storageUrl = await StorageExistingLocal(objectId, sourcePath, fileName);
+        var fileInfo = new FileInfo(sourcePath);
+        var fileSuffix = Path.GetExtension(fileName).ToLower();
+        var fileSizeKb = (long)(fileInfo.Length / 1024.0);
+        var devFile = await BuildSysFile(objectId, engine, bucketName, fileName, string.Empty, fileSizeKb, storageUrl, async () =>
+        {
+            if (!IsPic(fileSuffix))
+                return null;
+
+            await using var stream = File.OpenRead(sourcePath);
+            return await BuildThumbnail(stream);
+        });
+        return devFile.Id;
     }
 
     /// <summary>
@@ -176,38 +192,24 @@ public class FileService : DbRepository<SysFile>, IFileService
     /// <param name="file"></param>
     private async Task<string> StorageLocal(long fileId, IFormFile file)
     {
-        string uploadFileFolder;
-        var configKey = string.Empty;
-        //判断是windows还是linux
-        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        var (filePath, fileObjectName) = await BuildLocalStoragePath(fileId, file.FileName);
+        var fileName = Path.Combine(filePath, fileObjectName).Replace("\\", "/");
+        using (var stream = File.Create(Path.Combine(filePath, fileObjectName)))
         {
-            configKey = SysConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX;//Linux
+            await file.CopyToAsync(stream);
         }
-        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-        {
-            configKey = SysConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS;//Windows
-        }
-        //获取路径配置
-        var config = await _configService.GetByConfigKey(CateGoryConst.CONFIG_FILE_LOCAL, configKey);
-        if (config != null)
-        {
-            uploadFileFolder = config.ConfigValue;//赋值路径
-            var now = DateTime.Now.ToString("d");
-            var filePath = Path.Combine(uploadFileFolder, now);
-            if (!Directory.Exists(filePath))//如果不存在就创建文件夹
-                Directory.CreateDirectory(filePath);
-            var fileSuffix = Path.GetExtension(file.FileName).ToLower();// 文件后缀
-            var fileObjectName = $"{fileId}{fileSuffix}";//存储后的文件名
-            var fileName = Path.Combine(filePath, fileObjectName);//获取文件全路局
-            fileName = fileName.Replace("\\", "/");//格式化一系
-            //存储文件
-            using (var stream = File.Create(Path.Combine(filePath, fileObjectName)))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return fileName;
-        }
-        throw Oops.Oh("文件存储路径未配置");
+        return fileName;
+    }
+
+    /// <summary>
+    /// 存储已存在的本地文件
+    /// </summary>
+    private async Task<string> StorageExistingLocal(long fileId, string sourcePath, string fileName)
+    {
+        var (filePath, fileObjectName) = await BuildLocalStoragePath(fileId, fileName);
+        var targetPath = Path.Combine(filePath, fileObjectName);
+        File.Copy(sourcePath, targetPath, true);
+        return targetPath.Replace("\\", "/");
     }
 
     /// <summary>
@@ -267,6 +269,74 @@ public class FileService : DbRepository<SysFile>, IFileService
         if (pics.Contains(suffix))
             return true;
         return false;
+    }
+
+    private async Task<(string filePath, string fileObjectName)> BuildLocalStoragePath(long fileId, string originalFileName)
+    {
+        var uploadFileFolder = await GetLocalUploadFolder();
+        var now = DateTime.Now.ToString("d");
+        var filePath = Path.Combine(uploadFileFolder, now);
+        if (!Directory.Exists(filePath))
+            Directory.CreateDirectory(filePath);
+        var fileSuffix = Path.GetExtension(originalFileName).ToLower();
+        var fileObjectName = $"{fileId}{fileSuffix}";
+        return (filePath, fileObjectName);
+    }
+
+    private async Task<string> GetLocalUploadFolder()
+    {
+        var configKey = string.Empty;
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        {
+            configKey = SysConfigConst.FILE_LOCAL_FOLDER_FOR_UNIX;
+        }
+        else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        {
+            configKey = SysConfigConst.FILE_LOCAL_FOLDER_FOR_WINDOWS;
+        }
+
+        var config = await _configService.GetByConfigKey(CateGoryConst.CONFIG_FILE_LOCAL, configKey);
+        if (config == null || string.IsNullOrWhiteSpace(config.ConfigValue))
+            throw Oops.Oh("文件存储路径未配置");
+
+        return config.ConfigValue;
+    }
+
+    private async Task<SysFile> BuildSysFile(long objectId, string engine, string bucketName, string fileName, string objName, long fileSizeKb,
+        string storageUrl, Func<Task<string>> thumbnailFactory)
+    {
+        var fileSuffix = Path.GetExtension(fileName).ToLower();
+        var devFile = new SysFile
+        {
+            Id = objectId,
+            Engine = engine,
+            Bucket = bucketName,
+            Name = fileName,
+            Suffix = fileSuffix.TrimStart('.'),
+            ObjName = objName,
+            SizeKb = fileSizeKb,
+            SizeInfo = GetSizeInfo(fileSizeKb),
+            StoragePath = storageUrl
+        };
+        if (engine != CateGoryConst.CONFIG_FILE_LOCAL)
+        {
+            devFile.DownloadPath = storageUrl;
+        }
+        devFile.Thumbnail = await thumbnailFactory();
+        await InsertAsync(devFile);
+        return devFile;
+    }
+
+    private async Task<string> BuildThumbnail(Stream stream)
+    {
+        var image = SKImage.FromEncodedData(stream);
+        if (image == null)
+            return null;
+
+        var bmp = SKBitmap.FromImage(image);
+        var thubnail = bmp.GetPicThumbnail(100, 100);
+        var thubnailBase64 = ImageUtil.ImgToBase64String(thubnail);
+        return "data:image/png;base64," + thubnailBase64;
     }
 
     #endregion 方法

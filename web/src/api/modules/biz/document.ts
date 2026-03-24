@@ -41,6 +41,26 @@ const documentApi = {
       headers: { "Content-Type": "multipart/form-data" }
     });
   },
+  uploadInit(params: BizDocument.ChunkUploadInitReq) {
+    return http.post<BizDocument.ChunkUploadInitRes>("upload/init", params, { loading: false, cancel: false });
+  },
+  uploadChunk(params: FormData, config = {}) {
+    return http.post("upload/chunk", params, {
+      headers: { "Content-Type": "multipart/form-data" },
+      loading: false,
+      cancel: false,
+      ...config
+    });
+  },
+  uploadStatus(params: { uploadId: number }) {
+    return http.get<BizDocument.ChunkUploadStatusRes>("upload/status", params, { loading: false, cancel: false });
+  },
+  uploadComplete(params: BizDocument.ChunkUploadCompleteReq) {
+    return http.post<BizDocument.ChunkUploadCompleteRes>("upload/complete", params, { loading: false, cancel: false });
+  },
+  uploadCancel(params: { uploadId: number }) {
+    return http.post("upload/cancel", params, { loading: false, cancel: false });
+  },
   download(params: ReqId) {
     return http.get<any>("download", params, { responseType: "blob" });
   },

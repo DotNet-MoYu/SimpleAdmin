@@ -3553,6 +3553,26 @@
             文件引擎
             </summary>
         </member>
+        <member name="T:SimpleAdmin.System.CreateFileFromPathInput">
+            <summary>
+            本地临时文件转正式文件入参
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.CreateFileFromPathInput.Engine">
+            <summary>
+            文件引擎
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.CreateFileFromPathInput.FileName">
+            <summary>
+            原始文件名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.System.CreateFileFromPathInput.SourcePath">
+            <summary>
+            临时完整文件路径
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.System.FileService">
             <summary>
             <inheritdoc cref="T:SimpleAdmin.System.IFileService"/>
@@ -3562,6 +3582,9 @@
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.FileService.UploadFile(System.String,Microsoft.AspNetCore.Http.IFormFile)">
+            <inheritdoc/>
+        </member>
+        <member name="M:SimpleAdmin.System.FileService.CreateFileFromPath(SimpleAdmin.System.CreateFileFromPathInput)">
             <inheritdoc/>
         </member>
         <member name="M:SimpleAdmin.System.FileService.Delete(SimpleAdmin.Core.BaseIdListInput)">
@@ -3583,12 +3606,22 @@
             <param name="engine"></param>
             <param name="file"></param>
         </member>
+        <member name="M:SimpleAdmin.System.FileService.StorageExistingFile(System.String,System.String,System.String)">
+            <summary>
+            存储已存在的本地文件
+            </summary>
+        </member>
         <member name="M:SimpleAdmin.System.FileService.StorageLocal(System.Int64,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
             存储本地文件
             </summary>
             <param name="fileId"></param>
             <param name="file"></param>
+        </member>
+        <member name="M:SimpleAdmin.System.FileService.StorageExistingLocal(System.Int64,System.String,System.String)">
+            <summary>
+            存储已存在的本地文件
+            </summary>
         </member>
         <member name="M:SimpleAdmin.System.FileService.StorageMinio(System.Int64,Microsoft.AspNetCore.Http.IFormFile)">
             <summary>
@@ -3661,6 +3694,13 @@
             </summary>
             <param name="engine">文件引擎</param>
             <param name="file">文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:SimpleAdmin.System.IFileService.CreateFileFromPath(SimpleAdmin.System.CreateFileFromPathInput)">
+            <summary>
+            通过本地已存在文件创建正式文件记录
+            </summary>
+            <param name="input"></param>
             <returns></returns>
         </member>
         <member name="P:SimpleAdmin.System.MessagePageInput.Category">

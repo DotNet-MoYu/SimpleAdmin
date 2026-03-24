@@ -60,4 +60,11 @@ public interface IFileService : ITransient
     /// <param name="file">文件</param>
     /// <returns></returns>
     Task<long> UploadFile(string engine, IFormFile file);
+
+    /// <summary>
+    /// 通过本地已存在文件创建正式文件记录
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    Task<long> CreateFileFromPath(CreateFileFromPathInput input);
 }

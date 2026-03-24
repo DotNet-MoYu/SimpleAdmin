@@ -57,6 +57,28 @@ public class DocumentController : IDynamicApiController
     [DisplayName("上传文件夹")]
     public async Task UploadFolder([FromForm] UploadDocumentInput input) => await _documentService.UploadFolder(input);
 
+    [HttpPost("upload/init")]
+    [DisplayName("初始化分片上传")]
+    public async Task<dynamic> InitChunkUpload([FromBody] ChunkUploadInitInput input) => await _documentService.InitChunkUpload(input);
+
+    [HttpPost("upload/chunk")]
+    [DisableRequestSizeLimit]
+    [Consumes("multipart/form-data")]
+    [DisplayName("上传文件分片")]
+    public async Task UploadChunk([FromForm] ChunkUploadPartInput input) => await _documentService.UploadChunk(input);
+
+    [HttpGet("upload/status")]
+    [DisplayName("查询分片上传状态")]
+    public async Task<dynamic> GetChunkUploadStatus([FromQuery] ChunkUploadStatusInput input) => await _documentService.GetChunkUploadStatus(input);
+
+    [HttpPost("upload/complete")]
+    [DisplayName("完成分片上传")]
+    public async Task<dynamic> CompleteChunkUpload([FromBody] ChunkUploadCompleteInput input) => await _documentService.CompleteChunkUpload(input);
+
+    [HttpPost("upload/cancel")]
+    [DisplayName("取消分片上传")]
+    public async Task CancelChunkUpload([FromBody] ChunkUploadCancelInput input) => await _documentService.CancelChunkUpload(input);
+
     [HttpGet("download")]
     [DisplayName("下载文件")]
     public async Task<IActionResult> Download([FromQuery] BaseIdInput input) => await _documentService.Download(input);

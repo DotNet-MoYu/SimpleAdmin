@@ -260,11 +260,7 @@ public class DocumentService : DbRepository<BizDocument>, IDocumentService
 
     public async Task UploadFolder(UploadDocumentInput input)
     {
-        if (input.ParentId == 0 && !UserManager.SuperAdmin)
-            throw Oops.Bah("只有超级管理员可以上传到根目录");
-        var parent = input.ParentId == 0 ? null : await _documentAccessService.GetDocumentForRead(input.ParentId);
-        if (parent != null && parent.NodeType != DocumentNodeType.Folder)
-            throw Oops.Bah("只能上传到文件夹");
+        var parent = await ValidateUploadParent(input.ParentId);
 
         var folderCache = new Dictionary<string, BizDocument>();
         if (parent != null)
@@ -306,6 +302,141 @@ public class DocumentService : DbRepository<BizDocument>, IDocumentService
             await Context.Insertable(document).ExecuteCommandAsync();
             await _documentLogService.TryWrite(document.Id, "上传文件夹", $"上传文件：{relativePath}", DocumentLogType.UploadFolder);
         }
+    }
+
+    public async Task<ChunkUploadInitOutput> InitChunkUpload(ChunkUploadInitInput input)
+    {
+        var parent = await ValidateUploadParent(input.ParentId);
+        var normalizedRelativePath = string.IsNullOrWhiteSpace(input.RelativePath)
+            ? string.Empty
+            : NormalizeRelativePath(input.RelativePath);
+        var normalizedFileName = Path.GetFileName(string.IsNullOrWhiteSpace(normalizedRelativePath) ? input.FileName : normalizedRelativePath);
+        if (string.IsNullOrWhiteSpace(normalizedFileName))
+            throw Oops.Bah("文件名不能为空");
+        var engine = string.IsNullOrWhiteSpace(input.Engine) ? SysDictConst.FILE_ENGINE_LOCAL : input.Engine;
+        var reusableSession = await _documentStorageService.FindReusableChunkUpload(
+            input.ParentId,
+            engine,
+            normalizedFileName,
+            normalizedRelativePath,
+            input.FileHash,
+            input.FileSize);
+        if (reusableSession != null)
+        {
+            return new ChunkUploadInitOutput
+            {
+                UploadId = reusableSession.Id,
+                ChunkSize = reusableSession.ChunkSize,
+                ChunkCount = reusableSession.ChunkCount,
+                UploadedChunks = await _documentStorageService.GetUploadedChunks(reusableSession),
+                SkipUpload = reusableSession.UploadStatus == DocumentUploadStatusConst.COMPLETED && reusableSession.DocumentId != null,
+                DocumentId = reusableSession.DocumentId
+            };
+        }
+
+        var session = await _documentStorageService.InitChunkUpload(
+            input.ParentId,
+            input.ParentId == 0 ? 0 : parent!.RootId,
+            engine,
+            normalizedFileName,
+            normalizedRelativePath,
+            input.FileHash,
+            input.FileSize,
+            input.ChunkSize);
+
+        return new ChunkUploadInitOutput
+        {
+            UploadId = session.Id,
+            ChunkSize = session.ChunkSize,
+            ChunkCount = session.ChunkCount,
+            UploadedChunks = await _documentStorageService.GetUploadedChunks(session),
+            SkipUpload = false,
+            DocumentId = session.DocumentId
+        };
+    }
+
+    public async Task UploadChunk(ChunkUploadPartInput input)
+    {
+        var session = await GetChunkUploadSessionForCurrentUser(input.UploadId);
+        await _documentStorageService.SaveChunk(session, input.ChunkIndex, input.Chunk, input.ChunkHash);
+    }
+
+    public async Task<ChunkUploadStatusOutput> GetChunkUploadStatus(ChunkUploadStatusInput input)
+    {
+        var session = await GetChunkUploadSessionForCurrentUser(input.UploadId);
+        var uploadedChunks = await _documentStorageService.GetUploadedChunks(session);
+        return new ChunkUploadStatusOutput
+        {
+            UploadId = session.Id,
+            UploadStatus = session.UploadStatus,
+            ChunkCount = session.ChunkCount,
+            UploadedChunks = uploadedChunks,
+            IsCompleted = session.UploadStatus == DocumentUploadStatusConst.COMPLETED,
+            DocumentId = session.DocumentId
+        };
+    }
+
+    public async Task<ChunkUploadCompleteOutput> CompleteChunkUpload(ChunkUploadCompleteInput input)
+    {
+        var session = await GetChunkUploadSessionForCurrentUser(input.UploadId);
+        if (session.UploadStatus == DocumentUploadStatusConst.COMPLETED && session.SysFileId != null && session.DocumentId != null)
+        {
+            return new ChunkUploadCompleteOutput
+            {
+                UploadId = session.Id,
+                FileId = session.SysFileId.Value,
+                DocumentId = session.DocumentId.Value,
+                FileName = session.FileName
+            };
+        }
+
+        try
+        {
+            var parent = await ValidateUploadParent(session.ParentId);
+            var (targetParent, targetParentId, fileName) = await ResolveChunkUploadTarget(session, parent);
+            await EnsureUniqueName(targetParentId, fileName);
+            var sysFile = await _documentStorageService.MergeChunks(session);
+            var document = CreateFileEntity(targetParentId, fileName, targetParent, sysFile, session.Engine);
+            PrepareCreate(document);
+
+            var result = await Tenant.UseTranAsync(async () =>
+            {
+                await Context.Insertable(document).ExecuteCommandAsync();
+                await _documentStorageService.MarkChunkUploadCompleted(session, sysFile.Id, document.Id);
+            });
+
+            if (!result.IsSuccess)
+            {
+                _logger.LogError(result.ErrorMessage, result.ErrorException);
+                throw Oops.Bah("完成分片上传失败");
+            }
+
+            var isFolderUpload = !string.IsNullOrWhiteSpace(session.RelativePath) && session.RelativePath.Contains('/');
+            await _documentLogService.TryWrite(
+                document.Id,
+                isFolderUpload ? "上传文件夹" : "上传文件",
+                $"{(isFolderUpload ? "上传文件：" : "上传文件：")}{(string.IsNullOrWhiteSpace(session.RelativePath) ? fileName : session.RelativePath)}",
+                isFolderUpload ? DocumentLogType.UploadFolder : DocumentLogType.UploadFile);
+
+            return new ChunkUploadCompleteOutput
+            {
+                UploadId = session.Id,
+                FileId = sysFile.Id,
+                DocumentId = document.Id,
+                FileName = fileName
+            };
+        }
+        catch (Exception ex)
+        {
+            await _documentStorageService.MarkChunkUploadFailed(session, ex.Message);
+            throw;
+        }
+    }
+
+    public async Task CancelChunkUpload(ChunkUploadCancelInput input)
+    {
+        var session = await GetChunkUploadSessionForCurrentUser(input.UploadId);
+        await _documentStorageService.CancelChunkUpload(session);
     }
 
     public async Task<FileStreamResult> Download(BaseIdInput input)
@@ -472,6 +603,47 @@ public class DocumentService : DbRepository<BizDocument>, IDocumentService
             .AnyAsync();
         if (exist)
             throw Oops.Bah($"同级目录已存在同名文件：{name}");
+    }
+
+    private async Task<BizDocument> ValidateUploadParent(long parentId)
+    {
+        if (parentId == 0 && !UserManager.SuperAdmin)
+            throw Oops.Bah("只有超级管理员可以上传到根目录");
+
+        var parent = parentId == 0 ? null : await _documentAccessService.GetDocumentForRead(parentId);
+        if (parent != null && parent.NodeType != DocumentNodeType.Folder)
+            throw Oops.Bah("只能上传到文件夹");
+        return parent;
+    }
+
+    private async Task<BizDocumentUploadSession> GetChunkUploadSessionForCurrentUser(long uploadId)
+    {
+        var session = await _documentStorageService.GetChunkUploadSession(uploadId);
+        if (session.CreateUserId != UserManager.UserId)
+            throw Oops.Bah("无权访问该上传任务");
+        return session;
+    }
+
+    private async Task<(BizDocument parent, long parentId, string fileName)> ResolveChunkUploadTarget(BizDocumentUploadSession session, BizDocument parent)
+    {
+        if (string.IsNullOrWhiteSpace(session.RelativePath))
+            return (parent, session.ParentId, session.FileName);
+
+        var normalizedRelativePath = NormalizeRelativePath(session.RelativePath);
+        var segments = normalizedRelativePath.Split('/', StringSplitOptions.RemoveEmptyEntries);
+        if (segments.Length == 0)
+            return (parent, session.ParentId, session.FileName);
+
+        var currentParent = parent;
+        var currentParentId = session.ParentId;
+        for (var segmentIndex = 0; segmentIndex < segments.Length - 1; segmentIndex++)
+        {
+            var segment = segments[segmentIndex];
+            currentParent = await GetOrCreateFolder(currentParentId, segment, currentParent);
+            currentParentId = currentParent.Id;
+        }
+
+        return (currentParent, currentParentId, segments[^1]);
     }
 
     private string BuildAncestors(BizDocument parent)

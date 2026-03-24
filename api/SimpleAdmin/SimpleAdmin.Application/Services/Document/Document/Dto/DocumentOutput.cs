@@ -99,3 +99,53 @@ public class DocumentGrantOutput
 
     public List<RoleSelectorOutPut> Roles { get; set; } = new();
 }
+
+/// <summary>
+/// 分片上传初始化结果
+/// </summary>
+public class ChunkUploadInitOutput
+{
+    public long UploadId { get; set; }
+
+    public int ChunkSize { get; set; }
+
+    public int ChunkCount { get; set; }
+
+    public List<int> UploadedChunks { get; set; } = new();
+
+    public bool SkipUpload { get; set; }
+
+    public long? DocumentId { get; set; }
+}
+
+/// <summary>
+/// 分片上传状态
+/// </summary>
+public class ChunkUploadStatusOutput
+{
+    public long UploadId { get; set; }
+
+    public string UploadStatus { get; set; }
+
+    public int ChunkCount { get; set; }
+
+    public List<int> UploadedChunks { get; set; } = new();
+
+    public bool IsCompleted { get; set; }
+
+    public long? DocumentId { get; set; }
+}
+
+/// <summary>
+/// 分片上传完成结果
+/// </summary>
+public class ChunkUploadCompleteOutput
+{
+    public long UploadId { get; set; }
+
+    public long FileId { get; set; }
+
+    public long DocumentId { get; set; }
+
+    public string FileName { get; set; }
+}

@@ -25,6 +25,9 @@
               </template>
             </el-dropdown>
           </div>
+          <el-badge :value="activeUploadCount || uploadTasks.length" :hidden="!uploadTasks.length" class="upload-entry-badge">
+            <el-button :type="uploadTasks.length ? 'primary' : 'default'" plain @click="openUploadPanel">上传任务</el-button>
+          </el-badge>
         </div>
         <div class="breadcrumb-row">
           <el-button v-if="currentParentId !== 0" link type="primary" @click="goBack">返回上级</el-button>
@@ -128,6 +131,72 @@
     <MoveDialog ref="moveDialogRef" />
     <PreviewDialog ref="previewDialogRef" />
     <GrantDialog ref="grantDialogRef" />
+
+    <el-dialog v-model="uploadPanelVisible" title="上传任务" width="720px" top="8vh">
+      <div v-if="uploadTasks.length" class="upload-panel">
+        <div class="upload-panel-header">
+          <div class="upload-panel-title-wrap">
+            <div class="upload-panel-title">上传任务</div>
+            <div class="upload-panel-meta">进行中：{{ activeUploadCount }}，总进度：{{ uploadSummary.progress }}%</div>
+          </div>
+          <el-space wrap size="small">
+            <el-button v-if="uploadSummary.error > 0" link type="danger" @click="retryFailedUploadTasks">重试失败任务</el-button>
+            <el-button v-if="uploadSummary.finished > 0" link type="primary" @click="clearFinishedUploadTasks">清理已完成</el-button>
+            <el-button link type="info" @click="clearCancelledUploadTasks">清理已取消</el-button>
+          </el-space>
+        </div>
+        <el-progress :percentage="uploadSummary.progress" />
+        <div class="upload-summary-grid">
+          <div class="upload-summary-item">
+            <span class="label">总数</span>
+            <span class="value">{{ uploadSummary.total }}</span>
+          </div>
+          <div class="upload-summary-item">
+            <span class="label">成功</span>
+            <span class="value success">{{ uploadSummary.success }}</span>
+          </div>
+          <div class="upload-summary-item">
+            <span class="label">失败</span>
+            <span class="value danger">{{ uploadSummary.error }}</span>
+          </div>
+          <div class="upload-summary-item">
+            <span class="label">暂停</span>
+            <span class="value warning">{{ uploadSummary.paused }}</span>
+          </div>
+          <div class="upload-summary-item">
+            <span class="label">已取消</span>
+            <span class="value">{{ uploadSummary.cancelled }}</span>
+          </div>
+        </div>
+        <div class="upload-task-list">
+          <div v-for="task in uploadTasks" :key="task.taskId" class="upload-task">
+            <div class="upload-task-top">
+              <div class="upload-task-name" :title="task.displayName">{{ task.displayName }}</div>
+              <el-tag :type="uploadStatusTagType(task.status)" effect="plain">{{ resolveUploadStatusText(task.status) }}</el-tag>
+            </div>
+            <el-progress
+              :percentage="task.progress"
+              :status="task.status === 'success' ? 'success' : task.status === 'error' ? 'exception' : undefined"
+            />
+            <div class="upload-task-bottom">
+              <span class="upload-task-size">{{ formatBytes(task.uploadedBytes) }} / {{ formatBytes(task.file.size) }}</span>
+              <el-space wrap size="small">
+                <el-button v-if="task.status === 'uploading' || task.status === 'hashing'" link type="warning" @click="pauseUploadTask(task)">
+                  暂停
+                </el-button>
+                <el-button v-if="task.status === 'paused'" link type="primary" @click="resumeUploadTask(task)">继续</el-button>
+                <el-button v-if="task.status === 'error'" link type="danger" @click="retryUploadTask(task)">重试</el-button>
+                <el-button v-if="task.status !== 'success' && task.status !== 'cancelled'" link type="danger" @click="cancelUploadTask(task)">
+                  取消
+                </el-button>
+              </el-space>
+            </div>
+            <div v-if="task.errorMessage" class="upload-task-error">{{ task.errorMessage }}</div>
+          </div>
+        </div>
+      </div>
+      <el-empty v-else description="暂无上传任务" />
+    </el-dialog>
   </div>
 </template>
 
@@ -155,7 +224,27 @@ interface MoreCommand {
   cmd: string;
 }
 
+interface UploadTask {
+  taskId: string;
+  displayName: string;
+  relativePath: string;
+  parentId: number;
+  file: File;
+  status: BizDocument.ChunkTaskStatus;
+  progress: number;
+  uploadedBytes: number;
+  chunkSize: number;
+  chunkCount: number;
+  uploadId?: number;
+  uploadedChunks: number[];
+  errorMessage: string;
+  activeControllers: AbortController[];
+}
+
 const dictStore = useDictStore();
+const LARGE_FILE_THRESHOLD = 20 * 1024 * 1024;
+const DEFAULT_CHUNK_SIZE = 5 * 1024 * 1024;
+const DEFAULT_CHUNK_CONCURRENCY = 3;
 
 const fileTypeOptions: Array<{ label: BizDocument.FileType; value: BizDocument.FileType }> = [
   { label: "文件夹", value: "文件夹" },
@@ -189,6 +278,8 @@ const treeData = ref<BizDocument.TreeNode[]>([]);
 const nodeMap = shallowRef(new Map<number, TreeNodeMapValue>());
 const currentParentId = ref(0);
 const initParam = reactive<BizDocument.Page>({ parentId: 0, pageNum: 1, pageSize: 10 });
+const uploadTasks = ref<UploadTask[]>([]);
+const uploadPanelVisible = ref(false);
 
 const columns: ColumnProps<BizDocument.DocumentInfo>[] = [
   { type: "selection", fixed: "left", width: 50 },
@@ -208,6 +299,27 @@ const columns: ColumnProps<BizDocument.DocumentInfo>[] = [
 const currentFolderLabel = computed(() => {
   if (currentParentId.value === 0) return "全部文件";
   return nodeMap.value.get(currentParentId.value)?.name || "当前目录";
+});
+
+const activeUploadCount = computed(() => uploadTasks.value.filter(task => ["hashing", "uploading", "merging"].includes(task.status)).length);
+const uploadSummary = computed(() => {
+  const total = uploadTasks.value.length;
+  const uploadedBytes = uploadTasks.value.reduce((sum, task) => sum + task.uploadedBytes, 0);
+  const totalBytes = uploadTasks.value.reduce((sum, task) => sum + task.file.size, 0);
+  const progress = totalBytes > 0 ? Math.min(100, Math.round((uploadedBytes / totalBytes) * 100)) : 0;
+  const success = uploadTasks.value.filter(task => task.status === "success").length;
+  const error = uploadTasks.value.filter(task => task.status === "error").length;
+  const paused = uploadTasks.value.filter(task => task.status === "paused").length;
+  const cancelled = uploadTasks.value.filter(task => task.status === "cancelled").length;
+  return {
+    total,
+    progress,
+    success,
+    error,
+    paused,
+    cancelled,
+    finished: success + cancelled
+  };
 });
 
 const breadcrumbList = computed(() => {
@@ -384,34 +496,28 @@ function triggerFolderUpload() {
   folderInputRef.value?.click();
 }
 
+function openUploadPanel() {
+  uploadPanelVisible.value = true;
+}
+
 async function handleFileInputChange(event: Event) {
   const input = event.target as HTMLInputElement;
   const files = Array.from(input.files || []);
   if (!files.length) return;
-  const formData = new FormData();
-  formData.append("ParentId", String(currentParentId.value));
-  formData.append("Engine", "LOCAL");
-  files.forEach(file => formData.append("Files", file));
-  await documentApi.uploadFiles(formData);
+  const directFiles = files.filter(file => file.size < LARGE_FILE_THRESHOLD);
+  const chunkTasks = files.filter(file => file.size >= LARGE_FILE_THRESHOLD).map(file => createUploadTask(file, ""));
+  if (directFiles.length) await uploadFilesDirect(directFiles);
+  if (chunkTasks.length) await enqueueChunkTasks(chunkTasks);
   input.value = "";
-  refreshAll();
 }
 
 async function handleFolderInputChange(event: Event) {
   const input = event.target as HTMLInputElement;
   const files = Array.from(input.files || []);
   if (!files.length) return;
-  const formData = new FormData();
-  formData.append("ParentId", String(currentParentId.value));
-  formData.append("Engine", "LOCAL");
-  files.forEach(file => {
-    formData.append("Files", file);
-    // 浏览器会把目录结构放在 webkitRelativePath 里，后端据此重建整棵文件夹树。
-    formData.append("RelativePaths", file.webkitRelativePath || file.name);
-  });
-  await documentApi.uploadFolder(formData);
+  const tasks = files.map(file => createUploadTask(file, file.webkitRelativePath || file.name));
+  await enqueueChunkTasks(tasks);
   input.value = "";
-  refreshAll();
 }
 
 async function refreshAll() {
@@ -442,6 +548,297 @@ function fileTypeTagType(fileType?: string) {
       return undefined;
   }
 }
+
+async function uploadFilesDirect(files: File[]) {
+  const formData = new FormData();
+  formData.append("ParentId", String(currentParentId.value));
+  formData.append("Engine", "LOCAL");
+  files.forEach(file => formData.append("Files", file));
+  await documentApi.uploadFiles(formData);
+  await refreshAll();
+}
+
+function createUploadTask(file: File, relativePath: string): UploadTask {
+  return {
+    taskId: `${file.name}-${file.size}-${file.lastModified}-${Date.now()}-${Math.random().toString(16).slice(2)}`,
+    displayName: relativePath || file.name,
+    relativePath,
+    parentId: currentParentId.value,
+    file,
+    status: "waiting",
+    progress: 0,
+    uploadedBytes: 0,
+    chunkSize: DEFAULT_CHUNK_SIZE,
+    chunkCount: 0,
+    uploadId: undefined,
+    uploadedChunks: [],
+    errorMessage: "",
+    activeControllers: []
+  };
+}
+
+async function enqueueChunkTasks(tasks: UploadTask[]) {
+  uploadTasks.value.unshift(...tasks);
+  ElMessage.info(`已加入 ${tasks.length} 个上传任务，可点击“上传任务”查看进度`);
+  let successCount = 0;
+  let failCount = 0;
+  for (const task of tasks) {
+    const success = await startUploadTask(task);
+    if (success) successCount++;
+    else if (task.status === "error") failCount++;
+  }
+  if (successCount > 0) await refreshAll();
+  ElMessage[failCount > 0 ? "warning" : "success"](`本批次上传结束：成功 ${successCount} 个，失败 ${failCount} 个`);
+}
+
+async function startUploadTask(task: UploadTask) {
+  if (task.status === "uploading" || task.status === "merging" || task.status === "success" || task.status === "cancelled") return false;
+
+  try {
+    task.errorMessage = "";
+    task.status = "hashing";
+    if (!task.uploadId) {
+      const fileHash = await buildFileFingerprint(task.file, task.relativePath);
+      const { data } = await documentApi.uploadInit({
+        parentId: task.parentId,
+        engine: "LOCAL",
+        fileName: task.file.name,
+        fileSize: task.file.size,
+        chunkSize: DEFAULT_CHUNK_SIZE,
+        fileHash,
+        relativePath: task.relativePath || undefined
+      });
+      task.uploadId = data.uploadId;
+      task.chunkSize = data.chunkSize;
+      task.chunkCount = data.chunkCount;
+      task.uploadedChunks = [...data.uploadedChunks].sort((a, b) => a - b);
+      syncUploadTaskProgress(task);
+      if (data.skipUpload) {
+        task.status = "success";
+        task.progress = 100;
+        task.uploadedBytes = task.file.size;
+        return true;
+      }
+    } else {
+      const { data } = await documentApi.uploadStatus({ uploadId: task.uploadId });
+      syncUploadTaskStatus(task, data);
+      if (data.isCompleted) {
+        task.status = "success";
+        task.progress = 100;
+        task.uploadedBytes = task.file.size;
+        return true;
+      }
+    }
+
+    const remainingChunks = Array.from({ length: task.chunkCount }, (_, index) => index).filter(index => !task.uploadedChunks.includes(index));
+    task.status = "uploading";
+    if (remainingChunks.length) await uploadTaskChunks(task, remainingChunks);
+    if (task.status !== "uploading") return false;
+
+    task.status = "merging";
+    await documentApi.uploadComplete({ uploadId: task.uploadId! });
+    task.status = "success";
+    task.progress = 100;
+    task.uploadedBytes = task.file.size;
+    return true;
+  } catch (error: any) {
+    if (isAbortError(error)) {
+      return false;
+    }
+    task.status = "error";
+    task.errorMessage = error?.msg || error?.message || "上传失败";
+    return false;
+  }
+}
+
+async function uploadTaskChunks(task: UploadTask, chunkIndexes: number[]) {
+  const uploadedSet = new Set(task.uploadedChunks);
+  const queue = [...chunkIndexes];
+  const workers = Array.from({ length: Math.min(DEFAULT_CHUNK_CONCURRENCY, queue.length) }, async () => {
+    while (queue.length && task.status === "uploading") {
+      const chunkIndex = queue.shift();
+      if (chunkIndex == null) return;
+      const controller = new AbortController();
+      task.activeControllers.push(controller);
+      try {
+        const chunkBlob = getFileChunk(task.file, task.chunkSize, chunkIndex);
+        const chunkHash = await computeBlobHash(chunkBlob);
+        const formData = new FormData();
+        formData.append("UploadId", String(task.uploadId));
+        formData.append("ChunkIndex", String(chunkIndex));
+        formData.append("ChunkHash", chunkHash);
+        formData.append("Chunk", new File([chunkBlob], task.file.name, { type: task.file.type || "application/octet-stream" }));
+        await documentApi.uploadChunk(formData, { signal: controller.signal });
+        if (!uploadedSet.has(chunkIndex)) {
+          uploadedSet.add(chunkIndex);
+          task.uploadedChunks = Array.from(uploadedSet).sort((a, b) => a - b);
+          syncUploadTaskProgress(task);
+        }
+      } finally {
+        removeTaskController(task, controller);
+      }
+    }
+  });
+
+  const results = await Promise.allSettled(workers);
+  const rejected = results.find(result => result.status === "rejected") as PromiseRejectedResult | undefined;
+  if (rejected) throw rejected.reason;
+}
+
+async function pauseUploadTask(task: UploadTask) {
+  abortTaskControllers(task);
+  task.status = "paused";
+  if (task.uploadId) {
+    const { data } = await documentApi.uploadStatus({ uploadId: task.uploadId });
+    syncUploadTaskStatus(task, data);
+    task.status = "paused";
+  }
+}
+
+async function resumeUploadTask(task: UploadTask) {
+  const success = await startUploadTask(task);
+  if (success) await refreshAll();
+}
+
+async function retryUploadTask(task: UploadTask) {
+  task.errorMessage = "";
+  const success = await startUploadTask(task);
+  if (success) await refreshAll();
+}
+
+async function retryFailedUploadTasks() {
+  const failedTasks = uploadTasks.value.filter(task => task.status === "error");
+  if (!failedTasks.length) return;
+  let successCount = 0;
+  for (const task of failedTasks) {
+    task.errorMessage = "";
+    const success = await startUploadTask(task);
+    if (success) successCount++;
+  }
+  if (successCount > 0) await refreshAll();
+}
+
+async function cancelUploadTask(task: UploadTask) {
+  abortTaskControllers(task);
+  if (task.uploadId) await documentApi.uploadCancel({ uploadId: task.uploadId });
+  task.status = "cancelled";
+}
+
+function clearFinishedUploadTasks() {
+  uploadTasks.value = uploadTasks.value.filter(task => task.status !== "success");
+}
+
+function clearCancelledUploadTasks() {
+  uploadTasks.value = uploadTasks.value.filter(task => task.status !== "cancelled");
+}
+
+function syncUploadTaskStatus(task: UploadTask, status: BizDocument.ChunkUploadStatusRes) {
+  task.chunkCount = status.chunkCount;
+  task.uploadedChunks = [...status.uploadedChunks].sort((a, b) => a - b);
+  syncUploadTaskProgress(task);
+}
+
+function syncUploadTaskProgress(task: UploadTask) {
+  task.uploadedBytes = calculateUploadedBytes(task);
+  task.progress = calculateTaskProgress(task);
+}
+
+function calculateUploadedBytes(task: UploadTask) {
+  return task.uploadedChunks.reduce((total, chunkIndex) => total + getFileChunk(task.file, task.chunkSize, chunkIndex).size, 0);
+}
+
+function calculateTaskProgress(task: UploadTask) {
+  if (task.file.size <= 0) return 0;
+  if (task.status === "success") return 100;
+  if (task.uploadedBytes >= task.file.size) return 99;
+  return Math.min(99, Math.round((task.uploadedBytes / task.file.size) * 100));
+}
+
+function getFileChunk(file: File, chunkSize: number, chunkIndex: number) {
+  const start = chunkIndex * chunkSize;
+  const end = Math.min(file.size, start + chunkSize);
+  return file.slice(start, end);
+}
+
+function abortTaskControllers(task: UploadTask) {
+  task.activeControllers.splice(0).forEach(controller => controller.abort());
+}
+
+function removeTaskController(task: UploadTask, controller: AbortController) {
+  const index = task.activeControllers.indexOf(controller);
+  if (index >= 0) task.activeControllers.splice(index, 1);
+}
+
+function isAbortError(error: any) {
+  return error?.name === "CanceledError" || error?.code === "ERR_CANCELED";
+}
+
+async function buildFileFingerprint(file: File, relativePath: string) {
+  return await digestText(`${file.name}|${file.size}|${file.lastModified}|${relativePath}`);
+}
+
+async function computeBlobHash(blob: Blob) {
+  const buffer = await blob.arrayBuffer();
+  const digest = await crypto.subtle.digest("SHA-256", buffer);
+  return bufferToHex(digest);
+}
+
+async function digestText(value: string) {
+  const data = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", data);
+  return bufferToHex(digest);
+}
+
+function bufferToHex(buffer: ArrayBuffer) {
+  return Array.from(new Uint8Array(buffer))
+    .map(item => item.toString(16).padStart(2, "0"))
+    .join("");
+}
+
+function resolveUploadStatusText(status: BizDocument.ChunkTaskStatus) {
+  switch (status) {
+    case "waiting":
+      return "等待中";
+    case "hashing":
+      return "准备中";
+    case "uploading":
+      return "上传中";
+    case "paused":
+      return "已暂停";
+    case "merging":
+      return "合并中";
+    case "success":
+      return "已完成";
+    case "error":
+      return "失败";
+    case "cancelled":
+      return "已取消";
+    default:
+      return status;
+  }
+}
+
+function uploadStatusTagType(status: BizDocument.ChunkTaskStatus) {
+  switch (status) {
+    case "success":
+      return "success";
+    case "error":
+      return "danger";
+    case "paused":
+      return "warning";
+    case "cancelled":
+      return "info";
+    default:
+      return "primary";
+  }
+}
+
+function formatBytes(size: number) {
+  if (size >= 1024 * 1024 * 1024) return `${(size / 1024 / 1024 / 1024).toFixed(2)} GB`;
+  if (size >= 1024 * 1024) return `${(size / 1024 / 1024).toFixed(2)} MB`;
+  if (size >= 1024) return `${(size / 1024).toFixed(2)} KB`;
+  return `${size} B`;
+}
 </script>
 
 <style scoped lang="scss">
@@ -457,14 +854,20 @@ function fileTypeTagType(fileType?: string) {
 .toolbar-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .left-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+
+.upload-entry-badge {
+  display: inline-flex;
 }
 
 .breadcrumb-row {
@@ -478,6 +881,118 @@ function fileTypeTagType(fileType?: string) {
 .current-tip {
   color: var(--el-text-color-secondary);
   font-size: 13px;
+}
+
+.upload-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.upload-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.upload-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.upload-panel-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.upload-panel-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.upload-panel-meta {
+  color: var(--el-text-color-secondary);
+  font-size: 13px;
+}
+
+.upload-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.upload-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--el-fill-color-light);
+}
+
+.upload-summary-item .label {
+  font-size: 12px;
+  color: var(--el-text-color-secondary);
+}
+
+.upload-summary-item .value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--el-text-color-primary);
+}
+
+.upload-summary-item .value.success {
+  color: var(--el-color-success);
+}
+
+.upload-summary-item .value.danger {
+  color: var(--el-color-danger);
+}
+
+.upload-summary-item .value.warning {
+  color: var(--el-color-warning);
+}
+
+.upload-task {
+  padding: 12px;
+  border: 1px solid var(--el-border-color-light);
+  border-radius: 8px;
+  background: var(--el-fill-color-blank);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-task-top,
+.upload-task-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.upload-task-name {
+  min-width: 0;
+  font-weight: 500;
+  word-break: break-all;
+}
+
+.upload-task-size,
+.upload-task-error {
+  font-size: 13px;
+}
+
+.upload-task-error {
+  color: var(--el-color-danger);
+  word-break: break-word;
 }
 
 .table-header-wrap {

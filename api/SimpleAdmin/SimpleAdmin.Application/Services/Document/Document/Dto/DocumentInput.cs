@@ -102,6 +102,73 @@ public class UploadDocumentInput
 }
 
 /// <summary>
+/// 初始化分片上传
+/// </summary>
+public class ChunkUploadInitInput
+{
+    public long ParentId { get; set; }
+
+    public string Engine { get; set; }
+
+    [Required(ErrorMessage = "FileName不能为空")]
+    public string FileName { get; set; }
+
+    [Required(ErrorMessage = "FileSize不能为空")]
+    public long FileSize { get; set; }
+
+    [Required(ErrorMessage = "ChunkSize不能为空")]
+    public int ChunkSize { get; set; }
+
+    public string FileHash { get; set; }
+
+    public string RelativePath { get; set; }
+}
+
+/// <summary>
+/// 上传分片
+/// </summary>
+public class ChunkUploadPartInput
+{
+    [Required(ErrorMessage = "UploadId不能为空")]
+    public long UploadId { get; set; }
+
+    [Required(ErrorMessage = "ChunkIndex不能为空")]
+    public int ChunkIndex { get; set; }
+
+    public string ChunkHash { get; set; }
+
+    [Required(ErrorMessage = "Chunk不能为空")]
+    public IFormFile Chunk { get; set; }
+}
+
+/// <summary>
+/// 分片上传状态查询
+/// </summary>
+public class ChunkUploadStatusInput
+{
+    [Required(ErrorMessage = "UploadId不能为空")]
+    public long UploadId { get; set; }
+}
+
+/// <summary>
+/// 完成分片上传
+/// </summary>
+public class ChunkUploadCompleteInput
+{
+    [Required(ErrorMessage = "UploadId不能为空")]
+    public long UploadId { get; set; }
+}
+
+/// <summary>
+/// 取消分片上传
+/// </summary>
+public class ChunkUploadCancelInput
+{
+    [Required(ErrorMessage = "UploadId不能为空")]
+    public long UploadId { get; set; }
+}
+
+/// <summary>
 /// 用户授权
 /// </summary>
 public class GrantDocumentUsersInput : BaseIdInput

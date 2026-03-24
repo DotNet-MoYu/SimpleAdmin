@@ -159,6 +159,91 @@
             操作时间
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Application.DocumentUploadStatusConst">
+            <summary>
+            分片上传状态
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.BizDocumentUploadSession">
+            <summary>
+            文件分片上传会话
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.ParentId">
+            <summary>
+            上传目标父级ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.RootId">
+            <summary>
+            授权根目录ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.Engine">
+            <summary>
+            存储引擎
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.FileName">
+            <summary>
+            原始文件名
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.RelativePath">
+            <summary>
+            相对路径
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.FileHash">
+            <summary>
+            文件指纹
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.FileSize">
+            <summary>
+            文件大小
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.ChunkSize">
+            <summary>
+            分片大小
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.ChunkCount">
+            <summary>
+            分片数量
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.TempDir">
+            <summary>
+            临时目录
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.UploadStatus">
+            <summary>
+            上传状态
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.ErrorMessage">
+            <summary>
+            错误信息
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.SysFileId">
+            <summary>
+            对应系统文件ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.DocumentId">
+            <summary>
+            对应业务文件ID
+            </summary>
+        </member>
+        <member name="P:SimpleAdmin.Application.BizDocumentUploadSession.ExpireTime">
+            <summary>
+            过期时间
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Application.GenTest">
              <summary>
              代码生成基础
@@ -253,6 +338,31 @@
             上传
             </summary>
         </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadInitInput">
+            <summary>
+            初始化分片上传
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadPartInput">
+            <summary>
+            上传分片
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadStatusInput">
+            <summary>
+            分片上传状态查询
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadCompleteInput">
+            <summary>
+            完成分片上传
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadCancelInput">
+            <summary>
+            取消分片上传
+            </summary>
+        </member>
         <member name="T:SimpleAdmin.Application.GrantDocumentUsersInput">
             <summary>
             用户授权
@@ -281,6 +391,21 @@
         <member name="T:SimpleAdmin.Application.DocumentGrantOutput">
             <summary>
             文件授权详情
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadInitOutput">
+            <summary>
+            分片上传初始化结果
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadStatusOutput">
+            <summary>
+            分片上传状态
+            </summary>
+        </member>
+        <member name="T:SimpleAdmin.Application.ChunkUploadCompleteOutput">
+            <summary>
+            分片上传完成结果
             </summary>
         </member>
         <member name="T:SimpleAdmin.Application.IDocumentService">

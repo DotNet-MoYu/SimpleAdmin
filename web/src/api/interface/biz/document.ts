@@ -73,6 +73,41 @@ export namespace BizDocument {
     files: File[];
     relativePaths?: string[];
   }
+  export interface ChunkUploadInitReq {
+    parentId: number;
+    engine?: string;
+    fileName: string;
+    fileSize: number;
+    chunkSize: number;
+    fileHash?: string;
+    relativePath?: string;
+  }
+  export interface ChunkUploadInitRes {
+    uploadId: number;
+    chunkSize: number;
+    chunkCount: number;
+    uploadedChunks: number[];
+    skipUpload: boolean;
+    documentId?: number;
+  }
+  export interface ChunkUploadStatusRes {
+    uploadId: number;
+    uploadStatus: "INIT" | "UPLOADING" | "MERGING" | "COMPLETED" | "CANCELLED" | "FAILED";
+    chunkCount: number;
+    uploadedChunks: number[];
+    isCompleted: boolean;
+    documentId?: number;
+  }
+  export interface ChunkUploadCompleteReq {
+    uploadId: number;
+  }
+  export interface ChunkUploadCompleteRes {
+    uploadId: number;
+    fileId: number;
+    documentId: number;
+    fileName: string;
+  }
+  export type ChunkTaskStatus = "waiting" | "hashing" | "uploading" | "paused" | "merging" | "success" | "error" | "cancelled";
   export interface PreviewInfo {
     previewType: "image" | "text" | "none";
     contentType: string;

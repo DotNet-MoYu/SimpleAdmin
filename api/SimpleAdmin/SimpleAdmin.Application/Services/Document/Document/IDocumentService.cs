@@ -33,6 +33,16 @@ public interface IDocumentService : ITransient
 
     Task UploadFolder(UploadDocumentInput input);
 
+    Task<ChunkUploadInitOutput> InitChunkUpload(ChunkUploadInitInput input);
+
+    Task UploadChunk(ChunkUploadPartInput input);
+
+    Task<ChunkUploadStatusOutput> GetChunkUploadStatus(ChunkUploadStatusInput input);
+
+    Task<ChunkUploadCompleteOutput> CompleteChunkUpload(ChunkUploadCompleteInput input);
+
+    Task CancelChunkUpload(ChunkUploadCancelInput input);
+
     Task<FileStreamResult> Download(BaseIdInput input);
 
     Task<DocumentPreviewOutput> Preview(BaseIdInput input);

@@ -19,6 +19,26 @@ public interface IDocumentStorageService : ITransient
 {
     Task<SysFile> Upload(string engine, IFormFile file);
 
+    Task<BizDocumentUploadSession> FindReusableChunkUpload(long parentId, string engine, string fileName, string relativePath, string fileHash, long fileSize);
+
+    Task<BizDocumentUploadSession> InitChunkUpload(long parentId, long rootId, string engine, string fileName, string relativePath, string fileHash, long fileSize, int chunkSize);
+
+    Task<BizDocumentUploadSession> GetChunkUploadSession(long uploadId);
+
+    Task SaveChunk(BizDocumentUploadSession session, int chunkIndex, IFormFile chunk, string chunkHash);
+
+    Task<List<int>> GetUploadedChunks(BizDocumentUploadSession session);
+
+    Task<SysFile> MergeChunks(BizDocumentUploadSession session);
+
+    Task MarkChunkUploadCompleted(BizDocumentUploadSession session, long fileId, long documentId);
+
+    Task MarkChunkUploadFailed(BizDocumentUploadSession session, string errorMessage);
+
+    Task CancelChunkUpload(BizDocumentUploadSession session);
+
+    Task<int> CleanupExpiredChunkUploads(CancellationToken cancellationToken = default);
+
     Task<FileStreamResult> Download(long fileId);
 
     Task<DocumentPreviewOutput> Preview(SysFile file);

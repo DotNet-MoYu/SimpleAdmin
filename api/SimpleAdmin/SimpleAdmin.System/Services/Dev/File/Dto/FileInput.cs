@@ -20,3 +20,24 @@ public class FilePageInput : BasePageInput
     /// </summary>
     public string Engine { get; set; }
 }
+
+/// <summary>
+/// 本地临时文件转正式文件入参
+/// </summary>
+public class CreateFileFromPathInput
+{
+    /// <summary>
+    /// 文件引擎
+    /// </summary>
+    public string Engine { get; set; }
+
+    /// <summary>
+    /// 原始文件名
+    /// </summary>
+    public string FileName { get; set; }
+
+    /// <summary>
+    /// 临时完整文件路径
+    /// </summary>
+    public string SourcePath { get; set; }
+}
