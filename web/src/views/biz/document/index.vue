@@ -186,7 +186,12 @@
                 </el-button>
                 <el-button v-if="task.status === 'paused'" link type="primary" @click="resumeUploadTask(task)">继续</el-button>
                 <el-button v-if="task.status === 'error'" link type="danger" @click="retryUploadTask(task)">重试</el-button>
-                <el-button v-if="task.status !== 'success' && task.status !== 'cancelled'" link type="danger" @click="cancelUploadTask(task)">
+                <el-button
+                  v-if="task.status !== 'success' && task.status !== 'cancelled' && task.status !== 'merging'"
+                  link
+                  type="danger"
+                  @click="cancelUploadTask(task)"
+                >
                   取消
                 </el-button>
               </el-space>
@@ -237,6 +242,7 @@ interface UploadTask {
   chunkCount: number;
   uploadId?: number;
   uploadedChunks: number[];
+  chunkHashMap: Record<number, string>;
   errorMessage: string;
   activeControllers: AbortController[];
 }
@@ -245,6 +251,7 @@ const dictStore = useDictStore();
 const LARGE_FILE_THRESHOLD = 20 * 1024 * 1024;
 const DEFAULT_CHUNK_SIZE = 5 * 1024 * 1024;
 const DEFAULT_CHUNK_CONCURRENCY = 3;
+const DEFAULT_TASK_CONCURRENCY = 3;
 
 const fileTypeOptions: Array<{ label: BizDocument.FileType; value: BizDocument.FileType }> = [
   { label: "文件夹", value: "文件夹" },
@@ -572,6 +579,7 @@ function createUploadTask(file: File, relativePath: string): UploadTask {
     chunkCount: 0,
     uploadId: undefined,
     uploadedChunks: [],
+    chunkHashMap: {},
     errorMessage: "",
     activeControllers: []
   };
@@ -580,15 +588,7 @@ function createUploadTask(file: File, relativePath: string): UploadTask {
 async function enqueueChunkTasks(tasks: UploadTask[]) {
   uploadTasks.value.unshift(...tasks);
   ElMessage.info(`已加入 ${tasks.length} 个上传任务，可点击“上传任务”查看进度`);
-  let successCount = 0;
-  let failCount = 0;
-  for (const task of tasks) {
-    const success = await startUploadTask(task);
-    if (success) successCount++;
-    else if (task.status === "error") failCount++;
-  }
-  if (successCount > 0) await refreshAll();
-  ElMessage[failCount > 0 ? "warning" : "success"](`本批次上传结束：成功 ${successCount} 个，失败 ${failCount} 个`);
+  await runUploadBatch(tasks);
 }
 
 async function startUploadTask(task: UploadTask) {
@@ -598,7 +598,7 @@ async function startUploadTask(task: UploadTask) {
     task.errorMessage = "";
     task.status = "hashing";
     if (!task.uploadId) {
-      const fileHash = await buildFileFingerprint(task.file, task.relativePath);
+      const fileHash = await buildFileFingerprint(task);
       const { data } = await documentApi.uploadInit({
         parentId: task.parentId,
         engine: "LOCAL",
@@ -662,7 +662,8 @@ async function uploadTaskChunks(task: UploadTask, chunkIndexes: number[]) {
       task.activeControllers.push(controller);
       try {
         const chunkBlob = getFileChunk(task.file, task.chunkSize, chunkIndex);
-        const chunkHash = await computeBlobHash(chunkBlob);
+        const chunkHash = task.chunkHashMap[chunkIndex] || (await computeBlobHash(chunkBlob));
+        task.chunkHashMap[chunkIndex] = chunkHash;
         const formData = new FormData();
         formData.append("UploadId", String(task.uploadId));
         formData.append("ChunkIndex", String(chunkIndex));
@@ -709,16 +710,17 @@ async function retryUploadTask(task: UploadTask) {
 async function retryFailedUploadTasks() {
   const failedTasks = uploadTasks.value.filter(task => task.status === "error");
   if (!failedTasks.length) return;
-  let successCount = 0;
-  for (const task of failedTasks) {
+  failedTasks.forEach(task => {
     task.errorMessage = "";
-    const success = await startUploadTask(task);
-    if (success) successCount++;
-  }
-  if (successCount > 0) await refreshAll();
+  });
+  await runUploadBatch(failedTasks, "失败任务重试结束");
 }
 
 async function cancelUploadTask(task: UploadTask) {
+  if (task.status === "merging") {
+    ElMessage.warning("文件正在合并中，暂不支持取消");
+    return;
+  }
   abortTaskControllers(task);
   if (task.uploadId) await documentApi.uploadCancel({ uploadId: task.uploadId });
   task.status = "cancelled";
@@ -770,11 +772,52 @@ function removeTaskController(task: UploadTask, controller: AbortController) {
 }
 
 function isAbortError(error: any) {
-  return error?.name === "CanceledError" || error?.code === "ERR_CANCELED";
+  return error?.name === "CanceledError" || error?.code === "ERR_CANCELED" || error?.name === "AbortError" || error?.code === "CHUNK_TASK_ABORTED";
 }
 
-async function buildFileFingerprint(file: File, relativePath: string) {
-  return await digestText(`${file.name}|${file.size}|${file.lastModified}|${relativePath}`);
+async function buildFileFingerprint(task: UploadTask) {
+  const chunkCount = Math.max(1, Math.ceil(task.file.size / DEFAULT_CHUNK_SIZE));
+  const hashParts: string[] = [];
+  for (let chunkIndex = 0; chunkIndex < chunkCount; chunkIndex++) {
+    throwIfHashingStopped(task);
+    if (!task.chunkHashMap[chunkIndex]) {
+      const chunkBlob = getFileChunk(task.file, DEFAULT_CHUNK_SIZE, chunkIndex);
+      task.chunkHashMap[chunkIndex] = await computeBlobHash(chunkBlob);
+    }
+    hashParts.push(task.chunkHashMap[chunkIndex]);
+  }
+  return await digestText(`${task.file.size}|${chunkCount}|${hashParts.join("|")}`);
+}
+
+function throwIfHashingStopped(task: UploadTask) {
+  if (task.status === "cancelled") throw createTaskAbortError("上传已取消");
+  if (task.status === "paused") throw createTaskAbortError("上传已暂停");
+}
+
+function createTaskAbortError(message: string) {
+  const error = new Error(message) as Error & { code?: string; name?: string };
+  error.code = "CHUNK_TASK_ABORTED";
+  error.name = "AbortError";
+  return error;
+}
+
+async function runUploadBatch(tasks: UploadTask[], messagePrefix = "本批次上传结束") {
+  let successCount = 0;
+  let failCount = 0;
+  const queue = [...tasks];
+  const workers = Array.from({ length: Math.min(DEFAULT_TASK_CONCURRENCY, queue.length) }, async () => {
+    while (queue.length) {
+      const task = queue.shift();
+      if (!task) return;
+      const success = await startUploadTask(task);
+      if (success) successCount++;
+      else if (task.status === "error") failCount++;
+    }
+  });
+
+  await Promise.all(workers);
+  if (successCount > 0) await refreshAll();
+  ElMessage[failCount > 0 ? "warning" : "success"](`${messagePrefix}：成功 ${successCount} 个，失败 ${failCount} 个`);
 }
 
 async function computeBlobHash(blob: Blob) {

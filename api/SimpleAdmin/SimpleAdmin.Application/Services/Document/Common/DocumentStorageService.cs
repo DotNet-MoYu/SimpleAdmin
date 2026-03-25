@@ -256,10 +256,24 @@ public class DocumentStorageService : DbRepository<SysFile>, IDocumentStorageSer
         PrepareUpdate(session);
         await Context.Updateable(session).UpdateColumns(it => new { it.UploadStatus, it.ErrorMessage, it.ExpireTime, it.UpdateTime, it.UpdateUserId, it.UpdateUser })
             .ExecuteCommandAsync();
+        CleanupMergedArtifacts(session.TempDir);
+    }
+
+    public async Task CleanupMergedFile(SysFile file)
+    {
+        if (file == null)
+            return;
+
+        if (file.Engine == SysDictConst.FILE_ENGINE_LOCAL && !string.IsNullOrWhiteSpace(file.StoragePath) && File.Exists(file.StoragePath))
+            File.Delete(file.StoragePath);
+
+        await Context.Deleteable<SysFile>().Where(it => it.Id == file.Id).ExecuteCommandAsync();
     }
 
     public async Task CancelChunkUpload(BizDocumentUploadSession session)
     {
+        if (session.UploadStatus == DocumentUploadStatusConst.MERGING)
+            throw Oops.Bah("文件正在合并中，暂不支持取消");
         session.UploadStatus = DocumentUploadStatusConst.CANCELLED;
         session.ErrorMessage = string.Empty;
         session.ExpireTime = null;
@@ -384,6 +398,16 @@ public class DocumentStorageService : DbRepository<SysFile>, IDocumentStorageSer
     {
         if (!string.IsNullOrWhiteSpace(tempDir) && Directory.Exists(tempDir))
             Directory.Delete(tempDir, true);
+    }
+
+    private void CleanupMergedArtifacts(string tempDir)
+    {
+        if (string.IsNullOrWhiteSpace(tempDir))
+            return;
+
+        var mergedDir = Path.Combine(tempDir, "merged");
+        if (Directory.Exists(mergedDir))
+            Directory.Delete(mergedDir, true);
     }
 
     private async Task ExpireChunkUpload(BizDocumentUploadSession session)

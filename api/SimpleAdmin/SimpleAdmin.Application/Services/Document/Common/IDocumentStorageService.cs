@@ -35,6 +35,8 @@ public interface IDocumentStorageService : ITransient
 
     Task MarkChunkUploadFailed(BizDocumentUploadSession session, string errorMessage);
 
+    Task CleanupMergedFile(SysFile file);
+
     Task CancelChunkUpload(BizDocumentUploadSession session);
 
     Task<int> CleanupExpiredChunkUploads(CancellationToken cancellationToken = default);

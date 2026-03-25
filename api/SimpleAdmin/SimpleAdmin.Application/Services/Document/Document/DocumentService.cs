@@ -389,14 +389,20 @@ public class DocumentService : DbRepository<BizDocument>, IDocumentService
                 FileName = session.FileName
             };
         }
+        if (session.UploadStatus == DocumentUploadStatusConst.CANCELLED)
+            throw Oops.Bah("上传已取消");
+        if (session.UploadStatus == DocumentUploadStatusConst.MERGING)
+            throw Oops.Bah("文件正在合并中，请稍后重试");
 
+        SysFile sysFile = null;
+        BizDocument document = null;
         try
         {
             var parent = await ValidateUploadParent(session.ParentId);
             var (targetParent, targetParentId, fileName) = await ResolveChunkUploadTarget(session, parent);
             await EnsureUniqueName(targetParentId, fileName);
-            var sysFile = await _documentStorageService.MergeChunks(session);
-            var document = CreateFileEntity(targetParentId, fileName, targetParent, sysFile, session.Engine);
+            sysFile = await _documentStorageService.MergeChunks(session);
+            document = CreateFileEntity(targetParentId, fileName, targetParent, sysFile, session.Engine);
             PrepareCreate(document);
 
             var result = await Tenant.UseTranAsync(async () =>
@@ -410,27 +416,40 @@ public class DocumentService : DbRepository<BizDocument>, IDocumentService
                 _logger.LogError(result.ErrorMessage, result.ErrorException);
                 throw Oops.Bah("完成分片上传失败");
             }
-
-            var isFolderUpload = !string.IsNullOrWhiteSpace(session.RelativePath) && session.RelativePath.Contains('/');
-            await _documentLogService.TryWrite(
-                document.Id,
-                isFolderUpload ? "上传文件夹" : "上传文件",
-                $"{(isFolderUpload ? "上传文件：" : "上传文件：")}{(string.IsNullOrWhiteSpace(session.RelativePath) ? fileName : session.RelativePath)}",
-                isFolderUpload ? DocumentLogType.UploadFolder : DocumentLogType.UploadFile);
-
-            return new ChunkUploadCompleteOutput
-            {
-                UploadId = session.Id,
-                FileId = sysFile.Id,
-                DocumentId = document.Id,
-                FileName = fileName
-            };
         }
         catch (Exception ex)
         {
+            if (sysFile != null)
+            {
+                try
+                {
+                    await _documentStorageService.CleanupMergedFile(sysFile);
+                }
+                catch (Exception cleanupEx)
+                {
+                    _logger.LogError(cleanupEx, "分片上传失败后清理文件失败，FileId={FileId}", sysFile.Id);
+                }
+            }
             await _documentStorageService.MarkChunkUploadFailed(session, ex.Message);
             throw;
         }
+        if (sysFile == null || document == null)
+            throw Oops.Bah("完成分片上传失败");
+
+        var isFolderUpload = !string.IsNullOrWhiteSpace(session.RelativePath) && session.RelativePath.Contains('/');
+        await _documentLogService.TryWrite(
+            document.Id,
+            isFolderUpload ? "上传文件夹" : "上传文件",
+            $"{(isFolderUpload ? "上传文件：" : "上传文件：")}{(string.IsNullOrWhiteSpace(session.RelativePath) ? document.Name : session.RelativePath)}",
+            isFolderUpload ? DocumentLogType.UploadFolder : DocumentLogType.UploadFile);
+
+        return new ChunkUploadCompleteOutput
+        {
+            UploadId = session.Id,
+            FileId = sysFile.Id,
+            DocumentId = document.Id,
+            FileName = document.Name
+        };
     }
 
     public async Task CancelChunkUpload(ChunkUploadCancelInput input)
